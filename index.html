@@ -1,18 +1,1486 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bibliothèque</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bibliothèques</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background:#f5f5f7; color:#1d1d1f; text-align:center; padding:60px 20px; }
-  h1 { color:#0071e3; }
-  p { color:#86868b; }
+:root{
+  --encre:#14171a;
+  --encre2:#1c2126;
+  --encre3:#262d34;
+  --trait:#39434c;
+  --texte:#e9e4d9;
+  --texte2:#a7a293;
+  --papier:#f3ecdd;
+  --bronze:#c9a227;
+  --bronze-sombre:#7d6415;
+  --vert:#4f9d69;
+  --rouge:#d05a4a;
+  --bleu:#5a8fd0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--encre);color:var(--texte);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.45;overscroll-behavior-y:contain;
+}
+h1,h2,h3{margin:0;font-weight:600}
+.serif{font-family:Iowan Old Style,Palatino,Georgia,"Times New Roman",serif}
+
+/* ---------- en-tête ---------- */
+header{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+  display:flex;align-items:center;gap:8px;
+  padding:10px 12px;background:var(--encre2);
+  border-bottom:1px solid var(--trait);
+}
+header h1{font-size:17px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.icone{
+  background:var(--encre3);border:1px solid var(--trait);color:var(--texte);
+  border-radius:10px;padding:7px 10px;font-size:16px;line-height:1;cursor:pointer;
+}
+.icone:active{background:var(--trait)}
+#badgeVersion{
+  background:var(--bronze-sombre);border:1px solid var(--bronze);color:#fff8e1;
+  font-weight:700;font-size:13px;border-radius:999px;padding:6px 11px;cursor:pointer;
+  letter-spacing:.3px;
+}
+#badgeVersion.sale{background:#8a5a12;border-color:#e0a83a;color:#fff}
+#badgeVersion.echec{background:#7a2a20;border-color:var(--rouge)}
+#badgeVersion.ok{background:#1f5133;border-color:var(--vert)}
+
+main{padding:14px 12px 90px;max-width:900px;margin:0 auto}
+
+/* ---------- boutons ---------- */
+button{font-family:inherit}
+.btn{
+  background:var(--encre3);color:var(--texte);border:1px solid var(--trait);
+  border-radius:12px;padding:11px 14px;font-size:15px;cursor:pointer;
+}
+.btn:active{background:var(--trait)}
+.btn.principal{background:var(--bronze-sombre);border-color:var(--bronze);color:#fff8e1;font-weight:600}
+.btn.vert{background:#1f5133;border-color:var(--vert)}
+.btn.rouge{background:#5a241d;border-color:var(--rouge)}
+.btn.bleu{background:#1e3a5f;border-color:var(--bleu)}
+.btn.plein{width:100%}
+.btn:disabled{opacity:.45;cursor:default}
+.barre{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+
+/* ---------- cartes bibliothèques ---------- */
+.carte{
+  background:var(--encre2);border:1px solid var(--trait);border-left:4px solid var(--bronze);
+  border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;
+}
+.carte h2{font-size:19px}
+.carte .meta{color:var(--texte2);font-size:13.5px;margin-top:4px}
+.vide{
+  border:1px dashed var(--trait);border-radius:12px;padding:22px 16px;text-align:center;
+  color:var(--texte2);
+}
+
+/* ---------- grille des compartiments ---------- */
+.rangee{margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rangee > .titre{
+  font-size:12.5px;color:var(--bronze);margin-bottom:5px;letter-spacing:.4px;
+}
+.cases{display:grid;gap:6px}
+.case{
+  position:relative;aspect-ratio:3/4;border-radius:8px;overflow:hidden;
+  background:var(--encre3);border:1px solid var(--trait);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.case img{width:100%;height:100%;object-fit:cover;display:block}
+.case .sansphoto{font-size:20px;opacity:.45}
+.case .num{
+  position:absolute;top:2px;left:3px;font-size:10px;color:#fff;
+  background:rgba(0,0,0,.55);border-radius:4px;padding:0 4px;
+}
+.case .nb{
+  position:absolute;bottom:0;left:0;right:0;font-size:11px;text-align:center;
+  background:rgba(0,0,0,.6);color:#fff;padding:1px 0;
+}
+.case.analysee{border-color:var(--vert)}
+.case.aenvoyer{border-color:#e0a83a}
+
+/* ---------- modales ---------- */
+.fond{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:60;
+  display:flex;align-items:flex-start;justify-content:center;padding:14px;
+  padding-top:calc(14px + env(safe-area-inset-top,0px));
+  padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  overflow:hidden;
+}
+.modale{
+  background:var(--encre2);border:1px solid var(--bronze);border-radius:14px;
+  width:100%;max-width:640px;max-height:100%;display:flex;flex-direction:column;
+}
+.modale > .tete{
+  display:flex;align-items:center;gap:8px;padding:11px 13px;
+  border-bottom:1px solid var(--trait);position:sticky;top:0;background:var(--encre2);
+  border-radius:14px 14px 0 0;
+}
+.modale > .tete h2{font-size:16px;flex:1;min-width:0}
+.modale > .corps{padding:13px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modale > .pied{padding:11px 13px;border-top:1px solid var(--trait);display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+label{display:block;font-size:13px;color:var(--texte2);margin:10px 0 4px}
+input[type=text],input[type=number],input[type=password],select,textarea{
+  width:100%;background:var(--encre);color:var(--texte);border:1px solid var(--trait);
+  border-radius:9px;padding:9px 10px;font-size:16px;font-family:inherit;
+}
+textarea{min-height:90px;resize:vertical;line-height:1.4}
+.ligne2{display:flex;gap:10px}
+.ligne2 > *{flex:1}
+.coche{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--texte);margin:6px 0}
+.coche input{width:18px;height:18px;accent-color:var(--bronze)}
+
+/* ---------- livres ---------- */
+.livre{
+  background:var(--encre);border:1px solid var(--trait);border-radius:10px;
+  padding:9px 10px;margin-bottom:8px;
+}
+.livre .t{font-size:15.5px;font-weight:600}
+.livre .a{font-size:13.5px;color:var(--texte2)}
+.livre .r{font-size:13px;color:#cfc8b6;margin-top:4px;font-style:italic}
+.livre .cat{font-size:11.5px;color:var(--bronze);margin-top:3px}
+.livre .actions{display:flex;gap:6px;margin-top:7px}
+.livre .actions button{font-size:12.5px;padding:5px 9px;border-radius:8px}
+.certitude-faible{border-left:3px solid var(--rouge)}
+.certitude-moyenne{border-left:3px solid #e0a83a}
+
+/* ---------- divers ---------- */
+#toast{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  background:var(--encre3);border:1px solid var(--bronze);color:var(--texte);
+  padding:10px 15px;border-radius:12px;z-index:90;max-width:92%;font-size:14px;
+  box-shadow:0 6px 24px rgba(0,0,0,.5);
+}
+#toast.masque{display:none}
+.progres{
+  background:var(--encre);border:1px solid var(--bronze);border-radius:10px;
+  padding:10px 12px;margin:10px 0;font-size:14px;
+}
+.progres .barreint{height:6px;background:var(--trait);border-radius:4px;margin-top:7px;overflow:hidden}
+.progres .barreint i{display:block;height:100%;background:var(--bronze);width:0}
+.aide{font-size:12.5px;color:var(--texte2);margin-top:6px}
+.sep{height:1px;background:var(--trait);margin:16px 0}
+.onglets{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.onglets button{
+  background:var(--encre);border:1px solid var(--trait);color:var(--texte2);
+  border-radius:999px;padding:7px 12px;font-size:13.5px;cursor:pointer;
+}
+.onglets button.actif{background:var(--bronze-sombre);border-color:var(--bronze);color:#fff8e1}
+.photo-apercu{width:100%;border-radius:10px;border:1px solid var(--trait);display:block}
+.hist h3{font-size:15px;color:var(--bronze);margin-top:14px}
+.hist ul{margin:5px 0 0;padding-left:18px;font-size:14px}
+.hist li{margin-bottom:3px}
+@media (prefers-reduced-motion:no-preference){
+  .modale{animation:apparait .14s ease-out}
+  @keyframes apparait{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+}
 </style>
 </head>
 <body>
-<h1>Bibliothèque</h1>
-<p>Nouvelle application créée avec Le Déployeur.</p>
-<p>Déploie ton code depuis l'étape 3 pour remplacer cette page.</p>
+
+<header>
+  <button class="icone" id="btnRetour" hidden>←</button>
+  <h1 id="titrePage" class="serif">Bibliothèques</h1>
+  <button id="badgeVersion">V1.0.0</button>
+  <button class="icone" id="btnReglages">⚙️</button>
+</header>
+
+<main>
+  <section id="vueListe"></section>
+  <section id="vueBiblio" hidden></section>
+</main>
+
+<div id="toast" class="masque"></div>
+<div id="zoneModales"></div>
+
+<script>
+"use strict";
+
+/* ====================================================================
+   VERSION ET HISTORIQUE
+   ==================================================================== */
+const VERSION = "V1.0.0";
+const HISTORIQUE = [
+  { v:"V1.0.0", d:"19/09/2026", l:[
+    "Création de l'application : liste de bibliothèques, chacune définie par un nombre de rangées et de compartiments par rangée (modifiables ensuite).",
+    "Une photo par compartiment (compressée sur l'appareil), envoyée dans le dépôt GitHub ; seule une miniature reste en mémoire locale.",
+    "Analyse de la photo par Gemini : titre, auteur, année et degré de certitude pour chaque livre repéré ; tout reste modifiable à la main.",
+    "Bouton « Liste des livres » : livres par compartiment puis liste exhaustive de la bibliothèque, avec options d'affichage et copie.",
+    "Bouton « Résumés et auteurs » : résumé d'une ligne, précision sur l'auteur et année de parution, par lots avec décompte de progression.",
+    "Bouton « PDF thématique » : classement des livres par catégories puis PDF téléchargeable.",
+    "Réglages : clé Gemini (stockée sur l'appareil uniquement), dépôt GitHub, questions envoyées à Gemini modifiables, export et import JSON."
+  ]}
+];
+
+/* ====================================================================
+   ÉTAT
+   ==================================================================== */
+const CLE_DATA  = "biblio_data";
+const CLE_CFG   = "biblio_cfg";
+const CLE_GEM   = "gemini_api_key";   // partagée avec les autres apps de l'origine
+const FICHIER_JSON = "bibliotheques.json";
+
+const QUESTION_ANALYSE_DEFAUT =
+`Cette photo montre un compartiment d'étagère de bibliothèque, vu de face. Les livres sont le plus souvent rangés tranche visible.
+Identifie chaque livre distinct visible sur la photo.
+Règles :
+- N'invente jamais un livre : si tu ne lis rien, renvoie une liste vide.
+- Si un titre est partiellement lisible, donne ce que tu lis et baisse la certitude.
+- Un même livre ne doit apparaître qu'une fois.
+- Ignore les objets qui ne sont pas des livres (cadres, bibelots, revues sans titre lisible).
+Réponds UNIQUEMENT par un objet JSON de cette forme, sans texte autour :
+{"livres":[{"titre":"","auteur":"","annee":"","certitude":"haute|moyenne|faible","remarque":""}]}
+"annee" = année imprimée sur la tranche si elle est lisible, sinon "".
+"remarque" = collection, éditeur, état, ou ce qui gêne la lecture (2 à 6 mots), sinon "".`;
+
+const QUESTION_RESUME_DEFAUT =
+`Voici une liste numérotée de livres. Pour chacun, donne :
+- "resume" : un résumé du contenu en UNE seule phrase de 25 mots maximum ;
+- "auteur" : le nom complet de l'auteur, suivi entre parenthèses d'une précision brève (nationalité et dates, ou raison de sa notoriété) ;
+- "annee" : l'année de première parution, en chiffres.
+Si tu n'identifies pas le livre avec une confiance raisonnable, mets "?" dans le champ concerné plutôt que d'inventer.
+Réponds UNIQUEMENT par un objet JSON, sans texte autour :
+{"livres":[{"i":0,"resume":"","auteur":"","annee":""}]}
+"i" est le numéro du livre tel qu'il apparaît dans la liste.`;
+
+const QUESTION_CATEGORIE_DEFAUT =
+`Voici une liste numérotée de livres. Attribue à chacun UNE catégorie thématique, choisie dans une liste courte et cohérente que tu construis toi-même (entre 5 et 15 catégories pour l'ensemble, par exemple : Romans français, Littérature étrangère, Policier, Histoire, Sciences, Art, Voyage, Bandes dessinées, Jeunesse, Essais, Pratique).
+Une même catégorie doit être écrite exactement de la même façon partout. Si un livre n'est pas identifiable, mets "Non classé".
+Réponds UNIQUEMENT par un objet JSON, sans texte autour :
+{"livres":[{"i":0,"categorie":""}]}`;
+
+const CFG_DEFAUT = {
+  modele:"gemini-2.5-flash",
+  ghUser:"", ghRepo:"bibliotheque", ghBranche:"main",
+  qAnalyse:QUESTION_ANALYSE_DEFAUT,
+  qResume:QUESTION_RESUME_DEFAUT,
+  qCategorie:QUESTION_CATEGORIE_DEFAUT,
+  tailleMax:1600, qualite:0.72, tailleMini:260
+};
+
+let data = { bibliotheques:[], maj:null };
+let cfg  = Object.assign({}, CFG_DEFAUT);
+let sale = false;              // modifications locales non envoyées
+let etatSync = "";             // "", "ok", "echec"
+let biblioCourante = null;     // id
+const cachePhotos = {};        // cle -> dataURL pleine résolution (mémoire seulement)
+
+/* ====================================================================
+   OUTILS
+   ==================================================================== */
+const $ = s => document.querySelector(s);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const clef = (r,c) => r + "-" + c;
+
+function dateFr(d){
+  const x = d ? new Date(d) : new Date();
+  if (isNaN(x)) return "";
+  return x.toLocaleDateString("fr-FR") + " " + x.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+}
+
+let minuteurToast=null;
+function toast(msg, ms){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.remove("masque");
+  clearTimeout(minuteurToast);
+  minuteurToast = setTimeout(()=>t.classList.add("masque"), ms||3200);
+}
+
+async function copierTexte(txt){
+  try{
+    if (navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(txt);
+      return true;
+    }
+  }catch(e){ /* repli ci-dessous */ }
+  try{
+    const z = document.createElement("textarea");
+    z.value = txt;
+    z.style.position="fixed"; z.style.top="0"; z.style.left="0"; z.style.opacity="0";
+    document.body.appendChild(z);
+    z.focus(); z.select(); z.setSelectionRange(0, txt.length);
+    const ok = document.execCommand("copy");
+    document.body.removeChild(z);
+    return ok;
+  }catch(e){ return false; }
+}
+
+/* ---------- modales génériques ---------- */
+function modale(opts){
+  const fond = document.createElement("div");
+  fond.className = "fond";
+  const boutons = (opts.boutons||[]).map((b,i)=>
+    `<button class="btn ${b.classe||""}" data-b="${i}">${esc(b.texte)}</button>`).join("");
+  fond.innerHTML =
+    `<div class="modale">
+       <div class="tete"><h2 class="serif">${esc(opts.titre||"")}</h2>
+         <button class="icone" data-fermer="1">✕</button></div>
+       <div class="corps">${opts.html||""}</div>
+       ${boutons ? `<div class="pied">${boutons}</div>` : ""}
+     </div>`;
+  $("#zoneModales").appendChild(fond);
+  fond.querySelector('[data-fermer]').onclick = ()=>{ fond.remove(); if(opts.surFermeture) opts.surFermeture(); };
+  (opts.boutons||[]).forEach((b,i)=>{
+    fond.querySelector(`[data-b="${i}"]`).onclick = ()=>{
+      if (b.action) { const r = b.action(fond); if (r === false) return; }
+      if (b.garder !== true) fond.remove();
+    };
+  });
+  if (opts.apres) opts.apres(fond);
+  return fond;
+}
+
+function confirmer(message, titre){
+  return new Promise(res=>{
+    modale({
+      titre: titre||"Confirmer",
+      html: `<div style="font-size:15px">${message}</div>`,
+      boutons:[
+        {texte:"Annuler", action:()=>res(false)},
+        {texte:"Confirmer", classe:"principal", action:()=>res(true)}
+      ],
+      surFermeture:()=>res(false)
+    });
+  });
+}
+
+function fenetreProgres(titre){
+  const f = modale({ titre, html:
+    `<div class="progres"><div id="pgTexte">Préparation…</div>
+     <div class="barreint"><i id="pgBarre"></i></div></div>
+     <div id="pgDetail" class="aide"></div>` });
+  return {
+    maj(fait, total, detail){
+      const t = f.querySelector("#pgTexte");
+      const b = f.querySelector("#pgBarre");
+      if (t) t.textContent = `Traités : ${fait} / ${total} — restants : ${Math.max(0,total-fait)}`;
+      if (b) b.style.width = total ? Math.round(fait*100/total) + "%" : "0%";
+      if (detail) { const d = f.querySelector("#pgDetail"); if (d) d.textContent = detail; }
+    },
+    fermer(){ f.remove(); }
+  };
+}
+
+/* ====================================================================
+   STOCKAGE LOCAL
+   ==================================================================== */
+function charger(){
+  try{
+    const d = localStorage.getItem(CLE_DATA);
+    if (d) data = JSON.parse(d);
+  }catch(e){ console.warn("Données locales illisibles", e); }
+  if (!data || !Array.isArray(data.bibliotheques)) data = { bibliotheques:[], maj:null };
+  try{
+    const c = localStorage.getItem(CLE_CFG);
+    if (c) cfg = Object.assign({}, CFG_DEFAUT, JSON.parse(c));
+  }catch(e){ /* config par défaut */ }
+  sale = localStorage.getItem("biblio_sale") === "1";
+}
+
+function sauver(marquerSale){
+  if (marquerSale !== false){ sale = true; data.maj = new Date().toISOString(); }
+  try{
+    localStorage.setItem(CLE_DATA, JSON.stringify(data));
+    localStorage.setItem("biblio_sale", sale ? "1" : "0");
+  }catch(e){
+    toast("Stockage local plein : les données n'ont pas été enregistrées. Envoyez vos photos sur GitHub pour libérer de la place.", 7000);
+    console.error(e);
+  }
+  majBadge();
+}
+
+function sauverCfg(){
+  try{ localStorage.setItem(CLE_CFG, JSON.stringify(cfg)); }catch(e){}
+}
+
+function majBadge(){
+  const b = $("#badgeVersion");
+  b.className = "";
+  if (etatSync === "echec") b.classList.add("echec");
+  else if (sale) b.classList.add("sale");
+  else if (etatSync === "ok") b.classList.add("ok");
+  b.textContent = VERSION + (sale ? " •" : "");
+}
+
+/* ====================================================================
+   PHOTOS
+   ==================================================================== */
+function lireFichier(file){
+  return new Promise((res,rej)=>{
+    const fr = new FileReader();
+    fr.onload = ()=>res(fr.result);
+    fr.onerror = ()=>rej(new Error("Lecture du fichier impossible"));
+    fr.readAsDataURL(file);
+  });
+}
+
+function redimensionner(dataURL, maxDim, qualite){
+  return new Promise((res,rej)=>{
+    const img = new Image();
+    img.onload = ()=>{
+      let {width:w, height:h} = img;
+      const f = Math.min(1, maxDim/Math.max(w,h));
+      w = Math.round(w*f); h = Math.round(h*f);
+      const cv = document.createElement("canvas");
+      cv.width=w; cv.height=h;
+      const cx = cv.getContext("2d");
+      cx.fillStyle="#fff"; cx.fillRect(0,0,w,h);
+      cx.drawImage(img,0,0,w,h);
+      res(cv.toDataURL("image/jpeg", qualite));
+    };
+    img.onerror = ()=>rej(new Error("Image illisible"));
+    img.src = dataURL;
+  });
+}
+
+function base64Seul(dataURL){ return dataURL.split(",")[1] || ""; }
+
+async function photoPleine(bib, cle){
+  const cs = bib.cases[cle];
+  if (!cs || !cs.photo) return null;
+  if (cs.photo.plein) return cs.photo.plein;
+  const memo = cachePhotos[bib.id + "/" + cle];
+  if (memo) return memo;
+  if (cs.photo.envoye && cs.photo.chemin){
+    const d = await ghLireImage(cs.photo.chemin);
+    if (d){ cachePhotos[bib.id + "/" + cle] = d; return d; }
+  }
+  return cs.photo.mini || null;
+}
+
+/* ====================================================================
+   GITHUB
+   ==================================================================== */
+function ghPret(){ return !!(cfg.ghUser && cfg.ghRepo && localStorage.getItem("biblio_token")); }
+function ghToken(){ return localStorage.getItem("biblio_token") || ""; }
+function ghUrl(chemin){
+  return `https://api.github.com/repos/${cfg.ghUser}/${cfg.ghRepo}/contents/${chemin}`;
+}
+
+async function ghLireTexte(chemin){
+  const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), {
+    headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github.raw" }
+  });
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error("GitHub " + r.status + " : " + (await r.text()).slice(0,200));
+  return await r.text();
+}
+
+async function ghLireImage(chemin){
+  try{
+    const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche), {
+      headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github.raw" }
+    });
+    if (!r.ok) return null;
+    const b = await r.blob();
+    return await new Promise(res=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=()=>res(null); fr.readAsDataURL(b); });
+  }catch(e){ return null; }
+}
+
+async function ghSha(chemin){
+  const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), {
+    headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github+json" }
+  });
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error("GitHub " + r.status);
+  const j = await r.json();
+  return j.sha || null;
+}
+
+async function ghEcrire(chemin, contenuBase64, message){
+  const sha = await ghSha(chemin);
+  const corps = { message, content: contenuBase64, branch: cfg.ghBranche };
+  if (sha) corps.sha = sha;
+  const r = await fetch(ghUrl(chemin), {
+    method:"PUT",
+    headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github+json", "Content-Type":"application/json" },
+    body: JSON.stringify(corps)
+  });
+  if (!r.ok) throw new Error("GitHub " + r.status + " : " + (await r.text()).slice(0,200));
+  return await r.json();
+}
+
+function enBase64Utf8(txt){
+  return btoa(unescape(encodeURIComponent(txt)));
+}
+
+function photosEnAttente(){
+  const l = [];
+  data.bibliotheques.forEach(b=>{
+    Object.keys(b.cases||{}).forEach(k=>{
+      const cs = b.cases[k];
+      if (cs.photo && cs.photo.plein && !cs.photo.envoye) l.push({bib:b, cle:k, cs});
+    });
+  });
+  return l;
+}
+
+async function envoyerVersGitHub(){
+  if (!ghPret()){ toast("Renseignez d'abord le dépôt GitHub et le jeton dans les réglages."); return; }
+  const attente = photosEnAttente();
+  const total = attente.length + 1;
+  const pg = fenetreProgres("Envoi vers GitHub");
+  let fait = 0;
+  try{
+    for (const p of attente){
+      pg.maj(fait, total, "Photo " + p.cle + " de « " + p.bib.nom + " »");
+      const chemin = "images/" + p.bib.id + "/" + p.cle + ".jpg";
+      await ghEcrire(chemin, base64Seul(p.cs.photo.plein), "Photo " + p.bib.nom + " " + p.cle);
+      cachePhotos[p.bib.id + "/" + p.cle] = p.cs.photo.plein;
+      p.cs.photo.chemin = chemin;
+      p.cs.photo.envoye = true;
+      p.cs.photo.plein = null;   // libère le stockage local
+      fait++;
+      sauver(false);
+    }
+    pg.maj(fait, total, "Fichier " + FICHIER_JSON);
+    data.maj = new Date().toISOString();
+    await ghEcrire(FICHIER_JSON, enBase64Utf8(JSON.stringify(data, null, 1)),
+      "Mise à jour des bibliothèques (" + dateFr() + ")");
+    fait++;
+    pg.maj(fait, total, "Terminé");
+    sale = false; etatSync = "ok";
+    sauver(false);
+    pg.fermer();
+    toast("Envoyé sur GitHub : " + attente.length + " photo(s) et les données.");
+  }catch(e){
+    pg.fermer();
+    etatSync = "echec"; majBadge();
+    modale({titre:"Échec de l'envoi", html:`<div>L'envoi s'est arrêté après ${fait} élément(s) sur ${total}.</div>
+      <div class="aide">${esc(e.message)}</div>
+      <div class="aide">Ce qui a déjà été envoyé est conservé : relancez l'envoi pour reprendre là où il s'est arrêté.</div>`,
+      boutons:[{texte:"Fermer"}]});
+  }
+  rendre();
+}
+
+async function recupererDeGitHub(silencieux){
+  if (!ghPret()) return false;
+  try{
+    const txt = await ghLireTexte(FICHIER_JSON);
+    if (txt === null){ if(!silencieux) toast("Aucun fichier " + FICHIER_JSON + " sur le dépôt pour l'instant."); return false; }
+    const distant = JSON.parse(txt);
+    if (!distant || !Array.isArray(distant.bibliotheques)) throw new Error("Fichier distant inattendu");
+    const nbD = distant.bibliotheques.length, nbL = data.bibliotheques.length;
+    const appliquer = ()=>{
+      const attente = photosEnAttente();   // ne jamais perdre une photo pas encore envoyée
+      data = distant;
+      attente.forEach(p=>{
+        const b = data.bibliotheques.find(x=>x.id === p.bib.id);
+        if (b){ b.cases = b.cases||{}; b.cases[p.cle] = b.cases[p.cle]||{livres:[]}; b.cases[p.cle].photo = p.cs.photo; }
+      });
+      sale = attente.length > 0;
+      etatSync = "ok";
+      sauver(false);
+      rendre();
+      toast("Données récupérées depuis GitHub (" + nbD + " bibliothèque(s)).");
+    };
+    if (sale){
+      const ok = await confirmer(
+        `Des modifications locales n'ont pas encore été envoyées.<br><br>
+         Version locale : <b>${nbL} bibliothèque(s)</b><br>
+         Version GitHub : <b>${nbD} bibliothèque(s)</b> (${esc(dateFr(distant.maj))})<br><br>
+         Appliquer la version GitHub écrasera vos modifications locales, sauf les photos pas encore envoyées.`,
+        "Conflit de synchronisation");
+      if (!ok) return false;
+    }
+    appliquer();
+    return true;
+  }catch(e){
+    etatSync = "echec"; majBadge();
+    if (!silencieux) toast("Récupération impossible : " + e.message, 6000);
+    return false;
+  }
+}
+
+/* ====================================================================
+   GEMINI
+   ==================================================================== */
+function cleGemini(){ return localStorage.getItem(CLE_GEM) || ""; }
+
+async function gemini(parties){
+  const cle = cleGemini();
+  if (!cle) throw new Error("Clé API Gemini absente : renseignez-la dans les réglages (onglet Gemini).");
+  const modele = cfg.modele || "gemini-2.5-flash";
+  const gc = { temperature:0.2, responseMimeType:"application/json", maxOutputTokens:16384 };
+  if (/flash/.test(modele)) gc.thinkingConfig = { thinkingBudget:0 };
+  const r = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modele)}:generateContent?key=${encodeURIComponent(cle)}`,
+    { method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ contents:[{ role:"user", parts:parties }], generationConfig:gc }) });
+  if (!r.ok){
+    const t = await r.text();
+    throw new Error("Gemini " + r.status + " : " + t.slice(0,300));
+  }
+  const j = await r.json();
+  const cand = j.candidates && j.candidates[0];
+  if (!cand) throw new Error("Gemini n'a renvoyé aucune réponse (contenu peut-être bloqué).");
+  if (cand.finishReason === "MAX_TOKENS") throw new Error("Réponse trop longue pour Gemini : réduisez la taille du lot.");
+  const txt = (cand.content && cand.content.parts || []).map(p=>p.text||"").join("");
+  if (!txt.trim()) throw new Error("Réponse vide de Gemini.");
+  return txt;
+}
+
+function jsonDepuisTexte(txt){
+  let t = txt.trim();
+  t = t.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "").trim();
+  const d = t.indexOf("{"), f = t.lastIndexOf("}");
+  if (d > 0 || f < t.length-1) t = t.slice(d>=0?d:0, f>=0?f+1:undefined);
+  return JSON.parse(t);
+}
+
+async function analyserPhoto(bib, cle){
+  const plein = await photoPleine(bib, cle);
+  if (!plein) throw new Error("Aucune photo disponible pour ce compartiment.");
+  if (bib.cases[cle].photo && plein === bib.cases[cle].photo.mini)
+    toast("Photo pleine résolution introuvable sur GitHub : analyse faite sur la miniature, lecture moins fiable.", 5000);
+  const txt = await gemini([
+    { text: cfg.qAnalyse },
+    { inline_data: { mime_type:"image/jpeg", data: base64Seul(plein) } }
+  ]);
+  const j = jsonDepuisTexte(txt);
+  const livres = Array.isArray(j.livres) ? j.livres : [];
+  return livres.filter(x=>x && (x.titre||"").trim()).map(x=>({
+    id: uid(),
+    titre: String(x.titre||"").trim(),
+    auteur: String(x.auteur||"").trim(),
+    annee: String(x.annee||"").trim(),
+    certitude: ["haute","moyenne","faible"].includes(x.certitude) ? x.certitude : "moyenne",
+    remarque: String(x.remarque||"").trim(),
+    resume:"", categorie:""
+  }));
+}
+
+/* Traitement par lots d'une liste de livres (résumés ou catégories) */
+async function traiterParLots(livres, question, champs, titreFenetre, taille){
+  const lot = taille || 20;
+  const pg = fenetreProgres(titreFenetre);
+  let fait = 0;
+  try{
+    for (let d=0; d<livres.length; d+=lot){
+      const tranche = livres.slice(d, d+lot);
+      pg.maj(fait, livres.length, `Lot ${Math.floor(d/lot)+1} sur ${Math.ceil(livres.length/lot)} — envoi à Gemini…`);
+      const liste = tranche.map((lv,i)=>`${i}. ${lv.titre}${lv.auteur ? " — " + lv.auteur : ""}${lv.annee ? " (" + lv.annee + ")" : ""}`).join("\n");
+      const txt = await gemini([{ text: question + "\n\nListe :\n" + liste }]);
+      const j = jsonDepuisTexte(txt);
+      (Array.isArray(j.livres)?j.livres:[]).forEach(rep=>{
+        const i = Number(rep.i);
+        if (!Number.isInteger(i) || i<0 || i>=tranche.length) return;
+        champs.forEach(ch=>{
+          const v = rep[ch];
+          if (v != null && String(v).trim() && String(v).trim() !== "?") tranche[i][ch] = String(v).trim();
+        });
+      });
+      fait += tranche.length;
+      pg.maj(fait, livres.length, "");
+      sauver();
+    }
+    pg.fermer();
+    return true;
+  }catch(e){
+    pg.fermer();
+    modale({titre:"Interruption", html:
+      `<div>${fait} livre(s) sur ${livres.length} ont été traités avant l'erreur ; ils sont conservés.</div>
+       <div class="aide">${esc(e.message)}</div>`, boutons:[{texte:"Fermer"}]});
+    return false;
+  }
+}
+
+/* ====================================================================
+   MODÈLE DE DONNÉES
+   ==================================================================== */
+function biblio(id){ return data.bibliotheques.find(b=>b.id===id) || null; }
+
+function tousLesLivres(bib){
+  const out = [];
+  for (let r=1; r<=bib.rangees; r++){
+    for (let c=1; c<=bib.compartiments; c++){
+      const cs = bib.cases[clef(r,c)];
+      if (!cs) continue;
+      (cs.livres||[]).forEach(lv=>out.push({ livre:lv, r, c }));
+    }
+  }
+  // compartiments hors grille (après réduction du nombre de rangées/compartiments)
+  Object.keys(bib.cases||{}).forEach(k=>{
+    const [r,c] = k.split("-").map(Number);
+    if (r>bib.rangees || c>bib.compartiments)
+      (bib.cases[k].livres||[]).forEach(lv=>out.push({ livre:lv, r, c, horsGrille:true }));
+  });
+  return out;
+}
+
+function compteLivres(bib){ return tousLesLivres(bib).length; }
+function comptePhotos(bib){
+  return Object.keys(bib.cases||{}).filter(k=>bib.cases[k].photo).length;
+}
+
+/* ====================================================================
+   RENDU : LISTE DES BIBLIOTHÈQUES
+   ==================================================================== */
+function rendre(){
+  majBadge();
+  if (biblioCourante && biblio(biblioCourante)) rendreBiblio();
+  else { biblioCourante = null; rendreListe(); }
+}
+
+function rendreListe(){
+  $("#vueBiblio").hidden = true;
+  $("#vueListe").hidden = false;
+  $("#btnRetour").hidden = true;
+  $("#titrePage").textContent = "Bibliothèques";
+
+  const cartes = data.bibliotheques.map(b=>{
+    const cases = b.rangees * b.compartiments;
+    return `<div class="carte" data-ouvrir="${b.id}">
+      <h2 class="serif">${esc(b.nom)}</h2>
+      <div class="meta">${b.rangees} rangée(s) × ${b.compartiments} compartiment(s) = ${cases} cases
+        · ${comptePhotos(b)} photo(s) · ${compteLivres(b)} livre(s)${b.lieu ? " · " + esc(b.lieu) : ""}</div>
+    </div>`;
+  }).join("");
+
+  $("#vueListe").innerHTML =
+    `<div class="barre">
+       <button class="btn principal" id="btnNouvelle">Ajouter une bibliothèque</button>
+       <button class="btn" id="btnEnvoyer">Envoyer sur GitHub</button>
+       <button class="btn" id="btnRecuperer">Récupérer</button>
+     </div>
+     ${cartes || `<div class="vide">Aucune bibliothèque pour l'instant.<br>
+        Ajoutez-en une en indiquant son nombre de rangées et de compartiments par rangée.</div>`}
+     <div class="aide" style="margin-top:14px">Dernière modification : ${esc(dateFr(data.maj)) || "—"}${sale ? " · modifications locales non envoyées" : ""}</div>`;
+
+  $("#btnNouvelle").onclick = ()=>formBiblio(null);
+  $("#btnEnvoyer").onclick = envoyerVersGitHub;
+  $("#btnRecuperer").onclick = ()=>recupererDeGitHub(false);
+  document.querySelectorAll("[data-ouvrir]").forEach(el=>{
+    el.onclick = ()=>{ biblioCourante = el.dataset.ouvrir; rendreBiblio(); window.scrollTo(0,0); };
+  });
+}
+
+function formBiblio(id){
+  const b = id ? biblio(id) : null;
+  modale({
+    titre: b ? "Modifier la bibliothèque" : "Nouvelle bibliothèque",
+    html:
+      `<label for="fNom">Nom</label>
+       <input type="text" id="fNom" value="${esc(b?b.nom:"")}" placeholder="Salon, bureau, chambre…">
+       <label for="fLieu">Lieu (facultatif)</label>
+       <input type="text" id="fLieu" value="${esc(b?(b.lieu||""):"")}" placeholder="Mur nord, près de la fenêtre…">
+       <div class="ligne2">
+         <div><label for="fR">Rangées horizontales</label>
+           <input type="number" id="fR" min="1" max="30" value="${b?b.rangees:5}"></div>
+         <div><label for="fC">Compartiments par rangée</label>
+           <input type="number" id="fC" min="1" max="30" value="${b?b.compartiments:4}"></div>
+       </div>
+       <div class="aide">Ces deux nombres restent modifiables plus tard. Si vous les réduisez, les photos et les livres des compartiments retirés sont conservés et signalés séparément.</div>`,
+    boutons:[
+      {texte:"Annuler"},
+      {texte: b?"Enregistrer":"Créer", classe:"principal", garder:true, action:async (f)=>{
+        const nom = f.querySelector("#fNom").value.trim();
+        const lieu = f.querySelector("#fLieu").value.trim();
+        const r = Math.max(1, Math.min(30, parseInt(f.querySelector("#fR").value,10)||1));
+        const c = Math.max(1, Math.min(30, parseInt(f.querySelector("#fC").value,10)||1));
+        if (!nom){ toast("Donnez un nom à la bibliothèque."); return false; }
+        if (b){
+          if ((r<b.rangees || c<b.compartiments)){
+            const perdus = Object.keys(b.cases||{}).filter(k=>{
+              const [kr,kc]=k.split("-").map(Number); return kr>r||kc>c;
+            }).length;
+            if (perdus){
+              const ok = await confirmer(`${perdus} compartiment(s) sortiront de la grille. Leur contenu est conservé mais ne sera plus affiché dans la grille.`);
+              if (!ok) return false;
+            }
+          }
+          b.nom=nom; b.lieu=lieu; b.rangees=r; b.compartiments=c;
+        } else {
+          data.bibliotheques.push({ id:uid(), nom, lieu, rangees:r, compartiments:c, cases:{}, cree:new Date().toISOString() });
+        }
+        sauver();
+        f.remove();
+        rendre();
+      }}
+    ]
+  });
+}
+
+/* ====================================================================
+   RENDU : UNE BIBLIOTHÈQUE
+   ==================================================================== */
+function rendreBiblio(){
+  const b = biblio(biblioCourante);
+  if (!b){ biblioCourante=null; return rendreListe(); }
+  $("#vueListe").hidden = true;
+  $("#vueBiblio").hidden = false;
+  $("#btnRetour").hidden = false;
+  $("#titrePage").textContent = b.nom;
+
+  let grille = "";
+  for (let r=1; r<=b.rangees; r++){
+    let cases = "";
+    for (let c=1; c<=b.compartiments; c++){
+      const k = clef(r,c);
+      const cs = b.cases[k];
+      const nb = cs && cs.livres ? cs.livres.length : 0;
+      const ph = cs && cs.photo;
+      const cls = [ "case" ];
+      if (nb) cls.push("analysee");
+      if (ph && ph.plein && !ph.envoye) cls.push("aenvoyer");
+      cases += `<div class="${cls.join(" ")}" data-case="${k}">
+        ${ph && ph.mini ? `<img src="${ph.mini}" alt="Compartiment ${k}">` : `<span class="sansphoto">📷</span>`}
+        <span class="num">${r}·${c}</span>
+        ${nb ? `<span class="nb">${nb}</span>` : ""}
+      </div>`;
+    }
+    grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
+      <div class="cases" style="grid-template-columns:repeat(${b.compartiments},minmax(52px,1fr))">${cases}</div></div>`;
+  }
+
+  const hors = Object.keys(b.cases||{}).filter(k=>{
+    const [r,c]=k.split("-").map(Number); return r>b.rangees||c>b.compartiments;
+  });
+
+  $("#vueBiblio").innerHTML =
+    `<div class="barre">
+       <button class="btn" id="bModifier">Modifier la grille</button>
+       <button class="btn" id="bAnalyserTout">Analyser les photos</button>
+       <button class="btn rouge" id="bSupprimer">Supprimer</button>
+     </div>
+     ${grille}
+     ${hors.length ? `<div class="aide">⚠️ ${hors.length} compartiment(s) hors grille (${esc(hors.join(", "))}) : leur contenu est conservé et reste inclus dans les listes et le PDF.</div>` : ""}
+     <div class="sep"></div>
+     <div class="barre">
+       <button class="btn principal plein" id="bListe">Liste des livres</button>
+     </div>
+     <div class="barre">
+       <button class="btn" id="bResumes" style="flex:1">Résumés et auteurs</button>
+       <button class="btn" id="bPdf" style="flex:1">PDF thématique</button>
+     </div>
+     <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
+
+  $("#bModifier").onclick = ()=>formBiblio(b.id);
+  $("#bSupprimer").onclick = async ()=>{
+    const ok = await confirmer(`Supprimer « ${esc(b.nom)} » et tout son contenu ? Les photos déjà envoyées restent dans le dépôt GitHub.`);
+    if (!ok) return;
+    data.bibliotheques = data.bibliotheques.filter(x=>x.id!==b.id);
+    biblioCourante = null; sauver(); rendre();
+  };
+  $("#bAnalyserTout").onclick = ()=>analyserToutesPhotos(b);
+  $("#bListe").onclick = ()=>fenetreListe(b);
+  $("#bResumes").onclick = ()=>lancerResumes(b);
+  $("#bPdf").onclick = ()=>lancerPdf(b);
+  document.querySelectorAll("[data-case]").forEach(el=>{
+    el.onclick = ()=>ouvrirCompartiment(b, el.dataset.case);
+  });
+}
+
+/* ====================================================================
+   COMPARTIMENT
+   ==================================================================== */
+function ouvrirCompartiment(b, k){
+  b.cases[k] = b.cases[k] || { livres:[] };
+  const cs = b.cases[k];
+  const [r,c] = k.split("-");
+
+  const f = modale({
+    titre: `Rangée ${r} · compartiment ${c}`,
+    html: `<div id="zonePhoto"></div>
+           <div class="barre">
+             <button class="btn" id="cPhoto" style="flex:1">${cs.photo?"Changer la photo":"Ajouter une photo"}</button>
+             <button class="btn principal" id="cAnalyser" style="flex:1">Analyser avec Gemini</button>
+           </div>
+           <input type="file" id="cFichier" accept="image/*" hidden>
+           <div id="zoneLivres"></div>
+           <button class="btn plein" id="cAjouter">Ajouter un livre à la main</button>`,
+    boutons:[{texte:"Fermer"}],
+    surFermeture:()=>rendreBiblio()
+  });
+
+  const majPhoto = async ()=>{
+    const z = f.querySelector("#zonePhoto");
+    if (!cs.photo){ z.innerHTML = `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`; return; }
+    z.innerHTML = `<img class="photo-apercu" src="${cs.photo.mini}" alt="Compartiment ${k}">
+      <div class="aide">${cs.photo.envoye ? "Photo envoyée sur GitHub ("+esc(cs.photo.chemin)+")" : "Photo pas encore envoyée sur GitHub"}
+      · ${esc(dateFr(cs.photo.maj))}
+      <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
+    const btn = z.querySelector("#cRetirer");
+    if (btn) btn.onclick = async ()=>{
+      const ok = await confirmer("Retirer la photo de ce compartiment ? Les livres déjà relevés sont conservés.");
+      if (!ok) return;
+      cs.photo = null; sauver(); majPhoto(); rendreBiblio();
+    };
+  };
+
+  const majLivres = ()=>{
+    const z = f.querySelector("#zoneLivres");
+    const l = cs.livres || [];
+    if (!l.length){ z.innerHTML = `<div class="vide">Aucun livre relevé dans ce compartiment.</div>`; return; }
+    z.innerHTML = l.map((lv,i)=>
+      `<div class="livre ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}">
+         <div class="t">${esc(lv.titre)}</div>
+         <div class="a">${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
+         ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
+         ${lv.categorie?`<div class="cat">${esc(lv.categorie)}</div>`:""}
+         <div class="actions">
+           <button class="btn" data-modif="${i}">Modifier</button>
+           <button class="btn rouge" data-suppr="${i}">Supprimer</button>
+         </div>
+       </div>`).join("");
+    z.querySelectorAll("[data-modif]").forEach(el=>el.onclick=()=>formLivre(cs, Number(el.dataset.modif), majLivres));
+    z.querySelectorAll("[data-suppr]").forEach(el=>el.onclick=async()=>{
+      const i = Number(el.dataset.suppr);
+      const ok = await confirmer(`Supprimer « ${esc(cs.livres[i].titre)} » ?`);
+      if (!ok) return;
+      cs.livres.splice(i,1); sauver(); majLivres(); rendreBiblio();
+    });
+  };
+
+  f.querySelector("#cPhoto").onclick = ()=>f.querySelector("#cFichier").click();
+  f.querySelector("#cFichier").onchange = async (ev)=>{
+    const file = ev.target.files && ev.target.files[0];
+    if (!file) return;
+    try{
+      toast("Compression de la photo…");
+      const brut = await lireFichier(file);
+      const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
+      const mini  = await redimensionner(plein, cfg.tailleMini, 0.55);
+      cs.photo = { plein, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+      delete cachePhotos[b.id+"/"+k];
+      sauver();
+      majPhoto(); rendreBiblio();
+      toast("Photo enregistrée. Pensez à l'envoyer sur GitHub.");
+    }catch(e){ toast("Photo illisible : " + e.message, 5000); }
+    ev.target.value = "";
+  };
+
+  f.querySelector("#cAnalyser").onclick = async ()=>{
+    if (!cs.photo){ toast("Ajoutez d'abord une photo."); return; }
+    const btn = f.querySelector("#cAnalyser");
+    btn.disabled = true; btn.textContent = "Analyse en cours…";
+    try{
+      const livres = await analyserPhoto(b, k);
+      btn.disabled = false; btn.textContent = "Analyser avec Gemini";
+      if (!livres.length){ toast("Gemini n'a identifié aucun livre sur cette photo."); return; }
+      if ((cs.livres||[]).length){
+        modale({ titre:"Résultat de l'analyse",
+          html:`<div>${livres.length} livre(s) identifié(s). Ce compartiment contient déjà ${cs.livres.length} livre(s).</div>
+                <div class="aide">${livres.map(x=>esc(x.titre)).join("<br>")}</div>`,
+          boutons:[
+            {texte:"Annuler"},
+            {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); sauver(); majLivres(); rendreBiblio(); }},
+            {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; sauver(); majLivres(); rendreBiblio(); }}
+          ]});
+      } else {
+        cs.livres = livres;
+        cs.analyse = { maj:new Date().toISOString(), modele:cfg.modele };
+        sauver(); majLivres(); rendreBiblio();
+        toast(livres.length + " livre(s) identifié(s).");
+      }
+    }catch(e){
+      btn.disabled = false; btn.textContent = "Analyser avec Gemini";
+      modale({titre:"Analyse impossible", html:`<div class="aide">${esc(e.message)}</div>`, boutons:[{texte:"Fermer"}]});
+    }
+  };
+
+  f.querySelector("#cAjouter").onclick = ()=>formLivre(cs, -1, majLivres);
+
+  majPhoto(); majLivres();
+}
+
+function formLivre(cs, index, apres){
+  const lv = index >= 0 ? cs.livres[index] : { titre:"", auteur:"", annee:"", resume:"", categorie:"", remarque:"", certitude:"haute" };
+  modale({
+    titre: index>=0 ? "Modifier le livre" : "Nouveau livre",
+    html:
+      `<label for="lT">Titre</label><input type="text" id="lT" value="${esc(lv.titre)}">
+       <label for="lA">Auteur</label><input type="text" id="lA" value="${esc(lv.auteur)}">
+       <div class="ligne2">
+         <div><label for="lY">Année</label><input type="text" id="lY" value="${esc(lv.annee)}"></div>
+         <div><label for="lC">Catégorie</label><input type="text" id="lC" value="${esc(lv.categorie)}"></div>
+       </div>
+       <label for="lR">Résumé en une ligne</label><textarea id="lR">${esc(lv.resume)}</textarea>
+       <label for="lM">Remarque</label><input type="text" id="lM" value="${esc(lv.remarque)}">`,
+    boutons:[
+      {texte:"Annuler"},
+      {texte:"Enregistrer", classe:"principal", garder:true, action:(f)=>{
+        const t = f.querySelector("#lT").value.trim();
+        if (!t){ toast("Le titre est obligatoire."); return false; }
+        lv.titre=t;
+        lv.auteur=f.querySelector("#lA").value.trim();
+        lv.annee=f.querySelector("#lY").value.trim();
+        lv.categorie=f.querySelector("#lC").value.trim();
+        lv.resume=f.querySelector("#lR").value.trim();
+        lv.remarque=f.querySelector("#lM").value.trim();
+        if (index < 0){ lv.id = uid(); lv.certitude="haute"; cs.livres = cs.livres||[]; cs.livres.push(lv); }
+        sauver(); f.remove(); if (apres) apres(); rendreBiblio();
+      }}
+    ]
+  });
+}
+
+/* ====================================================================
+   ANALYSE DE TOUTES LES PHOTOS
+   ==================================================================== */
+async function analyserToutesPhotos(b){
+  const cibles = Object.keys(b.cases||{}).filter(k=>b.cases[k].photo);
+  if (!cibles.length){ toast("Aucune photo à analyser dans cette bibliothèque."); return; }
+  const vierges = cibles.filter(k=>!(b.cases[k].livres||[]).length);
+  const choix = await new Promise(res=>{
+    modale({ titre:"Analyser les photos",
+      html:`<div>${cibles.length} photo(s) dans cette bibliothèque, dont ${vierges.length} sans livre relevé.</div>
+            <div class="aide">L'analyse envoie chaque photo à Gemini, une par une, avec un décompte de progression.</div>`,
+      boutons:[
+        {texte:"Annuler", action:()=>res(null)},
+        {texte:`Seulement les ${vierges.length} vierges`, action:()=>res(vierges)},
+        {texte:`Les ${cibles.length} photos`, classe:"principal", action:()=>res(cibles)}
+      ], surFermeture:()=>res(null)});
+  });
+  if (!choix || !choix.length) return;
+
+  const pg = fenetreProgres("Analyse des photos");
+  let fait=0, trouves=0, erreurs=[];
+  for (const k of choix){
+    pg.maj(fait, choix.length, "Compartiment " + k);
+    try{
+      const livres = await analyserPhoto(b, k);
+      b.cases[k].livres = livres;
+      b.cases[k].analyse = { maj:new Date().toISOString(), modele:cfg.modele };
+      trouves += livres.length;
+      sauver();
+    }catch(e){ erreurs.push(k + " : " + e.message); }
+    fait++;
+    pg.maj(fait, choix.length, "");
+  }
+  pg.fermer();
+  rendreBiblio();
+  modale({ titre:"Analyse terminée",
+    html:`<div>${fait} photo(s) traitée(s), ${trouves} livre(s) relevé(s).</div>
+          ${erreurs.length?`<div class="aide">${erreurs.length} échec(s) :<br>${esc(erreurs.join(" | "))}</div>`:""}`,
+    boutons:[{texte:"Fermer"}]});
+}
+
+/* ====================================================================
+   BOUTON 1 : LISTE DES LIVRES
+   ==================================================================== */
+function fenetreListe(b){
+  const opts = { auteur:true, annee:true, emplacement:true, numeroter:true, resume:false };
+  const f = modale({
+    titre:"Liste des livres — " + b.nom,
+    html:
+      `<div class="coche"><input type="checkbox" id="oA" checked><label for="oA" style="margin:0">Auteur</label></div>
+       <div class="coche"><input type="checkbox" id="oY" checked><label for="oY" style="margin:0">Année</label></div>
+       <div class="coche"><input type="checkbox" id="oE" checked><label for="oE" style="margin:0">Emplacement (rangée · compartiment)</label></div>
+       <div class="coche"><input type="checkbox" id="oN" checked><label for="oN" style="margin:0">Numéroter la liste exhaustive</label></div>
+       <div class="coche"><input type="checkbox" id="oR"><label for="oR" style="margin:0">Résumé (s'il existe)</label></div>
+       <textarea id="sortie" style="min-height:320px;font-size:13px"></textarea>`,
+    boutons:[
+      {texte:"Fermer"},
+      {texte:"Copier", garder:true, action:async (fd)=>{
+        const ok = await copierTexte(fd.querySelector("#sortie").value);
+        toast(ok ? "Liste copiée." : "Copie impossible : sélectionnez le texte à la main.");
+      }}
+    ]
+  });
+
+  const construire = ()=>{
+    const o = {
+      auteur: f.querySelector("#oA").checked,
+      annee: f.querySelector("#oY").checked,
+      emplacement: f.querySelector("#oE").checked,
+      numeroter: f.querySelector("#oN").checked,
+      resume: f.querySelector("#oR").checked
+    };
+    f.querySelector("#sortie").value = texteListe(b, o);
+  };
+  ["#oA","#oY","#oE","#oN","#oR"].forEach(s=>f.querySelector(s).onchange = construire);
+  construire();
+}
+
+function ligneLivre(lv, o, empl){
+  let s = lv.titre;
+  if (o.auteur && lv.auteur) s += " — " + lv.auteur;
+  if (o.annee && lv.annee) s += " (" + lv.annee + ")";
+  if (o.emplacement && empl) s += "  [R" + empl.r + "C" + empl.c + "]";
+  if (lv.certitude === "faible") s += "  (lecture incertaine)";
+  if (o.resume && lv.resume) s += "\n     " + lv.resume;
+  return s;
+}
+
+function texteListe(b, o){
+  const L = [];
+  L.push("BIBLIOTHÈQUE : " + b.nom + (b.lieu ? " (" + b.lieu + ")" : ""));
+  L.push("Généré le " + dateFr());
+  L.push("");
+  L.push("═══ LIVRES PAR COMPARTIMENT ═══");
+  L.push("");
+
+  const parcourir = (r,c,horsGrille)=>{
+    const cs = b.cases[clef(r,c)];
+    if (!cs) return;
+    const l = cs.livres || [];
+    L.push("— Rangée " + r + " · compartiment " + c + (horsGrille ? " (hors grille)" : "") +
+           " — " + l.length + " livre(s)" + (cs.photo ? "" : " — pas de photo"));
+    if (!l.length) L.push("   (vide)");
+    l.forEach((lv,i)=>L.push("   " + (i+1) + ". " + ligneLivre(lv, o, null)));
+    L.push("");
+  };
+  for (let r=1; r<=b.rangees; r++) for (let c=1; c<=b.compartiments; c++) parcourir(r,c,false);
+  Object.keys(b.cases||{}).forEach(k=>{
+    const [r,c] = k.split("-").map(Number);
+    if (r>b.rangees || c>b.compartiments) parcourir(r,c,true);
+  });
+
+  const tous = tousLesLivres(b);
+  const tri = tous.slice().sort((a,z)=>
+    (a.livre.titre||"").localeCompare(z.livre.titre||"", "fr", {sensitivity:"base"}));
+  const distincts = new Set(tri.map(x=>(x.livre.titre||"").toLowerCase().trim() + "|" + (x.livre.auteur||"").toLowerCase().trim()));
+
+  L.push("═══ LISTE EXHAUSTIVE — " + tri.length + " livre(s), " + distincts.size + " titre(s) distinct(s) ═══");
+  L.push("");
+  tri.forEach((x,i)=>L.push((o.numeroter ? (i+1) + ". " : "• ") + ligneLivre(x.livre, o, {r:x.r,c:x.c})));
+  return L.join("\n");
+}
+
+/* ====================================================================
+   BOUTON 2 : RÉSUMÉS ET AUTEURS
+   ==================================================================== */
+async function lancerResumes(b){
+  const tous = tousLesLivres(b).map(x=>x.livre);
+  if (!tous.length){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
+  const manquants = tous.filter(lv=>!lv.resume);
+  const choix = await new Promise(res=>{
+    modale({ titre:"Résumés et auteurs",
+      html:`<div>${tous.length} livre(s) dans cette bibliothèque, dont ${manquants.length} sans résumé.</div>
+            <div class="aide">Gemini renvoie pour chaque livre un résumé d'une ligne, l'auteur complet avec une précision brève et l'année de première parution. Le traitement se fait par lots de 20, avec décompte.</div>`,
+      boutons:[
+        {texte:"Annuler", action:()=>res(null)},
+        {texte:`Les ${manquants.length} sans résumé`, action:()=>res(manquants)},
+        {texte:`Tous (${tous.length})`, classe:"principal", action:()=>res(tous)}
+      ], surFermeture:()=>res(null)});
+  });
+  if (!choix || !choix.length) return;
+  const ok = await traiterParLots(choix, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", 20);
+  rendreBiblio();
+  if (ok) {
+    const avec = choix.filter(lv=>lv.resume).length;
+    modale({ titre:"Résumés obtenus",
+      html:`<div>${avec} livre(s) sur ${choix.length} ont maintenant un résumé.</div>
+            <div class="aide">Les résumés apparaissent dans la fiche de chaque compartiment, dans la liste (case « Résumé ») et dans le PDF.</div>`,
+      boutons:[{texte:"Fermer"}]});
+  }
+}
+
+/* ====================================================================
+   BOUTON 3 : PDF PAR CATÉGORIES
+   ==================================================================== */
+function chargerJsPDF(){
+  return new Promise((res,rej)=>{
+    if (window.jspdf && window.jspdf.jsPDF) return res(window.jspdf.jsPDF);
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+    s.onload = ()=> (window.jspdf && window.jspdf.jsPDF) ? res(window.jspdf.jsPDF) : rej(new Error("jsPDF indisponible"));
+    s.onerror = ()=>rej(new Error("Téléchargement de la bibliothèque PDF impossible (réseau ?)"));
+    document.head.appendChild(s);
+  });
+}
+
+async function lancerPdf(b){
+  const tous = tousLesLivres(b).map(x=>x.livre);
+  if (!tous.length){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
+  const sansCat = tous.filter(lv=>!lv.categorie);
+  if (sansCat.length){
+    const ok = await confirmer(`${sansCat.length} livre(s) sur ${tous.length} n'ont pas encore de catégorie thématique.<br><br>Demander leur classement à Gemini maintenant ?`, "Classement thématique");
+    if (ok){
+      const fini = await traiterParLots(sansCat, cfg.qCategorie, ["categorie"], "Classement thématique", 30);
+      if (!fini) return;
+    }
+  }
+  try{
+    const jsPDF = await chargerJsPDF();
+    const blob = construirePdf(jsPDF, b, tous);
+    const url = URL.createObjectURL(blob);
+    const nom = "bibliotheque-" + b.nom.replace(/[^\w\-]+/g,"_") + "-" + new Date().toISOString().slice(0,10) + ".pdf";
+    modale({ titre:"PDF thématique",
+      html:`<div>Le PDF est prêt : ${tous.length} livre(s) classés par catégorie.</div>
+            <div class="aide">Sur iPhone, « Ouvrir » affiche le PDF dans un nouvel onglet ; le bouton de partage permet ensuite de l'enregistrer dans Fichiers.</div>`,
+      boutons:[
+        {texte:"Fermer", action:()=>setTimeout(()=>URL.revokeObjectURL(url), 60000)},
+        {texte:"Ouvrir", garder:true, action:()=>window.open(url,"_blank")},
+        {texte:"Télécharger", classe:"principal", garder:true, action:()=>{
+          const a = document.createElement("a"); a.href=url; a.download=nom;
+          document.body.appendChild(a); a.click(); a.remove();
+        }}
+      ]});
+  }catch(e){
+    modale({titre:"PDF impossible", html:`<div class="aide">${esc(e.message)}</div>`, boutons:[{texte:"Fermer"}]});
+  }
+}
+
+function construirePdf(jsPDF, b, livres){
+  const doc = new jsPDF({ unit:"mm", format:"a4" });
+  const MG = 18, LARG = 210 - MG*2;
+  let y = MG;
+
+  const groupes = {};
+  livres.forEach(lv=>{
+    const cat = (lv.categorie || "Non classé").trim();
+    (groupes[cat] = groupes[cat] || []).push(lv);
+  });
+  const cats = Object.keys(groupes).sort((a,z)=>{
+    if (a === "Non classé") return 1;
+    if (z === "Non classé") return -1;
+    return a.localeCompare(z, "fr");
+  });
+
+  const saut = (h)=>{ if (y + h > 297 - MG){ doc.addPage(); y = MG; } };
+
+  doc.setFont("helvetica","bold"); doc.setFontSize(20);
+  doc.text(b.nom, MG, y); y += 9;
+  doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setTextColor(110);
+  doc.text(`${livres.length} livres · ${cats.length} catégories · ${b.lieu ? b.lieu + " · " : ""}${new Date().toLocaleDateString("fr-FR")}`, MG, y);
+  y += 4; doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 9;
+  doc.setTextColor(0);
+
+  cats.forEach(cat=>{
+    const l = groupes[cat].slice().sort((x,z)=>{
+      const ax = (x.auteur||"zzz"), az = (z.auteur||"zzz");
+      const d = ax.localeCompare(az,"fr",{sensitivity:"base"});
+      return d !== 0 ? d : (x.titre||"").localeCompare(z.titre||"","fr",{sensitivity:"base"});
+    });
+    saut(16);
+    doc.setFont("helvetica","bold"); doc.setFontSize(13);
+    doc.text(cat + "  (" + l.length + ")", MG, y); y += 2;
+    doc.setDrawColor(150); doc.line(MG, y, MG+LARG, y); y += 6;
+
+    l.forEach(lv=>{
+      doc.setFont("helvetica","bold"); doc.setFontSize(10.5);
+      let entete = lv.titre;
+      if (lv.auteur) entete += " — " + lv.auteur;
+      if (lv.annee) entete += " (" + lv.annee + ")";
+      const lignes = doc.splitTextToSize(entete, LARG);
+      saut(lignes.length*5 + (lv.resume?6:0) + 2);
+      doc.text(lignes, MG, y); y += lignes.length*5;
+      if (lv.resume){
+        doc.setFont("helvetica","italic"); doc.setFontSize(9.5); doc.setTextColor(95);
+        const lr = doc.splitTextToSize(lv.resume, LARG - 4);
+        saut(lr.length*4.4 + 2);
+        doc.text(lr, MG+4, y); y += lr.length*4.4;
+        doc.setTextColor(0);
+      }
+      y += 2.5;
+    });
+    y += 4;
+  });
+
+  const n = doc.getNumberOfPages();
+  for (let p=1; p<=n; p++){
+    doc.setPage(p);
+    doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(140);
+    doc.text(b.nom + " — page " + p + " / " + n, 105, 290, {align:"center"});
+  }
+  return doc.output("blob");
+}
+
+/* ====================================================================
+   RÉGLAGES
+   ==================================================================== */
+function ouvrirReglages(){
+  const f = modale({
+    titre:"Réglages",
+    html:
+      `<div class="onglets">
+         <button data-o="gemini" class="actif">Gemini</button>
+         <button data-o="github">GitHub</button>
+         <button data-o="questions">Questions</button>
+         <button data-o="donnees">Données</button>
+       </div>
+       <div id="pGemini">
+         <label for="rCle">Clé API Gemini</label>
+         <input type="password" id="rCle" value="${esc(cleGemini())}" placeholder="AIza…">
+         <div class="aide">Stockée sur cet appareil uniquement, jamais envoyée sur GitHub. Elle est partagée avec vos autres applications de la même origine.</div>
+         <label for="rModele">Modèle</label>
+         <select id="rModele">
+           ${["gemini-2.5-flash","gemini-2.5-pro","gemini-2.0-flash"].map(m=>
+             `<option value="${m}" ${cfg.modele===m?"selected":""}>${m}</option>`).join("")}
+         </select>
+         <label for="rTaille">Taille maximale des photos envoyées (pixels)</label>
+         <input type="number" id="rTaille" min="600" max="3000" step="100" value="${cfg.tailleMax}">
+         <div class="aide">1600 px suffit en général pour lire les tranches. Plus grand = analyse plus fine mais envoi plus lent.</div>
+       </div>
+       <div id="pGithub" hidden>
+         <label for="rUser">Utilisateur GitHub</label><input type="text" id="rUser" value="${esc(cfg.ghUser)}">
+         <label for="rRepo">Dépôt</label><input type="text" id="rRepo" value="${esc(cfg.ghRepo)}">
+         <label for="rBranche">Branche</label><input type="text" id="rBranche" value="${esc(cfg.ghBranche)}">
+         <label for="rToken">Jeton (PAT)</label><input type="password" id="rToken" value="${esc(ghToken())}">
+         <div class="aide">Les données vont dans ${FICHIER_JSON}, les photos dans images/&lt;bibliothèque&gt;/&lt;rangée-compartiment&gt;.jpg. Le jeton reste sur l'appareil.</div>
+         <div class="barre">
+           <button class="btn" id="rTest">Tester l'accès</button>
+           <button class="btn" id="rEnvoyer">Envoyer maintenant</button>
+           <button class="btn" id="rRecup">Récupérer</button>
+         </div>
+         <div id="rStatut" class="aide"></div>
+       </div>
+       <div id="pQuestions" hidden>
+         <label for="qA">Question posée pour analyser une photo</label>
+         <textarea id="qA" style="min-height:160px">${esc(cfg.qAnalyse)}</textarea>
+         <button class="btn" id="qAr" style="margin-top:6px">Revenir au texte par défaut</button>
+         <label for="qR">Question posée pour les résumés</label>
+         <textarea id="qR" style="min-height:140px">${esc(cfg.qResume)}</textarea>
+         <button class="btn" id="qRr" style="margin-top:6px">Revenir au texte par défaut</button>
+         <label for="qC">Question posée pour les catégories</label>
+         <textarea id="qC" style="min-height:120px">${esc(cfg.qCategorie)}</textarea>
+         <button class="btn" id="qCr" style="margin-top:6px">Revenir au texte par défaut</button>
+       </div>
+       <div id="pDonnees" hidden>
+         <div id="rStats"></div>
+         <div class="barre">
+           <button class="btn" id="dExport">Exporter en JSON</button>
+           <button class="btn" id="dImport">Importer un JSON</button>
+         </div>
+         <input type="file" id="dFichier" accept="application/json,.json" hidden>
+         <div class="sep"></div>
+         <button class="btn rouge plein" id="dEffacer">Effacer toutes les données locales</button>
+         <div class="aide">N'efface rien sur GitHub : les données pourront être récupérées si elles y ont été envoyées.</div>
+       </div>`,
+    boutons:[
+      {texte:"Fermer"},
+      {texte:"Enregistrer", classe:"principal", garder:true, action:(fd)=>{
+        const cle = fd.querySelector("#rCle").value.trim();
+        if (cle) localStorage.setItem(CLE_GEM, cle); else localStorage.removeItem(CLE_GEM);
+        cfg.modele = fd.querySelector("#rModele").value;
+        cfg.tailleMax = Math.max(600, Math.min(3000, parseInt(fd.querySelector("#rTaille").value,10)||1600));
+        cfg.ghUser = fd.querySelector("#rUser").value.trim();
+        cfg.ghRepo = fd.querySelector("#rRepo").value.trim();
+        cfg.ghBranche = fd.querySelector("#rBranche").value.trim() || "main";
+        const tok = fd.querySelector("#rToken").value.trim();
+        if (tok) localStorage.setItem("biblio_token", tok); else localStorage.removeItem("biblio_token");
+        cfg.qAnalyse = fd.querySelector("#qA").value;
+        cfg.qResume = fd.querySelector("#qR").value;
+        cfg.qCategorie = fd.querySelector("#qC").value;
+        sauverCfg();
+        toast("Réglages enregistrés.");
+        fd.remove();
+      }}
+    ]
+  });
+
+  f.querySelectorAll("[data-o]").forEach(btn=>{
+    btn.onclick = ()=>{
+      f.querySelectorAll("[data-o]").forEach(x=>x.classList.remove("actif"));
+      btn.classList.add("actif");
+      ["gemini","github","questions","donnees"].forEach(o=>{
+        f.querySelector("#p" + o[0].toUpperCase() + o.slice(1)).hidden = (o !== btn.dataset.o);
+      });
+    };
+  });
+
+  f.querySelector("#qAr").onclick = ()=>{ f.querySelector("#qA").value = QUESTION_ANALYSE_DEFAUT; };
+  f.querySelector("#qRr").onclick = ()=>{ f.querySelector("#qR").value = QUESTION_RESUME_DEFAUT; };
+  f.querySelector("#qCr").onclick = ()=>{ f.querySelector("#qC").value = QUESTION_CATEGORIE_DEFAUT; };
+
+  f.querySelector("#rTest").onclick = async ()=>{
+    const s = f.querySelector("#rStatut");
+    cfg.ghUser = f.querySelector("#rUser").value.trim();
+    cfg.ghRepo = f.querySelector("#rRepo").value.trim();
+    cfg.ghBranche = f.querySelector("#rBranche").value.trim() || "main";
+    const tok = f.querySelector("#rToken").value.trim();
+    if (tok) localStorage.setItem("biblio_token", tok);
+    s.textContent = "Test en cours…";
+    try{
+      const t = await ghLireTexte(FICHIER_JSON);
+      s.textContent = t === null
+        ? "Dépôt accessible. Le fichier " + FICHIER_JSON + " n'existe pas encore : il sera créé au premier envoi."
+        : "Dépôt accessible. Fichier trouvé (" + t.length + " caractères).";
+    }catch(e){ s.textContent = "Échec : " + e.message; }
+  };
+  f.querySelector("#rEnvoyer").onclick = ()=>{ f.remove(); envoyerVersGitHub(); };
+  f.querySelector("#rRecup").onclick = ()=>{ f.remove(); recupererDeGitHub(false); };
+
+  const stats = f.querySelector("#rStats");
+  let octets = 0;
+  try{ octets = (localStorage.getItem(CLE_DATA)||"").length; }catch(e){}
+  const attente = photosEnAttente().length;
+  stats.innerHTML =
+    `<div class="aide">${data.bibliotheques.length} bibliothèque(s) · 
+     ${data.bibliotheques.reduce((n,b)=>n+compteLivres(b),0)} livre(s) · 
+     ${data.bibliotheques.reduce((n,b)=>n+comptePhotos(b),0)} photo(s), dont ${attente} pas encore envoyée(s).<br>
+     Stockage local utilisé : ${(octets/1024).toFixed(0)} Ko (limite du navigateur : environ 5 000 Ko).<br>
+     Dernière modification : ${esc(dateFr(data.maj))||"—"}</div>`;
+
+  f.querySelector("#dExport").onclick = ()=>{
+    const blob = new Blob([JSON.stringify(data,null,1)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href=url; a.download="bibliotheques-" + new Date().toISOString().slice(0,10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 30000);
+  };
+  f.querySelector("#dImport").onclick = ()=>f.querySelector("#dFichier").click();
+  f.querySelector("#dFichier").onchange = async (ev)=>{
+    const file = ev.target.files && ev.target.files[0];
+    if (!file) return;
+    try{
+      const txt = await file.text();
+      const j = JSON.parse(txt);
+      if (!j || !Array.isArray(j.bibliotheques)) throw new Error("Ce fichier ne contient pas de bibliothèques.");
+      const ok = await confirmer(`Remplacer les données actuelles (${data.bibliotheques.length} bibliothèque(s)) par celles du fichier (${j.bibliotheques.length}) ?`);
+      if (!ok) return;
+      data = j; sauver(); rendre(); f.remove();
+      toast("Données importées.");
+    }catch(e){ toast("Import impossible : " + e.message, 5000); }
+    ev.target.value="";
+  };
+  f.querySelector("#dEffacer").onclick = async ()=>{
+    const ok = await confirmer("Effacer toutes les bibliothèques enregistrées sur cet appareil ?");
+    if (!ok) return;
+    const ok2 = await confirmer("Confirmation : cette action est définitive en local.");
+    if (!ok2) return;
+    data = { bibliotheques:[], maj:null };
+    biblioCourante = null; sale = false;
+    sauver(false); rendre(); f.remove();
+    toast("Données locales effacées.");
+  };
+}
+
+/* ====================================================================
+   HISTORIQUE DES VERSIONS
+   ==================================================================== */
+function ouvrirHistorique(){
+  modale({
+    titre:"Historique des versions",
+    html: `<div class="hist">` + HISTORIQUE.map(h=>
+      `<h3>${esc(h.v)} — ${esc(h.d)}</h3><ul>${h.l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`).join("") + `</div>`,
+    boutons: sale ? [{texte:"Envoyer sur GitHub", classe:"principal", action:envoyerVersGitHub},{texte:"Fermer"}] : [{texte:"Fermer"}]
+  });
+}
+
+/* ====================================================================
+   DÉMARRAGE
+   ==================================================================== */
+$("#badgeVersion").onclick = ouvrirHistorique;
+$("#btnReglages").onclick = ouvrirReglages;
+$("#btnRetour").onclick = ()=>{ biblioCourante = null; rendreListe(); window.scrollTo(0,0); };
+document.addEventListener("keydown", e=>{
+  if (e.key === "Escape"){
+    const m = $("#zoneModales").lastElementChild;
+    if (m){ const x = m.querySelector("[data-fermer]"); if (x) x.click(); else m.remove(); }
+  }
+});
+
+charger();
+rendre();
+if (ghPret()) recupererDeGitHub(true);
+if (!cleGemini()) setTimeout(()=>toast("Renseignez votre clé Gemini dans les réglages (⚙️) pour analyser les photos.", 5000), 900);
+</script>
 </body>
 </html>
