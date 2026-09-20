@@ -1,0 +1,615 @@
+{
+ "bibliotheques": [
+  {
+   "id": "mu8tshr5zjktx",
+   "nom": "Bibliothèque de Jean dans son couloir",
+   "lieu": "Couloir Cour Debille",
+   "rangees": 5,
+   "compartiments": 6,
+   "cases": {
+    "1-1": {
+     "livres": [
+      {
+       "id": "mu8ttfnf7prjt",
+       "titre": "CONDORCET",
+       "auteur": "Keith Michael Baker (historien américain)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre explore la vie et les idées du philosophe des Lumières Condorcet, en se basant sur les travaux de Keith Michael Baker.",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnf1qrbq",
+       "titre": "Le grand Charlot",
+       "auteur": "Robert Payne (écrivain britannique, biographe)",
+       "annee": "1968",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une biographie détaillée de Charlie Chaplin, retraçant sa vie, sa carrière cinématographique et son impact culturel.",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnfmdl68",
+       "titre": "JOURNAL INTIME",
+       "auteur": "Robert Schumann (compositeur allemand, 1810-1856)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce journal intime révèle les pensées, émotions et réflexions du compositeur romantique Robert Schumann sur sa vie et sa musique.",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnfrot4s",
+       "titre": "LA VIE SECRÈTE d'Antoine de St-Exupéry",
+       "auteur": "Renée Zeller (biographe française)",
+       "annee": "1948",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Cette biographie explore les aspects moins connus et intimes de la vie d'Antoine de Saint-Exupéry, au-delà de son œuvre publique.",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnf9j3in",
+       "titre": "CLAUDE MAURIAC",
+       "auteur": "Claude Mauriac (écrivain français, 1914-1996)",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "partiellement visible",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnfwbvww",
+       "titre": "LYAUTEY",
+       "auteur": "Hubert Lyautey (Maréchal de France, 1854-1934)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnfz4015",
+       "titre": "JEAN COCTEAU",
+       "auteur": "Jean Cocteau (artiste français, 1889-1963)",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "partiellement visible",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnfmuwka",
+       "titre": "Changer la vie",
+       "auteur": "Jean Guéhenno (écrivain et essayiste français, 1880-1978)",
+       "annee": "1976",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est un essai philosophique et politique de Jean Guéhenno, explorant les idéaux et les défis de la transformation sociale.",
+       "categorie": "Essai"
+      },
+      {
+       "id": "mu8ttfnfinp77",
+       "titre": "Madame de Staël",
+       "auteur": "Ghislain de Diesbach (écrivain et biographe français)",
+       "annee": "1983",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Cette biographie retrace la vie et l'œuvre de Madame de Staël, figure intellectuelle majeure du XVIIIe et XIXe siècle français.",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfngoyv51",
+       "titre": "LÉOPOLD SÉDAR SENGHOR",
+       "auteur": "Léopold Sédar Senghor (homme d'État sénégalais, poète, 1906-2001)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfngywuie",
+       "titre": "ARAGON",
+       "auteur": "Louis Aragon (écrivain français, 1897-1982)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfnglk5np",
+       "titre": "MAO TSOU TONG",
+       "auteur": "Mao Tsé-toung (homme d'État chinois, 1893-1976)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfngw87j4",
+       "titre": "ARISTOPHANE",
+       "auteur": "Aristophane (dramaturge grec antique, c. 446-c. 386 av. J.-C.)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Littérature classique"
+      },
+      {
+       "id": "mu8ttfng9qgvq",
+       "titre": "APOLLINAIRE",
+       "auteur": "Guillaume Apollinaire (poète français, 1880-1918)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfng8a8i4",
+       "titre": "ZOLA",
+       "auteur": "Émile Zola (écrivain français, 1840-1902)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfng6tbgv",
+       "titre": "MOZART",
+       "auteur": "Wolfgang Amadeus Mozart (compositeur autrichien, 1756-1791)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Biographie"
+      },
+      {
+       "id": "mu8ttfng5eidd",
+       "titre": "À TRAVERS LES BARREAUX",
+       "auteur": "Charles Péguy (écrivain et poète français, 1873-1914)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce recueil rassemble des écrits de Charles Péguy, offrant une réflexion sur la foi, la société et la condition humaine.",
+       "categorie": "Essai"
+      },
+      {
+       "id": "mu8ttfngcvslf",
+       "titre": "D. MORNET",
+       "auteur": "Daniel Mornet (historien de la littérature française, 1878-1954)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Non classé"
+      },
+      {
+       "id": "mu8ttfngrz6o0",
+       "titre": "HYMENOPTERA FORMICIDAE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une étude scientifique approfondie des hyménoptères formicidés, c'est-à-dire des fourmis, leur biologie et leur écologie.",
+       "categorie": "Sciences"
+      },
+      {
+       "id": "mu8ttfngwwp0r",
+       "titre": "COULISSES DU MONDE ANIMAL",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre explore les aspects cachés et fascinants du comportement animal, révélant des observations inédites sur la faune.",
+       "categorie": "Sciences"
+      },
+      {
+       "id": "mu8ttfnghj1sm",
+       "titre": "LA VIE DES ABEILLES",
+       "auteur": "Maurice Maeterlinck (écrivain belge, Prix Nobel de littérature 1911)",
+       "annee": "1901",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre explore la vie fascinante des abeilles, leur organisation sociale complexe, leur communication et leur rôle essentiel dans la nature.",
+       "categorie": "Sciences"
+      },
+      {
+       "id": "mu8ttfngb8nhk",
+       "titre": "VERSUS",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Non classé"
+      },
+      {
+       "id": "mu8ttfngtqeqr",
+       "titre": "POISSONS",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Sciences"
+      }
+     ],
+     "photo": {
+      "plein": null,
+      "mini": "data:image/jpeg;base64,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",
+      "chemin": "images/mu8tshr5zjktx/1-1.jpg",
+      "envoye": true,
+      "maj": "2026-09-19T20:14:39.589Z"
+     },
+     "analyse": {
+      "maj": "2026-09-19T20:14:51.772Z",
+      "modele": "gemini-2.5-flash"
+     }
+    },
+    "1-2": {
+     "livres": [
+      {
+       "id": "mu8tuc6k7f39k",
+       "titre": "COLLECTIONS CHINOISES",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6kuphq7",
+       "titre": "MAÎTRE ECKHART PEINT PAR VAN EYCK",
+       "auteur": "A. Moulonguet • P. Bouche",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre explore la figure de Maître Eckhart et son lien potentiel avec l'œuvre du peintre Van Eyck, offrant une perspective unique.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6kl1ty1",
+       "titre": "LES VOIX DU SILENCE",
+       "auteur": "André Malraux (écrivain et homme politique français)",
+       "annee": "1951",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Malraux explore l'art comme moyen d'expression humaine face à la mort et au destin, analysant diverses formes artistiques à travers l'histoire.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6ka7bkv",
+       "titre": "La grammaire des styles",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "L'ART ROMAN",
+       "resume": "",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k7khwz",
+       "titre": "HISTOIRE DE L'ART",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "partiellement caché",
+       "resume": "",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6km2s3n",
+       "titre": "LES ESTAMPES",
+       "auteur": "Rembrandt van Rijn (peintre et graveur néerlandais)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre présente et analyse les estampes de Rembrandt, explorant sa technique, ses thèmes et son impact sur l'histoire de l'art.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k6xddd",
+       "titre": "LA SCULPTURE EN EUROPE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k5o605",
+       "titre": "LE DESSIN FRANÇAIS",
+       "auteur": "Larousse (maison d'édition française)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce volume de Larousse explore l'histoire et les caractéristiques du dessin français, présentant ses maîtres et ses évolutions stylistiques.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6ks14w6",
+       "titre": "principes fondamentaux de l'histoire de l'art",
+       "auteur": "Heinrich Wölfflin (historien de l'art suisse)",
+       "annee": "1915",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Wölfflin établit cinq paires de concepts fondamentaux pour analyser et comprendre l'évolution des styles artistiques, notamment entre Renaissance et Baroque.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6kh5d3i",
+       "titre": "CÉZANNE",
+       "auteur": "Paul Cézanne (peintre français, post-impressionniste)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre de Paul Cézanne, explorant sa vie, son style post-impressionniste et son influence majeure.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k99y4s",
+       "titre": "CHARDIN",
+       "auteur": "Jean Siméon Chardin (peintre français, rococo)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre de Jean Siméon Chardin, explorant sa vie, son style réaliste et ses natures mortes.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k9q00u",
+       "titre": "COROT",
+       "auteur": "Jean-Baptiste Corot (peintre français, pré-impressionniste)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre de Jean-Baptiste Corot, explorant sa vie, son style pré-impressionniste et ses paysages.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k8nyf9",
+       "titre": "COURBET",
+       "auteur": "Gustave Courbet (peintre français, réaliste)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre de Gustave Courbet, explorant sa vie, son style réaliste et son engagement artistique.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k7cqc7",
+       "titre": "DEGAS",
+       "auteur": "Edgar Degas (peintre et sculpteur français, impressionniste)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre d'Edgar Degas, explorant sa vie, son style impressionniste et ses thèmes récurrents.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k56ftp",
+       "titre": "DELACROIX",
+       "auteur": "Eugène Delacroix (peintre français, romantique)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre d'Eugène Delacroix, explorant sa vie, son style romantique et ses compositions dramatiques.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k6qbv2",
+       "titre": "MICHEL-ANGE",
+       "auteur": "Michel-Ange (artiste italien de la Haute Renaissance)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre de Michel-Ange, explorant sa vie, ses sculptures, peintures et architectures de la Renaissance.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k53qce",
+       "titre": "LE TITIEN",
+       "auteur": "Le Titien (peintre italien de la Renaissance vénitienne)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre est une monographie dédiée à l'œuvre du Titien, explorant sa vie, son style vénitien et ses portraits et scènes mythologiques.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6ki3v92",
+       "titre": "REMBRANDT",
+       "auteur": "Rembrandt van Rijn (Peintre néerlandais, 1606-1669)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre explore la vie et l'œuvre du célèbre peintre hollandais Rembrandt, analysant son style unique et son impact sur l'art baroque.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k82jzy",
+       "titre": "PEINTURE FRANÇAISE DES ORIGINES AU XVI S.",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Cet ouvrage retrace l'évolution de la peinture française depuis ses débuts jusqu'à la fin du XVIe siècle, couvrant les styles et artistes majeurs.",
+       "categorie": "Art"
+      },
+      {
+       "id": "mu8tuc6k1l5e6",
+       "titre": "HOROSCOPES CHINOIS",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre présente les douze signes du zodiaque chinois, leurs caractéristiques, compatibilités et prédictions annuelles basées sur l'astrologie chinoise.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kjvp3o",
+       "titre": "De la psychanalyse à l'astrologie",
+       "auteur": "André Barbault (Astrologue français, 1905-1999)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "L'auteur explore les liens et les divergences entre la psychanalyse et l'astrologie, proposant une réflexion sur leurs approches de l'être humain.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kfjjdo",
+       "titre": "Traité pratique d'astrologie",
+       "auteur": "André Barbault (Astrologue français, 1905-1999)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce traité offre une méthode complète et approfondie pour l'étude et la pratique de l'astrologie, couvrant les techniques d'interprétation et de prédiction.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kj6gno",
+       "titre": "VOTRE HOROSCOPE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre propose des prévisions astrologiques personnalisées basées sur les signes du zodiaque, offrant des conseils pour l'amour, la carrière et la vie quotidienne.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6k2jujh",
+       "titre": "astrologie devant la science",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Cet ouvrage examine la validité scientifique de l'astrologie, confrontant ses principes aux méthodes et découvertes de la science moderne.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kl46oj",
+       "titre": "BÉLIER",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Bélier.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kojxp5",
+       "titre": "TAUREAU",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Taureau.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6ktperq",
+       "titre": "GÉMEAUX",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique des Gémeaux.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kezle5",
+       "titre": "CANCER",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Cancer.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kbgzav",
+       "titre": "LION",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Lion.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kxf449",
+       "titre": "VIERGE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique de la Vierge.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kmqrkc",
+       "titre": "BALANCE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique de la Balance.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kwhv3b",
+       "titre": "SCORPION",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Scorpion.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kg73vv",
+       "titre": "SAGITTAIRE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Sagittaire.",
+       "categorie": "Esotérisme"
+      },
+      {
+       "id": "mu8tuc6kxx6f8",
+       "titre": "CAPRICORNE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Ce livre décrit les traits de personnalité, les forces et les faiblesses des individus nés sous le signe astrologique du Capricorne.",
+       "categorie": "Esotérisme"
+      }
+     ],
+     "photo": {
+      "plein": null,
+      "mini": "data:image/jpeg;base64,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",
+      "chemin": "images/mu8tshr5zjktx/1-2.jpg",
+      "envoye": true,
+      "maj": "2026-09-19T20:15:24.296Z"
+     },
+     "analyse": {
+      "maj": "2026-09-19T20:15:33.933Z",
+      "modele": "gemini-2.5-flash"
+     }
+    }
+   },
+   "cree": "2026-09-19T20:14:07.841Z"
+  }
+ ],
+ "maj": "2026-09-20T08:29:53.197Z"
+}
