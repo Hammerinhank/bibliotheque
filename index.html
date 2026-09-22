@@ -180,9 +180,11 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ---------- Claude sans clé : bouton vert vif en attente de la réponse ---------- */
 .btn.vif,#attenteClaude button.vif{background:#19e35f;border-color:#7dffa8;color:#062611;font-weight:700;box-shadow:0 0 0 3px rgba(25,227,95,.28),0 6px 20px rgba(25,227,95,.35)}
 .btn.vif:active{background:#12b84b}
-#attenteClaude{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:70;
+#attenteClaude{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:70;
   width:calc(100% - 20px);max-width:620px;display:flex;gap:6px;align-items:stretch}
 #attenteClaude[hidden]{display:none}
+body.attenteClaude{padding-bottom:84px}
+body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 #attenteClaude button.vif{flex:1;border-radius:14px;padding:13px 12px;font-size:15.5px;cursor:pointer;animation:pulseVif 1.6s ease-in-out infinite}
 #attenteClaude button.annul{flex:none;border-radius:14px;background:var(--encre3);border:1px solid var(--trait);color:var(--texte);padding:0 13px;font-size:16px}
 @keyframes pulseVif{0%,100%{box-shadow:0 0 0 3px rgba(25,227,95,.28),0 6px 20px rgba(25,227,95,.35)}50%{box-shadow:0 0 0 7px rgba(25,227,95,.18),0 6px 26px rgba(25,227,95,.55)}}
@@ -303,8 +305,12 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.10.0";
+const VERSION = "V1.10.1";
 const HISTORIQUE = [
+  { v:"V1.10.1", d:"22/09/2026", l:[
+    "Correction : le bouton vert « Copier la réponse de Claude » apparaissait dès l'ouverture de la fenêtre « Demander à Claude », même si rien n'avait été envoyé. Il n'apparaît plus qu'après avoir touché « Ouvrir Claude » ou « Copier le texte de la question ».",
+    "Le bouton vert est déplacé en bas de l'écran : il ne masque plus l'en-tête (⚙️, ☁️) ni le bandeau d'état ; il indique l'heure de la demande."
+  ]},
   { v:"V1.10.0", d:"22/09/2026", l:[
     "Claude sans clé API : réglages ⚙️ → IA → Claude → « Sans clé : copier-coller ». La voie par clé API reste disponible.",
     "Depuis un compartiment : copie de la photo (ou des deux photos côte à côte) dans le presse-papier et ouverture de Claude avec la question déjà écrite ; il reste à coller la photo en pièce jointe.",
@@ -1280,9 +1286,12 @@ function majAttenteClaude(){
   const a = lireAttenteClaude();
   const z = $("#attenteClaude");
   z.hidden = !a;
+  document.body.classList.toggle("attenteClaude", !!a);
   if (a){
     const b = biblio(a.bibId);
-    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de Claude — " + (b ? b.nom + " · " : "") + lib(a.cle);
+    const h = new Date(a.date);
+    const heure = isNaN(h) ? "" : " (demande de " + h.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}) + ")";
+    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de Claude — " + (b ? b.nom + " · " : "") + lib(a.cle) + heure;
   }
 }
 
@@ -1295,8 +1304,11 @@ function lancerClaudeManuel(b, k, parties, echecs){
   if (deux) question += "\n\nL'image jointe réunit les deux photos côte à côte : à GAUCHE la photo 1 (rang de devant), à DROITE la photo 2 (rang de derrière). Si je joins deux images séparées, la première est la photo 1 et la seconde la photo 2.";
   question += "\n\nL'image est en pièce jointe. Réponds uniquement par l'objet JSON demandé, sans texte ni balises ``` autour.";
 
-  localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
-  majAttenteClaude();
+  // L'attente n'est enregistrée qu'au moment où la demande part réellement vers Claude (étape 2).
+  const marquerEnvoi = ()=>{
+    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
+    majAttenteClaude();
+  };
 
   const tombees = (echecs||[]).filter(x=>x.nom === "gemini");
   const f = modale({
@@ -1313,7 +1325,7 @@ function lancerClaudeManuel(b, k, parties, echecs){
          <button class="btn plein" id="mcQuestion">Copier seulement le texte de la question</button></div></div>
        <div class="etape"><div class="n">3</div><div class="c">Dans Claude, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
          <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de Claude</button>
-         <div class="aide">Le bouton vert reste aussi en haut de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre.</div></div></div>`,
+         <div class="aide">Dès que vous avez ouvert Claude (étape 2), le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir Claude n'enregistre aucune attente.</div></div></div>`,
     boutons:[{texte:"Fermer"}]
   });
   const etat = f.querySelector("#mcEtatCopie");
@@ -1332,12 +1344,14 @@ function lancerClaudeManuel(b, k, parties, echecs){
     f.querySelector("#mcP2").onclick = ()=>copier([images[1]], "La photo 2 est");
   }
   f.querySelector("#mcOuvrir").onclick = ()=>{
+    marquerEnvoi();
     window.open("https://claude.ai/new?q=" + encodeURIComponent(question), "_blank");
   };
   f.querySelector("#mcQuestion").onclick = async ()=>{
+    marquerEnvoi();
     toast(await copierTexte(question) ? "Question copiée (la photo n'est plus dans le presse-papier : recopiez-la ensuite)." : "Copie impossible.", 5000);
   };
-  f.querySelector("#mcReponse").onclick = ()=>recevoirReponseClaude(f);
+  f.querySelector("#mcReponse").onclick = ()=>{ if (!lireAttenteClaude()) marquerEnvoi(); recevoirReponseClaude(f); };
 }
 
 async function recevoirReponseClaude(fenetre){
