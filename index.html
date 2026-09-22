@@ -177,6 +177,19 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
   box-shadow:0 6px 24px rgba(0,0,0,.5);
 }
 #toast.masque{display:none}
+/* ---------- Claude sans clé : bouton vert vif en attente de la réponse ---------- */
+.btn.vif,#attenteClaude button.vif{background:#19e35f;border-color:#7dffa8;color:#062611;font-weight:700;box-shadow:0 0 0 3px rgba(25,227,95,.28),0 6px 20px rgba(25,227,95,.35)}
+.btn.vif:active{background:#12b84b}
+#attenteClaude{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:70;
+  width:calc(100% - 20px);max-width:620px;display:flex;gap:6px;align-items:stretch}
+#attenteClaude[hidden]{display:none}
+#attenteClaude button.vif{flex:1;border-radius:14px;padding:13px 12px;font-size:15.5px;cursor:pointer;animation:pulseVif 1.6s ease-in-out infinite}
+#attenteClaude button.annul{flex:none;border-radius:14px;background:var(--encre3);border:1px solid var(--trait);color:var(--texte);padding:0 13px;font-size:16px}
+@keyframes pulseVif{0%,100%{box-shadow:0 0 0 3px rgba(25,227,95,.28),0 6px 20px rgba(25,227,95,.35)}50%{box-shadow:0 0 0 7px rgba(25,227,95,.18),0 6px 26px rgba(25,227,95,.55)}}
+.etape{display:flex;gap:10px;align-items:flex-start;background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:10px;margin-top:8px}
+.etape .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--bronze-sombre);color:#fff8e1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.etape .c{flex:1;min-width:0}
+.etape .btn{margin-top:6px}
 .progres{background:var(--encre);border:1px solid var(--bronze);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14px}
 .progres .barreint{height:6px;background:var(--trait);border-radius:4px;margin-top:7px;overflow:hidden}
 .progres .barreint i{display:block;height:100%;background:var(--bronze);width:0}
@@ -282,6 +295,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 <input type="file" id="entreeMulti" accept="image/*" multiple hidden>
 <input type="file" id="entreeSerie" accept="image/*" capture="environment" hidden>
 <div id="zoneModales"></div>
+<div id="attenteClaude" hidden><button class="vif" id="btnAttenteClaude">📥 Copier la réponse de Claude</button><button class="annul" id="btnAnnulClaude" title="Abandonner">✕</button></div>
 
 <script>
 "use strict";
@@ -289,8 +303,20 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.8.0";
+const VERSION = "V1.10.0";
 const HISTORIQUE = [
+  { v:"V1.10.0", d:"22/09/2026", l:[
+    "Claude sans clé API : réglages ⚙️ → IA → Claude → « Sans clé : copier-coller ». La voie par clé API reste disponible.",
+    "Depuis un compartiment : copie de la photo (ou des deux photos côte à côte) dans le presse-papier et ouverture de Claude avec la question déjà écrite ; il reste à coller la photo en pièce jointe.",
+    "Bouton vert vif « 📥 Copier la réponse de Claude » affiché en haut de l'écran tant que la réponse est attendue (il survit à un rechargement) : il lit la réponse copiée dans Claude et remplit le compartiment.",
+    "Si Gemini échoue et que le secours est Claude sans clé, cette démarche est proposée directement. Zone de collage manuel si le presse-papier n'est pas lisible."
+  ]},
+  { v:"V1.9.0", d:"22/09/2026", l:[
+    "Claude (Anthropic) en secours de Gemini : si Gemini échoue (modèle retiré, quota, erreur, réponse illisible), la même question avec les mêmes photos est posée à Claude, sans rien faire de plus.",
+    "Réglages ⚙️ → onglet « IA » : IA à interroger en premier (Gemini ou Claude), secours automatique activable, clé API Claude (sur l'appareil seulement, partagée sous claude_api_key), choix du modèle Claude avec liste à jour et bouton de test sur une image.",
+    "Une IA en panne n'est plus réessayée pour les photos suivantes de la même série ; les bilans indiquent quelle IA a répondu.",
+    "Le secours vaut pour l'analyse des photos, les résumés et les catégories du PDF."
+  ]},
   { v:"V1.8.0", d:"22/09/2026", l:[
     "Compartiments à deux rangs de livres : onglets « Devant » / « Derrière » dans la fenêtre du compartiment, avec une seconde photo prise après avoir retiré les livres de devant.",
     "Chaque photo a ses propres outils (taille réelle, lignes de coupe, tronquer, retirer) et son propre fichier sur GitHub (…-derriere.jpg).",
@@ -358,6 +384,9 @@ const CLE_TOKEN  = "biblio_token";
 const CLE_SYNC   = "biblio_sync_maj";   // horodatage de la version GitHub connue
 const CLE_COUPE  = "biblio_lignes_coupe"; // position des lignes de coupe (en % de la hauteur)
 const CLE_GEM    = "gemini_api_key";
+const CLE_ATTENTE_CLAUDE = "biblio_attente_claude"; // demande envoyée à Claude sans clé, en attente de réponse
+const CLE_CLAUDE = "claude_api_key";     // partagée avec les autres apps de l'origine
+const CLE_MODELES_CLAUDE = "biblio_modeles_claude";
 const CLE_MODELES = "biblio_modeles_testes"; // résultat du dernier test des modèles Gemini    // partagée avec les autres apps de l'origine
 const FICHIER_JSON = "bibliotheques.json";
 
@@ -408,6 +437,7 @@ Réponds UNIQUEMENT par un objet JSON, sans texte autour :
 
 const CFG_DEFAUT = {
   modele:"gemini-2.5-flash",
+  iaPrincipale:"gemini", secours:true, modeleClaude:"claude-sonnet-5", claudeMode:"api",
   ghUser:"Hammerinhank", ghRepo:"bibliotheque", ghBranche:"main",
   qAnalyse:QUESTION_ANALYSE_DEFAUT,
   qAnalyse2:QUESTION_DEUX_RANGS_DEFAUT,
@@ -1104,6 +1134,272 @@ async function gemini(parties, opts){
 }
 
 /* ====================================================================
+   CLAUDE (ANTHROPIC) — même question, mêmes photos
+   ==================================================================== */
+function cleClaude(){ return localStorage.getItem(CLE_CLAUDE) || ""; }
+function entetesClaude(cle){
+  return { "content-type":"application/json", "x-api-key":cle, "anthropic-version":"2023-06-01",
+           "anthropic-dangerous-direct-browser-access":"true" };
+}
+
+async function claude(parties, opts){
+  opts = opts || {};
+  const cle = opts.cle || cleClaude();
+  if (!cle) throw new Error("Clé API Claude absente : réglages ⚙️, onglet IA.");
+  const modele = opts.modele || cfg.modeleClaude || "claude-sonnet-5";
+  // Conversion des « parties » au format Gemini vers le format Claude
+  const content = parties.map(p=> p.inline_data
+    ? { type:"image", source:{ type:"base64", media_type:p.inline_data.mime_type, data:p.inline_data.data } }
+    : { type:"text", text:String(p.text||"") });
+  content.push({ type:"text", text:"Rappel : réponds uniquement par l'objet JSON demandé, sans texte ni balises ``` autour." });
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST", headers:entetesClaude(cle), signal:opts.signal,
+    body: JSON.stringify({ model:modele, max_tokens: opts.maxTokens || 16000, messages:[{ role:"user", content }] }) });
+  if (!r.ok){
+    const msg = extraitMessageGoogle(await r.text());
+    if (r.status === 401) throw erreurModele(`Clé API Claude refusée.\n\nMessage d'Anthropic : ${msg}`, 401);
+    if (r.status === 404) throw erreurModele(`Le modèle Claude « ${modele} » est introuvable. Choisissez-en un autre : réglages ⚙️ → IA → « Liste des modèles ».\n\nMessage d'Anthropic : ${msg}`, 404);
+    if (r.status === 429) throw erreurModele(`Limite d'utilisation de Claude atteinte (${modele}). Réessayez un peu plus tard.\n\nMessage d'Anthropic : ${msg}`, 429);
+    if (r.status === 400 && /credit|billing|balance/i.test(msg)) throw erreurModele(`Crédit Anthropic insuffisant : rechargez votre compte sur console.anthropic.com.\n\nMessage d'Anthropic : ${msg}`, 402);
+    if (r.status === 529) throw new Error("Claude est momentanément surchargé (529). Réessayez dans un instant.");
+    throw new Error("Claude " + r.status + " : " + msg);
+  }
+  const j = await r.json();
+  if (j.stop_reason === "max_tokens") throw new Error("Réponse de Claude trop longue : réduisez la taille du lot.");
+  const txt = (j.content||[]).filter(x=>x.type==="text").map(x=>x.text).join("");
+  if (!txt.trim()) throw new Error("Réponse vide de Claude.");
+  return txt;
+}
+
+async function listerModelesClaude(cle){
+  const r = await fetch("https://api.anthropic.com/v1/models?limit=100", { headers:entetesClaude(cle) });
+  if (!r.ok) throw new Error("Liste des modèles Claude refusée (" + r.status + ") : " + extraitMessageGoogle(await r.text()));
+  const j = await r.json();
+  return (j.data||[]).map(m=>({ id:m.id, nom:m.display_name||"" }));
+}
+
+function majSelectClaude(sel, choisi){
+  let liste = [];
+  try{ liste = JSON.parse(localStorage.getItem(CLE_MODELES_CLAUDE)||"[]"); }catch(e){}
+  if (!liste.length) liste = [{id:"claude-sonnet-5"},{id:"claude-opus-5"},{id:"claude-haiku-4-5-20251001"}];
+  const c = choisi || cfg.modeleClaude;
+  if (c && !liste.some(x=>x.id===c)) liste.unshift({ id:c });
+  sel.innerHTML = liste.map(m=>`<option value="${esc(m.id)}" ${m.id===c?"selected":""}>${esc(m.id)}${m.nom?" — "+esc(m.nom):""}</option>`).join("");
+}
+
+/* ====================================================================
+   INTERROGER L'IA : principale d'abord, l'autre en secours si elle échoue
+   ==================================================================== */
+const iaEnPanne = {};                     // pour la session : une IA en panne n'est pas réessayée à chaque photo
+const NOM_IA = { gemini:"Gemini", claude:"Claude" };
+
+async function interrogerIA(parties, lire, opts){
+  opts = opts || {};
+  const ordre = cfg.iaPrincipale === "claude" ? ["claude","gemini"] : ["gemini","claude"];
+  const essais = cfg.secours ? ordre : [ordre[0]];
+  const echecs = [];
+  for (let i=0; i<essais.length; i++){
+    const nom = essais[i];
+    if (iaEnPanne[nom] && i < essais.length-1){ echecs.push({ nom, e:iaEnPanne[nom], deja:true }); continue; }
+    if (nom === "claude" && cfg.claudeMode === "manuel"){
+      // Claude sans clé : seul l'utilisateur peut transmettre la demande (copier-coller)
+      if (opts.manuel){
+        const e = new Error("Demande à transmettre à Claude à la main.");
+        e.manuel = true; e.parties = parties; e.echecs = echecs.slice();
+        throw e;
+      }
+      echecs.push({ nom, e:new Error("Claude est réglé « sans clé » : ouvrez le compartiment et touchez 🔍 Analyser pour lui transmettre la photo à la main.") });
+      continue;
+    }
+    try{
+      const txt = nom === "gemini" ? await gemini(parties) : await claude(parties);
+      const res = lire ? lire(txt) : txt;
+      return { res, ia:nom, modele: nom === "gemini" ? cfg.modele : cfg.modeleClaude, echecs };
+    }catch(e){
+      if (e instanceof SyntaxError) e = new Error("Réponse illisible (pas du JSON valide).");
+      if (e.modele) iaEnPanne[nom] = e;
+      echecs.push({ nom, e });
+    }
+  }
+  if (!echecs.length) throw new Error("Aucune IA disponible : vérifiez les réglages ⚙️ → IA.");
+  const err = new Error(echecs.map(x=>NOM_IA[x.nom] + (x.deja?" (déjà en échec plus tôt)":"") + " : " + x.e.message).join("\n\n")
+    + (!cfg.secours ? "\n\nAstuce : activez le secours par l'autre IA dans les réglages ⚙️ → IA." : ""));
+  err.modele = echecs.some(x=>x.e.modele);
+  throw err;
+}
+
+function texteSource(src){
+  if (!src) return "";
+  if (src.manuel) return " Réponse de Claude (copier-coller).";
+  return src.echecs && src.echecs.length
+    ? ` Réponse de ${NOM_IA[src.ia]} (${NOM_IA[src.echecs[0].nom]} a échoué).`
+    : "";
+}
+
+/* ====================================================================
+   CLAUDE SANS CLÉ : copier la photo, ouvrir Claude, récupérer la réponse copiée
+   ==================================================================== */
+let rafraichirCompartimentOuvert = null;   // fourni par la fenêtre d'un compartiment ouverte
+
+function chargerImage(src){
+  return new Promise((res,rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = ()=>rej(new Error("Image illisible")); i.src = src; });
+}
+
+/* Une image PNG (seul format accepté par le presse-papier d'iOS) : une photo, ou deux côte à côte avec leur numéro. */
+async function blobPourClaude(images){
+  const imgs = await Promise.all(images.map(chargerImage));
+  const BANDE = imgs.length > 1 ? 70 : 0, MARGE = imgs.length > 1 ? 16 : 0;
+  const h = Math.max(...imgs.map(i=>i.height));
+  const w = imgs.reduce((n,i)=>n + i.width, 0) + MARGE*(imgs.length-1);
+  const cv = document.createElement("canvas");
+  cv.width = w; cv.height = h + BANDE;
+  const cx = cv.getContext("2d");
+  cx.fillStyle = "#ffffff"; cx.fillRect(0,0,cv.width,cv.height);
+  let x = 0;
+  imgs.forEach((im,i)=>{
+    if (BANDE){
+      cx.fillStyle = "#111"; cx.font = "bold 40px Helvetica, Arial, sans-serif"; cx.textBaseline = "middle";
+      cx.fillText(i === 0 ? "PHOTO 1 — rang de devant" : "PHOTO 2 — rang de derrière", x + 14, BANDE/2);
+    }
+    cx.drawImage(im, x, BANDE);
+    x += im.width + MARGE;
+  });
+  return await new Promise(res=>cv.toBlob(b=>res(b), "image/png"));
+}
+
+async function copierImagePresse(blobPromise){
+  if (!navigator.clipboard || !window.ClipboardItem) throw new Error("Copie d'image non prise en charge par ce navigateur.");
+  await navigator.clipboard.write([ new ClipboardItem({ "image/png": blobPromise }) ]);
+}
+
+function lireAttenteClaude(){
+  try{ const a = JSON.parse(localStorage.getItem(CLE_ATTENTE_CLAUDE)||"null"); if (a && a.bibId && a.cle) return a; }catch(e){}
+  return null;
+}
+function majAttenteClaude(){
+  const a = lireAttenteClaude();
+  const z = $("#attenteClaude");
+  z.hidden = !a;
+  if (a){
+    const b = biblio(a.bibId);
+    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de Claude — " + (b ? b.nom + " · " : "") + lib(a.cle);
+  }
+}
+
+/* Ouvre la démarche pas à pas. parties = la demande préparée (texte + photo(s)), echecs = IA déjà tombées en panne. */
+function lancerClaudeManuel(b, k, parties, echecs){
+  const images = parties.filter(p=>p.inline_data).map(p=>"data:" + p.inline_data.mime_type + ";base64," + p.inline_data.data);
+  const deux = images.length > 1;
+  const cs = b.cases[k];
+  let question = parties.filter(p=>p.text && !/^Photo \d/.test(p.text)).map(p=>p.text).join("\n\n");
+  if (deux) question += "\n\nL'image jointe réunit les deux photos côte à côte : à GAUCHE la photo 1 (rang de devant), à DROITE la photo 2 (rang de derrière). Si je joins deux images séparées, la première est la photo 1 et la seconde la photo 2.";
+  question += "\n\nL'image est en pièce jointe. Réponds uniquement par l'objet JSON demandé, sans texte ni balises ``` autour.";
+
+  localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
+  majAttenteClaude();
+
+  const tombees = (echecs||[]).filter(x=>x.nom === "gemini");
+  const f = modale({
+    titre:"Demander à Claude (sans clé)",
+    html:
+      (tombees.length ? `<div class="encadre" style="margin-top:0">Gemini a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
+      `<div class="etape"><div class="n">1</div><div class="c">Copier ${deux ? "les deux photos (réunies côte à côte)" : "la photo"} dans le presse-papier.
+         <button class="btn principal plein" id="mcCopier">📋 Copier ${deux ? "les 2 photos" : "la photo"}</button>
+         ${deux ? `<div class="aide">Pour une lecture plus fine, vous pouvez aussi les envoyer une par une :</div>
+           <div class="barre"><button class="btn" id="mcP1" style="flex:1">Photo 1</button><button class="btn" id="mcP2" style="flex:1">Photo 2</button></div>` : ""}
+         <div class="aide" id="mcEtatCopie"></div></div></div>
+       <div class="etape"><div class="n">2</div><div class="c">Ouvrir Claude : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
+         <button class="btn plein" id="mcOuvrir">↗️ Ouvrir Claude avec la question</button>
+         <button class="btn plein" id="mcQuestion">Copier seulement le texte de la question</button></div></div>
+       <div class="etape"><div class="n">3</div><div class="c">Dans Claude, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
+         <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de Claude</button>
+         <div class="aide">Le bouton vert reste aussi en haut de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre.</div></div></div>`,
+    boutons:[{texte:"Fermer"}]
+  });
+  const etat = f.querySelector("#mcEtatCopie");
+  const copier = async (liste, quoi)=>{
+    try{
+      await copierImagePresse(blobPourClaude(liste));        // la promesse est passée telle quelle : exigence de Safari
+      etat.textContent = "✓ " + quoi + " dans le presse-papier. Passez à l'étape 2.";
+    }catch(e){
+      etat.innerHTML = "Copie automatique impossible (" + esc(e.message) + "). Ouvrez l'image ci-dessous, appui long → Copier.";
+      visionneuse(liste[0], "Appui long sur l'image → Copier");
+    }
+  };
+  f.querySelector("#mcCopier").onclick = ()=>copier(images, deux ? "Les deux photos sont" : "La photo est");
+  if (deux){
+    f.querySelector("#mcP1").onclick = ()=>copier([images[0]], "Photo 1 copiée ; collez-la, puis revenez copier la photo 2. Elle est");
+    f.querySelector("#mcP2").onclick = ()=>copier([images[1]], "La photo 2 est");
+  }
+  f.querySelector("#mcOuvrir").onclick = ()=>{
+    window.open("https://claude.ai/new?q=" + encodeURIComponent(question), "_blank");
+  };
+  f.querySelector("#mcQuestion").onclick = async ()=>{
+    toast(await copierTexte(question) ? "Question copiée (la photo n'est plus dans le presse-papier : recopiez-la ensuite)." : "Copie impossible.", 5000);
+  };
+  f.querySelector("#mcReponse").onclick = ()=>recevoirReponseClaude(f);
+}
+
+async function recevoirReponseClaude(fenetre){
+  const a = lireAttenteClaude();
+  if (!a){ toast("Aucune demande à Claude en attente."); majAttenteClaude(); return; }
+  let txt = "";
+  try{ txt = await navigator.clipboard.readText(); }catch(e){ txt = ""; }
+  if (!appliquerReponseClaude(a, txt, true)) collerReponseClaudeMain(a, txt);
+  else if (fenetre && fenetre.isConnected) fenetre.remove();
+}
+
+/* Renvoie false si le texte n'est pas une réponse exploitable (on proposera alors de la coller à la main). */
+function appliquerReponseClaude(a, txt, silencieux){
+  const b = biblio(a.bibId);
+  if (!b){ toast("La bibliothèque de cette demande n'existe plus."); localStorage.removeItem(CLE_ATTENTE_CLAUDE); majAttenteClaude(); return true; }
+  let j;
+  try{ j = jsonDepuisTexte(String(txt||"")); }
+  catch(e){ if (!silencieux) toast("Ce texte ne contient pas de JSON lisible : copiez bien toute la réponse de Claude.", 5000); return false; }
+  const livres = livresDepuisReponse(j, a.deux, a.avecAvant, { ia:"claude", modele:"claude.ai (copier-coller)", manuel:true, echecs:[] });
+  localStorage.removeItem(CLE_ATTENTE_CLAUDE);
+  majAttenteClaude();
+  b.cases[a.cle] = b.cases[a.cle] || { livres:[] };
+  appliquerLivresCompartiment(b, a.cle, livres);
+  return true;
+}
+
+function collerReponseClaudeMain(a, txtInitial){
+  modale({ titre:"Coller la réponse de Claude",
+    html:`<div class="aide" style="margin-top:0">${txtInitial ? "Le presse-papier ne contient pas une réponse lisible." : "Le presse-papier n'a pas pu être lu."} Collez ici la réponse de Claude (appui long → Coller) :</div>
+          <textarea id="mcTexte" style="min-height:180px">${esc(txtInitial||"")}</textarea>`,
+    boutons:[
+      {texte:"Annuler"},
+      {texte:"Utiliser ce texte", classe:"principal", garder:true, action:(fd)=>{
+        if (appliquerReponseClaude(a, fd.querySelector("#mcTexte").value, false)) fd.remove();
+        return false;
+      }}
+    ]});
+}
+
+/* Range les livres trouvés dans un compartiment (demande avant d'écraser des livres déjà relevés). */
+function appliquerLivresCompartiment(b, k, livres){
+  const cs = b.cases[k];
+  const fin = ()=>{ sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
+  if (!livres.length){ toast(NOM_IA[(livres.source||{}).ia||"gemini"] + " n'a identifié aucun livre." + texteSource(livres.source), 5000); return; }
+  if ((cs.livres||[]).length){
+    modale({ titre:"Résultat de l'analyse",
+      html:`<div>${esc(texteBilanAnalyse(livres))} Ce compartiment (${esc(lib(k))}) en contient déjà ${cs.livres.length}.</div>
+            <div class="aide">${livres.map(x=>esc(x.titre)).join("<br>")}</div>`,
+      boutons:[
+        {texte:"Annuler"},
+        {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); fin(); }},
+        {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; cs.analyse = infoAnalyse(livres, cs); fin(); }}
+      ]});
+  } else {
+    cs.livres = livres;
+    cs.analyse = infoAnalyse(livres, cs);
+    fin();
+    toast(texteBilanAnalyse(livres), 5000);
+  }
+}
+
+/* ====================================================================
    RECHERCHE D'UN MODÈLE GEMINI QUI FONCTIONNE
    ==================================================================== */
 const EXCLUS_MODELES = /embedding|tts|image|imagen|veo|lyria|live|audio|native|robotics|computer-use|aqa|learnlm|gemma|nano|banana|search|dialog/i;
@@ -1147,13 +1443,13 @@ function imageDeTest(){
   return { n, b64: c.toDataURL("image/jpeg", 0.85).split(",")[1] };
 }
 
-async function testerModele(id, cle){
+async function testerModele(id, cle, fournisseur){
   const img = imageDeTest();
   const ctl = new AbortController();
   const minuteur = setTimeout(()=>ctl.abort(), 45000);
   const t0 = performance.now();
   try{
-    const txt = await gemini([
+    const txt = await (fournisseur === "claude" ? claude : gemini)([
       { text:'Recopie exactement le texte écrit sur cette image. Réponds UNIQUEMENT par un objet JSON : {"texte":""}' },
       { inline_data:{ mime_type:"image/jpeg", data: img.b64 } }
     ], { modele:id, cle, signal:ctl.signal, maxTokens:2048 });
@@ -1168,6 +1464,8 @@ async function testerModele(id, cle){
     if (st === 404) return { etat:"indispo", detail:"retiré ou indisponible (404)" };
     if (st === 429) return { etat:"quota", detail:"quota épuisé ou hors offre gratuite (429)" };
     if (st === 403) return { etat:"refus", detail:"accès refusé à cette clé (403)" };
+    if (st === 401) return { etat:"refus", detail:"clé refusée (401)" };
+    if (st === 402) return { etat:"quota", detail:"crédit insuffisant" };
     return { etat:"erreur", detail: String(e.message||e).split("\n")[0].slice(0,140) };
   }finally{ clearTimeout(minuteur); }
 }
@@ -1203,7 +1501,7 @@ function chercherModeles(cle, surChoix){
   const boutonsLancer = [...f.querySelectorAll(".pied .btn")].slice(1);
 
   const adopter = (id)=>{
-    cfg.modele = id; sauverCfg();
+    cfg.modele = id; sauverCfg(); delete iaEnPanne.gemini;
     if (surChoix) surChoix(id);
     toast("Modèle adopté : " + id);
     f.querySelectorAll(".encadre b")[0].textContent = id;
@@ -1323,7 +1621,7 @@ function jsonDepuisTexte(txt){
 
 /* Analyse d'un compartiment : une photo, ou deux photos (rang de devant + rang de derrière)
    envoyées ensemble pour que Gemini produise une liste unique sans doublon. */
-async function analyserPhoto(bib, cle){
+async function analyserPhoto(bib, cle, opts){
   const cs = bib.cases[cle];
   const deux = !!(cs && cs.photo && cs.photo2);
   const avant = cs && cs.photo ? await photoPleine(bib, cle, "photo") : null;
@@ -1346,9 +1644,13 @@ async function analyserPhoto(bib, cle){
       { inline_data: { mime_type:"image/jpeg", data: base64Seul(avant || arriere) } }
     ];
   }
-  const j = jsonDepuisTexte(await gemini(parties));
-  const bruts = Array.isArray(j.livres) ? j.livres : [];
-  const rangSeul = avant ? "devant" : "derriere";
+  const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
+  return livresDepuisReponse(rep.res, deux, !!avant, { ia:rep.ia, modele:rep.modele, echecs:rep.echecs });
+}
+
+/* Transforme la réponse JSON d'une IA en livres (commun à Gemini, Claude par clé et Claude par copier-coller). */
+function livresDepuisReponse(j, deux, avecAvant, source){
+  const bruts = Array.isArray(j && j.livres) ? j.livres : (Array.isArray(j) ? j : []);
   const livres = bruts.filter(x=>x && String(x.titre||"").trim()).map(x=>{
     const lv = {
       id: uid(),
@@ -1362,12 +1664,15 @@ async function analyserPhoto(bib, cle){
     if (deux){
       const r = String(x.rang||"").toLowerCase();
       lv.rang = /derri/.test(r) ? "derriere" : "devant";
+    } else if (!avecAvant){
+      lv.rang = "derriere";
     }
     return lv;
   });
-  if (!deux) return livres;
+  if (!deux){ livres.source = source; return livres; }
   const fus = fusionnerDoublons(livres);
   fus.fusionnes = livres.length - fus.length;
+  fus.source = source;
   return fus;
 }
 
@@ -1393,6 +1698,13 @@ function fusionnerDoublons(livres){
 }
 
 function texteBilanAnalyse(livres){
+  return texteBilanSimple(livres) + texteSource(livres.source);
+}
+function infoAnalyse(livres, cs){
+  const src = livres.source || {};
+  return { maj:new Date().toISOString(), ia: src.ia || "gemini", modele: src.modele || cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1, manuel: !!src.manuel };
+}
+function texteBilanSimple(livres){
   if (!livres.some(x=>x.rang)) return livres.length + " livre(s) identifié(s).";
   const der = livres.filter(x=>x.rang==="derriere").length;
   return `${livres.length} livre(s) identifié(s) : ${livres.length-der} devant, ${der} derrière` +
@@ -1408,7 +1720,7 @@ async function traiterParLots(livres, question, champs, titreFenetre, taille){
       const tranche = livres.slice(d, d+lot);
       pg.maj(fait, livres.length, `Lot ${Math.floor(d/lot)+1} sur ${Math.ceil(livres.length/lot)} — envoi à Gemini…`);
       const liste = tranche.map((lv,i)=>`${i}. ${lv.titre}${lv.auteur?" — "+lv.auteur:""}${lv.annee?" ("+lv.annee+")":""}`).join("\n");
-      const j = jsonDepuisTexte(await gemini([{ text: question + "\n\nListe :\n" + liste }]));
+      const j = (await interrogerIA([{ text: question + "\n\nListe :\n" + liste }], jsonDepuisTexte)).res;
       (Array.isArray(j.livres)?j.livres:[]).forEach(rep=>{
         const i = Number(rep.i);
         if (!Number.isInteger(i) || i<0 || i>=tranche.length) return;
@@ -1756,8 +2068,9 @@ function ouvrirCompartiment(b, k){
            <div id="zoneLivres"></div>
            <button class="btn plein" id="cAjouter">➕ Ajouter un livre à la main</button>`,
     boutons:[{texte:"Fermer"}],
-    surFermeture:()=>rendreBiblio()
+    surFermeture:()=>{ rafraichirCompartimentOuvert = null; rendreBiblio(); }
   });
+  f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; });
 
   /* ---------- lignes de coupe (haut / bas, en % de la hauteur) ---------- */
   const lireCoupe = ()=>{
@@ -1998,31 +2311,18 @@ function ouvrirCompartiment(b, k){
     const btn = f.querySelector("#cAnalyser");
     btn.disabled = true; btn.textContent = "Analyse…";
     try{
-      const livres = await analyserPhoto(b, k);
+      const livres = await analyserPhoto(b, k, { manuel:true });
       btn.disabled = false; btn.textContent = "🔍 Analyser";
-      if (!livres.length){ toast("Gemini n'a identifié aucun livre sur " + (cs.photo && cs.photo2 ? "ces deux photos." : "cette photo.")); return; }
-      if ((cs.livres||[]).length){
-        modale({ titre:"Résultat de l'analyse",
-          html:`<div>${esc(texteBilanAnalyse(livres))} Ce compartiment en contient déjà ${cs.livres.length}.</div>
-                <div class="aide">${livres.map(x=>esc(x.titre)).join("<br>")}</div>`,
-          boutons:[
-            {texte:"Annuler"},
-            {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); sauver(); majLivres(); rendreBiblio(); }},
-            {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; cs.analyse = { maj:new Date().toISOString(), modele:cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1 }; sauver(); majLivres(); rendreBiblio(); }}
-          ]});
-      } else {
-        cs.livres = livres;
-        cs.analyse = { maj:new Date().toISOString(), modele:cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1 };
-        sauver(); majLivres(); rendreBiblio();
-        toast(texteBilanAnalyse(livres), 4500);
-      }
+      appliquerLivresCompartiment(b, k, livres);
     }catch(e){
       btn.disabled = false; btn.textContent = "🔍 Analyser";
+      if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs); return; }
       montrerErreurAnalyse(e);
     }
   };
 
   f.querySelector("#cAjouter").onclick = ()=>formLivre(cs, -1, majLivres);
+  rafraichirCompartimentOuvert = (bid, kk)=>{ if (f.isConnected && bid === b.id && kk === k) majLivres(); };
 
   majPhoto(); majLivres();
 }
@@ -2086,13 +2386,14 @@ async function analyserToutesPhotos(b){
 
 async function analyserListe(b, choix, titre){
   const pg = fenetreProgres(titre || "Analyse des photos");
-  let fait=0, trouves=0; const erreurs=[]; let erreurBloquante=null;
+  let fait=0, trouves=0; const erreurs=[]; let erreurBloquante=null; const parIA = { gemini:0, claude:0 };
   for (const k of choix){
     pg.maj(fait, choix.length, "Compartiment " + k + (b.cases[k].photo && b.cases[k].photo2 ? " — deux rangs, 2 photos" : ""));
     try{
       const livres = await analyserPhoto(b, k);
       b.cases[k].livres = livres;
-      b.cases[k].analyse = { maj:new Date().toISOString(), modele:cfg.modele, photos: b.cases[k].photo && b.cases[k].photo2 ? 2 : 1 };
+      b.cases[k].analyse = infoAnalyse(livres, b.cases[k]);
+      if (livres.source) parIA[livres.source.ia]++;
       trouves += livres.length;
       sauver();
     }catch(e){
@@ -2113,7 +2414,10 @@ async function analyserListe(b, choix, titre){
   rendreBiblio();
   modale({ titre:"Analyse terminée",
     html:`<div>${fait} photo(s) traitée(s), ${trouves} livre(s) relevé(s).</div>
-          ${erreurs.length?`<div class="aide">${erreurs.length} échec(s) :<br>${esc(erreurs.join(" | "))}</div>`:""}`,
+          ${parIA.gemini && parIA.claude ? `<div class="aide">Réponses : ${parIA.gemini} par Gemini, ${parIA.claude} par Claude (en secours).</div>`
+            : parIA.claude ? `<div class="aide">Toutes les réponses viennent de Claude.</div>` : ""}
+          ${erreurs.length?`<div class="aide">${erreurs.length} échec(s) :<br>${esc(erreurs.join(" | "))}</div>`:""}
+          ${erreurs.length && cfg.claudeMode === "manuel" ? `<div class="aide">Claude sans clé ne peut pas traiter une série : ouvrez chaque compartiment en échec et touchez 🔍 Analyser.</div>` : ""}`,
     boutons:[{texte:"Fermer"}]});
 }
 
@@ -2739,7 +3043,7 @@ function ouvrirReglages(ongletInitial){
     titre:"Réglages",
     html:
       `<div class="onglets">
-         <button data-o="gemini">Gemini</button>
+         <button data-o="gemini">IA</button>
          <button data-o="github">GitHub</button>
          <button data-o="questions">Questions</button>
          <button data-o="entretien">Entretien</button>
@@ -2747,6 +3051,16 @@ function ouvrirReglages(ongletInitial){
        <div class="aide" style="margin-top:-6px">Configuration uniquement. Les envois, récupérations, exports et imports se font dans l'écran ☁️.</div>
 
        <div id="pGemini" hidden>
+         <label for="rIa">IA interrogée en premier</label>
+         <select id="rIa">
+           <option value="gemini" ${cfg.iaPrincipale!=="claude"?"selected":""}>Gemini (Google)</option>
+           <option value="claude" ${cfg.iaPrincipale==="claude"?"selected":""}>Claude (Anthropic)</option>
+         </select>
+         <div class="coche" style="margin-top:10px"><input type="checkbox" id="rSecours" ${cfg.secours!==false?"checked":""}>
+           <label for="rSecours" style="margin:0">Si elle échoue, poser la même question (mêmes photos) à l'autre IA</label></div>
+         <div class="aide">Échec = modèle retiré, quota épuisé, erreur ou réponse illisible. Il faut que l'autre IA ait sa clé ci-dessous.</div>
+
+         <div class="titreSection">Gemini (Google)</div>
          <label for="rCle">Clé API Gemini</label>
          <input type="password" id="rCle" value="${esc(cleGemini())}" placeholder="AIza…">
          <div class="aide">Stockée sur cet appareil uniquement, jamais envoyée sur GitHub, partagée avec vos autres applications de la même adresse.</div>
@@ -2754,6 +3068,28 @@ function ouvrirReglages(ongletInitial){
          <select id="rModele"></select>
          <button class="btn plein" id="rChercher" style="margin-top:8px">🔎 Trouver un modèle qui marche</button>
          <div class="aide" id="rInfoModeles"></div>
+
+         <div class="titreSection">Claude (Anthropic)</div>
+         <label for="rModeClaude">Accès à Claude</label>
+         <select id="rModeClaude">
+           <option value="api" ${cfg.claudeMode!=="manuel"?"selected":""}>Avec clé API (automatique)</option>
+           <option value="manuel" ${cfg.claudeMode==="manuel"?"selected":""}>Sans clé : copier-coller dans Claude</option>
+         </select>
+         <div class="aide" id="rAideModeClaude"></div>
+         <div id="rBlocApiClaude">
+         <label for="rCleClaude">Clé API Claude</label>
+         <input type="password" id="rCleClaude" value="${esc(cleClaude())}" placeholder="sk-ant-…">
+         <div class="aide">À créer sur console.anthropic.com (facturation à l'usage, distincte d'un abonnement Claude). Stockée sur cet appareil uniquement, jamais envoyée sur GitHub, partagée avec vos autres applications de la même adresse.</div>
+         <label for="rModeleClaude">Modèle Claude</label>
+         <select id="rModeleClaude"></select>
+         <div class="barre" style="margin-top:8px">
+           <button class="btn" id="rListeClaude" style="flex:1">🔄 Liste des modèles</button>
+           <button class="btn" id="rTestClaude" style="flex:1">🧪 Tester sur une image</button>
+         </div>
+         <div class="aide" id="rStatutClaude"></div>
+         </div>
+
+         <div class="titreSection">Photos</div>
          <label for="rTaille">Taille maximale des photos envoyées (pixels)</label>
          <input type="number" id="rTaille" min="600" max="3000" step="100" value="${cfg.tailleMax}">
          <div class="aide">1600 px suffit en général pour lire les tranches. Plus grand : lecture plus fine, envoi plus lent.</div>
@@ -2796,6 +3132,13 @@ function ouvrirReglages(ongletInitial){
         const cle = fd.querySelector("#rCle").value.trim();
         if (cle) localStorage.setItem(CLE_GEM, cle); else localStorage.removeItem(CLE_GEM);
         cfg.modele = fd.querySelector("#rModele").value;
+        const cleC = fd.querySelector("#rCleClaude").value.trim();
+        if (cleC) localStorage.setItem(CLE_CLAUDE, cleC); else localStorage.removeItem(CLE_CLAUDE);
+        cfg.modeleClaude = fd.querySelector("#rModeleClaude").value || CFG_DEFAUT.modeleClaude;
+        cfg.iaPrincipale = fd.querySelector("#rIa").value;
+        cfg.secours = fd.querySelector("#rSecours").checked;
+        cfg.claudeMode = fd.querySelector("#rModeClaude").value;
+        delete iaEnPanne.gemini; delete iaEnPanne.claude;   // nouvelle configuration : on redonne sa chance à chacune
         cfg.tailleMax = Math.max(600, Math.min(3000, parseInt(fd.querySelector("#rTaille").value,10)||1600));
         cfg.ghUser = fd.querySelector("#rUser").value.trim() || CFG_DEFAUT.ghUser;
         cfg.ghRepo = fd.querySelector("#rRepo").value.trim() || CFG_DEFAUT.ghRepo;
@@ -2821,6 +3164,45 @@ function ouvrirReglages(ongletInitial){
   };
   f.querySelectorAll("[data-o]").forEach(btn=>{ btn.onclick = ()=>activer(btn.dataset.o); });
   activer(ongletInitial || "gemini");
+
+  const modeClaude = f.querySelector("#rModeClaude");
+  const majModeClaude = ()=>{
+    const manuel = modeClaude.value === "manuel";
+    f.querySelector("#rBlocApiClaude").hidden = manuel;
+    f.querySelector("#rAideModeClaude").textContent = manuel
+      ? "Aucune clé ni facturation à l'usage. Depuis un compartiment, l'app copie la photo et ouvre Claude avec la question ; vous collez la photo en pièce jointe, puis copiez sa réponse et touchez le bouton vert « Copier la réponse de Claude ». Fonctionne photo par photo (pas pour une série, ni pour les résumés et le PDF)."
+      : "La requête part directement vers l'API d'Anthropic, sans rien faire à la main ; il faut une clé API.";
+  };
+  modeClaude.onchange = majModeClaude;
+  majModeClaude();
+
+  const selClaude = f.querySelector("#rModeleClaude");
+  majSelectClaude(selClaude, cfg.modeleClaude);
+  const statutClaude = f.querySelector("#rStatutClaude");
+  const lireCleClaude = ()=>{
+    const c = f.querySelector("#rCleClaude").value.trim();
+    if (c) localStorage.setItem(CLE_CLAUDE, c);
+    if (!c) statutClaude.textContent = "Saisissez d'abord la clé API Claude.";
+    return c;
+  };
+  f.querySelector("#rListeClaude").onclick = async ()=>{
+    const c = lireCleClaude(); if (!c) return;
+    statutClaude.textContent = "Demande de la liste à Anthropic…";
+    try{
+      const l = await listerModelesClaude(c);
+      localStorage.setItem(CLE_MODELES_CLAUDE, JSON.stringify(l));
+      majSelectClaude(selClaude, selClaude.value);
+      statutClaude.textContent = l.length + " modèle(s) disponible(s) pour cette clé. Tous les modèles Claude récents lisent les images.";
+    }catch(e){ statutClaude.textContent = "Échec : " + e.message; }
+  };
+  f.querySelector("#rTestClaude").onclick = async ()=>{
+    const c = lireCleClaude(); if (!c) return;
+    const m = selClaude.value;
+    statutClaude.textContent = "Test de " + m + " : lecture d'un nombre sur une petite image…";
+    const r = await testerModele(m, c, "claude");
+    statutClaude.textContent = (ICONE_ETAT[r.etat]||"") + " " + m + " : " + r.detail + (r.etat==="ok" ? " — utilisable en secours." : "");
+    if (r.etat === "ok") delete iaEnPanne.claude;
+  };
 
   const selModele = f.querySelector("#rModele");
   majSelectModeles(selModele, cfg.modele);
@@ -2900,6 +3282,12 @@ $("#badgeVersion").onclick = ouvrirHistorique;
 $("#btnSync").onclick = ouvrirSync;
 $("#bandeau").onclick = ()=>{ if (!ghLisible()) ouvrirReglages("github"); else ouvrirSync(); };
 $("#btnReglages").onclick = ()=>ouvrirReglages();
+$("#btnAttenteClaude").onclick = ()=>recevoirReponseClaude(null);
+$("#btnAnnulClaude").onclick = async ()=>{
+  const ok = await confirmer("Abandonner l'attente de la réponse de Claude ? Vous pourrez relancer la demande depuis le compartiment.", "Abandonner", "Abandonner");
+  if (ok){ localStorage.removeItem(CLE_ATTENTE_CLAUDE); majAttenteClaude(); }
+};
+setTimeout(majAttenteClaude, 0);
 $("#btnRetour").onclick = ()=>{ annulerSelection(); biblioCourante = null; rendreListe(); window.scrollTo(0,0); };
 document.addEventListener("pointerup", ()=>{
   if (appuiLongActif){ appuiLongActif = false; ignorerClicJusqua = Date.now() + 450; }
