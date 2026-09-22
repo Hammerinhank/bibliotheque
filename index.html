@@ -317,8 +317,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.14.0";
+const VERSION = "V1.15.0";
 const HISTORIQUE = [
+  { v:"V1.15.0", d:"22/09/2026", l:[
+    "Ménage interne, sans changement visible : commentaire de code égaré remis à sa place, et la série de photos construit désormais le chemin de l'image avec la fonction commune cheminPhoto (au lieu de le réécrire à la main).",
+    "Vérification faite que tout ce qui a été ajouté depuis la V1.7.0 est bien présent : choix d'un modèle Gemini opérationnel, compartiments à deux rangs, Claude en secours, IA sans clé par copier-coller, lignes de coupe rouges et vertes."
+  ]},
   { v:"V1.14.0", d:"22/09/2026", l:[
     "Réglages ⚙️ → IA → Gemini : bouton « 🧪 Tester ce modèle » qui vérifie sur une petite image que le modèle choisi dans la liste répond et lit les photos.",
     "Gemini sans clé API : « Accès à Gemini » → « Sans clé : copier-coller dans Gemini », même démarche que pour Claude (copier la photo, ouvrir Gemini avec la question, coller la photo, copier la réponse).",
@@ -422,9 +426,9 @@ const CLE_SYNC   = "biblio_sync_maj";   // horodatage de la version GitHub connu
 const CLE_COUPE  = "biblio_lignes_coupe"; // position des lignes de coupe (en % de la hauteur)
 const CLE_GEM    = "gemini_api_key";
 const CLE_ATTENTE_CLAUDE = "biblio_attente_claude"; // demande envoyée à Claude sans clé, en attente de réponse
-const CLE_CLAUDE = "claude_api_key";     // partagée avec les autres apps de l'origine
-const CLE_MODELES_CLAUDE = "biblio_modeles_claude";
-const CLE_MODELES = "biblio_modeles_testes"; // résultat du dernier test des modèles Gemini    // partagée avec les autres apps de l'origine
+const CLE_CLAUDE = "claude_api_key";        // partagée avec les autres apps de la même adresse
+const CLE_MODELES_CLAUDE = "biblio_modeles_claude"; // modèles Claude connus de cette clé
+const CLE_MODELES = "biblio_modeles_testes";        // résultat du dernier test des modèles Gemini
 const FICHIER_JSON = "bibliotheques.json";
 
 const QUESTION_ANALYSE_DEFAUT =
@@ -2805,8 +2809,8 @@ async function affecterPhoto(b, k, file){
   const brut  = await lireFichier(file);
   const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
   b.cases[k] = b.cases[k] || { livres:[] };
-  b.cases[k].photo = { plein, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
-  delete cachePhotos[b.id + "/" + k];
+  b.cases[k].photo = { plein, chemin:cheminPhoto(b, k, "photo"), envoye:false, maj:new Date().toISOString() };
+  delete cachePhotos[cleCache(b, k, "photo")];
   sauver(); rendreBiblio();
 }
 
