@@ -181,6 +181,18 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .onglets button{background:var(--encre);border:1px solid var(--trait);color:var(--texte2);border-radius:999px;padding:7px 12px;font-size:13.5px;cursor:pointer}
 .onglets button.actif{background:var(--bronze-sombre);border-color:var(--bronze);color:#fff8e1}
 .photo-apercu{width:100%;border-radius:10px;border:1px solid var(--trait);display:block}
+/* ---------- lignes de coupe ---------- */
+.cadrePhoto{position:relative;border-radius:10px;overflow:hidden}
+.cadrePhoto .photo-apercu{-webkit-user-drag:none;-webkit-touch-callout:none}
+.cadrePhoto.coupe{touch-action:none;-webkit-user-select:none;user-select:none}
+.voile{position:absolute;left:0;right:0;background:rgba(0,0,0,.5);pointer-events:none}
+.voile.h{top:0}
+.voile.b{bottom:0}
+.ligneCoupe{position:absolute;left:0;right:0;height:0;pointer-events:none}
+.ligneCoupe::before{content:"";position:absolute;left:0;right:0;top:-2px;height:4px;background:#ff1a1a;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 8px rgba(255,26,26,.9)}
+.ligneCoupe::after{content:"⇕";position:absolute;right:8px;top:-13px;width:26px;height:26px;border-radius:50%;background:#ff1a1a;color:#fff;font-size:15px;line-height:26px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.5)}
+.ligneCoupe.active::before{height:6px;top:-3px}
+.btn.coupeOn{background:var(--rouge-sombre);border-color:#ff1a1a}
 .hist h3{font-size:15px;color:var(--bronze);margin-top:14px}
 .hist ul{margin:5px 0 0;padding-left:18px;font-size:14px}
 .hist li{margin-bottom:3px}
@@ -225,7 +237,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 <header>
   <button class="icone" id="btnRetour" hidden>←</button>
   <h1 id="titrePage" class="serif">Bibliothèques</h1>
-  <button id="badgeVersion">V1.3.0</button>
+  <button id="badgeVersion">V1.4.0</button>
   <button class="icone" id="btnSync" title="Sauvegarde et transferts">☁️</button>
   <button class="icone" id="btnReglages" title="Réglages">⚙️</button>
 </header>
@@ -249,8 +261,14 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.3.0";
+const VERSION = "V1.4.0";
 const HISTORIQUE = [
+  { v:"V1.4.0", d:"22/09/2026", l:[
+    "Fenêtre d'un compartiment : bouton « ✂️ Lignes de coupe » qui affiche ou masque deux lignes rouges déplaçables au doigt sur la photo.",
+    "La position des deux lignes est mémorisée sur l'appareil et reprise pour toute nouvelle photo.",
+    "Bouton « Tronquer » (lignes visibles) : la photo pleine résolution est recoupée entre les deux lignes, envoyée sur GitHub, avec « Annuler la troncature » tant que la fenêtre est ouverte.",
+    "La fenêtre affiche désormais la photo en pleine résolution quand elle est disponible, pour placer les lignes avec précision."
+  ]},
   { v:"V1.3.0", d:"22/09/2026", l:[
     "Appui long sur un compartiment puis toucher d'un autre : tous les compartiments entre les deux sont sélectionnés, rangée par rangée (avertissement si le sens est inversé).",
     "Photos existantes : il faut autant de photos que de compartiments ; elles sont affectées dans l'ordre de sélection après un récapitulatif, sinon rien n'est fait et la raison est expliquée.",
@@ -287,6 +305,7 @@ const CLE_CFG    = "biblio_cfg";
 const CLE_SALE   = "biblio_sale";
 const CLE_TOKEN  = "biblio_token";
 const CLE_SYNC   = "biblio_sync_maj";   // horodatage de la version GitHub connue
+const CLE_COUPE  = "biblio_lignes_coupe"; // position des lignes de coupe (en % de la hauteur)
 const CLE_GEM    = "gemini_api_key";    // partagée avec les autres apps de l'origine
 const FICHIER_JSON = "bibliotheques.json";
 
@@ -1147,22 +1166,157 @@ function ouvrirCompartiment(b, k){
     surFermeture:()=>rendreBiblio()
   });
 
+  /* ---------- lignes de coupe (haut / bas, en % de la hauteur) ---------- */
+  const lireCoupe = ()=>{
+    try{
+      const j = JSON.parse(localStorage.getItem(CLE_COUPE) || "null");
+      if (j && isFinite(j.haut) && isFinite(j.bas) && j.haut >= 0 && j.bas <= 100 && j.bas - j.haut >= 5) return { haut:+j.haut, bas:+j.bas };
+    }catch(e){}
+    return { haut:25, bas:75 };
+  };
+  const ecrireCoupe = ()=>{ try{ localStorage.setItem(CLE_COUPE, JSON.stringify(coupe)); }catch(e){} };
+  let coupe = lireCoupe();
+  let lignesVisibles = false;
+  let avantTroncature = null;     // pour « Annuler la troncature » tant que la fenêtre est ouverte
+
+  const placerLignes = ()=>{
+    const cadre = f.querySelector("#cCadre");
+    if (!cadre) return;
+    cadre.querySelector(".ligneCoupe.h").style.top = coupe.haut + "%";
+    cadre.querySelector(".ligneCoupe.b").style.top = coupe.bas + "%";
+    cadre.querySelector(".voile.h").style.height = coupe.haut + "%";
+    cadre.querySelector(".voile.b").style.height = (100 - coupe.bas) + "%";
+  };
+
+  const brancherGlisser = (cadre)=>{
+    let ligne = null;
+    const pct = e=>{ const rc = cadre.getBoundingClientRect(); return (e.clientY - rc.top) * 100 / rc.height; };
+    cadre.addEventListener("pointerdown", e=>{
+      if (!lignesVisibles) return;                        // lignes masquées : rien ne se passe
+      const rc = cadre.getBoundingClientRect();
+      const y = e.clientY - rc.top;
+      const dH = Math.abs(y - rc.height * coupe.haut / 100);
+      const dB = Math.abs(y - rc.height * coupe.bas / 100);
+      const PROCHE = 32;                                  // px : « à proximité » de la ligne
+      if (Math.min(dH, dB) > PROCHE) return;
+      ligne = dH <= dB ? "haut" : "bas";
+      if (dH === dB) ligne = (y < rc.height * coupe.haut / 100) ? "haut" : "bas";
+      cadre.querySelector(".ligneCoupe." + (ligne === "haut" ? "h" : "b")).classList.add("active");
+      try{ cadre.setPointerCapture(e.pointerId); }catch(er){}
+      e.preventDefault();
+    });
+    cadre.addEventListener("pointermove", e=>{
+      if (!ligne) return;
+      const p = Math.max(0, Math.min(100, pct(e)));
+      if (ligne === "haut") coupe.haut = Math.round(Math.min(p, coupe.bas - 5) * 10) / 10;
+      else                  coupe.bas  = Math.round(Math.max(p, coupe.haut + 5) * 10) / 10;
+      placerLignes();
+      e.preventDefault();
+    });
+    const lacher = ()=>{
+      if (!ligne) return;
+      ligne = null;
+      cadre.querySelectorAll(".ligneCoupe").forEach(x=>x.classList.remove("active"));
+      ecrireCoupe();                                      // dernière position mémorisée
+    };
+    cadre.addEventListener("pointerup", lacher);
+    cadre.addEventListener("pointercancel", lacher);
+  };
+
+  const tronquer = async ()=>{
+    if (!cs.photo || !lignesVisibles) return;
+    const btn = f.querySelector("#cTronquer");
+    if (btn){ btn.disabled = true; btn.textContent = "Troncature…"; }
+    try{
+      const plein = await photoPleine(b, k);
+      if (!plein) throw new Error("Aucune photo disponible.");
+      if (plein === cs.photo.mini) throw new Error("Photo pleine résolution introuvable sur GitHub : troncature annulée pour ne pas dégrader la photo.");
+      const img = await new Promise((res,rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = ()=>rej(new Error("Image illisible")); i.src = plein; });
+      const sy = Math.round(img.height * coupe.haut / 100);
+      const sh = Math.max(1, Math.round(img.height * (coupe.bas - coupe.haut) / 100));
+      const cv = document.createElement("canvas");
+      cv.width = img.width; cv.height = sh;
+      const cx = cv.getContext("2d");
+      cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, sh);
+      cx.drawImage(img, 0, sy, img.width, sh, 0, 0, img.width, sh);
+      const nouveau = cv.toDataURL("image/jpeg", cfg.qualite);
+      const mini = await redimensionner(nouveau, cfg.tailleMini, 0.55);
+
+      avantTroncature = { plein, mini: cs.photo.mini };
+      cs.photo = { plein: nouveau, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+      delete cachePhotos[b.id + "/" + k];
+      lignesVisibles = false;                             // évite une seconde coupe par mégarde
+      sauver(); majPhoto(); rendreBiblio();
+      await envoyerSiPossible("Photo tronquée");
+    }catch(e){
+      toast("Troncature impossible : " + e.message, 6000);
+      if (btn){ btn.disabled = false; btn.textContent = "✂️ Tronquer"; }
+    }
+  };
+
+  const annulerTroncature = async ()=>{
+    if (!avantTroncature) return;
+    cs.photo = { plein: avantTroncature.plein, mini: avantTroncature.mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+    delete cachePhotos[b.id + "/" + k];
+    avantTroncature = null;
+    sauver(); majPhoto(); rendreBiblio();
+    await envoyerSiPossible("Photo d'origine rétablie");
+  };
+
+  const envoyerSiPossible = async (quoi)=>{
+    if (!ghPret()){ toast(quoi + " sur cet appareil. Ouvrez ☁️ pour l'envoyer sur GitHub."); return; }
+    toast(quoi + " : envoi vers GitHub…");
+    try{ await televerserPhoto(b, k); toast(quoi + " et envoyée sur GitHub."); }
+    catch(e){ toast(quoi + " sur cet appareil ; envoi GitHub impossible (" + e.message + ").", 6000); }
+    if (f.isConnected) majPhoto();
+  };
+
   const majPhoto = async ()=>{
     const z = f.querySelector("#zonePhoto");
     if (!cs.photo){
       z.innerHTML = `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`;
       return;
     }
-    z.innerHTML = `<img class="photo-apercu" src="${cs.photo.mini}" alt="Compartiment ${k}">
-      <div class="aide">${cs.photo.envoye ? "Photo sauvegardée sur GitHub ("+esc(cs.photo.chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
-      · ${esc(dateFr(cs.photo.maj))}
-      <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
-    const btn = z.querySelector("#cRetirer");
-    if (btn) btn.onclick = async ()=>{
+    z.innerHTML =
+      `<div class="cadrePhoto${lignesVisibles ? " coupe" : ""}" id="cCadre">
+         <img class="photo-apercu" src="${cs.photo.plein || cachePhotos[b.id+"/"+k] || cs.photo.mini}" alt="Compartiment ${k}">
+         ${lignesVisibles ? `<div class="voile h"></div><div class="voile b"></div>
+           <div class="ligneCoupe h"></div><div class="ligneCoupe b"></div>` : ""}
+       </div>
+       <div class="barre" style="margin:8px 0 2px">
+         <button class="btn ${lignesVisibles ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVisibles ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
+         ${lignesVisibles ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
+         ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
+       </div>
+       ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne rouge pour la déplacer ; seule la bande entre les deux lignes sera conservée.</div>` : ""}
+       <div class="aide">${cs.photo.envoye ? "Photo sauvegardée sur GitHub ("+esc(cs.photo.chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
+       · ${esc(dateFr(cs.photo.maj))}
+       <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
+
+    const cadre = z.querySelector("#cCadre");
+    if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
+    cadre.querySelector("img").addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
+
+    z.querySelector("#cLignes").onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
+    const bt = z.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
+    const ba = z.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
+
+    z.querySelector("#cRetirer").onclick = async ()=>{
       const ok = await confirmer("Retirer la photo de ce compartiment ? Les livres déjà relevés sont conservés.", "Retirer la photo", "Retirer");
       if (!ok) return;
-      cs.photo = null; sauver(); majPhoto(); rendreBiblio();
+      cs.photo = null; avantTroncature = null; lignesVisibles = false;
+      sauver(); majPhoto(); rendreBiblio();
     };
+
+    // affiche la photo pleine résolution dès qu'elle est disponible (placement précis des lignes)
+    if (!cs.photo.plein && !cachePhotos[b.id+"/"+k] && cs.photo.envoye){
+      const photoAvant = cs.photo;
+      const d = await photoPleine(b, k);
+      if (d && cs.photo === photoAvant && f.isConnected){
+        const im = f.querySelector("#cCadre img");
+        if (im) im.src = d;
+      }
+    }
   };
 
   const majLivres = ()=>{
@@ -1199,6 +1353,7 @@ function ouvrirCompartiment(b, k){
       const mini  = await redimensionner(plein, cfg.tailleMini, 0.55);
       cs.photo = { plein, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
       delete cachePhotos[b.id+"/"+k];
+      avantTroncature = null;
       sauver(); majPhoto(); rendreBiblio();
       toast("Photo enregistrée sur cet appareil. Ouvrez ☁️ quand vous voudrez la sauvegarder.");
     }catch(e){ toast("Photo illisible : " + e.message, 5000); }
