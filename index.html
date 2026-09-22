@@ -305,8 +305,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.10.1";
+const VERSION = "V1.11.0";
 const HISTORIQUE = [
+  { v:"V1.11.0", d:"22/09/2026", l:[
+    "Retirer une photo propose aussi de supprimer les livres identifiés à partir de cette photo (rang de devant pour la photo 1, rang de derrière pour la photo 2, tous si le compartiment n'a qu'une photo).",
+    "Les livres concernés sont listés avec une case à cocher chacun ; deux choix : « Photo seule » ou « Photo + livres cochés ». Les livres ajoutés à la main ne sont pas cochés d'office.",
+    "Les livres portent désormais leur origine (analyse IA ou ajout à la main)."
+  ]},
   { v:"V1.10.1", d:"22/09/2026", l:[
     "Correction : le bouton vert « Copier la réponse de Claude » apparaissait dès l'ouverture de la fenêtre « Demander à Claude », même si rien n'avait été envoyé. Il n'apparaît plus qu'après avoir touché « Ouvrir Claude » ou « Copier le texte de la question ».",
     "Le bouton vert est déplacé en bas de l'écran : il ne masque plus l'en-tête (⚙️, ☁️) ni le bandeau d'état ; il indique l'heure de la demande."
@@ -1673,7 +1678,8 @@ function livresDepuisReponse(j, deux, avecAvant, source){
       annee: String(x.annee||"").trim(),
       certitude: ["haute","moyenne","faible"].includes(x.certitude) ? x.certitude : "moyenne",
       remarque: String(x.remarque||"").trim(),
-      resume:"", categorie:""
+      resume:"", categorie:"",
+      origine:"ia"
     };
     if (deux){
       const r = String(x.rang||"").toLowerCase();
@@ -2269,13 +2275,18 @@ function ouvrirCompartiment(b, k){
     const btn = z.querySelector("#cRetirer");
     if (!btn) return;
     btn.onclick = async ()=>{
-      const ok = await confirmer(face === "photo2"
-        ? "Retirer la photo du rang de derrière ? Les livres déjà relevés sont conservés ; la prochaine analyse ne portera plus que sur la photo de devant."
-        : "Retirer la photo de ce compartiment ? Les livres déjà relevés sont conservés.", "Retirer la photo", "Retirer");
-      if (!ok) return;
+      const choix = await choisirRetraitPhoto(cs, face);
+      if (!choix) return;
+      if (choix.ids && choix.ids.size){
+        cs.livres = (cs.livres||[]).filter(lv => !choix.ids.has(lv));
+        if (!cs.livres.length) delete cs.analyse;
+      }
       cs[face] = null; avantTroncature = null; lignesVisibles = false;
       delete cachePhotos[cleCache(b,k,face)];
-      sauver(); majPhoto(); rendreBiblio();
+      sauver(); majPhoto(); majLivres(); rendreBiblio();
+      toast(choix.ids && choix.ids.size
+        ? `Photo retirée, ainsi que ${choix.ids.size} livre(s).`
+        : "Photo retirée ; les livres sont conservés.");
     };
   };
 
@@ -2341,6 +2352,72 @@ function ouvrirCompartiment(b, k){
   majPhoto(); majLivres();
 }
 
+/* Retrait d'une photo : propose de supprimer aussi les livres identifiés à partir d'elle.
+   Photo 1 (devant) -> livres non marqués « derrière » ; photo 2 -> livres « derrière » ;
+   compartiment à une seule photo -> tous ses livres. Les ajouts à la main ne sont pas cochés d'office.
+   Renvoie null (annulé) ou { ids:Set de livres à supprimer }. */
+function choisirRetraitPhoto(cs, face){
+  const livres = cs.livres || [];
+  const autre = face === "photo2" ? cs.photo : cs.photo2;
+  const lies = livres.filter(lv => {
+    if (!autre) return true;
+    return face === "photo2" ? lv.rang === "derriere" : lv.rang !== "derriere";
+  });
+  const intro = face === "photo2"
+    ? "Retirer la photo du rang de derrière ? La prochaine analyse ne portera plus que sur la photo de devant."
+    : "Retirer la photo de ce compartiment ?";
+  return new Promise(res=>{
+    if (!lies.length){
+      confirmer(`${intro} Les livres déjà relevés sont conservés.`, "Retirer la photo", "Retirer").then(ok => res(ok ? { ids:new Set() } : null));
+      return;
+    }
+    let fini = false;
+    const finir = v => { if (!fini){ fini = true; res(v); } };
+    const lignes = lies.map((lv,i)=>{
+      const main = lv.origine === "main";
+      return `<div class="coche" style="align-items:flex-start;margin:6px 0">
+        <input type="checkbox" data-rl="${i}" ${main ? "" : "checked"} style="margin-top:3px">
+        <label style="margin:0;font-weight:normal">${esc(lv.titre)}<span class="aide" style="display:block;margin:0">${esc(lv.auteur||"auteur inconnu")}${lv.rang ? " · " + (lv.rang==="derriere"?"derrière":"devant") : ""}${main ? " · ajouté à la main" : ""}</span></label></div>`;
+    }).join("");
+    const f = modale({
+      titre: "Retirer la photo",
+      html: `<div style="font-size:15px">${intro}</div>
+        <div style="margin-top:12px;font-weight:600">Supprimer aussi les livres identifiés à partir de cette photo ?</div>
+        <div class="aide" style="margin-top:2px">${lies.length} livre(s) concerné(s). Décochez ceux à conserver.</div>
+        <div class="barre" style="margin:8px 0 4px">
+          <button class="btn" id="rlTous" style="flex:1">Tout cocher</button>
+          <button class="btn" id="rlAucun" style="flex:1">Tout décocher</button>
+        </div>
+        <div style="max-height:40vh;overflow:auto;border:1px solid var(--trait);border-radius:10px;padding:4px 10px">${lignes}</div>`,
+      boutons: [
+        { texte:"Annuler", action:()=>finir(null) },
+        { texte:"Photo seule", action:()=>finir({ ids:new Set() }) },
+        { texte:"Photo + livres cochés", classe:"rouge", action:(fd)=>{
+            const ids = new Set();
+            fd.querySelectorAll("[data-rl]").forEach(c => { if (c.checked) ids.add(lies[Number(c.dataset.rl)]); });
+            finir({ ids });
+        }}
+      ],
+      surFermeture: ()=>finir(null),
+      apres: (fd)=>{
+        const bouton = [...fd.querySelectorAll(".pied .btn")].pop();
+        const maj = ()=>{
+          const n = [...fd.querySelectorAll("[data-rl]")].filter(c=>c.checked).length;
+          bouton.textContent = n ? `Photo + ${n} livre(s)` : "Photo + livres cochés";
+          bouton.disabled = !n;
+        };
+        fd.querySelectorAll("[data-rl]").forEach((c)=>{
+          c.onchange = maj;
+          const l = c.nextElementSibling; if (l) l.onclick = ()=>{ c.checked = !c.checked; maj(); };
+        });
+        fd.querySelector("#rlTous").onclick = ()=>{ fd.querySelectorAll("[data-rl]").forEach(c=>c.checked=true); maj(); };
+        fd.querySelector("#rlAucun").onclick = ()=>{ fd.querySelectorAll("[data-rl]").forEach(c=>c.checked=false); maj(); };
+        maj();
+      }
+    });
+  });
+}
+
 function formLivre(cs, index, apres){
   const lv = index >= 0 ? cs.livres[index]
     : { titre:"", auteur:"", annee:"", resume:"", categorie:"", remarque:"", certitude:"haute" };
@@ -2370,7 +2447,7 @@ function formLivre(cs, index, apres){
         lv.resume=f.querySelector("#lR").value.trim();
         lv.remarque=f.querySelector("#lM").value.trim();
         const g = f.querySelector("#lG"); if (g) lv.rang = g.value;
-        if (index < 0){ lv.id = uid(); lv.certitude="haute"; cs.livres = cs.livres||[]; cs.livres.push(lv); }
+        if (index < 0){ lv.id = uid(); lv.certitude="haute"; lv.origine="main"; cs.livres = cs.livres||[]; cs.livres.push(lv); }
         sauver(); f.remove(); if (apres) apres(); rendreBiblio();
       }}
     ]
