@@ -177,6 +177,16 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .progres .barreint i{display:block;height:100%;background:var(--bronze);width:0}
 .aide{font-size:12.5px;color:var(--texte2);margin-top:6px}
 .sep{height:1px;background:var(--trait);margin:16px 0}
+/* ---------- recherche de modèle Gemini ---------- */
+.modeles{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:46vh;overflow-y:auto}
+.mod{display:flex;align-items:center;gap:8px;background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:8px 10px;font-size:13.5px}
+.mod.ok{border-color:var(--vert)}
+.mod.reco{border-color:var(--bronze);box-shadow:0 0 0 1px var(--bronze) inset}
+.mod .nomMod{font-weight:600;word-break:break-all}
+.mod .detMod{font-size:12px;color:var(--texte2)}
+.mod .txtMod{flex:1;min-width:0}
+.mod .btn{padding:6px 10px;font-size:13px;flex:none}
+.encadre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13.5px}
 .onglets{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
 .onglets button{background:var(--encre);border:1px solid var(--trait);color:var(--texte2);border-radius:999px;padding:7px 12px;font-size:13.5px;cursor:pointer}
 .onglets button.actif{background:var(--bronze-sombre);border-color:var(--bronze);color:#fff8e1}
@@ -274,8 +284,14 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.6.0";
+const VERSION = "V1.7.0";
 const HISTORIQUE = [
+  { v:"V1.7.0", d:"22/09/2026", l:[
+    "Réglages ⚙️ → Gemini : bouton « 🔎 Trouver un modèle qui marche » qui demande à Google la liste des modèles réellement ouverts à votre clé.",
+    "Chaque modèle candidat est essayé pour de vrai avec une petite image à lire (décompte testés / restants, arrêt possible) : ✅ lit l'image, ou la raison de l'échec (retiré, quota épuisé, ne lit pas l'image…).",
+    "Un modèle est recommandé (le plus récent qui fonctionne, « flash » de préférence) ; « Utiliser » l'adopte aussitôt. Le résultat du dernier test est conservé.",
+    "Erreur de modèle pendant une analyse : message clair avec bouton « Choisir un autre modèle », et l'analyse de toute la bibliothèque s'arrête au lieu d'échouer photo après photo."
+  ]},
   { v:"V1.6.0", d:"22/09/2026", l:[
     "Bouton « 📐 Proportions » : un rectangle aux proportions actuelles d'un compartiment, dont on déplace le coin pour les redéfinir (ou saisie du rapport hauteur ÷ largeur, ou des mesures réelles en cm).",
     "La grille de la bibliothèque est dessinée avec ces proportions.",
@@ -330,7 +346,8 @@ const CLE_SALE   = "biblio_sale";
 const CLE_TOKEN  = "biblio_token";
 const CLE_SYNC   = "biblio_sync_maj";   // horodatage de la version GitHub connue
 const CLE_COUPE  = "biblio_lignes_coupe"; // position des lignes de coupe (en % de la hauteur)
-const CLE_GEM    = "gemini_api_key";    // partagée avec les autres apps de l'origine
+const CLE_GEM    = "gemini_api_key";
+const CLE_MODELES = "biblio_modeles_testes"; // résultat du dernier test des modèles Gemini    // partagée avec les autres apps de l'origine
 const FICHIER_JSON = "bibliotheques.json";
 
 const QUESTION_ANALYSE_DEFAUT =
@@ -998,24 +1015,262 @@ async function recupererDeGitHub(silencieux){
    ==================================================================== */
 function cleGemini(){ return localStorage.getItem(CLE_GEM) || ""; }
 
-async function gemini(parties){
-  const cle = cleGemini();
+/* Erreur Gemini qui vient du modèle choisi (retiré, quota, refus) : il faut en changer. */
+function erreurModele(message, statut){
+  const e = new Error(message);
+  e.modele = true; e.statut = statut;
+  return e;
+}
+
+function extraitMessageGoogle(brut){
+  try{ const j = JSON.parse(brut); if (j && j.error && j.error.message) return j.error.message; }catch(e){}
+  return String(brut||"").slice(0,300);
+}
+
+async function gemini(parties, opts){
+  opts = opts || {};
+  const cle = opts.cle || cleGemini();
   if (!cle) throw new Error("Clé API Gemini absente : réglages ⚙️, onglet Gemini.");
-  const modele = cfg.modele || "gemini-2.5-flash";
-  const gc = { temperature:0.2, responseMimeType:"application/json", maxOutputTokens:16384 };
-  if (/flash/.test(modele)) gc.thinkingConfig = { thinkingBudget:0 };
-  const r = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modele)}:generateContent?key=${encodeURIComponent(cle)}`,
-    { method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ contents:[{ role:"user", parts:parties }], generationConfig:gc }) });
-  if (!r.ok) throw new Error("Gemini " + r.status + " : " + (await r.text()).slice(0,300));
+  const modele = opts.modele || cfg.modele || "gemini-2.5-flash";
+  const gc = { temperature:0.2, responseMimeType:"application/json", maxOutputTokens: opts.maxTokens || 16384 };
+  // Seuls les 2.5 flash acceptent de couper la réflexion (budget 0) ; les autres gardent leur réglage par défaut.
+  if (/gemini-2\.5-flash/.test(modele)) gc.thinkingConfig = { thinkingBudget:0 };
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modele)}:generateContent?key=${encodeURIComponent(cle)}`;
+  const envoyer = (g)=>fetch(url, { method:"POST", headers:{"Content-Type":"application/json"}, signal: opts.signal,
+      body: JSON.stringify({ contents:[{ role:"user", parts:parties }], generationConfig:g }) });
+  let r = await envoyer(gc);
+  if (!r.ok && r.status === 400 && gc.thinkingConfig){
+    const brut = await r.text();
+    if (/thinking/i.test(brut)){ delete gc.thinkingConfig; r = await envoyer(gc); }
+    else throw erreurModele(`Gemini 400 (${modele}) : ${extraitMessageGoogle(brut)}`, 400);
+  }
+  if (!r.ok){
+    const brut = await r.text();
+    const msg = extraitMessageGoogle(brut);
+    if (r.status === 404) throw erreurModele(`Le modèle « ${modele} » n'est plus proposé par Google (ou n'existe pas). Choisissez-en un autre : réglages ⚙️ → Gemini → « Trouver un modèle qui marche ».\n\nMessage de Google : ${msg}`, 404);
+    if (r.status === 429) throw erreurModele(`Quota épuisé pour le modèle « ${modele} » (trop de demandes, ou modèle non inclus dans l'offre gratuite). Réessayez plus tard ou choisissez un autre modèle.\n\nMessage de Google : ${msg}`, 429);
+    if (r.status === 403) throw erreurModele(`Accès refusé au modèle « ${modele} » avec cette clé.\n\nMessage de Google : ${msg}`, 403);
+    if (r.status === 400 && /model|not supported|image|inline/i.test(msg)) throw erreurModele(`Le modèle « ${modele} » refuse cette demande (peut-être ne lit-il pas les images).\n\nMessage de Google : ${msg}`, 400);
+    throw new Error("Gemini " + r.status + " : " + msg);
+  }
   const j = await r.json();
   const cand = j.candidates && j.candidates[0];
   if (!cand) throw new Error("Gemini n'a renvoyé aucune réponse (contenu peut-être bloqué).");
   if (cand.finishReason === "MAX_TOKENS") throw new Error("Réponse trop longue : réduisez la taille du lot.");
-  const txt = ((cand.content && cand.content.parts) || []).map(p=>p.text||"").join("");
+  const txt = ((cand.content && cand.content.parts) || []).filter(p=>!p.thought).map(p=>p.text||"").join("");
   if (!txt.trim()) throw new Error("Réponse vide de Gemini.");
   return txt;
+}
+
+/* ====================================================================
+   RECHERCHE D'UN MODÈLE GEMINI QUI FONCTIONNE
+   ==================================================================== */
+const EXCLUS_MODELES = /embedding|tts|image|imagen|veo|lyria|live|audio|native|robotics|computer-use|aqa|learnlm|gemma|nano|banana|search|dialog/i;
+
+async function listerModelesGemini(cle){
+  const tous = []; let jeton = ""; let tours = 0;
+  do{
+    const u = `https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000&key=${encodeURIComponent(cle)}${jeton?"&pageToken="+encodeURIComponent(jeton):""}`;
+    const r = await fetch(u);
+    if (!r.ok) throw new Error("Liste des modèles refusée (" + r.status + ") : " + extraitMessageGoogle(await r.text()));
+    const j = await r.json();
+    (j.models||[]).forEach(m=>tous.push(m));
+    jeton = j.nextPageToken || "";
+  } while (jeton && ++tours < 10);
+  const candidats = tous.filter(m=>{
+    const id = String(m.name||"").replace(/^models\//,"");
+    return /^gemini/i.test(id) && (m.supportedGenerationMethods||[]).includes("generateContent") && !EXCLUS_MODELES.test(id);
+  }).map(m=>({ id:String(m.name).replace(/^models\//,""), nom:m.displayName||"" }));
+  candidats.sort((a,b)=>rangModele(a.id).localeCompare(rangModele(b.id)));
+  return { total: tous.length, candidats };
+}
+
+/* Clé de tri : alias « -latest » d'abord, puis stables avant preview/exp, version la plus récente, flash > pro > flash-lite. */
+function rangModele(id){
+  const alias = /latest$/i.test(id) ? 0 : 1;
+  const instable = /preview|exp/i.test(id) ? 1 : 0;
+  const mv = id.match(/gemini-(\d+)(?:\.(\d+))?/i);
+  const version = mv ? (parseInt(mv[1],10)*100 + parseInt(mv[2]||"0",10)) : 0;
+  const famille = /lite/i.test(id) ? 2 : /flash/i.test(id) ? 0 : /pro/i.test(id) ? 1 : 3;
+  return `${alias}${instable}${String(9999-version).padStart(4,"0")}${famille}${id}`;
+}
+
+/* Petite image JPEG contenant un nombre à lire : preuve que le modèle lit bien les photos. */
+function imageDeTest(){
+  const n = String(1000 + Math.floor(Math.random()*9000));
+  const c = document.createElement("canvas"); c.width = 480; c.height = 200;
+  const x = c.getContext("2d");
+  x.fillStyle = "#f4ecd8"; x.fillRect(0,0,480,200);
+  x.fillStyle = "#1a1a1a"; x.font = "bold 64px Georgia, serif"; x.textAlign = "center"; x.textBaseline = "middle";
+  x.fillText("LIVRE " + n, 240, 100);
+  return { n, b64: c.toDataURL("image/jpeg", 0.85).split(",")[1] };
+}
+
+async function testerModele(id, cle){
+  const img = imageDeTest();
+  const ctl = new AbortController();
+  const minuteur = setTimeout(()=>ctl.abort(), 45000);
+  const t0 = performance.now();
+  try{
+    const txt = await gemini([
+      { text:'Recopie exactement le texte écrit sur cette image. Réponds UNIQUEMENT par un objet JSON : {"texte":""}' },
+      { inline_data:{ mime_type:"image/jpeg", data: img.b64 } }
+    ], { modele:id, cle, signal:ctl.signal, maxTokens:2048 });
+    const ms = Math.round(performance.now() - t0);
+    const lu = txt.replace(/\D/g,"");
+    return lu.includes(img.n)
+      ? { etat:"ok", ms, detail:`lit l'image en ${(ms/1000).toFixed(1).replace(".",",")} s` }
+      : { etat:"aveugle", ms, detail:"répond mais ne lit pas l'image correctement" };
+  }catch(e){
+    if (e.name === "AbortError") return { etat:"delai", detail:"pas de réponse en 45 s" };
+    const st = e.statut;
+    if (st === 404) return { etat:"indispo", detail:"retiré ou indisponible (404)" };
+    if (st === 429) return { etat:"quota", detail:"quota épuisé ou hors offre gratuite (429)" };
+    if (st === 403) return { etat:"refus", detail:"accès refusé à cette clé (403)" };
+    return { etat:"erreur", detail: String(e.message||e).split("\n")[0].slice(0,140) };
+  }finally{ clearTimeout(minuteur); }
+}
+
+function lireTestsModeles(){
+  try{ const t = JSON.parse(localStorage.getItem(CLE_MODELES)||"null"); if (t && Array.isArray(t.liste)) return t; }catch(e){}
+  return null;
+}
+
+const ICONE_ETAT = { ok:"✅", aveugle:"👁️‍🗨️", indispo:"🚫", quota:"⏳", refus:"🔒", delai:"⌛", erreur:"❌", attente:"…" };
+
+/* Fenêtre de recherche. surChoix(id) est appelé quand l'utilisateur adopte un modèle. */
+function chercherModeles(cle, surChoix){
+  if (!cle){ toast("Saisissez d'abord la clé API Gemini."); return; }
+  let arret = false, enCours = false;
+  const f = modale({
+    titre:"Trouver un modèle Gemini",
+    html:
+      `<div class="aide" style="margin-top:0">Google retire régulièrement d'anciens modèles. Cet outil demande la liste des modèles ouverts à votre clé, puis envoie à chacun une petite image contenant un nombre à lire : seuls ceux qui le lisent sont capables d'analyser vos photos.</div>
+       <div class="encadre">Modèle actuel : <b>${esc(cfg.modele)}</b></div>
+       <div id="mEtat" class="aide"></div>
+       <div class="progres" id="mProg" hidden><div id="mProgT"></div><div class="barreint"><i id="mProgB"></i></div></div>
+       <div id="mListe" class="modeles"></div>
+       <div id="mReco"></div>`,
+    boutons:[
+      {texte:"Fermer", action:()=>{ arret = true; }},
+      {texte:"Tout tester", garder:true, action:()=>{ lancer(false); return false; }},
+      {texte:"Jusqu'au premier qui marche", classe:"principal", garder:true, action:()=>{ lancer(true); return false; }}
+    ],
+    surFermeture:()=>{ arret = true; }
+  });
+  const etat = f.querySelector("#mEtat"), liste = f.querySelector("#mListe"), reco = f.querySelector("#mReco");
+  const boutonsLancer = [...f.querySelectorAll(".pied .btn")].slice(1);
+
+  const adopter = (id)=>{
+    cfg.modele = id; sauverCfg();
+    if (surChoix) surChoix(id);
+    toast("Modèle adopté : " + id);
+    f.querySelectorAll(".encadre b")[0].textContent = id;
+  };
+
+  const ligne = (m, r)=>{
+    const d = document.createElement("div");
+    d.className = "mod" + (r.etat==="ok" ? " ok" : "");
+    d.dataset.id = m.id;
+    d.innerHTML = `<span style="font-size:18px">${ICONE_ETAT[r.etat]||"?"}</span>
+      <div class="txtMod"><div class="nomMod">${esc(m.id)}${m.id===cfg.modele?" <span class='detMod'>(actuel)</span>":""}</div>
+      <div class="detMod">${esc(r.detail||"")}${m.nom?" · "+esc(m.nom):""}</div></div>
+      ${r.etat==="ok" ? `<button class="btn vert">Utiliser</button>` : ""}`;
+    const b = d.querySelector("button");
+    if (b) b.onclick = ()=>adopter(m.id);
+    return d;
+  };
+
+  const afficherReco = (resultats)=>{
+    const bons = resultats.filter(x=>x.etat==="ok");
+    liste.querySelectorAll(".mod").forEach(x=>x.classList.remove("reco"));
+    if (!bons.length){
+      reco.innerHTML = resultats.length ? `<div class="encadre">Aucun modèle testé ne lit les images avec cette clé. Vérifiez la clé, ou réessayez plus tard si ce sont des quotas épuisés (⏳).</div>` : "";
+      return;
+    }
+    // Recommandé : le premier qui marche dans l'ordre de préférence, en évitant « lite » s'il y a mieux.
+    const choix = bons.find(x=>!/lite/i.test(x.id)) || bons[0];
+    const el = liste.querySelector(`.mod[data-id="${CSS.escape(choix.id)}"]`);
+    if (el) el.classList.add("reco");
+    reco.innerHTML = `<div class="encadre">⭐ Recommandé : <b>${esc(choix.id)}</b>${/latest$/i.test(choix.id)?" — cet alias suit automatiquement la dernière version, il ne devrait pas disparaître.":""}
+      ${choix.id===cfg.modele ? "<br>C'est déjà le modèle utilisé." : `<br><button class="btn principal plein" id="mAdopter" style="margin-top:8px">Utiliser ${esc(choix.id)}</button>`}</div>`;
+    const b = reco.querySelector("#mAdopter");
+    if (b) b.onclick = ()=>{ adopter(choix.id); b.remove(); };
+  };
+
+  // Affiche le dernier test conservé
+  const ancien = lireTestsModeles();
+  if (ancien){
+    etat.textContent = `Dernier test : ${dateFr(ancien.date)} — ${ancien.liste.filter(x=>x.etat==="ok").length} modèle(s) opérationnel(s) sur ${ancien.liste.length} testé(s). Relancez un test pour mettre à jour.`;
+    ancien.liste.forEach(x=>liste.appendChild(ligne(x, x)));
+    afficherReco(ancien.liste);
+  } else {
+    etat.textContent = "Aucun test encore fait sur cet appareil. « Jusqu'au premier qui marche » est le plus rapide ; « Tout tester » donne le tableau complet.";
+  }
+
+  async function lancer(premierSeul){
+    if (enCours) return;
+    enCours = true; arret = false;
+    boutonsLancer.forEach(b=>b.disabled = true);
+    liste.innerHTML = ""; reco.innerHTML = "";
+    etat.textContent = "Demande de la liste des modèles à Google…";
+    let cands;
+    try{
+      const r = await listerModelesGemini(cle);
+      cands = r.candidats;
+      etat.textContent = `${r.total} modèle(s) ouverts à votre clé, dont ${cands.length} capable(s) a priori d'analyser une photo. Essai de chacun…`;
+    }catch(e){
+      etat.textContent = "Échec : " + e.message;
+      enCours = false; boutonsLancer.forEach(b=>b.disabled = false);
+      return;
+    }
+    const prog = f.querySelector("#mProg"), progT = f.querySelector("#mProgT"), progB = f.querySelector("#mProgB");
+    prog.hidden = false;
+    const resultats = [];
+    for (let i=0; i<cands.length; i++){
+      if (arret || !f.isConnected) break;
+      const m = cands[i];
+      progT.textContent = `Testés : ${i} / ${cands.length} — restants : ${cands.length-i} · essai de ${m.id}…`;
+      progB.style.width = Math.round(i*100/cands.length) + "%";
+      const r = await testerModele(m.id, cle);
+      const res = Object.assign({ id:m.id, nom:m.nom }, r);
+      resultats.push(res);
+      liste.appendChild(ligne(m, res));
+      if (premierSeul && r.etat === "ok") break;
+    }
+    const n = resultats.length;
+    progT.textContent = `Testés : ${n} / ${cands.length} — restants : ${cands.length-n}${arret?" (arrêté)":""}`;
+    progB.style.width = cands.length ? Math.round(n*100/cands.length) + "%" : "100%";
+    const bons = resultats.filter(x=>x.etat==="ok").length;
+    etat.textContent = `${bons} modèle(s) opérationnel(s) sur ${n} testé(s).` + (premierSeul && bons && n<cands.length ? " « Tout tester » pour voir les autres." : "");
+    try{ localStorage.setItem(CLE_MODELES, JSON.stringify({ date:new Date().toISOString(), liste:resultats })); }catch(e){}
+    afficherReco(resultats);
+    if (surChoix) surChoix(cfg.modele);
+    enCours = false; boutonsLancer.forEach(b=>b.disabled = false);
+  }
+}
+
+/* Message d'erreur d'analyse, avec accès direct au choix d'un autre modèle si c'est le modèle qui coince. */
+function montrerErreurAnalyse(e){
+  const boutons = [{texte:"Fermer"}];
+  if (e && e.modele) boutons.push({texte:"Choisir un autre modèle", classe:"principal",
+    action:()=>{ ouvrirReglages("gemini"); chercherModeles(cleGemini(), id=>{
+      const sel = document.querySelector("#rModele"); if (sel) majSelectModeles(sel, id); }); }});
+  modale({titre:"Analyse impossible",
+    html:`<div class="aide" style="white-space:pre-line">${esc(e && e.message || e)}</div>`, boutons});
+}
+
+/* Remplit la liste déroulante des modèles : modèles testés opérationnels d'abord, puis les autres connus. */
+function majSelectModeles(sel, choisi){
+  const t = lireTestsModeles();
+  const ok = t ? t.liste.filter(x=>x.etat==="ok").map(x=>x.id) : [];
+  const ko = t ? t.liste.filter(x=>x.etat!=="ok").map(x=>x.id) : [];
+  const base = ["gemini-flash-latest","gemini-2.5-flash","gemini-2.5-pro"];
+  const tous = [...new Set([choisi || cfg.modele, ...ok, ...base.filter(x=>!ko.includes(x))])].filter(Boolean);
+  sel.innerHTML = tous.map(m=>{
+    const marque = ok.includes(m) ? "✅ " : ko.includes(m) ? "⚠️ " : "";
+    return `<option value="${esc(m)}" ${m===(choisi||cfg.modele)?"selected":""}>${marque}${esc(m)}</option>`;
+  }).join("");
 }
 
 function jsonDepuisTexte(txt){
@@ -1640,7 +1895,7 @@ function ouvrirCompartiment(b, k){
       }
     }catch(e){
       btn.disabled = false; btn.textContent = "🔍 Analyser";
-      modale({titre:"Analyse impossible", html:`<div class="aide">${esc(e.message)}</div>`, boutons:[{texte:"Fermer"}]});
+      montrerErreurAnalyse(e);
     }
   };
 
@@ -1704,7 +1959,7 @@ async function analyserToutesPhotos(b){
 
 async function analyserListe(b, choix, titre){
   const pg = fenetreProgres(titre || "Analyse des photos");
-  let fait=0, trouves=0; const erreurs=[];
+  let fait=0, trouves=0; const erreurs=[]; let erreurBloquante=null;
   for (const k of choix){
     pg.maj(fait, choix.length, "Compartiment " + k);
     try{
@@ -1713,11 +1968,21 @@ async function analyserListe(b, choix, titre){
       b.cases[k].analyse = { maj:new Date().toISOString(), modele:cfg.modele };
       trouves += livres.length;
       sauver();
-    }catch(e){ erreurs.push(k + " : " + e.message); }
+    }catch(e){
+      // Modèle retiré / quota / refus : inutile de continuer, toutes les photos échoueraient.
+      if (e.modele){ erreurBloquante = e; break; }
+      erreurs.push(k + " : " + e.message);
+    }
     fait++;
     pg.maj(fait, choix.length, "");
   }
   pg.fermer();
+  if (erreurBloquante){
+    rendreBiblio();
+    toast(`Analyse arrêtée après ${fait} photo(s) sur ${choix.length}.`, 5000);
+    montrerErreurAnalyse(erreurBloquante);
+    return;
+  }
   rendreBiblio();
   modale({ titre:"Analyse terminée",
     html:`<div>${fait} photo(s) traitée(s), ${trouves} livre(s) relevé(s).</div>
@@ -2357,10 +2622,9 @@ function ouvrirReglages(ongletInitial){
          <input type="password" id="rCle" value="${esc(cleGemini())}" placeholder="AIza…">
          <div class="aide">Stockée sur cet appareil uniquement, jamais envoyée sur GitHub, partagée avec vos autres applications de la même adresse.</div>
          <label for="rModele">Modèle</label>
-         <select id="rModele">
-           ${["gemini-2.5-flash","gemini-2.5-pro","gemini-2.0-flash"].map(m=>
-             `<option value="${m}" ${cfg.modele===m?"selected":""}>${m}</option>`).join("")}
-         </select>
+         <select id="rModele"></select>
+         <button class="btn plein" id="rChercher" style="margin-top:8px">🔎 Trouver un modèle qui marche</button>
+         <div class="aide" id="rInfoModeles"></div>
          <label for="rTaille">Taille maximale des photos envoyées (pixels)</label>
          <input type="number" id="rTaille" min="600" max="3000" step="100" value="${cfg.tailleMax}">
          <div class="aide">1600 px suffit en général pour lire les tranches. Plus grand : lecture plus fine, envoi plus lent.</div>
@@ -2424,6 +2688,21 @@ function ouvrirReglages(ongletInitial){
   };
   f.querySelectorAll("[data-o]").forEach(btn=>{ btn.onclick = ()=>activer(btn.dataset.o); });
   activer(ongletInitial || "gemini");
+
+  const selModele = f.querySelector("#rModele");
+  majSelectModeles(selModele, cfg.modele);
+  const infoModeles = ()=>{
+    const t = lireTestsModeles();
+    f.querySelector("#rInfoModeles").textContent = t
+      ? `Dernier test : ${dateFr(t.date)} — ✅ = lit les photos, ⚠️ = a échoué au test. Les modèles changent : refaites le test si une analyse échoue.`
+      : "Le bouton ci-dessus vérifie quels modèles sont disponibles pour votre clé et savent lire une photo, puis en recommande un.";
+  };
+  infoModeles();
+  f.querySelector("#rChercher").onclick = ()=>{
+    const cle = f.querySelector("#rCle").value.trim();
+    if (cle) localStorage.setItem(CLE_GEM, cle);
+    chercherModeles(cle, id=>{ majSelectModeles(selModele, id); infoModeles(); });
+  };
 
   f.querySelector("#qAr").onclick = ()=>{ f.querySelector("#qA").value = QUESTION_ANALYSE_DEFAUT; };
   f.querySelector("#qRr").onclick = ()=>{ f.querySelector("#qR").value = QUESTION_RESUME_DEFAUT; };
