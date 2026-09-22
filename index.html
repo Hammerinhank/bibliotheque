@@ -118,6 +118,11 @@ button{font-family:inherit}
 .case .nb{position:absolute;bottom:0;left:0;right:0;font-size:11px;text-align:center;background:rgba(0,0,0,.6);color:#fff;padding:1px 0}
 .case.analysee{border-color:var(--vert)}
 .case.aenvoyer{border-color:var(--orange)}
+.case .deux{position:absolute;top:2px;right:3px;font-size:10px;color:#fff;background:rgba(125,100,21,.85);border-radius:4px;padding:0 4px}
+.rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
+.rang.devant{background:var(--encre3);color:var(--texte2)}
+.rang.derriere{background:var(--bronze-sombre);color:#fff8e1}
+#cFaces{margin-bottom:8px}
 .legende{font-size:12px;color:var(--texte2);display:flex;gap:14px;flex-wrap:wrap;margin-top:-4px}
 .legende i{display:inline-block;width:10px;height:10px;border-radius:3px;border:2px solid;margin-right:4px;vertical-align:-1px}
 
@@ -284,8 +289,14 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.7.0";
+const VERSION = "V1.8.0";
 const HISTORIQUE = [
+  { v:"V1.8.0", d:"22/09/2026", l:[
+    "Compartiments à deux rangs de livres : onglets « Devant » / « Derrière » dans la fenêtre du compartiment, avec une seconde photo prise après avoir retiré les livres de devant.",
+    "Chaque photo a ses propres outils (taille réelle, lignes de coupe, tronquer, retirer) et son propre fichier sur GitHub (…-derriere.jpg).",
+    "L'analyse envoie les deux photos ensemble à Gemini, qui produit une liste unique : un livre du fond déjà visible sur la première photo n'est compté qu'une fois ; doublons restants fusionnés automatiquement.",
+    "Chaque livre indique son rang (devant / derrière), modifiable à la main ; repère « 2📷 » sur la grille ; question dédiée modifiable dans Réglages → Questions."
+  ]},
   { v:"V1.7.0", d:"22/09/2026", l:[
     "Réglages ⚙️ → Gemini : bouton « 🔎 Trouver un modèle qui marche » qui demande à Google la liste des modèles réellement ouverts à votre clé.",
     "Chaque modèle candidat est essayé pour de vrai avec une petite image à lire (décompte testés / restants, arrêt possible) : ✅ lit l'image, ou la raison de l'échec (retiré, quota épuisé, ne lit pas l'image…).",
@@ -363,6 +374,22 @@ Réponds UNIQUEMENT par un objet JSON de cette forme, sans texte autour :
 "annee" = année imprimée sur la tranche si elle est lisible, sinon "".
 "remarque" = collection, éditeur, état, ou ce qui gêne la lecture (2 à 6 mots), sinon "".`;
 
+const QUESTION_DEUX_RANGS_DEFAUT =
+`Ces deux photos montrent le MÊME compartiment d'étagère de bibliothèque, dont les livres sont rangés sur deux rangs, l'un derrière l'autre.
+- Photo 1 : le compartiment tel quel. On y voit le rang de devant, et aussi, là où ce rang n'est pas plein, des livres du rang de derrière (en retrait, souvent plus sombres ou dépassant au-dessus des autres).
+- Photo 2 : le même compartiment après avoir retiré les livres de devant : on y voit le rang de derrière.
+Dresse la liste UNIQUE de tous les livres du compartiment (les deux rangs réunis).
+Règles :
+- Un livre du rang de derrière déjà visible sur la photo 1 et de nouveau sur la photo 2 ne doit apparaître qu'UNE seule fois.
+- "rang" = "derriere" si le livre est visible sur la photo 2, sinon "devant".
+- "photos" = "1", "2" ou "1+2" selon les photos où tu le vois.
+- N'invente jamais un livre ; si un titre est partiellement lisible, donne ce que tu lis et baisse la certitude.
+- Ignore les objets qui ne sont pas des livres.
+Réponds UNIQUEMENT par un objet JSON de cette forme, sans texte autour :
+{"livres":[{"titre":"","auteur":"","annee":"","certitude":"haute|moyenne|faible","rang":"devant|derriere","photos":"1|2|1+2","remarque":""}]}
+"annee" = année imprimée sur la tranche si elle est lisible, sinon "".
+"remarque" = collection, éditeur, état, ou ce qui gêne la lecture (2 à 6 mots), sinon "".`;
+
 const QUESTION_RESUME_DEFAUT =
 `Voici une liste numérotée de livres. Pour chacun, donne :
 - "resume" : un résumé du contenu en UNE seule phrase de 25 mots maximum ;
@@ -383,6 +410,7 @@ const CFG_DEFAUT = {
   modele:"gemini-2.5-flash",
   ghUser:"Hammerinhank", ghRepo:"bibliotheque", ghBranche:"main",
   qAnalyse:QUESTION_ANALYSE_DEFAUT,
+  qAnalyse2:QUESTION_DEUX_RANGS_DEFAUT,
   qResume:QUESTION_RESUME_DEFAUT,
   qCategorie:QUESTION_CATEGORIE_DEFAUT,
   tailleMax:1600, qualite:0.72, tailleMini:260
@@ -610,25 +638,34 @@ function pomperChargements(){
   }
 }
 
-function photoImmediate(bib, cle){
+/* Un compartiment peut avoir deux photos : "photo" (rang de devant) et "photo2" (rang de derrière,
+   prise après avoir retiré les livres de devant). */
+const CHAMPS_PHOTO = ["photo","photo2"];
+const NOM_FACE = { photo:"devant", photo2:"derrière" };
+function cheminPhoto(b, k, champ){ return "images/" + b.id + "/" + k + (champ === "photo2" ? "-derriere" : "") + ".jpg"; }
+function cleCache(b, k, champ){ return b.id + "/" + k + (champ === "photo2" ? "#2" : ""); }
+
+function photoImmediate(bib, cle, champ){
+  champ = champ || "photo";
   const cs = bib.cases[cle];
-  if (!cs || !cs.photo) return null;
-  return cs.photo.plein || cachePhotos[bib.id + "/" + cle] || null;
+  if (!cs || !cs[champ]) return null;
+  return cs[champ].plein || cachePhotos[cleCache(bib, cle, champ)] || null;
 }
 
-function photoPleine(bib, cle){
+function photoPleine(bib, cle, champ){
+  champ = champ || "photo";
   const cs = bib.cases[cle];
-  if (!cs || !cs.photo) return Promise.resolve(null);
-  const deja = photoImmediate(bib, cle);
+  if (!cs || !cs[champ]) return Promise.resolve(null);
+  const deja = photoImmediate(bib, cle, champ);
   if (deja) return Promise.resolve(deja);
-  if (!cs.photo.envoye || !cs.photo.chemin) return Promise.resolve(null);
-  const id = bib.id + "/" + cle;
+  if (!cs[champ].envoye || !cs[champ].chemin) return Promise.resolve(null);
+  const id = cleCache(bib, cle, champ);
   if (chargementsPhotos[id]) return chargementsPhotos[id];
-  const photo = cs.photo;
+  const photo = cs[champ];
   const p = new Promise(res=>{
     fileChargements.push(async ()=>{
       const d = await ghLireImage(photo.chemin, photo.maj);
-      if (d && cs.photo === photo) cachePhotos[id] = d;
+      if (d && cs[champ] === photo) cachePhotos[id] = d;
       res(d);
     });
     pomperChargements();
@@ -683,7 +720,9 @@ function photosEnAttente(){
   data.bibliotheques.forEach(b=>{
     Object.keys(b.cases||{}).forEach(k=>{
       const cs = b.cases[k];
-      if (cs.photo && cs.photo.plein && !cs.photo.envoye) l.push({bib:b, cle:k, cs});
+      CHAMPS_PHOTO.forEach(ch=>{
+        if (cs[ch] && cs[ch].plein && !cs[ch].envoye) l.push({bib:b, cle:k, cs, champ:ch});
+      });
     });
   });
   return l;
@@ -769,6 +808,7 @@ function resume(jeu){
     Object.keys(b.cases||{}).forEach(k=>{
       const cs = b.cases[k];
       if (cs.photo) photos++;
+      if (cs.photo2) photos++;
       livres += (cs.livres||[]).length;
     });
   });
@@ -934,13 +974,14 @@ async function envoyerVersGitHub(){
   let fait = 0;
   try{
     for (const p of attente){
-      pg.maj(fait, total, "Photo " + p.cle + " de « " + p.bib.nom + " »");
-      const chemin = "images/" + p.bib.id + "/" + p.cle + ".jpg";
-      await ghEcrire(chemin, base64Seul(p.cs.photo.plein), "Photo " + p.bib.nom + " " + p.cle);
-      cachePhotos[p.bib.id + "/" + p.cle] = p.cs.photo.plein;
-      p.cs.photo.chemin = chemin;
-      p.cs.photo.envoye = true;
-      p.cs.photo.plein = null;          // libère la mémoire de l'appareil
+      const ph = p.cs[p.champ];
+      pg.maj(fait, total, "Photo " + p.cle + (p.champ === "photo2" ? " (derrière)" : "") + " de « " + p.bib.nom + " »");
+      const chemin = cheminPhoto(p.bib, p.cle, p.champ);
+      await ghEcrire(chemin, base64Seul(ph.plein), "Photo " + p.bib.nom + " " + p.cle + (p.champ === "photo2" ? " derrière" : ""));
+      cachePhotos[cleCache(p.bib, p.cle, p.champ)] = ph.plein;
+      ph.chemin = chemin;
+      ph.envoye = true;
+      ph.plein = null;                  // libère la mémoire de l'appareil
       fait++;
       sauver(false);
     }
@@ -993,7 +1034,7 @@ async function recupererDeGitHub(silencieux){
     data = j;
     attente.forEach(p=>{
       const b = data.bibliotheques.find(x=>x.id === p.bib.id);
-      if (b){ b.cases = b.cases||{}; b.cases[p.cle] = b.cases[p.cle]||{livres:[]}; b.cases[p.cle].photo = p.cs.photo; }
+      if (b){ b.cases = b.cases||{}; b.cases[p.cle] = b.cases[p.cle]||{livres:[]}; b.cases[p.cle][p.champ] = p.cs[p.champ]; }
     });
     localStorage.setItem(CLE_SYNC, j.maj || "");
     sale = attente.length > 0;
@@ -1280,24 +1321,82 @@ function jsonDepuisTexte(txt){
   return JSON.parse(t);
 }
 
+/* Analyse d'un compartiment : une photo, ou deux photos (rang de devant + rang de derrière)
+   envoyées ensemble pour que Gemini produise une liste unique sans doublon. */
 async function analyserPhoto(bib, cle){
-  const plein = await photoPleine(bib, cle);
-  if (!plein) throw new Error("Photo introuvable (ni sur cet appareil ni sur GitHub).");
-  const txt = await gemini([
-    { text: cfg.qAnalyse },
-    { inline_data: { mime_type:"image/jpeg", data: base64Seul(plein) } }
-  ]);
-  const j = jsonDepuisTexte(txt);
-  const livres = Array.isArray(j.livres) ? j.livres : [];
-  return livres.filter(x=>x && String(x.titre||"").trim()).map(x=>({
-    id: uid(),
-    titre: String(x.titre||"").trim(),
-    auteur: String(x.auteur||"").trim(),
-    annee: String(x.annee||"").trim(),
-    certitude: ["haute","moyenne","faible"].includes(x.certitude) ? x.certitude : "moyenne",
-    remarque: String(x.remarque||"").trim(),
-    resume:"", categorie:""
-  }));
+  const cs = bib.cases[cle];
+  const deux = !!(cs && cs.photo && cs.photo2);
+  const avant = cs && cs.photo ? await photoPleine(bib, cle, "photo") : null;
+  const arriere = cs && cs.photo2 ? await photoPleine(bib, cle, "photo2") : null;
+  if (!avant && !arriere) throw new Error("Photo introuvable (ni sur cet appareil ni sur GitHub).");
+  if (deux && (!avant || !arriere)) throw new Error("Une des deux photos du compartiment est introuvable (ni sur cet appareil ni sur GitHub).");
+
+  let parties;
+  if (deux){
+    parties = [
+      { text: cfg.qAnalyse2 || QUESTION_DEUX_RANGS_DEFAUT },
+      { text: "Photo 1 (compartiment tel quel, rang de devant) :" },
+      { inline_data: { mime_type:"image/jpeg", data: base64Seul(avant) } },
+      { text: "Photo 2 (après avoir retiré les livres de devant, rang de derrière) :" },
+      { inline_data: { mime_type:"image/jpeg", data: base64Seul(arriere) } }
+    ];
+  } else {
+    parties = [
+      { text: cfg.qAnalyse },
+      { inline_data: { mime_type:"image/jpeg", data: base64Seul(avant || arriere) } }
+    ];
+  }
+  const j = jsonDepuisTexte(await gemini(parties));
+  const bruts = Array.isArray(j.livres) ? j.livres : [];
+  const rangSeul = avant ? "devant" : "derriere";
+  const livres = bruts.filter(x=>x && String(x.titre||"").trim()).map(x=>{
+    const lv = {
+      id: uid(),
+      titre: String(x.titre||"").trim(),
+      auteur: String(x.auteur||"").trim(),
+      annee: String(x.annee||"").trim(),
+      certitude: ["haute","moyenne","faible"].includes(x.certitude) ? x.certitude : "moyenne",
+      remarque: String(x.remarque||"").trim(),
+      resume:"", categorie:""
+    };
+    if (deux){
+      const r = String(x.rang||"").toLowerCase();
+      lv.rang = /derri/.test(r) ? "derriere" : "devant";
+    }
+    return lv;
+  });
+  if (!deux) return livres;
+  const fus = fusionnerDoublons(livres);
+  fus.fusionnes = livres.length - fus.length;
+  return fus;
+}
+
+/* Filet de sécurité : même titre (et même auteur, ou auteur absent d'un côté) = même livre. */
+function normaliser(t){
+  return String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]+/g," ").replace(/^(le|la|les|l|un|une|des|the) /,"").trim();
+}
+function fusionnerDoublons(livres){
+  const rangC = { haute:3, moyenne:2, faible:1 };
+  const res = [];
+  livres.forEach(lv=>{
+    const t = normaliser(lv.titre), a = normaliser(lv.auteur);
+    const d = res.find(x=>normaliser(x.titre) === t && (!a || !normaliser(x.auteur) || normaliser(x.auteur) === a));
+    if (!d){ res.push(lv); return; }
+    if (!d.auteur && lv.auteur) d.auteur = lv.auteur;
+    if (!d.annee && lv.annee) d.annee = lv.annee;
+    if (!d.remarque && lv.remarque) d.remarque = lv.remarque;
+    if ((rangC[lv.certitude]||0) > (rangC[d.certitude]||0)) d.certitude = lv.certitude;
+    if (lv.rang === "derriere") d.rang = "derriere";   // vu sur la photo du fond : il est derrière
+  });
+  return res;
+}
+
+function texteBilanAnalyse(livres){
+  if (!livres.some(x=>x.rang)) return livres.length + " livre(s) identifié(s).";
+  const der = livres.filter(x=>x.rang==="derriere").length;
+  return `${livres.length} livre(s) identifié(s) : ${livres.length-der} devant, ${der} derrière` +
+         (livres.fusionnes ? ` (${livres.fusionnes} doublon(s) fusionné(s))` : "") + ".";
 }
 
 async function traiterParLots(livres, question, champs, titreFenetre, taille){
@@ -1353,7 +1452,7 @@ function tousLesLivres(bib){
   return out;
 }
 function compteLivres(bib){ return tousLesLivres(bib).length; }
-function comptePhotos(bib){ return Object.keys(bib.cases||{}).filter(k=>bib.cases[k].photo).length; }
+function comptePhotos(bib){ return Object.keys(bib.cases||{}).reduce((n,k)=>n + (bib.cases[k].photo?1:0) + (bib.cases[k].photo2?1:0), 0); }
 
 /* ====================================================================
    RENDU
@@ -1444,14 +1543,15 @@ function rendreBiblio(){
       const cs = b.cases[k];
       const nb = cs && cs.livres ? cs.livres.length : 0;
       const ph = cs && cs.photo;
+      const ph2 = cs && cs.photo2;
       const cls = ["case"];
       if (nb) cls.push("analysee");
-      if (ph && ph.plein && !ph.envoye) cls.push("aenvoyer");
+      if ((ph && ph.plein && !ph.envoye) || (ph2 && ph2.plein && !ph2.envoye)) cls.push("aenvoyer");
       cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
         ${!ph ? `<span class="sansphoto">📷</span>`
               : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
                                      : `<span class="sansphoto charge">⏳</span>`)}
-        <span class="num">${r}·${c}</span>${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
+        <span class="num">${r}·${c}</span>${ph2 ? `<span class="deux" title="Deux rangs : photo de devant et de derrière">2📷</span>` : ""}${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
       <div class="cases" style="grid-template-columns:repeat(${b.compartiments},minmax(52px,1fr))">${cases}</div></div>`;
@@ -1462,7 +1562,7 @@ function rendreBiblio(){
 
   $("#vueBiblio").innerHTML =
     `<div class="titreSection">La grille — touchez un compartiment pour sa photo et ses livres</div>
-     <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier.</div>
+     <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ».</div>
      ${grille}
      <div class="legende">
        <span><i style="border-color:var(--vert)"></i>livres relevés</span>
@@ -1641,12 +1741,14 @@ function ouvrirCompartiment(b, k){
   b.cases[k] = b.cases[k] || { livres:[] };
   const cs = b.cases[k];
   const [r,c] = k.split("-");
+  let face = "photo";            // "photo" = rang de devant, "photo2" = rang de derrière
 
   const f = modale({
     titre: `Rangée ${r} · compartiment ${c}`,
-    html: `<div id="zonePhoto"></div>
+    html: `<div class="onglets" id="cFaces"></div>
+           <div id="zonePhoto"></div>
            <div class="barre">
-             <button class="btn" id="cPhoto" style="flex:1">${cs.photo?"📷 Changer la photo":"📷 Ajouter une photo"}</button>
+             <button class="btn" id="cPhoto" style="flex:1">📷 Ajouter une photo</button>
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
            <input type="file" id="cFichier" accept="image/*" hidden>
@@ -1715,11 +1817,11 @@ function ouvrirCompartiment(b, k){
   };
 
   const tronquer = async ()=>{
-    if (!cs.photo || !lignesVisibles) return;
+    if (!cs[face] || !lignesVisibles) return;
     const btn = f.querySelector("#cTronquer");
     if (btn){ btn.disabled = true; btn.textContent = "Troncature…"; }
     try{
-      const plein = await photoPleine(b, k);
+      const plein = await photoPleine(b, k, face);
       if (!plein) throw new Error("Aucune photo disponible.");
       const img = await new Promise((res,rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = ()=>rej(new Error("Image illisible")); i.src = plein; });
       const sy = Math.round(img.height * coupe.haut / 100);
@@ -1731,8 +1833,8 @@ function ouvrirCompartiment(b, k){
       cx.drawImage(img, 0, sy, img.width, sh, 0, 0, img.width, sh);
       const nouveau = cv.toDataURL("image/jpeg", cfg.qualite);
       avantTroncature = { plein };
-      cs.photo = { plein: nouveau, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
-      delete cachePhotos[b.id + "/" + k];
+      cs[face] = { plein: nouveau, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
+      delete cachePhotos[cleCache(b,k,face)];
       lignesVisibles = false;                             // évite une seconde coupe par mégarde
       sauver(); majPhoto(); rendreBiblio();
       await envoyerSiPossible("Photo tronquée");
@@ -1744,8 +1846,8 @@ function ouvrirCompartiment(b, k){
 
   const annulerTroncature = async ()=>{
     if (!avantTroncature) return;
-    cs.photo = { plein: avantTroncature.plein, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
-    delete cachePhotos[b.id + "/" + k];
+    cs[face] = { plein: avantTroncature.plein, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
+    delete cachePhotos[cleCache(b,k,face)];
     avantTroncature = null;
     sauver(); majPhoto(); rendreBiblio();
     await envoyerSiPossible("Photo d'origine rétablie");
@@ -1754,29 +1856,47 @@ function ouvrirCompartiment(b, k){
   const envoyerSiPossible = async (quoi)=>{
     if (!ghPret()){ toast(quoi + " sur cet appareil. Ouvrez ☁️ pour l'envoyer sur GitHub."); return; }
     toast(quoi + " : envoi vers GitHub…");
-    try{ await televerserPhoto(b, k); toast(quoi + " et envoyée sur GitHub."); }
+    try{ await televerserPhoto(b, k, face); toast(quoi + " et envoyée sur GitHub."); }
     catch(e){ toast(quoi + " sur cet appareil ; envoi GitHub impossible (" + e.message + ").", 6000); }
     if (f.isConnected) majPhoto();
   };
 
+  const majFaces = ()=>{
+    const zf = f.querySelector("#cFaces");
+    zf.innerHTML =
+      `<button data-face="photo" class="${face==="photo"?"actif":""}">📚 Devant${cs.photo?"":" (vide)"}</button>
+       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Rang de derrière"}</button>`;
+    zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>{
+      if (face === bt.dataset.face) return;
+      face = bt.dataset.face; lignesVisibles = false; avantTroncature = null;
+      majPhoto();
+    });
+  };
+
   const majPhoto = ()=>{
+    majFaces();
     const z = f.querySelector("#zonePhoto");
-    if (!cs.photo){
-      z.innerHTML = `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`;
+    f.querySelector("#cPhoto").textContent = cs[face]
+      ? (face === "photo2" ? "📷 Changer la photo de derrière" : "📷 Changer la photo")
+      : (face === "photo2" ? "📷 Photo du rang de derrière" : "📷 Ajouter une photo");
+    if (!cs[face]){
+      z.innerHTML = face === "photo2"
+        ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à Gemini, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
+        : `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`;
       return;
     }
-    const src = photoImmediate(b, k);
-    const statut = `<div class="aide">${cs.photo.envoye ? "Photo sauvegardée sur GitHub ("+esc(cs.photo.chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
-       · ${esc(dateFr(cs.photo.maj))}
+    const src = photoImmediate(b, k, face);
+    const statut = `<div class="aide">${face==="photo2" ? "<b>Rang de derrière</b> · " : (cs.photo2 ? "<b>Rang de devant</b> · " : "")}${cs[face].envoye ? "Photo sauvegardée sur GitHub ("+esc(cs[face].chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
+       · ${esc(dateFr(cs[face].maj))}
        <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
 
     if (!src){
       // pas encore en mémoire : chargement de la vraie photo, jamais de version dégradée
       z.innerHTML = `<div class="chargePhoto">⏳ Chargement de la photo en pleine résolution…</div>` + statut;
       brancherRetirer(z);
-      const photoAvant = cs.photo;
-      photoPleine(b, k).then(d=>{
-        if (!f.isConnected || cs.photo !== photoAvant) return;
+      const photoAvant = cs[face];
+      photoPleine(b, k, face).then(d=>{
+        if (!f.isConnected || cs[face] !== photoAvant) return;
         if (d) majPhoto();
         else {
           const c = z.querySelector(".chargePhoto");
@@ -1809,9 +1929,9 @@ function ouvrirCompartiment(b, k){
 
     if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
     img.addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
-    img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, `Compartiment ${lib(k)} — taille réelle`); });
+    img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, `Compartiment ${lib(k)}${face==="photo2"?" (derrière)":""} — taille réelle`); });
 
-    z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, `Compartiment ${lib(k)} — taille réelle`);
+    z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, `Compartiment ${lib(k)}${face==="photo2"?" (derrière)":""} — taille réelle`);
     z.querySelector("#cLignes").onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
     const bt = z.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
     const ba = z.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
@@ -1822,10 +1942,12 @@ function ouvrirCompartiment(b, k){
     const btn = z.querySelector("#cRetirer");
     if (!btn) return;
     btn.onclick = async ()=>{
-      const ok = await confirmer("Retirer la photo de ce compartiment ? Les livres déjà relevés sont conservés.", "Retirer la photo", "Retirer");
+      const ok = await confirmer(face === "photo2"
+        ? "Retirer la photo du rang de derrière ? Les livres déjà relevés sont conservés ; la prochaine analyse ne portera plus que sur la photo de devant."
+        : "Retirer la photo de ce compartiment ? Les livres déjà relevés sont conservés.", "Retirer la photo", "Retirer");
       if (!ok) return;
-      cs.photo = null; avantTroncature = null; lignesVisibles = false;
-      delete cachePhotos[b.id + "/" + k];
+      cs[face] = null; avantTroncature = null; lignesVisibles = false;
+      delete cachePhotos[cleCache(b,k,face)];
       sauver(); majPhoto(); rendreBiblio();
     };
   };
@@ -1837,7 +1959,7 @@ function ouvrirCompartiment(b, k){
     z.innerHTML = l.map((lv,i)=>
       `<div class="livre ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}">
          <div class="t">${esc(lv.titre)}</div>
-         <div class="a">${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
+         <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
          ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
          ${lv.categorie?`<div class="cat">${esc(lv.categorie)}</div>`:""}
          <div class="actions">
@@ -1861,37 +1983,38 @@ function ouvrirCompartiment(b, k){
       toast("Compression de la photo…");
       const brut = await lireFichier(file);
       const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
-      cs.photo = { plein, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
-      delete cachePhotos[b.id+"/"+k];
+      cs[face] = { plein, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
+      delete cachePhotos[cleCache(b,k,face)];
       avantTroncature = null;
       sauver(); majPhoto(); rendreBiblio();
-      toast("Photo enregistrée sur cet appareil. Ouvrez ☁️ quand vous voudrez la sauvegarder.");
+      toast((face === "photo2" ? "Photo de derrière enregistrée" : "Photo enregistrée") + " sur cet appareil. Ouvrez ☁️ quand vous voudrez la sauvegarder.");
     }catch(e){ toast("Photo illisible : " + e.message, 5000); }
     ev.target.value = "";
   };
 
   f.querySelector("#cAnalyser").onclick = async ()=>{
-    if (!cs.photo){ toast("Ajoutez d'abord une photo."); return; }
+    if (!cs.photo && !cs.photo2){ toast("Ajoutez d'abord une photo."); return; }
+    if (!cs.photo && cs.photo2) toast("Seule la photo de derrière existe : elle sera analysée seule.");
     const btn = f.querySelector("#cAnalyser");
     btn.disabled = true; btn.textContent = "Analyse…";
     try{
       const livres = await analyserPhoto(b, k);
       btn.disabled = false; btn.textContent = "🔍 Analyser";
-      if (!livres.length){ toast("Gemini n'a identifié aucun livre sur cette photo."); return; }
+      if (!livres.length){ toast("Gemini n'a identifié aucun livre sur " + (cs.photo && cs.photo2 ? "ces deux photos." : "cette photo.")); return; }
       if ((cs.livres||[]).length){
         modale({ titre:"Résultat de l'analyse",
-          html:`<div>${livres.length} livre(s) identifié(s). Ce compartiment en contient déjà ${cs.livres.length}.</div>
+          html:`<div>${esc(texteBilanAnalyse(livres))} Ce compartiment en contient déjà ${cs.livres.length}.</div>
                 <div class="aide">${livres.map(x=>esc(x.titre)).join("<br>")}</div>`,
           boutons:[
             {texte:"Annuler"},
             {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); sauver(); majLivres(); rendreBiblio(); }},
-            {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; sauver(); majLivres(); rendreBiblio(); }}
+            {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; cs.analyse = { maj:new Date().toISOString(), modele:cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1 }; sauver(); majLivres(); rendreBiblio(); }}
           ]});
       } else {
         cs.livres = livres;
-        cs.analyse = { maj:new Date().toISOString(), modele:cfg.modele };
+        cs.analyse = { maj:new Date().toISOString(), modele:cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1 };
         sauver(); majLivres(); rendreBiblio();
-        toast(livres.length + " livre(s) identifié(s).");
+        toast(texteBilanAnalyse(livres), 4500);
       }
     }catch(e){
       btn.disabled = false; btn.textContent = "🔍 Analyser";
@@ -1917,7 +2040,10 @@ function formLivre(cs, index, apres){
          <div><label for="lC">Catégorie</label><input type="text" id="lC" value="${esc(lv.categorie)}"></div>
        </div>
        <label for="lR">Résumé en une ligne</label><textarea id="lR">${esc(lv.resume)}</textarea>
-       <label for="lM">Remarque</label><input type="text" id="lM" value="${esc(lv.remarque)}">`,
+       <label for="lM">Remarque</label><input type="text" id="lM" value="${esc(lv.remarque)}">
+       ${(cs.photo2 || lv.rang) ? `<label for="lG">Rang dans le compartiment</label>
+         <select id="lG"><option value="devant" ${lv.rang!=="derriere"?"selected":""}>Devant</option>
+         <option value="derriere" ${lv.rang==="derriere"?"selected":""}>Derrière</option></select>` : ""}`,
     boutons:[
       {texte:"Annuler"},
       {texte:"Enregistrer", classe:"principal", garder:true, action:(f)=>{
@@ -1929,6 +2055,7 @@ function formLivre(cs, index, apres){
         lv.categorie=f.querySelector("#lC").value.trim();
         lv.resume=f.querySelector("#lR").value.trim();
         lv.remarque=f.querySelector("#lM").value.trim();
+        const g = f.querySelector("#lG"); if (g) lv.rang = g.value;
         if (index < 0){ lv.id = uid(); lv.certitude="haute"; cs.livres = cs.livres||[]; cs.livres.push(lv); }
         sauver(); f.remove(); if (apres) apres(); rendreBiblio();
       }}
@@ -1940,7 +2067,7 @@ function formLivre(cs, index, apres){
    ANALYSE DE TOUTES LES PHOTOS
    ==================================================================== */
 async function analyserToutesPhotos(b){
-  const cibles = Object.keys(b.cases||{}).filter(k=>b.cases[k].photo);
+  const cibles = Object.keys(b.cases||{}).filter(k=>b.cases[k].photo || b.cases[k].photo2);
   if (!cibles.length){ toast("Aucune photo à analyser dans cette bibliothèque."); return; }
   const vierges = cibles.filter(k=>!(b.cases[k].livres||[]).length);
   const choix = await new Promise(res=>{
@@ -1961,11 +2088,11 @@ async function analyserListe(b, choix, titre){
   const pg = fenetreProgres(titre || "Analyse des photos");
   let fait=0, trouves=0; const erreurs=[]; let erreurBloquante=null;
   for (const k of choix){
-    pg.maj(fait, choix.length, "Compartiment " + k);
+    pg.maj(fait, choix.length, "Compartiment " + k + (b.cases[k].photo && b.cases[k].photo2 ? " — deux rangs, 2 photos" : ""));
     try{
       const livres = await analyserPhoto(b, k);
       b.cases[k].livres = livres;
-      b.cases[k].analyse = { maj:new Date().toISOString(), modele:cfg.modele };
+      b.cases[k].analyse = { maj:new Date().toISOString(), modele:cfg.modele, photos: b.cases[k].photo && b.cases[k].photo2 ? 2 : 1 };
       trouves += livres.length;
       sauver();
     }catch(e){
@@ -2216,17 +2343,18 @@ async function affecterPhoto(b, k, file){
   sauver(); rendreBiblio();
 }
 
-async function televerserPhoto(b, k){
+async function televerserPhoto(b, k, champ){
+  champ = champ || "photo";
   const cs = b.cases[k];
-  if (!cs || !cs.photo || !cs.photo.plein) return;
-  const plein = cs.photo.plein;
-  const chemin = "images/" + b.id + "/" + k + ".jpg";
-  await ghEcrire(chemin, base64Seul(plein), "Photo " + b.nom + " " + k);
-  if (cs.photo && cs.photo.plein === plein){      // pas remplacée entre-temps
-    cachePhotos[b.id + "/" + k] = plein;
-    cs.photo.chemin = chemin;
-    cs.photo.envoye = true;
-    cs.photo.plein = null;                        // libère la mémoire de l'appareil
+  if (!cs || !cs[champ] || !cs[champ].plein) return;
+  const plein = cs[champ].plein;
+  const chemin = cheminPhoto(b, k, champ);
+  await ghEcrire(chemin, base64Seul(plein), "Photo " + b.nom + " " + k + (champ === "photo2" ? " derrière" : ""));
+  if (cs[champ] && cs[champ].plein === plein){    // pas remplacée entre-temps
+    cachePhotos[cleCache(b, k, champ)] = plein;
+    cs[champ].chemin = chemin;
+    cs[champ].envoye = true;
+    cs[champ].plein = null;                       // libère la mémoire de l'appareil
     sauver(); rendreBiblio();
   }
 }
@@ -2426,7 +2554,8 @@ function ligneLivre(lv, o, empl){
   let s = lv.titre;
   if (o.auteur && lv.auteur) s += " — " + lv.auteur;
   if (o.annee && lv.annee) s += " (" + lv.annee + ")";
-  if (o.emplacement && empl) s += "  [R" + empl.r + "C" + empl.c + "]";
+  if (o.emplacement && empl) s += "  [R" + empl.r + "C" + empl.c + (lv.rang === "derriere" ? ", derrière" : "") + "]";
+  if (o.emplacement && !empl && lv.rang === "derriere") s += "  [derrière]";
   if (lv.certitude === "faible") s += "  (lecture incertaine)";
   if (o.resume && lv.resume) s += "\n     " + lv.resume;
   return s;
@@ -2444,7 +2573,7 @@ function texteListe(b, o){
     if (!cs) return;
     const l = cs.livres || [];
     L.push("— Rangée " + r + " · compartiment " + c + (horsGrille ? " (hors grille)" : "") +
-           " — " + l.length + " livre(s)" + (cs.photo ? "" : " — pas de photo"));
+           " — " + l.length + " livre(s)" + (cs.photo2 ? " — deux rangs" : "") + (cs.photo || cs.photo2 ? "" : " — pas de photo"));
     if (!l.length) L.push("   (vide)");
     l.forEach((lv,i)=>L.push("   " + (i+1) + ". " + ligneLivre(lv, o, null)));
     L.push("");
@@ -2644,6 +2773,9 @@ function ouvrirReglages(ongletInitial){
          <label for="qA">Question posée pour analyser une photo</label>
          <textarea id="qA" style="min-height:160px">${esc(cfg.qAnalyse)}</textarea>
          <button class="btn" id="qAr" style="margin-top:6px">Texte par défaut</button>
+         <label for="qA2">Question pour un compartiment à deux rangs (photo de devant + photo de derrière)</label>
+         <textarea id="qA2" style="min-height:180px">${esc(cfg.qAnalyse2 || QUESTION_DEUX_RANGS_DEFAUT)}</textarea>
+         <button class="btn" id="qA2r" style="margin-top:6px">Texte par défaut</button>
          <label for="qR">Question posée pour les résumés</label>
          <textarea id="qR" style="min-height:140px">${esc(cfg.qResume)}</textarea>
          <button class="btn" id="qRr" style="margin-top:6px">Texte par défaut</button>
@@ -2671,6 +2803,7 @@ function ouvrirReglages(ongletInitial){
         const tok = fd.querySelector("#rToken").value.trim();
         if (tok) localStorage.setItem(CLE_TOKEN, tok); else localStorage.removeItem(CLE_TOKEN);
         cfg.qAnalyse = fd.querySelector("#qA").value;
+        cfg.qAnalyse2 = fd.querySelector("#qA2").value;
         cfg.qResume = fd.querySelector("#qR").value;
         cfg.qCategorie = fd.querySelector("#qC").value;
         sauverCfg(); majBandeau();
@@ -2705,6 +2838,7 @@ function ouvrirReglages(ongletInitial){
   };
 
   f.querySelector("#qAr").onclick = ()=>{ f.querySelector("#qA").value = QUESTION_ANALYSE_DEFAUT; };
+  f.querySelector("#qA2r").onclick = ()=>{ f.querySelector("#qA2").value = QUESTION_DEUX_RANGS_DEFAUT; };
   f.querySelector("#qRr").onclick = ()=>{ f.querySelector("#qR").value = QUESTION_RESUME_DEFAUT; };
   f.querySelector("#qCr").onclick = ()=>{ f.querySelector("#qC").value = QUESTION_CATEGORIE_DEFAUT; };
 
