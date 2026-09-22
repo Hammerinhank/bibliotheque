@@ -178,7 +178,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
   box-shadow:0 6px 24px rgba(0,0,0,.5);
 }
 #toast.masque{display:none}
-/* ---------- Claude sans clé : bouton vert vif en attente de la réponse ---------- */
+/* ---------- IA sans clé (Claude ou Gemini) : bouton vert vif en attente de la réponse ---------- */
 .btn.vif,#attenteClaude button.vif{background:#19e35f;border-color:#7dffa8;color:#062611;font-weight:700;box-shadow:0 0 0 3px rgba(25,227,95,.28),0 6px 20px rgba(25,227,95,.35)}
 .btn.vif:active{background:#12b84b}
 #attenteClaude{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:70;
@@ -223,6 +223,17 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .ligneCoupe::before{content:"";position:absolute;left:0;right:0;top:-2px;height:4px;background:#ff1a1a;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 8px rgba(255,26,26,.9)}
 .ligneCoupe::after{content:"⇕";position:absolute;right:8px;top:-13px;width:26px;height:26px;border-radius:50%;background:#ff1a1a;color:#fff;font-size:15px;line-height:26px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.5)}
 .ligneCoupe.active::before{height:6px;top:-3px}
+.voile.g,.voile.d{right:auto;left:auto;width:0}
+.voile.g{left:0}
+.voile.d{right:0}
+.ligneV{position:absolute;top:0;bottom:0;width:0;pointer-events:none}
+.ligneV::before{content:"";position:absolute;top:0;bottom:0;width:4px;background:#1fd65a;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 8px rgba(31,214,90,.9)}
+.ligneV.g::before{left:0}
+.ligneV.d::before{right:0}
+.ligneV::after{content:"⇔";position:absolute;top:calc(50% - 13px);width:26px;height:26px;border-radius:50%;background:#1fd65a;color:#06240f;font-size:15px;line-height:26px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.5)}
+.ligneV.g::after{left:6px}
+.ligneV.d::after{right:6px}
+.ligneV.active::before{width:6px}
 .btn.coupeOn{background:var(--rouge-sombre);border-color:#ff1a1a}
 /* ---------- photos pleine résolution ---------- */
 .case .sansphoto.charge{font-size:16px;opacity:.7}
@@ -306,8 +317,18 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.12.0";
+const VERSION = "V1.14.0";
 const HISTORIQUE = [
+  { v:"V1.14.0", d:"22/09/2026", l:[
+    "Réglages ⚙️ → IA → Gemini : bouton « 🧪 Tester ce modèle » qui vérifie sur une petite image que le modèle choisi dans la liste répond et lit les photos.",
+    "Gemini sans clé API : « Accès à Gemini » → « Sans clé : copier-coller dans Gemini », même démarche que pour Claude (copier la photo, ouvrir Gemini avec la question, coller la photo, copier la réponse).",
+    "Bouton vert vif « 📥 Copier la réponse de Gemini » (ou de Claude) en bas de l'écran tant que la réponse est attendue ; il remplit le compartiment."
+  ]},
+  { v:"V1.13.0", d:"22/09/2026", l:[
+    "Lignes de coupe : en plus des deux lignes rouges horizontales, deux lignes vertes verticales, placées par défaut sur les bords gauche et droit de la photo.",
+    "« Tronquer » conserve le rectangle délimité par les quatre lignes ; laissées sur les bords, les lignes vertes ne changent rien.",
+    "Les lignes vertes repartent des bords à chaque affichage ; la position des rouges reste mémorisée."
+  ]},
   { v:"V1.12.0", d:"22/09/2026", l:[
     "Grille : liseré vert épais (2 px) quand toutes les photos du compartiment ont été analysées ; liseré vert fin (1 px) s'il reste une photo non analysée (photo ajoutée, changée ou tronquée après la dernière analyse).",
     "La légende distingue les deux cas ; « Ajouter à la suite » après une analyse compte désormais comme une analyse."
@@ -453,7 +474,7 @@ Réponds UNIQUEMENT par un objet JSON, sans texte autour :
 
 const CFG_DEFAUT = {
   modele:"gemini-2.5-flash",
-  iaPrincipale:"gemini", secours:true, modeleClaude:"claude-sonnet-5", claudeMode:"api",
+  iaPrincipale:"gemini", secours:true, modeleClaude:"claude-sonnet-5", claudeMode:"api", geminiMode:"api",
   ghUser:"Hammerinhank", ghRepo:"bibliotheque", ghBranche:"main",
   qAnalyse:QUESTION_ANALYSE_DEFAUT,
   qAnalyse2:QUESTION_DEUX_RANGS_DEFAUT,
@@ -1209,6 +1230,9 @@ function majSelectClaude(sel, choisi){
 const iaEnPanne = {};                     // pour la session : une IA en panne n'est pas réessayée à chaque photo
 const NOM_IA = { gemini:"Gemini", claude:"Claude" };
 
+/* Vrai si l'IA est réglée « sans clé » (copier-coller dans son site). */
+function modeManuel(nom){ return (nom === "claude" ? cfg.claudeMode : cfg.geminiMode) === "manuel"; }
+
 async function interrogerIA(parties, lire, opts){
   opts = opts || {};
   const ordre = cfg.iaPrincipale === "claude" ? ["claude","gemini"] : ["gemini","claude"];
@@ -1217,14 +1241,14 @@ async function interrogerIA(parties, lire, opts){
   for (let i=0; i<essais.length; i++){
     const nom = essais[i];
     if (iaEnPanne[nom] && i < essais.length-1){ echecs.push({ nom, e:iaEnPanne[nom], deja:true }); continue; }
-    if (nom === "claude" && cfg.claudeMode === "manuel"){
-      // Claude sans clé : seul l'utilisateur peut transmettre la demande (copier-coller)
+    if (modeManuel(nom)){
+      // IA sans clé : seul l'utilisateur peut transmettre la demande (copier-coller)
       if (opts.manuel){
-        const e = new Error("Demande à transmettre à Claude à la main.");
-        e.manuel = true; e.parties = parties; e.echecs = echecs.slice();
+        const e = new Error("Demande à transmettre à " + NOM_IA[nom] + " à la main.");
+        e.manuel = true; e.ia = nom; e.parties = parties; e.echecs = echecs.slice();
         throw e;
       }
-      echecs.push({ nom, e:new Error("Claude est réglé « sans clé » : ouvrez le compartiment et touchez 🔍 Analyser pour lui transmettre la photo à la main.") });
+      echecs.push({ nom, e:new Error(NOM_IA[nom] + " est réglé « sans clé » : ouvrez le compartiment et touchez 🔍 Analyser pour lui transmettre la photo à la main.") });
       continue;
     }
     try{
@@ -1246,7 +1270,7 @@ async function interrogerIA(parties, lire, opts){
 
 function texteSource(src){
   if (!src) return "";
-  if (src.manuel) return " Réponse de Claude (copier-coller).";
+  if (src.manuel) return " Réponse de " + NOM_IA[src.ia||"claude"] + " (copier-coller).";
   return src.echecs && src.echecs.length
     ? ` Réponse de ${NOM_IA[src.ia]} (${NOM_IA[src.echecs[0].nom]} a échoué).`
     : "";
@@ -1301,12 +1325,18 @@ function majAttenteClaude(){
     const b = biblio(a.bibId);
     const h = new Date(a.date);
     const heure = isNaN(h) ? "" : " (demande de " + h.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}) + ")";
-    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de Claude — " + (b ? b.nom + " · " : "") + lib(a.cle) + heure;
+    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de " + NOM_IA[a.ia||"claude"] + " — " + (b ? b.nom + " · " : "") + lib(a.cle) + heure;
   }
 }
 
 /* Ouvre la démarche pas à pas. parties = la demande préparée (texte + photo(s)), echecs = IA déjà tombées en panne. */
-function lancerClaudeManuel(b, k, parties, echecs){
+const SITE_IA = {
+  claude:{ url:q=>"https://claude.ai/new?q=" + encodeURIComponent(q) },
+  gemini:{ url:q=>"https://gemini.google.com/app?q=" + encodeURIComponent(q) }
+};
+function lancerClaudeManuel(b, k, parties, echecs, ia){
+  ia = ia || "claude";
+  const NOM = NOM_IA[ia], autre = ia === "claude" ? "gemini" : "claude";
   const images = parties.filter(p=>p.inline_data).map(p=>"data:" + p.inline_data.mime_type + ";base64," + p.inline_data.data);
   const deux = images.length > 1;
   const cs = b.cases[k];
@@ -1316,26 +1346,27 @@ function lancerClaudeManuel(b, k, parties, echecs){
 
   // L'attente n'est enregistrée qu'au moment où la demande part réellement vers Claude (étape 2).
   const marquerEnvoi = ()=>{
-    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
+    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ ia, bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
     majAttenteClaude();
   };
 
-  const tombees = (echecs||[]).filter(x=>x.nom === "gemini");
+  const tombees = (echecs||[]).filter(x=>x.nom === autre);
   const f = modale({
-    titre:"Demander à Claude (sans clé)",
+    titre:"Demander à " + NOM + " (sans clé)",
     html:
-      (tombees.length ? `<div class="encadre" style="margin-top:0">Gemini a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
+      (tombees.length ? `<div class="encadre" style="margin-top:0">${NOM_IA[autre]} a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
       `<div class="etape"><div class="n">1</div><div class="c">Copier ${deux ? "les deux photos (réunies côte à côte)" : "la photo"} dans le presse-papier.
          <button class="btn principal plein" id="mcCopier">📋 Copier ${deux ? "les 2 photos" : "la photo"}</button>
          ${deux ? `<div class="aide">Pour une lecture plus fine, vous pouvez aussi les envoyer une par une :</div>
            <div class="barre"><button class="btn" id="mcP1" style="flex:1">Photo 1</button><button class="btn" id="mcP2" style="flex:1">Photo 2</button></div>` : ""}
          <div class="aide" id="mcEtatCopie"></div></div></div>
-       <div class="etape"><div class="n">2</div><div class="c">Ouvrir Claude : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
-         <button class="btn plein" id="mcOuvrir">↗️ Ouvrir Claude avec la question</button>
-         <button class="btn plein" id="mcQuestion">Copier seulement le texte de la question</button></div></div>
-       <div class="etape"><div class="n">3</div><div class="c">Dans Claude, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
-         <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de Claude</button>
-         <div class="aide">Dès que vous avez ouvert Claude (étape 2), le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir Claude n'enregistre aucune attente.</div></div></div>`,
+       <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOM} : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
+         <button class="btn plein" id="mcOuvrir">↗️ Ouvrir ${NOM} avec la question</button>
+         <button class="btn plein" id="mcQuestion">Copier seulement le texte de la question</button>
+         ${ia === "gemini" ? `<div class="aide">Si la question n'apparaît pas déjà écrite dans Gemini, collez d'abord la photo, revenez ici toucher « Copier seulement le texte de la question », puis collez-la sous la photo.</div>` : ""}</div></div>
+       <div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
+         <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de ${NOM}</button>
+         <div class="aide">Dès que vous avez ouvert ${NOM} (étape 2), le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir ${NOM} n'enregistre aucune attente.</div></div></div>`,
     boutons:[{texte:"Fermer"}]
   });
   const etat = f.querySelector("#mcEtatCopie");
@@ -1355,7 +1386,7 @@ function lancerClaudeManuel(b, k, parties, echecs){
   }
   f.querySelector("#mcOuvrir").onclick = ()=>{
     marquerEnvoi();
-    window.open("https://claude.ai/new?q=" + encodeURIComponent(question), "_blank");
+    window.open(SITE_IA[ia].url(question), "_blank");
   };
   f.querySelector("#mcQuestion").onclick = async ()=>{
     marquerEnvoi();
@@ -1366,7 +1397,7 @@ function lancerClaudeManuel(b, k, parties, echecs){
 
 async function recevoirReponseClaude(fenetre){
   const a = lireAttenteClaude();
-  if (!a){ toast("Aucune demande à Claude en attente."); majAttenteClaude(); return; }
+  if (!a){ toast("Aucune demande à une IA en attente."); majAttenteClaude(); return; }
   let txt = "";
   try{ txt = await navigator.clipboard.readText(); }catch(e){ txt = ""; }
   if (!appliquerReponseClaude(a, txt, true)) collerReponseClaudeMain(a, txt);
@@ -1377,10 +1408,11 @@ async function recevoirReponseClaude(fenetre){
 function appliquerReponseClaude(a, txt, silencieux){
   const b = biblio(a.bibId);
   if (!b){ toast("La bibliothèque de cette demande n'existe plus."); localStorage.removeItem(CLE_ATTENTE_CLAUDE); majAttenteClaude(); return true; }
+  const ia = a.ia || "claude";
   let j;
   try{ j = jsonDepuisTexte(String(txt||"")); }
-  catch(e){ if (!silencieux) toast("Ce texte ne contient pas de JSON lisible : copiez bien toute la réponse de Claude.", 5000); return false; }
-  const livres = livresDepuisReponse(j, a.deux, a.avecAvant, { ia:"claude", modele:"claude.ai (copier-coller)", manuel:true, echecs:[] });
+  catch(e){ if (!silencieux) toast("Ce texte ne contient pas de JSON lisible : copiez bien toute la réponse de " + NOM_IA[ia] + ".", 5000); return false; }
+  const livres = livresDepuisReponse(j, a.deux, a.avecAvant, { ia, modele: ia === "gemini" ? "gemini.google.com (copier-coller)" : "claude.ai (copier-coller)", manuel:true, echecs:[] });
   localStorage.removeItem(CLE_ATTENTE_CLAUDE);
   majAttenteClaude();
   b.cases[a.cle] = b.cases[a.cle] || { livres:[] };
@@ -1389,8 +1421,9 @@ function appliquerReponseClaude(a, txt, silencieux){
 }
 
 function collerReponseClaudeMain(a, txtInitial){
-  modale({ titre:"Coller la réponse de Claude",
-    html:`<div class="aide" style="margin-top:0">${txtInitial ? "Le presse-papier ne contient pas une réponse lisible." : "Le presse-papier n'a pas pu être lu."} Collez ici la réponse de Claude (appui long → Coller) :</div>
+  const NOM = NOM_IA[a.ia||"claude"];
+  modale({ titre:"Coller la réponse de " + NOM,
+    html:`<div class="aide" style="margin-top:0">${txtInitial ? "Le presse-papier ne contient pas une réponse lisible." : "Le presse-papier n'a pas pu être lu."} Collez ici la réponse de ${NOM} (appui long → Coller) :</div>
           <textarea id="mcTexte" style="min-height:180px">${esc(txtInitial||"")}</textarea>`,
     boutons:[
       {texte:"Annuler"},
@@ -2114,11 +2147,11 @@ function ouvrirCompartiment(b, k){
   const lireCoupe = ()=>{
     try{
       const j = JSON.parse(localStorage.getItem(CLE_COUPE) || "null");
-      if (j && isFinite(j.haut) && isFinite(j.bas) && j.haut >= 0 && j.bas <= 100 && j.bas - j.haut >= 5) return { haut:+j.haut, bas:+j.bas };
+      if (j && isFinite(j.haut) && isFinite(j.bas) && j.haut >= 0 && j.bas <= 100 && j.bas - j.haut >= 5) return { haut:+j.haut, bas:+j.bas, gauche:0, droite:100 };
     }catch(e){}
-    return { haut:25, bas:75 };
+    return { haut:25, bas:75, gauche:0, droite:100 };   // lignes vertes : toujours sur les bords au départ
   };
-  const ecrireCoupe = ()=>{ try{ localStorage.setItem(CLE_COUPE, JSON.stringify(coupe)); }catch(e){} };
+  const ecrireCoupe = ()=>{ try{ localStorage.setItem(CLE_COUPE, JSON.stringify({ haut:coupe.haut, bas:coupe.bas })); }catch(e){} };
   let coupe = lireCoupe();
   let lignesVisibles = false;
   let avantTroncature = null;     // pour « Annuler la troncature » tant que la fenêtre est ouverte
@@ -2130,38 +2163,57 @@ function ouvrirCompartiment(b, k){
     cadre.querySelector(".ligneCoupe.b").style.top = coupe.bas + "%";
     cadre.querySelector(".voile.h").style.height = coupe.haut + "%";
     cadre.querySelector(".voile.b").style.height = (100 - coupe.bas) + "%";
+    cadre.querySelector(".ligneV.g").style.left = coupe.gauche + "%";
+    cadre.querySelector(".ligneV.d").style.left = coupe.droite + "%";
+    const vg = cadre.querySelector(".voile.g"), vd = cadre.querySelector(".voile.d");
+    [vg, vd].forEach(v=>{ v.style.top = coupe.haut + "%"; v.style.height = (coupe.bas - coupe.haut) + "%"; });
+    vg.style.width = coupe.gauche + "%";
+    vd.style.width = (100 - coupe.droite) + "%";
   };
 
   const brancherGlisser = (cadre)=>{
-    let ligne = null;
-    const pct = e=>{ const rc = cadre.getBoundingClientRect(); return (e.clientY - rc.top) * 100 / rc.height; };
+    let ligne = null;       // "haut" | "bas" | "gauche" | "droite"
+    const CLASSE = { haut:".ligneCoupe.h", bas:".ligneCoupe.b", gauche:".ligneV.g", droite:".ligneV.d" };
     cadre.addEventListener("pointerdown", e=>{
       if (!lignesVisibles) return;                        // lignes masquées : rien ne se passe
       const rc = cadre.getBoundingClientRect();
-      const y = e.clientY - rc.top;
-      const dH = Math.abs(y - rc.height * coupe.haut / 100);
-      const dB = Math.abs(y - rc.height * coupe.bas / 100);
+      const x = e.clientX - rc.left, y = e.clientY - rc.top;
+      const dist = {
+        haut:   Math.abs(y - rc.height * coupe.haut / 100),
+        bas:    Math.abs(y - rc.height * coupe.bas / 100),
+        gauche: Math.abs(x - rc.width * coupe.gauche / 100),
+        droite: Math.abs(x - rc.width * coupe.droite / 100)
+      };
       const PROCHE = 32;                                  // px : « à proximité » de la ligne
-      if (Math.min(dH, dB) > PROCHE) return;
-      ligne = dH <= dB ? "haut" : "bas";
-      if (dH === dB) ligne = (y < rc.height * coupe.haut / 100) ? "haut" : "bas";
-      cadre.querySelector(".ligneCoupe." + (ligne === "haut" ? "h" : "b")).classList.add("active");
+      let choix = null;
+      Object.keys(dist).forEach(n=>{ if (dist[n] <= PROCHE && (!choix || dist[n] < dist[choix])) choix = n; });
+      if (!choix) return;
+      // deux lignes superposées : on prend celle vers laquelle on tire
+      if (choix === "haut" && coupe.haut === coupe.bas - 5 && y > rc.height * coupe.bas / 100) choix = "bas";
+      if (choix === "gauche" && coupe.gauche === coupe.droite - 5 && x > rc.width * coupe.droite / 100) choix = "droite";
+      ligne = choix;
+      cadre.querySelector(CLASSE[ligne]).classList.add("active");
       try{ cadre.setPointerCapture(e.pointerId); }catch(er){}
       e.preventDefault();
     });
     cadre.addEventListener("pointermove", e=>{
       if (!ligne) return;
-      const p = Math.max(0, Math.min(100, pct(e)));
-      if (ligne === "haut") coupe.haut = Math.round(Math.min(p, coupe.bas - 5) * 10) / 10;
-      else                  coupe.bas  = Math.round(Math.max(p, coupe.haut + 5) * 10) / 10;
+      const rc = cadre.getBoundingClientRect();
+      const px = Math.max(0, Math.min(100, (e.clientX - rc.left) * 100 / rc.width));
+      const py = Math.max(0, Math.min(100, (e.clientY - rc.top) * 100 / rc.height));
+      const r1 = v => Math.round(v * 10) / 10;
+      if      (ligne === "haut")   coupe.haut   = r1(Math.min(py, coupe.bas - 5));
+      else if (ligne === "bas")    coupe.bas    = r1(Math.max(py, coupe.haut + 5));
+      else if (ligne === "gauche") coupe.gauche = r1(Math.min(px, coupe.droite - 5));
+      else                         coupe.droite = r1(Math.max(px, coupe.gauche + 5));
       placerLignes();
       e.preventDefault();
     });
     const lacher = ()=>{
       if (!ligne) return;
       ligne = null;
-      cadre.querySelectorAll(".ligneCoupe").forEach(x=>x.classList.remove("active"));
-      ecrireCoupe();                                      // dernière position mémorisée
+      cadre.querySelectorAll(".ligneCoupe,.ligneV").forEach(x=>x.classList.remove("active"));
+      ecrireCoupe();                                      // position des lignes rouges mémorisée
     };
     cadre.addEventListener("pointerup", lacher);
     cadre.addEventListener("pointercancel", lacher);
@@ -2177,11 +2229,13 @@ function ouvrirCompartiment(b, k){
       const img = await new Promise((res,rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = ()=>rej(new Error("Image illisible")); i.src = plein; });
       const sy = Math.round(img.height * coupe.haut / 100);
       const sh = Math.max(1, Math.round(img.height * (coupe.bas - coupe.haut) / 100));
+      const sx = Math.round(img.width * coupe.gauche / 100);
+      const sw = Math.max(1, Math.round(img.width * (coupe.droite - coupe.gauche) / 100));
       const cv = document.createElement("canvas");
-      cv.width = img.width; cv.height = sh;
+      cv.width = sw; cv.height = sh;
       const cx = cv.getContext("2d");
-      cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, sh);
-      cx.drawImage(img, 0, sy, img.width, sh, 0, 0, img.width, sh);
+      cx.fillStyle = "#fff"; cx.fillRect(0, 0, sw, sh);
+      cx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
       const nouveau = cv.toDataURL("image/jpeg", cfg.qualite);
       avantTroncature = { plein };
       cs[face] = { plein: nouveau, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
@@ -2260,8 +2314,8 @@ function ouvrirCompartiment(b, k){
     z.innerHTML =
       `<div class="cadrePhoto${lignesVisibles ? " coupe" : ""}" id="cCadre">
          <img class="photo-apercu" src="${src}" alt="Compartiment ${k}">
-         ${lignesVisibles ? `<div class="voile h"></div><div class="voile b"></div>
-           <div class="ligneCoupe h"></div><div class="ligneCoupe b"></div>` : ""}
+         ${lignesVisibles ? `<div class="voile h"></div><div class="voile b"></div><div class="voile g"></div><div class="voile d"></div>
+           <div class="ligneCoupe h"></div><div class="ligneCoupe b"></div><div class="ligneV g"></div><div class="ligneV d"></div>` : ""}
        </div>
        <div class="aide">Définition : <span class="dims" id="cDims">…</span>${lignesVisibles ? "" : " — touchez la photo pour la voir en taille réelle"}</div>
        <div class="barre" style="margin:8px 0 2px">
@@ -2270,7 +2324,7 @@ function ouvrirCompartiment(b, k){
          ${lignesVisibles ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
          ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
        </div>
-       ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne rouge pour la déplacer ; seule la bande entre les deux lignes sera conservée.</div>` : ""}
+       ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes (sur les bords au départ) pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
        ${statut}`;
 
     const cadre = z.querySelector("#cCadre");
@@ -2359,7 +2413,7 @@ function ouvrirCompartiment(b, k){
       appliquerLivresCompartiment(b, k, livres);
     }catch(e){
       btn.disabled = false; btn.textContent = "🔍 Analyser";
-      if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs); return; }
+      if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia); return; }
       montrerErreurAnalyse(e);
     }
   };
@@ -2526,7 +2580,7 @@ async function analyserListe(b, choix, titre){
           ${parIA.gemini && parIA.claude ? `<div class="aide">Réponses : ${parIA.gemini} par Gemini, ${parIA.claude} par Claude (en secours).</div>`
             : parIA.claude ? `<div class="aide">Toutes les réponses viennent de Claude.</div>` : ""}
           ${erreurs.length?`<div class="aide">${erreurs.length} échec(s) :<br>${esc(erreurs.join(" | "))}</div>`:""}
-          ${erreurs.length && cfg.claudeMode === "manuel" ? `<div class="aide">Claude sans clé ne peut pas traiter une série : ouvrez chaque compartiment en échec et touchez 🔍 Analyser.</div>` : ""}`,
+          ${erreurs.length && (modeManuel("claude") || modeManuel("gemini")) ? `<div class="aide">Une IA sans clé (copier-coller) ne peut pas traiter une série : ouvrez chaque compartiment en échec et touchez 🔍 Analyser.</div>` : ""}`,
     boutons:[{texte:"Fermer"}]});
 }
 
@@ -3170,13 +3224,25 @@ function ouvrirReglages(ongletInitial){
          <div class="aide">Échec = modèle retiré, quota épuisé, erreur ou réponse illisible. Il faut que l'autre IA ait sa clé ci-dessous.</div>
 
          <div class="titreSection">Gemini (Google)</div>
+         <label for="rModeGemini">Accès à Gemini</label>
+         <select id="rModeGemini">
+           <option value="api" ${cfg.geminiMode!=="manuel"?"selected":""}>Avec clé API (automatique)</option>
+           <option value="manuel" ${cfg.geminiMode==="manuel"?"selected":""}>Sans clé : copier-coller dans Gemini</option>
+         </select>
+         <div class="aide" id="rAideModeGemini"></div>
+         <div id="rBlocApiGemini">
          <label for="rCle">Clé API Gemini</label>
          <input type="password" id="rCle" value="${esc(cleGemini())}" placeholder="AIza…">
          <div class="aide">Stockée sur cet appareil uniquement, jamais envoyée sur GitHub, partagée avec vos autres applications de la même adresse.</div>
          <label for="rModele">Modèle</label>
          <select id="rModele"></select>
-         <button class="btn plein" id="rChercher" style="margin-top:8px">🔎 Trouver un modèle qui marche</button>
+         <div class="barre" style="margin-top:8px">
+           <button class="btn" id="rTestGemini" style="flex:1">🧪 Tester ce modèle</button>
+           <button class="btn" id="rChercher" style="flex:1">🔎 Trouver un modèle qui marche</button>
+         </div>
+         <div class="aide" id="rStatutGemini"></div>
          <div class="aide" id="rInfoModeles"></div>
+         </div>
 
          <div class="titreSection">Claude (Anthropic)</div>
          <label for="rModeClaude">Accès à Claude</label>
@@ -3247,6 +3313,7 @@ function ouvrirReglages(ongletInitial){
         cfg.iaPrincipale = fd.querySelector("#rIa").value;
         cfg.secours = fd.querySelector("#rSecours").checked;
         cfg.claudeMode = fd.querySelector("#rModeClaude").value;
+        cfg.geminiMode = fd.querySelector("#rModeGemini").value;
         delete iaEnPanne.gemini; delete iaEnPanne.claude;   // nouvelle configuration : on redonne sa chance à chacune
         cfg.tailleMax = Math.max(600, Math.min(3000, parseInt(fd.querySelector("#rTaille").value,10)||1600));
         cfg.ghUser = fd.querySelector("#rUser").value.trim() || CFG_DEFAUT.ghUser;
@@ -3285,6 +3352,17 @@ function ouvrirReglages(ongletInitial){
   modeClaude.onchange = majModeClaude;
   majModeClaude();
 
+  const modeGemini = f.querySelector("#rModeGemini");
+  const majModeGemini = ()=>{
+    const manuel = modeGemini.value === "manuel";
+    f.querySelector("#rBlocApiGemini").hidden = manuel;
+    f.querySelector("#rAideModeGemini").textContent = manuel
+      ? "Aucune clé API. Depuis un compartiment, l'app copie la photo et ouvre Gemini avec la question ; vous collez la photo, puis copiez sa réponse et touchez le bouton vert « Copier la réponse de Gemini ». Fonctionne photo par photo (pas pour une série, ni pour les résumés et le PDF)."
+      : "La requête part directement vers l'API de Google, sans rien faire à la main ; il faut une clé API.";
+  };
+  modeGemini.onchange = majModeGemini;
+  majModeGemini();
+
   const selClaude = f.querySelector("#rModeleClaude");
   majSelectClaude(selClaude, cfg.modeleClaude);
   const statutClaude = f.querySelector("#rStatutClaude");
@@ -3322,6 +3400,25 @@ function ouvrirReglages(ongletInitial){
       : "Le bouton ci-dessus vérifie quels modèles sont disponibles pour votre clé et savent lire une photo, puis en recommande un.";
   };
   infoModeles();
+  f.querySelector("#rTestGemini").onclick = async ()=>{
+    const st = f.querySelector("#rStatutGemini");
+    const cle = f.querySelector("#rCle").value.trim();
+    if (!cle){ st.textContent = "Saisissez d'abord la clé API Gemini."; return; }
+    localStorage.setItem(CLE_GEM, cle);
+    const m = selModele.value;
+    const btn = f.querySelector("#rTestGemini");
+    btn.disabled = true;
+    st.textContent = "Test de " + m + " : lecture d'un nombre sur une petite image…";
+    const r = await testerModele(m, cle, "gemini");
+    btn.disabled = false;
+    st.textContent = (ICONE_ETAT[r.etat]||"") + " " + m + " : " + r.detail + (r.etat === "ok" ? " — utilisable pour les analyses." : " — choisissez un autre modèle ou touchez « Trouver un modèle qui marche ».");
+    if (r.etat === "ok") delete iaEnPanne.gemini;
+    // le résultat met à jour la marque ✅ / ⚠️ de la liste
+    const t = lireTestsModeles() || { date:new Date().toISOString(), liste:[] };
+    t.liste = t.liste.filter(x=>x.id !== m).concat([Object.assign({ id:m, nom:m }, r)]);
+    try{ localStorage.setItem(CLE_MODELES, JSON.stringify(t)); }catch(e){}
+    majSelectModeles(selModele, m);
+  };
   f.querySelector("#rChercher").onclick = ()=>{
     const cle = f.querySelector("#rCle").value.trim();
     if (cle) localStorage.setItem(CLE_GEM, cle);
@@ -3393,7 +3490,8 @@ $("#bandeau").onclick = ()=>{ if (!ghLisible()) ouvrirReglages("github"); else o
 $("#btnReglages").onclick = ()=>ouvrirReglages();
 $("#btnAttenteClaude").onclick = ()=>recevoirReponseClaude(null);
 $("#btnAnnulClaude").onclick = async ()=>{
-  const ok = await confirmer("Abandonner l'attente de la réponse de Claude ? Vous pourrez relancer la demande depuis le compartiment.", "Abandonner", "Abandonner");
+  const a = lireAttenteClaude();
+  const ok = await confirmer("Abandonner l'attente de la réponse de " + NOM_IA[(a && a.ia)||"claude"] + " ? Vous pourrez relancer la demande depuis le compartiment.", "Abandonner", "Abandonner");
   if (ok){ localStorage.removeItem(CLE_ATTENTE_CLAUDE); majAttenteClaude(); }
 };
 setTimeout(majAttenteClaude, 0);
