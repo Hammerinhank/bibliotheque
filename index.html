@@ -215,8 +215,13 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.1.0";
+const VERSION = "V1.2.0";
 const HISTORIQUE = [
+  { v:"V1.2.0", d:"21/09/2026", l:[
+    "Dépôt pré-rempli : propriétaire Hammerinhank, dépôt bibliotheque, branche main — toujours modifiables dans les réglages.",
+    "Les données et les photos se lisent sur GitHub sans jeton ; le jeton ne sert plus qu'à y enregistrer.",
+    "Sans jeton, le bandeau indique « Lecture seule » et l'envoi vers GitHub explique qu'un jeton est nécessaire."
+  ]},
   { v:"V1.1.0", d:"20/09/2026", l:[
     "Tous les transferts sont regroupés dans un seul écran « Sauvegarde et transferts », ouvert par le nuage ☁️ de l'en-tête : plus aucun bouton d'envoi, de récupération, d'export ou d'import ailleurs dans l'application.",
     "Chaque transfert indique son sens en toutes lettres (cet appareil → GitHub, GitHub → cet appareil, fichier → cet appareil) et ce qu'il remplace.",
@@ -276,7 +281,7 @@ Réponds UNIQUEMENT par un objet JSON, sans texte autour :
 
 const CFG_DEFAUT = {
   modele:"gemini-2.5-flash",
-  ghUser:"", ghRepo:"bibliotheque", ghBranche:"main",
+  ghUser:"Hammerinhank", ghRepo:"bibliotheque", ghBranche:"main",
   qAnalyse:QUESTION_ANALYSE_DEFAUT,
   qResume:QUESTION_RESUME_DEFAUT,
   qCategorie:QUESTION_CATEGORIE_DEFAUT,
@@ -391,6 +396,8 @@ function charger(){
   catch(e){ console.warn("Données locales illisibles", e); }
   if (!data || !Array.isArray(data.bibliotheques)) data = { bibliotheques:[], maj:null };
   try{ const c = localStorage.getItem(CLE_CFG); if (c) cfg = Object.assign({}, CFG_DEFAUT, JSON.parse(c)); }catch(e){}
+  // Un champ laissé vide reprend la valeur par défaut : le dépôt reste toujours lisible.
+  ["ghUser","ghRepo","ghBranche"].forEach(k => { if (!cfg[k]) cfg[k] = CFG_DEFAUT[k]; });
   sale = localStorage.getItem(CLE_SALE) === "1";
 }
 
@@ -413,10 +420,15 @@ function sauverCfg(){ try{ localStorage.setItem(CLE_CFG, JSON.stringify(cfg)); }
    ==================================================================== */
 function etatGlobal(){
   const attente = photosEnAttente().length;
-  if (!ghPret()) return {
+  if (!ghLisible()) return {
     cls:"", pastille:"⚙️",
     titre:"Sauvegarde GitHub non configurée",
     detail:"Vos données ne vivent que sur cet appareil. Touchez pour configurer le dépôt."
+  };
+  if (!ghToken()) return {
+    cls:"", pastille:"👁",
+    titre:"Lecture seule (sans jeton)",
+    detail:"Les données sont lues sur GitHub. Pour y enregistrer vos modifications, ajoutez un jeton dans les réglages ⚙️."
   };
   if (etatSync === "echec") return {
     cls:"echec", pastille:"⚠️",
@@ -508,12 +520,18 @@ function photosEnAttente(){
    GITHUB
    ==================================================================== */
 function ghToken(){ return localStorage.getItem(CLE_TOKEN) || ""; }
-function ghPret(){ return !!(cfg.ghUser && cfg.ghRepo && ghToken()); }
+function ghLisible(){ return !!(cfg.ghUser && cfg.ghRepo); }          // lecture : dépôt public, pas de jeton requis
+function ghPret(){ return !!(ghLisible() && ghToken()); }                // écriture : jeton requis
+function ghEntetes(accept){
+  const h = { Accept: accept };
+  if (ghToken()) h.Authorization = "token " + ghToken();
+  return h;
+}
 function ghUrl(chemin){ return `https://api.github.com/repos/${cfg.ghUser}/${cfg.ghRepo}/contents/${chemin}`; }
 
 async function ghLireTexte(chemin){
   const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), {
-    headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github.raw" }
+    headers: ghEntetes("application/vnd.github.raw")
   });
   if (r.status === 404) return null;
   if (!r.ok) throw new Error("GitHub " + r.status + " : " + (await r.text()).slice(0,200));
@@ -523,7 +541,7 @@ async function ghLireTexte(chemin){
 async function ghLireImage(chemin){
   try{
     const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche), {
-      headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github.raw" }
+      headers: ghEntetes("application/vnd.github.raw")
     });
     if (!r.ok) return null;
     const b = await r.blob();
@@ -533,7 +551,7 @@ async function ghLireImage(chemin){
 
 async function ghSha(chemin){
   const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), {
-    headers:{ Authorization:"token " + ghToken(), Accept:"application/vnd.github+json" }
+    headers: ghEntetes("application/vnd.github+json")
   });
   if (r.status === 404) return null;
   if (!r.ok) throw new Error("GitHub " + r.status);
@@ -630,12 +648,12 @@ function ouvrirSync(){
     zone.innerHTML = tableauComparaison(resume(data), distant, "GitHub")
       + `<div class="aide">${message||""}</div>`;
   };
-  afficher(ghPret()
+  afficher(ghLisible()
     ? "Touchez « Vérifier l'état de GitHub » pour remplir la colonne de droite."
     : "Dépôt GitHub non configuré : ouvrez les réglages ⚙️, onglet GitHub.");
 
   const verifier = async (silencieux)=>{
-    if (!ghPret()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); return false; }
+    if (!ghLisible()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); return false; }
     afficher("Lecture du dépôt en cours…");
     try{
       const txt = await ghLireTexte(FICHIER_JSON);
@@ -658,7 +676,7 @@ function ouvrirSync(){
       return false;
     }
   };
-  if (ghPret()) verifier(true);
+  if (ghLisible()) verifier(true);
 
   f.querySelector("#sVerifier").onclick = ()=>verifier(false);
   f.querySelector("#sEnvoyer").onclick = async ()=>{ f.remove(); await envoyerVersGitHub(); };
@@ -699,7 +717,8 @@ function exporterFichier(){
 }
 
 async function envoyerVersGitHub(){
-  if (!ghPret()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); ouvrirReglages("github"); return; }
+  if (!ghLisible()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); ouvrirReglages("github"); return; }
+  if (!ghToken()){ toast("Un jeton GitHub est nécessaire pour enregistrer sur GitHub. Ajoutez-le dans les réglages ⚙️.", 5000); ouvrirReglages("github"); return; }
 
   // garde-fou : la version GitHub a-t-elle changé depuis notre dernière synchronisation ?
   try{
@@ -760,7 +779,7 @@ async function envoyerVersGitHub(){
 }
 
 async function recupererDeGitHub(silencieux){
-  if (!ghPret()){ if(!silencieux) toast("Configurez d'abord le dépôt dans les réglages ⚙️."); return false; }
+  if (!ghLisible()){ if(!silencieux) toast("Configurez d'abord le dépôt dans les réglages ⚙️."); return false; }
   try{
     const txt = await ghLireTexte(FICHIER_JSON);
     if (txt === null){
@@ -1531,8 +1550,8 @@ function ouvrirReglages(ongletInitial){
         if (cle) localStorage.setItem(CLE_GEM, cle); else localStorage.removeItem(CLE_GEM);
         cfg.modele = fd.querySelector("#rModele").value;
         cfg.tailleMax = Math.max(600, Math.min(3000, parseInt(fd.querySelector("#rTaille").value,10)||1600));
-        cfg.ghUser = fd.querySelector("#rUser").value.trim();
-        cfg.ghRepo = fd.querySelector("#rRepo").value.trim();
+        cfg.ghUser = fd.querySelector("#rUser").value.trim() || CFG_DEFAUT.ghUser;
+        cfg.ghRepo = fd.querySelector("#rRepo").value.trim() || CFG_DEFAUT.ghRepo;
         cfg.ghBranche = fd.querySelector("#rBranche").value.trim() || "main";
         const tok = fd.querySelector("#rToken").value.trim();
         if (tok) localStorage.setItem(CLE_TOKEN, tok); else localStorage.removeItem(CLE_TOKEN);
@@ -1561,8 +1580,8 @@ function ouvrirReglages(ongletInitial){
 
   f.querySelector("#rTest").onclick = async ()=>{
     const s = f.querySelector("#rStatut");
-    cfg.ghUser = f.querySelector("#rUser").value.trim();
-    cfg.ghRepo = f.querySelector("#rRepo").value.trim();
+    cfg.ghUser = f.querySelector("#rUser").value.trim() || CFG_DEFAUT.ghUser;
+    cfg.ghRepo = f.querySelector("#rRepo").value.trim() || CFG_DEFAUT.ghRepo;
     cfg.ghBranche = f.querySelector("#rBranche").value.trim() || "main";
     const tok = f.querySelector("#rToken").value.trim();
     if (tok) localStorage.setItem(CLE_TOKEN, tok);
@@ -1615,7 +1634,7 @@ function ouvrirHistorique(){
    ==================================================================== */
 $("#badgeVersion").onclick = ouvrirHistorique;
 $("#btnSync").onclick = ouvrirSync;
-$("#bandeau").onclick = ()=>{ if (!ghPret()) ouvrirReglages("github"); else ouvrirSync(); };
+$("#bandeau").onclick = ()=>{ if (!ghLisible()) ouvrirReglages("github"); else ouvrirSync(); };
 $("#btnReglages").onclick = ()=>ouvrirReglages();
 $("#btnRetour").onclick = ()=>{ biblioCourante = null; rendreListe(); window.scrollTo(0,0); };
 document.addEventListener("keydown", e=>{
@@ -1627,7 +1646,7 @@ document.addEventListener("keydown", e=>{
 
 charger();
 rendre();
-if (ghPret()) recupererDeGitHub(true);
+if (ghLisible()) recupererDeGitHub(true);
 if (!cleGemini()) setTimeout(()=>toast("Renseignez votre clé Gemini dans les réglages ⚙️ pour analyser les photos.", 5000), 900);
 </script>
 </body>
