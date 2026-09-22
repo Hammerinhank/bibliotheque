@@ -1222,20 +1222,818 @@
    "cases": {
     "1-1": {
      "livres": [],
-     "photo": {
-      "plein": null,
-      "chemin": "images/mucn2e6dat2vv/1-1.jpg",
-      "envoye": true,
-      "maj": "2026-09-22T13:51:35.512Z"
-     }
+     "photo": null
     },
     "1-2": {
      "livres": [],
+     "photo": null
+    },
+    "10-1": {
+     "livres": [],
      "photo": {
       "plein": null,
-      "chemin": "images/mucn2e6dat2vv/1-2.jpg",
+      "chemin": "images/mucn2e6dat2vv/10-1.jpg",
       "envoye": true,
-      "maj": "2026-09-22T12:30:24.451Z"
+      "maj": "2026-09-22T14:41:43.171Z"
+     }
+    },
+    "10-2": {
+     "livres": [],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/10-2.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T14:12:15.651Z"
+     }
+    },
+    "9-1": {
+     "livres": [
+      {
+       "id": "mucvphywpgg05",
+       "titre": "La petite maison dans la prairie",
+       "auteur": "Laura Ingalls Wilder",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "tome illisible, poche",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphyw31923",
+       "titre": "Une place à prendre",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Grasset, grand format",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphywn1bxt",
+       "titre": "Harry Potter et la Coupe de Feu",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Gallimard, tome 4",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphywihzph",
+       "titre": "Harry Potter et l'Ordre du Phénix",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Gallimard, tome 5",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphywn2e4y",
+       "titre": "Harry Potter et le Prisonnier d'Azkaban",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Gallimard, tome 3",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphyw2m9cz",
+       "titre": "Harry Potter à l'école des sorciers",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Gallimard, tome 1",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphyw0ibp3",
+       "titre": "Harry Potter et les Reliques de la Mort",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Gallimard, tome 7",
+       "resume": "",
+       "categorie": "",
+       "rang": "devant"
+      },
+      {
+       "id": "mucvphyw0q1ak",
+       "titre": "L'or sous la neige",
+       "auteur": "Nicolas Vanier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "XO éditions",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywd09k0",
+       "titre": "Jonathan Livingston le goéland",
+       "auteur": "Richard Bach",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywzh8og",
+       "titre": "Pinocchio",
+       "auteur": "Carlo Collodi",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Hachette",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywvsdz2",
+       "titre": "Pointe Blanche",
+       "auteur": "Anthony Horowitz",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "série Alex Rider",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywpp2od",
+       "titre": "Silver…",
+       "auteur": "",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "titre partiellement lisible",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywdrgbx",
+       "titre": "Stormbreaker",
+       "auteur": "Anthony Horowitz",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "série Alex Rider",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywd5sfo",
+       "titre": "La grande aventure des …",
+       "auteur": "Georges Blond",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "reliure sombre, fin du titre illisible",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywm9ne7",
+       "titre": "Un si long orage, tome I : Les enfants trahis",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "tranche bleue",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywx9xke",
+       "titre": "Un si long orage, tome II",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "sous-titre peu lisible",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphyw7jj0w",
+       "titre": "L'Île au trésor",
+       "auteur": "R. L. Stevenson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "tranche blanche",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphyw56rx3",
+       "titre": "Mer Baltique",
+       "auteur": "Édouard Peisson",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "auteur peu lisible",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywxkk0y",
+       "titre": "Age of Empires – The Conquerors Expansion",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "manuel de jeu Microsoft",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphyw7k904",
+       "titre": "Age of Empires II",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "manuel de jeu Microsoft",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphyw01sxy",
+       "titre": "Harry Potter et la Chambre des secrets",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "poche",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywykl2s",
+       "titre": "Harry Potter …",
+       "auteur": "J.K. Rowling",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "poche, tome illisible",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphyw484j2",
+       "titre": "Charlie et la chocolaterie",
+       "auteur": "Roald Dahl",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Livre de Poche Jeunesse",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphyw359qi",
+       "titre": "Matilda",
+       "auteur": "Roald Dahl",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "Livre de Poche Jeunesse",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywn11uh",
+       "titre": "Les pistolets de Sans-Atout",
+       "auteur": "Boileau-Narcejac",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "poche jeunesse",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywa875r",
+       "titre": "L'attaque des clones",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Star Wars, poche",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywusjgo",
+       "titre": "La guerre du feu",
+       "auteur": "J.-H. Rosny aîné",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "tranche verte, poche",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      },
+      {
+       "id": "mucvphywgx303",
+       "titre": "Langelot agent secret",
+       "auteur": "Vladimir Volkoff (Lieutenant X)",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "tranche noire",
+       "resume": "",
+       "categorie": "",
+       "rang": "derriere"
+      }
+     ],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/9-1.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T14:12:47.657Z"
+     },
+     "photo2": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/9-1-derriere.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T15:00:51.715Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T16:18:52.090Z",
+      "ia": "claude",
+      "modele": "claude.ai (copier-coller)",
+      "photos": 2,
+      "manuel": true
+     }
+    },
+    "8-1": {
+     "livres": [
+      {
+       "id": "mucs864hq98cf",
+       "titre": "La colère des volcans",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tranche noire et bleue",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hbxymy",
+       "titre": "La Grande Encyclopédie des Pays",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditions Atlas",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h1a3wg",
+       "titre": "MEGA Junior",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Édition Nathan",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hbfxkd",
+       "titre": "MEGA",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Édition Nathan",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hjhl2d",
+       "titre": "L'Égypte au temps des pharaons",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tranche rouge",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hzshhp",
+       "titre": "Le Livre des Uniformes Militaires",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tranche bleue",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h7n7gi",
+       "titre": "La Poste du Docteur Dolittle",
+       "auteur": "Hugh Lofting",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre ancien, tranche rose",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864ho4lzz",
+       "titre": "XIII - L'or de Maximilien",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 17",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hc1sti",
+       "titre": "XIII - Opération Montecristo",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 16",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864ha17ck",
+       "titre": "XIII Mystery - L'enquête",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 13",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864ht8tal",
+       "titre": "XIII - Lâchez les chiens!",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 14",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hjl1n8",
+       "titre": "XIII - Le jugement",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 12",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hfgh46",
+       "titre": "XIII - Trois montres d'argent",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 11",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h8fho6",
+       "titre": "XIII - Le Cascador",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 10",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h4dab6",
+       "titre": "XIII - Pour Maria",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 9",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hbrsyk",
+       "titre": "XIII - Treize contre un",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 8",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hox3ia",
+       "titre": "XIII - La nuit du 3 août",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 7",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h735vh",
+       "titre": "XIII - Le dossier Jason Fly",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 6",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hsqkx2",
+       "titre": "XIII - Rouge total",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 5",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h7tulb",
+       "titre": "XIII - Toutes les larmes de l'enfer",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 3",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hdyy7e",
+       "titre": "XIII - Là où va l'indien...",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 2",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hfw8i3",
+       "titre": "XIII - Le jour du soleil noir",
+       "auteur": "W. Vance - J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tome 1",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hzh7v9",
+       "titre": "Le Tapis Magique",
+       "auteur": "Tabary",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Iznogoud",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864ha3177",
+       "titre": "Astérix et la Traviata",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hq7pi7",
+       "titre": "Astérix chez les Belges",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h7vfzo",
+       "titre": "Le Bouclier arverne",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hoymu4",
+       "titre": "Astérix chez les Helvètes",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h9snok",
+       "titre": "Obélix et Compagnie",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hc002q",
+       "titre": "Astérix chez les Bretons",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hygt0a",
+       "titre": "Le Papyrus de César",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h8ypua",
+       "titre": "Astérix en Corse",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h0efz9",
+       "titre": "Le Cadeau de César",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hy9pxh",
+       "titre": "Le Devin",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h61vut",
+       "titre": "Astérix en Hispanie",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Titre partiellement coupé",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h3996p",
+       "titre": "Astérix le Gaulois",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hz3xej",
+       "titre": "Astérix chez les Pictes",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864h9kswq",
+       "titre": "La Zizanie",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864ho4bgj",
+       "titre": "Le Combat des chefs",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hfwpnw",
+       "titre": "Astérix et les Normands",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      },
+      {
+       "id": "mucs864hdlqtf",
+       "titre": "Les Lauriers de César",
+       "auteur": "Goscinny",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "BD Astérix",
+       "resume": "",
+       "categorie": ""
+      }
+     ],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/8-1.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T14:13:14.638Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T14:41:24.738Z",
+      "modele": "gemini-3.5-flash"
+     }
+    },
+    "7-1": {
+     "livres": [],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/7-1.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T16:33:18.870Z"
+     }
+    },
+    "6-1": {
+     "livres": [],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/6-1.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T16:34:23.519Z"
+     }
+    },
+    "6-2": {
+     "livres": [],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/6-2.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T16:35:06.425Z"
+     }
+    },
+    "6-3": {
+     "livres": [],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/6-3.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T16:35:35.229Z"
+     }
+    },
+    "7-2": {
+     "livres": [],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/7-2.jpg",
+      "envoye": true,
+      "maj": "2026-09-22T16:36:08.886Z"
      }
     }
    },
@@ -1243,5 +2041,5 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-22T14:09:55.574Z"
+ "maj": "2026-09-22T16:36:38.983Z"
 }
