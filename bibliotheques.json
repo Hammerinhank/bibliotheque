@@ -1992,12 +1992,306 @@
      }
     },
     "7-1": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud5lcolbiwp8",
+       "titre": "Le fond de la bouteille",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol14hfp",
+       "titre": "La femme au manteau bleu",
+       "auteur": "Deon Meyer",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcole39mb",
+       "titre": "De soie et de sang",
+       "auteur": "Qiu Xiaolong",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcoleqwux",
+       "titre": "La forme de l'eau",
+       "auteur": "Andrea Camilleri",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Pocket",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolkr43l",
+       "titre": "La voix du violon",
+       "auteur": "Andrea Camilleri",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Pocket",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcoljeiud",
+       "titre": "Le voleur de goûter",
+       "auteur": "Andrea Camilleri",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Pocket",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolkf2yu",
+       "titre": "La me souviens",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolls8ni",
+       "titre": "Le parfum",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcoluz9wm",
+       "titre": "Maigret et le corps sans tête",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol37d2h",
+       "titre": "Maigret et la jeune morte",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol79swl",
+       "titre": "Maigret et le clochard",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol89py5",
+       "titre": "La pendaison de Saint-Pholien",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcold3co8",
+       "titre": "La folle de Maigret",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolew232",
+       "titre": "L'enterrement de Monsieur Bouvet",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolm27x2",
+       "titre": "Maigret et les vieillards",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolohji6",
+       "titre": "Maigret et le marchand de vin",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolfxtnn",
+       "titre": "Au bout du rouleau",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolkb3fm",
+       "titre": "Nouvelles exotiques",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolj81eh",
+       "titre": "Les rescapés du Télémacque",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol1wys7",
+       "titre": "Maigret chez le ministre",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol03vhg",
+       "titre": "La vérité sur Bébé Donge",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolzy337",
+       "titre": "Maigret en Auvergne",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol2t6q1",
+       "titre": "Le crime de l'Orient Express",
+       "auteur": "Agatha Christie",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol1slax",
+       "titre": "Le train de 16h50",
+       "auteur": "Agatha Christie",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcolm3pfs",
+       "titre": "Mort sur le Nil",
+       "auteur": "Agatha Christie",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5lcol1oh95",
+       "titre": "Le Dahlia Noir",
+       "auteur": "James Ellroy",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Rivages Noir",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/7-1.jpg",
       "envoye": true,
       "maj": "2026-09-22T16:33:18.870Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T20:55:34.774Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     },
     "6-1": {
@@ -2028,12 +2322,339 @@
      }
     },
     "7-2": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud5m1hsww3pt",
+       "titre": "L'art de perdre",
+       "auteur": "Alice Zeniter",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hslncvb",
+       "titre": "Au long du Grand Canal",
+       "auteur": "Zhang Xinxin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsqcniw",
+       "titre": "Mrs Dalloway",
+       "auteur": "Virginia Woolf",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "folio classique",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs0n7lo",
+       "titre": "Black Boy",
+       "auteur": "Richard Wright",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs4n19b",
+       "titre": "Le Coeur des femmes",
+       "auteur": "Martin Winckler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsdpwna",
+       "titre": "La chatte sur un toit brûlant",
+       "auteur": "Tennessee Williams",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs2ruq4",
+       "titre": "Le témoin oculaire",
+       "auteur": "Ernst Weiss",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsadq60",
+       "titre": "Le plus clair de la lune",
+       "auteur": "Wang Anyi",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs32vjc",
+       "titre": "Smoothe (Egyptien) I",
+       "auteur": "Mika Waltari",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hszuw6e",
+       "titre": "Smoothe (Egyptien) II",
+       "auteur": "Mika Waltari",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hscobtv",
+       "titre": "Aurora, Kentucky",
+       "auteur": "Carolyn D. Wall",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs8n1qq",
+       "titre": "L'écume des jours",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsr5hxx",
+       "titre": "L'automne à Pékin",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hso6k0f",
+       "titre": "Trouble dans les Andains",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsgorns",
+       "titre": "Castillane en goguette",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsvjdwk",
+       "titre": "L'herbe rouge",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs9gl5k",
+       "titre": "La rose de la mer",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs8cb6b",
+       "titre": "La mort est un commencement",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "partiellement lisible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs507w1",
+       "titre": "Si long après-midi",
+       "auteur": "Inga Vesper",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs706mu",
+       "titre": "Monsieur Teste",
+       "auteur": "Paul Valéry",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs29d6m",
+       "titre": "Body Language",
+       "auteur": "A.K. Turner",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsw2i1j",
+       "titre": "Johnny s'en va-t-en guerre",
+       "auteur": "Dalton Trumbo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsh76co",
+       "titre": "Les Eygletière (1)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hspxo8n",
+       "titre": "Les Eygletière (2)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsccr1n",
+       "titre": "Les Eygletière (3)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsxk24o",
+       "titre": "Le sac et la cendre I",
+       "auteur": "Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hsd72w6",
+       "titre": "Le sac et la cendre II",
+       "auteur": "Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hspzb94",
+       "titre": "Étrangers sur la terre II",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5m1hs4z1rn",
+       "titre": "Étrangers sur la terre I",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/7-2.jpg",
       "envoye": true,
       "maj": "2026-09-22T16:36:08.886Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T20:56:06.928Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     }
    },
@@ -2041,5 +2662,5 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-22T16:36:38.983Z"
+ "maj": "2026-09-22T20:56:26.929Z"
 }
