@@ -1229,21 +1229,356 @@
      "photo": null
     },
     "10-1": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud5zpogtdazq",
+       "titre": "L'arche de Noé",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogqbcj7",
+       "titre": "LES SUPER GRANDS CAMIONS",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogr2weo",
+       "titre": "L'histoire et la vie d'une Chartreuse",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpog8ovsw",
+       "titre": "le théo",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "livre jaune",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogt82d0",
+       "titre": "Ma première Bible",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogayj87",
+       "titre": "Mon premier Théo",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogodqf0",
+       "titre": "L'Histoire de Jésus",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpoghp7fj",
+       "titre": "DIEU PARMI NOUS",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogt1471",
+       "titre": "le vieil homme et la mer",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogxpyth",
+       "titre": "mille ans de contes",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpog7lk74",
+       "titre": "JOSEPH PERSIN",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogai8mn",
+       "titre": "LE SAUVAGE DE KERGOZ",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpog9zivy",
+       "titre": "Saint-François d'Assise",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5zpogpbw9w",
+       "titre": "Alice au pays des merveilles",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/10-1.jpg",
       "envoye": true,
       "maj": "2026-09-22T14:41:43.171Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T21:06:44.800Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     },
     "10-2": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud6006et32yp",
+       "titre": "Le Rire",
+       "auteur": "JEAN-CLAUDE SIMOEN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006e0cv4l",
+       "titre": "FELLINI DESSINS",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Albin Michel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006ecp59z",
+       "titre": "Toulouse Lautrec",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Génies et Réalités",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006e9lqni",
+       "titre": "joies du chien",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006en0ucc",
+       "titre": "LES PLUS BEAUX CHEVAUX",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006e1nx4h",
+       "titre": "joies du cheval",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Réalités Hachette",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006ebvq84",
+       "titre": "Flawless Consulting",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006erjdgp",
+       "titre": "Prolog",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006ezqv00",
+       "titre": "Physique atomique et connaissance humaine Niels Bohr",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006e634e2",
+       "titre": "Le roman vrai des Années Folles",
+       "auteur": "gilbert guillemouot",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006e3j8ve",
+       "titre": "DAUMIER - LA CHASSE ET LA PECHE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006etkk8y",
+       "titre": "L'HERMIONE",
+       "auteur": "JEAN-YVES DELITTE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006eqlirj",
+       "titre": "HISTOIRE D'OEUFS",
+       "auteur": "ROBERT COTTAMASSA",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "GRASSET",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006e6axao",
+       "titre": "Méthodes et techniques de traitement du signal",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "partiellement visible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud6006egl8ub",
+       "titre": "Les peintres de l'invisible",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "partiellement visible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/10-2.jpg",
       "envoye": true,
       "maj": "2026-09-22T14:12:15.651Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T21:06:58.407Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     },
     "9-1": {
@@ -3357,5 +3692,5 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-22T21:06:33.958Z"
+ "maj": "2026-09-22T21:07:06.074Z"
 }
