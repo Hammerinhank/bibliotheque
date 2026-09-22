@@ -117,6 +117,7 @@ button{font-family:inherit}
 .case .num{position:absolute;top:2px;left:3px;font-size:10px;color:#fff;background:rgba(0,0,0,.55);border-radius:4px;padding:0 4px}
 .case .nb{position:absolute;bottom:0;left:0;right:0;font-size:11px;text-align:center;background:rgba(0,0,0,.6);color:#fff;padding:1px 0}
 .case.analysee{border-color:var(--vert)}
+.case.analysee.complete{border-width:2px}
 .case.aenvoyer{border-color:var(--orange)}
 .case .deux{position:absolute;top:2px;right:3px;font-size:10px;color:#fff;background:rgba(125,100,21,.85);border-radius:4px;padding:0 4px}
 .rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
@@ -124,7 +125,7 @@ button{font-family:inherit}
 .rang.derriere{background:var(--bronze-sombre);color:#fff8e1}
 #cFaces{margin-bottom:8px}
 .legende{font-size:12px;color:var(--texte2);display:flex;gap:14px;flex-wrap:wrap;margin-top:-4px}
-.legende i{display:inline-block;width:10px;height:10px;border-radius:3px;border:2px solid;margin-right:4px;vertical-align:-1px}
+.legende i{display:inline-block;width:10px;height:10px;border-radius:3px;border:1px solid;margin-right:4px;vertical-align:-1px}
 
 /* ---------- modales ---------- */
 .fond{
@@ -305,8 +306,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.11.0";
+const VERSION = "V1.12.0";
 const HISTORIQUE = [
+  { v:"V1.12.0", d:"22/09/2026", l:[
+    "Grille : liseré vert épais (2 px) quand toutes les photos du compartiment ont été analysées ; liseré vert fin (1 px) s'il reste une photo non analysée (photo ajoutée, changée ou tronquée après la dernière analyse).",
+    "La légende distingue les deux cas ; « Ajouter à la suite » après une analyse compte désormais comme une analyse."
+  ]},
   { v:"V1.11.0", d:"22/09/2026", l:[
     "Retirer une photo propose aussi de supprimer les livres identifiés à partir de cette photo (rang de devant pour la photo 1, rang de derrière pour la photo 2, tous si le compartiment n'a qu'une photo).",
     "Les livres concernés sont listés avec une case à cocher chacun ; deux choix : « Photo seule » ou « Photo + livres cochés ». Les livres ajoutés à la main ne sont pas cochés d'office.",
@@ -1407,7 +1412,7 @@ function appliquerLivresCompartiment(b, k, livres){
             <div class="aide">${livres.map(x=>esc(x.titre)).join("<br>")}</div>`,
       boutons:[
         {texte:"Annuler"},
-        {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); fin(); }},
+        {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); cs.analyse = infoAnalyse(livres, cs); fin(); }},
         {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; cs.analyse = infoAnalyse(livres, cs); fin(); }}
       ]});
   } else {
@@ -1720,6 +1725,17 @@ function fusionnerDoublons(livres){
 function texteBilanAnalyse(livres){
   return texteBilanSimple(livres) + texteSource(livres.source);
 }
+/* Vrai si chaque photo présente du compartiment a été analysée après sa dernière modification.
+   Données antérieures sans trace d'analyse : un compartiment à une seule photo et avec des livres est réputé analysé. */
+function photosToutesAnalysees(cs){
+  if (!cs || !(cs.livres||[]).length) return false;
+  const photos = [cs.photo, cs.photo2].filter(Boolean);
+  if (!photos.length) return false;
+  if (!cs.analyse) return photos.length === 1;
+  const t = Date.parse(cs.analyse.maj || "") || 0;
+  return photos.every(p => (Date.parse(p.maj || "") || 0) <= t);
+}
+
 function infoAnalyse(livres, cs){
   const src = livres.source || {};
   return { maj:new Date().toISOString(), ia: src.ia || "gemini", modele: src.modele || cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1, manuel: !!src.manuel };
@@ -1878,6 +1894,7 @@ function rendreBiblio(){
       const ph2 = cs && cs.photo2;
       const cls = ["case"];
       if (nb) cls.push("analysee");
+      if (nb && photosToutesAnalysees(cs)) cls.push("complete");
       if ((ph && ph.plein && !ph.envoye) || (ph2 && ph2.plein && !ph2.envoye)) cls.push("aenvoyer");
       cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
         ${!ph ? `<span class="sansphoto">📷</span>`
@@ -1897,7 +1914,8 @@ function rendreBiblio(){
      <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ».</div>
      ${grille}
      <div class="legende">
-       <span><i style="border-color:var(--vert)"></i>livres relevés</span>
+       <span><i style="border-color:var(--vert);border-width:2px"></i>toutes les photos analysées</span>
+       <span><i style="border-color:var(--vert)"></i>une photo non analysée</span>
        <span><i style="border-color:var(--orange)"></i>photo à envoyer</span>
        <span><i style="border-color:var(--trait)"></i>vide</span>
      </div>
