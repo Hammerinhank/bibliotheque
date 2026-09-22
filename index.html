@@ -193,6 +193,19 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .ligneCoupe::after{content:"⇕";position:absolute;right:8px;top:-13px;width:26px;height:26px;border-radius:50%;background:#ff1a1a;color:#fff;font-size:15px;line-height:26px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.5)}
 .ligneCoupe.active::before{height:6px;top:-3px}
 .btn.coupeOn{background:var(--rouge-sombre);border-color:#ff1a1a}
+/* ---------- photos pleine résolution ---------- */
+.case .sansphoto.charge{font-size:16px;opacity:.7}
+.chargePhoto{border:1px dashed var(--trait);border-radius:10px;padding:40px 16px;text-align:center;color:var(--texte2);font-size:14px}
+.vZone{overflow:auto;-webkit-overflow-scrolling:touch;max-height:68vh;border:1px solid var(--trait);border-radius:10px;background:#000}
+.vZone img{display:block;max-width:none}
+.vZone.fit img{width:100%;height:auto}
+.dims{font-variant-numeric:tabular-nums;color:var(--texte)}
+/* ---------- proportions d'un compartiment ---------- */
+.scene{position:relative;height:min(340px,62vw);background:var(--encre);border:1px solid var(--trait);border-radius:10px;touch-action:none;-webkit-user-select:none;user-select:none;overflow:hidden;margin:8px 0 4px}
+.rectComp{position:absolute;left:14px;top:14px;border:2px solid var(--bronze);background:rgba(201,162,39,.14);border-radius:4px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.rectComp span{font-size:15px;font-weight:600;color:var(--texte);background:rgba(0,0,0,.45);border-radius:6px;padding:2px 8px;font-variant-numeric:tabular-nums}
+.poignee{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#ff1a1a;border:3px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.5),0 2px 10px rgba(0,0,0,.6);pointer-events:none}
+.poignee.active{transform:scale(1.25)}
 .hist h3{font-size:15px;color:var(--bronze);margin-top:14px}
 .hist ul{margin:5px 0 0;padding-left:18px;font-size:14px}
 .hist li{margin-bottom:3px}
@@ -237,7 +250,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 <header>
   <button class="icone" id="btnRetour" hidden>←</button>
   <h1 id="titrePage" class="serif">Bibliothèques</h1>
-  <button id="badgeVersion">V1.4.0</button>
+  <button id="badgeVersion">V1.6.0</button>
   <button class="icone" id="btnSync" title="Sauvegarde et transferts">☁️</button>
   <button class="icone" id="btnReglages" title="Réglages">⚙️</button>
 </header>
@@ -261,8 +274,19 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.4.0";
+const VERSION = "V1.6.0";
 const HISTORIQUE = [
+  { v:"V1.6.0", d:"22/09/2026", l:[
+    "Bouton « 📐 Proportions » : un rectangle aux proportions actuelles d'un compartiment, dont on déplace le coin pour les redéfinir (ou saisie du rapport hauteur ÷ largeur, ou des mesures réelles en cm).",
+    "La grille de la bibliothèque est dessinée avec ces proportions.",
+    "Réglage propre à chaque bibliothèque, enregistré dans bibliotheques.json et envoyé aussitôt sur GitHub pour tous les appareils."
+  ]},
+  { v:"V1.5.0", d:"22/09/2026", l:[
+    "Suppression des miniatures (floues et encombrantes) : la grille, la fenêtre du compartiment et la série de photos affichent toujours la vraie photo, chargée depuis GitHub.",
+    "Visionneuse en taille réelle (Ajustée / 100 % / 200 %) avec définition en pixels et poids : c'est exactement l'image envoyée à Gemini.",
+    "Photos lues sur GitHub sans jeton via raw.githubusercontent.com (pas de limite de 60 requêtes/heure), 4 chargements en parallèle au plus.",
+    "Les miniatures déjà présentes sont retirées de l'appareil au lancement, à la récupération GitHub et à l'import."
+  ]},
   { v:"V1.4.0", d:"22/09/2026", l:[
     "Fenêtre d'un compartiment : bouton « ✂️ Lignes de coupe » qui affiche ou masque deux lignes rouges déplaçables au doigt sur la photo.",
     "La position des deux lignes est mémorisée sur l'appareil et reprise pour toute nouvelle photo.",
@@ -458,6 +482,9 @@ function charger(){
   // Un champ laissé vide reprend la valeur par défaut : le dépôt reste toujours lisible.
   ["ghUser","ghRepo","ghBranche"].forEach(k => { if (!cfg[k]) cfg[k] = CFG_DEFAUT[k]; });
   sale = localStorage.getItem(CLE_SALE) === "1";
+  if (retirerMiniatures(data)){
+    try{ localStorage.setItem(CLE_DATA, JSON.stringify(data)); }catch(e){}
+  }
 }
 
 function sauver(marquerSale){
@@ -551,17 +578,87 @@ function redimensionner(dataURL, maxDim, qualite){
 
 function base64Seul(dataURL){ return (dataURL||"").split(",")[1] || ""; }
 
-async function photoPleine(bib, cle){
+/* Photo en pleine résolution : en attente d'envoi (plein), en mémoire, ou lue sur GitHub.
+   Plus aucune miniature : on voit toujours la vraie photo, celle que reçoit Gemini. */
+const chargementsPhotos = {};
+const fileChargements = [];
+let chargementsActifs = 0;
+const MAX_CHARGEMENTS = 4;
+
+function pomperChargements(){
+  while (chargementsActifs < MAX_CHARGEMENTS && fileChargements.length){
+    const tache = fileChargements.shift();
+    chargementsActifs++;
+    tache().finally(()=>{ chargementsActifs--; pomperChargements(); });
+  }
+}
+
+function photoImmediate(bib, cle){
   const cs = bib.cases[cle];
   if (!cs || !cs.photo) return null;
-  if (cs.photo.plein) return cs.photo.plein;
-  const memo = cachePhotos[bib.id + "/" + cle];
-  if (memo) return memo;
-  if (cs.photo.envoye && cs.photo.chemin){
-    const d = await ghLireImage(cs.photo.chemin);
-    if (d){ cachePhotos[bib.id + "/" + cle] = d; return d; }
-  }
-  return cs.photo.mini || null;
+  return cs.photo.plein || cachePhotos[bib.id + "/" + cle] || null;
+}
+
+function photoPleine(bib, cle){
+  const cs = bib.cases[cle];
+  if (!cs || !cs.photo) return Promise.resolve(null);
+  const deja = photoImmediate(bib, cle);
+  if (deja) return Promise.resolve(deja);
+  if (!cs.photo.envoye || !cs.photo.chemin) return Promise.resolve(null);
+  const id = bib.id + "/" + cle;
+  if (chargementsPhotos[id]) return chargementsPhotos[id];
+  const photo = cs.photo;
+  const p = new Promise(res=>{
+    fileChargements.push(async ()=>{
+      const d = await ghLireImage(photo.chemin, photo.maj);
+      if (d && cs.photo === photo) cachePhotos[id] = d;
+      res(d);
+    });
+    pomperChargements();
+  });
+  chargementsPhotos[id] = p;
+  p.finally(()=>{ delete chargementsPhotos[id]; });
+  return p;
+}
+
+function retirerMiniatures(jeu){
+  let n = 0;
+  ((jeu && jeu.bibliotheques) || []).forEach(b=>{
+    Object.keys(b.cases||{}).forEach(k=>{
+      const ph = b.cases[k].photo;
+      if (ph && "mini" in ph){ delete ph.mini; n++; }
+    });
+  });
+  return n;
+}
+
+function infoImage(img, dataURL){
+  const ko = dataURL ? Math.round(base64Seul(dataURL).length * 3 / 4 / 1024) : 0;
+  return `${img.naturalWidth} × ${img.naturalHeight} px` + (ko ? ` · ${ko} Ko` : "");
+}
+
+function visionneuse(src, titre){
+  const f = modale({ titre: titre || "Photo en taille réelle",
+    html:`<div class="onglets" id="vZoom">
+            <button data-z="fit" class="actif">Ajustée</button>
+            <button data-z="1">100 %</button>
+            <button data-z="2">200 %</button>
+          </div>
+          <div class="vZone fit" id="vZone"><img id="vImg" src="${src}" alt=""></div>
+          <div class="aide">Définition : <span class="dims" id="vInfo">…</span></div>
+          <div class="aide">C'est exactement cette image que reçoit Gemini. À 100 %, chaque pixel de la photo occupe un point de l'écran : si les titres des tranches n'y sont pas lisibles, l'analyse sera peu fiable. Pour plus de définition, augmentez « Taille maximale des photos » dans les réglages ⚙️ (actuellement ${cfg.tailleMax} px), puis reprenez la photo.</div>`,
+    boutons:[{texte:"Fermer"}] });
+  const img = f.querySelector("#vImg"), zone = f.querySelector("#vZone");
+  const info = ()=>{ f.querySelector("#vInfo").textContent = infoImage(img, src); };
+  if (img.complete) info(); else img.onload = info;
+  f.querySelectorAll("[data-z]").forEach(bt=>{
+    bt.onclick = ()=>{
+      f.querySelectorAll("[data-z]").forEach(x=>x.classList.toggle("actif", x === bt));
+      const z = bt.dataset.z;
+      zone.classList.toggle("fit", z === "fit");
+      img.style.width = z === "fit" ? "" : (img.naturalWidth * Number(z)) + "px";
+    };
+  });
 }
 
 function photosEnAttente(){
@@ -597,15 +694,29 @@ async function ghLireTexte(chemin){
   return await r.text();
 }
 
-async function ghLireImage(chemin){
-  try{
-    const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche), {
+async function ghLireImage(chemin, version){
+  const enDataURL = async (r)=>{
+    const b = new Blob([await r.arrayBuffer()], { type:"image/jpeg" });
+    return await new Promise(res=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=()=>res(null); fr.readAsDataURL(b); });
+  };
+  const parApi = async ()=>{
+    const r = await fetch(ghUrl(chemin) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), {
       headers: ghEntetes("application/vnd.github.raw")
     });
-    if (!r.ok) return null;
-    const b = await r.blob();
-    return await new Promise(res=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=()=>res(null); fr.readAsDataURL(b); });
-  }catch(e){ return null; }
+    return r.ok ? await enDataURL(r) : null;
+  };
+  // sans jeton : raw.githubusercontent.com (pas de limite de 60 requêtes/heure de l'API)
+  const parRaw = async ()=>{
+    const u = `https://raw.githubusercontent.com/${cfg.ghUser}/${cfg.ghRepo}/${encodeURIComponent(cfg.ghBranche)}/${chemin}?v=${encodeURIComponent(version||"")}`;
+    const r = await fetch(u, { cache:"no-cache" });
+    return r.ok ? await enDataURL(r) : null;
+  };
+  try{
+    if (ghToken()) return (await parApi()) || (await parRaw());
+    return (await parRaw()) || (await parApi());
+  }catch(e){
+    try{ return ghToken() ? await parRaw() : await parApi(); }catch(e2){ return null; }
+  }
 }
 
 async function ghSha(chemin){
@@ -666,7 +777,7 @@ function ouvrirSync(){
     titre:"Sauvegarde et transferts",
     html:
       `<div class="aide" style="font-size:13px;margin-bottom:10px">
-         Cet appareil garde tout en mémoire (miniatures comprises). Le dépôt GitHub
+         Cet appareil garde les données et les photos pas encore envoyées. Le dépôt GitHub
          <b>${esc(cfg.ghUser||"?")}/${esc(cfg.ghRepo||"?")}</b> est la copie de référence : le fichier
          <b>${FICHIER_JSON}</b> et les photos en pleine résolution dans <b>images/</b>.
          Les deux ne se synchronisent jamais tout seuls : c'est vous qui décidez du sens, ici.
@@ -690,7 +801,7 @@ function ouvrirSync(){
        <div class="titreSection">Fichier — copie de secours et transfert entre appareils</div>
        <div class="action">
          <button class="btn" id="sExport">💾 Exporter un fichier de sauvegarde</button>
-         <div class="expl"><span class="sens">Cet appareil → fichier .json.</span> Contient bibliothèques, livres et miniatures, pas les photos en pleine résolution (elles restent sur GitHub). Ne modifie rien.</div>
+         <div class="expl"><span class="sens">Cet appareil → fichier .json.</span> Contient bibliothèques et livres, plus les photos pas encore envoyées ; les autres photos restent sur GitHub. Ne modifie rien.</div>
        </div>
        <div class="action">
          <button class="btn" id="sImport">📂 Importer un fichier de sauvegarde</button>
@@ -756,6 +867,7 @@ function ouvrirSync(){
         `<div class="aide">GitHub n'est pas modifié : il faudra envoyer ensuite si vous voulez y reporter cet import.</div>`,
         "Importer un fichier", "Remplacer");
       if (!ok) return;
+      retirerMiniatures(j);
       data = j; biblioCourante = null;
       sauver();                      // marque « à envoyer »
       f.remove(); rendre();
@@ -860,6 +972,7 @@ async function recupererDeGitHub(silencieux){
     }
 
     const attente = photosEnAttente();   // ne jamais perdre une photo pas encore envoyée
+    retirerMiniatures(j);
     data = j;
     attente.forEach(p=>{
       const b = data.bibliotheques.find(x=>x.id === p.bib.id);
@@ -914,9 +1027,7 @@ function jsonDepuisTexte(txt){
 
 async function analyserPhoto(bib, cle){
   const plein = await photoPleine(bib, cle);
-  if (!plein) throw new Error("Aucune photo disponible pour ce compartiment.");
-  if (bib.cases[cle].photo && plein === bib.cases[cle].photo.mini)
-    toast("Photo pleine résolution introuvable sur GitHub : analyse faite sur la miniature, lecture moins fiable.", 5000);
+  if (!plein) throw new Error("Photo introuvable (ni sur cet appareil ni sur GitHub).");
   const txt = await gemini([
     { text: cfg.qAnalyse },
     { inline_data: { mime_type:"image/jpeg", data: base64Seul(plein) } }
@@ -1081,8 +1192,10 @@ function rendreBiblio(){
       const cls = ["case"];
       if (nb) cls.push("analysee");
       if (ph && ph.plein && !ph.envoye) cls.push("aenvoyer");
-      cases += `<div class="${cls.join(" ")}" data-case="${k}">
-        ${ph && ph.mini ? `<img src="${ph.mini}" alt="Compartiment ${k}">` : `<span class="sansphoto">📷</span>`}
+      cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
+        ${!ph ? `<span class="sansphoto">📷</span>`
+              : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
+                                     : `<span class="sansphoto charge">⏳</span>`)}
         <span class="num">${r}·${c}</span>${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
@@ -1104,6 +1217,7 @@ function rendreBiblio(){
      ${hors.length ? `<div class="aide">⚠️ ${hors.length} compartiment(s) hors grille (${esc(hors.join(", "))}) : leur contenu est conservé et reste compté dans les listes et le PDF.</div>` : ""}
      <div class="barre">
        <button class="btn" id="bModifier" style="flex:1">Modifier la grille</button>
+       <button class="btn" id="bProportions" style="flex:1">📐 Proportions</button>
        <button class="btn rouge" id="bSupprimer">Supprimer</button>
      </div>
 
@@ -1129,6 +1243,7 @@ function rendreBiblio(){
      <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
 
   $("#bModifier").onclick = ()=>formBiblio(b.id);
+  $("#bProportions").onclick = ()=>formProportions(b);
   $("#bSupprimer").onclick = async ()=>{
     const ok = await confirmer(`Supprimer « ${esc(b.nom)} » et tout son contenu sur cet appareil ?<br><br>Les photos déjà envoyées restent dans le dépôt GitHub jusqu'au prochain envoi.`, "Supprimer la bibliothèque", "Supprimer");
     if (!ok) return;
@@ -1141,6 +1256,127 @@ function rendreBiblio(){
   $("#bPdf").onclick = ()=>lancerPdf(b);
   document.querySelectorAll("#vueBiblio [data-case]").forEach(el=>brancherCase(el, b));
   majMarquesGrille();
+  chargerPhotosGrille(b);
+}
+
+function chargerPhotosGrille(b){
+  document.querySelectorAll("#vueBiblio [data-case] .sansphoto.charge").forEach(sp=>{
+    const el = sp.closest("[data-case]"), k = el.dataset.case;
+    photoPleine(b, k).then(d=>{
+      if (biblioCourante !== b.id) return;
+      const cible = document.querySelector(`#vueBiblio [data-case="${k}"] .sansphoto.charge`);
+      if (!cible) return;
+      if (!d){ cible.textContent = "⚠️"; cible.classList.remove("charge"); cible.title = "Photo introuvable sur GitHub"; return; }
+      const im = new Image();
+      im.src = d; im.alt = "Compartiment " + k; im.decoding = "async";
+      cible.replaceWith(im);
+    });
+  });
+}
+
+/* ====================================================================
+   PROPORTIONS D'UN COMPARTIMENT (hauteur / largeur), propre à chaque bibliothèque
+   ==================================================================== */
+const RATIO_DEFAUT = 4/3;          // ancien affichage : compartiment plus haut que large (3:4)
+const RATIO_MIN = 0.15, RATIO_MAX = 6;
+function ratioBiblio(b){
+  const r = Number(b && b.ratio);
+  return (isFinite(r) && r >= RATIO_MIN && r <= RATIO_MAX) ? r : RATIO_DEFAUT;
+}
+const fmtRatio = r => r.toLocaleString("fr-FR", { minimumFractionDigits:2, maximumFractionDigits:2 });
+
+function formProportions(b){
+  let ratio = ratioBiblio(b);
+  const f = modale({
+    titre:"Proportions d'un compartiment — " + b.nom,
+    html:
+      `<div class="aide" style="margin-top:0">Déplacez le coin rouge en bas à droite jusqu'à ce que le rectangle ait la forme d'un compartiment réel. La grille de cette bibliothèque sera dessinée avec ces proportions, sur tous vos appareils.</div>
+       <div id="pScene" class="scene"><div id="pRect" class="rectComp"><span id="pCote"></span></div><div id="pPoignee" class="poignee"></div></div>
+       <div class="ligne2" style="align-items:flex-end">
+         <div><label for="pRatio">Hauteur ÷ largeur</label><input type="number" id="pRatio" step="0.01" min="${RATIO_MIN}" max="${RATIO_MAX}"></div>
+         <div><label for="pH">ou mesures réelles (cm)</label>
+           <div class="ligne2"><input type="number" id="pH" placeholder="haut." min="1"><input type="number" id="pL" placeholder="larg." min="1"></div></div>
+       </div>
+       <div class="aide" id="pForme"></div>`,
+    boutons:[
+      {texte:"Annuler"},
+      {texte:"Par défaut", garder:true, action:()=>{ ratio = RATIO_DEFAUT; dessiner(true); }},
+      {texte:"Enregistrer", classe:"principal", action:()=>enregistrer()}
+    ]
+  });
+
+  const scene = f.querySelector("#pScene"), rect = f.querySelector("#pRect"), poignee = f.querySelector("#pPoignee");
+  const MARGE = 14;
+  let w = 0, h = 0;
+
+  const dims = ()=>{ const rc = scene.getBoundingClientRect(); return { W: rc.width - 2*MARGE, H: rc.height - 2*MARGE, rc }; };
+
+  // place le rectangle pour un ratio donné, le plus grand possible dans la scène
+  const ajuster = ()=>{
+    const { W, H } = dims();
+    w = Math.min(W * 0.85, (H * 0.85) / ratio);
+    h = w * ratio;
+  };
+
+  const dessiner = (recalculer, depuisSaisie)=>{
+    if (recalculer) ajuster();
+    rect.style.width = w + "px"; rect.style.height = h + "px";
+    poignee.style.left = (MARGE + w) + "px"; poignee.style.top = (MARGE + h) + "px";
+    f.querySelector("#pCote").textContent = fmtRatio(ratio);
+    if (!depuisSaisie) f.querySelector("#pRatio").value = ratio.toFixed(2);
+    f.querySelector("#pForme").textContent =
+      ratio > 1.05 ? `Compartiment plus haut que large (hauteur = ${fmtRatio(ratio)} × la largeur).`
+      : ratio < 0.95 ? `Compartiment plus large que haut (largeur = ${fmtRatio(1/ratio)} × la hauteur).`
+      : "Compartiment à peu près carré.";
+  };
+
+  let glisse = false;
+  const commencer = e=>{
+    const { rc } = dims();
+    const x = e.clientX - rc.left, y = e.clientY - rc.top;
+    if (Math.hypot(x - (MARGE + w), y - (MARGE + h)) > 44) return;   // seulement près du coin
+    glisse = true;
+    poignee.classList.add("active");
+    try{ scene.setPointerCapture(e.pointerId); }catch(er){}
+    e.preventDefault();
+  };
+  scene.addEventListener("pointerdown", commencer);
+  scene.addEventListener("pointermove", e=>{
+    if (!glisse) return;
+    const { W, H, rc } = dims();
+    w = Math.max(24, Math.min(W, e.clientX - rc.left - MARGE));
+    h = Math.max(24, Math.min(H, e.clientY - rc.top - MARGE));
+    ratio = Math.max(RATIO_MIN, Math.min(RATIO_MAX, h / w));
+    dessiner(false);
+    e.preventDefault();
+  });
+  const lacher = ()=>{ if (!glisse) return; glisse = false; poignee.classList.remove("active"); };
+  scene.addEventListener("pointerup", lacher);
+  scene.addEventListener("pointercancel", lacher);
+
+  f.querySelector("#pRatio").oninput = ev=>{
+    const v = parseFloat(String(ev.target.value).replace(",", "."));
+    if (isFinite(v) && v >= RATIO_MIN && v <= RATIO_MAX){ ratio = v; dessiner(true, true); }
+  };
+  const depuisMesures = ()=>{
+    const hh = parseFloat(f.querySelector("#pH").value), ll = parseFloat(f.querySelector("#pL").value);
+    if (hh > 0 && ll > 0){ ratio = Math.max(RATIO_MIN, Math.min(RATIO_MAX, hh / ll)); dessiner(true); }
+  };
+  f.querySelector("#pH").oninput = depuisMesures;
+  f.querySelector("#pL").oninput = depuisMesures;
+
+  const enregistrer = async ()=>{
+    b.ratio = Math.round(ratio * 1000) / 1000;
+    sauver(); rendreBiblio();
+    if (ghPret()){
+      toast("Proportions enregistrées : envoi vers GitHub pour tous vos appareils…");
+      await envoyerVersGitHub();
+    } else {
+      toast("Proportions enregistrées sur cet appareil. Ajoutez un jeton GitHub puis envoyez via ☁️ pour les partager avec vos autres appareils.", 6000);
+    }
+  };
+
+  requestAnimationFrame(()=>dessiner(true));
 }
 
 /* ====================================================================
@@ -1230,7 +1466,6 @@ function ouvrirCompartiment(b, k){
     try{
       const plein = await photoPleine(b, k);
       if (!plein) throw new Error("Aucune photo disponible.");
-      if (plein === cs.photo.mini) throw new Error("Photo pleine résolution introuvable sur GitHub : troncature annulée pour ne pas dégrader la photo.");
       const img = await new Promise((res,rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = ()=>rej(new Error("Image illisible")); i.src = plein; });
       const sy = Math.round(img.height * coupe.haut / 100);
       const sh = Math.max(1, Math.round(img.height * (coupe.bas - coupe.haut) / 100));
@@ -1240,10 +1475,8 @@ function ouvrirCompartiment(b, k){
       cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, sh);
       cx.drawImage(img, 0, sy, img.width, sh, 0, 0, img.width, sh);
       const nouveau = cv.toDataURL("image/jpeg", cfg.qualite);
-      const mini = await redimensionner(nouveau, cfg.tailleMini, 0.55);
-
-      avantTroncature = { plein, mini: cs.photo.mini };
-      cs.photo = { plein: nouveau, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+      avantTroncature = { plein };
+      cs.photo = { plein: nouveau, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
       delete cachePhotos[b.id + "/" + k];
       lignesVisibles = false;                             // évite une seconde coupe par mégarde
       sauver(); majPhoto(); rendreBiblio();
@@ -1256,7 +1489,7 @@ function ouvrirCompartiment(b, k){
 
   const annulerTroncature = async ()=>{
     if (!avantTroncature) return;
-    cs.photo = { plein: avantTroncature.plein, mini: avantTroncature.mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+    cs.photo = { plein: avantTroncature.plein, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
     delete cachePhotos[b.id + "/" + k];
     avantTroncature = null;
     sauver(); majPhoto(); rendreBiblio();
@@ -1271,52 +1504,75 @@ function ouvrirCompartiment(b, k){
     if (f.isConnected) majPhoto();
   };
 
-  const majPhoto = async ()=>{
+  const majPhoto = ()=>{
     const z = f.querySelector("#zonePhoto");
     if (!cs.photo){
       z.innerHTML = `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`;
       return;
     }
+    const src = photoImmediate(b, k);
+    const statut = `<div class="aide">${cs.photo.envoye ? "Photo sauvegardée sur GitHub ("+esc(cs.photo.chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
+       · ${esc(dateFr(cs.photo.maj))}
+       <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
+
+    if (!src){
+      // pas encore en mémoire : chargement de la vraie photo, jamais de version dégradée
+      z.innerHTML = `<div class="chargePhoto">⏳ Chargement de la photo en pleine résolution…</div>` + statut;
+      brancherRetirer(z);
+      const photoAvant = cs.photo;
+      photoPleine(b, k).then(d=>{
+        if (!f.isConnected || cs.photo !== photoAvant) return;
+        if (d) majPhoto();
+        else {
+          const c = z.querySelector(".chargePhoto");
+          if (c) c.innerHTML = "⚠️ Photo introuvable sur GitHub. Vérifiez le dépôt ou reprenez la photo.";
+        }
+      });
+      return;
+    }
+
     z.innerHTML =
       `<div class="cadrePhoto${lignesVisibles ? " coupe" : ""}" id="cCadre">
-         <img class="photo-apercu" src="${cs.photo.plein || cachePhotos[b.id+"/"+k] || cs.photo.mini}" alt="Compartiment ${k}">
+         <img class="photo-apercu" src="${src}" alt="Compartiment ${k}">
          ${lignesVisibles ? `<div class="voile h"></div><div class="voile b"></div>
            <div class="ligneCoupe h"></div><div class="ligneCoupe b"></div>` : ""}
        </div>
+       <div class="aide">Définition : <span class="dims" id="cDims">…</span>${lignesVisibles ? "" : " — touchez la photo pour la voir en taille réelle"}</div>
        <div class="barre" style="margin:8px 0 2px">
+         <button class="btn" id="cTailleReelle" style="flex:1">🔍 Taille réelle</button>
          <button class="btn ${lignesVisibles ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVisibles ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
          ${lignesVisibles ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
          ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
        </div>
        ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne rouge pour la déplacer ; seule la bande entre les deux lignes sera conservée.</div>` : ""}
-       <div class="aide">${cs.photo.envoye ? "Photo sauvegardée sur GitHub ("+esc(cs.photo.chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
-       · ${esc(dateFr(cs.photo.maj))}
-       <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
+       ${statut}`;
 
     const cadre = z.querySelector("#cCadre");
-    if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
-    cadre.querySelector("img").addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
+    const img = cadre.querySelector("img");
+    const dims = ()=>{ const d = z.querySelector("#cDims"); if (d) d.textContent = infoImage(img, src); };
+    if (img.complete) dims(); else img.onload = dims;
 
+    if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
+    img.addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
+    img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, `Compartiment ${lib(k)} — taille réelle`); });
+
+    z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, `Compartiment ${lib(k)} — taille réelle`);
     z.querySelector("#cLignes").onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
     const bt = z.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
     const ba = z.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
+    brancherRetirer(z);
+  };
 
-    z.querySelector("#cRetirer").onclick = async ()=>{
+  const brancherRetirer = (z)=>{
+    const btn = z.querySelector("#cRetirer");
+    if (!btn) return;
+    btn.onclick = async ()=>{
       const ok = await confirmer("Retirer la photo de ce compartiment ? Les livres déjà relevés sont conservés.", "Retirer la photo", "Retirer");
       if (!ok) return;
       cs.photo = null; avantTroncature = null; lignesVisibles = false;
+      delete cachePhotos[b.id + "/" + k];
       sauver(); majPhoto(); rendreBiblio();
     };
-
-    // affiche la photo pleine résolution dès qu'elle est disponible (placement précis des lignes)
-    if (!cs.photo.plein && !cachePhotos[b.id+"/"+k] && cs.photo.envoye){
-      const photoAvant = cs.photo;
-      const d = await photoPleine(b, k);
-      if (d && cs.photo === photoAvant && f.isConnected){
-        const im = f.querySelector("#cCadre img");
-        if (im) im.src = d;
-      }
-    }
   };
 
   const majLivres = ()=>{
@@ -1350,8 +1606,7 @@ function ouvrirCompartiment(b, k){
       toast("Compression de la photo…");
       const brut = await lireFichier(file);
       const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
-      const mini  = await redimensionner(plein, cfg.tailleMini, 0.55);
-      cs.photo = { plein, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+      cs.photo = { plein, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
       delete cachePhotos[b.id+"/"+k];
       avantTroncature = null;
       sauver(); majPhoto(); rendreBiblio();
@@ -1690,9 +1945,8 @@ async function remplirDepuisFichiers(b, files){
 async function affecterPhoto(b, k, file){
   const brut  = await lireFichier(file);
   const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
-  const mini  = await redimensionner(plein, cfg.tailleMini, 0.55);
   b.cases[k] = b.cases[k] || { livres:[] };
-  b.cases[k].photo = { plein, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+  b.cases[k].photo = { plein, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
   delete cachePhotos[b.id + "/" + k];
   sauver(); rendreBiblio();
 }
@@ -1743,9 +1997,10 @@ function serieAppareil(b){
     const courant = liste[et.i];
     f.querySelector("#aBande").innerHTML = liste.map(k=>{
       const ph = b.cases[k] && b.cases[k].photo;
-      const montrer = et.statuts[k] !== "attente" && ph && ph.mini;
+      const src = ph ? photoImmediate(b, k) : null;
+      const montrer = et.statuts[k] !== "attente" && src;
       return `<div class="vig ${k===courant?"cour":""}" data-v="${k}">
-        ${montrer ? `<img src="${ph.mini}" alt="">` : "📷"}
+        ${montrer ? `<img src="${src}" alt="">` : "📷"}
         <span class="lib">${lib(k)}</span><span class="st">${ICONE[et.statuts[k]]||""}</span></div>`;
     }).join("");
     const cv = f.querySelector(`[data-v="${courant}"]`);
