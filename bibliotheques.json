@@ -2295,30 +2295,725 @@
      }
     },
     "6-1": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud5yqkr2pk78",
+       "titre": "PHILIP KERR",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Nom de l'auteur, titre illisible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkr96brn",
+       "titre": "L'amateur",
+       "auteur": "ROBERT LITTELL",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkr16hi8",
+       "titre": "La cote 512",
+       "auteur": "Thierry Bourcy",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrqi9tx",
+       "titre": "Disparu à jamais",
+       "auteur": "HARLAN COBEN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrhlyhp",
+       "titre": "POST MORTEM",
+       "auteur": "Olivier Tournut",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkriqr3z",
+       "titre": "RENDEZ-VOUS DANS LE NOIR",
+       "auteur": "OTSUICHI",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrqg7yo",
+       "titre": "L'été froid",
+       "auteur": "GIANRICO CAROFIGLIO",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrbfbh1",
+       "titre": "TOUCHEZ PAS AU GRISBI !",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkro97mz",
+       "titre": "CASINO ROYAL",
+       "auteur": "JAMES BOND 007",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrd4kot",
+       "titre": "simple question de temps",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkripc4o",
+       "titre": "la main sur la ville",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrfaevr",
+       "titre": "fais-moi confiance",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrnumob",
+       "titre": "une bouffée d'air pur",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkr5ezww",
+       "titre": "pochette surprise",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrl5gn9",
+       "titre": "ça n'arrive qu'aux morts",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrffov9",
+       "titre": "à vous le plaisir",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkruy64r",
+       "titre": "C'est un dur métier",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrhkwss",
+       "titre": "la petite vertu",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrwi3fr",
+       "titre": "on s'attaque au jeu",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkr8nqvy",
+       "titre": "Trop petit, mon ami",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkr9zs3l",
+       "titre": "éva",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkr9nq1y",
+       "titre": "vidre au sein",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrnj6mb",
+       "titre": "C'est le bouquet !",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yqkrsnk4q",
+       "titre": "C'est ce qu'on déguste",
+       "auteur": "JAMES HADLEY CHASE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/6-1.jpg",
       "envoye": true,
       "maj": "2026-09-22T16:34:23.519Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T21:05:59.308Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     },
     "6-2": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud5yytjwz2b4",
+       "titre": "MARIE PADLEY CHASE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "tranche partiellement visible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytj0b5q4",
+       "titre": "UN MOIS DANS UN AN",
+       "auteur": "FRANÇOISE SAGAN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjcqetl",
+       "titre": "Sept hommes qui reviennent de loin",
+       "auteur": "Jean-Christophe Rufin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjc7uy2",
+       "titre": "ABEL QUENTIN",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjodwxj",
+       "titre": "LAISSEZ VENIR LA MER",
+       "auteur": "Henri Obadia",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytj7v0qt",
+       "titre": "Les plantes et les jours",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "titre partiellement visible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytj7jbe7",
+       "titre": "médecin du désert",
+       "auteur": "HERBERT PRITZKE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "collection Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytj28ds9",
+       "titre": "La vie du capitaine",
+       "auteur": "Alexandre Pouchkine",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "collection Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjq78g0",
+       "titre": "Le grand marin",
+       "auteur": "Catherine Poulain",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "collection Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjvh0xz",
+       "titre": "Les pierres sauvages",
+       "auteur": "Fernand Pouillon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "collection Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjjshi9",
+       "titre": "Un homme effacé",
+       "auteur": "Alexandre Postel",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "collection Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjince2",
+       "titre": "La Fabrique de Souvenirs",
+       "auteur": "Alexandre Postel",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjz3wft",
+       "titre": "Mélopée",
+       "auteur": "Kopatt",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "titre et auteur partiellement visibles",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjwp8gf",
+       "titre": "LES CULOTTES DU DIMANCHE",
+       "auteur": "VALÉRIE PERRIN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjjdkdd",
+       "titre": "ORAL ÉPINGLE",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "titre partiellement visible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5yytjhswyo",
+       "titre": "Le lièvre de Vatanen",
+       "auteur": "Arto Paasilinna",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "collection Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/6-2.jpg",
       "envoye": true,
       "maj": "2026-09-22T16:35:06.425Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T21:06:09.992Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     },
     "6-3": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mud5z7z9ax4fd",
+       "titre": "SHISHA GUPPY",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z96h11g",
+       "titre": "Le chemin des larmes",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9137s3",
+       "titre": "Le jardin à l'horizon",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9qtyjm",
+       "titre": "LE DERNIER TRAMWAY",
+       "auteur": "Nadim Gürsel",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9wins9",
+       "titre": "Le goût des pépins de pomme",
+       "auteur": "Katharina Hagena",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9kzqzo",
+       "titre": "L'inconnue de Birobidjan",
+       "auteur": "MAREK HALTER",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z94ekhx",
+       "titre": "PAQUEBOT",
+       "auteur": "HERVÉ HAMON",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9fe0q4",
+       "titre": "L'Art du jeu",
+       "auteur": "Chad Hubach",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9jd0ip",
+       "titre": "UNE COMÉDIE FAMILIALE",
+       "auteur": "ISABELLE HAUSSER",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z95c6sg",
+       "titre": "NITCHEVO",
+       "auteur": "ISABELLE HAUSSER",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z98sn5n",
+       "titre": "Le Harem",
+       "auteur": "Frédérique Héliard",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9vlbt8",
+       "titre": "Lola",
+       "auteur": "CATHERINE HERMARY-VIEILLE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9jzes3",
+       "titre": "Soumission",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z955k1m",
+       "titre": "Mademoiselle Chambon",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9za15l",
+       "titre": "Ainsi résonne l'écho infini des montagnes",
+       "auteur": "Khaled Hosseini",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9suel0",
+       "titre": "LA LONGUE VUE",
+       "auteur": "ELIZABETH JANE HOWARD",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z91v184",
+       "titre": "Les Pages",
+       "auteur": "FRÉDÉRIC HULOT",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9x7usa",
+       "titre": "CONTES DE L'ALHAMBRA",
+       "auteur": "Washington Irving",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z93os7c",
+       "titre": "L'ŒUVRE D'IRVING",
+       "auteur": "JOHN IRVING",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z9hfhuo",
+       "titre": "LA QUATRIÈME MAIN",
+       "auteur": "JOHN IRVING",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      },
+      {
+       "id": "mud5z7z943td2",
+       "titre": "Sous l'égide d'Osiris",
+       "auteur": "Christian Jacq",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/6-3.jpg",
       "envoye": true,
       "maj": "2026-09-22T16:35:35.229Z"
+     },
+     "analyse": {
+      "maj": "2026-09-22T21:06:21.861Z",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 1,
+      "manuel": false
      }
     },
     "7-2": {
@@ -2662,5 +3357,5 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-22T20:56:26.929Z"
+ "maj": "2026-09-22T21:06:33.958Z"
 }
