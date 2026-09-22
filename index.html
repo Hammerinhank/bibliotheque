@@ -123,7 +123,16 @@ button{font-family:inherit}
 .rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
 .rang.devant{background:var(--encre3);color:var(--texte2)}
 .rang.derriere{background:var(--bronze-sombre);color:#fff8e1}
-#cFaces{margin-bottom:8px}
+#cFaces{margin-bottom:8px;align-items:center}
+#cFaces select{flex:1;min-width:130px;width:auto;border-radius:999px;padding:7px 10px;font-size:13.5px}
+.prop{background:var(--encre);border:1px solid var(--trait);border-left:3px solid var(--bronze);border-radius:10px;padding:9px 11px;margin-bottom:8px}
+.prop.ajouter{border-left-color:var(--vert)}
+.prop.retirer{border-left-color:var(--rouge)}
+.prop .act{font-size:11.5px;letter-spacing:.3px;color:var(--texte2)}
+.prop .t{font-size:15px;font-weight:600}
+.prop .chg{font-size:13.5px;margin-top:3px}
+.prop .chg b{color:var(--bronze)}
+.prop .mot{font-size:12.5px;color:var(--texte2);font-style:italic;margin-top:3px}
 .legende{font-size:12px;color:var(--texte2);display:flex;gap:14px;flex-wrap:wrap;margin-top:-4px}
 .legende i{display:inline-block;width:10px;height:10px;border-radius:3px;border:1px solid;margin-right:4px;vertical-align:-1px}
 
@@ -317,8 +326,15 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.15.0";
+const VERSION = "V1.16.0";
 const HISTORIQUE = [
+  { v:"V1.16.0", d:"22/09/2026", l:[
+    "Photos d'appoint : autant de photos que voulu par compartiment (zooms, angles), en plus des deux photos de rang. Liste déroulante à droite des boutons Devant / Derrière pour les choisir ou en ajouter une.",
+    "Chaque appoint a une légende libre, ses propres outils (taille réelle, lignes de coupe, tronquer, retirer) et son fichier sur GitHub (…-appoint-<id>.jpg).",
+    "Bouton « 🔎 Contrôler la liste » depuis une photo d'appoint : l'IA compare la liste déjà relevée à ces photos et propose des corrections, ajouts ou retraits, traités par lots de 3 photos avec décompte.",
+    "Chaque proposition est présentée avec son motif et l'ancienne valeur en regard de la nouvelle ; vous cochez celles à appliquer. Rien n'est modifié sans votre accord.",
+    "Question dédiée modifiable dans Réglages → Questions ; fonctionne aussi avec une IA sans clé (copier-coller)."
+  ]},
   { v:"V1.15.0", d:"22/09/2026", l:[
     "Ménage interne, sans changement visible : commentaire de code égaré remis à sa place, et la série de photos construit désormais le chemin de l'image avec la fonction commune cheminPhoto (au lieu de le réécrire à la main).",
     "Vérification faite que tout ce qui a été ajouté depuis la V1.7.0 est bien présent : choix d'un modèle Gemini opérationnel, compartiments à deux rangs, Claude en secours, IA sans clé par copier-coller, lignes de coupe rouges et vertes."
@@ -460,6 +476,20 @@ Réponds UNIQUEMENT par un objet JSON de cette forme, sans texte autour :
 "annee" = année imprimée sur la tranche si elle est lisible, sinon "".
 "remarque" = collection, éditeur, état, ou ce qui gêne la lecture (2 à 6 mots), sinon "".`;
 
+const QUESTION_APPOINT_DEFAUT =
+`Voici la liste des livres déjà relevés dans un compartiment d'étagère, établie à partir d'une ou deux photos d'ensemble. Les images jointes sont des photos d'appoint du MÊME compartiment : vues rapprochées, zooms, autres angles, prises pour vérifier et préciser cette liste.
+Compare ce que tu lis sur ces photos d'appoint avec la liste, et propose UNIQUEMENT des changements.
+Règles :
+- "corriger" : le livre figure dans la liste mais un renseignement est faux ou incomplet (titre mal lu, auteur, année). Donne le numéro "i" du livre et seulement les champs à changer.
+- "ajouter" : un livre nettement visible sur une photo d'appoint et absent de la liste.
+- "retirer" : un livre de la liste que les photos montrent comme inexistant ou compté deux fois. Ne le propose que si tu en es sûr.
+- Ne propose rien pour un livre que les photos confirment tel quel.
+- N'invente jamais : si une tranche reste illisible, ne propose rien pour elle.
+- "motif" : en quelques mots, ce que tu vois sur la photo qui justifie le changement.
+Réponds UNIQUEMENT par un objet JSON de cette forme, sans texte autour :
+{"corrections":[{"action":"corriger|ajouter|retirer","i":0,"titre":"","auteur":"","annee":"","certitude":"haute|moyenne|faible","rang":"devant|derriere","remarque":"","motif":""}]}
+Pour "ajouter", n'utilise pas "i". Laisse vide tout champ que tu ne veux pas changer.`;
+
 const QUESTION_RESUME_DEFAUT =
 `Voici une liste numérotée de livres. Pour chacun, donne :
 - "resume" : un résumé du contenu en UNE seule phrase de 25 mots maximum ;
@@ -482,6 +512,7 @@ const CFG_DEFAUT = {
   ghUser:"Hammerinhank", ghRepo:"bibliotheque", ghBranche:"main",
   qAnalyse:QUESTION_ANALYSE_DEFAUT,
   qAnalyse2:QUESTION_DEUX_RANGS_DEFAUT,
+  qAppoint:QUESTION_APPOINT_DEFAUT,
   qResume:QUESTION_RESUME_DEFAUT,
   qCategorie:QUESTION_CATEGORIE_DEFAUT,
   tailleMax:1600, qualite:0.72, tailleMini:260
@@ -709,34 +740,68 @@ function pomperChargements(){
   }
 }
 
-/* Un compartiment peut avoir deux photos : "photo" (rang de devant) et "photo2" (rang de derrière,
-   prise après avoir retiré les livres de devant). */
+/* Un compartiment peut avoir deux photos de rang : "photo" (devant) et "photo2" (derrière, prise
+   après avoir retiré les livres de devant), plus autant de photos d'appoint que voulu
+   (zooms, autres angles), désignées par "appoint:<id>" et rangées dans cs.appoints. */
 const CHAMPS_PHOTO = ["photo","photo2"];
 const NOM_FACE = { photo:"devant", photo2:"derrière" };
-function cheminPhoto(b, k, champ){ return "images/" + b.id + "/" + k + (champ === "photo2" ? "-derriere" : "") + ".jpg"; }
-function cleCache(b, k, champ){ return b.id + "/" + k + (champ === "photo2" ? "#2" : ""); }
+const PRE_APPOINT = "appoint:";
+function estAppoint(champ){ return typeof champ === "string" && champ.indexOf(PRE_APPOINT) === 0; }
+function idAppoint(champ){ return String(champ).slice(PRE_APPOINT.length); }
+
+/* La photo désignée par un champ, qu'elle soit de rang ou d'appoint. */
+function photoObj(cs, champ){
+  if (!cs) return null;
+  if (estAppoint(champ)) return (cs.appoints||[]).find(a=>a.id === idAppoint(champ)) || null;
+  return cs[champ || "photo"] || null;
+}
+/* Pose (ou retire, avec val null) la photo d'un champ, en gardant la légende d'un appoint. */
+function poserPhoto(cs, champ, val){
+  if (!estAppoint(champ)){ cs[champ] = val; return; }
+  cs.appoints = cs.appoints || [];
+  const id = idAppoint(champ);
+  const i = cs.appoints.findIndex(a=>a.id === id);
+  if (!val){ if (i >= 0) cs.appoints.splice(i, 1); return; }
+  val.id = id;
+  if (i >= 0){ if (val.legende === undefined) val.legende = cs.appoints[i].legende || ""; cs.appoints[i] = val; }
+  else { if (val.legende === undefined) val.legende = ""; cs.appoints.push(val); }
+}
+/* Tous les champs de photo réellement présents dans un compartiment. */
+function champsPhotoCase(cs){
+  return CHAMPS_PHOTO.filter(ch=>cs && cs[ch]).concat(((cs && cs.appoints) || []).map(a=>PRE_APPOINT + a.id));
+}
+function numeroAppoint(cs, champ){ return ((cs && cs.appoints) || []).findIndex(a=>a.id === idAppoint(champ)) + 1; }
+
+function cheminPhoto(b, k, champ){
+  const suffixe = estAppoint(champ) ? "-appoint-" + idAppoint(champ) : (champ === "photo2" ? "-derriere" : "");
+  return "images/" + b.id + "/" + k + suffixe + ".jpg";
+}
+function cleCache(b, k, champ){
+  const suffixe = estAppoint(champ) ? "#a" + idAppoint(champ) : (champ === "photo2" ? "#2" : "");
+  return b.id + "/" + k + suffixe;
+}
 
 function photoImmediate(bib, cle, champ){
   champ = champ || "photo";
-  const cs = bib.cases[cle];
-  if (!cs || !cs[champ]) return null;
-  return cs[champ].plein || cachePhotos[cleCache(bib, cle, champ)] || null;
+  const ph = photoObj(bib.cases[cle], champ);
+  if (!ph) return null;
+  return ph.plein || cachePhotos[cleCache(bib, cle, champ)] || null;
 }
 
 function photoPleine(bib, cle, champ){
   champ = champ || "photo";
   const cs = bib.cases[cle];
-  if (!cs || !cs[champ]) return Promise.resolve(null);
+  const photo = photoObj(cs, champ);
+  if (!photo) return Promise.resolve(null);
   const deja = photoImmediate(bib, cle, champ);
   if (deja) return Promise.resolve(deja);
-  if (!cs[champ].envoye || !cs[champ].chemin) return Promise.resolve(null);
+  if (!photo.envoye || !photo.chemin) return Promise.resolve(null);
   const id = cleCache(bib, cle, champ);
   if (chargementsPhotos[id]) return chargementsPhotos[id];
-  const photo = cs[champ];
   const p = new Promise(res=>{
     fileChargements.push(async ()=>{
       const d = await ghLireImage(photo.chemin, photo.maj);
-      if (d && cs[champ] === photo) cachePhotos[id] = d;
+      if (d && photoObj(cs, champ) === photo) cachePhotos[id] = d;
       res(d);
     });
     pomperChargements();
@@ -791,8 +856,9 @@ function photosEnAttente(){
   data.bibliotheques.forEach(b=>{
     Object.keys(b.cases||{}).forEach(k=>{
       const cs = b.cases[k];
-      CHAMPS_PHOTO.forEach(ch=>{
-        if (cs[ch] && cs[ch].plein && !cs[ch].envoye) l.push({bib:b, cle:k, cs, champ:ch});
+      champsPhotoCase(cs).forEach(ch=>{
+        const ph = photoObj(cs, ch);
+        if (ph && ph.plein && !ph.envoye) l.push({bib:b, cle:k, cs, champ:ch});
       });
     });
   });
@@ -878,8 +944,7 @@ function resume(jeu){
   jeu.bibliotheques.forEach(b=>{
     Object.keys(b.cases||{}).forEach(k=>{
       const cs = b.cases[k];
-      if (cs.photo) photos++;
-      if (cs.photo2) photos++;
+      photos += champsPhotoCase(cs).length;
       livres += (cs.livres||[]).length;
     });
   });
@@ -1045,10 +1110,11 @@ async function envoyerVersGitHub(){
   let fait = 0;
   try{
     for (const p of attente){
-      const ph = p.cs[p.champ];
-      pg.maj(fait, total, "Photo " + p.cle + (p.champ === "photo2" ? " (derrière)" : "") + " de « " + p.bib.nom + " »");
+      const ph = photoObj(p.cs, p.champ);
+      const quoi = estAppoint(p.champ) ? " (appoint " + numeroAppoint(p.cs, p.champ) + ")" : (p.champ === "photo2" ? " (derrière)" : "");
+      pg.maj(fait, total, "Photo " + p.cle + quoi + " de « " + p.bib.nom + " »");
       const chemin = cheminPhoto(p.bib, p.cle, p.champ);
-      await ghEcrire(chemin, base64Seul(ph.plein), "Photo " + p.bib.nom + " " + p.cle + (p.champ === "photo2" ? " derrière" : ""));
+      await ghEcrire(chemin, base64Seul(ph.plein), "Photo " + p.bib.nom + " " + p.cle + quoi);
       cachePhotos[cleCache(p.bib, p.cle, p.champ)] = ph.plein;
       ph.chemin = chemin;
       ph.envoye = true;
@@ -1105,7 +1171,7 @@ async function recupererDeGitHub(silencieux){
     data = j;
     attente.forEach(p=>{
       const b = data.bibliotheques.find(x=>x.id === p.bib.id);
-      if (b){ b.cases = b.cases||{}; b.cases[p.cle] = b.cases[p.cle]||{livres:[]}; b.cases[p.cle][p.champ] = p.cs[p.champ]; }
+      if (b){ b.cases = b.cases||{}; b.cases[p.cle] = b.cases[p.cle]||{livres:[]}; poserPhoto(b.cases[p.cle], p.champ, photoObj(p.cs, p.champ)); }
     });
     localStorage.setItem(CLE_SYNC, j.maj || "");
     sale = attente.length > 0;
@@ -1329,7 +1395,7 @@ function majAttenteClaude(){
     const b = biblio(a.bibId);
     const h = new Date(a.date);
     const heure = isNaN(h) ? "" : " (demande de " + h.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}) + ")";
-    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de " + NOM_IA[a.ia||"claude"] + " — " + (b ? b.nom + " · " : "") + lib(a.cle) + heure;
+    $("#btnAttenteClaude").textContent = "📥 Copier la réponse de " + NOM_IA[a.ia||"claude"] + (a.genre === "controle" ? " (contrôle)" : "") + " — " + (b ? b.nom + " · " : "") + lib(a.cle) + heure;
   }
 }
 
@@ -1338,8 +1404,9 @@ const SITE_IA = {
   claude:{ url:q=>"https://claude.ai/new?q=" + encodeURIComponent(q) },
   gemini:{ url:q=>"https://gemini.google.com/app?q=" + encodeURIComponent(q) }
 };
-function lancerClaudeManuel(b, k, parties, echecs, ia){
+function lancerClaudeManuel(b, k, parties, echecs, ia, genre){
   ia = ia || "claude";
+  genre = genre || "analyse";
   const NOM = NOM_IA[ia], autre = ia === "claude" ? "gemini" : "claude";
   const images = parties.filter(p=>p.inline_data).map(p=>"data:" + p.inline_data.mime_type + ";base64," + p.inline_data.data);
   const deux = images.length > 1;
@@ -1350,15 +1417,16 @@ function lancerClaudeManuel(b, k, parties, echecs, ia){
 
   // L'attente n'est enregistrée qu'au moment où la demande part réellement vers Claude (étape 2).
   const marquerEnvoi = ()=>{
-    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ ia, bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
+    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ ia, genre, bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
     majAttenteClaude();
   };
 
   const tombees = (echecs||[]).filter(x=>x.nom === autre);
   const f = modale({
-    titre:"Demander à " + NOM + " (sans clé)",
+    titre: (genre === "controle" ? "Contrôler avec " : "Demander à ") + NOM + " (sans clé)",
     html:
       (tombees.length ? `<div class="encadre" style="margin-top:0">${NOM_IA[autre]} a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
+      (genre === "controle" ? `<div class="encadre" style="margin-top:0">Contrôle de la liste déjà relevée : la question contient cette liste, et ${images.length > 3 ? "les 3 premières photos d'appoint sont jointes (relancez ensuite pour les suivantes)" : "les photos d'appoint sont jointes"}.</div>` : "") +
       `<div class="etape"><div class="n">1</div><div class="c">Copier ${deux ? "les deux photos (réunies côte à côte)" : "la photo"} dans le presse-papier.
          <button class="btn principal plein" id="mcCopier">📋 Copier ${deux ? "les 2 photos" : "la photo"}</button>
          ${deux ? `<div class="aide">Pour une lecture plus fine, vous pouvez aussi les envoyer une par une :</div>
@@ -1416,10 +1484,18 @@ function appliquerReponseClaude(a, txt, silencieux){
   let j;
   try{ j = jsonDepuisTexte(String(txt||"")); }
   catch(e){ if (!silencieux) toast("Ce texte ne contient pas de JSON lisible : copiez bien toute la réponse de " + NOM_IA[ia] + ".", 5000); return false; }
-  const livres = livresDepuisReponse(j, a.deux, a.avecAvant, { ia, modele: ia === "gemini" ? "gemini.google.com (copier-coller)" : "claude.ai (copier-coller)", manuel:true, echecs:[] });
+  const source = { ia, modele: ia === "gemini" ? "gemini.google.com (copier-coller)" : "claude.ai (copier-coller)", manuel:true, echecs:[] };
+  b.cases[a.cle] = b.cases[a.cle] || { livres:[] };
+  if (a.genre === "controle"){
+    const props = fusionnerPropositions(propositionsDepuisReponse(j, b.cases[a.cle]));
+    localStorage.removeItem(CLE_ATTENTE_CLAUDE);
+    majAttenteClaude();
+    validerPropositions(b, a.cle, props, source);
+    return true;
+  }
+  const livres = livresDepuisReponse(j, a.deux, a.avecAvant, source);
   localStorage.removeItem(CLE_ATTENTE_CLAUDE);
   majAttenteClaude();
-  b.cases[a.cle] = b.cases[a.cle] || { livres:[] };
   appliquerLivresCompartiment(b, a.cle, livres);
   return true;
 }
@@ -1458,6 +1534,172 @@ function appliquerLivresCompartiment(b, k, livres){
     fin();
     toast(texteBilanAnalyse(livres), 5000);
   }
+}
+
+/* ====================================================================
+   CONTRÔLE DE LA LISTE PAR LES PHOTOS D'APPOINT
+   ==================================================================== */
+function listeLivresPourIA(cs){
+  const l = cs.livres || [];
+  if (!l.length) return "(aucun livre relevé pour l'instant)";
+  return l.map((lv,i)=>`${i}. ${lv.titre}${lv.auteur?" — "+lv.auteur:""}${lv.annee?" ("+lv.annee+")":""}`
+    + (lv.rang ? " [" + (lv.rang==="derriere"?"derrière":"devant") + "]" : "")
+    + (lv.certitude && lv.certitude !== "haute" ? " (certitude " + lv.certitude + ")" : "")
+    + (lv.remarque ? " — " + lv.remarque : "")).join("\n");
+}
+
+/* Envoie les photos d'appoint par lots de 3, avec la liste actuelle, et rassemble les changements proposés. */
+async function controlerAvecAppoints(bib, cle, opts){
+  const cs = bib.cases[cle];
+  const app = (cs && cs.appoints) || [];
+  if (!app.length) throw new Error("Aucune photo d'appoint sur ce compartiment.");
+  const LOT = 3;
+  const propositions = [];
+  let source = null;
+  const pg = app.length > LOT ? fenetreProgres("Contrôle par les photos d'appoint") : null;
+  let fait = 0;
+  try{
+    for (let d = 0; d < app.length; d += LOT){
+      const tranche = app.slice(d, d + LOT);
+      if (pg) pg.maj(fait, app.length, `Photos ${d+1} à ${Math.min(d+LOT, app.length)} — envoi à l'IA…`);
+      const parties = [{ text: (cfg.qAppoint || QUESTION_APPOINT_DEFAUT) + "\n\nListe actuelle du compartiment :\n" + listeLivresPourIA(cs) }];
+      for (const a of tranche){
+        const img = await photoPleine(bib, cle, PRE_APPOINT + a.id);
+        if (!img) throw new Error("Photo d'appoint " + (app.indexOf(a)+1) + " introuvable (ni sur cet appareil ni sur GitHub).");
+        parties.push({ text: "Photo d'appoint " + (app.indexOf(a)+1) + (a.legende ? " — " + a.legende : "") + " :" });
+        parties.push({ inline_data:{ mime_type:"image/jpeg", data: base64Seul(img) } });
+      }
+      const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
+      source = { ia:rep.ia, modele:rep.modele, echecs:rep.echecs };
+      propositionsDepuisReponse(rep.res, cs).forEach(p=>propositions.push(p));
+      fait += tranche.length;
+      if (pg) pg.maj(fait, app.length, "");
+    }
+  } finally { if (pg) pg.fermer(); }
+  return { propositions: fusionnerPropositions(propositions), source };
+}
+
+const CHAMPS_PROP = ["titre","auteur","annee","certitude","rang","remarque"];
+const NOM_CHAMP = { titre:"Titre", auteur:"Auteur", annee:"Année", certitude:"Certitude", rang:"Rang", remarque:"Remarque" };
+
+/* Transforme la réponse de l'IA en propositions rattachées aux livres existants. */
+function propositionsDepuisReponse(j, cs){
+  const bruts = Array.isArray(j && j.corrections) ? j.corrections : [];
+  const livres = cs.livres || [];
+  const out = [];
+  bruts.forEach(x=>{
+    if (!x) return;
+    const a = String(x.action||"").toLowerCase();
+    const action = /ajout/.test(a) ? "ajouter" : /retir|suppr/.test(a) ? "retirer" : "corriger";
+    const i = Number(x.i);
+    const cible = Number.isInteger(i) && i >= 0 && i < livres.length ? livres[i] : null;
+    if (action !== "ajouter" && !cible) return;
+    const p = { action, cible, motif:String(x.motif||"").trim(), champs:{} };
+    CHAMPS_PROP.forEach(ch=>{
+      let v = x[ch];
+      if (v == null) return;
+      v = String(v).trim();
+      if (!v) return;
+      if (ch === "rang") v = /derri/.test(v.toLowerCase()) ? "derriere" : "devant";
+      if (ch === "certitude" && !["haute","moyenne","faible"].includes(v)) return;
+      if (action !== "ajouter" && String(cible[ch]||"") === v) return;   // rien de nouveau
+      p.champs[ch] = v;
+    });
+    if (action === "corriger" && !Object.keys(p.champs).length) return;  // simple confirmation
+    if (action === "ajouter" && !p.champs.titre) return;
+    if (action === "ajouter" && livres.some(lv=>normaliser(lv.titre) === normaliser(p.champs.titre))) return;
+    out.push(p);
+  });
+  return out;
+}
+
+/* Deux lots peuvent proposer la même chose : on ne la présente qu'une fois. */
+function fusionnerPropositions(props){
+  const vus = new Set(), out = [];
+  props.forEach(p=>{
+    const c = p.action + "|" + (p.cible ? p.cible.id || p.cible.titre : "") + "|" + JSON.stringify(p.champs);
+    if (vus.has(c)) return;
+    vus.add(c); out.push(p);
+  });
+  return out;
+}
+
+/* Chaque proposition est présentée avec son motif ; rien n'est appliqué sans être coché. */
+function validerPropositions(b, k, props, source){
+  const cs = b.cases[k];
+  const marquerControle = ()=>{
+    cs.controle = { maj:new Date().toISOString(), ia:(source&&source.ia)||"gemini",
+      modele:(source&&source.modele)||"", manuel:!!(source&&source.manuel), photos:(cs.appoints||[]).length };
+  };
+  if (!props.length){
+    marquerControle(); sauver();
+    if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+    if (biblioCourante === b.id) rendreBiblio();
+    modale({ titre:"Contrôle terminé",
+      html:`<div>Aucun changement proposé : les photos d'appoint confirment la liste de ce compartiment.</div>
+            <div class="aide">${esc(texteSource(source).trim() || "")}</div>`,
+      boutons:[{texte:"Fermer"}]});
+    return;
+  }
+  const ETIQ = { corriger:"✏️ Corriger", ajouter:"➕ Ajouter", retirer:"🗑 Retirer" };
+  const cartes = props.map((p,i)=>{
+    let corps = "";
+    if (p.action === "ajouter"){
+      corps = `<div class="t">${esc(p.champs.titre)}</div>
+               <div class="chg">${esc(p.champs.auteur||"auteur inconnu")}${p.champs.annee?" · "+esc(p.champs.annee):""}${p.champs.rang?" · "+(p.champs.rang==="derriere"?"derrière":"devant"):""}</div>`;
+    } else if (p.action === "retirer"){
+      corps = `<div class="t">${esc(p.cible.titre)}</div>
+               <div class="chg">${esc(p.cible.auteur||"auteur inconnu")}</div>`;
+    } else {
+      corps = `<div class="t">${esc(p.cible.titre)}</div>` +
+        Object.keys(p.champs).map(ch=>
+          `<div class="chg">${esc(NOM_CHAMP[ch]||ch)} : ${esc(String(p.cible[ch]||"—"))} → <b>${esc(p.champs[ch])}</b></div>`).join("");
+    }
+    return `<div class="prop ${p.action}">
+      <div class="coche" style="align-items:flex-start">
+        <input type="checkbox" data-p="${i}" ${p.action==="retirer"?"":"checked"} style="margin-top:3px">
+        <label style="margin:0;flex:1"><span class="act">${ETIQ[p.action]}</span>${corps}
+        ${p.motif?`<div class="mot">${esc(p.motif)}</div>`:""}</label></div></div>`;
+  }).join("");
+
+  const f = modale({
+    titre:"Changements proposés",
+    html:`<div class="aide" style="margin-top:0">${props.length} proposition(s) à partir de ${(cs.appoints||[]).length} photo(s) d'appoint.${esc(texteSource(source))} Décochez ce que vous ne voulez pas appliquer ; les retraits sont décochés d'office.</div>
+          <div class="barre" style="margin:8px 0 4px">
+            <button class="btn" id="pvTous" style="flex:1">Tout cocher</button>
+            <button class="btn" id="pvAucun" style="flex:1">Tout décocher</button>
+          </div>
+          ${cartes}`,
+    boutons:[
+      {texte:"Ne rien appliquer", action:()=>{ marquerControle(); sauver(); if (biblioCourante === b.id) rendreBiblio(); }},
+      {texte:"Appliquer les cochés", classe:"principal", action:(fd)=>{
+        const retenus = props.filter((p,i)=>fd.querySelector(`[data-p="${i}"]`).checked);
+        let cor=0, ajo=0, ret=0;
+        retenus.filter(p=>p.action==="corriger").forEach(p=>{
+          Object.keys(p.champs).forEach(ch=>{ p.cible[ch] = p.champs[ch]; });
+          cor++;
+        });
+        retenus.filter(p=>p.action==="ajouter").forEach(p=>{
+          cs.livres = cs.livres || [];
+          cs.livres.push(Object.assign({ id:uid(), titre:"", auteur:"", annee:"", certitude:"moyenne",
+            remarque:"", resume:"", categorie:"", origine:"ia" }, p.champs));
+          ajo++;
+        });
+        const aRetirer = new Set(retenus.filter(p=>p.action==="retirer").map(p=>p.cible));
+        if (aRetirer.size){ cs.livres = (cs.livres||[]).filter(lv=>!aRetirer.has(lv)); ret = aRetirer.size; }
+        marquerControle();
+        sauver();
+        if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+        if (biblioCourante === b.id) rendreBiblio();
+        toast(`${cor} correction(s), ${ajo} ajout(s), ${ret} retrait(s) appliqué(s).`, 5000);
+      }}
+    ],
+    surFermeture:()=>{ marquerControle(); sauver(); if (biblioCourante === b.id) rendreBiblio(); }
+  });
+  const coches = ()=>[...f.querySelectorAll("[data-p]")];
+  f.querySelector("#pvTous").onclick = ()=>coches().forEach(c=>c.checked = true);
+  f.querySelector("#pvAucun").onclick = ()=>coches().forEach(c=>c.checked = false);
+  coches().forEach(c=>{ const l = c.nextElementSibling; if (l) l.onclick = e=>{ if (e.target.tagName !== "INPUT") c.checked = !c.checked; }; });
 }
 
 /* ====================================================================
@@ -1767,10 +2009,14 @@ function texteBilanAnalyse(livres){
 function photosToutesAnalysees(cs){
   if (!cs || !(cs.livres||[]).length) return false;
   const photos = [cs.photo, cs.photo2].filter(Boolean);
-  if (!photos.length) return false;
-  if (!cs.analyse) return photos.length === 1;
+  const appoints = cs.appoints || [];
+  if (!photos.length && !appoints.length) return false;
+  if (!cs.analyse) return photos.length === 1 && !appoints.length;
   const t = Date.parse(cs.analyse.maj || "") || 0;
-  return photos.every(p => (Date.parse(p.maj || "") || 0) <= t);
+  // une photo d'appoint compte comme prise en compte dès qu'un contrôle postérieur a eu lieu
+  const tc = Math.max(t, Date.parse((cs.controle && cs.controle.maj) || "") || 0);
+  return photos.every(p => (Date.parse(p.maj || "") || 0) <= t)
+      && appoints.every(a => (Date.parse(a.maj || "") || 0) <= tc);
 }
 
 function infoAnalyse(livres, cs){
@@ -1837,7 +2083,7 @@ function tousLesLivres(bib){
   return out;
 }
 function compteLivres(bib){ return tousLesLivres(bib).length; }
-function comptePhotos(bib){ return Object.keys(bib.cases||{}).reduce((n,k)=>n + (bib.cases[k].photo?1:0) + (bib.cases[k].photo2?1:0), 0); }
+function comptePhotos(bib){ return Object.keys(bib.cases||{}).reduce((n,k)=>n + champsPhotoCase(bib.cases[k]).length, 0); }
 
 /* ====================================================================
    RENDU
@@ -1928,16 +2174,16 @@ function rendreBiblio(){
       const cs = b.cases[k];
       const nb = cs && cs.livres ? cs.livres.length : 0;
       const ph = cs && cs.photo;
-      const ph2 = cs && cs.photo2;
+      const champs = cs ? champsPhotoCase(cs) : [];
       const cls = ["case"];
       if (nb) cls.push("analysee");
       if (nb && photosToutesAnalysees(cs)) cls.push("complete");
-      if ((ph && ph.plein && !ph.envoye) || (ph2 && ph2.plein && !ph2.envoye)) cls.push("aenvoyer");
+      if (champs.some(ch=>{ const p = photoObj(cs, ch); return p && p.plein && !p.envoye; })) cls.push("aenvoyer");
       cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
         ${!ph ? `<span class="sansphoto">📷</span>`
               : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
                                      : `<span class="sansphoto charge">⏳</span>`)}
-        <span class="num">${r}·${c}</span>${ph2 ? `<span class="deux" title="Deux rangs : photo de devant et de derrière">2📷</span>` : ""}${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
+        <span class="num">${r}·${c}</span>${champs.length > 1 ? `<span class="deux" title="${champs.length} photos : rangs et appoints">${champs.length}📷</span>` : ""}${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
       <div class="cases" style="grid-template-columns:repeat(${b.compartiments},minmax(52px,1fr))">${cases}</div></div>`;
@@ -1948,7 +2194,7 @@ function rendreBiblio(){
 
   $("#vueBiblio").innerHTML =
     `<div class="titreSection">La grille — touchez un compartiment pour sa photo et ses livres</div>
-     <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ».</div>
+     <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ». Photos d'appoint (zooms) : liste déroulante à droite des deux onglets.</div>
      ${grille}
      <div class="legende">
        <span><i style="border-color:var(--vert);border-width:2px"></i>toutes les photos analysées</span>
@@ -2128,7 +2374,8 @@ function ouvrirCompartiment(b, k){
   b.cases[k] = b.cases[k] || { livres:[] };
   const cs = b.cases[k];
   const [r,c] = k.split("-");
-  let face = "photo";            // "photo" = rang de devant, "photo2" = rang de derrière
+  let face = "photo";            // "photo" = devant, "photo2" = derrière, "appoint:<id>" = photo d'appoint
+  let enAjoutAppoint = false;    // la prochaine photo choisie crée un appoint au lieu de remplacer
 
   const f = modale({
     titre: `Rangée ${r} · compartiment ${c}`,
@@ -2224,7 +2471,7 @@ function ouvrirCompartiment(b, k){
   };
 
   const tronquer = async ()=>{
-    if (!cs[face] || !lignesVisibles) return;
+    if (!photoObj(cs, face) || !lignesVisibles) return;
     const btn = f.querySelector("#cTronquer");
     if (btn){ btn.disabled = true; btn.textContent = "Troncature…"; }
     try{
@@ -2242,7 +2489,7 @@ function ouvrirCompartiment(b, k){
       cx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
       const nouveau = cv.toDataURL("image/jpeg", cfg.qualite);
       avantTroncature = { plein };
-      cs[face] = { plein: nouveau, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
+      poserPhoto(cs, face, { plein: nouveau, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() });
       delete cachePhotos[cleCache(b,k,face)];
       lignesVisibles = false;                             // évite une seconde coupe par mégarde
       sauver(); majPhoto(); rendreBiblio();
@@ -2255,7 +2502,7 @@ function ouvrirCompartiment(b, k){
 
   const annulerTroncature = async ()=>{
     if (!avantTroncature) return;
-    cs[face] = { plein: avantTroncature.plein, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
+    poserPhoto(cs, face, { plein: avantTroncature.plein, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() });
     delete cachePhotos[cleCache(b,k,face)];
     avantTroncature = null;
     sauver(); majPhoto(); rendreBiblio();
@@ -2270,42 +2517,65 @@ function ouvrirCompartiment(b, k){
     if (f.isConnected) majPhoto();
   };
 
+  const changerFace = (nouvelle)=>{
+    if (face === nouvelle) return;
+    face = nouvelle; lignesVisibles = false; avantTroncature = null;
+    majPhoto();
+  };
+
+  const ajouterAppoint = ()=>{ enAjoutAppoint = true; f.querySelector("#cFichier").click(); };
+
   const majFaces = ()=>{
     const zf = f.querySelector("#cFaces");
+    const app = cs.appoints || [];
     zf.innerHTML =
       `<button data-face="photo" class="${face==="photo"?"actif":""}">📚 Devant${cs.photo?"":" (vide)"}</button>
-       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Rang de derrière"}</button>`;
-    zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>{
-      if (face === bt.dataset.face) return;
-      face = bt.dataset.face; lignesVisibles = false; avantTroncature = null;
-      majPhoto();
-    });
+       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Rang de derrière"}</button>
+       <select id="cAppoints" title="Photos d'appoint">
+         <option value="">🖼 Appoints${app.length ? " ("+app.length+")" : " : aucun"}</option>
+         ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
+         <option value="__nouveau">➕ Ajouter une photo d'appoint</option>
+       </select>`;
+    zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>changerFace(bt.dataset.face));
+    const sel = zf.querySelector("#cAppoints");
+    sel.value = estAppoint(face) ? face : "";
+    sel.onchange = ()=>{
+      const v = sel.value;
+      if (v === "__nouveau"){ sel.value = estAppoint(face) ? face : ""; ajouterAppoint(); return; }
+      if (!v){ if (estAppoint(face)) changerFace("photo"); return; }
+      changerFace(v);
+    };
   };
 
   const majPhoto = ()=>{
     majFaces();
     const z = f.querySelector("#zonePhoto");
-    f.querySelector("#cPhoto").textContent = cs[face]
-      ? (face === "photo2" ? "📷 Changer la photo de derrière" : "📷 Changer la photo")
+    const appoint = estAppoint(face);
+    const num = appoint ? numeroAppoint(cs, face) : 0;
+    f.querySelector("#cPhoto").textContent = photoObj(cs, face)
+      ? (appoint ? "📷 Changer cette photo d'appoint" : face === "photo2" ? "📷 Changer la photo de derrière" : "📷 Changer la photo")
       : (face === "photo2" ? "📷 Photo du rang de derrière" : "📷 Ajouter une photo");
-    if (!cs[face]){
+    const bAn = f.querySelector("#cAnalyser");
+    bAn.textContent = appoint ? "🔎 Contrôler la liste" : "🔍 Analyser";
+    bAn.title = appoint ? "Compare la liste déjà relevée aux photos d'appoint et propose des corrections" : "";
+    if (!photoObj(cs, face)){
       z.innerHTML = face === "photo2"
-        ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à Gemini, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
+        ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à l'IA, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
         : `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`;
       return;
     }
     const src = photoImmediate(b, k, face);
-    const statut = `<div class="aide">${face==="photo2" ? "<b>Rang de derrière</b> · " : (cs.photo2 ? "<b>Rang de devant</b> · " : "")}${cs[face].envoye ? "Photo sauvegardée sur GitHub ("+esc(cs[face].chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
-       · ${esc(dateFr(cs[face].maj))}
+    const statut = `<div class="aide">${appoint ? "<b>Appoint "+num+"</b> · " : face==="photo2" ? "<b>Rang de derrière</b> · " : (cs.photo2 ? "<b>Rang de devant</b> · " : "")}${photoObj(cs, face).envoye ? "Photo sauvegardée sur GitHub ("+esc(photoObj(cs, face).chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
+       · ${esc(dateFr(photoObj(cs, face).maj))}
        <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
 
     if (!src){
       // pas encore en mémoire : chargement de la vraie photo, jamais de version dégradée
       z.innerHTML = `<div class="chargePhoto">⏳ Chargement de la photo en pleine résolution…</div>` + statut;
       brancherRetirer(z);
-      const photoAvant = cs[face];
+      const photoAvant = photoObj(cs, face);
       photoPleine(b, k, face).then(d=>{
-        if (!f.isConnected || cs[face] !== photoAvant) return;
+        if (!f.isConnected || photoObj(cs, face) !== photoAvant) return;
         if (d) majPhoto();
         else {
           const c = z.querySelector(".chargePhoto");
@@ -2329,6 +2599,9 @@ function ouvrirCompartiment(b, k){
          ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
        </div>
        ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes (sur les bords au départ) pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
+       ${appoint ? `<label for="cLegende">Légende de cette photo d'appoint</label>
+         <input type="text" id="cLegende" value="${esc(photoObj(cs, face).legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…">
+         <div class="aide">Cette légende est transmise à l'IA lors du contrôle : elle l'aide à savoir ce que vous vouliez montrer.</div>` : ""}
        ${statut}`;
 
     const cadre = z.querySelector("#cCadre");
@@ -2338,12 +2611,20 @@ function ouvrirCompartiment(b, k){
 
     if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
     img.addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
-    img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, `Compartiment ${lib(k)}${face==="photo2"?" (derrière)":""} — taille réelle`); });
+    const titrePhoto = `Compartiment ${lib(k)}${appoint ? " (appoint "+num+")" : face==="photo2" ? " (derrière)" : ""} — taille réelle`;
+    img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, titrePhoto); });
 
-    z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, `Compartiment ${lib(k)}${face==="photo2"?" (derrière)":""} — taille réelle`);
+    z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, titrePhoto);
     z.querySelector("#cLignes").onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
     const bt = z.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
     const ba = z.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
+    const bl = z.querySelector("#cLegende");
+    if (bl) bl.onchange = ()=>{
+      const ph = photoObj(cs, face);
+      if (!ph) return;
+      ph.legende = bl.value.trim();
+      sauver(); majFaces();
+    };
     brancherRetirer(z);
   };
 
@@ -2351,13 +2632,23 @@ function ouvrirCompartiment(b, k){
     const btn = z.querySelector("#cRetirer");
     if (!btn) return;
     btn.onclick = async ()=>{
+      if (estAppoint(face)){
+        const ok = await confirmer("Retirer cette photo d'appoint ? Les livres relevés sont conservés.", "Retirer la photo d'appoint", "Retirer");
+        if (!ok) return;
+        delete cachePhotos[cleCache(b,k,face)];
+        poserPhoto(cs, face, null);
+        face = "photo"; avantTroncature = null; lignesVisibles = false;
+        sauver(); majPhoto(); rendreBiblio();
+        toast("Photo d'appoint retirée.");
+        return;
+      }
       const choix = await choisirRetraitPhoto(cs, face);
       if (!choix) return;
       if (choix.ids && choix.ids.size){
         cs.livres = (cs.livres||[]).filter(lv => !choix.ids.has(lv));
         if (!cs.livres.length) delete cs.analyse;
       }
-      cs[face] = null; avantTroncature = null; lignesVisibles = false;
+      poserPhoto(cs, face, null); avantTroncature = null; lignesVisibles = false;
       delete cachePhotos[cleCache(b,k,face)];
       sauver(); majPhoto(); majLivres(); rendreBiblio();
       toast(choix.ids && choix.ids.size
@@ -2389,24 +2680,44 @@ function ouvrirCompartiment(b, k){
     });
   };
 
-  f.querySelector("#cPhoto").onclick = ()=>f.querySelector("#cFichier").click();
+  f.querySelector("#cPhoto").onclick = ()=>{ enAjoutAppoint = false; f.querySelector("#cFichier").click(); };
   f.querySelector("#cFichier").onchange = async (ev)=>{
     const file = ev.target.files && ev.target.files[0];
+    const nouveau = enAjoutAppoint;
+    enAjoutAppoint = false;
     if (!file) return;
     try{
       toast("Compression de la photo…");
       const brut = await lireFichier(file);
       const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
-      cs[face] = { plein, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() };
-      delete cachePhotos[cleCache(b,k,face)];
+      const cible = nouveau ? PRE_APPOINT + uid() : face;
+      poserPhoto(cs, cible, { plein, chemin:cheminPhoto(b,k,cible), envoye:false, maj:new Date().toISOString() });
+      delete cachePhotos[cleCache(b,k,cible)];
       avantTroncature = null;
+      face = cible; lignesVisibles = false;
       sauver(); majPhoto(); rendreBiblio();
-      toast((face === "photo2" ? "Photo de derrière enregistrée" : "Photo enregistrée") + " sur cet appareil. Ouvrez ☁️ quand vous voudrez la sauvegarder.");
+      toast((estAppoint(cible) ? "Photo d'appoint " + numeroAppoint(cs, cible) + " enregistrée"
+             : face === "photo2" ? "Photo de derrière enregistrée" : "Photo enregistrée")
+            + " sur cet appareil. Ouvrez ☁️ quand vous voudrez la sauvegarder.");
     }catch(e){ toast("Photo illisible : " + e.message, 5000); }
     ev.target.value = "";
   };
 
   f.querySelector("#cAnalyser").onclick = async ()=>{
+    const btnA = f.querySelector("#cAnalyser");
+    if (estAppoint(face)){
+      btnA.disabled = true; btnA.textContent = "Contrôle…";
+      try{
+        const r = await controlerAvecAppoints(b, k, { manuel:true });
+        btnA.disabled = false; btnA.textContent = "🔎 Contrôler la liste";
+        validerPropositions(b, k, r.propositions, r.source);
+      }catch(e){
+        btnA.disabled = false; btnA.textContent = "🔎 Contrôler la liste";
+        if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle"); return; }
+        montrerErreurAnalyse(e);
+      }
+      return;
+    }
     if (!cs.photo && !cs.photo2){ toast("Ajoutez d'abord une photo."); return; }
     if (!cs.photo && cs.photo2) toast("Seule la photo de derrière existe : elle sera analysée seule.");
     const btn = f.querySelector("#cAnalyser");
@@ -2423,7 +2734,7 @@ function ouvrirCompartiment(b, k){
   };
 
   f.querySelector("#cAjouter").onclick = ()=>formLivre(cs, -1, majLivres);
-  rafraichirCompartimentOuvert = (bid, kk)=>{ if (f.isConnected && bid === b.id && kk === k) majLivres(); };
+  rafraichirCompartimentOuvert = (bid, kk)=>{ if (f.isConnected && bid === b.id && kk === k){ majLivres(); majFaces(); } };
 
   majPhoto(); majLivres();
 }
@@ -2817,15 +3128,17 @@ async function affecterPhoto(b, k, file){
 async function televerserPhoto(b, k, champ){
   champ = champ || "photo";
   const cs = b.cases[k];
-  if (!cs || !cs[champ] || !cs[champ].plein) return;
-  const plein = cs[champ].plein;
+  const ph = photoObj(cs, champ);
+  if (!ph || !ph.plein) return;
+  const plein = ph.plein;
   const chemin = cheminPhoto(b, k, champ);
-  await ghEcrire(chemin, base64Seul(plein), "Photo " + b.nom + " " + k + (champ === "photo2" ? " derrière" : ""));
-  if (cs[champ] && cs[champ].plein === plein){    // pas remplacée entre-temps
+  const quoi = estAppoint(champ) ? " appoint " + numeroAppoint(cs, champ) : (champ === "photo2" ? " derrière" : "");
+  await ghEcrire(chemin, base64Seul(plein), "Photo " + b.nom + " " + k + quoi);
+  if (photoObj(cs, champ) === ph && ph.plein === plein){    // pas remplacée entre-temps
     cachePhotos[cleCache(b, k, champ)] = plein;
-    cs[champ].chemin = chemin;
-    cs[champ].envoye = true;
-    cs[champ].plein = null;                       // libère la mémoire de l'appareil
+    ph.chemin = chemin;
+    ph.envoye = true;
+    ph.plein = null;                              // libère la mémoire de l'appareil
     sauver(); rendreBiblio();
   }
 }
@@ -3291,6 +3604,9 @@ function ouvrirReglages(ongletInitial){
          <label for="qA2">Question pour un compartiment à deux rangs (photo de devant + photo de derrière)</label>
          <textarea id="qA2" style="min-height:180px">${esc(cfg.qAnalyse2 || QUESTION_DEUX_RANGS_DEFAUT)}</textarea>
          <button class="btn" id="qA2r" style="margin-top:6px">Texte par défaut</button>
+         <label for="qAp">Question pour le contrôle par les photos d'appoint</label>
+         <textarea id="qAp" style="min-height:180px">${esc(cfg.qAppoint || QUESTION_APPOINT_DEFAUT)}</textarea>
+         <button class="btn" id="qApr" style="margin-top:6px">Texte par défaut</button>
          <label for="qR">Question posée pour les résumés</label>
          <textarea id="qR" style="min-height:140px">${esc(cfg.qResume)}</textarea>
          <button class="btn" id="qRr" style="margin-top:6px">Texte par défaut</button>
@@ -3327,6 +3643,7 @@ function ouvrirReglages(ongletInitial){
         if (tok) localStorage.setItem(CLE_TOKEN, tok); else localStorage.removeItem(CLE_TOKEN);
         cfg.qAnalyse = fd.querySelector("#qA").value;
         cfg.qAnalyse2 = fd.querySelector("#qA2").value;
+        cfg.qAppoint = fd.querySelector("#qAp").value;
         cfg.qResume = fd.querySelector("#qR").value;
         cfg.qCategorie = fd.querySelector("#qC").value;
         sauverCfg(); majBandeau();
@@ -3431,6 +3748,7 @@ function ouvrirReglages(ongletInitial){
 
   f.querySelector("#qAr").onclick = ()=>{ f.querySelector("#qA").value = QUESTION_ANALYSE_DEFAUT; };
   f.querySelector("#qA2r").onclick = ()=>{ f.querySelector("#qA2").value = QUESTION_DEUX_RANGS_DEFAUT; };
+  f.querySelector("#qApr").onclick = ()=>{ f.querySelector("#qAp").value = QUESTION_APPOINT_DEFAUT; };
   f.querySelector("#qRr").onclick = ()=>{ f.querySelector("#qR").value = QUESTION_RESUME_DEFAUT; };
   f.querySelector("#qCr").onclick = ()=>{ f.querySelector("#qC").value = QUESTION_CATEGORIE_DEFAUT; };
 
