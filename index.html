@@ -184,6 +184,36 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .hist h3{font-size:15px;color:var(--bronze);margin-top:14px}
 .hist ul{margin:5px 0 0;padding-left:18px;font-size:14px}
 .hist li{margin-bottom:3px}
+/* ---------- sélection d'une série de compartiments ---------- */
+.cases{-webkit-user-select:none;user-select:none}
+.case{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.case img{pointer-events:none;-webkit-user-drag:none}
+.case.depart{outline:3px solid var(--bronze);outline-offset:-3px;box-shadow:0 0 0 3px rgba(201,162,39,.35)}
+.case.plage{outline:2px dashed var(--bronze);outline-offset:-2px}
+.case.encours{outline:3px solid #fff8e1;outline-offset:-3px}
+.case .ordre{position:absolute;top:2px;right:3px;font-size:10px;font-weight:700;color:#1c1500;background:var(--bronze);border-radius:4px;padding:0 4px}
+#barreSel,#suivi{
+  position:fixed;left:50%;transform:translateX(-50%);z-index:50;width:calc(100% - 24px);max-width:640px;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  background:var(--encre2);border:1px solid var(--bronze);border-radius:12px;
+  box-shadow:0 6px 24px rgba(0,0,0,.55);font-size:14px;
+}
+#barreSel{display:flex;align-items:center;gap:10px;padding:9px 10px 9px 13px}
+#barreSel span{flex:1;min-width:0}
+#barreSel .btn{padding:7px 12px;font-size:14px}
+#suivi{padding:10px 13px}
+#barreSel[hidden],#suivi[hidden]{display:none}
+.bande{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin-bottom:10px}
+.vig{position:relative;flex:0 0 46px;height:61px;border-radius:7px;border:1px solid var(--trait);background:var(--encre3);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--texte2)}
+.vig img{width:100%;height:100%;object-fit:cover}
+.vig .lib{position:absolute;bottom:0;left:0;right:0;text-align:center;background:rgba(0,0,0,.6);color:#fff;font-size:10px}
+.vig .st{position:absolute;top:1px;right:2px;font-size:11px}
+.vig.cour{border:2px solid var(--bronze)}
+.cibleSerie{font-size:15px;margin-bottom:8px}
+.recap{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+.duo{text-align:center;font-size:12.5px}
+.duo img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:7px;border:1px solid var(--trait);display:block;margin-bottom:3px}
+.alerte{background:var(--orange-sombre);border:1px solid var(--orange);border-radius:10px;padding:8px 10px;margin:8px 0;font-size:13.5px}
 @media (prefers-reduced-motion:no-preference){
   .modale{animation:apparait .14s ease-out}
   @keyframes apparait{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
@@ -195,7 +225,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 <header>
   <button class="icone" id="btnRetour" hidden>←</button>
   <h1 id="titrePage" class="serif">Bibliothèques</h1>
-  <button id="badgeVersion">V1.1.0</button>
+  <button id="badgeVersion">V1.3.0</button>
   <button class="icone" id="btnSync" title="Sauvegarde et transferts">☁️</button>
   <button class="icone" id="btnReglages" title="Réglages">⚙️</button>
 </header>
@@ -207,6 +237,10 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 </main>
 
 <div id="toast" class="masque"></div>
+<div id="barreSel" hidden></div>
+<div id="suivi" class="progres" hidden></div>
+<input type="file" id="entreeMulti" accept="image/*" multiple hidden>
+<input type="file" id="entreeSerie" accept="image/*" capture="environment" hidden>
 <div id="zoneModales"></div>
 
 <script>
@@ -215,8 +249,14 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.2.0";
+const VERSION = "V1.3.0";
 const HISTORIQUE = [
+  { v:"V1.3.0", d:"22/09/2026", l:[
+    "Appui long sur un compartiment puis toucher d'un autre : tous les compartiments entre les deux sont sélectionnés, rangée par rangée (avertissement si le sens est inversé).",
+    "Photos existantes : il faut autant de photos que de compartiments ; elles sont affectées dans l'ordre de sélection après un récapitulatif, sinon rien n'est fait et la raison est expliquée.",
+    "Appareil photo : une photo par compartiment avec « Reprendre » ou « Utiliser », et « Terminer » pour s'arrêter en route.",
+    "Compartiments déjà photographiés : remplacer, les sauter ou ne rien faire. Photos envoyées sur GitHub au fil de l'eau, remplissage visible dans la grille, analyse Gemini proposée à la fin."
+  ]},
   { v:"V1.2.0", d:"21/09/2026", l:[
     "Dépôt pré-rempli : propriétaire Hammerinhank, dépôt bibliotheque, branche main — toujours modifiables dans les réglages.",
     "Les données et les photos se lisent sur GitHub sans jeton ; le jeton ne sert plus qu'à y enregistrer.",
@@ -1035,6 +1075,7 @@ function rendreBiblio(){
 
   $("#vueBiblio").innerHTML =
     `<div class="titreSection">La grille — touchez un compartiment pour sa photo et ses livres</div>
+     <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier.</div>
      ${grille}
      <div class="legende">
        <span><i style="border-color:var(--vert)"></i>livres relevés</span>
@@ -1079,9 +1120,8 @@ function rendreBiblio(){
   $("#bListe").onclick = ()=>fenetreListe(b);
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
-  document.querySelectorAll("[data-case]").forEach(el=>{
-    el.onclick = ()=>ouvrirCompartiment(b, el.dataset.case);
-  });
+  document.querySelectorAll("#vueBiblio [data-case]").forEach(el=>brancherCase(el, b));
+  majMarquesGrille();
 }
 
 /* ====================================================================
@@ -1249,8 +1289,11 @@ async function analyserToutesPhotos(b){
       ], surFermeture:()=>res(null)});
   });
   if (!choix || !choix.length) return;
+  await analyserListe(b, choix, "Analyse des photos");
+}
 
-  const pg = fenetreProgres("Analyse des photos");
+async function analyserListe(b, choix, titre){
+  const pg = fenetreProgres(titre || "Analyse des photos");
   let fait=0, trouves=0; const erreurs=[];
   for (const k of choix){
     pg.maj(fait, choix.length, "Compartiment " + k);
@@ -1270,6 +1313,404 @@ async function analyserToutesPhotos(b){
     html:`<div>${fait} photo(s) traitée(s), ${trouves} livre(s) relevé(s).</div>
           ${erreurs.length?`<div class="aide">${erreurs.length} échec(s) :<br>${esc(erreurs.join(" | "))}</div>`:""}`,
     boutons:[{texte:"Fermer"}]});
+}
+
+/* ====================================================================
+   SÉRIE DE PHOTOS : APPUI LONG + TOUCHER → PLUSIEURS COMPARTIMENTS
+   ==================================================================== */
+const DUREE_APPUI_LONG = 600;   // ms
+let selDepart = null;           // { bibId, cle } : compartiment tenu longtemps
+let serie = null;               // { bibId, liste:[clés], inverse, encours, actif }
+let appuiLongActif = false;
+let ignorerClicJusqua = 0;
+
+const lib = k => String(k).replace("-", "·");
+
+function brancherCase(el, b){
+  const k = el.dataset.case;
+  let minuteur = null, x0 = 0, y0 = 0;
+  const stop = ()=>{ clearTimeout(minuteur); minuteur = null; };
+  el.addEventListener("pointerdown", e=>{
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    x0 = e.clientX; y0 = e.clientY; stop();
+    minuteur = setTimeout(()=>{ minuteur = null; appuiLongActif = true; appuiLong(b, k, el); }, DUREE_APPUI_LONG);
+  });
+  el.addEventListener("pointermove", e=>{
+    if (minuteur && Math.hypot(e.clientX - x0, e.clientY - y0) > 10) stop();
+  });
+  ["pointerup","pointercancel","pointerleave"].forEach(t=>el.addEventListener(t, stop));
+  el.addEventListener("contextmenu", e=>e.preventDefault());
+  el.addEventListener("click", e=>{
+    e.stopPropagation();
+    if (Date.now() < ignorerClicJusqua) return;          // relâchement de l'appui long
+    if (selDepart && selDepart.bibId === b.id){ toucherArrivee(b, k); return; }
+    if (serie && serie.actif && serie.liste.includes(k)){ toast("Ce compartiment est en cours de remplissage."); return; }
+    ouvrirCompartiment(b, k);
+  });
+}
+
+function appuiLong(b, k){
+  if (serie){ toast(serie.actif ? "Un remplissage est déjà en cours : attendez qu'il se termine." : "Une sélection est déjà en cours."); return; }
+  try{ if (navigator.vibrate) navigator.vibrate(35); }catch(e){}
+  selDepart = { bibId:b.id, cle:k };
+  majBarreSel(); majMarquesGrille();
+}
+
+function majMarquesGrille(){
+  const b = biblio(biblioCourante);
+  document.querySelectorAll("#vueBiblio [data-case]").forEach(el=>{
+    const k = el.dataset.case;
+    el.classList.toggle("depart", !!(b && selDepart && selDepart.bibId === b.id && selDepart.cle === k));
+    const pos = (b && serie && serie.bibId === b.id) ? serie.liste.indexOf(k) : -1;
+    el.classList.toggle("plage", pos >= 0);
+    el.classList.toggle("encours", !!(b && serie && serie.bibId === b.id && serie.encours === k));
+    let o = el.querySelector(".ordre");
+    if (pos >= 0){
+      if (!o){ o = document.createElement("span"); o.className = "ordre"; el.appendChild(o); }
+      o.textContent = pos + 1;
+    } else if (o) o.remove();
+  });
+}
+
+function majBarreSel(){
+  const z = $("#barreSel");
+  if (selDepart){
+    z.innerHTML = `<span>Départ : <b>${lib(selDepart.cle)}</b> — touchez le compartiment d'arrivée</span>
+                   <button class="btn" id="bsAnnuler">Annuler</button>`;
+  } else if (serie && !serie.actif){
+    z.innerHTML = `<span>Sélection : <b>${serie.liste.length}</b> compartiment(s)</span>
+                   <button class="btn" id="bsAnnuler">Annuler</button>`;
+  } else { z.hidden = true; z.innerHTML = ""; return; }
+  z.hidden = false;
+  z.querySelector("#bsAnnuler").onclick = ()=>annulerSelection("Sélection annulée.");
+}
+
+function annulerSelection(msg){
+  const avait = !!(selDepart || (serie && !serie.actif));
+  selDepart = null;
+  if (serie && !serie.actif) serie = null;
+  majBarreSel(); majMarquesGrille();
+  if (msg && avait) toast(msg);
+}
+
+/* ordre rangée par rangée, de gauche à droite ; à rebours si l'arrivée précède le départ */
+function plageCases(b, k1, k2){
+  const idx = k=>{ const [r,c] = k.split("-").map(Number); return (r-1)*b.compartiments + (c-1); };
+  const i1 = idx(k1), i2 = idx(k2), pas = i2 >= i1 ? 1 : -1;
+  const liste = [];
+  for (let i = i1; ; i += pas){
+    liste.push(clef(Math.floor(i / b.compartiments) + 1, (i % b.compartiments) + 1));
+    if (i === i2) break;
+  }
+  return { liste, inverse: pas < 0 };
+}
+
+function texteOrdre(liste){
+  if (liste.length <= 8) return liste.map(lib).join(" → ");
+  return liste.slice(0,3).map(lib).join(" → ") + " → … → " + liste.slice(-2).map(lib).join(" → ");
+}
+
+function blocOrdre(){
+  return `<div class="aide" style="font-size:13px">Ordre de remplissage : ${esc(texteOrdre(serie.liste))}</div>` +
+    (serie.inverse ? `<div class="alerte">⚠️ Sens inversé : le compartiment d'arrivée est avant celui de départ. Les compartiments seront remplis en remontant, de ${lib(serie.liste[0])} vers ${lib(serie.liste[serie.liste.length-1])}.</div>` : "");
+}
+
+async function toucherArrivee(b, k){
+  const depart = selDepart.cle;
+  if (k === depart){ annulerSelection("Sélection annulée."); return; }
+  const { liste, inverse } = plageCases(b, depart, k);
+  selDepart = null;
+  serie = { bibId:b.id, liste, inverse, encours:null, actif:false };
+  majBarreSel(); majMarquesGrille();
+  if (inverse) toast("⚠️ Sens inversé : les compartiments seront remplis en remontant.", 4500);
+
+  // compartiments qui ont déjà une photo
+  const occupes = liste.filter(x=>b.cases[x] && b.cases[x].photo);
+  if (occupes.length){
+    const choix = await new Promise(res=>{
+      modale({ titre:"Compartiments déjà photographiés",
+        html:`<div>${liste.length} compartiment(s) sélectionné(s), dont <b>${occupes.length}</b> qui ont déjà une photo :
+              ${esc(occupes.map(lib).join(", "))}.</div>` + blocOrdre() +
+             `<div class="aide">« Remplacer » : leurs photos seront changées (les livres relevés sont conservés).<br>
+              « Les sauter » : ils gardent leur photo et sont retirés de la sélection.</div>`,
+        boutons:[
+          {texte:"Ne rien faire", action:()=>res(null)},
+          {texte:"Les sauter", action:()=>res("sauter")},
+          {texte:"Remplacer", classe:"principal", action:()=>res("remplacer")}
+        ], surFermeture:()=>res(null) });
+    });
+    if (!choix){ annulerSelection(); return; }
+    if (choix === "sauter"){
+      serie.liste = liste.filter(x=>!occupes.includes(x));
+      majBarreSel(); majMarquesGrille();
+      if (!serie.liste.length){ annulerSelection(); toast("Tous les compartiments sélectionnés ont déjà une photo : rien à faire."); return; }
+    }
+  }
+
+  const n = serie.liste.length;
+  modale({ titre:`Photos pour ${n} compartiment(s)`,
+    html: blocOrdre() +
+      (ghPret() ? `<div class="aide">Chaque photo est envoyée sur GitHub dès qu'elle est placée ; la grille se remplit au fur et à mesure.</div>`
+                : `<div class="alerte">Pas de jeton GitHub : les photos resteront sur cet appareil (envoi possible plus tard via ☁️). La mémoire de l'appareil est limitée à quelques dizaines de photos.</div>`) +
+      `<div class="aide">📁 Photos existantes : choisissez exactement ${n} photo(s), dans l'ordre des compartiments.<br>
+       📷 Appareil photo : une photo par compartiment, avec possibilité de la reprendre.</div>`,
+    boutons:[
+      {texte:"Annuler", action:()=>annulerSelection()},
+      {texte:"📁 Photos existantes", action:()=>ouvrirSelecteurPhotos(b)},
+      {texte:"📷 Appareil photo", classe:"principal", action:()=>serieAppareil(b)}
+    ],
+    surFermeture:()=>annulerSelection() });
+}
+
+/* ---------- photos existantes ---------- */
+function ouvrirSelecteurPhotos(b){
+  const inp = $("#entreeMulti");
+  inp.value = "";
+  inp.onchange = ()=>{
+    const files = Array.from(inp.files || []);
+    inp.value = "";
+    recevoirPhotosExistantes(b, files);
+  };
+  inp.oncancel = ()=>annulerSelection("Aucune photo choisie : sélection annulée.");
+  inp.click();          // appelé directement dans le geste de l'utilisateur (exigence iOS)
+}
+
+function recevoirPhotosExistantes(b, files){
+  if (!serie) return;
+  const n = serie.liste.length;
+  if (!files.length){ annulerSelection("Aucune photo choisie : sélection annulée."); return; }
+  if (files.length !== n){
+    modale({ titre:"Nombre de photos différent",
+      html:`<div>Vous avez choisi <b>${files.length}</b> photo(s) pour <b>${n}</b> compartiment(s) : <b>rien n'a été fait</b>.</div>
+            <div class="aide">Chaque photo doit aller dans un compartiment, dans l'ordre où vous l'avez sélectionnée : il faut donc exactement ${n} photo(s).
+            ${files.length > n ? `Il y en a ${files.length - n} de trop.` : `Il en manque ${n - files.length}.`}</div>`,
+      boutons:[
+        {texte:"Annuler", action:()=>annulerSelection()},
+        {texte:"Choisir à nouveau", classe:"principal", action:()=>ouvrirSelecteurPhotos(b)}
+      ],
+      surFermeture:()=>annulerSelection() });
+    return;
+  }
+  const urls = files.map(f=>URL.createObjectURL(f));
+  const liberer = ()=>setTimeout(()=>urls.forEach(u=>URL.revokeObjectURL(u)), 1000);
+  modale({ titre:"Vérifiez l'ordre",
+    html:`<div class="aide" style="margin-top:0">Chaque photo ira dans le compartiment indiqué dessous. Si l'ordre ne convient pas, choisissez à nouveau en touchant les photos dans le bon ordre.</div>
+          ${serie.inverse ? `<div class="alerte">⚠️ Sens inversé : remplissage en remontant.</div>` : ""}
+          <div class="recap">${urls.map((u,i)=>`<div class="duo"><img src="${u}" alt=""><span>→ ${lib(serie.liste[i])}</span></div>`).join("")}</div>`,
+    boutons:[
+      {texte:"Annuler", action:()=>{ liberer(); annulerSelection(); }},
+      {texte:"Choisir à nouveau", action:()=>{ liberer(); ouvrirSelecteurPhotos(b); }},
+      {texte:"Valider", classe:"principal", action:()=>{ liberer(); remplirDepuisFichiers(b, files); }}
+    ],
+    surFermeture:()=>{ liberer(); annulerSelection(); } });
+}
+
+async function remplirDepuisFichiers(b, files){
+  const liste = serie.liste.slice();
+  serie.actif = true; majBarreSel();
+  const total = liste.length;
+  let fait = 0, envoyees = 0, locales = 0;
+  const affectees = [], erreurs = [];
+  for (let i = 0; i < total; i++){
+    const k = liste[i];
+    serie.encours = k; majMarquesGrille();
+    majSuivi(fait, total, `${lib(k)} : préparation de la photo…`);
+    try{
+      await affecterPhoto(b, k, files[i]);
+      affectees.push(k);
+      if (ghPret()){
+        majSuivi(fait, total, `${lib(k)} : envoi vers GitHub…`);
+        try{ await televerserPhoto(b, k); envoyees++; }
+        catch(e){ locales++; erreurs.push(lib(k) + " (envoi) : " + e.message); }
+      } else locales++;
+    }catch(e){ erreurs.push(lib(k) + " : " + e.message); }
+    fait++;
+    majSuivi(fait, total, "");
+  }
+  masquerSuivi();
+  bilanSerie(b, affectees, envoyees, locales, erreurs, false);
+}
+
+/* ---------- outils communs ---------- */
+async function affecterPhoto(b, k, file){
+  const brut  = await lireFichier(file);
+  const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
+  const mini  = await redimensionner(plein, cfg.tailleMini, 0.55);
+  b.cases[k] = b.cases[k] || { livres:[] };
+  b.cases[k].photo = { plein, mini, chemin:"images/"+b.id+"/"+k+".jpg", envoye:false, maj:new Date().toISOString() };
+  delete cachePhotos[b.id + "/" + k];
+  sauver(); rendreBiblio();
+}
+
+async function televerserPhoto(b, k){
+  const cs = b.cases[k];
+  if (!cs || !cs.photo || !cs.photo.plein) return;
+  const plein = cs.photo.plein;
+  const chemin = "images/" + b.id + "/" + k + ".jpg";
+  await ghEcrire(chemin, base64Seul(plein), "Photo " + b.nom + " " + k);
+  if (cs.photo && cs.photo.plein === plein){      // pas remplacée entre-temps
+    cachePhotos[b.id + "/" + k] = plein;
+    cs.photo.chemin = chemin;
+    cs.photo.envoye = true;
+    cs.photo.plein = null;                        // libère la mémoire de l'appareil
+    sauver(); rendreBiblio();
+  }
+}
+
+function majSuivi(fait, total, detail){
+  const z = $("#suivi");
+  z.hidden = false;
+  z.innerHTML = `<div><b>Remplissage : ${fait} / ${total}</b> — restants : ${Math.max(0, total - fait)}</div>
+    <div class="barreint"><i style="width:${total ? Math.round(fait*100/total) : 0}%"></i></div>
+    ${detail ? `<div class="aide">${esc(detail)}</div>` : ""}`;
+}
+function masquerSuivi(){ const z = $("#suivi"); z.hidden = true; z.innerHTML = ""; }
+
+/* ---------- appareil photo ---------- */
+function serieAppareil(b){
+  const liste = serie.liste.slice();
+  serie.actif = true; serie.encours = liste[0];
+  majBarreSel(); majMarquesGrille();
+  const inp = $("#entreeSerie");
+  const et = { i:0, fichier:null, url:null, statuts:{}, chaine:Promise.resolve(),
+               affectees:[], envoyees:0, locales:0, erreurs:[], termine:false };
+  liste.forEach(k=>et.statuts[k] = "attente");
+  const ICONE = { attente:"", traitement:"⏳", envoi:"⬆️", envoye:"☁️", local:"📱", echec:"⚠️" };
+
+  const f = modale({ titre:"Photos en série",
+    html:`<div class="bande" id="aBande"></div><div id="aCible" class="cibleSerie"></div>
+          <div id="aZone"></div><div id="aEnvoi" class="aide"></div>`,
+    boutons:[{texte:"Terminer", classe:"principal", action:()=>terminer()}],
+    surFermeture:()=>terminer() });
+
+  const dessiner = ()=>{
+    if (!f.isConnected) return;
+    const courant = liste[et.i];
+    f.querySelector("#aBande").innerHTML = liste.map(k=>{
+      const ph = b.cases[k] && b.cases[k].photo;
+      const montrer = et.statuts[k] !== "attente" && ph && ph.mini;
+      return `<div class="vig ${k===courant?"cour":""}" data-v="${k}">
+        ${montrer ? `<img src="${ph.mini}" alt="">` : "📷"}
+        <span class="lib">${lib(k)}</span><span class="st">${ICONE[et.statuts[k]]||""}</span></div>`;
+    }).join("");
+    const cv = f.querySelector(`[data-v="${courant}"]`);
+    if (cv) cv.scrollIntoView({ inline:"center", block:"nearest" });
+
+    f.querySelector("#aCible").innerHTML = courant
+      ? `Compartiment <b>${lib(courant)}</b> — traités : ${et.i} / ${liste.length}, restants : ${liste.length - et.i}`
+      : `Toutes les photos sont prises.`;
+
+    const z = f.querySelector("#aZone");
+    if (!courant){ z.innerHTML = ""; }
+    else if (et.fichier){
+      z.innerHTML = `<img class="photo-apercu" src="${et.url}" alt="Photo prise">
+        <div class="barre"><button class="btn" id="aReprendre" style="flex:1">↺ Reprendre</button>
+        <button class="btn principal" id="aUtiliser" style="flex:1">✓ Utiliser</button></div>`;
+      z.querySelector("#aReprendre").onclick = ()=>prendre();
+      z.querySelector("#aUtiliser").onclick = ()=>utiliser();
+    } else {
+      z.innerHTML = `<button class="btn principal plein" id="aPrendre">📷 Photographier ${lib(courant)}</button>
+        <div class="aide">De face, bien éclairé, tranches lisibles.</div>`;
+      z.querySelector("#aPrendre").onclick = ()=>prendre();
+    }
+
+    const enCours = liste.filter(k=>["traitement","envoi"].includes(et.statuts[k])).length;
+    f.querySelector("#aEnvoi").textContent = ghPret()
+      ? `GitHub : ${et.envoyees} photo(s) envoyée(s)${enCours ? `, ${enCours} en cours` : ""}${et.locales ? `, ${et.locales} restée(s) sur l'appareil` : ""}.`
+      : `Sans jeton GitHub : les photos restent sur cet appareil.`;
+  };
+
+  const prendre = ()=>{
+    inp.value = "";
+    inp.onchange = ()=>{
+      const file = inp.files && inp.files[0];
+      inp.value = "";
+      if (!file || et.termine) return;
+      if (et.url) URL.revokeObjectURL(et.url);
+      et.fichier = file; et.url = URL.createObjectURL(file);
+      dessiner();
+    };
+    inp.click();        // directement dans le geste de l'utilisateur (exigence iOS)
+  };
+
+  const utiliser = ()=>{
+    const k = liste[et.i], file = et.fichier, url = et.url;
+    if (!k || !file) return;
+    et.fichier = null; et.url = null;
+    et.statuts[k] = "traitement";
+    et.i++;
+    const suivant = liste[et.i];
+    serie.encours = suivant || null; majMarquesGrille();
+    dessiner();
+    if (suivant) prendre();               // enchaîne sur le compartiment suivant
+    et.chaine = et.chaine.then(async ()=>{
+      try{
+        await affecterPhoto(b, k, file);
+        et.affectees.push(k);
+      }catch(e){
+        et.statuts[k] = "echec"; et.erreurs.push(lib(k) + " : " + e.message);
+        URL.revokeObjectURL(url); dessiner(); rafraichirSuivi(); return;
+      }
+      URL.revokeObjectURL(url);
+      if (ghPret()){
+        et.statuts[k] = "envoi"; dessiner();
+        try{ await televerserPhoto(b, k); et.statuts[k] = "envoye"; et.envoyees++; }
+        catch(e){ et.statuts[k] = "local"; et.locales++; et.erreurs.push(lib(k) + " (envoi) : " + e.message); }
+      } else { et.statuts[k] = "local"; et.locales++; }
+      dessiner(); rafraichirSuivi();
+    });
+    if (!suivant) terminer();
+  };
+
+  const rafraichirSuivi = ()=>{
+    if (!et.termine) return;
+    const n = liste.filter(k=>et.statuts[k] !== "attente").length;
+    const faits = liste.filter(k=>["envoye","local","echec"].includes(et.statuts[k])).length;
+    majSuivi(faits, n, "Envoi des dernières photos…");
+  };
+
+  const terminer = async ()=>{
+    if (et.termine) return;
+    et.termine = true;
+    if (et.url) URL.revokeObjectURL(et.url);
+    et.fichier = null; et.url = null;
+    if (f.isConnected) f.remove();
+    serie.encours = null; majMarquesGrille();
+    rafraichirSuivi();
+    await et.chaine;
+    masquerSuivi();
+    bilanSerie(b, et.affectees, et.envoyees, et.locales, et.erreurs, et.i < liste.length);
+  };
+
+  dessiner();
+  prendre();            // ouvre l'appareil tout de suite pour le premier compartiment
+}
+
+/* ---------- bilan + proposition d'analyse ---------- */
+function bilanSerie(b, affectees, envoyees, locales, erreurs, interrompu){
+  serie = null;
+  majBarreSel(); rendreBiblio();
+  if (!affectees.length){
+    toast(interrompu ? "Série terminée sans photo affectée." : "Aucune photo n'a été affectée.");
+    if (erreurs.length) modale({ titre:"Remplissage", html:`<div class="aide">${esc(erreurs.join(" | "))}</div>`, boutons:[{texte:"Fermer"}] });
+    return;
+  }
+  const avecLivres = affectees.filter(k=>(b.cases[k].livres||[]).length).length;
+  const html =
+    `<div>${affectees.length} photo(s) placée(s) dans leur compartiment${interrompu ? " (série arrêtée en route)" : ""}.</div>
+     <div class="aide">☁️ ${envoyees} envoyée(s) sur GitHub${locales ? ` · 📱 ${locales} restée(s) sur cet appareil, à envoyer via ☁️` : ""}.
+     Le fichier ${FICHIER_JSON} reste à envoyer via ☁️ pour que vos autres appareils voient ces photos.</div>
+     ${erreurs.length ? `<div class="aide">⚠️ ${esc(erreurs.join(" | "))}</div>` : ""}
+     <div class="sep"></div>
+     <div>Analyser maintenant ces ${affectees.length} compartiment(s) avec Gemini ?</div>
+     ${avecLivres ? `<div class="aide">${avecLivres} d'entre eux ont déjà des livres relevés : leur liste sera remplacée.</div>` : ""}
+     ${cleGemini() ? "" : `<div class="alerte">Clé Gemini absente : renseignez-la d'abord dans les réglages ⚙️.</div>`}`;
+  modale({ titre:"Remplissage terminé", html,
+    boutons: cleGemini()
+      ? [ {texte:"Plus tard"},
+          {texte:"🔍 Analyser", classe:"principal", action:()=>{ analyserListe(b, affectees, "Analyse des nouvelles photos"); }} ]
+      : [ {texte:"Plus tard"},
+          {texte:"Réglages ⚙️", classe:"principal", action:()=>ouvrirReglages("gemini")} ] });
 }
 
 /* ====================================================================
@@ -1636,7 +2077,15 @@ $("#badgeVersion").onclick = ouvrirHistorique;
 $("#btnSync").onclick = ouvrirSync;
 $("#bandeau").onclick = ()=>{ if (!ghLisible()) ouvrirReglages("github"); else ouvrirSync(); };
 $("#btnReglages").onclick = ()=>ouvrirReglages();
-$("#btnRetour").onclick = ()=>{ biblioCourante = null; rendreListe(); window.scrollTo(0,0); };
+$("#btnRetour").onclick = ()=>{ annulerSelection(); biblioCourante = null; rendreListe(); window.scrollTo(0,0); };
+document.addEventListener("pointerup", ()=>{
+  if (appuiLongActif){ appuiLongActif = false; ignorerClicJusqua = Date.now() + 450; }
+}, true);
+document.addEventListener("click", e=>{
+  if (!selDepart) return;
+  if (e.target.closest(".case, #barreSel, #zoneModales")) return;
+  annulerSelection("Sélection annulée.");
+});
 document.addEventListener("keydown", e=>{
   if (e.key === "Escape"){
     const m = $("#zoneModales").lastElementChild;
