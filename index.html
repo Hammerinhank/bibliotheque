@@ -326,8 +326,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.16.0";
+const VERSION = "V1.16.1";
 const HISTORIQUE = [
+  { v:"V1.16.1", d:"22/09/2026", l:[
+    "Libellé du second onglet d'un compartiment raccourci : « ➕ Derrière » au lieu de « ➕ Rang de derrière »."
+  ]},
   { v:"V1.16.0", d:"22/09/2026", l:[
     "Photos d'appoint : autant de photos que voulu par compartiment (zooms, angles), en plus des deux photos de rang. Liste déroulante à droite des boutons Devant / Derrière pour les choisir ou en ajouter une.",
     "Chaque appoint a une légende libre, ses propres outils (taille réelle, lignes de coupe, tronquer, retirer) et son fichier sur GitHub (…-appoint-<id>.jpg).",
@@ -2530,7 +2533,7 @@ function ouvrirCompartiment(b, k){
     const app = cs.appoints || [];
     zf.innerHTML =
       `<button data-face="photo" class="${face==="photo"?"actif":""}">📚 Devant${cs.photo?"":" (vide)"}</button>
-       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Rang de derrière"}</button>
+       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Derrière"}</button>
        <select id="cAppoints" title="Photos d'appoint">
          <option value="">🖼 Appoints${app.length ? " ("+app.length+")" : " : aucun"}</option>
          ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
@@ -3839,3 +3842,4 @@ if (ghLisible()) recupererDeGitHub(true);
 if (!cleGemini()) setTimeout(()=>toast("Renseignez votre clé Gemini dans les réglages ⚙️ pour analyser les photos.", 5000), 900);
 </script>
 </body>
+</html>
