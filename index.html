@@ -380,8 +380,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.40.0";
+const VERSION = "V1.41.0";
 const HISTORIQUE = [
+  { v:"V1.41.0", d:"23/09/2026", l:[
+    "Photo d'appoint : avant tout rapprochement, l'app établit la rangée photographiée. Une rangée : il faut quelques livres reconnus, sinon elle demande confirmation. Deux rangées : il faut des correspondances nettes avec l'une et pas avec l'autre, sinon elle demande laquelle.",
+    "La rangée de chaque appoint est mémorisée et affichée dans la liste déroulante des appoints (« Appoint 2 · rangée 1 — légende »). La vérification ne compare ensuite qu'à cette rangée."
+  ]},
   { v:"V1.40.0", d:"23/09/2026", l:[
     "Modèles Gemini : chaque recherche ou test complète la mémoire au lieu de l'écraser ; pour chaque modèle sont conservés le dernier état, le temps de réponse du test, la moyenne des 10 derniers tests et la date.",
     "Le temps des vraies analyses de photos est aussi mesuré et mémorisé par modèle (moyenne des 10 dernières).",
@@ -2486,7 +2490,74 @@ function preparerFusionAppoint(cs, lus, rangForce){
   return (b.sur > a.sur || (b.sur === a.sur && b.paires > a.paires)) ? b : a;
 }
 
-function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
+/* ====== RANGÉE D'UNE PHOTO D'APPOINT ======
+   Avant tout rapprochement : à quelle rangée la photo d'appoint correspond-elle ?
+   - une seule rangée : il faut au moins quelques livres reconnus ;
+   - deux rangées : il faut des correspondances nettes avec l'une et pas avec l'autre.
+   Sinon, on demande. Le résultat est mémorisé sur l'appoint (appoint.rang) et affiché dans la liste des appoints. */
+function correspondancesRangee(cs, lus, r){
+  const liste = (cs.livres||[]).filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r);
+  let n = 0;
+  lus.forEach(lu=>{
+    if (lu.illisible || !lu.titre) return;
+    if (liste.some(lv=>{ const t = simTitre(lu.titre, lv.titre), au = simAuteur(lu.auteur, lv.auteur); return t >= 0.85 && (au === null || au >= 0.6); })) n++;
+  });
+  return { n, total: liste.length };
+}
+function deuxRangeesCase(cs){ return !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere")); }
+const NOM_RANGEE = { devant:"rangée 1 (devant)", derriere:"rangée 2 (derrière)" };
+
+function securiserRangeeAppoint(b, k, champ, lus){
+  const cs = b.cases[k];
+  const appoint = photoObj(cs, champ);
+  const num = numeroAppoint(cs, champ);
+  const lisibles = lus.filter(l=>!l.illisible && l.titre).length;
+  const minimum = Math.min(2, Math.max(1, lisibles));        // « quelques » livres : 2, ou 1 si la photo n'en montre qu'un
+  const memoriser = (r, auto, c1, c2)=>{
+    if (!appoint) return;
+    appoint.rang = r;
+    appoint.rangInfo = { auto, n1:c1 ? c1.n : null, n2:c2 ? c2.n : null, date:new Date().toISOString() };
+    sauver();
+    if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+  };
+  return new Promise(res=>{
+    const deux = deuxRangeesCase(cs);
+    const c1 = correspondancesRangee(cs, lus, "devant");
+    const c2 = deux ? correspondancesRangee(cs, lus, "derriere") : null;
+    const choisir = (titre, texte, options)=>{
+      let fait = false;
+      modale({ titre, html:texte,
+        boutons: options.map(o=>({ texte:o.texte, classe:o.classe, action:()=>{ fait = true; if (o.r) memoriser(o.r, false, c1, c2); res(o.r || null); } })),
+        surFermeture:()=>{ if (!fait) res(null); } });
+    };
+    const lignesCompte = `<div class="aide">Livres lus sur la photo : ${lisibles}. Reconnus dans la rangée 1 : <b>${c1.n}</b> (sur ${c1.total})${deux ? `, dans la rangée 2 : <b>${c2.n}</b> (sur ${c2.total})` : ""}.</div>`;
+
+    if (!deux){
+      if (c1.n >= minimum){ memoriser("devant", true, c1, null); res("devant"); return; }
+      if (!c1.total){ memoriser("devant", true, c1, null); res("devant"); return; }   // rangée encore vide : rien à vérifier
+      choisir("Appoint " + num + " — correspondance douteuse",
+        `<div>Sur cette photo d'appoint, ${c1.n ? "un seul livre est reconnu" : "<b>aucun livre n'est reconnu</b>"} dans la liste du compartiment ${esc(lib(k))}.</div>${lignesCompte}
+         <div class="aide">La photo appartient-elle vraiment à ce compartiment ? Si oui, continuez ; sinon, annulez et vérifiez la photo.</div>`,
+        [{ texte:"Annuler" }, { texte:"Continuer quand même", classe:"principal", r:"devant" }]);
+      return;
+    }
+    // deux rangées : il faut un écart net
+    const net = (a, z)=> a.n >= minimum && a.n >= 3 * z.n && a.n - z.n >= 2 || (a.n >= minimum && z.n === 0);
+    if (net(c1, c2)){ memoriser("devant", true, c1, c2); res("devant"); return; }
+    if (net(c2, c1)){ memoriser("derriere", true, c1, c2); res("derriere"); return; }
+    const prec = appoint && appoint.rang;
+    choisir("Appoint " + num + " — quelle rangée ?",
+      `<div>Impossible de savoir avec certitude à quelle rangée correspond cette photo d'appoint.</div>${lignesCompte}
+       ${prec ? `<div class="aide">Rattachée précédemment à la ${NOM_RANGEE[prec]}.</div>` : ""}
+       <div class="aide">Choisissez la rangée photographiée, ou annulez si la photo ne correspond à aucune des deux.</div>`,
+      [{ texte:"Annuler" },
+       { texte:"Rangée 1 (devant)", classe: prec === "devant" || (!prec && c1.n >= c2.n) ? "principal" : "", r:"devant" },
+       { texte:"Rangée 2 (derrière)", classe: prec === "derriere" || (!prec && c2.n > c1.n) ? "principal" : "", r:"derriere" }]);
+  });
+}
+
+async function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
+  if (!rangForce){ rangForce = await securiserRangeeAppoint(b, k, champ, lus); if (!rangForce) return; }
   const cs = b.cases[k];
   const appoint = photoObj(cs, champ);
   const num = numeroAppoint(cs, champ);
@@ -2521,7 +2592,11 @@ function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
     surAnnuler: marquer
   });
   const bA = f.querySelector("#faAutre");
-  if (bA) bA.onclick = ()=>{ f.remove(); fenetreFusionAppoint(b, k, champ, lus, source, autre); };
+  if (bA) bA.onclick = ()=>{
+    f.remove();
+    if (appoint){ appoint.rang = autre; appoint.rangInfo = { auto:false, date:new Date().toISOString() }; sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); }
+    fenetreFusionAppoint(b, k, champ, lus, source, autre);
+  };
 }
 
 /* ====================================================================
@@ -2762,7 +2837,9 @@ function rapprocherAppoint(cs, lus){
 }
 
 /* ---------- fenêtre de vérification ---------- */
-function fenetreVerifAppoint(b, k, champ, lus, source){
+async function fenetreVerifAppoint(b, k, champ, lus, source){
+  const rangAppoint = lus.length ? await securiserRangeeAppoint(b, k, champ, lus) : null;
+  if (lus.length && !rangAppoint) return;
   const cs = b.cases[k];
   const appoint = photoObj(cs, champ);
   const num = numeroAppoint(cs, champ);
@@ -2775,11 +2852,12 @@ function fenetreVerifAppoint(b, k, champ, lus, source){
   }
   const deuxRangees = !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere"));
   const nomRg = (r)=> r === "derriere" ? "rangée 2" : "rangée 1";
-  const R = rapprocherAppoint(cs, lus);
+  // on ne compare qu'à la rangée photographiée
+  const R = rapprocherAppoint({ livres:(cs.livres||[]).filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === rangAppoint) }, lus);
   const res = R.res;
   // choix de l'utilisateur pour les « probables » : "oui" | "non" | "" (sans choix = ignoré)
   const choix = res.map(()=> "");
-  const rangNouveau = res.map(()=> "devant");
+  const rangNouveau = res.map(()=> rangAppoint || "devant");
 
   // voisin reconnu le plus proche (pour placer un livre ajouté)
   const voisin = (i)=>{
@@ -2850,7 +2928,7 @@ function fenetreVerifAppoint(b, k, champ, lus, source){
     titre:"Photo d'appoint " + num + " — " + lib(k),
     html:`<div>L'IA a lu <b>${res.length}</b> livre(s) sur cette photo, de gauche à droite :
             <b>${nb("sur")}</b> déjà relevé(s), <b>${nb("probable")}</b> à confirmer, <b>${nb("absent")}</b> absent(s)${nb("illisible") ? `, ${nb("illisible")} illisible(s)` : ""}.</div>
-          <div class="aide">L'IA n'a pas vu la liste : c'est l'application qui a comparé chaque titre lu aux listes ${deuxRangees ? "des rangées 1 et 2" : "de la rangée"} (titre, auteur et place dans l'ordre).${esc(texteSource(source))}</div>
+          <div class="aide">Photo rattachée à la <b>${NOM_RANGEE[rangAppoint]}</b>. L'IA n'a pas vu la liste : c'est l'application qui a comparé chaque titre lu à la liste de cette rangée (titre, auteur et place dans l'ordre).${esc(texteSource(source))}</div>
           ${ordre}
           <div class="titreSection" style="margin-top:12px">📷 Lu sur la photo</div>
           <div>${res.map(ligne).join("")}</div>
@@ -3891,7 +3969,7 @@ function ouvrirCompartiment(b, k){
        <div class="colAppoint">
        ${app.length ? `<select id="cAppoints" title="Photos d'appoint">
          <option value="">🖼 Appoints (${app.length})</option>
-         ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
+         ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.rang ? (a.rang === "derriere" ? " · rangée 2" : " · rangée 1") : " · rangée ?"}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
        </select>` : ""}
        <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)">➕ Appoint</button>
        </div>`;
