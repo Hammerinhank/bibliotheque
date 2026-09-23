@@ -4241,6 +4241,342 @@
        "categorie": "",
        "origine": "ia",
        "rang": "devant"
+      },
+      {
+       "id": "muef9o75ouq4r",
+       "titre": "Les mains sales",
+       "auteur": "Sartre",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75z1vkp",
+       "titre": "Gomorra",
+       "auteur": "Roberto Saviano",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75nm5ab",
+       "titre": "Une vie critique",
+       "auteur": "Madame Ming Na Jamais Rus",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75voe3x",
+       "titre": "Le café sans nom",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75cyt7n",
+       "titre": "Le libraire de Kaboul",
+       "auteur": "Åsne Seierstad",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75l09cl",
+       "titre": "Douleur",
+       "auteur": "Zeruya Shalev",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75yuy5m",
+       "titre": "La maison de Bretagne",
+       "auteur": "Henri Simon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o752c3jv",
+       "titre": "Les raisins verts",
+       "auteur": "Clifford D. Shaw",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o7529m5a",
+       "titre": "Nos premiers jours",
+       "auteur": "Jane Smiley",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75ca8oy",
+       "titre": "Une journée d'Ivan Denissovitch",
+       "auteur": "Alexandre Soljenitsyne",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio classique",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75x4d5u",
+       "titre": "Killdozer",
+       "auteur": "Th. Sturgeon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio SF",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o757azzl",
+       "titre": "Cristal qui songe",
+       "auteur": "Th. Sturgeon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio SF",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o752t4u8",
+       "titre": "Les fabuleuses aventures d'un millionnaire",
+       "auteur": "Vikas Swarup",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75qzrmf",
+       "titre": "Romance-Conti 1935",
+       "auteur": "Kaiko",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75pt584",
+       "titre": "L'anomalie",
+       "auteur": "Hervé Le Tellier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75rf49p",
+       "titre": "Le guépard",
+       "auteur": "Giuseppe Tomasi di Lampedusa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75qwiw6",
+       "titre": "Théâtre complet I",
+       "auteur": "Tchekhov",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75e5ek6",
+       "titre": "Sur les chemins noirs",
+       "auteur": "Sylvain Tesson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o7533hvu",
+       "titre": "Une vie à coucher dehors",
+       "auteur": "Sylvain Tesson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75lj3vg",
+       "titre": "Long Island",
+       "auteur": "Colm Tóibín",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75ygnya",
+       "titre": "La sonate à Kreutzer",
+       "auteur": "Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o752jri1",
+       "titre": "Le cheval",
+       "auteur": "Léon Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o756ug6v",
+       "titre": "Résurrection tome 1",
+       "auteur": "Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75o1bur",
+       "titre": "Les guerres intérieures",
+       "auteur": "Valérie Tong Cuong",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75ojqkx",
+       "titre": "La conjuration des imbéciles",
+       "auteur": "J.K. Toole",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o75gmtds",
+       "titre": "Mémoires d'un chasseur",
+       "auteur": "Tourgueniev",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o753ffd6",
+       "titre": "Les météores",
+       "auteur": "Tournier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muef9o754fzqa",
+       "titre": "L'Italienne",
+       "auteur": "Adriana Trigiani",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
       }
      ],
      "photo": {
@@ -4669,12 +5005,13 @@
       ]
      },
      "analyse": {
-      "maj": "2026-09-23T18:12:47.736Z",
+      "maj": "2026-09-23T18:14:12.164Z",
       "rangs": {
-       "devant": "2026-09-23T18:12:47.736Z"
+       "devant": "2026-09-23T18:12:47.736Z",
+       "derriere": "2026-09-23T18:14:12.164Z"
       },
       "ia": "gemini",
-      "modele": "gemini-2.5-flash — résultat sauvegardé du 23/09 18:00",
+      "modele": "gemini-2.5-flash",
       "photos": 2,
       "manuel": false
      }
@@ -7082,7 +7419,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T18:12:48.800Z",
+ "maj": "2026-09-23T18:14:13.095Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
