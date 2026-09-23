@@ -4004,6 +4004,102 @@
        "rang": "devant"
       },
       {
+       "id": "mued6ixnxyg5s",
+       "titre": "Les mains sales",
+       "auteur": "Sartre",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixn37x7x",
+       "titre": "Gomorra",
+       "auteur": "Roberto Saviano",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixnr3m2r",
+       "titre": "LES DIX ENFANTS QUE MADAME MING N'A JAMAIS EUS",
+       "auteur": "ERIC-EMMANUEL SCHMITT",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixnsk3el",
+       "titre": "Une vie entière",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixninuru",
+       "titre": "Le café sans nom",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixnris3q",
+       "titre": "Le Libraire de Kaboul",
+       "auteur": "Åsne Seierstad",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixnw0a23",
+       "titre": "Douleur",
+       "auteur": "Zenzya Shalov",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixn0it6e",
+       "titre": "Pygmalion",
+       "auteur": "Bernard Shaw",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
        "id": "mued5p7u7zjpm",
        "titre": "La croisade de l'idiot",
        "auteur": "Zeruya Shalev",
@@ -4019,6 +4115,30 @@
        "id": "mued5p7u0kmvz",
        "titre": "Les raisins verts",
        "auteur": "Marie Censi",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixno4lm6",
+       "titre": "Les rais",
+       "auteur": "Pierre-Henri Simon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued6ixn7iin3",
+       "titre": "La maison de Bretagne",
+       "auteur": "Marie Sizun",
        "annee": "",
        "certitude": "haute",
        "remarque": "",
@@ -4136,6 +4256,18 @@
        "resume": "",
        "categorie": "Policier",
        "origine": "ia"
+      },
+      {
+       "id": "mued6ixnfpsup",
+       "titre": "une journée d'Ivan Denissovitch",
+       "auteur": "Alexandre Soljenitsyne",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
       },
       {
        "id": "mued5p7uhvg6k",
@@ -4482,7 +4614,7 @@
        "maj": "2026-09-23T16:49:11.069Z",
        "id": "muec75xnhw210",
        "legende": "",
-       "verif": "2026-09-23T16:55:11.570Z"
+       "verif": "2026-09-23T17:15:49.388Z"
       },
       {
        "plein": null,
@@ -6912,7 +7044,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T17:15:10.871Z",
+ "maj": "2026-09-23T17:15:50.226Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
