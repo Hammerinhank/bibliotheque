@@ -127,8 +127,12 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case .sansphoto{font-size:20px;opacity:.45}
 .case .num{position:absolute;top:2px;left:3px;font-size:10px;color:#fff;background:rgba(0,0,0,.55);border-radius:4px;padding:0 4px}
 .case .nb{position:absolute;bottom:0;left:0;right:0;font-size:11px;text-align:center;background:rgba(0,0,0,.6);color:#fff;padding:1px 0}
-.case.analysee{border:2px solid #3ddc6a}
-.case.analysee.complete{border-width:4px;box-shadow:0 0 6px rgba(61,220,106,.45)}
+.case.analysee{border:4px solid #3ddc6a}
+.case.analysee.complete{box-shadow:0 0 6px rgba(61,220,106,.45)}
+.case.analysee.cotesV{border-top-color:var(--trait);border-bottom-color:var(--trait)}
+.case.analysee.sansBas{border-bottom-color:var(--trait)}
+.legende i.cV{border-top-color:var(--trait)!important;border-bottom-color:var(--trait)!important}
+.legende i.sB{border-bottom-color:var(--trait)!important}
 .case.aenvoyer{border:3px solid var(--orange);box-shadow:none}
 .case .deux{position:absolute;top:3px;right:3px;z-index:2;font-size:12px;font-weight:800;letter-spacing:.3px;line-height:1.25;color:#1c1500;
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
@@ -361,8 +365,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.26.1";
+const VERSION = "V1.27.0";
 const HISTORIQUE = [
+  { v:"V1.27.0", d:"23/09/2026", l:[
+    "Cadre vert toujours épais ; ce sont les côtés allumés qui indiquent l'état : 4 côtés = tout est analysé, côtés verticaux seuls = une photo de rang (devant ou derrière) non analysée, côté du bas éteint = une photo d'appoint non prise en compte.",
+    "L'état d'analyse est désormais suivi rang par rang : analyser le seul rang de derrière ne marque plus la photo de devant comme analysée (et inversement)."
+  ]},
   { v:"V1.26.1", d:"23/09/2026", l:[
     "Grille : suppression de l'effet « deux photos empilées », l'étiquette « 2 RANGS » suffit.",
     "Cadres des compartiments bien plus visibles : vert vif, épais (4 px) si toutes les photos sont analysées, moyen (2 px) s'il en reste une non analysée ; orange 3 px pour une photo à envoyer."
@@ -2355,22 +2363,39 @@ function texteBilanAnalyse(livres){
 }
 /* Vrai si chaque photo présente du compartiment a été analysée après sa dernière modification.
    Données antérieures sans trace d'analyse : un compartiment à une seule photo et avec des livres est réputé analysé. */
-function photosToutesAnalysees(cs){
-  if (!cs || !(cs.livres||[]).length) return false;
-  const photos = [cs.photo, cs.photo2].filter(Boolean);
+/* Date de la dernière analyse de chaque rang. Les analyses anciennes (sans détail par rang) valent pour les deux rangs. */
+function datesAnalyseRangs(cs){
+  const a = cs && cs.analyse;
+  if (!a) return {};
+  return a.rangs ? Object.assign({}, a.rangs) : { devant:a.maj, derriere:a.maj };
+}
+/* État d'analyse d'un compartiment : null s'il n'a pas de livre, sinon
+   { rangs: photos de devant/derrière toutes analysées, appoints: photos d'appoint toutes prises en compte } */
+function etatAnalyse(cs){
+  if (!cs || !(cs.livres||[]).length) return null;
   const appoints = cs.appoints || [];
-  if (!photos.length && !appoints.length) return false;
-  if (!cs.analyse) return photos.length === 1 && !appoints.length;
-  const t = Date.parse(cs.analyse.maj || "") || 0;
-  // une photo d'appoint compte comme prise en compte dès qu'un contrôle postérieur a eu lieu
-  const tc = Math.max(t, Date.parse((cs.controle && cs.controle.maj) || "") || 0);
-  return photos.every(p => (Date.parse(p.maj || "") || 0) <= t)
-      && appoints.every(a => (Date.parse(a.maj || "") || 0) <= tc);
+  const presents = [["photo","devant"],["photo2","derriere"]].filter(([ch])=>cs[ch]);
+  if (!presents.length && !appoints.length) return null;
+  if (!cs.analyse) return { rangs: presents.length === 1, appoints: !appoints.length };
+  const dates = datesAnalyseRangs(cs);
+  const rangs = presents.every(([ch, r])=>(Date.parse(cs[ch].maj || "") || 0) <= (Date.parse(dates[r] || "") || 0));
+  // une photo d'appoint compte comme prise en compte dès qu'une analyse ou un contrôle postérieur a eu lieu
+  const tc = Math.max(Date.parse(cs.analyse.maj || "") || 0, Date.parse((cs.controle && cs.controle.maj) || "") || 0);
+  return { rangs, appoints: appoints.every(a=>(Date.parse(a.maj || "") || 0) <= tc) };
+}
+/* Vrai si chaque photo présente du compartiment a été analysée après sa dernière modification. */
+function photosToutesAnalysees(cs){
+  const e = etatAnalyse(cs);
+  return !!(e && e.rangs && e.appoints);
 }
 
 function infoAnalyse(livres, cs){
   const src = livres.source || {};
-  return { maj:new Date().toISOString(), ia: src.ia || "gemini", modele: src.modele || cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1, manuel: !!src.manuel };
+  const maintenant = new Date().toISOString();
+  const portee = livres.portee || porteeParDefaut(cs);
+  const rangs = datesAnalyseRangs(cs);
+  (portee === "deux" ? ["devant","derriere"] : [portee]).forEach(r=>{ rangs[r] = maintenant; });
+  return { maj:maintenant, rangs, ia: src.ia || "gemini", modele: src.modele || cfg.modele, photos: cs.photo && cs.photo2 ? 2 : 1, manuel: !!src.manuel };
 }
 function texteBilanSimple(livres){
   if (!livres.some(x=>x.rang)) return livres.length + " livre(s) identifié(s).";
@@ -2526,7 +2551,12 @@ function rendreBiblio(){
       const champs = cs ? champsPhotoCase(cs) : [];
       const cls = ["case"];
       if (nb) cls.push("analysee");
-      if (nb && photosToutesAnalysees(cs)) cls.push("complete");
+      const ea = nb ? etatAnalyse(cs) : null;
+      if (ea){
+        if (!ea.rangs) cls.push("cotesV");            // une photo de rang non analysée : côtés verticaux seuls
+        else if (!ea.appoints) cls.push("sansBas");   // une photo d'appoint non prise en compte : bas éteint
+        else cls.push("complete");
+      }
       if (champs.some(ch=>{ const p = photoObj(cs, ch); return p && p.plein && !p.envoye; })) cls.push("aenvoyer");
       const deuxRangs = !!(cs && cs.photo && cs.photo2);
       const nbAppoints = champs.filter(ch=>ch !== "photo" && ch !== "photo2").length;
@@ -2552,8 +2582,9 @@ function rendreBiblio(){
      <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ». Photos d'appoint (zooms) : liste déroulante à droite des deux onglets.</div>
      ${grille}
      <div class="legende">
-       <span><i style="border-color:#3ddc6a;border-width:4px"></i>toutes les photos analysées</span>
-       <span><i style="border-color:#3ddc6a;border-width:2px"></i>une photo non analysée</span>
+       <span><i style="border-color:#3ddc6a;border-width:3px"></i>toutes les photos analysées</span>
+       <span><i class="cV" style="border-color:#3ddc6a;border-width:3px"></i>un rang non analysé</span>
+       <span><i class="sB" style="border-color:#3ddc6a;border-width:3px"></i>une photo d'appoint non prise en compte</span>
        <span><i style="border-color:var(--orange);border-width:3px"></i>photo à envoyer</span>
        <span><i style="border-color:var(--trait)"></i>vide</span>
        <span><b class="pastilleDeux">2 RANGS</b>livres sur deux rangs (2 photos)</span>
