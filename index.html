@@ -380,8 +380,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.41.0";
+const VERSION = "V1.41.1";
 const HISTORIQUE = [
+  { v:"V1.41.1", d:"23/09/2026", l:[
+    "Règle de fond : le résultat d'une photo d'appoint n'est jamais affecté à une rangée qui n'a pas quelques livres en commun avec lui (plus de « Continuer quand même »).",
+    "Sans correspondance : refus expliqué — erreur de compartiment, erreur de rangée, ou rangée pas encore relevée (photo de derrière absente ou non analysée) — avec la liste de ce qui a été lu ; le résultat reste réutilisable (📜).",
+    "« Comparer plutôt à l'autre rangée » refuse aussi une rangée sans livres en commun.",
+    "Nouvelle analyse d'une rangée déjà relevée : alerte si aucun livre n'est en commun avec la liste actuelle (autre compartiment ou autre rangée ?)."
+  ]},
   { v:"V1.41.0", d:"23/09/2026", l:[
     "Photo d'appoint : avant tout rapprochement, l'app établit la rangée photographiée. Une rangée : il faut quelques livres reconnus, sinon elle demande confirmation. Deux rangées : il faut des correspondances nettes avec l'une et pas avec l'autre, sinon elle demande laquelle.",
     "La rangée de chaque appoint est mémorisée et affichée dans la liste déroulante des appoints (« Appoint 2 · rangée 1 — légende »). La vérification ne compare ensuite qu'à cette rangée."
@@ -2271,6 +2277,7 @@ function appliquerLivresCompartiment(b, k, livres){
   const fenetreChoix = modale({ titre:"Nouvelle analyse de " + lib(k),
     html:`<div><b>${enTete}.</b> Le ${nomsDisputes} avai${disputes.length > 1 ? "ent" : "t"} déjà des livres relevés (photo refaite ou nouvelle analyse) : que faire de ce nouveau résultat ?</div>
           <div class="aide">${esc(texteBilanAnalyse(livres))}</div>
+          ${disputes.some(r=>parRang[r].vieux.length >= 3 && !parRang[r].communs.length) ? `<div class="encadre">⚠️ <b>Aucun livre en commun</b> avec la liste actuelle de la ${disputes.filter(r=>parRang[r].vieux.length >= 3 && !parRang[r].communs.length).map(r=>r === "derriere" ? "rangée 2" : "rangée 1").join(" et de la ")} : la photo montre peut-être un autre compartiment ou l'autre rangée. Vérifiez avant de remplacer ou de compléter.</div>` : ""}
           ${autoTxt.length ? `<div class="aide">Dans tous les cas (sauf « Annuler ») : ${autoTxt.join(" ; ")}.</div>` : ""}
           ${disputes.map(blocRang).join("")}
           <div class="sep"></div>
@@ -2507,6 +2514,31 @@ function correspondancesRangee(cs, lus, r){
 function deuxRangeesCase(cs){ return !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere")); }
 const NOM_RANGEE = { devant:"rangée 1 (devant)", derriere:"rangée 2 (derrière)" };
 
+/* Refus motivé : aucune rangée n'a de livres en commun avec la photo d'appoint. */
+function refuserAppointSansCorrespondance(b, k, champ, lus, c1, c2){
+  const cs = b.cases[k];
+  const num = numeroAppoint(cs, champ);
+  const deux = deuxRangeesCase(cs);
+  const lisibles = lus.filter(l=>!l.illisible && l.titre);
+  const pistes = [];
+  pistes.push(`<li><b>Erreur de compartiment</b> : la photo montre peut-être un autre compartiment que ${esc(lib(k))}.</li>`);
+  if (deux){
+    if (!c2.total) pistes.push(`<li><b>Rangée 2 pas encore relevée</b> : la rangée 2 (derrière) n'a aucun livre dans la liste${cs.photo2 ? " alors qu'elle a une photo : analysez d'abord la photo de derrière (🔍 Analyser → Derrière seul)" : ""}. C'est sans doute elle que montre l'appoint.</li>`);
+    else if (!c1.total) pistes.push(`<li><b>Rangée 1 pas encore relevée</b> : la rangée 1 (devant) n'a aucun livre dans la liste : analysez d'abord la photo de devant.</li>`);
+    else pistes.push(`<li><b>Erreur de rangée</b> : aucune des deux rangées relevées ne correspond ; la liste de l'une d'elles est peut-être incomplète ou fausse.</li>`);
+  } else if (!cs.unRang){
+    pistes.push(`<li><b>Rangée de derrière pas encore photographiée</b> : si ce compartiment a deux rangées, la photo d'appoint montre sans doute la rangée de derrière. Prenez d'abord la photo de derrière (onglet ➕ Derrière) et analysez-la.</li>`);
+  }
+  modale({ titre:"Appoint " + num + " — aucune correspondance",
+    html:`<div><b>Aucun livre de cette photo d'appoint ne se retrouve dans ${deux ? "les rangées relevées" : "la liste"} du compartiment ${esc(lib(k))}</b> : le résultat n'est affecté à aucune rangée.</div>
+          <div class="aide">Livres lus sur la photo : ${lisibles.length}. Reconnus dans la rangée 1 : <b>${c1.n}</b> (sur ${c1.total})${deux ? `, dans la rangée 2 : <b>${c2.n}</b> (sur ${c2.total})` : ""}.</div>
+          <div style="margin-top:8px">Causes possibles :</div><ul>${pistes.join("")}</ul>
+          <div class="aide">Le résultat de la lecture est sauvegardé (📜 Résultats d'analyse sauvegardés) : vous pourrez le réutiliser une fois le problème corrigé, sans redemander à l'IA.</div>
+          ${lisibles.length ? `<details style="margin-top:8px"><summary style="cursor:pointer;font-weight:600">📷 Ce qui a été lu sur la photo (${lisibles.length})</summary>
+            <div class="aide" style="margin:6px 0 0 14px">${lisibles.map(l=>esc(l.titre) + (l.auteur ? ` <span style="opacity:.7">— ${esc(l.auteur)}</span>` : "")).join("<br>")}</div></details>` : ""}`,
+    boutons:[{texte:"Compris", classe:"principal"}] });
+}
+
 function securiserRangeeAppoint(b, k, champ, lus){
   const cs = b.cases[k];
   const appoint = photoObj(cs, champ);
@@ -2523,36 +2555,30 @@ function securiserRangeeAppoint(b, k, champ, lus){
   return new Promise(res=>{
     const deux = deuxRangeesCase(cs);
     const c1 = correspondancesRangee(cs, lus, "devant");
-    const c2 = deux ? correspondancesRangee(cs, lus, "derriere") : null;
-    const choisir = (titre, texte, options)=>{
-      let fait = false;
-      modale({ titre, html:texte,
-        boutons: options.map(o=>({ texte:o.texte, classe:o.classe, action:()=>{ fait = true; if (o.r) memoriser(o.r, false, c1, c2); res(o.r || null); } })),
-        surFermeture:()=>{ if (!fait) res(null); } });
-    };
-    const lignesCompte = `<div class="aide">Livres lus sur la photo : ${lisibles}. Reconnus dans la rangée 1 : <b>${c1.n}</b> (sur ${c1.total})${deux ? `, dans la rangée 2 : <b>${c2.n}</b> (sur ${c2.total})` : ""}.</div>`;
+    const c2 = deux ? correspondancesRangee(cs, lus, "derriere") : { n:0, total:0 };
+    const ok1 = c1.n >= minimum, ok2 = deux && c2.n >= minimum;
 
-    if (!deux){
-      if (c1.n >= minimum){ memoriser("devant", true, c1, null); res("devant"); return; }
-      if (!c1.total){ memoriser("devant", true, c1, null); res("devant"); return; }   // rangée encore vide : rien à vérifier
-      choisir("Appoint " + num + " — correspondance douteuse",
-        `<div>Sur cette photo d'appoint, ${c1.n ? "un seul livre est reconnu" : "<b>aucun livre n'est reconnu</b>"} dans la liste du compartiment ${esc(lib(k))}.</div>${lignesCompte}
-         <div class="aide">La photo appartient-elle vraiment à ce compartiment ? Si oui, continuez ; sinon, annulez et vérifiez la photo.</div>`,
-        [{ texte:"Annuler" }, { texte:"Continuer quand même", classe:"principal", r:"devant" }]);
-      return;
-    }
-    // deux rangées : il faut un écart net
-    const net = (a, z)=> a.n >= minimum && a.n >= 3 * z.n && a.n - z.n >= 2 || (a.n >= minimum && z.n === 0);
-    if (net(c1, c2)){ memoriser("devant", true, c1, c2); res("devant"); return; }
-    if (net(c2, c1)){ memoriser("derriere", true, c1, c2); res("derriere"); return; }
+    // règle de fond : jamais d'affectation sans livres en commun
+    if (!ok1 && !ok2){ refuserAppointSansCorrespondance(b, k, champ, lus, c1, c2); res(null); return; }
+    if (ok1 && !ok2){ memoriser("devant", true, c1, c2); res("devant"); return; }
+    if (ok2 && !ok1){ memoriser("derriere", true, c1, c2); res("derriere"); return; }
+
+    // les deux rangées ont des livres en commun avec la photo : écart net, sinon on demande
+    if (c1.n >= 3 * c2.n && c1.n - c2.n >= 2){ memoriser("devant", true, c1, c2); res("devant"); return; }
+    if (c2.n >= 3 * c1.n && c2.n - c1.n >= 2){ memoriser("derriere", true, c1, c2); res("derriere"); return; }
+    let fait = false;
     const prec = appoint && appoint.rang;
-    choisir("Appoint " + num + " — quelle rangée ?",
-      `<div>Impossible de savoir avec certitude à quelle rangée correspond cette photo d'appoint.</div>${lignesCompte}
-       ${prec ? `<div class="aide">Rattachée précédemment à la ${NOM_RANGEE[prec]}.</div>` : ""}
-       <div class="aide">Choisissez la rangée photographiée, ou annulez si la photo ne correspond à aucune des deux.</div>`,
-      [{ texte:"Annuler" },
-       { texte:"Rangée 1 (devant)", classe: prec === "devant" || (!prec && c1.n >= c2.n) ? "principal" : "", r:"devant" },
-       { texte:"Rangée 2 (derrière)", classe: prec === "derriere" || (!prec && c2.n > c1.n) ? "principal" : "", r:"derriere" }]);
+    modale({ titre:"Appoint " + num + " — quelle rangée ?",
+      html:`<div>Cette photo d'appoint a des livres en commun avec <b>les deux rangées</b> : impossible de trancher avec certitude.</div>
+            <div class="aide">Livres lus : ${lisibles}. Reconnus dans la rangée 1 : <b>${c1.n}</b> (sur ${c1.total}), dans la rangée 2 : <b>${c2.n}</b> (sur ${c2.total}).</div>
+            ${prec ? `<div class="aide">Rattachée précédemment à la ${NOM_RANGEE[prec]}.</div>` : ""}
+            <div class="aide">Un même livre présent dans les deux listes est peut-être un doublon à corriger.</div>`,
+      boutons:[
+        { texte:"Annuler", action:()=>{ fait = true; res(null); } },
+        { texte:`Rangée 1 (${c1.n})`, classe: (prec ? prec === "devant" : c1.n >= c2.n) ? "principal" : "", action:()=>{ fait = true; memoriser("devant", false, c1, c2); res("devant"); } },
+        { texte:`Rangée 2 (${c2.n})`, classe: (prec ? prec === "derriere" : c2.n > c1.n) ? "principal" : "", action:()=>{ fait = true; memoriser("derriere", false, c1, c2); res("derriere"); } }
+      ],
+      surFermeture:()=>{ if (!fait) res(null); } });
   });
 }
 
@@ -2593,6 +2619,12 @@ async function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
   });
   const bA = f.querySelector("#faAutre");
   if (bA) bA.onclick = ()=>{
+    const cA = correspondancesRangee(cs, lus, autre);
+    const lisiblesA = lus.filter(l=>!l.illisible && l.titre).length;
+    if (cA.n < Math.min(2, Math.max(1, lisiblesA))){
+      toast(`Impossible : la ${nomR(autre)} n'a ${cA.n ? "qu'un livre" : "aucun livre"} en commun avec cette photo${cA.total ? "" : " (elle n'a encore aucun livre relevé)"}.`, 6000);
+      return;
+    }
     f.remove();
     if (appoint){ appoint.rang = autre; appoint.rangInfo = { auto:false, date:new Date().toISOString() }; sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); }
     fenetreFusionAppoint(b, k, champ, lus, source, autre);
