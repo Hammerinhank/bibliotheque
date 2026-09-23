@@ -351,8 +351,16 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.19.0";
+const VERSION = "V1.20.0";
 const HISTORIQUE = [
+  { v:"V1.20.0", d:"23/09/2026", l:[
+    "PDF avec emplacements : choix de numéroter les rangées de haut en bas (comme à l'écran) ou de bas en haut ; ce choix ne s'applique qu'aux mentions (rg: X, cl: Y, Z) du PDF.",
+    "En tête et en fin du PDF, rappel du sens de numérotation (rangées, colonnes de gauche à droite, rang 1 devant / 2 derrière).",
+    "En tête du PDF, schéma de la bibliothèque : chaque compartiment porte ses numéros de rangée et de colonne, selon la numérotation choisie, et son nombre de livres."
+  ]},
+  { v:"V1.19.1", d:"23/09/2026", l:[
+    "PDF : la mention d'emplacement précise le rang de livres, (rg: X, cl: Y, 1) pour le rang de devant (1re photo), (rg: X, cl: Y, 2) pour le rang de derrière (2e photo)."
+  ]},
   { v:"V1.19.0", d:"23/09/2026", l:[
     "Écran d'une bibliothèque : la section « Ce que l'on peut en tirer » se plie et se déplie en touchant son titre ; l'état est mémorisé.",
     "Case à cocher « Emplacement dans le PDF » : ajoute après chaque livre du PDF la mention (rg: X, cl: Y), rangée et colonne où il est rangé. Choix mémorisé."
@@ -2399,7 +2407,12 @@ function rendreBiblio(){
        <div class="expl">Classe les livres par catégorie thématique puis produit un PDF à ouvrir ou télécharger.</div>
      </div>
      <div class="coche" style="margin-top:8px"><input type="checkbox" id="bPdfEmpl" ${cfg.pdfEmplacement ? "checked" : ""}>
-       <label for="bPdfEmpl" style="margin:0">Emplacement dans le PDF : ajouter « (rg: X, cl: Y) » après chaque livre (rangée, colonne)</label></div>
+       <label for="bPdfEmpl" style="margin:0">Emplacement dans le PDF : ajouter « (rg: X, cl: Y, 1 ou 2) » après chaque livre (rangée, colonne, rang de devant ou de derrière), avec un schéma numéroté de la bibliothèque en tête</label></div>
+     <div id="bPdfSens" style="margin:6px 0 0 26px;${cfg.pdfEmplacement ? "" : "opacity:.45;pointer-events:none"}">
+       <div class="aide" style="margin:0 0 4px">Numérotation des rangées dans le PDF (les colonnes vont toujours de gauche à droite) :</div>
+       <div class="coche"><input type="radio" name="bSensRg" id="bSensHB" value="hb" ${cfg.pdfRangsBasHaut ? "" : "checked"}><label for="bSensHB" style="margin:0">de haut en bas (1 = rangée du haut, comme à l'écran)</label></div>
+       <div class="coche"><input type="radio" name="bSensRg" id="bSensBH" value="bh" ${cfg.pdfRangsBasHaut ? "checked" : ""}><label for="bSensBH" style="margin:0">de bas en haut (1 = rangée du bas)</label></div>
+     </div>
      </details>
      <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
 
@@ -2415,7 +2428,13 @@ function rendreBiblio(){
   $("#bListe").onclick = ()=>fenetreListe(b);
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
-  $("#bPdfEmpl").onchange = (e)=>{ cfg.pdfEmplacement = e.target.checked; sauverCfg(); };
+  $("#bPdfEmpl").onchange = (e)=>{
+    cfg.pdfEmplacement = e.target.checked; sauverCfg();
+    const z = $("#bPdfSens"); z.style.opacity = e.target.checked ? "" : ".45"; z.style.pointerEvents = e.target.checked ? "" : "none";
+  };
+  document.querySelectorAll('#vueBiblio input[name="bSensRg"]').forEach(r=>{
+    r.onchange = ()=>{ if (r.checked){ cfg.pdfRangsBasHaut = r.value === "bh"; sauverCfg(); } };
+  });
   $("#plTirer").ontoggle = (e)=>{
     cfg.tirerPlie = !e.target.open; sauverCfg();
     const et = e.target.querySelector(".etat");
@@ -3649,15 +3668,80 @@ function construirePdf(jsPDF, b, livres){
   });
   const saut = (h)=>{ if (y + h > 297 - MG){ doc.addPage(); y = MG; } };
   // emplacement de chaque livre (rangée, colonne), si la case est cochée
+  const avecEmpl = !!cfg.pdfEmplacement;
+  const basHaut = avecEmpl && !!cfg.pdfRangsBasHaut;
   const empl = new Map();
-  if (cfg.pdfEmplacement) tousLesLivres(b).forEach(x=>empl.set(x.livre, x));
+  if (avecEmpl) tousLesLivres(b).forEach(x=>empl.set(x.livre, x));
+  // numéro de rangée tel qu'il est écrit dans le PDF (les compartiments hors grille gardent leur numéro)
+  const rgPdf = (r)=> (basHaut && r <= b.rangees) ? b.rangees - r + 1 : r;
+  const RAPPEL = `Numérotation des emplacements (rg: rangée, cl: colonne, rang) : rangées numérotées de ${basHaut ? "bas en haut (1 = rangée du bas)" : "haut en bas (1 = rangée du haut)"}, colonnes de gauche à droite (1 = colonne de gauche) ; dernier chiffre : 1 = rang de devant (1re photo), 2 = rang de derrière (2e photo).`;
+  const encadre = (texte)=>{
+    doc.setFont("helvetica","italic"); doc.setFontSize(9.5);
+    const lt = doc.splitTextToSize(texte, LARG - 6);
+    const h = lt.length*4.3 + 4;
+    saut(h + 2);
+    doc.setDrawColor(170); doc.setFillColor(244, 241, 232);
+    doc.rect(MG, y, LARG, h, "FD");
+    doc.setTextColor(60); doc.text(lt, MG + 3, y + 4.6);
+    doc.setTextColor(0);
+    y += h + 5;
+  };
 
   doc.setFont("helvetica","bold"); doc.setFontSize(20);
   doc.text(b.nom, MG, y); y += 9;
   doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setTextColor(110);
   doc.text(`${livres.length} livres, ${cats.length} catégories${b.lieu ? " — " + b.lieu : ""} — ${new Date().toLocaleDateString("fr-FR")}`, MG, y);
-  y += 4; doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 9;
+  y += 4; doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 7;
   doc.setTextColor(0);
+
+  if (avecEmpl){
+    encadre(RAPPEL);
+    // schéma de la bibliothèque : une cellule par compartiment, avec ses numéros
+    const R = b.rangees, C = b.compartiments;
+    const ratio = ratioBiblio(b);                 // hauteur / largeur d'un compartiment
+    const HMAX = 110;
+    let cw = LARG / C, ch = cw * ratio;
+    if (ch * R > HMAX){ ch = HMAX / R; cw = ch / ratio; }
+    const lg = cw * C, x0 = MG + (LARG - lg) / 2;
+    doc.setFont("helvetica","bold"); doc.setFontSize(10.5);
+    doc.text("Plan de la bibliothèque", MG, y); y += 3;
+    saut(ch * R + 8);
+    const y0 = y;
+    doc.setDrawColor(90); doc.setLineWidth(0.6);
+    doc.rect(x0, y0, lg, ch * R);
+    doc.setLineWidth(0.25);
+    const fs = Math.max(5, Math.min(10, cw * 0.9, ch * 1.6));
+    for (let r = 1; r <= R; r++){
+      for (let c = 1; c <= C; c++){
+        const cx = x0 + (c - 1) * cw, cy = y0 + (r - 1) * ch;
+        const cs = (b.cases||{})[clef(r, c)];
+        const nb = cs ? (cs.livres||[]).length : 0;
+        doc.setFillColor(nb ? 250 : 238, nb ? 247 : 238, nb ? 238 : 238);
+        doc.rect(cx, cy, cw, ch, "FD");
+        doc.setFont("helvetica","bold"); doc.setFontSize(fs); doc.setTextColor(30);
+        const deux = ch > fs * 0.9;               // assez de hauteur pour deux lignes ?
+        if (deux){
+          doc.text(`rg ${rgPdf(r)}`, cx + cw/2, cy + ch/2 - fs*0.12, { align:"center" });
+          doc.text(`cl ${c}`, cx + cw/2, cy + ch/2 + fs*0.3, { align:"center" });
+        } else {
+          doc.text(`${rgPdf(r)}·${c}`, cx + cw/2, cy + ch/2 + fs*0.12, { align:"center" });
+        }
+        if (nb && ch > fs * 1.4){
+          doc.setFont("helvetica","normal"); doc.setFontSize(Math.max(4.5, fs * 0.6)); doc.setTextColor(120);
+          doc.text(`${nb} livre${nb > 1 ? "s" : ""}`, cx + cw/2, cy + ch - 1.6, { align:"center" });
+        }
+      }
+    }
+    doc.setTextColor(0);
+    y = y0 + ch * R + 5;
+    const hors = Object.keys(b.cases||{}).filter(k=>{ const [r,c] = k.split("-").map(Number); return r > R || c > C; });
+    if (hors.length){
+      doc.setFont("helvetica","italic"); doc.setFontSize(8.5); doc.setTextColor(110);
+      const lh = doc.splitTextToSize(`Compartiments hors grille (numérotés comme à l'écran) : ${hors.map(nomCaseCourt).join(", ")}.`, LARG);
+      doc.text(lh, MG, y); y += lh.length*4 + 2; doc.setTextColor(0);
+    }
+    doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 8;
+  }
 
   cats.forEach(cat=>{
     const l = groupes[cat].slice().sort((x,z)=>{
@@ -3674,7 +3758,7 @@ function construirePdf(jsPDF, b, livres){
       if (lv.auteur) entete += " — " + lv.auteur;
       if (lv.annee) entete += " (" + lv.annee + ")";
       const e = empl.get(lv);
-      if (e) entete += " (rg: " + e.r + ", cl: " + e.c + ")";
+      if (e) entete += " (rg: " + rgPdf(e.r) + ", cl: " + e.c + ", " + (lv.rang === "derriere" ? 2 : 1) + ")";
       const lignes = doc.splitTextToSize(entete, LARG);
       saut(lignes.length*5 + (lv.resume?6:0) + 2);
       doc.text(lignes, MG, y); y += lignes.length*5;
@@ -3689,6 +3773,7 @@ function construirePdf(jsPDF, b, livres){
     });
     y += 4;
   });
+  if (avecEmpl){ y += 2; encadre("Rappel — " + RAPPEL); }
 
   const n = doc.getNumberOfPages();
   for (let p=1; p<=n; p++){
