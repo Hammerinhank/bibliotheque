@@ -145,7 +145,10 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .rang.devant{background:var(--encre3);color:var(--texte2)}
 .rang.derriere{background:var(--bronze-sombre);color:#fff8e1}
 #cFaces{margin-bottom:8px;align-items:center}
-#cFaces select{flex:1;min-width:130px;width:auto;border-radius:999px;padding:7px 10px;font-size:13.5px}
+#cFaces{align-items:flex-start}
+#cFaces .colAppoint{flex:1;min-width:130px;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#cFaces select{width:100%;border-radius:999px;padding:7px 10px;font-size:13.5px}
+#cFaces .colAppoint button{width:100%}
 .prop{background:var(--encre);border:1px solid var(--trait);border-left:3px solid var(--bronze);border-radius:10px;padding:9px 11px;margin-bottom:8px}
 .prop.ajouter{border-left-color:var(--vert)}
 .prop.retirer{border-left-color:var(--rouge)}
@@ -367,8 +370,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.30.0";
+const VERSION = "V1.30.1";
 const HISTORIQUE = [
+  { v:"V1.30.1", d:"23/09/2026", l:[
+    "Bouton « 🔎 Contrôler la liste » renommé « 🔎 Compléter / vérifier la liste avec les appoints », avec une ligne d'explication dessous.",
+    "Bouton « ➕ Appoint » placé sous la liste des appoints, à droite, un peu espacé et de même largeur."
+  ]},
   { v:"V1.30.0", d:"23/09/2026", l:[
     "Contrôle par photo d'appoint repensé : la fenêtre sépare clairement les livres « déjà relevés » (avec leur rangée) et ceux qui avaient échappé à la photo d'ensemble.",
     "Livres nouveaux : bouton « Ajouter » avec, si le compartiment a deux rangées, le choix Rangée 1 / Rangée 2 pour chacun (ou pour tous d'un coup) ; en compartiment à une rangée, ajout direct en rangée 1.",
@@ -2881,6 +2888,7 @@ function ouvrirCompartiment(b, k){
              <button class="btn" id="cPhoto" style="flex:1">📷 Ajouter une photo</button>
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
+           <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">Envoie à l'IA la liste déjà relevée avec <b>toutes</b> les photos d'appoint du compartiment : elle signale les livres qui avaient échappé à la photo d'ensemble (à ajouter), les erreurs de lecture et les doublons. Rien n'est modifié sans votre accord.</div>
            <div id="zoneUnRang" style="margin-top:8px"></div>
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
            <input type="file" id="cFichier" accept="image/*" hidden>
@@ -3030,11 +3038,13 @@ function ouvrirCompartiment(b, k){
     zf.innerHTML =
       `<button data-face="photo" class="${face==="photo"?"actif":""}">📚 Devant${cs.photo?"":" (vide)"}</button>
        <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Derrière"}</button>
+       <div class="colAppoint">
        ${app.length ? `<select id="cAppoints" title="Photos d'appoint">
          <option value="">🖼 Appoints (${app.length})</option>
          ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
        </select>` : ""}
-       <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)">➕ Appoint</button>`;
+       <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)">➕ Appoint</button>
+       </div>`;
     zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>changerFace(bt.dataset.face));
     // bouton direct : Safari (iPhone) n'ouvre l'appareil photo que sur un vrai toucher, pas depuis une liste déroulante
     zf.querySelector("#cAjoutAppoint").onclick = ajouterAppoint;
@@ -3074,8 +3084,10 @@ function ouvrirCompartiment(b, k){
       ? (appoint ? "📷 Changer cette photo d'appoint" : face === "photo2" ? "📷 Changer la photo de derrière" : "📷 Changer la photo")
       : (face === "photo2" ? "📷 Photo du rang de derrière" : "📷 Ajouter une photo");
     const bAn = f.querySelector("#cAnalyser");
-    bAn.textContent = appoint ? "🔎 Contrôler la liste" : "🔍 Analyser";
+    bAn.textContent = appoint ? "🔎 Compléter / vérifier la liste avec les appoints" : "🔍 Analyser";
     bAn.title = appoint ? "Compare la liste déjà relevée aux photos d'appoint et propose des corrections" : "";
+    const expA = f.querySelector("#cExplAppoint");
+    if (expA) expA.style.display = appoint ? "" : "none";
     if (!photoObj(cs, face)){
       z.innerHTML = face === "photo2"
         ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à l'IA, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
@@ -3241,10 +3253,10 @@ function ouvrirCompartiment(b, k){
       btnA.disabled = true; btnA.textContent = "Contrôle…";
       try{
         const r = await controlerAvecAppoints(b, k, { manuel:true });
-        btnA.disabled = false; btnA.textContent = "🔎 Contrôler la liste";
+        btnA.disabled = false; btnA.textContent = "🔎 Compléter / vérifier la liste avec les appoints";
         validerPropositions(b, k, r.propositions, r.source, r.vus);
       }catch(e){
-        btnA.disabled = false; btnA.textContent = "🔎 Contrôler la liste";
+        btnA.disabled = false; btnA.textContent = "🔎 Compléter / vérifier la liste avec les appoints";
         if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle"); return; }
         montrerErreurAnalyse(e);
       }
