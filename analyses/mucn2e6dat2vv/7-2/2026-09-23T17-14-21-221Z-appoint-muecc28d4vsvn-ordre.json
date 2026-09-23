@@ -1,0 +1,135 @@
+{
+ "date": "2026-09-23T17:14:21.221Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muecc28d4vsvn",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Le Guépard",
+   "auteur": "Giuseppe Tomasi di Lampedusa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "L'Anomalie",
+   "auteur": "Hervé Le Tellier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Théâtre complet I",
+   "auteur": "Tchekhov",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Sur les chemins noirs",
+   "auteur": "Sylvain Tesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Une vie à coucher dehors",
+   "auteur": "Sylvain Tesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "LONG ISLAND",
+   "auteur": "COLM TÓIBÍN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "La sonate à Kreutzer",
+   "auteur": "Tolstoi",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Le cheval",
+   "auteur": "Léon Tolstoï",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Résurrection tome 1",
+   "auteur": "TOLSTOI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Résurrection tome 2",
+   "auteur": "TOLSTOI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "LES GUERRES INTÉRIEURES",
+   "auteur": "VALÉRIE TONG CUONG",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "La conjuration des imbéciles",
+   "auteur": "J.K. TOOLE",
+   "annee": "2010",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Mémoires d'un chasseur",
+   "auteur": "Tourgueniev",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Les météores",
+   "auteur": "Tournier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "L'Italienne",
+   "auteur": "ADRIANA TRIGIANI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  }
+ ]
+}
