@@ -137,7 +137,9 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case .deux{position:absolute;top:3px;right:3px;z-index:2;font-size:12px;font-weight:800;letter-spacing:.3px;line-height:1.25;color:#1c1500;
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
+.case .deux.unRang{background:#9a9a9a}
 .case .deux small{font-size:10px;font-weight:700;opacity:.8}
+.legende .pastilleDeux.gris{background:#9a9a9a}
 .legende .pastilleDeux{display:inline-block;font-size:10px;font-weight:800;color:#1c1500;background:#ffd23f;border:1px solid #1c1500;border-radius:4px;padding:0 4px;margin-right:4px}
 .rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
 .rang.devant{background:var(--encre3);color:var(--texte2)}
@@ -365,8 +367,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.28.0";
+const VERSION = "V1.29.0";
 const HISTORIQUE = [
+  { v:"V1.29.0", d:"23/09/2026", l:[
+    "Nouvelle étiquette grise « 1 RANG » (même format que « 2 RANGS ») : se pose ou s'enlève dans la fenêtre d'un compartiment, pour indiquer qu'il n'a qu'un rang et qu'il est complet. Mémorisée avec les données (sauvegardée sur GitHub).",
+    "Si une photo de derrière est ajoutée, « 2 RANGS » prend le dessus."
+  ]},
   { v:"V1.28.0", d:"23/09/2026", l:[
     "Fenêtre d'un compartiment : sous « Livres de ce compartiment », nombre de livres de la rangée 1 (devant) et de la rangée 2 (derrière), et trois boutons « Tous » (par défaut), « Rangée 1 », « Rangée 2 » pour filtrer la liste."
   ]},
@@ -2566,7 +2572,9 @@ function rendreBiblio(){
       if (deuxRangs) cls.push("deuxRangs");
       const etiquette = deuxRangs
         ? `<span class="deux" title="Deux rangs de livres : photo de devant et photo de derrière${nbAppoints ? " + " + nbAppoints + " photo(s) d'appoint" : ""}">2 RANGS${nbAppoints ? ` <small>+${nbAppoints} zoom</small>` : ""}</span>`
-        : (nbAppoints ? `<span class="deux appoint" title="${nbAppoints} photo(s) d'appoint">+${nbAppoints} zoom</span>` : "");
+        : (cs && cs.unRang)
+          ? `<span class="deux unRang" title="Un seul rang de livres : compartiment complet${nbAppoints ? " + " + nbAppoints + " photo(s) d'appoint" : ""}">1 RANG${nbAppoints ? ` <small>+${nbAppoints} zoom</small>` : ""}</span>`
+          : (nbAppoints ? `<span class="deux appoint" title="${nbAppoints} photo(s) d'appoint">+${nbAppoints} zoom</span>` : "");
       cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
         ${!ph ? `<span class="sansphoto">📷</span>`
               : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
@@ -2591,6 +2599,7 @@ function rendreBiblio(){
        <span><i style="border-color:var(--orange);border-width:3px"></i>photo à envoyer</span>
        <span><i style="border-color:var(--trait)"></i>vide</span>
        <span><b class="pastilleDeux">2 RANGS</b>livres sur deux rangs (2 photos)</span>
+       <span><b class="pastilleDeux gris">1 RANG</b>un seul rang, compartiment complet</span>
      </div>
      ${hors.length ? `<div class="aide">⚠️ ${hors.length} compartiment(s) hors grille (${esc(hors.join(", "))}) : leur contenu est conservé et reste compté dans les listes et le PDF.</div>` : ""}
      <div class="barre">
@@ -2803,6 +2812,7 @@ function ouvrirCompartiment(b, k){
              <button class="btn" id="cPhoto" style="flex:1">📷 Ajouter une photo</button>
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
+           <div id="zoneUnRang" style="margin-top:8px"></div>
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
            <input type="file" id="cFichier" accept="image/*" hidden>
            <div class="titreSection">Livres de ce compartiment</div>
@@ -2967,7 +2977,23 @@ function ouvrirCompartiment(b, k){
     };
   };
 
+  const majUnRang = ()=>{
+    const z = f.querySelector("#zoneUnRang");
+    if (!z) return;
+    if (cs.photo2){
+      z.innerHTML = `<div class="aide" style="margin:0">Ce compartiment a une photo de derrière : il est marqué <b>2 RANGS</b>.${cs.unRang ? " (L'ancienne mention « 1 rang » est ignorée.)" : ""}</div>`;
+      return;
+    }
+    z.innerHTML = `<div class="coche" style="margin:0"><input type="checkbox" id="cUnRang" ${cs.unRang ? "checked" : ""}>
+        <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette grise <b style="font-size:11px;font-weight:800;color:#1c1500;background:#9a9a9a;border:1px solid #1c1500;border-radius:4px;padding:0 4px">1 RANG</b> sur la grille</label></div>`;
+    z.querySelector("#cUnRang").onchange = (e)=>{
+      if (e.target.checked) cs.unRang = true; else delete cs.unRang;
+      sauver(); rendreBiblio();
+      toast(e.target.checked ? "Marqué « 1 rang » : compartiment complet." : "Mention « 1 rang » retirée.");
+    };
+  };
   const majPhoto = ()=>{
+    majUnRang();
     majFaces();
     const z = f.querySelector("#zonePhoto");
     const appoint = estAppoint(face);
