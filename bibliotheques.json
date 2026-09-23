@@ -4531,7 +4531,34 @@
       "modele": "gemini-flash-lite-latest",
       "photos": 1,
       "manuel": false
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/8-3-appoint-mudya68iolbtd.jpg",
+       "envoye": true,
+       "maj": "2026-09-23T10:18:42.066Z",
+       "id": "mudya68iolbtd",
+       "legende": ""
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/8-3-appoint-mue1b0ctnsovc.jpg",
+       "envoye": true,
+       "maj": "2026-09-23T11:43:19.949Z",
+       "id": "mue1b0ctnsovc",
+       "legende": ""
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/8-3-appoint-mue1kdyclueoa.jpg",
+       "envoye": true,
+       "maj": "2026-09-23T11:50:37.476Z",
+       "id": "mue1kdyclueoa",
+       "legende": "",
+       "verif": "2026-09-23T12:19:21.012Z"
+      }
+     ]
     },
     "9-2": {
      "livres": [
@@ -6552,5 +6579,5 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T07:50:45.537Z"
+ "maj": "2026-09-23T16:01:59.857Z"
 }
