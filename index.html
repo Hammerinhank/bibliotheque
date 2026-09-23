@@ -96,6 +96,11 @@ button{font-family:inherit}
 .carte .meta{color:var(--texte2);font-size:13.5px;margin-top:4px}
 .vide{border:1px dashed var(--trait);border-radius:12px;padding:22px 16px;text-align:center;color:var(--texte2)}
 .titreSection{font-size:12.5px;color:var(--bronze);letter-spacing:.4px;margin:18px 0 6px}
+details.pliable > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;-webkit-user-select:none;user-select:none}
+details.pliable > summary::-webkit-details-marker{display:none}
+details.pliable > summary::before{content:"▸";display:inline-block;font-size:13px;transition:transform .15s}
+details.pliable[open] > summary::before{transform:rotate(90deg)}
+details.pliable > summary .etat{margin-left:auto;font-size:11.5px;color:var(--texte2);letter-spacing:0}
 
 /* ---------- bloc d'action expliqué ---------- */
 .action{margin-bottom:14px}
@@ -346,8 +351,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.18.0";
+const VERSION = "V1.19.0";
 const HISTORIQUE = [
+  { v:"V1.19.0", d:"23/09/2026", l:[
+    "Écran d'une bibliothèque : la section « Ce que l'on peut en tirer » se plie et se déplie en touchant son titre ; l'état est mémorisé.",
+    "Case à cocher « Emplacement dans le PDF » : ajoute après chaque livre du PDF la mention (rg: X, cl: Y), rangée et colonne où il est rangé. Choix mémorisé."
+  ]},
   { v:"V1.18.0", d:"23/09/2026", l:[
     "Scan des photos du dépôt : bouton « ↩️ Réaffecter » sur chaque photo orpheline (orange) pour la remettre dans son compartiment d'origine, et bouton pour réaffecter d'un coup toutes celles dont la place est libre. Si la place est prise : remplacer, ou ajouter en photo d'appoint.",
     "Tableau de comparaison appareil / GitHub enrichi : résumés, catégories, compartiments analysés, photos pas encore envoyées (lignes en orange si elles diffèrent).",
@@ -2375,7 +2384,8 @@ function rendreBiblio(){
        <div class="expl">Parcourt les compartiments photographiés et remplit la liste de leurs livres, avec décompte de progression.</div>
      </div>
 
-     <div class="titreSection">Ce que l'on peut en tirer</div>
+     <details class="pliable" id="plTirer" ${cfg.tirerPlie ? "" : "open"}>
+     <summary class="titreSection">Ce que l'on peut en tirer <span class="etat">${cfg.tirerPlie ? "toucher pour déplier" : "toucher pour replier"}</span></summary>
      <div class="action">
        <button class="btn principal" id="bListe">📋 Liste des livres</button>
        <div class="expl">Livres compartiment par compartiment, puis liste exhaustive. Affichage réglable et copie dans le presse-papier.</div>
@@ -2388,6 +2398,9 @@ function rendreBiblio(){
        <button class="btn" id="bPdf">📄 PDF classé par thèmes</button>
        <div class="expl">Classe les livres par catégorie thématique puis produit un PDF à ouvrir ou télécharger.</div>
      </div>
+     <div class="coche" style="margin-top:8px"><input type="checkbox" id="bPdfEmpl" ${cfg.pdfEmplacement ? "checked" : ""}>
+       <label for="bPdfEmpl" style="margin:0">Emplacement dans le PDF : ajouter « (rg: X, cl: Y) » après chaque livre (rangée, colonne)</label></div>
+     </details>
      <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
 
   $("#bModifier").onclick = ()=>formBiblio(b.id);
@@ -2402,6 +2415,12 @@ function rendreBiblio(){
   $("#bListe").onclick = ()=>fenetreListe(b);
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
+  $("#bPdfEmpl").onchange = (e)=>{ cfg.pdfEmplacement = e.target.checked; sauverCfg(); };
+  $("#plTirer").ontoggle = (e)=>{
+    cfg.tirerPlie = !e.target.open; sauverCfg();
+    const et = e.target.querySelector(".etat");
+    if (et) et.textContent = e.target.open ? "toucher pour replier" : "toucher pour déplier";
+  };
   document.querySelectorAll("#vueBiblio [data-case]").forEach(el=>brancherCase(el, b));
   majMarquesGrille();
   chargerPhotosGrille(b);
@@ -3629,6 +3648,9 @@ function construirePdf(jsPDF, b, livres){
     return a.localeCompare(z, "fr");
   });
   const saut = (h)=>{ if (y + h > 297 - MG){ doc.addPage(); y = MG; } };
+  // emplacement de chaque livre (rangée, colonne), si la case est cochée
+  const empl = new Map();
+  if (cfg.pdfEmplacement) tousLesLivres(b).forEach(x=>empl.set(x.livre, x));
 
   doc.setFont("helvetica","bold"); doc.setFontSize(20);
   doc.text(b.nom, MG, y); y += 9;
@@ -3651,6 +3673,8 @@ function construirePdf(jsPDF, b, livres){
       let entete = lv.titre;
       if (lv.auteur) entete += " — " + lv.auteur;
       if (lv.annee) entete += " (" + lv.annee + ")";
+      const e = empl.get(lv);
+      if (e) entete += " (rg: " + e.r + ", cl: " + e.c + ")";
       const lignes = doc.splitTextToSize(entete, LARG);
       saut(lignes.length*5 + (lv.resume?6:0) + 2);
       doc.text(lignes, MG, y); y += lignes.length*5;
