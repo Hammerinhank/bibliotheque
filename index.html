@@ -380,8 +380,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.43.0";
+const VERSION = "V1.44.0";
 const HISTORIQUE = [
+  { v:"V1.44.0", d:"23/09/2026", l:[
+    "Fenêtre d'un compartiment réorganisée : sous la photo affichée, un encadré « Analyse de cette photo » avec deux choix côte à côte — 🔍 Nouvelle analyse par l'IA, ou ♻️ Réutiliser l'analyse sauvegardée (avec sa date et le nombre disponible) ; grisé s'il n'y en a aucune.",
+    "« 🗑 Vider les listes » placé en tête de la liste des livres ; message d'aide quand la liste est vide."
+  ]},
   { v:"V1.43.0", d:"23/09/2026", l:[
     "Compartiment : « 🗑 Vider les listes » directement sous « Livres de ce compartiment » (photos conservées, liste d'avant rétablissable par « ↩ Rétablir »).",
     "Pour la photo affichée (devant, derrière ou appoint) : bouton « ♻️ Réutiliser un résultat sauvegardé » à côté de l'analyse, qui ne propose que les résultats de cette photo ; ou nouvelle demande à l'IA, au choix.",
@@ -1448,7 +1452,9 @@ function exporterFichier(){
 /* ====================================================================
    SAUVEGARDE IMMÉDIATE : photos dès qu'elles sont prises, résultats d'analyse dès qu'ils arrivent
    ==================================================================== */
-const CLE_JOURNAL = "biblio_journal_attente";      // résultats d'analyse pas encore envoyés (pas de réseau)
+const CLE_JOURNAL = "biblio_journal_attente";
+let versionJournal = 0;                           // change à chaque nouveau résultat sauvegardé
+const resultatsSession = [];                      // résultats obtenus pendant cette session (chemin + contenu)      // résultats d'analyse pas encore envoyés (pas de réseau)
 
 /* Avertissement bien visible quand une sauvegarde immédiate n'a pas pu se faire. */
 function avertirNonSauve(quoi, raison){
@@ -1488,6 +1494,8 @@ async function journaliserResultat(b, k, genre, contenu){
   const nomGenre = genre === "appoint" ? "appoint-" + (contenu.appoint || "") + (contenu.mode === "ordre" ? "-ordre" : "") : "analyse-" + (contenu.portee || "deux");
   const chemin = `analyses/${b.id}/${k}/${date.replace(/[:.]/g, "-")}-${nomGenre}.json`;
   const doc = Object.assign({ date, bibliotheque:b.id, nomBibliotheque:b.nom, compartiment:k, genre }, contenu);
+  resultatsSession.push({ chemin, doc });
+  versionJournal++;
   const quoi = (genre === "appoint" ? "Résultat de la lecture de l'appoint" : "Résultat de l'analyse") + " de " + lib(k);
   if (!ghPret() || navigator.onLine === false){
     ecrireJournalEnAttente(journalEnAttente().concat([{ chemin, doc }]));
@@ -1580,7 +1588,10 @@ async function listerResultatsSauves(b, k){
     if (r.ok) distants = (await r.json()).filter(x=>x.type === "file" && /\.json$/.test(x.name)).map(x=>({ nom:x.name, chemin:x.path }));
     else if (r.status !== 404) throw new Error("GitHub " + r.status);
   }
-  return locaux.concat(distants).map(x=>{
+  const connus = new Set(locaux.concat(distants).map(x=>x.nom));
+  const session = resultatsSession.filter(x=>x.doc.bibliotheque === b.id && x.doc.compartiment === k)
+    .map(x=>({ nom:x.chemin.split("/").pop(), doc:x.doc })).filter(x=>!connus.has(x.nom));
+  return locaux.concat(distants, session).map(x=>{
     const m = x.nom.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d)-(\d\d)-(\d\d)/);
     const t = m ? `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}` : x.nom;
     const quand = m ? `${m[3]}/${m[2]} ${m[4]}:${m[5]}` : x.nom;
@@ -1600,7 +1611,7 @@ async function viderListesCompartiment(b, k){
   cs.livres = []; delete cs.analyse;
   (cs.appoints||[]).forEach(a=>{ delete a.rang; delete a.rangInfo; });
   sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
-  toast("Listes vidées. Photo par photo : 🔍 Analyser, ou ♻️ Réutiliser un résultat sauvegardé.", 6000);
+  toast("Listes vidées. Choisissez une photo, puis 🔍 nouvelle analyse ou ♻️ analyse sauvegardée.", 6000);
   envoyerDonneesAuto("Listes de livres de " + lib(k), { livresEnMoinsVoulus:true });
 }
 function retablirListesCompartiment(b, k){
@@ -3896,12 +3907,16 @@ function ouvrirCompartiment(b, k){
     titre: `Rangée ${r} · compartiment ${c}`,
     html: `<div class="onglets" id="cFaces"></div>
            <div id="zonePhoto"></div>
-           <div class="barre">
-             <button class="btn" id="cPhoto" style="flex:1">📷 Ajouter une photo</button>
-             <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
+           <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
+           <div class="encadre" id="cBlocAnalyse" style="margin-top:10px">
+             <div id="cTitreAnalyse" style="font-weight:700;margin-bottom:8px">Analyse de cette photo</div>
+             <div class="barre" style="align-items:stretch">
+               <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Nouvelle analyse par l'IA</button>
+               <button class="btn" id="cReutiliser" style="flex:1">♻️ Réutiliser l'analyse sauvegardée</button>
+             </div>
+             <button class="btn principal plein" id="cAppointOrdre" style="margin-top:8px;display:none">🔀 Nouvelle lecture par l'IA (ordre respecté)</button>
+             <div class="aide" id="cInfoReu" style="margin:6px 0 0"></div>
            </div>
-           <button class="btn principal plein" id="cAppointOrdre" style="margin-top:8px;display:none">🔀 Vérifier avec cette photo (ordre respecté)</button>
-           <button class="btn plein" id="cReutiliser" style="margin-top:8px">♻️ Réutiliser un résultat sauvegardé de cette photo</button>
            <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste. <b>🔎 Vérifier</b> : chaque livre lu est cherché dans les listes des rangées 1 et 2 (titre, auteur, voisinage). <b>🔀 Ordre respecté</b> : l'app repère la zone de la rangée que couvre la photo et aligne les livres un à un dans l'ordre ; vous corrigez au besoin l'ordre de deux voisins avec la poignée ≡. Rien n'est modifié sans votre accord.</div>
            <div id="zoneUnRang" style="margin-top:8px"></div>
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
@@ -4085,6 +4100,31 @@ function ouvrirCompartiment(b, k){
       toast(e.target.checked ? "Marqué « 1 rang » : compartiment complet." : "Mention « 1 rang » retirée.");
     };
   };
+  // résultats sauvegardés de ce compartiment (relus quand un nouveau résultat a été sauvegardé)
+  let cacheRes = null, cacheVersion = -1;
+  const resultatsDeLaFace = async (fc)=>{
+    if (!cacheRes || cacheVersion !== versionJournal){
+      cacheVersion = versionJournal;
+      try{ cacheRes = await listerResultatsSauves(b, k); }catch(e){ cacheRes = null; return null; }
+    }
+    const app = estAppoint(fc);
+    return cacheRes.filter(x=> app ? (x.genre === "appoint" && x.appoint === idAppoint(fc))
+      : x.genre === "analyse" && (x.portee === "deux" || x.portee === (fc === "photo2" ? "derriere" : "devant")));
+  };
+  const majReutiliser = async ()=>{
+    const bR = f.querySelector("#cReutiliser"), info = f.querySelector("#cInfoReu");
+    if (!bR || !photoObj(cs, face)) return;
+    const fc = face;
+    bR.disabled = true; bR.textContent = "♻️ Recherche des analyses sauvegardées…"; info.textContent = "";
+    const l = await resultatsDeLaFace(fc);
+    if (fc !== face || !f.isConnected) return;
+    if (l === null){ bR.textContent = "♻️ Analyses sauvegardées : GitHub illisible"; return; }
+    if (!l.length){ bR.textContent = "♻️ Aucune analyse sauvegardée pour cette photo"; info.textContent = "Seule une nouvelle analyse par l'IA est possible ; son résultat sera sauvegardé et réutilisable ensuite."; return; }
+    const der = l[l.length - 1];
+    bR.disabled = false;
+    bR.textContent = `♻️ Réutiliser l'analyse du ${der.quand}` + (l.length > 1 ? ` (+${l.length - 1} plus ancienne${l.length > 2 ? "s" : ""})` : "");
+    info.textContent = "Réutiliser ne redemande rien à l'IA : le résultat passe par les mêmes fenêtres de choix qu'une nouvelle analyse.";
+  };
   const majPhoto = ()=>{
     majUnRang();
     majFaces();
@@ -4095,12 +4135,15 @@ function ouvrirCompartiment(b, k){
       ? (appoint ? "📷 Changer cette photo d'appoint" : face === "photo2" ? "📷 Changer la photo de derrière" : "📷 Changer la photo")
       : (face === "photo2" ? "📷 Photo du rang de derrière" : "📷 Ajouter une photo");
     const bAn = f.querySelector("#cAnalyser");
-    bAn.textContent = appoint ? "🔎 Vérifier avec cette photo d'appoint" : "🔍 Analyser";
+    bAn.textContent = appoint ? "🔎 Nouvelle lecture par l'IA (vérifier)" : "🔍 Nouvelle analyse par l'IA";
     bAn.title = appoint ? "L'IA lit cette photo ; l'application compare ce qu'elle lit aux listes des rangées" : "";
     const expA = f.querySelector("#cExplAppoint");
     if (expA) expA.style.display = appoint ? "" : "none";
-    const bReu = f.querySelector("#cReutiliser");
-    if (bReu) bReu.style.display = photoObj(cs, face) ? "" : "none";
+    const bloc = f.querySelector("#cBlocAnalyse");
+    if (bloc) bloc.style.display = photoObj(cs, face) ? "" : "none";
+    f.querySelector("#cTitreAnalyse").textContent = "Analyse de cette photo — " +
+      (appoint ? "appoint " + num : face === "photo2" ? "rangée 2 (derrière)" : cs.photo2 ? "rangée 1 (devant)" : "rangée 1");
+    majReutiliser();
     const bOrd = f.querySelector("#cAppointOrdre");
     if (bOrd) bOrd.style.display = appoint && photoObj(cs, face) ? "" : "none";
     if (!photoObj(cs, face)){
@@ -4215,7 +4258,7 @@ function ouvrirCompartiment(b, k){
       const v = zf.querySelector("[data-vider]"); if (v) v.onclick = ()=>viderListesCompartiment(b, k);
       const r = zf.querySelector("[data-retablir]"); if (r) r.onclick = ()=>retablirListesCompartiment(b, k);
     };
-    if (!l.length){ zf.innerHTML = cs.avantReconstruction ? bVider : ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Pour chaque photo : 🔍 Analyser, ou ♻️ Réutiliser un résultat sauvegardé.</div>`; return; }
+    if (!l.length){ zf.innerHTML = cs.avantReconstruction ? bVider : ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Choisissez une photo en haut (Devant, Derrière, appoint), puis, dans l'encadré « Analyse de cette photo » : 🔍 nouvelle analyse par l'IA, ou ♻️ réutiliser l'analyse sauvegardée.</div>`; return; }
     zf.innerHTML = bVider +
       `<div class="aide" style="margin:-4px 0 8px">${l.length} livre(s) : <b>${n1}</b> sur la rangée 1 (devant) · <b>${n2}</b> sur la rangée 2 (derrière)</div>
        <div class="onglets" style="margin-bottom:10px">
@@ -4286,7 +4329,7 @@ function ouvrirCompartiment(b, k){
       if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle", idAppoint(champ) + "|ordre"); }
       else montrerErreurAnalyse(e);
     }finally{
-      btnO.disabled = false; btnO.textContent = "🔀 Vérifier avec cette photo (ordre respecté)";
+      btnO.disabled = false; btnO.textContent = "🔀 Nouvelle lecture par l'IA (ordre respecté)";
     }
   };
   f.querySelector("#cAnalyser").onclick = async ()=>{
@@ -4296,10 +4339,10 @@ function ouvrirCompartiment(b, k){
       btnA.disabled = true; btnA.textContent = "Lecture de la photo…";
       try{
         const r = await lireAppoint(b, k, champ, { manuel:true });
-        btnA.disabled = false; btnA.textContent = "🔎 Vérifier avec cette photo d'appoint";
+        btnA.disabled = false; btnA.textContent = "🔎 Nouvelle lecture par l'IA (vérifier)";
         fenetreVerifAppoint(b, k, champ, r.lus, r.source);
       }catch(e){
-        btnA.disabled = false; btnA.textContent = "🔎 Vérifier avec cette photo d'appoint";
+        btnA.disabled = false; btnA.textContent = "🔎 Nouvelle lecture par l'IA (vérifier)";
         if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle", idAppoint(champ)); return; }
         montrerErreurAnalyse(e);
       }
@@ -4312,10 +4355,10 @@ function ouvrirCompartiment(b, k){
     btn.disabled = true; btn.textContent = "Analyse…";
     try{
       const livres = await analyserPhoto(b, k, { manuel:true, portee });
-      btn.disabled = false; btn.textContent = "🔍 Analyser";
+      btn.disabled = false; btn.textContent = "🔍 Nouvelle analyse par l'IA";
       appliquerLivresCompartiment(b, k, livres);
     }catch(e){
-      btn.disabled = false; btn.textContent = "🔍 Analyser";
+      btn.disabled = false; btn.textContent = "🔍 Nouvelle analyse par l'IA";
       if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, undefined, e.portee || portee); return; }
       montrerErreurAnalyse(e);
     }
