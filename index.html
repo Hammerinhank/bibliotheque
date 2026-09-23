@@ -96,11 +96,17 @@ button{font-family:inherit}
 .carte .meta{color:var(--texte2);font-size:13.5px;margin-top:4px}
 .vide{border:1px dashed var(--trait);border-radius:12px;padding:22px 16px;text-align:center;color:var(--texte2)}
 .titreSection{font-size:12.5px;color:var(--bronze);letter-spacing:.4px;margin:18px 0 6px}
-details.pliable > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;-webkit-user-select:none;user-select:none}
+details.pliable{margin:18px 0 6px;border:1.5px solid var(--bronze);border-radius:12px;background:var(--encre2,rgba(255,255,255,.03));overflow:hidden}
+details.pliable > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;-webkit-user-select:none;user-select:none;
+  margin:0;padding:12px 14px;font-size:15px;font-weight:700;letter-spacing:.3px;color:var(--bronze);background:rgba(200,160,70,.10)}
 details.pliable > summary::-webkit-details-marker{display:none}
-details.pliable > summary::before{content:"▸";display:inline-block;font-size:13px;transition:transform .15s}
+details.pliable > summary::before{content:"▶";display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;
+  background:var(--bronze);color:#1b1b1b;font-size:11px;flex:none;transition:transform .15s}
 details.pliable[open] > summary::before{transform:rotate(90deg)}
-details.pliable > summary .etat{margin-left:auto;font-size:11.5px;color:var(--texte2);letter-spacing:0}
+details.pliable[open] > summary{border-bottom:1px solid var(--trait)}
+details.pliable > summary .etat{margin-left:auto;font-size:11.5px;font-weight:400;color:var(--texte2);letter-spacing:0;white-space:nowrap}
+details.pliable > .contenuPli{padding:4px 12px 12px}
+.boutonsDuo{display:flex;gap:8px} .boutonsDuo .btn{flex:1}
 
 /* ---------- bloc d'action expliqué ---------- */
 .action{margin-bottom:14px}
@@ -351,8 +357,17 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.20.0";
+const VERSION = "V1.21.0";
 const HISTORIQUE = [
+  { v:"V1.21.0", d:"23/09/2026", l:[
+    "Liste des livres : bouton « 📄 PDF » à côté de « 📋 Voir », et dans la fenêtre de la liste ; le PDF reprend les options d'affichage choisies (mémorisées).",
+    "La section « Ce que l'on peut en tirer » est repliée par défaut.",
+    "Sections pliables bien plus visibles : bandeau encadré, titre plus grand, pastille ▶ qui pivote."
+  ]},
+  { v:"V1.20.1", d:"23/09/2026", l:[
+    "Résumés et auteurs : le bouton principal devient « sans résumé » ; nouveau choix « sans résumé ou sans auteur ».",
+    "Confirmation obligatoire avant de redemander à Gemini des livres déjà traités (combien le sont, écrasement des résumés, risque de saturation du serveur)."
+  ]},
   { v:"V1.20.0", d:"23/09/2026", l:[
     "PDF avec emplacements : choix de numéroter les rangées de haut en bas (comme à l'écran) ou de bas en haut ; ce choix ne s'applique qu'aux mentions (rg: X, cl: Y, Z) du PDF.",
     "En tête et en fin du PDF, rappel du sens de numérotation (rangées, colonnes de gauche à droite, rang 1 devant / 2 derrière).",
@@ -2392,11 +2407,15 @@ function rendreBiblio(){
        <div class="expl">Parcourt les compartiments photographiés et remplit la liste de leurs livres, avec décompte de progression.</div>
      </div>
 
-     <details class="pliable" id="plTirer" ${cfg.tirerPlie ? "" : "open"}>
-     <summary class="titreSection">Ce que l'on peut en tirer <span class="etat">${cfg.tirerPlie ? "toucher pour déplier" : "toucher pour replier"}</span></summary>
+     <details class="pliable" id="plTirer" ${cfg.tirerOuvert ? "open" : ""}>
+     <summary>Ce que l'on peut en tirer <span class="etat">${cfg.tirerOuvert ? "toucher pour replier" : "toucher pour déplier"}</span></summary>
+     <div class="contenuPli">
      <div class="action">
-       <button class="btn principal" id="bListe">📋 Liste des livres</button>
-       <div class="expl">Livres compartiment par compartiment, puis liste exhaustive. Affichage réglable et copie dans le presse-papier.</div>
+       <div class="boutonsDuo">
+         <button class="btn principal" id="bListe">📋 Voir la liste des livres</button>
+         <button class="btn" id="bListePdf" style="flex:0 0 auto">📄 PDF</button>
+       </div>
+       <div class="expl">Livres compartiment par compartiment, puis liste exhaustive. « Voir » : affichage réglable et copie dans le presse-papier ; « PDF » : la même liste en PDF, avec les dernières options choisies.</div>
      </div>
      <div class="action">
        <button class="btn" id="bResumes">📝 Résumés et auteurs</button>
@@ -2413,6 +2432,7 @@ function rendreBiblio(){
        <div class="coche"><input type="radio" name="bSensRg" id="bSensHB" value="hb" ${cfg.pdfRangsBasHaut ? "" : "checked"}><label for="bSensHB" style="margin:0">de haut en bas (1 = rangée du haut, comme à l'écran)</label></div>
        <div class="coche"><input type="radio" name="bSensRg" id="bSensBH" value="bh" ${cfg.pdfRangsBasHaut ? "checked" : ""}><label for="bSensBH" style="margin:0">de bas en haut (1 = rangée du bas)</label></div>
      </div>
+     </div>
      </details>
      <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
 
@@ -2426,6 +2446,7 @@ function rendreBiblio(){
   };
   $("#bAnalyserTout").onclick = ()=>analyserToutesPhotos(b);
   $("#bListe").onclick = ()=>fenetreListe(b);
+  $("#bListePdf").onclick = ()=>pdfListe(b, optionsListe());
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
   $("#bPdfEmpl").onchange = (e)=>{
@@ -2436,7 +2457,7 @@ function rendreBiblio(){
     r.onchange = ()=>{ if (r.checked){ cfg.pdfRangsBasHaut = r.value === "bh"; sauverCfg(); } };
   });
   $("#plTirer").ontoggle = (e)=>{
-    cfg.tirerPlie = !e.target.open; sauverCfg();
+    cfg.tirerOuvert = e.target.open; sauverCfg();
     const et = e.target.querySelector(".etat");
     if (et) et.textContent = e.target.open ? "toucher pour replier" : "toucher pour déplier";
   };
@@ -3501,35 +3522,121 @@ function bilanSerie(b, affectees, envoyees, locales, erreurs, interrompu){
 /* ====================================================================
    LISTE DES LIVRES
    ==================================================================== */
+/* options d'affichage de la liste, mémorisées */
+function optionsListe(){
+  const d = { auteur:true, annee:true, emplacement:true, numeroter:true, resume:false };
+  return Object.assign(d, cfg.listeOpts || {});
+}
+
 function fenetreListe(b){
+  const o = optionsListe();
+  const ck = (id, cle, lib)=>`<div class="coche"><input type="checkbox" id="${id}" ${o[cle] ? "checked" : ""}><label for="${id}" style="margin:0">${lib}</label></div>`;
   const f = modale({
     titre:"Liste des livres — " + b.nom,
     html:
-      `<div class="coche"><input type="checkbox" id="oA" checked><label for="oA" style="margin:0">Auteur</label></div>
-       <div class="coche"><input type="checkbox" id="oY" checked><label for="oY" style="margin:0">Année</label></div>
-       <div class="coche"><input type="checkbox" id="oE" checked><label for="oE" style="margin:0">Emplacement (rangée · compartiment)</label></div>
-       <div class="coche"><input type="checkbox" id="oN" checked><label for="oN" style="margin:0">Numéroter la liste exhaustive</label></div>
-       <div class="coche"><input type="checkbox" id="oR"><label for="oR" style="margin:0">Résumé (s'il existe)</label></div>
-       <textarea id="sortie" style="min-height:320px;font-size:13px"></textarea>`,
+      ck("oA","auteur","Auteur") +
+      ck("oY","annee","Année") +
+      ck("oE","emplacement","Emplacement (rangée · compartiment)") +
+      ck("oN","numeroter","Numéroter la liste exhaustive") +
+      ck("oR","resume","Résumé (s'il existe)") +
+      `<textarea id="sortie" style="min-height:320px;font-size:13px"></textarea>`,
     boutons:[
       {texte:"Fermer"},
+      {texte:"📄 PDF", garder:true, action:()=>pdfListe(b, lire())},
       {texte:"Copier", classe:"principal", garder:true, action:async (fd)=>{
         const ok = await copierTexte(fd.querySelector("#sortie").value);
         toast(ok ? "Liste copiée dans le presse-papier." : "Copie impossible : sélectionnez le texte à la main.");
       }}
     ]
   });
+  const lire = ()=>({
+    auteur: f.querySelector("#oA").checked,
+    annee: f.querySelector("#oY").checked,
+    emplacement: f.querySelector("#oE").checked,
+    numeroter: f.querySelector("#oN").checked,
+    resume: f.querySelector("#oR").checked
+  });
   const construire = ()=>{
-    f.querySelector("#sortie").value = texteListe(b, {
-      auteur: f.querySelector("#oA").checked,
-      annee: f.querySelector("#oY").checked,
-      emplacement: f.querySelector("#oE").checked,
-      numeroter: f.querySelector("#oN").checked,
-      resume: f.querySelector("#oR").checked
-    });
+    const op = lire();
+    cfg.listeOpts = op; sauverCfg();
+    f.querySelector("#sortie").value = texteListe(b, op);
   };
   ["#oA","#oY","#oE","#oN","#oR"].forEach(s=>f.querySelector(s).onchange = construire);
   construire();
+}
+
+/* La liste des livres (même contenu que « Voir ») mise en page en PDF */
+async function pdfListe(b, o){
+  if (!compteLivres(b)){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
+  try{
+    const jsPDF = await chargerJsPDF();
+    const doc = new jsPDF({ unit:"mm", format:"a4" });
+    const MG = 16, LARG = 210 - MG*2, BAS = 297 - MG;
+    let y = MG;
+    const saut = (h)=>{ if (y + h > BAS){ doc.addPage(); y = MG; } };
+    const lignes = texteListe(b, o).split("\n");
+    lignes.forEach((l, i)=>{
+      if (i === 0){                                    // titre
+        doc.setFont("helvetica","bold"); doc.setFontSize(18); doc.setTextColor(0);
+        const t = doc.splitTextToSize(l.replace(/^BIBLIOTHÈQUE : /, ""), LARG);
+        doc.text(t, MG, y + 4); y += t.length*7 + 2; return;
+      }
+      if (i === 1){                                    // date
+        doc.setFont("helvetica","normal"); doc.setFontSize(9.5); doc.setTextColor(110);
+        doc.text(l, MG, y); y += 3; doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 6; return;
+      }
+      if (!l.trim()){ y += 2; return; }
+      if (/^═══/.test(l)){                             // grande section
+        const t = l.replace(/═/g, "").trim();
+        saut(16); y += 3;
+        doc.setFont("helvetica","bold"); doc.setFontSize(13); doc.setTextColor(0);
+        doc.text(t, MG, y); y += 2; doc.setDrawColor(120); doc.line(MG, y, MG+LARG, y); y += 6; return;
+      }
+      if (/^— Rangée/.test(l)){                        // compartiment
+        saut(12);
+        doc.setFont("helvetica","bold"); doc.setFontSize(10.5); doc.setTextColor(120, 90, 20);
+        const t = doc.splitTextToSize(l.replace(/^— /, ""), LARG);
+        doc.text(t, MG, y); y += t.length*4.8 + 1; doc.setTextColor(0); return;
+      }
+      if (/^\s{5}\S/.test(l) && !/^\s{3}\d+\./.test(l)){  // résumé
+        doc.setFont("helvetica","italic"); doc.setFontSize(9); doc.setTextColor(95);
+        const t = doc.splitTextToSize(l.trim(), LARG - 12);
+        saut(t.length*4);
+        doc.text(t, MG + 12, y); y += t.length*4 + 1; doc.setTextColor(0); return;
+      }
+      const retrait = /^\s+/.test(l) ? 5 : 0;           // livre
+      doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setTextColor(l.trim() === "(vide)" ? 140 : 0);
+      const t = doc.splitTextToSize(l.trim(), LARG - retrait);
+      saut(t.length*4.6);
+      doc.text(t, MG + retrait, y); y += t.length*4.6; doc.setTextColor(0);
+    });
+    const n = doc.getNumberOfPages();
+    for (let p=1; p<=n; p++){
+      doc.setPage(p);
+      doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(140);
+      doc.text(b.nom + " — liste des livres — page " + p + " / " + n, 105, 290, {align:"center"});
+    }
+    const nom = "liste-" + b.nom.replace(/[^\w\-]+/g,"_") + "-" + new Date().toISOString().slice(0,10) + ".pdf";
+    proposerPdf(doc.output("blob"), nom, "Liste des livres en PDF", `PDF prêt : ${compteLivres(b)} livre(s), ${n} page(s).`);
+  }catch(e){
+    modale({titre:"PDF impossible", html:`<div class="aide">${esc(e.message)}</div>`, boutons:[{texte:"Fermer"}]});
+  }
+}
+
+/* fenêtre commune « Ouvrir / Télécharger » pour un PDF produit */
+function proposerPdf(blob, nom, titre, message){
+  const url = URL.createObjectURL(blob);
+  modale({ titre,
+    html:`<div>${message}</div>
+          <div class="aide">Sur iPhone, « Ouvrir » affiche le PDF dans un onglet ; le bouton de partage permet ensuite de l'enregistrer dans Fichiers.</div>`,
+    boutons:[
+      {texte:"Fermer", action:()=>setTimeout(()=>URL.revokeObjectURL(url), 60000)},
+      {texte:"Ouvrir", garder:true, action:()=>window.open(url,"_blank")},
+      {texte:"Télécharger", classe:"principal", garder:true, action:()=>{
+        const a = document.createElement("a"); a.href=url; a.download=nom;
+        document.body.appendChild(a); a.click(); a.remove();
+      }}
+    ]});
 }
 
 function ligneLivre(lv, o, empl){
@@ -3582,23 +3689,43 @@ async function lancerResumes(b){
   const tous = tousLesLivres(b).map(x=>x.livre);
   if (!tous.length){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
   const manquants = tous.filter(lv=>!lv.resume);
+  const incomplets = tous.filter(lv=>!lv.resume || !lv.auteur);
+  const boutons = [{texte:"Annuler", action:()=>null}];
+  boutons.push({texte:`Tous (${tous.length})`, action:()=>"tous"});
+  if (incomplets.length > manquants.length)
+    boutons.push({texte:`Sans résumé ou sans auteur (${incomplets.length})`, action:()=>"incomplets"});
+  if (manquants.length)
+    boutons.push({texte:`Les ${manquants.length} sans résumé`, classe:"principal", action:()=>"manquants"});
   const choix = await new Promise(res=>{
     modale({ titre:"Résumés et auteurs",
-      html:`<div>${tous.length} livre(s) dans cette bibliothèque, dont ${manquants.length} sans résumé.</div>
-            <div class="aide">Gemini renvoie un résumé d'une ligne, l'auteur complet avec une précision brève et l'année de première parution. Traitement par lots de 20, avec décompte.</div>`,
-      boutons:[
-        {texte:"Annuler", action:()=>res(null)},
-        {texte:`Les ${manquants.length} sans résumé`, action:()=>res(manquants)},
-        {texte:`Tous (${tous.length})`, classe:"principal", action:()=>res(tous)}
-      ], surFermeture:()=>res(null)});
+      html:`<div>${tous.length} livre(s) dans cette bibliothèque : ${tous.length - manquants.length} ont déjà un résumé, ${manquants.length} n'en ont pas${incomplets.length > manquants.length ? `, et ${incomplets.length - manquants.length} ont un résumé mais pas d'auteur` : ""}.</div>
+            <div class="aide">Gemini renvoie un résumé d'une ligne, l'auteur complet avec une précision brève et l'année de première parution. Traitement par lots de 20, avec décompte.</div>
+            ${!manquants.length ? `<div class="aide">✅ Tous les livres ont déjà un résumé.</div>` : ""}`,
+      boutons: boutons.map(x=>({ texte:x.texte, classe:x.classe, action:()=>res(x.action()) })),
+      surFermeture:()=>res(null)});
   });
-  if (!choix || !choix.length) return;
-  const ok = await traiterParLots(choix, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", 20);
+  if (!choix) return;
+  const liste = choix === "tous" ? tous : choix === "incomplets" ? incomplets : manquants;
+  if (!liste.length) return;
+
+  // garde-fou : ne pas redemander par accident ce qui a déjà été obtenu (Gemini est souvent saturé)
+  const deja = liste.filter(lv=>lv.resume);
+  if (deja.length){
+    const pct = Math.round(deja.length * 100 / liste.length);
+    const ok = await confirmer(
+      `<div><b>${deja.length} livre(s) sur ${liste.length} (${pct} %) ont déjà un résumé.</b></div>
+       <div class="aide">Les redemander refera ${Math.ceil(liste.length / 20)} requête(s) à Gemini au lieu de ${Math.ceil((liste.length - deja.length) / 20)}, alors que son serveur est souvent saturé, et <b>remplacera</b> les résumés, auteurs et années déjà obtenus par les nouvelles réponses.</div>
+       ${liste.length > deja.length ? `<div class="aide">Pour ne traiter que les ${liste.length - deja.length} livre(s) qui en manquent, annulez puis choisissez « sans résumé ».</div>` : ""}`,
+      "Redemander des résumés déjà obtenus ?", `Oui, redemander les ${liste.length}`);
+    if (!ok) return;
+  }
+
+  const ok = await traiterParLots(liste, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", 20);
   rendreBiblio();
   if (ok){
-    const avec = choix.filter(lv=>lv.resume).length;
+    const avec = liste.filter(lv=>lv.resume).length;
     modale({ titre:"Résumés obtenus",
-      html:`<div>${avec} livre(s) sur ${choix.length} ont maintenant un résumé.</div>
+      html:`<div>${avec} livre(s) sur ${liste.length} ont maintenant un résumé.</div>
             <div class="aide">Ils apparaissent dans chaque compartiment, dans la liste (case « Résumé ») et dans le PDF.</div>`,
       boutons:[{texte:"Fermer"}]});
   }
