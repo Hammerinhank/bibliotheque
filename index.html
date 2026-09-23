@@ -380,8 +380,16 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.41.1";
+const VERSION = "V1.42.1";
 const HISTORIQUE = [
+  { v:"V1.42.1", d:"23/09/2026", l:[
+    "Reconstruction pas à pas, à la main : dans « 📜 Résultats sauvegardés », bouton « 🗑 Vider les listes » (liste mise de côté, retour possible) et, pour chaque lecture d'appoint, choix direct 🔎 Vérifier ou 🔀 Ordre respecté ; on rejoue les résultats un par un, dans l'ordre voulu."
+  ]},
+  { v:"V1.42.0", d:"23/09/2026", l:[
+    "Nouveau « 🔄 Reconstruire à partir des résultats sauvegardés » dans un compartiment : remise à zéro des listes, puis rejeu des étapes cochées (analyses des rangées, puis photos d'appoint), sans redemander à l'IA.",
+    "Pour chaque appoint, choix du mode : 🔎 Vérifier ou 🔀 Ordre respecté ; chaque étape ouvre sa fenêtre habituelle, la suivante attend sa fermeture ; décompte des étapes.",
+    "La liste d'avant est mise de côté : bouton pour revenir en arrière. Une seule sauvegarde GitHub à la fin."
+  ]},
   { v:"V1.41.1", d:"23/09/2026", l:[
     "Règle de fond : le résultat d'une photo d'appoint n'est jamais affecté à une rangée qui n'a pas quelques livres en commun avec lui (plus de « Continuer quand même »).",
     "Sans correspondance : refus expliqué — erreur de compartiment, erreur de rangée, ou rangée pas encore relevée (photo de derrière absente ou non analysée) — avec la liste de ce qui a été lu ; le résultat reste réutilisable (📜).",
@@ -1515,7 +1523,11 @@ async function fenetreResultatsSauves(b, k){
       if (r.ok) distants = (await r.json()).filter(x=>x.type === "file" && /\.json$/.test(x.name)).map(x=>({ nom:x.name, chemin:x.path }));
     }catch(e){ toast("Liste GitHub illisible : " + e.message, 5000); }
   }
-  const tous = locaux.concat(distants).sort((x, y)=>y.nom.localeCompare(x.nom));
+  // ordre de rejeu : analyses des rangées d'abord, puis appoints, chacun du plus ancien au plus récent
+  const tous = locaux.concat(distants).sort((x, y)=>{
+    const gx = /-appoint-/.test(x.nom) ? 1 : 0, gy = /-appoint-/.test(y.nom) ? 1 : 0;
+    return gx - gy || x.nom.localeCompare(y.nom);
+  });
   const decrire = (nom)=>{
     const m = nom.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d)-(\d\d)/);
     const quand = m ? `${m[3]}/${m[2]}/${m[1]} à ${m[4]}:${m[5]}` : nom;
@@ -1529,26 +1541,50 @@ async function fenetreResultatsSauves(b, k){
   const f = modale({ titre:"Résultats sauvegardés — " + lib(k),
     html: tous.length
       ? `<div class="aide" style="margin-top:0">Chaque résultat de Gemini ou de Claude est sauvegardé dès son arrivée. Réutilisez-en un sans redemander à l'IA : il passe par les mêmes fenêtres de choix (compléter, remplacer, fusionner…).</div>
+         <div class="aide"><b>Pas à pas :</b> « 🗑 Vider les listes », puis rejouez les résultats un par un dans l'ordre voulu (analyses des rangées d'abord, puis les appoints). Cette fenêtre reste ouverte ; ✓ marque ce qui a déjà été rejoué.</div>
          ${tous.map((x, i)=>{ const d = decrire(x.nom); return `<div class="prop" style="display:flex;gap:10px;align-items:center">
             <div style="flex:1"><div class="t">${esc(d.quand)}</div><div class="chg">${esc(d.quoi)}${x.local ? " — <b>pas encore sur GitHub</b>" : ""}</div></div>
-            <button class="btn" data-j="${i}">Réutiliser</button></div>`; }).join("")}`
+            ${/-appoint-/.test(x.nom)
+              ? `<div style="display:flex;flex-direction:column;gap:6px"><button class="btn" data-j="${i}" data-mode="verif">🔎 Vérifier</button><button class="btn" data-j="${i}" data-mode="ordre">🔀 Ordre respecté</button></div>`
+              : `<button class="btn" data-j="${i}">Réutiliser</button>`}</div>`; }).join("")}`
       : `<div>Aucun résultat sauvegardé pour ce compartiment.</div><div class="aide">Les résultats sont sauvegardés à partir de la V1.38.0.</div>`,
-    boutons:[{texte:"Fermer"}] });
+    boutons:[
+      ...(b.cases[k] && b.cases[k].avantReconstruction ? [{ texte:"↩ Revenir à avant", action:()=>{
+        const cs0 = b.cases[k], sv = cs0.avantReconstruction;
+        cs0.livres = sv.livres; delete cs0.avantReconstruction; sauver();
+        if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
+        toast(`Liste du ${dateFr(sv.date)} rétablie (${cs0.livres.length} livre(s)).`, 5000);
+        envoyerDonneesAuto("Listes de livres de " + lib(k)); } }] : []),
+      { texte:"🗑 Vider les listes", garder:true, action:async (fd)=>{
+        const cs0 = b.cases[k] = b.cases[k] || { livres:[] };
+        const ok = await confirmer(`<div>Vider les listes de livres de ${esc(lib(k))} (${(cs0.livres||[]).length} livre(s)) pour les reconstruire à la main, résultat par résultat ?</div>
+          <div class="aide">La liste actuelle est mise de côté : « ↩ Revenir à avant » la rétablit.</div>`, "Vider les listes", "Vider");
+        if (!ok) return false;
+        cs0.avantReconstruction = { date:new Date().toISOString(), livres:(cs0.livres||[]).slice() };
+        cs0.livres = []; delete cs0.analyse;
+        (cs0.appoints||[]).forEach(a=>{ delete a.rang; delete a.rangInfo; });
+        sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
+        toast("Listes vidées : rejouez maintenant les résultats un par un.", 5000);
+        fd.remove(); fenetreResultatsSauves(b, k);
+        return false;
+      }},
+      { texte:"Fermer" }] });
   f.querySelectorAll("[data-j]").forEach(bt=>bt.onclick = async ()=>{
     const x = tous[Number(bt.dataset.j)];
+    const modeChoisi = bt.dataset.mode || "";
     let doc = x.doc;
     if (!doc){
       try{ doc = JSON.parse(await ghLireTexte(x.chemin)); }
       catch(e){ toast("Lecture impossible : " + e.message, 5000); return; }
     }
-    f.remove();
     const cs = b.cases[k] = b.cases[k] || { livres:[] };
+    bt.textContent = "✓ " + bt.textContent.replace(/^✓ /, "");       // repère des étapes déjà rejouées
     const source = Object.assign({ ia:"gemini", modele:"", echecs:[] }, doc.source || {}, { modele: ((doc.source && doc.source.modele) || "") + " — résultat sauvegardé du " + decrire(x.nom).quand });
     if (doc.genre === "appoint"){
       const champ = PRE_APPOINT + (doc.appoint || "");
       if (!photoObj(cs, champ)){ toast("La photo d'appoint de ce résultat n'existe plus dans ce compartiment.", 5000); return; }
       const lus = (doc.lus || []).map(l=>Object.assign({}, l));
-      if (doc.mode === "ordre") fenetreFusionAppoint(b, k, champ, lus, source);
+      if ((modeChoisi || doc.mode) === "ordre") fenetreFusionAppoint(b, k, champ, lus, source);
       else fenetreVerifAppoint(b, k, champ, lus, source);
     } else {
       const livres = (doc.livres || []).map(l=>Object.assign({}, l, { id:uid() }));
@@ -1562,7 +1598,9 @@ async function fenetreResultatsSauves(b, k){
 /* Envoi automatique des DONNÉES (listes de livres de chaque rangée) juste après une analyse appliquée.
    Garde-fous : pas de réseau → avertissement ; GitHub modifié ailleurs ou envoi avec pertes → envoi suspendu, on explique. */
 let envoiAutoEnCours = null;
-async function envoyerDonneesAuto(quoi){
+async function envoyerDonneesAuto(quoi, opts){
+  opts = opts || {};
+  if (reconstructionEnCours) return false;                     // une seule sauvegarde, à la fin de la reconstruction
   if (envoiAutoEnCours){ try{ await envoiAutoEnCours; }catch(e){} }
   envoiAutoEnCours = (async ()=>{
     if (!ghPret() || navigator.onLine === false){ avertirNonSauve(quoi, raisonEchec()); return false; }
@@ -1571,7 +1609,8 @@ async function envoyerDonneesAuto(quoi){
       if (txt){
         const j = JSON.parse(txt);
         const connue = localStorage.getItem(CLE_SYNC);
-        const pertes = pertesEnvoi(data, j);
+        // une reconstruction peut légitimement réduire le nombre de livres et de résumés
+        const pertes = pertesEnvoi(data, j).filter(x=>!(opts.livresEnMoinsVoulus && /^(livres|résumés) :/.test(x)));
         if ((j.maj && connue && j.maj !== connue) || pertes.length){
           modale({ titre:"⚠️ Sauvegarde automatique suspendue",
             html:`<div><b>${esc(quoi)}</b> est enregistré sur cet appareil, mais n'a pas été envoyé automatiquement :</div>
@@ -1601,6 +1640,166 @@ async function envoyerDonneesAuto(quoi){
   const r = await envoiAutoEnCours;
   envoiAutoEnCours = null;
   return r;
+}
+
+/* ====================================================================
+   RECONSTRUCTION D'UN COMPARTIMENT À PARTIR DES RÉSULTATS SAUVEGARDÉS
+   Remise à zéro des listes, puis rejeu des étapes (analyses des rangées, puis photos d'appoint)
+   sans redemander à l'IA. Chaque étape ouvre sa fenêtre habituelle ; la suivante attend qu'elle soit close.
+   ==================================================================== */
+let reconstructionEnCours = false;
+
+async function listerResultatsSauves(b, k){
+  const locaux = journalEnAttente().filter(x=>x.doc.bibliotheque === b.id && x.doc.compartiment === k)
+    .map(x=>({ nom:x.chemin.split("/").pop(), doc:x.doc, local:true }));
+  let distants = [];
+  if (ghLisible()){
+    const r = await fetch(ghUrl(`analyses/${b.id}/${k}`) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), { headers: ghEntetes() });
+    if (r.ok) distants = (await r.json()).filter(x=>x.type === "file" && /\.json$/.test(x.name)).map(x=>({ nom:x.name, chemin:x.path }));
+    else if (r.status !== 404) throw new Error("GitHub " + r.status);
+  }
+  return locaux.concat(distants).map(x=>{
+    const m = x.nom.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d)-(\d\d)-(\d\d)/);
+    const t = m ? `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}` : x.nom;
+    const quand = m ? `${m[3]}/${m[2]} ${m[4]}:${m[5]}` : x.nom;
+    const ma = x.nom.match(/-appoint-([a-z0-9]+)(-ordre)?\.json$/i);
+    const mp = x.nom.match(/-analyse-(deux|devant|derriere)\.json$/i);
+    return Object.assign(x, { t, quand, genre: ma ? "appoint" : "analyse", appoint: ma ? ma[1] : null, mode: ma && ma[2] ? "ordre" : "verif", portee: mp ? mp[1] : null });
+  }).sort((a, z)=>a.t.localeCompare(z.t));
+}
+
+/* attend que toutes les fenêtres ouvertes par une étape soient fermées */
+function attendreFenetres(base){
+  return new Promise(res=>{
+    const zone = $("#zoneModales");
+    let calme = 0;
+    const tic = setInterval(()=>{
+      if (zone.children.length <= base){ if (++calme >= 2){ clearInterval(tic); res(); } }
+      else calme = 0;
+    }, 250);
+  });
+}
+
+async function fenetreReconstruction(b, k){
+  const cs = b.cases[k] = b.cases[k] || { livres:[] };
+  let liste;
+  const pg = fenetreProgres("Résultats sauvegardés");
+  try{ pg.maj(0, 1, "Liste des résultats de " + lib(k)); liste = await listerResultatsSauves(b, k); }
+  catch(e){ pg.fermer(); toast("Liste illisible : " + e.message, 6000); return; }
+  pg.fermer();
+  const analyses = liste.filter(x=>x.genre === "analyse");
+  const appointsExistants = new Set((cs.appoints||[]).map(a=>a.id));
+  const appoints = liste.filter(x=>x.genre === "appoint");
+  if (!analyses.length && !appoints.length){
+    modale({ titre:"Reconstruire " + lib(k), html:`<div>Aucun résultat sauvegardé pour ce compartiment : impossible de reconstruire sans redemander à l'IA.</div><div class="aide">Les résultats sont sauvegardés depuis la V1.38.0.</div>`, boutons:[{texte:"Fermer"}] });
+    return;
+  }
+  // plan par défaut : dernière analyse des deux rangs, puis les analyses d'un seul rang plus récentes ;
+  // puis, pour chaque appoint encore présent, sa dernière lecture, dans l'ordre des appoints
+  const dernier = (f)=>{ const l = analyses.filter(f); return l[l.length - 1]; };
+  const ld = dernier(x=>x.portee === "deux"), l1 = dernier(x=>x.portee === "devant"), l2 = dernier(x=>x.portee === "derriere");
+  const defaut = new Set();
+  if (ld) defaut.add(ld);
+  [l1, l2].forEach(x=>{ if (x && (!ld || x.t > ld.t)) defaut.add(x); });
+  if (!ld && !l1 && !l2 && analyses.length) defaut.add(analyses[analyses.length - 1]);
+  const ordreAppoint = (id)=>{ const i = (cs.appoints||[]).findIndex(a=>a.id === id); return i < 0 ? 999 : i; };
+  [...new Set(appoints.map(x=>x.appoint))].forEach(id=>{
+    if (!appointsExistants.has(id)) return;
+    const l = appoints.filter(x=>x.appoint === id); defaut.add(l[l.length - 1]);
+  });
+  const nomPortee = { deux:"analyse des deux rangées", devant:"analyse de la rangée 1 (devant)", derriere:"analyse de la rangée 2 (derrière)" };
+  const lignes = analyses.map(x=>({ x, type:"analyse" }))
+    .concat(appoints.slice().sort((a, z)=>ordreAppoint(a.appoint) - ordreAppoint(z.appoint) || a.t.localeCompare(z.t)).map(x=>({ x, type:"appoint" })));
+  const html = lignes.map((l, i)=>{
+    const x = l.x, absent = l.type === "appoint" && !appointsExistants.has(x.appoint);
+    const titre = l.type === "analyse" ? nomPortee[x.portee] || "analyse"
+      : `appoint ${ordreAppoint(x.appoint) < 999 ? ordreAppoint(x.appoint) + 1 : "?"}` + (absent ? " — photo retirée" : "");
+    return `<div class="prop" style="${absent ? "opacity:.5" : ""}"><div class="coche" style="align-items:flex-start">
+      <input type="checkbox" data-e="${i}" ${defaut.has(x) && !absent ? "checked" : ""} ${absent ? "disabled" : ""} style="margin-top:3px">
+      <div style="flex:1"><div class="t">${esc(titre)}</div><div class="chg">résultat du ${esc(x.quand)}${x.local ? " — pas encore sur GitHub" : ""}</div>
+      ${l.type === "appoint" && !absent ? `<div class="onglets" style="margin-top:6px" data-m="${i}">
+          <button data-v="verif" class="${x.mode !== "ordre" ? "actif" : ""}">🔎 Vérifier</button>
+          <button data-v="ordre" class="${x.mode === "ordre" ? "actif" : ""}">🔀 Ordre respecté</button></div>` : ""}
+      </div></div></div>`;
+  }).join("");
+  const modes = lignes.map(l=>l.x.mode);
+  const sauvegarde = cs.avantReconstruction;
+  const f = modale({ titre:"Reconstruire " + lib(k),
+    html:`<div>Les listes de livres de ce compartiment (${(cs.livres||[]).length} livre(s) actuellement) seront <b>remises à zéro</b>, puis reconstruites en rejouant les résultats cochés, <b>sans redemander à l'IA</b>.</div>
+          <div class="aide">Ordre : d'abord les analyses des rangées (de la plus ancienne à la plus récente), puis les photos d'appoint. Chaque étape ouvre sa fenêtre habituelle (compléter, fusionner, vérifier…) ; la suivante s'ouvre quand vous l'avez fermée. Pour chaque appoint, choisissez le mode : 🔎 Vérifier, ou 🔀 Ordre respecté (les livres n'ont pas bougé).</div>
+          <div class="aide">La liste actuelle est mise de côté : vous pourrez l'annuler et revenir en arrière.</div>
+          ${html}`,
+    boutons:[
+      ...(sauvegarde ? [{ texte:"↩ Revenir à avant la dernière reconstruction", action:()=>{
+        cs.livres = sauvegarde.livres; delete cs.avantReconstruction; sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
+        toast(`Liste d'avant la reconstruction du ${dateFr(sauvegarde.date)} rétablie (${cs.livres.length} livre(s)).`, 5000);
+        envoyerDonneesAuto("Listes de livres de " + lib(k)); } }] : []),
+      { texte:"Annuler" },
+      { texte:"🔄 Remettre à zéro et reconstruire", classe:"principal", action:(fd)=>{
+        const etapes = lignes.map((l, i)=>({ l, i })).filter(({ i })=>{ const c = fd.querySelector(`[data-e="${i}"]`); return c && c.checked; })
+          .map(({ l, i })=>({ x:l.x, type:l.type, mode:modes[i] }));
+        if (!etapes.length){ toast("Aucune étape cochée."); return false; }
+        setTimeout(()=>executerReconstruction(b, k, etapes), 50);
+      }}
+    ]});
+  f.querySelectorAll("[data-m]").forEach(z=>{
+    const i = Number(z.dataset.m);
+    z.querySelectorAll("button").forEach(bt=>bt.onclick = (e)=>{
+      e.preventDefault(); modes[i] = bt.dataset.v;
+      z.querySelectorAll("button").forEach(y=>y.classList.toggle("actif", y === bt));
+    });
+  });
+}
+
+async function executerReconstruction(b, k, etapes){
+  const cs = b.cases[k];
+  // lecture des résultats (décompte fait / restant)
+  const pg = fenetreProgres("Lecture des résultats sauvegardés");
+  try{
+    for (let i = 0; i < etapes.length; i++){
+      const e = etapes[i];
+      pg.maj(i, etapes.length, `Résultat ${i + 1} / ${etapes.length} — reste ${etapes.length - i}`);
+      if (!e.x.doc) e.x.doc = JSON.parse(await ghLireTexte(e.x.chemin));
+    }
+  }catch(err){ pg.fermer(); toast("Lecture impossible : " + err.message + ". Rien n'a été modifié.", 6000); return; }
+  pg.fermer();
+  // remise à zéro (la liste est mise de côté)
+  cs.avantReconstruction = { date:new Date().toISOString(), livres:(cs.livres||[]).slice() };
+  cs.livres = [];
+  delete cs.analyse;
+  (cs.appoints||[]).forEach(a=>{ delete a.rang; delete a.rangInfo; });
+  sauver();
+  if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+  reconstructionEnCours = true;
+  try{
+    for (let i = 0; i < etapes.length; i++){
+      const e = etapes[i], doc = e.x.doc;
+      const base = $("#zoneModales").children.length;
+      const src = Object.assign({ ia:"gemini", modele:"", echecs:[] }, doc.source || {});
+      src.modele = (src.modele || "") + " — résultat sauvegardé du " + e.x.quand;
+      toast(`Reconstruction ${i + 1} / ${etapes.length} (reste ${etapes.length - i - 1}) : ${e.type === "analyse" ? "analyse" : "appoint, " + (e.mode === "ordre" ? "ordre respecté" : "vérification")}`, 4000);
+      if (e.type === "analyse"){
+        const livres = (doc.livres || []).map(l=>Object.assign({}, l, { id:uid() }));
+        livres.source = src;
+        finaliserPortee(livres, doc.portee || porteeParDefaut(cs), cs);
+        appliquerLivresCompartiment(b, k, livres);
+      } else {
+        const champ = PRE_APPOINT + doc.appoint;
+        if (!photoObj(cs, champ)) continue;
+        const lus = (doc.lus || []).map(l=>Object.assign({}, l));
+        if (e.mode === "ordre") fenetreFusionAppoint(b, k, champ, lus, src);
+        else fenetreVerifAppoint(b, k, champ, lus, src);
+      }
+      await attendreFenetres(base);
+    }
+  } finally {
+    reconstructionEnCours = false;
+  }
+  sauver();
+  if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+  rendreBiblio();
+  toast(`Reconstruction de ${lib(k)} terminée : ${(cs.livres||[]).length} livre(s) (avant : ${cs.avantReconstruction.livres.length}).`, 6000);
+  envoyerDonneesAuto("Reconstruction de " + lib(k), { livresEnMoinsVoulus:true });
 }
 
 /* ====================================================================
@@ -3850,7 +4049,10 @@ function ouvrirCompartiment(b, k){
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
            <button class="btn principal plein" id="cAppointOrdre" style="margin-top:8px;display:none">🔀 Vérifier avec cette photo (ordre respecté)</button>
-           <button class="btn plein" id="cResultats" style="margin-top:8px">📜 Résultats d'analyse sauvegardés</button>
+           <div class="barre" style="margin-top:8px">
+             <button class="btn" id="cResultats" style="flex:1">📜 Résultats sauvegardés</button>
+             <button class="btn" id="cReconstruire" style="flex:1">🔄 Reconstruire</button>
+           </div>
            <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste. <b>🔎 Vérifier</b> : chaque livre lu est cherché dans les listes des rangées 1 et 2 (titre, auteur, voisinage). <b>🔀 Ordre respecté</b> : l'app repère la zone de la rangée que couvre la photo et aligne les livres un à un dans l'ordre ; vous corrigez au besoin l'ordre de deux voisins avec la poignée ≡. Rien n'est modifié sans votre accord.</div>
            <div id="zoneUnRang" style="margin-top:8px"></div>
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
@@ -4213,6 +4415,7 @@ function ouvrirCompartiment(b, k){
   };
 
   f.querySelector("#cResultats").onclick = ()=>fenetreResultatsSauves(b, k);
+  f.querySelector("#cReconstruire").onclick = ()=>fenetreReconstruction(b, k);
   f.querySelector("#cAppointOrdre").onclick = async ()=>{
     if (!estAppoint(face)) return;
     const champ = face;
