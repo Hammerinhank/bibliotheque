@@ -4170,17 +4170,6 @@
        "origine": "ia"
       },
       {
-       "id": "mud5m1hso6k0f",
-       "titre": "Trouble dans les Andains",
-       "auteur": "Boris Vian (écrivain français, 1920-1959)",
-       "annee": "1966",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Ce roman satirique et loufoque suit les aventures burlesques de personnages hauts en couleur dans une province française imaginaire.",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
        "id": "mud5m1hsgorns",
        "titre": "Castillane en goguette",
        "auteur": "Boris Vian (écrivain français, 1920-1959)",
@@ -4192,6 +4181,18 @@
        "origine": "ia"
       },
       {
+       "id": "muedis6xlj6js",
+       "titre": "L'écume des jours",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
        "id": "mud5m1hsvjdwk",
        "titre": "L'herbe rouge",
        "auteur": "Boris Vian (écrivain français, 1920-1959)",
@@ -4201,6 +4202,18 @@
        "resume": "Un homme tourmenté tente de fuir ses angoisses en participant à une étrange thérapie psychanalytique dans un paysage surréaliste.",
        "categorie": "Romans français",
        "origine": "ia"
+      },
+      {
+       "id": "muedis6x1ldet",
+       "titre": "La croule",
+       "auteur": "Paul Vialar",
+       "annee": "2022",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
       },
       {
        "id": "mud5m1hs9gl5k",
@@ -4215,8 +4228,8 @@
       },
       {
        "id": "mud5m1hs8cb6b",
-       "titre": "La mort est un commencement",
-       "auteur": "Paul Vialar (écrivain français, 1898-1996)",
+       "titre": "mon seul amour",
+       "auteur": "Paul Vialar",
        "annee": "1937",
        "certitude": "moyenne",
        "remarque": "partiellement lisible",
@@ -4584,6 +4597,18 @@
        "resume": "Première partie de ce diptyque centré sur la vie, les épreuves et les espoirs des réfugiés russes en exil.",
        "categorie": "Romans français",
        "origine": "ia"
+      },
+      {
+       "id": "muedis6x0kibj",
+       "titre": "Andains",
+       "auteur": "",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
       }
      ],
      "photo": {
@@ -4605,7 +4630,15 @@
        "envoye": true,
        "maj": "2026-09-23T16:26:56.475Z",
        "legende": "",
-       "id": "mue5rvl3sa4zy"
+       "id": "mue5rvl3sa4zy",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 15,
+        "n2": 0,
+        "date": "2026-09-23T17:25:18.005Z"
+       },
+       "verif": "2026-09-23T17:25:38.098Z"
       },
       {
        "plein": null,
@@ -7044,7 +7077,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T17:15:50.226Z",
+ "maj": "2026-09-23T17:26:25.566Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
