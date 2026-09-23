@@ -127,15 +127,13 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case .sansphoto{font-size:20px;opacity:.45}
 .case .num{position:absolute;top:2px;left:3px;font-size:10px;color:#fff;background:rgba(0,0,0,.55);border-radius:4px;padding:0 4px}
 .case .nb{position:absolute;bottom:0;left:0;right:0;font-size:11px;text-align:center;background:rgba(0,0,0,.6);color:#fff;padding:1px 0}
-.case.analysee{border-color:var(--vert)}
-.case.analysee.complete{border-width:2px}
-.case.aenvoyer{border-color:var(--orange)}
+.case.analysee{border:2px solid #3ddc6a}
+.case.analysee.complete{border-width:4px;box-shadow:0 0 6px rgba(61,220,106,.45)}
+.case.aenvoyer{border:3px solid var(--orange);box-shadow:none}
 .case .deux{position:absolute;top:3px;right:3px;z-index:2;font-size:12px;font-weight:800;letter-spacing:.3px;line-height:1.25;color:#1c1500;
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
 .case .deux small{font-size:10px;font-weight:700;opacity:.8}
-/* deux rangs : une seconde « photo » décalée derrière la case */
-.case.deuxRangs{box-shadow:5px -5px 0 -1px #ffd23f, 5px -5px 0 0 #1c1500}
 .legende .pastilleDeux{display:inline-block;font-size:10px;font-weight:800;color:#1c1500;background:#ffd23f;border:1px solid #1c1500;border-radius:4px;padding:0 4px;margin-right:4px}
 .rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
 .rang.devant{background:var(--encre3);color:var(--texte2)}
@@ -363,8 +361,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.26.0";
+const VERSION = "V1.26.1";
 const HISTORIQUE = [
+  { v:"V1.26.1", d:"23/09/2026", l:[
+    "Grille : suppression de l'effet « deux photos empilées », l'étiquette « 2 RANGS » suffit.",
+    "Cadres des compartiments bien plus visibles : vert vif, épais (4 px) si toutes les photos sont analysées, moyen (2 px) s'il en reste une non analysée ; orange 3 px pour une photo à envoyer."
+  ]},
   { v:"V1.26.0", d:"23/09/2026", l:[
     "Grille : un compartiment à deux rangs est bien plus visible — grosse étiquette jaune « 2 RANGS » et effet de deux photos empilées ; les photos d'appoint sont signalées à part (« +1 zoom »).",
     "Légende complétée en conséquence."
@@ -2550,9 +2552,9 @@ function rendreBiblio(){
      <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ». Photos d'appoint (zooms) : liste déroulante à droite des deux onglets.</div>
      ${grille}
      <div class="legende">
-       <span><i style="border-color:var(--vert);border-width:2px"></i>toutes les photos analysées</span>
-       <span><i style="border-color:var(--vert)"></i>une photo non analysée</span>
-       <span><i style="border-color:var(--orange)"></i>photo à envoyer</span>
+       <span><i style="border-color:#3ddc6a;border-width:4px"></i>toutes les photos analysées</span>
+       <span><i style="border-color:#3ddc6a;border-width:2px"></i>une photo non analysée</span>
+       <span><i style="border-color:var(--orange);border-width:3px"></i>photo à envoyer</span>
        <span><i style="border-color:var(--trait)"></i>vide</span>
        <span><b class="pastilleDeux">2 RANGS</b>livres sur deux rangs (2 photos)</span>
      </div>
