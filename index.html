@@ -207,6 +207,19 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .progres .barreint i{display:block;height:100%;background:var(--bronze);width:0}
 .aide{font-size:12.5px;color:var(--texte2);margin-top:6px}
 .sep{height:1px;background:var(--trait);margin:16px 0}
+/* ---------- scan des photos du dépôt ---------- */
+.scanTotaux{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.scanTotaux button{flex:1;min-width:78px;border-radius:10px;padding:8px 6px;font-size:13px;border:1px solid var(--trait);background:var(--encre);color:var(--texte);cursor:pointer}
+.scanTotaux button b{display:block;font-size:19px}
+.scanTotaux button.actif{box-shadow:0 0 0 2px var(--bronze) inset}
+.scanTotaux .t-vert b{color:var(--vert)} .scanTotaux .t-orange b{color:var(--orange)} .scanTotaux .t-rouge b{color:var(--rouge)}
+.scanListe{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow-y:auto;margin-top:6px}
+.scanLigne{display:flex;gap:9px;align-items:flex-start;background:var(--encre);border:1px solid var(--trait);border-left-width:6px;border-radius:10px;padding:8px 10px;font-size:13.5px;cursor:pointer;text-align:left;color:var(--texte);width:100%}
+.scanLigne.vert{border-left-color:var(--vert)} .scanLigne.orange{border-left-color:var(--orange)} .scanLigne.rouge{border-left-color:var(--rouge)}
+.scanLigne .pt{flex:none;width:12px;height:12px;border-radius:50%;margin-top:4px}
+.scanLigne.vert .pt{background:var(--vert)} .scanLigne.orange .pt{background:var(--orange)} .scanLigne.rouge .pt{background:var(--rouge)}
+.scanLigne .ch{font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all;color:var(--texte2)}
+.scanLigne .qui{font-weight:600}
 /* ---------- recherche de modèle Gemini ---------- */
 .modeles{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:46vh;overflow-y:auto}
 .mod{display:flex;align-items:center;gap:8px;background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:8px 10px;font-size:13.5px}
@@ -326,8 +339,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.16.1";
+const VERSION = "V1.17.0";
 const HISTORIQUE = [
+  { v:"V1.17.0", d:"23/09/2026", l:[
+    "Réglages ⚙️ → Entretien : bouton « 🗂️ Scanner les photos du dépôt GitHub » qui liste toutes les images présentes sur le dépôt, avec décompte de progression.",
+    "Vert : photo associée actuellement à un compartiment ; orange : photo créée pour un compartiment mais aujourd'hui orpheline (retirée, remplacée, compartiment ou bibliothèque supprimés) ; rouge : image jamais associée à un compartiment.",
+    "Totaux cliquables pour filtrer la liste ; toucher une ligne ouvre la photo en taille réelle. Signale aussi les photos associées mais introuvables sur le dépôt."
+  ]},
   { v:"V1.16.1", d:"22/09/2026", l:[
     "Libellé du second onglet d'un compartiment raccourci : « ➕ Derrière » au lieu de « ➕ Rang de derrière »."
   ]},
@@ -3621,6 +3639,9 @@ function ouvrirReglages(ongletInitial){
        <div id="pEntretien" hidden>
          <div id="rStats"></div>
          <div class="sep"></div>
+         <button class="btn plein" id="dScanPhotos">🗂️ Scanner les photos du dépôt GitHub</button>
+         <div class="aide">Liste toutes les images du dépôt : <b style="color:var(--vert)">vert</b> = associée à un compartiment, <b style="color:var(--orange)">orange</b> = a été associée mais est orpheline aujourd'hui, <b style="color:var(--rouge)">rouge</b> = jamais associée. Rien n'est modifié.</div>
+         <div class="sep"></div>
          <button class="btn rouge plein" id="dEffacer">Effacer les données de cet appareil</button>
          <div class="aide">GitHub n'est pas touché : les données pourront être récupérées via ☁️ si elles y ont été envoyées. Pensez à exporter un fichier avant, par sécurité.</div>
        </div>`,
@@ -3782,6 +3803,8 @@ function ouvrirReglages(ongletInitial){
       Mémoire de l'appareil utilisée : ${(octets/1024).toFixed(0)} Ko (limite du navigateur : environ 5 000 Ko).<br>
       Dernière modification : ${esc(dateFr(data.maj))||"—"}</div>`;
 
+  f.querySelector("#dScanPhotos").onclick = ()=>scannerPhotosDepot();
+
   f.querySelector("#dEffacer").onclick = async ()=>{
     const ok = await confirmer("Effacer toutes les bibliothèques enregistrées sur cet appareil ?", "Effacer", "Effacer");
     if (!ok) return;
@@ -3792,6 +3815,142 @@ function ouvrirReglages(ongletInitial){
     sauver(false); rendre(); f.remove();
     toast("Données de cet appareil effacées.");
   };
+}
+
+/* ====================================================================
+   SCAN DES PHOTOS DU DÉPÔT
+   ==================================================================== */
+/* Toutes les photos que l'app nomme pour un compartiment suivent ce modèle :
+   images/<id bibliothèque>/<rangée>-<compartiment>[-derriere | -appoint-<id>].jpg
+   Une image de ce nom a donc forcément été créée pour un compartiment, même si plus rien ne la désigne. */
+const RE_PHOTO_APP = /^images\/([^/]+)\/(\d+)-(\d+)(?:-(derriere)|-appoint-([^/.]+))?\.jpe?g$/i;
+const RE_IMAGE = /\.(jpe?g|png|webp|gif|heic|heif|bmp|tiff?)$/i;
+
+async function ghArbre(){
+  const u = `https://api.github.com/repos/${cfg.ghUser}/${cfg.ghRepo}/git/trees/${encodeURIComponent(cfg.ghBranche)}?recursive=1&t=${Date.now()}`;
+  const r = await fetch(u, { headers: ghEntetes("application/vnd.github+json") });
+  if (!r.ok) throw new Error("GitHub " + r.status + " : " + (await r.text()).slice(0,200));
+  return await r.json();
+}
+
+function libelleFace(champ, cs){
+  if (estAppoint(champ)){
+    const a = photoObj(cs, champ);
+    return "appoint " + numeroAppoint(cs, champ) + (a && a.legende ? " (" + a.legende + ")" : "");
+  }
+  return NOM_FACE[champ] || "devant";
+}
+function libelleCase(b, k){
+  const [r, c] = k.split("-").map(Number);
+  const hors = b && (r > b.rangees || c > b.compartiments) ? " — hors de la grille actuelle" : "";
+  return `rangée ${r} · compartiment ${c}${hors}`;
+}
+
+async function scannerPhotosDepot(){
+  if (!ghLisible()){ toast("Indiquez d'abord le dépôt GitHub dans l'onglet GitHub."); return; }
+  const pg = fenetreProgres("Scan des photos du dépôt");
+  let arbre;
+  try{
+    pg.maj(0, 1, "Lecture de la liste des fichiers du dépôt…");
+    arbre = await ghArbre();
+  }catch(e){
+    pg.fermer();
+    modale({ titre:"Scan impossible", html:`<div>${esc(e.message)}</div><div class="aide">Vérifiez l'utilisateur, le dépôt, la branche et le jeton (onglet GitHub).</div>`, boutons:[{texte:"Fermer"}] });
+    return;
+  }
+
+  // photos associées actuellement (données de cet appareil), y compris hors de la grille
+  const actuelles = {};
+  data.bibliotheques.forEach(b=>{
+    Object.keys(b.cases||{}).forEach(k=>{
+      const cs = b.cases[k];
+      champsPhotoCase(cs).forEach(ch=>{
+        const ph = photoObj(cs, ch);
+        const chemin = ph && (ph.chemin || (ph.envoye ? cheminPhoto(b, k, ch) : null));
+        if (chemin) actuelles[chemin] = { b, k, ch, cs };
+      });
+    });
+  });
+
+  const images = (arbre.tree || []).filter(x=>x.type === "blob" && RE_IMAGE.test(x.path));
+  const lignes = [];
+  const total = images.length;
+  for (let i = 0; i < total; i++){
+    const it = images[i];
+    const ko = Math.round((it.size||0)/1024);
+    const a = actuelles[it.path];
+    if (a){
+      lignes.push({ coul:"vert", chemin:it.path, ko,
+        qui: a.b.nom, detail: libelleCase(a.b, a.k) + " · " + libelleFace(a.ch, a.cs) });
+    } else {
+      const m = it.path.match(RE_PHOTO_APP);
+      if (m){
+        const b = biblio(m[1]);
+        const k = m[2] + "-" + m[3];
+        const face = m[4] ? "derrière" : (m[5] ? "photo d'appoint" : "devant");
+        let raison;
+        if (!b) raison = "bibliothèque supprimée";
+        else if (!b.cases || !b.cases[k]) raison = "compartiment vidé";
+        else raison = m[5] ? "photo d'appoint retirée" : "photo retirée ou remplacée";
+        lignes.push({ coul:"orange", chemin:it.path, ko,
+          qui: b ? b.nom : "Bibliothèque inconnue",
+          detail: `${b ? libelleCase(b, k) : "rangée " + m[2] + " · compartiment " + m[3]} · ${face} — ${raison}` });
+      } else {
+        lignes.push({ coul:"rouge", chemin:it.path, ko, qui:"Jamais associée", detail:"aucun compartiment ne porte ce nom de fichier" });
+      }
+    }
+    if (i % 25 === 0 || i === total - 1){ pg.maj(i + 1, total, it.path); await new Promise(r=>setTimeout(r, 0)); }
+  }
+  pg.fermer();
+
+  // photos associées mais introuvables sur le dépôt
+  const presentes = new Set(images.map(x=>x.path));
+  const absentes = Object.keys(actuelles).filter(c=>!presentes.has(c));
+
+  const ordre = { vert:0, orange:1, rouge:2 };
+  lignes.sort((x,y)=> ordre[x.coul] - ordre[y.coul] || x.chemin.localeCompare(y.chemin, "fr", { numeric:true }));
+  const n = c => lignes.filter(l=>l.coul === c).length;
+
+  const f = modale({
+    titre:"Photos du dépôt GitHub",
+    html:
+      `<div class="aide" style="margin-top:0">${total} image(s) sur ${esc(cfg.ghUser)}/${esc(cfg.ghRepo)} (branche ${esc(cfg.ghBranche)}). Toucher un total pour filtrer, une ligne pour voir la photo.</div>
+       <div class="scanTotaux">
+         <button data-f="tout" class="actif"><b>${total}</b>toutes</button>
+         <button data-f="vert" class="t-vert"><b>${n("vert")}</b>associées</button>
+         <button data-f="orange" class="t-orange"><b>${n("orange")}</b>orphelines</button>
+         <button data-f="rouge" class="t-rouge"><b>${n("rouge")}</b>jamais associées</button>
+       </div>
+       ${sale ? `<div class="aide">⚠️ Cet appareil a des modifications non envoyées : le classement reflète les compartiments tels qu'ils sont ici.</div>` : ""}
+       ${arbre.truncated ? `<div class="aide" style="color:var(--rouge)">⚠️ GitHub a tronqué la liste (dépôt très volumineux) : certaines images peuvent manquer.</div>` : ""}
+       ${absentes.length ? `<div class="aide">ℹ️ ${absentes.length} photo(s) associée(s) à un compartiment introuvable(s) sur le dépôt.</div>` : ""}
+       <div class="scanListe" id="scanListe"></div>`,
+    boutons:[{texte:"Fermer"}]
+  });
+  const zone = f.querySelector("#scanListe");
+  const afficher = (filtre)=>{
+    const vis = lignes.filter(l=>filtre === "tout" || l.coul === filtre);
+    zone.innerHTML = vis.length ? vis.map((l, i)=>
+      `<button class="scanLigne ${l.coul}" data-i="${lignes.indexOf(l)}"><span class="pt"></span>
+         <span><span class="qui">${esc(l.qui)}</span><br>${esc(l.detail)}<br>
+         <span class="ch">${esc(l.chemin)} · ${l.ko} Ko</span></span></button>`).join("")
+      : `<div class="aide">Aucune photo dans cette catégorie.</div>`;
+    zone.querySelectorAll("[data-i]").forEach(el=>{
+      el.onclick = async ()=>{
+        const l = lignes[Number(el.dataset.i)];
+        toast("Chargement de la photo…", 1500);
+        const d = await ghLireImage(l.chemin, String(Date.now()));
+        if (d) visionneuse(d, l.qui + " — " + l.chemin); else toast("Impossible de charger cette photo.");
+      };
+    });
+  };
+  f.querySelectorAll("[data-f]").forEach(bt=>{
+    bt.onclick = ()=>{
+      f.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("actif", x === bt));
+      afficher(bt.dataset.f);
+    };
+  });
+  afficher("tout");
 }
 
 /* ====================================================================
