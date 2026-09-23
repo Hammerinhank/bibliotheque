@@ -365,8 +365,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.27.0";
+const VERSION = "V1.28.0";
 const HISTORIQUE = [
+  { v:"V1.28.0", d:"23/09/2026", l:[
+    "Fenêtre d'un compartiment : sous « Livres de ce compartiment », nombre de livres de la rangée 1 (devant) et de la rangée 2 (derrière), et trois boutons « Tous » (par défaut), « Rangée 1 », « Rangée 2 » pour filtrer la liste."
+  ]},
   { v:"V1.27.0", d:"23/09/2026", l:[
     "Cadre vert toujours épais ; ce sont les côtés allumés qui indiquent l'état : 4 côtés = tout est analysé, côtés verticaux seuls = une photo de rang (devant ou derrière) non analysée, côté du bas éteint = une photo d'appoint non prise en compte.",
     "L'état d'analyse est désormais suivi rang par rang : analyser le seul rang de derrière ne marque plus la photo de devant comme analysée (et inversement)."
@@ -2803,6 +2806,7 @@ function ouvrirCompartiment(b, k){
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
            <input type="file" id="cFichier" accept="image/*" hidden>
            <div class="titreSection">Livres de ce compartiment</div>
+           <div id="zoneFiltreRang"></div>
            <div id="zoneLivres"></div>
            <button class="btn plein" id="cAjouter">➕ Ajouter un livre à la main</button>`,
     boutons:[{texte:"Fermer"}],
@@ -3073,11 +3077,25 @@ function ouvrirCompartiment(b, k){
     };
   };
 
+  let filtreRang = "tous";          // "tous" | "devant" (rangée 1) | "derriere" (rangée 2)
   const majLivres = ()=>{
     const z = f.querySelector("#zoneLivres");
+    const zf = f.querySelector("#zoneFiltreRang");
     const l = cs.livres || [];
-    if (!l.length){ z.innerHTML = `<div class="vide">Aucun livre relevé ici.</div>`; return; }
-    z.innerHTML = l.map((lv,i)=>
+    const n1 = l.filter(lv=>lv.rang !== "derriere").length, n2 = l.length - n1;
+    if (!l.length){ zf.innerHTML = ""; z.innerHTML = `<div class="vide">Aucun livre relevé ici.</div>`; return; }
+    zf.innerHTML =
+      `<div class="aide" style="margin:-4px 0 8px">${l.length} livre(s) : <b>${n1}</b> sur la rangée 1 (devant) · <b>${n2}</b> sur la rangée 2 (derrière)</div>
+       <div class="onglets" style="margin-bottom:10px">
+         <button data-filtre="tous" class="${filtreRang==="tous"?"actif":""}">Tous (${l.length})</button>
+         <button data-filtre="devant" class="${filtreRang==="devant"?"actif":""}">Rangée 1 (${n1})</button>
+         <button data-filtre="derriere" class="${filtreRang==="derriere"?"actif":""}">Rangée 2 (${n2})</button>
+       </div>`;
+    zf.querySelectorAll("[data-filtre]").forEach(bt=>bt.onclick=()=>{ filtreRang = bt.dataset.filtre; majLivres(); });
+    const visibles = l.map((lv,i)=>({lv,i})).filter(({lv})=>
+      filtreRang === "tous" || (filtreRang === "derriere" ? lv.rang === "derriere" : lv.rang !== "derriere"));
+    if (!visibles.length){ z.innerHTML = `<div class="vide">Aucun livre sur la ${filtreRang === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)"}.</div>`; return; }
+    z.innerHTML = visibles.map(({lv,i})=>
       `<div class="livre ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}">
          <div class="t">${esc(lv.titre)}</div>
          <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
