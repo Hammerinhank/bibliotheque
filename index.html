@@ -166,6 +166,11 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .compare th,.compare td{border:1px solid var(--trait);padding:6px 8px;text-align:left}
 .compare th{background:var(--encre3);color:var(--texte2);font-weight:600}
 .compare td.n{text-align:right;font-variant-numeric:tabular-nums}
+.compare tr.diff td{color:var(--orange);font-weight:600}
+.compare tr.sousTitre th{background:var(--encre);color:var(--bronze);text-align:center;letter-spacing:.3px}
+.compare td.detail{font-size:12.5px;line-height:1.45}
+.compare td.detail ul{margin:0;padding-left:16px}
+.compare .ici{color:var(--vert)} .compare .gh{color:#7fb2e6}
 
 /* ---------- livres ---------- */
 .livre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:9px 10px;margin-bottom:8px}
@@ -214,7 +219,9 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .scanTotaux button.actif{box-shadow:0 0 0 2px var(--bronze) inset}
 .scanTotaux .t-vert b{color:var(--vert)} .scanTotaux .t-orange b{color:var(--orange)} .scanTotaux .t-rouge b{color:var(--rouge)}
 .scanListe{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow-y:auto;margin-top:6px}
-.scanLigne{display:flex;gap:9px;align-items:flex-start;background:var(--encre);border:1px solid var(--trait);border-left-width:6px;border-radius:10px;padding:8px 10px;font-size:13.5px;cursor:pointer;text-align:left;color:var(--texte);width:100%}
+.scanLigne{display:flex;gap:9px;align-items:flex-start;background:var(--encre);border:1px solid var(--trait);border-left-width:6px;border-radius:10px;padding:8px 10px;font-size:13.5px;cursor:pointer;text-align:left;color:var(--texte);width:100%;box-sizing:border-box}
+.scanLigne .txt{flex:1;min-width:0}
+.scanLigne .reaff{margin-top:7px;padding:7px 10px;font-size:13px;background:var(--orange-sombre);border-color:var(--orange)}
 .scanLigne.vert{border-left-color:var(--vert)} .scanLigne.orange{border-left-color:var(--orange)} .scanLigne.rouge{border-left-color:var(--rouge)}
 .scanLigne .pt{flex:none;width:12px;height:12px;border-radius:50%;margin-top:4px}
 .scanLigne.vert .pt{background:var(--vert)} .scanLigne.orange .pt{background:var(--orange)} .scanLigne.rouge .pt{background:var(--rouge)}
@@ -339,8 +346,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.17.0";
+const VERSION = "V1.18.0";
 const HISTORIQUE = [
+  { v:"V1.18.0", d:"23/09/2026", l:[
+    "Scan des photos du dépôt : bouton « ↩️ Réaffecter » sur chaque photo orpheline (orange) pour la remettre dans son compartiment d'origine, et bouton pour réaffecter d'un coup toutes celles dont la place est libre. Si la place est prise : remplacer, ou ajouter en photo d'appoint.",
+    "Tableau de comparaison appareil / GitHub enrichi : résumés, catégories, compartiments analysés, photos pas encore envoyées (lignes en orange si elles diffèrent).",
+    "Nouveau « Détail des différences » par bibliothèque (livres ajoutés, retirés ou modifiés, résumés, catégories, photos, analyses, nom, dimensions…), pour comprendre pourquoi un envoi est nécessaire même quand les totaux sont identiques."
+  ]},
   { v:"V1.17.0", d:"23/09/2026", l:[
     "Réglages ⚙️ → Entretien : bouton « 🗂️ Scanner les photos du dépôt GitHub » qui liste toutes les images présentes sur le dépôt, avec décompte de progression.",
     "Vert : photo associée actuellement à un compartiment ; orange : photo créée pour un compartiment mais aujourd'hui orpheline (retirée, remplacée, compartiment ou bibliothèque supprimés) ; rouge : image jamais associée à un compartiment.",
@@ -961,25 +973,152 @@ function enBase64Utf8(txt){ return btoa(unescape(encodeURIComponent(txt))); }
 /* résumé chiffré d'un jeu de données, pour les comparaisons */
 function resume(jeu){
   if (!jeu || !Array.isArray(jeu.bibliotheques)) return null;
-  let livres=0, photos=0;
+  let livres=0, photos=0, resumes=0, categories=0, analyses=0, attente=0;
   jeu.bibliotheques.forEach(b=>{
     Object.keys(b.cases||{}).forEach(k=>{
       const cs = b.cases[k];
-      photos += champsPhotoCase(cs).length;
-      livres += (cs.livres||[]).length;
+      champsPhotoCase(cs).forEach(ch=>{ photos++; const ph = photoObj(cs, ch); if (ph && !ph.envoye) attente++; });
+      (cs.livres||[]).forEach(lv=>{ livres++; if (lv.resume) resumes++; if (lv.categorie) categories++; });
+      if (cs.analyse) analyses++;
     });
   });
-  return { bibliotheques: jeu.bibliotheques.length, livres, photos, maj: jeu.maj };
+  return { bibliotheques: jeu.bibliotheques.length, livres, photos, resumes, categories, analyses, attente, maj: jeu.maj };
 }
 
-function tableauComparaison(loc, dist, titreDist){
+/* forme canonique (clés triées, sans la photo en mémoire) pour comparer deux objets */
+function canon(o){
+  if (Array.isArray(o)) return "[" + o.map(canon).join(",") + "]";
+  if (o && typeof o === "object"){
+    return "{" + Object.keys(o).filter(k=>k !== "plein" && o[k] !== undefined).sort()
+      .map(k=>JSON.stringify(k) + ":" + canon(o[k])).join(",") + "}";
+  }
+  return JSON.stringify(o === undefined ? null : o);
+}
+function nomCaseCourt(k){ const [r, c] = k.split("-"); return "R" + r + "·C" + c; }
+
+/* Liste lisible de tout ce qui diffère entre deux jeux de données, par bibliothèque. */
+function differences(loc, dist){
+  const res = [];
+  if (!loc || !dist) return res;
+  const L = {}, D = {};
+  (loc.bibliotheques||[]).forEach(b=>L[b.id] = b);
+  (dist.bibliotheques||[]).forEach(b=>D[b.id] = b);
+  const ids = Object.keys(L).concat(Object.keys(D).filter(id=>!L[id]));
+  const ordreL = (loc.bibliotheques||[]).map(b=>b.id).join(","), ordreD = (dist.bibliotheques||[]).map(b=>b.id).join(",");
+  ids.forEach(id=>{
+    const a = L[id], d = D[id];
+    const nom = (a||d).nom || "Sans nom";
+    if (!d){ res.push({ nom, items:[`<span class="ici">Bibliothèque présente seulement sur cet appareil</span> (${compteLivres(a)} livre(s))`] }); return; }
+    if (!a){ res.push({ nom, items:[`<span class="gh">Bibliothèque présente seulement sur GitHub</span> (${compteLivres(d)} livre(s))`] }); return; }
+    const items = [];
+    if ((a.nom||"") !== (d.nom||"")) items.push(`nom : « ${esc(a.nom)} » ici, « ${esc(d.nom)} » sur GitHub`);
+    if ((a.lieu||"") !== (d.lieu||"")) items.push(`lieu : « ${esc(a.lieu||"—")} » ici, « ${esc(d.lieu||"—")} » sur GitHub`);
+    if (a.rangees !== d.rangees || a.compartiments !== d.compartiments)
+      items.push(`dimensions : ${a.rangees}×${a.compartiments} ici, ${d.rangees}×${d.compartiments} sur GitHub`);
+    if (canon(a.ratio) !== canon(d.ratio)) items.push("proportions de la grille différentes");
+    const autresA = Object.assign({}, a), autresD = Object.assign({}, d);
+    ["id","nom","lieu","rangees","compartiments","ratio","cases"].forEach(k=>{ delete autresA[k]; delete autresD[k]; });
+    if (canon(autresA) !== canon(autresD)) items.push("autres réglages de la bibliothèque différents");
+
+    // compartiment par compartiment, en regroupant par nature de différence
+    const g = {};
+    const noter = (cle, k, n)=>{ g[cle] = g[cle] || { n:0, cases:new Set() }; g[cle].n += (n||1); g[cle].cases.add(k); };
+    const ca = a.cases||{}, cd = d.cases||{};
+    Object.keys(ca).concat(Object.keys(cd).filter(k=>!ca[k])).forEach(k=>{
+      const x = ca[k] || {}, y = cd[k] || {};
+      const lx = x.livres||[], ly = y.livres||[];
+      const mx = {}, my = {};
+      lx.forEach(l=>mx[l.id] = l); ly.forEach(l=>my[l.id] = l);
+      lx.forEach(l=>{
+        const m = my[l.id];
+        if (!m){ noter("livresIci", k); return; }
+        if (["titre","auteur","annee"].some(c=>(l[c]||"") !== (m[c]||""))) noter("fiche", k);
+        if ((l.resume||"") !== (m.resume||"")) noter("resume", k);
+        if ((l.categorie||"") !== (m.categorie||"")) noter("categorie", k);
+        const ra = Object.assign({}, l), rb = Object.assign({}, m);
+        ["id","titre","auteur","annee","resume","categorie"].forEach(c=>{ delete ra[c]; delete rb[c]; });
+        if (canon(ra) !== canon(rb)) noter("livreAutre", k);
+      });
+      ly.forEach(l=>{ if (!mx[l.id]) noter("livresGH", k); });
+      const communs = lx.filter(l=>my[l.id]).map(l=>l.id).join(","), communsD = ly.filter(l=>mx[l.id]).map(l=>l.id).join(",");
+      if (communs !== communsD) noter("ordre", k);
+      const champs = new Set(champsPhotoCase(x).concat(champsPhotoCase(y)));
+      champs.forEach(ch=>{
+        const px = photoObj(x, ch), py = photoObj(y, ch);
+        if (px && !px.envoye) noter("attente", k);
+        if (px && !py) noter("photoIci", k);
+        else if (!px && py) noter("photoGH", k);
+        else if ((px.chemin||"") !== (py.chemin||"") || (px.maj||"") !== (py.maj||"")) noter("photoChange", k);
+        else if ((px.legende||"") !== (py.legende||"")) noter("legende", k);
+      });
+      if (canon(x.analyse) !== canon(y.analyse)) noter("analyse", k);
+      if (canon(x.controle) !== canon(y.controle)) noter("controle", k);
+      const rx = Object.assign({}, x), ry = Object.assign({}, y);
+      ["livres","photo","photo2","appoints","analyse","controle"].forEach(c=>{ delete rx[c]; delete ry[c]; });
+      if (canon(rx) !== canon(ry)) noter("caseAutre", k);
+    });
+    const LIB = {
+      livresIci:   n=>`<span class="ici">${n} livre(s) seulement sur cet appareil</span>`,
+      livresGH:    n=>`<span class="gh">${n} livre(s) seulement sur GitHub</span>`,
+      fiche:       n=>`${n} livre(s) au titre, à l'auteur ou à l'année modifiés`,
+      resume:      n=>`${n} résumé(s) différent(s)`,
+      categorie:   n=>`${n} catégorie(s) différente(s)`,
+      livreAutre:  n=>`${n} livre(s) aux détails modifiés (rang, certitude, remarque…)`,
+      ordre:       n=>`ordre des livres différent dans ${n} compartiment(s)`,
+      attente:     n=>`<span class="ici">${n} photo(s) pas encore envoyée(s) sur GitHub</span>`,
+      photoIci:    n=>`<span class="ici">${n} photo(s) seulement sur cet appareil</span>`,
+      photoGH:     n=>`<span class="gh">${n} photo(s) seulement sur GitHub</span>`,
+      photoChange: n=>`${n} photo(s) remplacée(s) ou retouchée(s)`,
+      legende:     n=>`${n} légende(s) de photo d'appoint différente(s)`,
+      analyse:     n=>`état d'analyse différent dans ${n} compartiment(s)`,
+      controle:    n=>`contrôle par photos d'appoint différent dans ${n} compartiment(s)`,
+      caseAutre:   n=>`autres données différentes dans ${n} compartiment(s)`
+    };
+    Object.keys(LIB).forEach(cle=>{
+      if (!g[cle]) return;
+      const cs = [...g[cle].cases].sort((p, q)=>p.localeCompare(q, "fr", { numeric:true }));
+      const ou = cs.slice(0, 4).map(nomCaseCourt).join(", ") + (cs.length > 4 ? "…" : "");
+      items.push(LIB[cle](g[cle].n) + ` <span class="aide">(${ou})</span>`);
+    });
+    if (items.length) res.push({ nom, items });
+  });
+  if (ordreL !== ordreD && ids.every(id=>L[id] && D[id])) res.push({ nom:"Liste des bibliothèques", items:["ordre d'affichage différent"] });
+  return res;
+}
+
+/* jeuLoc / jeuDist : les jeux de données complets (pas leur résumé) */
+function tableauComparaison(jeuLoc, jeuDist, titreDist){
+  const loc = resume(jeuLoc), dist = resume(jeuDist);
   const c = (v)=> v==null ? "—" : v;
+  const ligne = (lib, cle)=>{
+    const a = loc && loc[cle], b = dist && dist[cle];
+    const diff = loc && dist && a !== b;
+    return `<tr class="${diff?"diff":""}"><th>${lib}</th><td class="n">${c(a)}</td><td class="n">${c(b)}</td></tr>`;
+  };
+  let detail = "";
+  if (loc && dist){
+    const diffs = differences(jeuLoc, jeuDist);
+    detail = `<tr class="sousTitre"><th colspan="3">Détail des différences</th></tr>`;
+    if (diffs.length){
+      detail += diffs.map(x=>`<tr><th>${esc(x.nom)}</th><td colspan="2" class="detail"><ul>${x.items.map(i=>`<li>${i}</li>`).join("")}</ul></td></tr>`).join("");
+    } else {
+      detail += `<tr><td colspan="3" class="detail">Aucune différence de contenu : livres, photos et réglages sont identiques.` +
+        (loc.maj !== dist.maj ? " Seule la date de modification diffère." : "") +
+        (jeuLoc === data && sale ? " L'appareil garde seulement la marque « à envoyer » (une modification a sans doute été faite puis défaite) : un envoi ne changerait rien au contenu." : "") +
+        `</td></tr>`;
+    }
+  }
   return `<table class="compare">
     <tr><th></th><th>Cet appareil</th><th>${esc(titreDist||"GitHub")}</th></tr>
-    <tr><th>Bibliothèques</th><td class="n">${c(loc&&loc.bibliotheques)}</td><td class="n">${c(dist&&dist.bibliotheques)}</td></tr>
-    <tr><th>Livres</th><td class="n">${c(loc&&loc.livres)}</td><td class="n">${c(dist&&dist.livres)}</td></tr>
-    <tr><th>Photos</th><td class="n">${c(loc&&loc.photos)}</td><td class="n">${c(dist&&dist.photos)}</td></tr>
-    <tr><th>Modifiée le</th><td>${esc(loc&&loc.maj?dateFr(loc.maj):"—")}</td><td>${esc(dist&&dist.maj?dateFr(dist.maj):"—")}</td></tr>
+    ${ligne("Bibliothèques","bibliotheques")}
+    ${ligne("Livres","livres")}
+    ${ligne("Résumés","resumes")}
+    ${ligne("Catégories","categories")}
+    ${ligne("Photos","photos")}
+    ${ligne("Photos pas encore envoyées","attente")}
+    ${ligne("Compartiments analysés","analyses")}
+    <tr class="${loc && dist && loc.maj !== dist.maj ? "diff" : ""}"><th>Modifiée le</th><td>${esc(loc&&loc.maj?dateFr(loc.maj):"—")}</td><td>${esc(dist&&dist.maj?dateFr(dist.maj):"—")}</td></tr>
+    ${detail}
   </table>`;
 }
 
@@ -1029,7 +1168,7 @@ function ouvrirSync(){
   let distant = null;
 
   const afficher = (message)=>{
-    zone.innerHTML = tableauComparaison(resume(data), distant, "GitHub")
+    zone.innerHTML = tableauComparaison(data, distant, "GitHub")
       + `<div class="aide">${message||""}</div>`;
   };
   afficher(ghLisible()
@@ -1047,7 +1186,7 @@ function ouvrirSync(){
         return true;
       }
       const j = JSON.parse(txt);
-      distant = resume(j);
+      distant = j;
       etatSync = "ok"; majBandeau();
       const sameVersion = !sale && distant.maj === data.maj;
       afficher(sameVersion
@@ -1077,7 +1216,7 @@ function ouvrirSync(){
       if (!r) throw new Error("Ce fichier ne contient pas de bibliothèques.");
       const ok = await confirmer(
         `<div>Le contenu de cet appareil sera remplacé par celui du fichier.</div>` +
-        tableauComparaison(resume(data), r, "Fichier") +
+        tableauComparaison(data, j, "Fichier") +
         `<div class="aide">GitHub n'est pas modifié : il faudra envoyer ensuite si vous voulez y reporter cet import.</div>`,
         "Importer un fichier", "Remplacer");
       if (!ok) return;
@@ -1114,7 +1253,7 @@ async function envoyerVersGitHub(){
       if (j.maj && connue && j.maj !== connue){
         const ok = await confirmer(
           `<div>La version présente sur GitHub a changé depuis votre dernier échange avec ce dépôt : elle vient probablement d'un autre appareil.</div>` +
-          tableauComparaison(resume(data), resume(j), "GitHub") +
+          tableauComparaison(data, j, "GitHub") +
           `<div class="aide">Envoyer remplacera la version GitHub par celle de cet appareil.</div>`,
           "Version GitHub plus récente", "Envoyer quand même");
         if (!ok) return;
@@ -1181,7 +1320,7 @@ async function recupererDeGitHub(silencieux){
       if (silencieux && !sale && j.maj === data.maj){ etatSync="ok"; majBandeau(); return false; }
       const ok = await confirmer(
         `<div>Le contenu de cet appareil sera remplacé par celui de GitHub.</div>` +
-        tableauComparaison(resume(data), resume(j), "GitHub") +
+        tableauComparaison(data, j, "GitHub") +
         (sale ? `<div class="aide">⚠️ Cet appareil a des modifications non envoyées : elles seront perdues, sauf les photos pas encore téléversées.</div>` : ""),
         "Récupérer depuis GitHub", "Remplacer");
       if (!ok) return false;
@@ -3892,7 +4031,8 @@ async function scannerPhotosDepot(){
         if (!b) raison = "bibliothèque supprimée";
         else if (!b.cases || !b.cases[k]) raison = "compartiment vidé";
         else raison = m[5] ? "photo d'appoint retirée" : "photo retirée ou remplacée";
-        lignes.push({ coul:"orange", chemin:it.path, ko,
+        lignes.push({ coul:"orange", chemin:it.path, ko, bibId:m[1], k,
+          champ: m[4] ? "photo2" : (m[5] ? PRE_APPOINT + m[5] : "photo"),
           qui: b ? b.nom : "Bibliothèque inconnue",
           detail: `${b ? libelleCase(b, k) : "rangée " + m[2] + " · compartiment " + m[3]} · ${face} — ${raison}` });
       } else {
@@ -3910,47 +4050,137 @@ async function scannerPhotosDepot(){
   const ordre = { vert:0, orange:1, rouge:2 };
   lignes.sort((x,y)=> ordre[x.coul] - ordre[y.coul] || x.chemin.localeCompare(y.chemin, "fr", { numeric:true }));
   const n = c => lignes.filter(l=>l.coul === c).length;
+  const libres = ()=>lignes.filter(l=>l.coul === "orange" && biblio(l.bibId) && !placePrise(l));
 
   const f = modale({
     titre:"Photos du dépôt GitHub",
     html:
       `<div class="aide" style="margin-top:0">${total} image(s) sur ${esc(cfg.ghUser)}/${esc(cfg.ghRepo)} (branche ${esc(cfg.ghBranche)}). Toucher un total pour filtrer, une ligne pour voir la photo.</div>
-       <div class="scanTotaux">
-         <button data-f="tout" class="actif"><b>${total}</b>toutes</button>
-         <button data-f="vert" class="t-vert"><b>${n("vert")}</b>associées</button>
-         <button data-f="orange" class="t-orange"><b>${n("orange")}</b>orphelines</button>
-         <button data-f="rouge" class="t-rouge"><b>${n("rouge")}</b>jamais associées</button>
-       </div>
+       <div class="scanTotaux" id="scanTotaux"></div>
        ${sale ? `<div class="aide">⚠️ Cet appareil a des modifications non envoyées : le classement reflète les compartiments tels qu'ils sont ici.</div>` : ""}
        ${arbre.truncated ? `<div class="aide" style="color:var(--rouge)">⚠️ GitHub a tronqué la liste (dépôt très volumineux) : certaines images peuvent manquer.</div>` : ""}
        ${absentes.length ? `<div class="aide">ℹ️ ${absentes.length} photo(s) associée(s) à un compartiment introuvable(s) sur le dépôt.</div>` : ""}
+       <div id="scanToutes"></div>
        <div class="scanListe" id="scanListe"></div>`,
     boutons:[{texte:"Fermer"}]
   });
   const zone = f.querySelector("#scanListe");
-  const afficher = (filtre)=>{
+  let filtre = "tout";
+  const afficher = ()=>{
+    f.querySelector("#scanTotaux").innerHTML =
+      `<button data-f="tout" class="${filtre==="tout"?"actif":""}"><b>${lignes.length}</b>toutes</button>
+       <button data-f="vert" class="t-vert ${filtre==="vert"?"actif":""}"><b>${n("vert")}</b>associées</button>
+       <button data-f="orange" class="t-orange ${filtre==="orange"?"actif":""}"><b>${n("orange")}</b>orphelines</button>
+       <button data-f="rouge" class="t-rouge ${filtre==="rouge"?"actif":""}"><b>${n("rouge")}</b>jamais associées</button>`;
+    f.querySelectorAll("[data-f]").forEach(bt=>{ bt.onclick = ()=>{ filtre = bt.dataset.f; afficher(); }; });
+
+    const nl = libres().length;
+    f.querySelector("#scanToutes").innerHTML = nl
+      ? `<button class="btn plein reaff" id="scanToutesBtn" style="margin:4px 0 6px;background:var(--orange-sombre);border-color:var(--orange)">↩️ Réaffecter les ${nl} orpheline(s) dont la place est libre</button>`
+      : "";
+    const bt = f.querySelector("#scanToutesBtn");
+    if (bt) bt.onclick = async ()=>{
+      const liste = libres();
+      const ok = await confirmer(`Remettre ${liste.length} photo(s) orpheline(s) dans leur compartiment d'origine ? Aucune photo en place n'est remplacée.`, "Réaffecter", "Réaffecter");
+      if (!ok) return;
+      liste.forEach((l, i)=>{ reaffecter(l, l.champ); majSuivi(i + 1, liste.length, l.chemin); });
+      masquerSuivi();
+      apresReaffectation(liste.length);
+    };
+
     const vis = lignes.filter(l=>filtre === "tout" || l.coul === filtre);
-    zone.innerHTML = vis.length ? vis.map((l, i)=>
-      `<button class="scanLigne ${l.coul}" data-i="${lignes.indexOf(l)}"><span class="pt"></span>
-         <span><span class="qui">${esc(l.qui)}</span><br>${esc(l.detail)}<br>
-         <span class="ch">${esc(l.chemin)} · ${l.ko} Ko</span></span></button>`).join("")
-      : `<div class="aide">Aucune photo dans cette catégorie.</div>`;
+    zone.innerHTML = vis.length ? vis.map(l=>{
+      const i = lignes.indexOf(l);
+      const bouton = l.coul === "orange"
+        ? (biblio(l.bibId)
+            ? `<button class="btn reaff" data-r="${i}">↩️ Réaffecter à ${esc(nomCaseCourt(l.k))} · ${esc(libelleChamp(l.champ))}</button>`
+            : `<div class="aide">Réaffectation impossible : la bibliothèque n'existe plus.</div>`)
+        : "";
+      return `<div class="scanLigne ${l.coul}" data-i="${i}"><span class="pt"></span>
+         <div class="txt"><span class="qui">${esc(l.qui)}</span><br>${esc(l.detail)}<br>
+         <span class="ch">${esc(l.chemin)} · ${l.ko} Ko</span>${bouton ? "<br>" + bouton : ""}</div></div>`;
+    }).join("") : `<div class="aide">Aucune photo dans cette catégorie.</div>`;
+
     zone.querySelectorAll("[data-i]").forEach(el=>{
-      el.onclick = async ()=>{
+      el.onclick = async (ev)=>{
+        if (ev.target.closest("[data-r]")) return;
         const l = lignes[Number(el.dataset.i)];
         toast("Chargement de la photo…", 1500);
         const d = await ghLireImage(l.chemin, String(Date.now()));
         if (d) visionneuse(d, l.qui + " — " + l.chemin); else toast("Impossible de charger cette photo.");
       };
     });
+    zone.querySelectorAll("[data-r]").forEach(el=>{
+      el.onclick = async (ev)=>{
+        ev.stopPropagation();
+        const l = lignes[Number(el.dataset.r)];
+        let champ = l.champ;
+        if (placePrise(l)){
+          champ = await choisirPlacePrise(l);
+          if (!champ) return;
+        }
+        reaffecter(l, champ);
+        apresReaffectation(1);
+      };
+    });
   };
-  f.querySelectorAll("[data-f]").forEach(bt=>{
-    bt.onclick = ()=>{
-      f.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("actif", x === bt));
-      afficher(bt.dataset.f);
-    };
-  });
-  afficher("tout");
+
+  /* la place d'origine est-elle occupée par une autre photo ? */
+  function placePrise(l){
+    const b = biblio(l.bibId);
+    const cs = b && b.cases && b.cases[l.k];
+    return !!(cs && photoObj(cs, l.champ));
+  }
+  function choisirPlacePrise(l){
+    return new Promise(res=>{
+      modale({
+        titre:"Place déjà occupée",
+        html:`<div>Le compartiment ${esc(nomCaseCourt(l.k))} de « ${esc(l.qui)} » a déjà une photo ${esc(libelleChamp(l.champ))}.</div>
+              <div class="aide">Remplacer : la photo actuelle reste sur GitHub et deviendra à son tour orpheline (orange), réaffectable plus tard. Les livres déjà relevés ne sont pas touchés.<br>
+              Ajouter en appoint : l'orpheline revient dans le compartiment comme photo d'appoint, sans rien déplacer.</div>`,
+        boutons:[
+          {texte:"Annuler", action:()=>res(null)},
+          {texte:"Ajouter en appoint", action:()=>res(PRE_APPOINT + uid())},
+          {texte:"Remplacer", classe:"principal", action:()=>res(l.champ)}
+        ],
+        surFermeture:()=>res(null)
+      });
+    });
+  }
+  /* remet la photo l dans son compartiment d'origine, au champ indiqué */
+  function reaffecter(l, champ){
+    const b = biblio(l.bibId);
+    b.cases = b.cases || {};
+    const cs = b.cases[l.k] = b.cases[l.k] || { livres:[] };
+    const ancienne = photoObj(cs, champ);
+    const val = { chemin:l.chemin, envoye:true, maj:new Date().toISOString() };
+    if (estAppoint(champ) && !ancienne) val.legende = champ === l.champ ? "" : "réaffectée";
+    poserPhoto(cs, champ, val);
+    delete cachePhotos[cleCache(b, l.k, champ)];
+    l.coul = "vert";
+    l.detail = libelleCase(b, l.k) + " · " + libelleFace(champ, cs) + " — réaffectée";
+    if (ancienne && ancienne.chemin && ancienne.envoye && ancienne.chemin !== l.chemin){
+      // l'ancienne photo, déjà sur GitHub, devient orpheline
+      const deja = lignes.find(x=>x.chemin === ancienne.chemin);
+      const m = ancienne.chemin.match(RE_PHOTO_APP);
+      const ligne = { coul:"orange", chemin:ancienne.chemin, ko: deja ? deja.ko : 0, bibId:b.id, k:l.k, champ,
+        qui:b.nom, detail: libelleCase(b, l.k) + " · " + libelleChamp(champ) + " — photo remplacée à l'instant" };
+      if (!m){ ligne.coul = "rouge"; ligne.qui = "Jamais associée"; ligne.detail = "photo remplacée à l'instant, nom de fichier hors convention"; }
+      if (deja) Object.assign(deja, ligne); else lignes.push(ligne);
+    }
+  }
+  function apresReaffectation(nb){
+    sauver();
+    if (biblioCourante) rendreBiblio(); else rendre();
+    afficher();
+    toast(`${nb} photo(s) réaffectée(s). Pensez à envoyer vers GitHub (☁️) ; relancez l'analyse des compartiments concernés si besoin.`, 5000);
+  }
+
+  afficher();
+}
+
+function libelleChamp(champ){
+  return estAppoint(champ) ? "d'appoint" : (champ === "photo2" ? "de derrière" : "de devant");
 }
 
 /* ====================================================================
