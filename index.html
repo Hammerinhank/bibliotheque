@@ -137,9 +137,9 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case .deux{position:absolute;top:3px;right:3px;z-index:2;font-size:12px;font-weight:800;letter-spacing:.3px;line-height:1.25;color:#1c1500;
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
-.case .deux.unRang{background:#9a9a9a}
+.case .deux.unRang{background:#ffffff}
 .case .deux small{font-size:10px;font-weight:700;opacity:.8}
-.legende .pastilleDeux.gris{background:#9a9a9a}
+.legende .pastilleDeux.gris{background:#ffffff}
 .legende .pastilleDeux{display:inline-block;font-size:10px;font-weight:800;color:#1c1500;background:#ffd23f;border:1px solid #1c1500;border-radius:4px;padding:0 4px;margin-right:4px}
 .rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
 .rang.devant{background:var(--encre3);color:var(--texte2)}
@@ -367,8 +367,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.29.0";
+const VERSION = "V1.29.1";
 const HISTORIQUE = [
+  { v:"V1.29.1", d:"23/09/2026", l:[
+    "Étiquette « 1 RANG » sur fond blanc (au lieu de gris), sur la grille, dans la légende et dans la fenêtre du compartiment."
+  ]},
   { v:"V1.29.0", d:"23/09/2026", l:[
     "Nouvelle étiquette grise « 1 RANG » (même format que « 2 RANGS ») : se pose ou s'enlève dans la fenêtre d'un compartiment, pour indiquer qu'il n'a qu'un rang et qu'il est complet. Mémorisée avec les données (sauvegardée sur GitHub).",
     "Si une photo de derrière est ajoutée, « 2 RANGS » prend le dessus."
@@ -2985,7 +2988,7 @@ function ouvrirCompartiment(b, k){
       return;
     }
     z.innerHTML = `<div class="coche" style="margin:0"><input type="checkbox" id="cUnRang" ${cs.unRang ? "checked" : ""}>
-        <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette grise <b style="font-size:11px;font-weight:800;color:#1c1500;background:#9a9a9a;border:1px solid #1c1500;border-radius:4px;padding:0 4px">1 RANG</b> sur la grille</label></div>`;
+        <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette blanche <b style="font-size:11px;font-weight:800;color:#1c1500;background:#ffffff;border:1px solid #1c1500;border-radius:4px;padding:0 4px">1 RANG</b> sur la grille</label></div>`;
     z.querySelector("#cUnRang").onchange = (e)=>{
       if (e.target.checked) cs.unRang = true; else delete cs.unRang;
       sauver(); rendreBiblio();
