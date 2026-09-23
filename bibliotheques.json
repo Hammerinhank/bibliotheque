@@ -4483,21 +4483,21 @@
        "rang": "derriere"
       },
       {
-       "id": "muef9o75pt584",
-       "titre": "L'anomalie",
-       "auteur": "Hervé Le Tellier",
+       "id": "muej1kkrkv2b6",
+       "titre": "Le Guépard",
+       "auteur": "Giuseppe Tomasi di Lampedusa",
        "annee": "",
        "certitude": "haute",
-       "remarque": "Folio",
+       "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "ia",
+       "origine": "appoint",
        "rang": "derriere"
       },
       {
-       "id": "muef9o75rf49p",
-       "titre": "Le guépard",
-       "auteur": "Giuseppe Tomasi di Lampedusa",
+       "id": "muef9o75pt584",
+       "titre": "L'anomalie",
+       "auteur": "Hervé Le Tellier",
        "annee": "",
        "certitude": "haute",
        "remarque": "Folio",
@@ -4579,6 +4579,18 @@
        "rang": "derriere"
       },
       {
+       "id": "muej1kkrizcvt",
+       "titre": "Résurrection tome 1",
+       "auteur": "TOLSTOI",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
        "id": "muef9o756ug6v",
        "titre": "Résurrection tome 1",
        "auteur": "Tolstoï",
@@ -4606,7 +4618,7 @@
        "id": "muef9o75ojqkx",
        "titre": "La conjuration des imbéciles",
        "auteur": "J.K. Toole",
-       "annee": "",
+       "annee": "2010",
        "certitude": "haute",
        "remarque": "Points",
        "resume": "",
@@ -4696,7 +4708,14 @@
        "maj": "2026-09-23T16:52:49.464Z",
        "id": "muec92wh8n0ai",
        "legende": "",
-       "verif": "2026-09-23T17:15:10.106Z"
+       "verif": "2026-09-23T18:53:29.391Z",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 13,
+        "date": "2026-09-23T18:18:14.014Z"
+       }
       },
       {
        "plein": null,
@@ -4705,7 +4724,14 @@
        "maj": "2026-09-23T16:52:04.814Z",
        "id": "muecc28d4vsvn",
        "legende": "",
-       "verif": "2026-09-23T17:14:24.636Z"
+       "verif": "2026-09-23T20:00:03.451Z",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 15,
+        "date": "2026-09-23T19:59:52.678Z"
+       }
       }
      ],
      "photo2": {
@@ -7505,7 +7531,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T18:17:49.712Z",
+ "maj": "2026-09-23T20:00:04.085Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
