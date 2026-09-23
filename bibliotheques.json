@@ -4647,7 +4647,14 @@
        "maj": "2026-09-23T16:49:11.069Z",
        "id": "muec75xnhw210",
        "legende": "",
-       "verif": "2026-09-23T17:15:49.388Z"
+       "verif": "2026-09-23T17:26:50.113Z",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 12,
+        "n2": 0,
+        "date": "2026-09-23T17:26:47.764Z"
+       }
       },
       {
        "plein": null,
@@ -7077,7 +7084,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T17:26:25.566Z",
+ "maj": "2026-09-23T17:26:50.770Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
