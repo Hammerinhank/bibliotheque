@@ -197,7 +197,16 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .compare .ici{color:var(--vert)} .compare .gh{color:#7fb2e6}
 
 /* ---------- livres ---------- */
-.livre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:9px 10px;margin-bottom:8px}
+.livre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:9px 10px;margin-bottom:8px;position:relative}
+.livre.deplacable{padding-right:52px}
+.livre .poignee{position:absolute;top:0;right:0;bottom:0;width:46px;display:flex;align-items:center;justify-content:center;
+  cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.livre .poignee span{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid var(--trait);border-radius:7px;background:var(--encre3)}
+.livre .poignee i{display:block;width:18px;height:2px;border-radius:2px;background:var(--texte2)}
+.livre.enDrag{opacity:.92;border-color:var(--bronze);box-shadow:0 6px 18px rgba(0,0,0,.55);transform:scale(1.02);z-index:5;transition:none}
+.livre.enDrag .poignee{cursor:grabbing}
+.livre.enDrag .poignee span{border-color:var(--bronze)}
+.livre.enDrag .poignee i{background:var(--bronze)}
 .livre .t{font-size:15.5px;font-weight:600}
 .livre .a{font-size:13.5px;color:var(--texte2)}
 .livre .r{font-size:13px;color:#cfc8b6;margin-top:4px;font-style:italic}
@@ -370,8 +379,16 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.32.0";
+const VERSION = "V1.34.0";
 const HISTORIQUE = [
+  { v:"V1.34.0", d:"23/09/2026", l:[
+    "Nouvelle analyse d'une rangée déjà relevée : bouton « 🔀 Fusionner (même rangée, même ordre) ». Les deux listes sont alignées dans l'ordre ; les livres reconnus sans ambiguïté servent de repères pour situer les autres.",
+    "Une ligne par livre avec ses choix : ✅ identique (garder le titre ou prendre la nouvelle lecture), 🟡 à confirmer (même livre / deux livres), 📕 absent de la nouvelle photo (garder / retirer), 🆕 absent de la liste (ajouter / ignorer). Livres qui ont changé de place signalés."
+  ]},
+  { v:"V1.33.0", d:"23/09/2026", l:[
+    "Liste des livres d'un compartiment : poignée ≡ à droite de chaque livre ; en la maintenant, on fait glisser le livre pour le replacer ailleurs dans la liste (défilement automatique en haut et en bas). L'ordre est enregistré.",
+    "Fonctionne aussi avec le filtre Rangée 1 / Rangée 2 : seul l'ordre des livres affichés change."
+  ]},
   { v:"V1.32.0", d:"23/09/2026", l:[
     "Vérification photo par photo : « 🔎 Vérifier avec cette photo d'appoint » n'envoie que la photo affichée ; le contrôle de toutes les photos d'un coup est supprimé.",
     "L'IA lit la photo à l'aveugle (sans voir la liste), de gauche à droite ; c'est l'application qui rapproche chaque livre lu des listes des rangées 1 et 2 (titre et auteur, tolérance aux fautes, et voisinage : l'ordre des livres est le même d'une photo à l'autre).",
@@ -1894,7 +1911,7 @@ function appliquerLivresCompartiment(b, k, livres){
     ...horsPortee.map(r=>`les ${ancDe(r).length} livre(s) du ${NOM_RANG[r]} ne sont pas concernés et restent tels quels`)
   ];
   const nomsDisputes = disputes.map(r=>NOM_RANG[r]).join(" et le ");
-  modale({ titre:"Nouvelle analyse de " + lib(k),
+  const fenetreChoix = modale({ titre:"Nouvelle analyse de " + lib(k),
     html:`<div><b>${enTete}.</b> Le ${nomsDisputes} avai${disputes.length > 1 ? "ent" : "t"} déjà des livres relevés (photo refaite ou nouvelle analyse) : que faire de ce nouveau résultat ?</div>
           <div class="aide">${esc(texteBilanAnalyse(livres))}</div>
           ${autoTxt.length ? `<div class="aide">Dans tous les cas (sauf « Annuler ») : ${autoTxt.join(" ; ")}.</div>` : ""}
@@ -1903,10 +1920,19 @@ function appliquerLivresCompartiment(b, k, livres){
           <div class="aide" style="margin:0">
             <b>Annuler</b> : rien ne change, cette analyse est ignorée.<br>
             <b>Compléter</b> : l'ancienne liste du ${nomsDisputes} est gardée, on y ajoute seulement les ${somme("nouveaux")} livre(s) « 🆕 ». À choisir si la nouvelle photo montre des livres qui manquaient.<br>
-            <b>Remplacer</b> : la liste du ${nomsDisputes} devient celle de cette analyse${somme("absents") ? ` ; les ${somme("absents")} livre(s) « ⚠️ » sont retirés` : ""}. À choisir si les livres ont changé ou si l'ancienne analyse était mauvaise. Résumés et auteurs déjà obtenus pour les livres communs sont conservés.
+            <b>Remplacer</b> : la liste du ${nomsDisputes} devient celle de cette analyse${somme("absents") ? ` ; les ${somme("absents")} livre(s) « ⚠️ » sont retirés` : ""}. À choisir si les livres ont changé ou si l'ancienne analyse était mauvaise. Résumés et auteurs déjà obtenus pour les livres communs sont conservés.<br>
+            <b>🔀 Fusionner</b> : la nouvelle photo montre la même rangée, les livres dans le même ordre. Les deux listes sont alignées livre par livre et vous tranchez chaque différence (livre ajouté, manquant, mal lu).
           </div>`,
     boutons:[
       {texte:"Annuler"},
+      {texte:"🔀 Fusionner (même rangée, même ordre)", garder:true, action:()=>{
+        fenetreFusion(k, disputes, parRang, (res, bilan)=>{
+          cs.livres = assembler(r=>res[r]);
+          cs.analyse = infoAnalyse(livres, cs); fin();
+          fenetreChoix.remove();
+          toast(`Fusion : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+        });
+      }},
       {texte:`Compléter (+${somme("nouveaux")})`, action:()=>{
         cs.livres = assembler(r=>parRang[r].vieux.concat(parRang[r].nouveaux));
         cs.analyse = infoAnalyse(livres, cs); fin();
@@ -1920,9 +1946,220 @@ function appliquerLivresCompartiment(b, k, livres){
     ]});
 }
 
+/* ====== FUSION DE DEUX LECTURES D'UNE MÊME RANGÉE (livres dans le même ordre) ====== */
+
+/* Aligne deux listes ordonnées (ancienne A, nouvelle B) en respectant l'ordre, en maximisant la ressemblance.
+   Renvoie des étapes : {type:"paire", a, b, sur, raison} | {type:"ancien", a} | {type:"nouveau", b} */
+function alignerListes(A, B){
+  const sc = (a, b)=>{
+    const t = simTitre(a.titre, b.titre), au = simAuteur(a.auteur, b.auteur);
+    if (!(t >= 0.5 || (au !== null && au >= 0.8 && t >= 0.3))) return null;
+    return { s: t + (au === null ? 0 : 0.3 * au), t, au };
+  };
+  const n = A.length, m = B.length;
+  const S = Array.from({length:n+1}, ()=>new Float64Array(m+1));
+  const memo = Array.from({length:n}, ()=>new Array(m));
+  for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++){
+    let v = Math.max(S[i-1][j], S[i][j-1]);
+    const x = memo[i-1][j-1] = sc(A[i-1], B[j-1]);
+    if (x) v = Math.max(v, S[i-1][j-1] + x.s);
+    S[i][j] = v;
+  }
+  // remontée
+  const etapes = [];
+  let i = n, j = m;
+  while (i > 0 || j > 0){
+    const x = i > 0 && j > 0 ? memo[i-1][j-1] : null;
+    if (x && Math.abs(S[i][j] - (S[i-1][j-1] + x.s)) < 1e-9){
+      etapes.push({ type:"paire", a:A[i-1], b:B[j-1], sur: x.t >= 0.85 && (x.au === null || x.au >= 0.6),
+        raison: x.t >= 0.85 ? "auteur différent" : "titre approchant" + (x.au !== null && x.au >= 0.8 ? ", même auteur" : "") });
+      i--; j--;
+    } else if (i > 0 && (j === 0 || S[i][j] === S[i-1][j])){ etapes.push({ type:"ancien", a:A[i-1] }); i--; }
+    else { etapes.push({ type:"nouveau", b:B[j-1] }); j--; }
+  }
+  etapes.reverse();
+  // entre deux livres appariés, autant de livres « seulement anciens » que « seulement nouveaux » : même place, donc sans doute les mêmes livres mal lus
+  const out = [];
+  let k = 0;
+  while (k < etapes.length){
+    if (etapes[k].type === "paire"){ out.push(etapes[k]); k++; continue; }
+    let f = k; while (f < etapes.length && etapes[f].type !== "paire") f++;
+    const trou = etapes.slice(k, f);
+    const anc = trou.filter(e=>e.type === "ancien"), nou = trou.filter(e=>e.type === "nouveau");
+    const encadre = k > 0 && f < etapes.length;
+    if (anc.length && anc.length === nou.length && anc.length <= 3 && encadre)
+      anc.forEach((e, x)=>out.push({ type:"paire", a:e.a, b:nou[x].b, sur:false, parPlace:true, raison:"même place entre deux livres reconnus, titres différents" }));
+    else {
+      // ordre : anciens puis nouveaux (à la même place)
+      anc.forEach(e=>out.push(e)); nou.forEach(e=>out.push(e));
+    }
+    k = f;
+  }
+  // livres qui semblent avoir changé de place (présents des deux côtés, mais hors alignement)
+  const seulsA = out.filter(e=>e.type === "ancien"), seulsB = out.filter(e=>e.type === "nouveau");
+  seulsA.forEach(e=>{ const d = seulsB.find(x=>simTitre(x.b.titre, e.a.titre) >= 0.85); if (d){ e.deplace = d.b; d.deplace = e.a; } });
+  return out;
+}
+
+/* Fenêtre de fusion : une ligne par livre, dans l'ordre, avec les choix à faire.
+   surValider(resultatParRang) reçoit la nouvelle liste de chaque rangée concernée. */
+function fenetreFusion(k, rangs, parRang, surValider){
+  const NOMR = { devant:"Rangée 1 (devant)", derriere:"Rangée 2 (derrière)" };
+  const blocs = rangs.map(r=>({ r, etapes: alignerListes(parRang[r].vieux, parRang[r].neufs) }));
+  // choix par défaut
+  blocs.forEach(bl=>bl.etapes.forEach(e=>{
+    if (e.type === "paire"){ e.choix = "meme"; e.titreDe = e.parPlace ? "nouveau" : "ancien"; }   // à la même place mais titres très différents : la nouvelle photo (refaite) est présumée meilleure
+    else if (e.type === "ancien") e.choix = e.deplace ? "retirer" : "garder";
+    else e.choix = e.deplace ? "ignorer" : "ajouter";
+  }));
+  const titresDiff = (e)=> e.type === "paire" && normaliser(e.a.titre) !== normaliser(e.b.titre);
+  const aut = (lv)=> lv.auteur ? ` <span style="opacity:.75">— ${esc(lv.auteur)}</span>` : "";
+  const boutons = (id, opts, v)=>`<div class="onglets" style="margin:6px 0 0" data-f="${id}">${opts.map(([val, lib])=>
+      `<button data-v="${val}" class="${v===val?"actif":""}">${lib}</button>`).join("")}</div>`;
+  const ligne = (e, id, n)=>{
+    let h = `<span class="aide" style="margin:0">${n}.</span> `;
+    if (e.type === "paire" && e.sur){
+      h += `<span style="color:var(--vert)">✅</span> <b>${esc(e.a.titre)}</b>${aut(e.a)}`;
+      if (titresDiff(e)) h += `<div class="aide" style="margin:2px 0 0">Nouvelle lecture : « ${esc(e.b.titre)} »</div>` + boutons(id + "t", [["ancien","Garder le titre actuel"],["nouveau","Prendre la nouvelle lecture"]], e.titreDe);
+    } else if (e.type === "paire"){
+      h += `<span style="color:var(--orange)">🟡 à confirmer</span> — ${esc(e.raison)}
+        <div style="margin:3px 0 0">Liste actuelle : <b>${esc(e.a.titre)}</b>${aut(e.a)}</div>
+        <div>Nouvelle photo : <b>${esc(e.b.titre)}</b>${aut(e.b)}</div>` +
+        boutons(id, [["meme","Même livre"],["deux","Deux livres différents"]], e.choix) +
+        `<div data-ft="${id}" ${e.choix === "meme" ? "" : "hidden"}>${boutons(id + "t", [["ancien","Titre actuel"],["nouveau","Titre de la nouvelle photo"]], e.titreDe)}</div>`;
+    } else if (e.type === "ancien"){
+      h += `<span style="color:var(--orange)">📕 absent de la nouvelle photo</span> : <b>${esc(e.a.titre)}</b>${aut(e.a)}` +
+        (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ semble avoir changé de place (retrouvé plus loin sur la nouvelle photo) : retiré ici par défaut.</div>` : "") +
+        boutons(id, [["garder","Garder"],["retirer","Retirer"]], e.choix);
+    } else {
+      h += `<span style="color:var(--bronze)">🆕 absent de la liste actuelle</span> : <b>${esc(e.b.titre)}</b>${aut(e.b)}` +
+        (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ c'est sans doute « ${esc(e.deplace.titre)} », déplacé : ajouté ici par défaut à la place de l'ancien.</div>` : "") +
+        boutons(id, [["ajouter","Ajouter"],["ignorer","Ignorer"]], e.choix);
+    }
+    return `<div style="padding:8px 0;border-bottom:1px solid var(--trait)">${h}</div>`;
+  };
+  // ajuste le défaut des déplacés : on garde le livre à sa nouvelle place
+  blocs.forEach(bl=>bl.etapes.forEach(e=>{ if (e.type === "nouveau" && e.deplace) e.choix = "ajouter"; }));
+  const compte = (bl, f)=>bl.etapes.filter(f).length;
+  const html = blocs.map((bl, nb)=>{
+    const s = compte(bl, e=>e.type === "paire" && e.sur), p = compte(bl, e=>e.type === "paire" && !e.sur),
+          a = compte(bl, e=>e.type === "ancien"), n = compte(bl, e=>e.type === "nouveau"),
+          dep = compte(bl, e=>e.type === "ancien" && e.deplace);
+    return `<div class="titreSection" style="margin-top:${nb ? 16 : 4}px">${NOMR[bl.r]} — liste actuelle : ${parRang[bl.r].vieux.length}, nouvelle photo : ${parRang[bl.r].neufs.length}</div>
+      <div class="aide" style="margin:-4px 0 6px"><b>${s}</b> identique(s), <b>${p}</b> à confirmer, <b>${a}</b> seulement dans la liste actuelle, <b>${n}</b> seulement sur la nouvelle photo.</div>
+      ${dep ? `<div class="encadre">⚠️ ${dep} livre(s) semblent ne plus être à la même place : l'ordre n'est pas tout à fait le même.</div>` : ""}
+      ${bl.etapes.map((e, x)=>ligne(e, nb + "_" + x, x + 1)).join("")}`;
+  }).join("");
+
+  const f = modale({
+    titre:"Fusionner — " + lib(k),
+    html:`<div>La nouvelle photo montre <b>la même rangée, dans le même ordre</b>. Les deux listes sont mises côte à côte : les livres reconnus sans ambiguïté servent de repères pour situer les autres.</div>
+          <div class="aide">Vérifiez surtout les lignes 🟡, 📕 et 🆕 ; les choix proposés par défaut sont déjà sélectionnés. Résumés, catégories et renseignements déjà obtenus sont conservés.</div>
+          ${html}`,
+    boutons:[
+      {texte:"Retour"},
+      {texte:"Valider la fusion", classe:"principal", action:()=>{
+        const res = {}; let aj = 0, re = 0, co = 0;
+        blocs.forEach(bl=>{
+          const l = [];
+          bl.etapes.forEach(e=>{
+            if (e.type === "paire"){
+              if (e.choix === "deux"){ l.push(e.a, e.b); aj++; return; }
+              const lv = e.a;
+              if (e.titreDe === "nouveau" && titresDiff(e)){ lv.titre = e.b.titre; if (e.b.auteur) lv.auteur = e.b.auteur; co++; }
+              ["auteur","annee","editeur"].forEach(c=>{ if (!lv[c] && e.b[c]) lv[c] = e.b[c]; });
+              l.push(lv);
+            } else if (e.type === "ancien"){ if (e.choix === "garder") l.push(e.a); else re++; }
+            else if (e.choix === "ajouter"){ l.push(e.b); aj++; }
+          });
+          res[bl.r] = l;
+        });
+        surValider(res, { aj, re, co });
+      }}
+    ]
+  });
+  f.querySelectorAll("[data-f]").forEach(z=>{
+    const id = z.dataset.f, titre = id.endsWith("t");
+    const [nb, x] = (titre ? id.slice(0, -1) : id).split("_").map(Number);
+    const e = blocs[nb].etapes[x];
+    z.querySelectorAll("button").forEach(bt=>bt.onclick = (ev)=>{
+      ev.preventDefault();
+      if (titre) e.titreDe = bt.dataset.v; else e.choix = bt.dataset.v;
+      z.querySelectorAll("button").forEach(y=>y.classList.toggle("actif", y === bt));
+      if (!titre){ const ft = f.querySelector(`[data-ft="${id}"]`); if (ft) ft.hidden = e.choix !== "meme"; }
+    });
+  });
+  return f;
+}
+
 /* ====================================================================
    CONTRÔLE DE LA LISTE PAR LES PHOTOS D'APPOINT
    ==================================================================== */
+/* ====== GLISSER-DÉPOSER DES LIVRES D'UN COMPARTIMENT ======
+   La poignée ≡ déplace l'élément dans la liste affichée ; au lâcher, les livres affichés sont remis
+   dans cs.livres aux mêmes emplacements, dans leur nouvel ordre (compatible avec le filtre par rangée). */
+function activerGlisser(z, cs, apres){
+  const defilant = (el)=>{ for (let p = el.parentElement; p; p = p.parentElement){ const o = getComputedStyle(p).overflowY; if ((o === "auto" || o === "scroll") && p.scrollHeight > p.clientHeight) return p; } return document.scrollingElement; };
+  z.querySelectorAll(".poignee").forEach(h=>{
+    h.addEventListener("pointerdown", (e)=>{
+      if (e.button && e.button !== 0) return;
+      e.preventDefault();
+      const item = h.closest(".livre");
+      const scr = defilant(z);
+      const ordreAvant = [...z.querySelectorAll(".livre")].map(x=>Number(x.dataset.idx));
+      let dernierY = e.clientY, minuterie = null, fini = false;
+      item.classList.add("enDrag");
+      try{ h.setPointerCapture(e.pointerId); }catch(_){}
+      if (navigator.vibrate) try{ navigator.vibrate(10); }catch(_){}
+      const placer = ()=>{
+        const autres = [...z.querySelectorAll(".livre")].filter(x=>x !== item);
+        let avant = null;
+        for (const x of autres){ const r = x.getBoundingClientRect(); if (dernierY < r.top + r.height / 2){ avant = x; break; } }
+        // on ne déplace jamais l'élément tenu (iOS perdrait le suivi du doigt) : ce sont ses voisins qui changent de côté
+        const tous = [...z.querySelectorAll(".livre")];
+        const iItem = tous.indexOf(item);
+        const iCible = avant ? tous.indexOf(avant) : tous.length;     // l'élément doit se retrouver juste avant iCible
+        if (iCible > iItem + 1){
+          tous.slice(iItem + 1, iCible).forEach(x=>z.insertBefore(x, item));
+        } else if (iCible < iItem){
+          let ref = item.nextElementSibling;
+          tous.slice(iCible, iItem).forEach(x=>z.insertBefore(x, ref));
+        }
+      };
+      const defiler = ()=>{
+        const r = scr === document.scrollingElement ? { top:0, bottom:window.innerHeight } : scr.getBoundingClientRect();
+        const marge = 60;
+        let v = 0;
+        if (dernierY < r.top + marge) v = -Math.ceil((r.top + marge - dernierY) / 4);
+        else if (dernierY > r.bottom - marge) v = Math.ceil((dernierY - (r.bottom - marge)) / 4);
+        if (v){ scr.scrollTop += v; placer(); }
+        minuterie = fini ? null : requestAnimationFrame(defiler);
+      };
+      minuterie = requestAnimationFrame(defiler);
+      const bouger = (ev)=>{ ev.preventDefault(); dernierY = ev.clientY; placer(); };
+      const lacher = ()=>{
+        fini = true;
+        if (minuterie) cancelAnimationFrame(minuterie);
+        h.removeEventListener("pointermove", bouger);
+        h.removeEventListener("pointerup", lacher);
+        h.removeEventListener("pointercancel", lacher);
+        item.classList.remove("enDrag");
+        const ordreApres = [...z.querySelectorAll(".livre")].map(x=>Number(x.dataset.idx));
+        if (ordreApres.join() === ordreAvant.join()) return;
+        const emplacements = [...ordreAvant].sort((a,b)=>a-b);           // positions occupées dans cs.livres
+        const copie = cs.livres.slice();
+        emplacements.forEach((pos, n)=>{ cs.livres[pos] = copie[ordreApres[n]]; });
+        sauver(); if (typeof rendreBiblio === "function") rendreBiblio();
+        apres();
+        toast("Ordre modifié.");
+      };
+      h.addEventListener("pointermove", bouger, { passive:false });
+      h.addEventListener("pointerup", lacher);
+      h.addEventListener("pointercancel", lacher);
+    });
+  });
+}
+
 /* ====== LECTURE D'UNE PHOTO D'APPOINT (l'IA lit à l'aveugle, l'application rapproche) ====== */
 
 /* Envoie UNE photo d'appoint à l'IA, sans la liste ; renvoie les livres lus de gauche à droite. */
@@ -3321,7 +3558,8 @@ function ouvrirCompartiment(b, k){
       filtreRang === "tous" || (filtreRang === "derriere" ? lv.rang === "derriere" : lv.rang !== "derriere"));
     if (!visibles.length){ z.innerHTML = `<div class="vide">Aucun livre sur la ${filtreRang === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)"}.</div>`; return; }
     z.innerHTML = visibles.map(({lv,i})=>
-      `<div class="livre ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}">
+      `<div class="livre ${visibles.length > 1 ? "deplacable" : ""} ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}" data-idx="${i}">
+         ${visibles.length > 1 ? `<div class="poignee" title="Maintenir et glisser pour déplacer"><span><i></i><i></i><i></i><i></i></span></div>` : ""}
          <div class="t">${esc(lv.titre)}</div>
          <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
          ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
@@ -3337,6 +3575,7 @@ function ouvrirCompartiment(b, k){
       if (!ok) return;
       cs.livres.splice(i,1); sauver(); majLivres(); rendreBiblio();
     });
+    activerGlisser(z, cs, majLivres);
   };
 
   f.querySelector("#cPhoto").onclick = ()=>{ enAjoutAppoint = false; f.querySelector("#cFichier").click(); };
