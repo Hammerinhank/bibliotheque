@@ -380,8 +380,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.44.0";
+const VERSION = "V1.45.0";
 const HISTORIQUE = [
+  { v:"V1.45.0", d:"23/09/2026", l:[
+    "Plus aucun choix de mode a priori : l'app part du principe que les livres sont toujours rangés dans le même ordre d'une photo à l'autre.",
+    "Photo de rangée : l'analyse porte sur la photo affichée (devant ou derrière) ; si la rangée a déjà des livres, la fusion ordonnée s'ouvre directement.",
+    "Photo d'appoint : un seul bouton, vérification « ordre respecté » ; réutilisation d'un résultat sauvegardé sans choix de mode.",
+    "Incohérences signalées au moment de la fusion : peu ou pas de livres en commun (autre compartiment ou autre rangée ?), livres qui ont changé de place."
+  ]},
   { v:"V1.44.0", d:"23/09/2026", l:[
     "Fenêtre d'un compartiment réorganisée : sous la photo affichée, un encadré « Analyse de cette photo » avec deux choix côte à côte — 🔍 Nouvelle analyse par l'IA, ou ♻️ Réutiliser l'analyse sauvegardée (avec sa date et le nombre disponible) ; grisé s'il n'y en a aucune.",
     "« 🗑 Vider les listes » placé en tête de la liste des livres ; message d'aide quand la liste est vide."
@@ -1642,8 +1648,7 @@ async function fenetreReutiliserPhoto(b, k, face){
     html:`<div class="aide" style="margin-top:0">Résultats déjà obtenus de l'IA pour ${nomPhoto}, du plus récent au plus ancien. Réutiliser ne redemande rien à l'IA.</div>
       ${retenus.map((x, i)=>`<div class="prop" style="display:flex;gap:10px;align-items:center">
         <div style="flex:1"><div class="t">${esc(x.quand)}</div><div class="chg">${appoint ? "lecture de l'appoint" : esc(nomPortee[x.portee] || "analyse")}${x.local ? " — pas encore sur GitHub" : ""}</div></div>
-        ${appoint ? `<div style="display:flex;flex-direction:column;gap:6px"><button class="btn" data-r="${i}" data-mode="verif">🔎 Vérifier</button><button class="btn" data-r="${i}" data-mode="ordre">🔀 Ordre respecté</button></div>`
-                  : `<button class="btn" data-r="${i}">Utiliser</button>`}</div>`).join("")}`,
+        <button class="btn" data-r="${i}">Utiliser</button></div>`).join("")}`,
     boutons:[{texte:"Fermer"}] });
   f.querySelectorAll("[data-r]").forEach(bt=>bt.onclick = async ()=>{
     const x = retenus[Number(bt.dataset.r)];
@@ -1654,8 +1659,7 @@ async function fenetreReutiliserPhoto(b, k, face){
     src.modele = (src.modele || "") + " — résultat sauvegardé du " + x.quand;
     if (appoint){
       const lus = (doc.lus || []).map(l=>Object.assign({}, l));
-      if (bt.dataset.mode === "ordre") fenetreFusionAppoint(b, k, face, lus, src);
-      else fenetreVerifAppoint(b, k, face, lus, src);
+      fenetreFusionAppoint(b, k, face, lus, src);
     } else {
       const livres = (doc.livres || []).map(l=>Object.assign({}, l, { id:uid() }));
       livres.source = src;
@@ -2199,8 +2203,7 @@ function appliquerReponseClaude(a, txt, silencieux){
     if (!photoObj(b.cases[a.cle], champ)){ toast("Cette photo d'appoint n'existe plus.", 5000); return true; }
     const lusM = lusDepuisReponse(j);
     journaliserResultat(b, a.cle, "appoint", { appoint:idA, mode: mode || "", source:{ ia, modele:source.modele }, lus:lusM });
-    if (mode === "ordre") fenetreFusionAppoint(b, a.cle, champ, lusM, source);
-    else fenetreVerifAppoint(b, a.cle, champ, lusM, source);
+    fenetreFusionAppoint(b, a.cle, champ, lusM, source);
     return true;
   }
   const portee = a.portee || (a.deux ? "deux" : (a.avecAvant ? "devant" : "derriere"));
@@ -2323,53 +2326,18 @@ function appliquerLivresCompartiment(b, k, livres){
       ${liste("🆕 Nouveaux", d.nouveaux, "var(--bronze)")}
       ${liste("⚠️ Relevés avant, pas retrouvés cette fois", d.absents, "var(--orange)")}`;
   };
-  // en remplaçant, on garde ce qui avait déjà été obtenu (résumé, auteur, année, catégorie…) pour les livres communs
-  const remplacerRang = (r)=>parRang[r].neufs.map(lv=>{
-    const vieux = parRang[r].idx.get(cle(lv));
-    if (!vieux) return lv;
-    const x = Object.assign({}, lv);
-    Object.keys(vieux).forEach(c=>{ if (c !== "rang" && (x[c] === undefined || x[c] === null || x[c] === "")) x[c] = vieux[c]; });
-    return x;
-  });
   const autoTxt = [
     ...remplisDirect.map(r=>`le ${NOM_RANG[r]}, encore vide, reçoit ses ${nouvDe(r).length} livre(s)`),
     ...horsPortee.map(r=>`les ${ancDe(r).length} livre(s) du ${NOM_RANG[r]} ne sont pas concernés et restent tels quels`)
   ];
-  const nomsDisputes = disputes.map(r=>NOM_RANG[r]).join(" et le ");
-  const fenetreChoix = modale({ titre:"Nouvelle analyse de " + lib(k),
-    html:`<div><b>${enTete}.</b> Le ${nomsDisputes} avai${disputes.length > 1 ? "ent" : "t"} déjà des livres relevés (photo refaite ou nouvelle analyse) : que faire de ce nouveau résultat ?</div>
-          <div class="aide">${esc(texteBilanAnalyse(livres))}</div>
-          ${disputes.some(r=>parRang[r].vieux.length >= 3 && !parRang[r].communs.length) ? `<div class="encadre">⚠️ <b>Aucun livre en commun</b> avec la liste actuelle de la ${disputes.filter(r=>parRang[r].vieux.length >= 3 && !parRang[r].communs.length).map(r=>r === "derriere" ? "rangée 2" : "rangée 1").join(" et de la ")} : la photo montre peut-être un autre compartiment ou l'autre rangée. Vérifiez avant de remplacer ou de compléter.</div>` : ""}
-          ${autoTxt.length ? `<div class="aide">Dans tous les cas (sauf « Annuler ») : ${autoTxt.join(" ; ")}.</div>` : ""}
-          ${disputes.map(blocRang).join("")}
-          <div class="sep"></div>
-          <div class="aide" style="margin:0">
-            <b>Annuler</b> : rien ne change, cette analyse est ignorée.<br>
-            <b>Compléter</b> : l'ancienne liste du ${nomsDisputes} est gardée, on y ajoute seulement les ${somme("nouveaux")} livre(s) « 🆕 ». À choisir si la nouvelle photo montre des livres qui manquaient.<br>
-            <b>Remplacer</b> : la liste du ${nomsDisputes} devient celle de cette analyse${somme("absents") ? ` ; les ${somme("absents")} livre(s) « ⚠️ » sont retirés` : ""}. À choisir si les livres ont changé ou si l'ancienne analyse était mauvaise. Résumés et auteurs déjà obtenus pour les livres communs sont conservés.<br>
-            <b>🔀 Fusionner</b> : la nouvelle photo montre la même rangée, les livres dans le même ordre. Les deux listes sont alignées livre par livre et vous tranchez chaque différence (livre ajouté, manquant, mal lu).
-          </div>`,
-    boutons:[
-      {texte:"Annuler"},
-      {texte:"🔀 Fusionner (même rangée, même ordre)", garder:true, action:()=>{
-        fenetreFusion(k, disputes, parRang, (res, bilan)=>{
-          cs.livres = assembler(r=>res[r]);
-          cs.analyse = infoAnalyse(livres, cs); fin();
-          fenetreChoix.remove();
-          toast(`Fusion : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
-        });
-      }},
-      {texte:`Compléter (+${somme("nouveaux")})`, action:()=>{
-        cs.livres = assembler(r=>parRang[r].vieux.concat(parRang[r].nouveaux));
-        cs.analyse = infoAnalyse(livres, cs); fin();
-        toast(`Liste complétée : ${cs.livres.length} livre(s) dans ${lib(k)}.`, 4000);
-      }},
-      {texte:"Remplacer", classe:"principal", action:()=>{
-        cs.livres = assembler(remplacerRang);
-        cs.analyse = infoAnalyse(livres, cs); fin();
-        toast(`Liste remplacée : ${cs.livres.length} livre(s) dans ${lib(k)}.`, 4000);
-      }}
-    ]});
+  // a priori : même rangée, même ordre → fusion ordonnée directement ; les incohérences y sont signalées
+  const aucunCommun = disputes.filter(r=>parRang[r].vieux.length >= 3 && !parRang[r].communs.length);
+  fenetreFusion(k, disputes, parRang, (res, bilan)=>{
+    cs.livres = assembler(r=>res[r]);
+    cs.analyse = infoAnalyse(livres, cs); fin();
+    toast(`Fusion : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+  }, `<div class="aide"><b>${enTete}.</b> ${esc(texteBilanAnalyse(livres))}${autoTxt.length ? " En plus : " + autoTxt.join(" ; ") + "." : ""}</div>` +
+     (aucunCommun.length ? `<div class="encadre">⚠️ <b>Aucun livre en commun</b> avec la liste actuelle de la ${aucunCommun.map(r=>r === "derriere" ? "rangée 2" : "rangée 1").join(" et de la ")} : la photo montre sans doute un autre compartiment ou l'autre rangée. Dans ce cas, touchez « Retour » et vérifiez la photo.</div>` : ""));
 }
 
 /* ====== FUSION DE DEUX LECTURES D'UNE MÊME RANGÉE (livres dans le même ordre) ====== */
@@ -2473,7 +2441,8 @@ function fenetreFusionGenerique(opts){
           dep = compte(bl, e=>e.type === "ancien" && e.deplace);
     return `<div class="titreSection" style="margin-top:${nb ? 16 : 4}px">${bl.entete}</div>
       <div class="aide" style="margin:-4px 0 6px"><b>${s}</b> identique(s), <b>${p}</b> à confirmer, <b>${a}</b> seulement dans la liste, <b>${n}</b> seulement sur la ${nomNouveau}.</div>
-      ${dep ? `<div class="encadre">⚠️ ${dep} livre(s) semblent ne plus être à la même place.</div>` : ""}
+      ${dep ? `<div class="encadre">⚠️ <b>Ordre différent</b> : ${dep} livre(s) semblent avoir changé de place. Si les livres ont été réorganisés, il vaut mieux vider les listes et repartir de zéro.</div>` : ""}
+      ${(s + p) && (a + n) >= 4 && (s + p) < 0.3 * Math.min(s + p + a, s + p + n) ? `<div class="encadre">⚠️ <b>Peu de livres en commun</b> (${s + p}) : la photo correspond peut-être à un autre compartiment ou à l'autre rangée.</div>` : ""}
       ${hors(bl.avant || [], "Avant")}
       <div data-bloc="${nb}">${bl.etapes.map((e, x)=>ligne(e, nb + "_" + x)).join("")}</div>
       ${hors(bl.apres || [], "Après")}`;
@@ -2525,11 +2494,11 @@ function fenetreFusionGenerique(opts){
 }
 
 /* Fusion de deux lectures complètes d'une même rangée (nouvelle analyse). */
-function fenetreFusion(k, rangs, parRang, surValider){
+function fenetreFusion(k, rangs, parRang, surValider, introSupp){
   const NOMR = { devant:"Rangée 1 (devant)", derriere:"Rangée 2 (derrière)" };
   return fenetreFusionGenerique({
-    titre:"Fusionner — " + lib(k),
-    intro:`<div>La nouvelle photo montre <b>la même rangée, dans le même ordre</b>. Les deux listes sont mises côte à côte : les livres reconnus sans ambiguïté servent de repères pour situer les autres.</div>`,
+    titre:"Nouvelle analyse — " + lib(k),
+    intro:`<div>Cette rangée avait déjà une liste. Les livres étant rangés dans le même ordre d'une photo à l'autre, la nouvelle lecture est alignée sur la liste actuelle : les livres reconnus sans ambiguïté servent de repères pour situer les autres.</div>${introSupp || ""}`,
     blocs: rangs.map(r=>({ r, etapes: alignerListes(parRang[r].vieux, parRang[r].neufs),
       entete:`${NOMR[r]} — liste actuelle : ${parRang[r].vieux.length}, nouvelle photo : ${parRang[r].neufs.length}` })),
     surValider
@@ -4135,17 +4104,17 @@ function ouvrirCompartiment(b, k){
       ? (appoint ? "📷 Changer cette photo d'appoint" : face === "photo2" ? "📷 Changer la photo de derrière" : "📷 Changer la photo")
       : (face === "photo2" ? "📷 Photo du rang de derrière" : "📷 Ajouter une photo");
     const bAn = f.querySelector("#cAnalyser");
-    bAn.textContent = appoint ? "🔎 Nouvelle lecture par l'IA (vérifier)" : "🔍 Nouvelle analyse par l'IA";
+    bAn.textContent = appoint ? "🔍 Nouvelle lecture par l'IA" : "🔍 Nouvelle analyse par l'IA";
     bAn.title = appoint ? "L'IA lit cette photo ; l'application compare ce qu'elle lit aux listes des rangées" : "";
     const expA = f.querySelector("#cExplAppoint");
-    if (expA) expA.style.display = appoint ? "" : "none";
+    if (expA) expA.style.display = "none";
     const bloc = f.querySelector("#cBlocAnalyse");
     if (bloc) bloc.style.display = photoObj(cs, face) ? "" : "none";
     f.querySelector("#cTitreAnalyse").textContent = "Analyse de cette photo — " +
       (appoint ? "appoint " + num : face === "photo2" ? "rangée 2 (derrière)" : cs.photo2 ? "rangée 1 (devant)" : "rangée 1");
     majReutiliser();
     const bOrd = f.querySelector("#cAppointOrdre");
-    if (bOrd) bOrd.style.display = appoint && photoObj(cs, face) ? "" : "none";
+    if (bOrd) bOrd.style.display = "none";
     if (!photoObj(cs, face)){
       z.innerHTML = face === "photo2"
         ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à l'IA, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
@@ -4338,19 +4307,19 @@ function ouvrirCompartiment(b, k){
       const champ = face;
       btnA.disabled = true; btnA.textContent = "Lecture de la photo…";
       try{
-        const r = await lireAppoint(b, k, champ, { manuel:true });
-        btnA.disabled = false; btnA.textContent = "🔎 Nouvelle lecture par l'IA (vérifier)";
-        fenetreVerifAppoint(b, k, champ, r.lus, r.source);
+        const r = await lireAppoint(b, k, champ, { manuel:true, mode:"ordre" });
+        btnA.disabled = false; btnA.textContent = "🔍 Nouvelle lecture par l'IA";
+        fenetreFusionAppoint(b, k, champ, r.lus, r.source);
       }catch(e){
-        btnA.disabled = false; btnA.textContent = "🔎 Nouvelle lecture par l'IA (vérifier)";
-        if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle", idAppoint(champ)); return; }
+        btnA.disabled = false; btnA.textContent = "🔍 Nouvelle lecture par l'IA";
+        if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle", idAppoint(champ) + "|ordre"); return; }
         montrerErreurAnalyse(e);
       }
       return;
     }
     if (!cs.photo && !cs.photo2){ toast("Ajoutez d'abord une photo."); return; }
-    const portee = (cs.photo && cs.photo2) ? await choisirPortee(b, k) : porteeParDefaut(cs);
-    if (!portee) return;
+    const portee = face === "photo2" ? "derriere" : (cs.photo ? "devant" : "derriere");   // la photo affichée
+    if (!photoObj(cs, portee === "derriere" ? "photo2" : "photo")){ toast("Cette photo n'existe pas encore."); return; }
     const btn = f.querySelector("#cAnalyser");
     btn.disabled = true; btn.textContent = "Analyse…";
     try{
