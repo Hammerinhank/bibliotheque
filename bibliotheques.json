@@ -4316,38 +4316,14 @@
       },
       {
        "id": "muef9o75nm5ab",
-       "titre": "Une vie critique",
-       "auteur": "Madame Ming Na Jamais Rus",
+       "titre": "Une vie entière",
+       "auteur": "Robert Seethaler",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
-      },
-      {
-       "id": "muejmr8elnau5",
-       "titre": "Le champ",
-       "auteur": "Robert Seethaler",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "rang": "derriere"
-      },
-      {
-       "id": "muejmr8eg3ek1",
-       "titre": "L'un d'entre nous",
-       "auteur": "Åsne Seierstad",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
        "rang": "derriere"
       },
       {
@@ -4426,18 +4402,6 @@
        "id": "muef9o75yuy5m",
        "titre": "La maison de Bretagne",
        "auteur": "Henri Simon",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere"
-      },
-      {
-       "id": "muef9o752c3jv",
-       "titre": "Les raisins verts",
-       "auteur": "Clifford D. Shaw",
        "annee": "",
        "certitude": "haute",
        "remarque": "Folio",
@@ -4740,14 +4704,30 @@
        "maj": "2026-09-23T16:49:11.069Z",
        "id": "muec75xnhw210",
        "legende": "",
-       "verif": "2026-09-23T18:17:49.059Z",
+       "verif": "2026-09-23T20:31:53.890Z",
        "rang": "derriere",
        "rangInfo": {
         "auto": true,
         "n1": 0,
-        "n2": 8,
-        "date": "2026-09-23T18:17:42.767Z"
-       }
+        "n2": 13,
+        "date": "2026-09-23T20:26:07.065Z"
+       },
+       "livresVus": [
+        "muef9o75ouq4r",
+        "muef9o75z1vkp",
+        "muefe6pfcauf6",
+        "muef9o75nm5ab",
+        "muef9o75voe3x",
+        "muef9o75cyt7n",
+        "muef9o75l09cl",
+        "muefe6pfdrrpi",
+        "muefe6pf50zar",
+        "muefe6pfrz1y1",
+        "muef9o75yuy5m",
+        "muef9o7529m5a",
+        "muef9o75ca8oy",
+        "muefe6pf8qj4a"
+       ]
       },
       {
        "plein": null,
@@ -7595,7 +7575,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T20:16:47.815Z",
+ "maj": "2026-09-23T20:32:28.124Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
