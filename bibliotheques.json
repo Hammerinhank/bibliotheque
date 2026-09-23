@@ -4102,6 +4102,126 @@
        "origine": "ia"
       },
       {
+       "id": "mued4peww9m0x",
+       "titre": "Le Guépard",
+       "auteur": "Giuseppe Tomasi di Lampedusa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewwhto9",
+       "titre": "L'Anomalie",
+       "auteur": "Hervé Le Tellier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewxq7ml",
+       "titre": "Théâtre complet I",
+       "auteur": "Tchekhov",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewmtgrs",
+       "titre": "Sur les chemins noirs",
+       "auteur": "Sylvain Tesson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pew4rrmg",
+       "titre": "Une vie à coucher dehors",
+       "auteur": "Sylvain Tesson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewlbue1",
+       "titre": "LONG ISLAND",
+       "auteur": "COLM TÓIBÍN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pews42n9",
+       "titre": "La sonate à Kreutzer",
+       "auteur": "Tolstoi",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewifhsg",
+       "titre": "Le cheval",
+       "auteur": "Léon Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pew5b5z1",
+       "titre": "Résurrection tome 1",
+       "auteur": "TOLSTOI",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewwomhf",
+       "titre": "Résurrection tome 2",
+       "auteur": "TOLSTOI",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
        "id": "mud5m1hsw2i1j",
        "titre": "Johnny s'en va-t-en guerre",
        "auteur": "Dalton Trumbo (scénariste et romancier américain, 1905-1976)",
@@ -4111,6 +4231,54 @@
        "resume": "Un jeune soldat américain mutilé et tétraplégique de la Première Guerre mondiale communique avec le monde extérieur par la pensée.",
        "categorie": "Littérature étrangère",
        "origine": "ia"
+      },
+      {
+       "id": "mued4pew9kiav",
+       "titre": "La conjuration des imbéciles",
+       "auteur": "J.K. TOOLE",
+       "annee": "2010",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pewsfrdp",
+       "titre": "Mémoires d'un chasseur",
+       "auteur": "Tourgueniev",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pew465lh",
+       "titre": "Les météores",
+       "auteur": "Tournier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued4pew35p70",
+       "titre": "L'Italienne",
+       "auteur": "ADRIANA TRIGIANI",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
       },
       {
        "id": "mud5m1hsh76co",
@@ -4234,7 +4402,8 @@
        "envoye": true,
        "maj": "2026-09-23T16:52:04.814Z",
        "id": "muecc28d4vsvn",
-       "legende": ""
+       "legende": "",
+       "verif": "2026-09-23T17:14:24.636Z"
       }
      ],
      "photo2": {
@@ -6646,7 +6815,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T17:13:43.830Z",
+ "maj": "2026-09-23T17:14:25.366Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
