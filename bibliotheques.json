@@ -4279,6 +4279,18 @@
        "rang": "derriere"
       },
       {
+       "id": "muefe6pfcauf6",
+       "titre": "LES DIX ENFANTS QUE MADAME MING N'A JAMAIS EUS",
+       "auteur": "ERIC-EMMANUEL SCHMITT",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
        "id": "muef9o75nm5ab",
        "titre": "Une vie critique",
        "auteur": "Madame Ming Na Jamais Rus",
@@ -4327,6 +4339,42 @@
        "rang": "derriere"
       },
       {
+       "id": "muefe6pfdrrpi",
+       "titre": "Pygmalion",
+       "auteur": "Bernard Shaw",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
+       "id": "muefe6pf50zar",
+       "titre": "la croisade de l'idiot",
+       "auteur": "clifford d. simak",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
+       "id": "muefe6pfrz1y1",
+       "titre": "Les rais",
+       "auteur": "Pierre-Henri Simon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
        "id": "muef9o75yuy5m",
        "titre": "La maison de Bretagne",
        "auteur": "Henri Simon",
@@ -4372,6 +4420,18 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muefe6pf8qj4a",
+       "titre": "L'Étrange Cas du docteur Jekyll et de Mr Hyde",
+       "auteur": "Stevenson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
        "rang": "derriere"
       },
       {
@@ -4620,7 +4680,14 @@
        "maj": "2026-09-23T16:49:11.069Z",
        "id": "muec75xnhw210",
        "legende": "",
-       "verif": "2026-09-23T17:26:50.113Z"
+       "verif": "2026-09-23T18:17:49.059Z",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 8,
+        "date": "2026-09-23T18:17:42.767Z"
+       }
       },
       {
        "plein": null,
@@ -7438,7 +7505,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T18:17:01.808Z",
+ "maj": "2026-09-23T18:17:49.712Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
