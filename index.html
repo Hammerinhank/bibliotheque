@@ -199,14 +199,15 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ---------- livres ---------- */
 .livre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:9px 10px;margin-bottom:8px;position:relative}
 .livre.deplacable{padding-right:52px}
-.livre .poignee{position:absolute;top:0;right:0;bottom:0;width:46px;display:flex;align-items:center;justify-content:center;
+.livre .poigneeGlisser{position:absolute;top:0;right:0;bottom:0;width:52px;pointer-events:auto;z-index:2;display:flex;align-items:center;justify-content:center;
   cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.livre .poignee span{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid var(--trait);border-radius:7px;background:var(--encre3)}
-.livre .poignee i{display:block;width:18px;height:2px;border-radius:2px;background:var(--texte2)}
+.livre .poigneeGlisser span{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid var(--trait);border-radius:7px;background:var(--encre3)}
+.livre .poigneeGlisser i{display:block;width:18px;height:2px;border-radius:2px;background:var(--texte2)}
+body.glisseEnCours, body.glisseEnCours *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
 .livre.enDrag{opacity:.92;border-color:var(--bronze);box-shadow:0 6px 18px rgba(0,0,0,.55);transform:scale(1.02);z-index:5;transition:none}
-.livre.enDrag .poignee{cursor:grabbing}
-.livre.enDrag .poignee span{border-color:var(--bronze)}
-.livre.enDrag .poignee i{background:var(--bronze)}
+.livre.enDrag .poigneeGlisser{cursor:grabbing}
+.livre.enDrag .poigneeGlisser span{border-color:var(--bronze)}
+.livre.enDrag .poigneeGlisser i{background:var(--bronze)}
 .livre .t{font-size:15.5px;font-weight:600}
 .livre .a{font-size:13.5px;color:var(--texte2)}
 .livre .r{font-size:13px;color:#cfc8b6;margin-top:4px;font-style:italic}
@@ -379,8 +380,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.35.0";
+const VERSION = "V1.35.1";
 const HISTORIQUE = [
+  { v:"V1.35.1", d:"23/09/2026", l:[
+    "Correctif glisser-déposer : la poignée ≡ portait le même nom qu'une poignée des lignes de coupe (rendue insensible au doigt), d'où la sélection de texte en bleu au lieu du déplacement. Poignée renommée, sélection de texte et menu « Copier » bloqués pendant le glisser."
+  ]},
   { v:"V1.35.0", d:"23/09/2026", l:[
     "Photo d'appoint : second bouton « 🔀 Vérifier (ordre respecté) ». L'app repère la zone de la rangée que couvre l'appoint (sans supposer qu'il commence au premier livre ni finit au dernier), puis aligne livre par livre dans cette zone ; les livres hors zone ne sont pas touchés.",
     "Choix de la rangée comparée (la plus ressemblante par défaut, bouton pour comparer à l'autre).",
@@ -2044,7 +2048,7 @@ function fenetreFusionGenerique(opts){
         (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ c'est sans doute « ${esc(e.deplace.titre)} », déplacé : ajouté ici par défaut.</div>` : "") +
         boutons(id, [["ajouter","Ajouter"],["ignorer","Ignorer"]], e.choix);
     }
-    return `<div class="livre deplacable" data-idx="${id.split("_")[1]}"><div class="poignee" title="Maintenir et glisser pour corriger l'ordre"><span><i></i><i></i><i></i><i></i></span></div>${h}</div>`;
+    return `<div class="livre deplacable" data-idx="${id.split("_")[1]}"><div class="poigneeGlisser" title="Maintenir et glisser pour corriger l'ordre"><span><i></i><i></i><i></i><i></i></span></div>${h}</div>`;
   };
   const compte = (bl, f)=>bl.etapes.filter(f).length;
   const hors = (l, ou)=> l.length ? `<div class="aide" style="margin:4px 0">${ou} : ${l.length} livre(s) hors de la zone photographiée, inchangé(s) (${l.slice(0,2).map(x=>"« "+esc(x.titre)+" »").join(", ")}${l.length > 2 ? "…" : ""}).</div>` : "";
@@ -2186,7 +2190,12 @@ function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
 function glisserListe(z, surLacher){
   const defilant = (el)=>{ for (let p = el.parentElement; p; p = p.parentElement){ const o = getComputedStyle(p).overflowY; if ((o === "auto" || o === "scroll") && p.scrollHeight > p.clientHeight) return p; } return document.scrollingElement; };
   const enfants = ()=>[...z.children].filter(x=>x.classList.contains("livre"));
-  z.querySelectorAll(":scope > .livre > .poignee").forEach(h=>{
+  // la poignée doit recevoir le doigt : touch-action none (pas de défilement ni de zoom depuis elle)
+  z.querySelectorAll(":scope > .livre > .poigneeGlisser").forEach(h=>{
+    // iOS : empêcher la sélection de texte et le menu « Copier » au toucher de la poignée
+    h.addEventListener("touchstart", (e)=>{ e.preventDefault(); }, { passive:false });
+    h.addEventListener("selectstart", (e)=>e.preventDefault());
+    h.addEventListener("contextmenu", (e)=>e.preventDefault());
     h.addEventListener("pointerdown", (e)=>{
       if (e.button && e.button !== 0) return;
       e.preventDefault();
@@ -2195,6 +2204,8 @@ function glisserListe(z, surLacher){
       const ordreAvant = enfants().map(x=>Number(x.dataset.idx));
       let dernierY = e.clientY, minuterie = null, fini = false;
       item.classList.add("enDrag");
+      document.body.classList.add("glisseEnCours");
+      try{ const sel = window.getSelection && window.getSelection(); if (sel) sel.removeAllRanges(); }catch(_){}
       try{ h.setPointerCapture(e.pointerId); }catch(_){}
       if (navigator.vibrate) try{ navigator.vibrate(10); }catch(_){}
       const placer = ()=>{
@@ -2226,6 +2237,7 @@ function glisserListe(z, surLacher){
         h.removeEventListener("pointerup", lacher);
         h.removeEventListener("pointercancel", lacher);
         item.classList.remove("enDrag");
+        document.body.classList.remove("glisseEnCours");
         const ordreApres = enfants().map(x=>Number(x.dataset.idx));
         if (ordreApres.join() !== ordreAvant.join() && surLacher) surLacher(ordreAvant, ordreApres);
       };
@@ -3649,7 +3661,7 @@ function ouvrirCompartiment(b, k){
     if (!visibles.length){ z.innerHTML = `<div class="vide">Aucun livre sur la ${filtreRang === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)"}.</div>`; return; }
     z.innerHTML = visibles.map(({lv,i})=>
       `<div class="livre ${visibles.length > 1 ? "deplacable" : ""} ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}" data-idx="${i}">
-         ${visibles.length > 1 ? `<div class="poignee" title="Maintenir et glisser pour déplacer"><span><i></i><i></i><i></i><i></i></span></div>` : ""}
+         ${visibles.length > 1 ? `<div class="poigneeGlisser" title="Maintenir et glisser pour déplacer"><span><i></i><i></i><i></i><i></i></span></div>` : ""}
          <div class="t">${esc(lv.titre)}</div>
          <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
          ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
