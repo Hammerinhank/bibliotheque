@@ -367,8 +367,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.29.2";
+const VERSION = "V1.30.0";
 const HISTORIQUE = [
+  { v:"V1.30.0", d:"23/09/2026", l:[
+    "Contrôle par photo d'appoint repensé : la fenêtre sépare clairement les livres « déjà relevés » (avec leur rangée) et ceux qui avaient échappé à la photo d'ensemble.",
+    "Livres nouveaux : bouton « Ajouter » avec, si le compartiment a deux rangées, le choix Rangée 1 / Rangée 2 pour chacun (ou pour tous d'un coup) ; en compartiment à une rangée, ajout direct en rangée 1.",
+    "Corrections et retraits éventuels présentés à part, en dessous."
+  ]},
   { v:"V1.29.2", d:"23/09/2026", l:[
     "Correctif iPhone : « Ajouter une photo d'appoint » ne faisait rien (Safari refuse d'ouvrir l'appareil photo depuis une liste déroulante). C'est désormais un vrai bouton « ➕ Appoint » ; la liste ne sert plus qu'à choisir un appoint existant."
   ]},
@@ -1735,7 +1740,7 @@ function appliquerReponseClaude(a, txt, silencieux){
     const props = fusionnerPropositions(propositionsDepuisReponse(j, b.cases[a.cle]));
     localStorage.removeItem(CLE_ATTENTE_CLAUDE);
     majAttenteClaude();
-    validerPropositions(b, a.cle, props, source);
+    validerPropositions(b, a.cle, props, source, vusDepuisReponse(j, b.cases[a.cle]));
     return true;
   }
   const portee = a.portee || (a.deux ? "deux" : (a.avecAvant ? "devant" : "derriere"));
@@ -1907,6 +1912,26 @@ function listeLivresPourIA(cs){
     + (lv.remarque ? " — " + lv.remarque : "")).join("\n");
 }
 
+/* Ajouté à la question (même personnalisée) : l'IA liste aussi tous les livres qu'elle lit, pour distinguer « déjà relevés » et « nouveaux ». */
+const APPOINT_VUS = `
+En plus de "corrections", ajoute au même objet JSON une clé "vus" : la liste de TOUS les livres que tu lis sur les photos d'appoint. Pour un livre qui figure dans la liste ci-dessous, donne seulement son numéro "i" ; pour un livre absent de la liste, donne "titre" et "auteur" (et propose-le aussi en "ajouter"). Exemple : {"corrections":[...],"vus":[{"i":3},{"i":7},{"titre":"...","auteur":"..."}]}`;
+
+/* Livres déjà relevés que l'IA dit avoir vus sur les photos d'appoint. */
+function vusDepuisReponse(j, cs){
+  const livres = cs.livres || [];
+  const out = new Set();
+  (Array.isArray(j && j.vus) ? j.vus : []).forEach(v=>{
+    const i = Number(v && v.i);
+    if (Number.isInteger(i) && i >= 0 && i < livres.length) out.add(livres[i]);
+    else if (v && v.titre){ const t = normaliser(v.titre); const lv = livres.find(x=>normaliser(x.titre) === t); if (lv) out.add(lv); }
+  });
+  (Array.isArray(j && j.corrections) ? j.corrections : []).forEach(x=>{
+    const i = Number(x && x.i);
+    if (x && !/retir|suppr|ajout/i.test(String(x.action||"")) && Number.isInteger(i) && i >= 0 && i < livres.length) out.add(livres[i]);
+  });
+  return out;
+}
+
 /* Envoie les photos d'appoint par lots de 3, avec la liste actuelle, et rassemble les changements proposés. */
 async function controlerAvecAppoints(bib, cle, opts){
   const cs = bib.cases[cle];
@@ -1914,6 +1939,7 @@ async function controlerAvecAppoints(bib, cle, opts){
   if (!app.length) throw new Error("Aucune photo d'appoint sur ce compartiment.");
   const LOT = 3;
   const propositions = [];
+  const vus = new Set();
   let source = null;
   const pg = app.length > LOT ? fenetreProgres("Contrôle par les photos d'appoint") : null;
   let fait = 0;
@@ -1921,7 +1947,7 @@ async function controlerAvecAppoints(bib, cle, opts){
     for (let d = 0; d < app.length; d += LOT){
       const tranche = app.slice(d, d + LOT);
       if (pg) pg.maj(fait, app.length, `Photos ${d+1} à ${Math.min(d+LOT, app.length)} — envoi à l'IA…`);
-      const parties = [{ text: (cfg.qAppoint || QUESTION_APPOINT_DEFAUT) + "\n\nListe actuelle du compartiment :\n" + listeLivresPourIA(cs) }];
+      const parties = [{ text: (cfg.qAppoint || QUESTION_APPOINT_DEFAUT) + APPOINT_VUS + "\n\nListe actuelle du compartiment :\n" + listeLivresPourIA(cs) }];
       for (const a of tranche){
         const img = await photoPleine(bib, cle, PRE_APPOINT + a.id);
         if (!img) throw new Error("Photo d'appoint " + (app.indexOf(a)+1) + " introuvable (ni sur cet appareil ni sur GitHub).");
@@ -1931,11 +1957,12 @@ async function controlerAvecAppoints(bib, cle, opts){
       const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
       source = { ia:rep.ia, modele:rep.modele, echecs:rep.echecs };
       propositionsDepuisReponse(rep.res, cs).forEach(p=>propositions.push(p));
+      vusDepuisReponse(rep.res, cs).forEach(lv=>vus.add(lv));
       fait += tranche.length;
       if (pg) pg.maj(fait, app.length, "");
     }
   } finally { if (pg) pg.fermer(); }
-  return { propositions: fusionnerPropositions(propositions), source };
+  return { propositions: fusionnerPropositions(propositions), source, vus };
 }
 
 const CHAMPS_PROP = ["titre","auteur","annee","certitude","rang","remarque"];
@@ -1983,82 +2010,118 @@ function fusionnerPropositions(props){
   return out;
 }
 
-/* Chaque proposition est présentée avec son motif ; rien n'est appliqué sans être coché. */
-function validerPropositions(b, k, props, source){
+/* Résultat d'un contrôle par photos d'appoint :
+   1. livres qui avaient échappé à la photo d'ensemble (à ajouter, avec choix de la rangée si le compartiment en a deux) ;
+   2. corrections et retraits éventuels ;
+   3. livres déjà relevés que la photo confirme (pour information).
+   Rien n'est appliqué sans être coché. */
+function validerPropositions(b, k, props, source, vus){
   const cs = b.cases[k];
+  vus = vus || new Set();
   const marquerControle = ()=>{
     cs.controle = { maj:new Date().toISOString(), ia:(source&&source.ia)||"gemini",
       modele:(source&&source.modele)||"", manuel:!!(source&&source.manuel), photos:(cs.appoints||[]).length };
   };
+  const rafraichir = ()=>{ if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
+  const deuxRangees = !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere"));
+  const nomRangee = (lv)=> lv.rang === "derriere" ? "rangée 2" : "rangée 1";
+  // compartiment à une rangée : une « correction de rang » n'a pas de sens
+  if (!deuxRangees) props = props.filter(p=>{
+    if (p.action !== "corriger") return true;
+    delete p.champs.rang;
+    return Object.keys(p.champs).length > 0;
+  });
+  const ajouts = props.filter(p=>p.action === "ajouter");
+  const corrections = props.filter(p=>p.action === "corriger");
+  const retraits = props.filter(p=>p.action === "retirer");
+  const confirmes = [...vus];
+
   if (!props.length){
-    marquerControle(); sauver();
-    if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
-    if (biblioCourante === b.id) rendreBiblio();
+    marquerControle(); sauver(); rafraichir();
     modale({ titre:"Contrôle terminé",
-      html:`<div>Aucun changement proposé : les photos d'appoint confirment la liste de ce compartiment.</div>
+      html:`<div>Rien de nouveau : la photo d'appoint ne montre aucun livre qui manque à la liste, et ne signale aucune erreur.</div>
+            ${confirmes.length ? `<div class="aide">${confirmes.length} livre(s) déjà relevé(s) reconnu(s) sur la photo.</div>` : ""}
             <div class="aide">${esc(texteSource(source).trim() || "")}</div>`,
       boutons:[{texte:"Fermer"}]});
     return;
   }
-  const ETIQ = { corriger:"✏️ Corriger", ajouter:"➕ Ajouter", retirer:"🗑 Retirer" };
-  const cartes = props.map((p,i)=>{
-    let corps = "";
-    if (p.action === "ajouter"){
-      corps = `<div class="t">${esc(p.champs.titre)}</div>
-               <div class="chg">${esc(p.champs.auteur||"auteur inconnu")}${p.champs.annee?" · "+esc(p.champs.annee):""}${p.champs.rang?" · "+(p.champs.rang==="derriere"?"derrière":"devant"):""}</div>`;
-    } else if (p.action === "retirer"){
-      corps = `<div class="t">${esc(p.cible.titre)}</div>
-               <div class="chg">${esc(p.cible.auteur||"auteur inconnu")}</div>`;
-    } else {
-      corps = `<div class="t">${esc(p.cible.titre)}</div>` +
-        Object.keys(p.champs).map(ch=>
-          `<div class="chg">${esc(NOM_CHAMP[ch]||ch)} : ${esc(String(p.cible[ch]||"—"))} → <b>${esc(p.champs[ch])}</b></div>`).join("");
-    }
-    return `<div class="prop ${p.action}">
+
+  // rangée choisie pour chaque ajout (proposition de l'IA si deux rangées, sinon rangée 1)
+  const rangAjout = ajouts.map(p=> deuxRangees && p.champs.rang === "derriere" ? "derriere" : "devant");
+  const boutonsRangee = (i)=> deuxRangees
+    ? `<div class="onglets" style="margin-top:6px" data-rg="${i}">
+         <button data-v="devant" class="${rangAjout[i]==="devant"?"actif":""}">Rangée 1 (devant)</button>
+         <button data-v="derriere" class="${rangAjout[i]==="derriere"?"actif":""}">Rangée 2 (derrière)</button></div>`
+    : `<div class="chg">→ sera ajouté à la rangée 1</div>`;
+  const carte = (p, idx, corps, coche)=>`<div class="prop ${p.action}">
       <div class="coche" style="align-items:flex-start">
-        <input type="checkbox" data-p="${i}" ${p.action==="retirer"?"":"checked"} style="margin-top:3px">
-        <label style="margin:0;flex:1"><span class="act">${ETIQ[p.action]}</span>${corps}
-        ${p.motif?`<div class="mot">${esc(p.motif)}</div>`:""}</label></div></div>`;
-  }).join("");
+        <input type="checkbox" data-p="${idx}" ${coche?"checked":""} style="margin-top:3px">
+        <div style="flex:1">${corps}${p.motif?`<div class="mot">${esc(p.motif)}</div>`:""}</div></div></div>`;
+
+  const htmlAjouts = ajouts.map((p,i)=>carte(p, props.indexOf(p),
+    `<div class="t">${esc(p.champs.titre)}</div>
+     <div class="chg">${esc(p.champs.auteur||"auteur inconnu")}${p.champs.annee?" · "+esc(p.champs.annee):""}</div>
+     ${boutonsRangee(i)}`, true)).join("");
+  const htmlCorr = corrections.map(p=>carte(p, props.indexOf(p),
+    `<div class="t">${esc(p.cible.titre)} <span class="aide" style="font-weight:400">(${nomRangee(p.cible)})</span></div>` +
+    Object.keys(p.champs).map(ch=>`<div class="chg">${esc(NOM_CHAMP[ch]||ch)} : ${esc(String(p.cible[ch]||"—"))} → <b>${esc(ch==="rang" ? (p.champs[ch]==="derriere"?"rangée 2":"rangée 1") : p.champs[ch])}</b></div>`).join(""), true)).join("");
+  const htmlRet = retraits.map(p=>carte(p, props.indexOf(p),
+    `<div class="t">${esc(p.cible.titre)} <span class="aide" style="font-weight:400">(${nomRangee(p.cible)})</span></div>
+     <div class="chg">${esc(p.cible.auteur||"auteur inconnu")}</div>`, false)).join("");
+  const section = (titre, aide, contenu)=> contenu ? `<div class="titreSection" style="margin-top:14px">${titre}</div>${aide?`<div class="aide" style="margin:-4px 0 8px">${aide}</div>`:""}${contenu}` : "";
 
   const f = modale({
-    titre:"Changements proposés",
-    html:`<div class="aide" style="margin-top:0">${props.length} proposition(s) à partir de ${(cs.appoints||[]).length} photo(s) d'appoint.${esc(texteSource(source))} Décochez ce que vous ne voulez pas appliquer ; les retraits sont décochés d'office.</div>
-          <div class="barre" style="margin:8px 0 4px">
-            <button class="btn" id="pvTous" style="flex:1">Tout cocher</button>
-            <button class="btn" id="pvAucun" style="flex:1">Tout décocher</button>
-          </div>
-          ${cartes}`,
+    titre:"Photo d'appoint — " + lib(k),
+    html:`<div>La photo d'appoint montre <b>${confirmes.length + ajouts.length}</b> livre(s) lisible(s) :
+            <b>${confirmes.length}</b> déjà relevé(s) et <b>${ajouts.length}</b> qui avai${ajouts.length>1?"ent":"t"} échappé à la photo d'ensemble.</div>
+          <div class="aide">${deuxRangees ? "Compartiment à deux rangées : choisissez la rangée de chaque livre ajouté." : "Compartiment à une rangée : les livres ajoutés vont dans la rangée 1."}${esc(texteSource(source))}</div>
+          ${section(`🆕 Absents de la liste (${ajouts.length})`, "Cochés = seront ajoutés à la liste du compartiment.",
+             ajouts.length ? (deuxRangees && ajouts.length > 1 ? `<div class="barre" style="margin-bottom:8px">
+               <button class="btn" id="pvTout1" style="flex:1">Tous en rangée 1</button>
+               <button class="btn" id="pvTout2" style="flex:1">Tous en rangée 2</button></div>` : "") + htmlAjouts : "")}
+          ${section(`✏️ Corrections proposées (${corrections.length})`, "Livres déjà relevés dont un renseignement serait faux.", htmlCorr)}
+          ${section(`🗑 Retraits proposés (${retraits.length})`, "Livres de la liste que la photo ne montre pas ou compte deux fois — décochés par précaution.", htmlRet)}
+          ${confirmes.length ? `<details style="margin-top:14px"><summary style="cursor:pointer;font-weight:600;color:var(--vert)">✅ Déjà relevés, reconnus sur la photo (${confirmes.length})</summary>
+             <div class="aide" style="margin:6px 0 0 14px">${confirmes.map(lv=>esc(lv.titre) + ` <span style="opacity:.7">— ${nomRangee(lv)}</span>`).join("<br>")}</div></details>` : ""}`,
     boutons:[
-      {texte:"Ne rien appliquer", action:()=>{ marquerControle(); sauver(); if (biblioCourante === b.id) rendreBiblio(); }},
+      {texte:"Ne rien changer", action:()=>{ marquerControle(); sauver(); rafraichir(); }},
       {texte:"Appliquer les cochés", classe:"principal", action:(fd)=>{
-        const retenus = props.filter((p,i)=>fd.querySelector(`[data-p="${i}"]`).checked);
+        const coche = (p)=>fd.querySelector(`[data-p="${props.indexOf(p)}"]`).checked;
         let cor=0, ajo=0, ret=0;
-        retenus.filter(p=>p.action==="corriger").forEach(p=>{
-          Object.keys(p.champs).forEach(ch=>{ p.cible[ch] = p.champs[ch]; });
-          cor++;
-        });
-        retenus.filter(p=>p.action==="ajouter").forEach(p=>{
+        corrections.filter(coche).forEach(p=>{ Object.keys(p.champs).forEach(ch=>{ p.cible[ch] = p.champs[ch]; }); cor++; });
+        ajouts.forEach((p,i)=>{
+          if (!coche(p)) return;
           cs.livres = cs.livres || [];
-          cs.livres.push(Object.assign({ id:uid(), titre:"", auteur:"", annee:"", certitude:"moyenne",
-            remarque:"", resume:"", categorie:"", origine:"ia" }, p.champs));
+          const champs = Object.assign({}, p.champs);
+          delete champs.rang;
+          const lv = Object.assign({ id:uid(), titre:"", auteur:"", annee:"", certitude:"moyenne",
+            remarque:"", resume:"", categorie:"", origine:"appoint" }, champs);
+          if (deuxRangees) lv.rang = rangAjout[i];
+          cs.livres.push(lv);
           ajo++;
         });
-        const aRetirer = new Set(retenus.filter(p=>p.action==="retirer").map(p=>p.cible));
+        const aRetirer = new Set(retraits.filter(coche).map(p=>p.cible));
         if (aRetirer.size){ cs.livres = (cs.livres||[]).filter(lv=>!aRetirer.has(lv)); ret = aRetirer.size; }
-        marquerControle();
-        sauver();
-        if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
-        if (biblioCourante === b.id) rendreBiblio();
-        toast(`${cor} correction(s), ${ajo} ajout(s), ${ret} retrait(s) appliqué(s).`, 5000);
+        marquerControle(); sauver(); rafraichir();
+        toast(`${ajo} livre(s) ajouté(s), ${cor} correction(s), ${ret} retrait(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
       }}
     ],
     surFermeture:()=>{ marquerControle(); sauver(); if (biblioCourante === b.id) rendreBiblio(); }
   });
-  const coches = ()=>[...f.querySelectorAll("[data-p]")];
-  f.querySelector("#pvTous").onclick = ()=>coches().forEach(c=>c.checked = true);
-  f.querySelector("#pvAucun").onclick = ()=>coches().forEach(c=>c.checked = false);
-  coches().forEach(c=>{ const l = c.nextElementSibling; if (l) l.onclick = e=>{ if (e.target.tagName !== "INPUT") c.checked = !c.checked; }; });
+  // choix de la rangée, livre par livre ou pour tous
+  f.querySelectorAll("[data-rg]").forEach(zone=>{
+    const i = Number(zone.dataset.rg);
+    zone.querySelectorAll("button").forEach(bt=>bt.onclick = (e)=>{
+      e.preventDefault(); e.stopPropagation();
+      rangAjout[i] = bt.dataset.v;
+      zone.querySelectorAll("button").forEach(x=>x.classList.toggle("actif", x === bt));
+    });
+  });
+  const tous = (v)=>{ rangAjout.forEach((_,i)=>{ rangAjout[i] = v; });
+    f.querySelectorAll("[data-rg] button").forEach(x=>x.classList.toggle("actif", x.dataset.v === v)); };
+  const t1 = f.querySelector("#pvTout1"), t2 = f.querySelector("#pvTout2");
+  if (t1) t1.onclick = ()=>tous("devant");
+  if (t2) t2.onclick = ()=>tous("derriere");
 }
 
 /* ====================================================================
@@ -3179,7 +3242,7 @@ function ouvrirCompartiment(b, k){
       try{
         const r = await controlerAvecAppoints(b, k, { manuel:true });
         btnA.disabled = false; btnA.textContent = "🔎 Contrôler la liste";
-        validerPropositions(b, k, r.propositions, r.source);
+        validerPropositions(b, k, r.propositions, r.source, r.vus);
       }catch(e){
         btnA.disabled = false; btnA.textContent = "🔎 Contrôler la liste";
         if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle"); return; }
