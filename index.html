@@ -357,8 +357,18 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.23.0";
+const VERSION = "V1.25.0";
 const HISTORIQUE = [
+  { v:"V1.25.0", d:"23/09/2026", l:[
+    "Compartiment à deux rangs : « Analyser » demande quoi analyser — les deux rangs ensemble, le rang de devant seul ou le rang de derrière seul — avec un texte explicatif.",
+    "Une analyse ne touche plus jamais le rang qu'elle ne concerne pas : analyser la photo de derrière complète la liste du rang de devant, et inversement, sans question.",
+    "La fenêtre de choix (compléter / remplacer) n'apparaît que si le rang analysé avait déjà des livres, et compare rang par rang ; « Annuler » ne change rien."
+  ]},
+  { v:"V1.24.0", d:"23/09/2026", l:[
+    "Nouvelle analyse d'un compartiment qui a déjà des livres : la fenêtre compare l'ancienne et la nouvelle liste (communs, nouveaux, absents) au lieu d'une simple liste de titres.",
+    "Boutons explicites : « Garder l'ancienne liste », « Ajouter seulement les nouveaux (n) » (sans doublons), « Remplacer par la nouvelle liste (n) ».",
+    "En remplaçant, les résumés, auteurs, années et catégories déjà obtenus pour les livres communs sont conservés."
+  ]},
   { v:"V1.23.0", d:"23/09/2026", l:[
     "PDF trié : choix explicite « Quels livres ? » — tous, un seul auteur (choisi dans la liste des auteurs relevés, avec leur nombre de livres), titre contenant…, auteur contenant….",
     "Le filtre appliqué est rappelé en tête du PDF et dans le nom du fichier."
@@ -1604,7 +1614,7 @@ const SITE_IA = {
   claude:{ url:q=>"https://claude.ai/new?q=" + encodeURIComponent(q) },
   gemini:{ url:q=>"https://gemini.google.com/app?q=" + encodeURIComponent(q) }
 };
-function lancerClaudeManuel(b, k, parties, echecs, ia, genre){
+function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
   ia = ia || "claude";
   genre = genre || "analyse";
   const NOM = NOM_IA[ia], autre = ia === "claude" ? "gemini" : "claude";
@@ -1617,7 +1627,7 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre){
 
   // L'attente n'est enregistrée qu'au moment où la demande part réellement vers Claude (étape 2).
   const marquerEnvoi = ()=>{
-    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ ia, genre, bibId:b.id, cle:k, deux, avecAvant: !!cs.photo, date:new Date().toISOString() }));
+    localStorage.setItem(CLE_ATTENTE_CLAUDE, JSON.stringify({ ia, genre, bibId:b.id, cle:k, deux, avecAvant: portee ? portee !== "derriere" : !!cs.photo, portee: portee || "", date:new Date().toISOString() }));
     majAttenteClaude();
   };
 
@@ -1693,7 +1703,8 @@ function appliquerReponseClaude(a, txt, silencieux){
     validerPropositions(b, a.cle, props, source);
     return true;
   }
-  const livres = livresDepuisReponse(j, a.deux, a.avecAvant, source);
+  const portee = a.portee || (a.deux ? "deux" : (a.avecAvant ? "devant" : "derriere"));
+  const livres = finaliserPortee(livresDepuisReponse(j, a.deux, a.avecAvant, source), portee, b.cases[a.cle]);
   localStorage.removeItem(CLE_ATTENTE_CLAUDE);
   majAttenteClaude();
   appliquerLivresCompartiment(b, a.cle, livres);
@@ -1714,26 +1725,139 @@ function collerReponseClaudeMain(a, txtInitial){
     ]});
 }
 
-/* Range les livres trouvés dans un compartiment (demande avant d'écraser des livres déjà relevés). */
+const NOM_RANG = { devant:"rang de devant", derriere:"rang de derrière" };
+const rangDe = (lv)=> lv.rang === "derriere" ? "derriere" : "devant";
+
+/* Demande quel(s) rang(s) analyser quand le compartiment a les deux photos. Résout "deux" | "devant" | "derriere" | null. */
+function choisirPortee(b, k){
+  const cs = b.cases[k];
+  const nb = (r)=>(cs.livres||[]).filter(lv=>rangDe(lv) === r).length;
+  const etat = (r)=> nb(r) ? `${nb(r)} livre(s) déjà relevé(s)` : "aucun livre relevé";
+  return new Promise(res=>{
+    let fait = false;
+    const choisir = (v)=>{ fait = true; res(v); };
+    modale({ titre:"Analyser " + lib(k),
+      html:`<div>Ce compartiment a deux photos. Que faut-il analyser ?</div>
+            <div class="aide">Rang de devant : ${etat("devant")}. Rang de derrière : ${etat("derriere")}.</div>
+            <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:600">ℹ️ Comment ça marche</summary>
+              <div class="aide" style="margin:6px 0 0">
+                • <b>Les deux rangs ensemble</b> : l'IA voit les deux photos et évite de compter deux fois un livre visible sur les deux (par ex. un livre de derrière qui dépasse). C'est le plus sûr quand les deux photos sont prêtes.<br>
+                • <b>Un seul rang</b> : utile si vous n'avez refait qu'une des deux photos, ou pour compléter : analyser le rang de derrière ajoute ses livres à ceux du rang de devant déjà relevés, et inversement.<br>
+                • Les livres du rang non analysé ne sont <b>jamais</b> modifiés.<br>
+                • Si le rang analysé avait déjà des livres, l'app vous montre la comparaison et vous choisissez : compléter, remplacer ou annuler.
+              </div></details>`,
+      boutons:[
+        {texte:"Annuler", action:()=>choisir(null)},
+        {texte:"Devant seul", action:()=>choisir("devant")},
+        {texte:"Derrière seul", action:()=>choisir("derriere")},
+        {texte:"Les deux rangs", classe:"principal", action:()=>choisir("deux")}
+      ],
+      surFermeture:()=>{ if (!fait) res(null); } });
+  });
+}
+
+/* Range les livres trouvés dans un compartiment, rang par rang :
+   - le rang que l'analyse ne concerne pas est conservé tel quel ;
+   - un rang analysé encore vide est rempli directement ;
+   - un rang analysé qui avait déjà des livres donne lieu à une comparaison et à un choix. */
 function appliquerLivresCompartiment(b, k, livres){
   const cs = b.cases[k];
   const fin = ()=>{ sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
   if (!livres.length){ toast(NOM_IA[(livres.source||{}).ia||"gemini"] + " n'a identifié aucun livre." + texteSource(livres.source), 5000); return; }
-  if ((cs.livres||[]).length){
-    modale({ titre:"Résultat de l'analyse",
-      html:`<div>${esc(texteBilanAnalyse(livres))} Ce compartiment (${esc(lib(k))}) en contient déjà ${cs.livres.length}.</div>
-            <div class="aide">${livres.map(x=>esc(x.titre)).join("<br>")}</div>`,
-      boutons:[
-        {texte:"Annuler"},
-        {texte:"Ajouter à la suite", action:()=>{ cs.livres = cs.livres.concat(livres); cs.analyse = infoAnalyse(livres, cs); fin(); }},
-        {texte:"Remplacer", classe:"principal", action:()=>{ cs.livres = livres; cs.analyse = infoAnalyse(livres, cs); fin(); }}
-      ]});
-  } else {
-    cs.livres = livres;
+  const portee = livres.portee || porteeParDefaut(cs);
+  const concernes = portee === "deux" ? ["devant","derriere"] : [portee];
+  const anciens = cs.livres || [];
+  const ancDe = (r)=>anciens.filter(lv=>rangDe(lv) === r);
+  const nouvDe = (r)=>livres.filter(lv=>rangDe(lv) === r);
+  const horsPortee = ["devant","derriere"].filter(r=>!concernes.includes(r) && ancDe(r).length);
+  const remplisDirect = concernes.filter(r=>!ancDe(r).length);
+  const disputes = concernes.filter(r=>ancDe(r).length);
+  const enTete = portee === "deux" ? "Analyse des deux rangs" : "Analyse du " + NOM_RANG[portee] + " seul";
+
+  // liste finale : rang de devant puis rang de derrière
+  const assembler = (choixDispute)=>{
+    const out = [];
+    ["devant","derriere"].forEach(r=>{
+      if (!concernes.includes(r)) out.push(...ancDe(r));
+      else if (!ancDe(r).length) out.push(...nouvDe(r));
+      else out.push(...choixDispute(r));
+    });
+    return out;
+  };
+  const conserves = horsPortee.map(r=>`${ancDe(r).length} livre(s) du ${NOM_RANG[r]} conservé(s)`);
+
+  if (!disputes.length){
+    cs.livres = assembler(()=>[]);
     cs.analyse = infoAnalyse(livres, cs);
     fin();
-    toast(texteBilanAnalyse(livres), 5000);
+    const ajouts = remplisDirect.map(r=>`${nouvDe(r).length} livre(s) pour le ${NOM_RANG[r]}`);
+    toast(`${enTete} : ${ajouts.join(", ")}${conserves.length ? " ; " + conserves.join(", ") : ""}. Total : ${cs.livres.length}.`, 6000);
+    return;
   }
+
+  // comparaison sur les rangs disputés (même titre = même livre)
+  const cle = (lv)=>normaliser(lv.titre);
+  const parRang = {};
+  disputes.forEach(r=>{
+    const vieux = ancDe(r), neufs = nouvDe(r);
+    const idx = new Map(); vieux.forEach(lv=>{ const c = cle(lv); if (c && !idx.has(c)) idx.set(c, lv); });
+    const clesN = new Set(neufs.map(cle));
+    parRang[r] = {
+      vieux, neufs, idx,
+      communs: neufs.filter(lv=>idx.has(cle(lv))),
+      nouveaux: neufs.filter(lv=>!idx.has(cle(lv))),
+      absents: vieux.filter(lv=>!clesN.has(cle(lv)))
+    };
+  });
+  const somme = (champ)=>disputes.reduce((n,r)=>n + parRang[r][champ].length, 0);
+  const liste = (titre, l, coul)=> l.length
+    ? `<details style="margin-top:6px" ${l.length <= 10 ? "open" : ""}><summary style="cursor:pointer;font-weight:600;color:${coul}">${titre} (${l.length})</summary>
+         <div class="aide" style="margin:4px 0 0 14px">${l.map(x=>esc(x.titre) + (x.auteur ? ` <span style="opacity:.7">— ${esc(x.auteur)}</span>` : "")).join("<br>")}</div></details>`
+    : `<div class="aide" style="margin-top:6px">${titre} : aucun.</div>`;
+  const blocRang = (r)=>{
+    const d = parRang[r];
+    return `<div class="titreSection" style="margin-top:12px">${NOM_RANG[r][0].toUpperCase() + NOM_RANG[r].slice(1)} — avant : ${d.vieux.length}, cette analyse : ${d.neufs.length}</div>
+      ${liste("✅ Déjà relevés", d.communs, "var(--vert)")}
+      ${liste("🆕 Nouveaux", d.nouveaux, "var(--bronze)")}
+      ${liste("⚠️ Relevés avant, pas retrouvés cette fois", d.absents, "var(--orange)")}`;
+  };
+  // en remplaçant, on garde ce qui avait déjà été obtenu (résumé, auteur, année, catégorie…) pour les livres communs
+  const remplacerRang = (r)=>parRang[r].neufs.map(lv=>{
+    const vieux = parRang[r].idx.get(cle(lv));
+    if (!vieux) return lv;
+    const x = Object.assign({}, lv);
+    Object.keys(vieux).forEach(c=>{ if (c !== "rang" && (x[c] === undefined || x[c] === null || x[c] === "")) x[c] = vieux[c]; });
+    return x;
+  });
+  const autoTxt = [
+    ...remplisDirect.map(r=>`le ${NOM_RANG[r]}, encore vide, reçoit ses ${nouvDe(r).length} livre(s)`),
+    ...horsPortee.map(r=>`les ${ancDe(r).length} livre(s) du ${NOM_RANG[r]} ne sont pas concernés et restent tels quels`)
+  ];
+  const nomsDisputes = disputes.map(r=>NOM_RANG[r]).join(" et le ");
+  modale({ titre:"Nouvelle analyse de " + lib(k),
+    html:`<div><b>${enTete}.</b> Le ${nomsDisputes} avai${disputes.length > 1 ? "ent" : "t"} déjà des livres relevés (photo refaite ou nouvelle analyse) : que faire de ce nouveau résultat ?</div>
+          <div class="aide">${esc(texteBilanAnalyse(livres))}</div>
+          ${autoTxt.length ? `<div class="aide">Dans tous les cas (sauf « Annuler ») : ${autoTxt.join(" ; ")}.</div>` : ""}
+          ${disputes.map(blocRang).join("")}
+          <div class="sep"></div>
+          <div class="aide" style="margin:0">
+            <b>Annuler</b> : rien ne change, cette analyse est ignorée.<br>
+            <b>Compléter</b> : l'ancienne liste du ${nomsDisputes} est gardée, on y ajoute seulement les ${somme("nouveaux")} livre(s) « 🆕 ». À choisir si la nouvelle photo montre des livres qui manquaient.<br>
+            <b>Remplacer</b> : la liste du ${nomsDisputes} devient celle de cette analyse${somme("absents") ? ` ; les ${somme("absents")} livre(s) « ⚠️ » sont retirés` : ""}. À choisir si les livres ont changé ou si l'ancienne analyse était mauvaise. Résumés et auteurs déjà obtenus pour les livres communs sont conservés.
+          </div>`,
+    boutons:[
+      {texte:"Annuler"},
+      {texte:`Compléter (+${somme("nouveaux")})`, action:()=>{
+        cs.livres = assembler(r=>parRang[r].vieux.concat(parRang[r].nouveaux));
+        cs.analyse = infoAnalyse(livres, cs); fin();
+        toast(`Liste complétée : ${cs.livres.length} livre(s) dans ${lib(k)}.`, 4000);
+      }},
+      {texte:"Remplacer", classe:"principal", action:()=>{
+        cs.livres = assembler(remplacerRang);
+        cs.analyse = infoAnalyse(livres, cs); fin();
+        toast(`Liste remplacée : ${cs.livres.length} livre(s) dans ${lib(k)}.`, 4000);
+      }}
+    ]});
 }
 
 /* ====================================================================
@@ -2124,11 +2248,22 @@ function jsonDepuisTexte(txt){
 
 /* Analyse d'un compartiment : une photo, ou deux photos (rang de devant + rang de derrière)
    envoyées ensemble pour que Gemini produise une liste unique sans doublon. */
+/* portée d'une analyse : "deux" (les deux rangs), "devant" ou "derriere" (une seule photo) */
+function porteeParDefaut(cs){ return cs && cs.photo && cs.photo2 ? "deux" : (cs && cs.photo ? "devant" : "derriere"); }
+/* rang de chaque livre selon la portée + mémorisation de la portée dans la liste */
+function finaliserPortee(livres, portee, cs){
+  if (portee === "devant" && cs && cs.photo2) livres.forEach(lv=>{ lv.rang = "devant"; });
+  if (portee === "derriere") livres.forEach(lv=>{ lv.rang = "derriere"; });
+  livres.portee = portee;
+  return livres;
+}
 async function analyserPhoto(bib, cle, opts){
+  opts = opts || {};
   const cs = bib.cases[cle];
-  const deux = !!(cs && cs.photo && cs.photo2);
-  const avant = cs && cs.photo ? await photoPleine(bib, cle, "photo") : null;
-  const arriere = cs && cs.photo2 ? await photoPleine(bib, cle, "photo2") : null;
+  const portee = opts.portee || porteeParDefaut(cs);
+  const deux = portee === "deux" && !!(cs && cs.photo && cs.photo2);
+  const avant = cs && cs.photo && portee !== "derriere" ? await photoPleine(bib, cle, "photo") : null;
+  const arriere = cs && cs.photo2 && portee !== "devant" ? await photoPleine(bib, cle, "photo2") : null;
   if (!avant && !arriere) throw new Error("Photo introuvable (ni sur cet appareil ni sur GitHub).");
   if (deux && (!avant || !arriere)) throw new Error("Une des deux photos du compartiment est introuvable (ni sur cet appareil ni sur GitHub).");
 
@@ -2147,8 +2282,10 @@ async function analyserPhoto(bib, cle, opts){
       { inline_data: { mime_type:"image/jpeg", data: base64Seul(avant || arriere) } }
     ];
   }
-  const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
-  return livresDepuisReponse(rep.res, deux, !!avant, { ia:rep.ia, modele:rep.modele, echecs:rep.echecs });
+  let rep;
+  try{ rep = await interrogerIA(parties, jsonDepuisTexte, opts); }
+  catch(e){ e.portee = portee; throw e; }
+  return finaliserPortee(livresDepuisReponse(rep.res, deux, !!avant, { ia:rep.ia, modele:rep.modele, echecs:rep.echecs }), portee, cs);
 }
 
 /* Transforme la réponse JSON d'une IA en livres (commun à Gemini, Claude par clé et Claude par copier-coller). */
@@ -2613,6 +2750,7 @@ function ouvrirCompartiment(b, k){
              <button class="btn" id="cPhoto" style="flex:1">📷 Ajouter une photo</button>
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
+           <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
            <input type="file" id="cFichier" accept="image/*" hidden>
            <div class="titreSection">Livres de ce compartiment</div>
            <div id="zoneLivres"></div>
@@ -2947,16 +3085,17 @@ function ouvrirCompartiment(b, k){
       return;
     }
     if (!cs.photo && !cs.photo2){ toast("Ajoutez d'abord une photo."); return; }
-    if (!cs.photo && cs.photo2) toast("Seule la photo de derrière existe : elle sera analysée seule.");
+    const portee = (cs.photo && cs.photo2) ? await choisirPortee(b, k) : porteeParDefaut(cs);
+    if (!portee) return;
     const btn = f.querySelector("#cAnalyser");
     btn.disabled = true; btn.textContent = "Analyse…";
     try{
-      const livres = await analyserPhoto(b, k, { manuel:true });
+      const livres = await analyserPhoto(b, k, { manuel:true, portee });
       btn.disabled = false; btn.textContent = "🔍 Analyser";
       appliquerLivresCompartiment(b, k, livres);
     }catch(e){
       btn.disabled = false; btn.textContent = "🔍 Analyser";
-      if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia); return; }
+      if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, undefined, e.portee || portee); return; }
       montrerErreurAnalyse(e);
     }
   };
