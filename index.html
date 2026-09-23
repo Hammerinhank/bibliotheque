@@ -204,7 +204,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 .livre .poigneeGlisser span{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid var(--trait);border-radius:7px;background:var(--encre3)}
 .livre .poigneeGlisser i{display:block;width:18px;height:2px;border-radius:2px;background:var(--texte2)}
 body.glisseEnCours, body.glisseEnCours *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
-.livre.enDrag{opacity:.92;border-color:var(--bronze);box-shadow:0 6px 18px rgba(0,0,0,.55);transform:scale(1.02);z-index:5;transition:none}
+.livre.enDrag{opacity:.95;border-color:var(--bronze);box-shadow:0 8px 22px rgba(0,0,0,.6);z-index:5;transition:none;will-change:transform}
 .livre.enDrag .poigneeGlisser{cursor:grabbing}
 .livre.enDrag .poigneeGlisser span{border-color:var(--bronze)}
 .livre.enDrag .poigneeGlisser i{background:var(--bronze)}
@@ -380,8 +380,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.45.0";
+const VERSION = "V1.45.1";
 const HISTORIQUE = [
+  { v:"V1.45.1", d:"23/09/2026", l:[
+    "Glisser-déposer : le livre tenu suit désormais le doigt dès le début du geste (il restait sur place jusqu'à ce qu'on franchisse la moitié d'un voisin) ; les voisins s'écartent au passage."
+  ]},
   { v:"V1.45.0", d:"23/09/2026", l:[
     "Plus aucun choix de mode a priori : l'app part du principe que les livres sont toujours rangés dans le même ordre d'une photo à l'autre.",
     "Photo de rangée : l'analyse porte sur la photo affichée (devant ou derrière) ; si la rangée a déjà des livres, la fusion ordonnée s'ouvre directement.",
@@ -2684,7 +2687,15 @@ function glisserListe(z, surLacher){
       const scr = defilant(z);
       const ordreAvant = enfants().map(x=>Number(x.dataset.idx));
       let dernierY = e.clientY, minuterie = null, fini = false;
+      const scrollDe = ()=> scr === document.scrollingElement ? window.scrollY : scr.scrollTop;
+      const y0 = e.clientY, scroll0 = scrollDe(), top0 = item.offsetTop;
+      // le livre suit le doigt : décalage visuel = déplacement du doigt (défilement compris) − déplacement réel dans la liste
+      const suivre = ()=>{
+        const dy = (dernierY + scrollDe()) - (y0 + scroll0) - (item.offsetTop - top0);
+        item.style.transform = `translateY(${dy}px) scale(1.02)`;
+      };
       item.classList.add("enDrag");
+      suivre();
       document.body.classList.add("glisseEnCours");
       try{ const sel = window.getSelection && window.getSelection(); if (sel) sel.removeAllRanges(); }catch(_){}
       try{ h.setPointerCapture(e.pointerId); }catch(_){}
@@ -2706,11 +2717,11 @@ function glisserListe(z, surLacher){
         let v = 0;
         if (dernierY < r.top + marge) v = -Math.ceil((r.top + marge - dernierY) / 4);
         else if (dernierY > r.bottom - marge) v = Math.ceil((dernierY - (r.bottom - marge)) / 4);
-        if (v){ scr.scrollTop += v; placer(); }
+        if (v){ scr.scrollTop += v; placer(); suivre(); }
         minuterie = fini ? null : requestAnimationFrame(defiler);
       };
       minuterie = requestAnimationFrame(defiler);
-      const bouger = (ev)=>{ ev.preventDefault(); dernierY = ev.clientY; placer(); };
+      const bouger = (ev)=>{ ev.preventDefault(); dernierY = ev.clientY; placer(); suivre(); };
       const lacher = ()=>{
         fini = true;
         if (minuterie) cancelAnimationFrame(minuterie);
@@ -2718,6 +2729,7 @@ function glisserListe(z, surLacher){
         h.removeEventListener("pointerup", lacher);
         h.removeEventListener("pointercancel", lacher);
         item.classList.remove("enDrag");
+        item.style.transform = "";
         document.body.classList.remove("glisseEnCours");
         const ordreApres = enfants().map(x=>Number(x.dataset.idx));
         if (ordreApres.join() !== ordreAvant.join() && surLacher) surLacher(ordreAvant, ordreApres);
