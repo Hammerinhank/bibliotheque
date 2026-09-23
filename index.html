@@ -380,8 +380,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.39.0";
+const VERSION = "V1.40.0";
 const HISTORIQUE = [
+  { v:"V1.40.0", d:"23/09/2026", l:[
+    "Modèles Gemini : chaque recherche ou test complète la mémoire au lieu de l'écraser ; pour chaque modèle sont conservés le dernier état, le temps de réponse du test, la moyenne des 10 derniers tests et la date.",
+    "Le temps des vraies analyses de photos est aussi mesuré et mémorisé par modèle (moyenne des 10 dernières).",
+    "Temps affichés dans la fenêtre « Trouver un modèle » (triée : modèles qui marchent du plus rapide au plus lent) et dans la liste des modèles des réglages."
+  ]},
   { v:"V1.39.0", d:"23/09/2026", l:[
     "Les listes de livres qui résultent d'une analyse (compléter, remplacer, fusionner, vérification d'appoint, analyse de toute la bibliothèque) sont envoyées sur GitHub automatiquement, dès qu'elles sont appliquées.",
     "Garde-fous : sans réseau, avertissement ; si GitHub a été modifié ailleurs ou si l'envoi ferait disparaître quelque chose, l'envoi automatique est suspendu et expliqué (décision dans ☁️)."
@@ -1946,8 +1951,10 @@ async function interrogerIA(parties, lire, opts){
       continue;
     }
     try{
+      const t0 = performance.now();
       const txt = nom === "gemini" ? await gemini(parties) : await claude(parties);
       const res = lire ? lire(txt) : txt;
+      if (nom === "gemini") enregistrerTempsAnalyse(cfg.modele, Math.round(performance.now() - t0));
       return { res, ia:nom, modele: nom === "gemini" ? cfg.modele : cfg.modeleClaude, echecs };
     }catch(e){
       if (e instanceof SyntaxError) e = new Error("Réponse illisible (pas du JSON valide).");
@@ -2992,10 +2999,44 @@ async function testerModele(id, cle, fournisseur){
   }finally{ clearTimeout(minuteur); }
 }
 
+/* Mémoire des tests de modèles Gemini : chaque test COMPLÈTE la mémoire au lieu de l'écraser.
+   Par modèle : dernier état, temps du dernier test, historique des tests, temps des vraies analyses. */
 function lireTestsModeles(){
   try{ const t = JSON.parse(localStorage.getItem(CLE_MODELES)||"null"); if (t && Array.isArray(t.liste)) return t; }catch(e){}
   return null;
 }
+function ecrireTestsModeles(t){ try{ localStorage.setItem(CLE_MODELES, JSON.stringify(t)); }catch(e){} }
+function enregistrerTestModele(res){
+  const t = lireTestsModeles() || { date:null, liste:[] };
+  const maintenant = new Date().toISOString();
+  let m = t.liste.find(x=>x.id === res.id);
+  if (!m){ m = { id:res.id, nom:res.nom || "" }; t.liste.push(m); }
+  Object.assign(m, { etat:res.etat, detail:res.detail, ms:res.ms, dateTest:maintenant, nom: res.nom || m.nom });
+  m.historique = (m.historique || []).concat([{ date:maintenant, etat:res.etat, ms:res.ms }]).slice(-10);
+  t.date = maintenant;
+  ecrireTestsModeles(t);
+  return m;
+}
+/* temps d'une vraie analyse (photo de rayonnage) réussie avec un modèle */
+function enregistrerTempsAnalyse(id, ms){
+  if (!id || !ms) return;
+  const t = lireTestsModeles() || { date:null, liste:[] };
+  let m = t.liste.find(x=>x.id === id);
+  if (!m){ m = { id, nom:"" }; t.liste.push(m); }
+  m.analyses = (m.analyses || []).concat([{ date:new Date().toISOString(), ms }]).slice(-10);
+  ecrireTestsModeles(t);
+}
+const secondes = (ms)=> ms == null ? "—" : (ms/1000).toFixed(1).replace(".", ",") + " s";
+function vitesseModele(m){
+  if (!m) return "";
+  const morceaux = [];
+  const okTests = (m.historique || []).filter(h=>h.etat === "ok" && h.ms);
+  if (m.etat === "ok" && m.ms) morceaux.push(`test ${secondes(m.ms)}` + (okTests.length > 1 ? ` (moy. ${secondes(okTests.reduce((s,h)=>s+h.ms,0)/okTests.length)} sur ${okTests.length})` : ""));
+  const an = m.analyses || [];
+  if (an.length) morceaux.push(`analyses réelles ~${secondes(an.reduce((s,h)=>s+h.ms,0)/an.length)} (${an.length})`);
+  return morceaux.join(" · ");
+}
+
 
 const ICONE_ETAT = { ok:"✅", aveugle:"👁️‍🗨️", indispo:"🚫", quota:"⏳", refus:"🔒", delai:"⌛", erreur:"❌", attente:"…" };
 
@@ -3035,7 +3076,8 @@ function chercherModeles(cle, surChoix){
     d.dataset.id = m.id;
     d.innerHTML = `<span style="font-size:18px">${ICONE_ETAT[r.etat]||"?"}</span>
       <div class="txtMod"><div class="nomMod">${esc(m.id)}${m.id===cfg.modele?" <span class='detMod'>(actuel)</span>":""}</div>
-      <div class="detMod">${esc(r.detail||"")}${m.nom?" · "+esc(m.nom):""}</div></div>
+      <div class="detMod">${esc(r.detail||"")}${m.nom?" · "+esc(m.nom):""}</div>
+      ${vitesseModele(r) || r.dateTest ? `<div class="detMod">⏱ ${esc(vitesseModele(r) || "—")}${r.dateTest ? " · testé le " + esc(dateFr(r.dateTest)) : ""}</div>` : ""}</div>
       ${r.etat==="ok" ? `<button class="btn vert">Utiliser</button>` : ""}`;
     const b = d.querySelector("button");
     if (b) b.onclick = ()=>adopter(m.id);
@@ -3059,12 +3101,24 @@ function chercherModeles(cle, surChoix){
     if (b) b.onclick = ()=>{ adopter(choix.id); b.remove(); };
   };
 
+  // toute la mémoire des tests, modèles qui marchent du plus rapide au plus lent
+  function afficherMemoire(){
+    const t = lireTestsModeles();
+    if (!t) return;
+    liste.innerHTML = "";
+    t.liste.slice().sort((a, b)=>{
+      const oa = a.etat === "ok" ? 0 : 1, ob = b.etat === "ok" ? 0 : 1;
+      if (oa !== ob) return oa - ob;
+      if (!oa) return (a.ms || 1e9) - (b.ms || 1e9);
+      return rangModele(a.id).localeCompare(rangModele(b.id));
+    }).forEach(x=>liste.appendChild(ligne(x, x)));
+    afficherReco(t.liste);
+  }
   // Affiche le dernier test conservé
   const ancien = lireTestsModeles();
   if (ancien){
     etat.textContent = `Dernier test : ${dateFr(ancien.date)} — ${ancien.liste.filter(x=>x.etat==="ok").length} modèle(s) opérationnel(s) sur ${ancien.liste.length} testé(s). Relancez un test pour mettre à jour.`;
-    ancien.liste.forEach(x=>liste.appendChild(ligne(x, x)));
-    afficherReco(ancien.liste);
+    afficherMemoire();
   } else {
     etat.textContent = "Aucun test encore fait sur cet appareil. « Jusqu'au premier qui marche » est le plus rapide ; « Tout tester » donne le tableau complet.";
   }
@@ -3094,7 +3148,7 @@ function chercherModeles(cle, surChoix){
       progT.textContent = `Testés : ${i} / ${cands.length} — restants : ${cands.length-i} · essai de ${m.id}…`;
       progB.style.width = Math.round(i*100/cands.length) + "%";
       const r = await testerModele(m.id, cle);
-      const res = Object.assign({ id:m.id, nom:m.nom }, r);
+      const res = enregistrerTestModele(Object.assign({ id:m.id, nom:m.nom }, r));
       resultats.push(res);
       liste.appendChild(ligne(m, res));
       if (premierSeul && r.etat === "ok") break;
@@ -3104,8 +3158,10 @@ function chercherModeles(cle, surChoix){
     progB.style.width = cands.length ? Math.round(n*100/cands.length) + "%" : "100%";
     const bons = resultats.filter(x=>x.etat==="ok").length;
     etat.textContent = `${bons} modèle(s) opérationnel(s) sur ${n} testé(s).` + (premierSeul && bons && n<cands.length ? " « Tout tester » pour voir les autres." : "");
-    try{ localStorage.setItem(CLE_MODELES, JSON.stringify({ date:new Date().toISOString(), liste:resultats })); }catch(e){}
-    afficherReco(resultats);
+    afficherMemoire();
+    const memo = lireTestsModeles();
+    if (memo && memo.liste.length > resultats.length)
+      etat.textContent += ` Mémoire : ${memo.liste.filter(x=>x.etat==="ok").length} modèle(s) opérationnel(s) connus au total (les tests précédents sont conservés).`;
     if (surChoix) surChoix(cfg.modele);
     enCours = false; boutonsLancer.forEach(b=>b.disabled = false);
   }
@@ -3128,9 +3184,12 @@ function majSelectModeles(sel, choisi){
   const ko = t ? t.liste.filter(x=>x.etat!=="ok").map(x=>x.id) : [];
   const base = ["gemini-flash-latest","gemini-2.5-flash","gemini-2.5-pro"];
   const tous = [...new Set([choisi || cfg.modele, ...ok, ...base.filter(x=>!ko.includes(x))])].filter(Boolean);
+  const infos = {}; (t ? t.liste : []).forEach(x=>infos[x.id] = x);
   sel.innerHTML = tous.map(m=>{
     const marque = ok.includes(m) ? "✅ " : ko.includes(m) ? "⚠️ " : "";
-    return `<option value="${esc(m)}" ${m===(choisi||cfg.modele)?"selected":""}>${marque}${esc(m)}</option>`;
+    const x = infos[m];
+    const temps = x && x.etat === "ok" && x.ms ? " — " + secondes(x.ms) + ((x.analyses||[]).length ? " / analyse ~" + secondes(x.analyses.reduce((s,h)=>s+h.ms,0)/x.analyses.length) : "") : "";
+    return `<option value="${esc(m)}" ${m===(choisi||cfg.modele)?"selected":""}>${marque}${esc(m)}${temps}</option>`;
   }).join("");
 }
 
@@ -5458,9 +5517,7 @@ function ouvrirReglages(ongletInitial){
     st.textContent = (ICONE_ETAT[r.etat]||"") + " " + m + " : " + r.detail + (r.etat === "ok" ? " — utilisable pour les analyses." : " — choisissez un autre modèle ou touchez « Trouver un modèle qui marche ».");
     if (r.etat === "ok") delete iaEnPanne.gemini;
     // le résultat met à jour la marque ✅ / ⚠️ de la liste
-    const t = lireTestsModeles() || { date:new Date().toISOString(), liste:[] };
-    t.liste = t.liste.filter(x=>x.id !== m).concat([Object.assign({ id:m, nom:m }, r)]);
-    try{ localStorage.setItem(CLE_MODELES, JSON.stringify(t)); }catch(e){}
+    enregistrerTestModele(Object.assign({ id:m, nom:"" }, r));
     majSelectModeles(selModele, m);
   };
   f.querySelector("#rChercher").onclick = ()=>{
