@@ -4267,6 +4267,18 @@
        "rang": "derriere"
       },
       {
+       "id": "muejmr8exnjse",
+       "titre": "Le Sursis",
+       "auteur": "J.P. Sartre",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
        "id": "muef9o75z1vkp",
        "titre": "Gomorra",
        "auteur": "Roberto Saviano",
@@ -4276,6 +4288,18 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muejmr8eo0u2p",
+       "titre": "L'Affaire Collini",
+       "auteur": "Ferdinand von Schirach",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
        "rang": "derriere"
       },
       {
@@ -4300,6 +4324,30 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "muejmr8elnau5",
+       "titre": "Le champ",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "derriere"
+      },
+      {
+       "id": "muejmr8eg3ek1",
+       "titre": "L'un d'entre nous",
+       "auteur": "Åsne Seierstad",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
        "rang": "derriere"
       },
       {
@@ -4732,6 +4780,22 @@
         "n2": 15,
         "date": "2026-09-23T19:59:52.678Z"
        }
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muejko3xqtzoi.jpg",
+       "envoye": true,
+       "maj": "2026-09-23T20:15:45.709Z",
+       "id": "muejko3xqtzoi",
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 3,
+        "date": "2026-09-23T20:16:21.081Z"
+       },
+       "verif": "2026-09-23T20:16:46.857Z"
       }
      ],
      "photo2": {
@@ -7531,7 +7595,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T20:00:04.085Z",
+ "maj": "2026-09-23T20:16:47.815Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
