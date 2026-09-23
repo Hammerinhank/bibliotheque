@@ -380,8 +380,20 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.37.0";
+const VERSION = "V1.39.0";
 const HISTORIQUE = [
+  { v:"V1.39.0", d:"23/09/2026", l:[
+    "Les listes de livres qui résultent d'une analyse (compléter, remplacer, fusionner, vérification d'appoint, analyse de toute la bibliothèque) sont envoyées sur GitHub automatiquement, dès qu'elles sont appliquées.",
+    "Garde-fous : sans réseau, avertissement ; si GitHub a été modifié ailleurs ou si l'envoi ferait disparaître quelque chose, l'envoi automatique est suspendu et expliqué (décision dans ☁️)."
+  ]},
+  { v:"V1.38.0", d:"23/09/2026", l:[
+    "Chaque photo (devant, derrière, appoint, troncature) est envoyée sur GitHub dès qu'elle est prise ; sans réseau ni jeton, un avertissement le signale et elle partira au prochain envoi ☁️.",
+    "Chaque résultat d'analyse de Gemini ou de Claude (analyse d'un compartiment, lecture d'un appoint, copier-coller) est sauvegardé sur GitHub dès son arrivée, dans analyses/… ; sans réseau, il est gardé de côté et part au prochain envoi.",
+    "Nouveau bouton « 📜 Résultats sauvegardés » dans un compartiment : réutiliser un résultat passé sans redemander à l'IA."
+  ]},
+  { v:"V1.37.1", d:"23/09/2026", l:[
+    "Scan des photos : « Réaffecter » et « Marquer non associée » côte à côte sur la même ligne, légèrement espacés, pour éviter d'appuyer sur l'un à la place de l'autre."
+  ]},
   { v:"V1.37.0", d:"23/09/2026", l:[
     "Scan des photos du dépôt : bouton « ✖ Marquer non associée » sur chaque photo orpheline (orange) qui n'a jamais été à la bonne place ; elle passe en rouge et sort des réaffectations. Réversible (« ↩ Remettre en orpheline »). Marque mémorisée avec les données (envoyée sur GitHub)."
   ]},
@@ -1406,6 +1418,177 @@ function exporterFichier(){
 }
 
 /* ====================================================================
+   SAUVEGARDE IMMÉDIATE : photos dès qu'elles sont prises, résultats d'analyse dès qu'ils arrivent
+   ==================================================================== */
+const CLE_JOURNAL = "biblio_journal_attente";      // résultats d'analyse pas encore envoyés (pas de réseau)
+
+/* Avertissement bien visible quand une sauvegarde immédiate n'a pas pu se faire. */
+function avertirNonSauve(quoi, raison){
+  // plusieurs échecs d'affilée (analyse de toute une bibliothèque sans réseau) : un seul avertissement à la fois
+  const deja = document.getElementById("avertNonSauve");
+  if (deja){ deja.dataset.n = String(Number(deja.dataset.n || 1) + 1); deja.querySelector(".nbAutres").textContent = `+ ${Number(deja.dataset.n) - 1} autre(s) élément(s) dans le même cas.`; return; }
+  modale({ titre:"⚠️ Pas encore sauvegardé sur GitHub",
+    html:`<div id="avertNonSauve" data-n="1"><div><b>${esc(quoi)}</b> n'existe pour l'instant que <b>sur cet appareil</b>.</div>
+          <div class="aide">${esc(raison)}</div>
+          <div class="aide">Dès que le réseau revient, ouvrez ☁️ et envoyez : ${quoi.startsWith("Photo") ? "la photo partira" : quoi.startsWith("Résultat") ? "le résultat partira" : "tout partira"} avec le reste.</div>
+          <div class="aide nbAutres" style="font-weight:600"></div></div>`,
+    boutons:[{texte:"Compris", classe:"principal"}] });
+}
+function raisonEchec(e){
+  if (!ghPret()) return "Aucun jeton GitHub n'est enregistré (réglages ⚙️) : l'envoi automatique est impossible.";
+  if (typeof navigator !== "undefined" && navigator.onLine === false) return "Pas de réseau.";
+  return "L'envoi a échoué" + (e && e.message ? " : " + e.message : "") + ".";
+}
+
+/* Envoie tout de suite une photo qui vient d'être prise ou modifiée. */
+async function envoyerPhotoAuto(b, k, champ, quoi){
+  if (!ghPret() || navigator.onLine === false){ avertirNonSauve(quoi, raisonEchec()); return false; }
+  try{
+    await televerserPhoto(b, k, champ);
+    toast(quoi + " : sauvegardée sur GitHub ✓", 3000);
+    return true;
+  }catch(e){ avertirNonSauve(quoi, raisonEchec(e)); return false; }
+}
+
+/* Journal des résultats d'analyse : un fichier par résultat, jamais écrasé.
+   analyses/<bibliothèque>/<compartiment>/<date>-<genre>.json */
+function journalEnAttente(){ try{ return JSON.parse(localStorage.getItem(CLE_JOURNAL) || "[]"); }catch(e){ return []; } }
+function ecrireJournalEnAttente(l){ try{ localStorage.setItem(CLE_JOURNAL, JSON.stringify(l)); }catch(e){} }
+
+async function journaliserResultat(b, k, genre, contenu){
+  const date = new Date().toISOString();
+  const nomGenre = genre === "appoint" ? "appoint-" + (contenu.appoint || "") + (contenu.mode === "ordre" ? "-ordre" : "") : "analyse-" + (contenu.portee || "deux");
+  const chemin = `analyses/${b.id}/${k}/${date.replace(/[:.]/g, "-")}-${nomGenre}.json`;
+  const doc = Object.assign({ date, bibliotheque:b.id, nomBibliotheque:b.nom, compartiment:k, genre }, contenu);
+  const quoi = (genre === "appoint" ? "Résultat de la lecture de l'appoint" : "Résultat de l'analyse") + " de " + lib(k);
+  if (!ghPret() || navigator.onLine === false){
+    ecrireJournalEnAttente(journalEnAttente().concat([{ chemin, doc }]));
+    avertirNonSauve(quoi, raisonEchec() + " Il est gardé de côté et partira au prochain envoi ☁️.");
+    return false;
+  }
+  try{
+    await ghEcrire(chemin, enBase64Utf8(JSON.stringify(doc, null, 1)), quoi);
+    viderJournalEnAttente();                 // profite du réseau pour envoyer ceux restés de côté
+    return true;
+  }catch(e){
+    ecrireJournalEnAttente(journalEnAttente().concat([{ chemin, doc }]));
+    avertirNonSauve(quoi, raisonEchec(e) + " Il est gardé de côté et partira au prochain envoi ☁️.");
+    return false;
+  }
+}
+async function viderJournalEnAttente(pg){
+  let l = journalEnAttente();
+  if (!l.length || !ghPret()) return 0;
+  let n = 0;
+  for (let i = 0; i < l.length; i++){
+    const x = l[i];
+    if (pg) pg.maj(i, l.length, `Résultat d'analyse ${i + 1} / ${l.length} — reste ${l.length - i}`);
+    try{ await ghEcrire(x.chemin, enBase64Utf8(JSON.stringify(x.doc, null, 1)), "Résultat d'analyse " + x.doc.compartiment); n++; x.fait = true; }
+    catch(e){ break; }
+  }
+  ecrireJournalEnAttente(l.filter(x=>!x.fait));
+  return n;
+}
+
+/* Liste des résultats sauvegardés d'un compartiment, pour les réutiliser sans redemander à l'IA. */
+async function fenetreResultatsSauves(b, k){
+  const locaux = journalEnAttente().filter(x=>x.doc.bibliotheque === b.id && x.doc.compartiment === k).map(x=>({ nom:x.chemin.split("/").pop(), doc:x.doc, local:true }));
+  let distants = [];
+  if (ghLisible()){
+    try{
+      const r = await fetch(ghUrl(`analyses/${b.id}/${k}`) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), { headers: ghEntetes() });
+      if (r.ok) distants = (await r.json()).filter(x=>x.type === "file" && /\.json$/.test(x.name)).map(x=>({ nom:x.name, chemin:x.path }));
+    }catch(e){ toast("Liste GitHub illisible : " + e.message, 5000); }
+  }
+  const tous = locaux.concat(distants).sort((x, y)=>y.nom.localeCompare(x.nom));
+  const decrire = (nom)=>{
+    const m = nom.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d)-(\d\d)/);
+    const quand = m ? `${m[3]}/${m[2]}/${m[1]} à ${m[4]}:${m[5]}` : nom;
+    let quoi = "résultat";
+    if (/-analyse-deux/.test(nom)) quoi = "analyse des deux rangs";
+    else if (/-analyse-devant/.test(nom)) quoi = "analyse du rang de devant";
+    else if (/-analyse-derriere/.test(nom)) quoi = "analyse du rang de derrière";
+    else if (/-appoint-/.test(nom)) quoi = "lecture d'une photo d'appoint" + (/-ordre\.json$/.test(nom) ? " (ordre respecté)" : "");
+    return { quand, quoi };
+  };
+  const f = modale({ titre:"Résultats sauvegardés — " + lib(k),
+    html: tous.length
+      ? `<div class="aide" style="margin-top:0">Chaque résultat de Gemini ou de Claude est sauvegardé dès son arrivée. Réutilisez-en un sans redemander à l'IA : il passe par les mêmes fenêtres de choix (compléter, remplacer, fusionner…).</div>
+         ${tous.map((x, i)=>{ const d = decrire(x.nom); return `<div class="prop" style="display:flex;gap:10px;align-items:center">
+            <div style="flex:1"><div class="t">${esc(d.quand)}</div><div class="chg">${esc(d.quoi)}${x.local ? " — <b>pas encore sur GitHub</b>" : ""}</div></div>
+            <button class="btn" data-j="${i}">Réutiliser</button></div>`; }).join("")}`
+      : `<div>Aucun résultat sauvegardé pour ce compartiment.</div><div class="aide">Les résultats sont sauvegardés à partir de la V1.38.0.</div>`,
+    boutons:[{texte:"Fermer"}] });
+  f.querySelectorAll("[data-j]").forEach(bt=>bt.onclick = async ()=>{
+    const x = tous[Number(bt.dataset.j)];
+    let doc = x.doc;
+    if (!doc){
+      try{ doc = JSON.parse(await ghLireTexte(x.chemin)); }
+      catch(e){ toast("Lecture impossible : " + e.message, 5000); return; }
+    }
+    f.remove();
+    const cs = b.cases[k] = b.cases[k] || { livres:[] };
+    const source = Object.assign({ ia:"gemini", modele:"", echecs:[] }, doc.source || {}, { modele: ((doc.source && doc.source.modele) || "") + " — résultat sauvegardé du " + decrire(x.nom).quand });
+    if (doc.genre === "appoint"){
+      const champ = PRE_APPOINT + (doc.appoint || "");
+      if (!photoObj(cs, champ)){ toast("La photo d'appoint de ce résultat n'existe plus dans ce compartiment.", 5000); return; }
+      const lus = (doc.lus || []).map(l=>Object.assign({}, l));
+      if (doc.mode === "ordre") fenetreFusionAppoint(b, k, champ, lus, source);
+      else fenetreVerifAppoint(b, k, champ, lus, source);
+    } else {
+      const livres = (doc.livres || []).map(l=>Object.assign({}, l, { id:uid() }));
+      livres.source = source;
+      finaliserPortee(livres, doc.portee || porteeParDefaut(cs), cs);
+      appliquerLivresCompartiment(b, k, livres);
+    }
+  });
+}
+
+/* Envoi automatique des DONNÉES (listes de livres de chaque rangée) juste après une analyse appliquée.
+   Garde-fous : pas de réseau → avertissement ; GitHub modifié ailleurs ou envoi avec pertes → envoi suspendu, on explique. */
+let envoiAutoEnCours = null;
+async function envoyerDonneesAuto(quoi){
+  if (envoiAutoEnCours){ try{ await envoiAutoEnCours; }catch(e){} }
+  envoiAutoEnCours = (async ()=>{
+    if (!ghPret() || navigator.onLine === false){ avertirNonSauve(quoi, raisonEchec()); return false; }
+    try{
+      const txt = await ghLireTexte(FICHIER_JSON);
+      if (txt){
+        const j = JSON.parse(txt);
+        const connue = localStorage.getItem(CLE_SYNC);
+        const pertes = pertesEnvoi(data, j);
+        if ((j.maj && connue && j.maj !== connue) || pertes.length){
+          modale({ titre:"⚠️ Sauvegarde automatique suspendue",
+            html:`<div><b>${esc(quoi)}</b> est enregistré sur cet appareil, mais n'a pas été envoyé automatiquement :</div>
+                  <ul>${j.maj && connue && j.maj !== connue ? "<li>la version GitHub a été modifiée ailleurs (autre appareil ou autre fenêtre) depuis votre dernier échange ;</li>" : ""}
+                  ${pertes.map(x=>`<li>l'envoi ferait disparaître des éléments de GitHub — ${esc(x)} ;</li>`).join("")}</ul>
+                  <div class="aide">Ouvrez ☁️ pour comparer et décider en connaissance de cause.</div>`,
+            boutons:[{texte:"Plus tard"}, {texte:"Ouvrir ☁️", classe:"principal", action:()=>ouvrirSync()}] });
+          return false;
+        }
+      }
+      // photos et résultats restés de côté, puis les données
+      for (const p of photosEnAttente()){ try{ await televerserPhoto(p.bib, p.cle, p.champ); }catch(e){} }
+      if (journalEnAttente().length) await viderJournalEnAttente();
+      data.maj = new Date().toISOString();
+      await ghEcrire(FICHIER_JSON, enBase64Utf8(JSON.stringify(data, null, 1)), "Bibliothèques — " + quoi + " — " + dateFr());
+      localStorage.setItem(CLE_SYNC, data.maj);
+      sale = photosEnAttente().length > 0; etatSync = "ok";
+      sauver(false);
+      toast(quoi + " : sauvegardé sur GitHub ✓", 3000);
+      return true;
+    }catch(e){
+      etatSync = "echec"; majBandeau();
+      avertirNonSauve(quoi, raisonEchec(e));
+      return false;
+    }
+  })();
+  const r = await envoiAutoEnCours;
+  envoiAutoEnCours = null;
+  return r;
+}
+
+/* ====================================================================
    HISTORIQUE GITHUB : restaurer une version précédente de bibliotheques.json
    ==================================================================== */
 async function ouvrirHistoriqueGitHub(){
@@ -1539,6 +1722,7 @@ async function envoyerVersGitHub(){
   const pg = fenetreProgres("Envoi vers GitHub");
   let fait = 0;
   try{
+    if (journalEnAttente().length) await viderJournalEnAttente(pg);
     for (const p of attente){
       const ph = photoObj(p.cs, p.champ);
       const quoi = estAppoint(p.champ) ? " (appoint " + numeroAppoint(p.cs, p.champ) + ")" : (p.champ === "photo2" ? " (derrière)" : "");
@@ -1934,12 +2118,15 @@ function appliquerReponseClaude(a, txt, silencieux){
     const [idA, mode] = String(a.appoint || "").split("|");
     const champ = PRE_APPOINT + idA;
     if (!photoObj(b.cases[a.cle], champ)){ toast("Cette photo d'appoint n'existe plus.", 5000); return true; }
-    if (mode === "ordre") fenetreFusionAppoint(b, a.cle, champ, lusDepuisReponse(j), source);
-    else fenetreVerifAppoint(b, a.cle, champ, lusDepuisReponse(j), source);
+    const lusM = lusDepuisReponse(j);
+    journaliserResultat(b, a.cle, "appoint", { appoint:idA, mode: mode || "", source:{ ia, modele:source.modele }, lus:lusM });
+    if (mode === "ordre") fenetreFusionAppoint(b, a.cle, champ, lusM, source);
+    else fenetreVerifAppoint(b, a.cle, champ, lusM, source);
     return true;
   }
   const portee = a.portee || (a.deux ? "deux" : (a.avecAvant ? "devant" : "derriere"));
   const livres = finaliserPortee(livresDepuisReponse(j, a.deux, a.avecAvant, source), portee, b.cases[a.cle]);
+  journaliserResultat(b, a.cle, "analyse", { portee, source:{ ia, modele:source.modele }, livres: livres.map(l=>Object.assign({}, l)) });
   localStorage.removeItem(CLE_ATTENTE_CLAUDE);
   majAttenteClaude();
   appliquerLivresCompartiment(b, a.cle, livres);
@@ -1997,7 +2184,8 @@ function choisirPortee(b, k){
    - un rang analysé qui avait déjà des livres donne lieu à une comparaison et à un choix. */
 function appliquerLivresCompartiment(b, k, livres){
   const cs = b.cases[k];
-  const fin = ()=>{ sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
+  const fin = ()=>{ sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio();
+    envoyerDonneesAuto("Listes de livres de " + lib(k)); };
   if (!livres.length){ toast(NOM_IA[(livres.source||{}).ia||"gemini"] + " n'a identifié aucun livre." + texteSource(livres.source), 5000); return; }
   const portee = livres.portee || porteeParDefaut(cs);
   const concernes = portee === "deux" ? ["devant","derriere"] : [portee];
@@ -2321,6 +2509,7 @@ function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
       cs.livres = P.r === "devant" ? res[P.r].concat(autres) : autres.concat(res[P.r]);
       marquer();
       toast(`Appoint ${num} : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+      envoyerDonneesAuto("Listes de livres de " + lib(k));
     },
     surAnnuler: marquer
   });
@@ -2420,7 +2609,9 @@ async function lireAppoint(bib, cle, champ, opts){
   const parties = [{ text: q + (a.legende ? "\n\nIndication de la personne qui a pris la photo : " + a.legende : "") }];
   parties.push({ inline_data:{ mime_type:"image/jpeg", data: base64Seul(img) } });
   const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
-  return { lus: lusDepuisReponse(rep.res), source:{ ia:rep.ia, modele:rep.modele, echecs:rep.echecs } };
+  const lus = lusDepuisReponse(rep.res);
+  journaliserResultat(bib, cle, "appoint", { appoint: idAppoint(champ), mode: (opts && opts.mode) || "", source:{ ia:rep.ia, modele:rep.modele }, lus });
+  return { lus, source:{ ia:rep.ia, modele:rep.modele, echecs:rep.echecs } };
 }
 
 function lusDepuisReponse(j){
@@ -2698,6 +2889,7 @@ function fenetreVerifAppoint(b, k, champ, lus, source){
         if (aRetirer.size){ cs.livres = cs.livres.filter(lv=>!aRetirer.has(lv)); ret = aRetirer.size; }
         marquer();
         toast(`${ajo} ajout(s), ${cor} correction(s), ${ret} retrait(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+        if (ajo + cor + ret) envoyerDonneesAuto("Listes de livres de " + lib(k));
       }}
     ],
     surFermeture:()=>{ marquer(); }
@@ -2988,7 +3180,9 @@ async function analyserPhoto(bib, cle, opts){
   let rep;
   try{ rep = await interrogerIA(parties, jsonDepuisTexte, opts); }
   catch(e){ e.portee = portee; throw e; }
-  return finaliserPortee(livresDepuisReponse(rep.res, deux, !!avant, { ia:rep.ia, modele:rep.modele, echecs:rep.echecs }), portee, cs);
+  const livresA = finaliserPortee(livresDepuisReponse(rep.res, deux, !!avant, { ia:rep.ia, modele:rep.modele, echecs:rep.echecs }), portee, cs);
+  journaliserResultat(bib, cle, "analyse", { portee, source:{ ia:rep.ia, modele:rep.modele }, livres: livresA.map(l=>Object.assign({}, l)) });
+  return livresA;
 }
 
 /* Transforme la réponse JSON d'une IA en livres (commun à Gemini, Claude par clé et Claude par copier-coller). */
@@ -3487,6 +3681,7 @@ function ouvrirCompartiment(b, k){
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
            <button class="btn principal plein" id="cAppointOrdre" style="margin-top:8px;display:none">🔀 Vérifier avec cette photo (ordre respecté)</button>
+           <button class="btn plein" id="cResultats" style="margin-top:8px">📜 Résultats d'analyse sauvegardés</button>
            <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste. <b>🔎 Vérifier</b> : chaque livre lu est cherché dans les listes des rangées 1 et 2 (titre, auteur, voisinage). <b>🔀 Ordre respecté</b> : l'app repère la zone de la rangée que couvre la photo et aligne les livres un à un dans l'ordre ; vous corrigez au besoin l'ordre de deux voisins avec la poignée ≡. Rien n'est modifié sans votre accord.</div>
            <div id="zoneUnRang" style="margin-top:8px"></div>
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
@@ -3616,10 +3811,7 @@ function ouvrirCompartiment(b, k){
   };
 
   const envoyerSiPossible = async (quoi)=>{
-    if (!ghPret()){ toast(quoi + " sur cet appareil. Ouvrez ☁️ pour l'envoyer sur GitHub."); return; }
-    toast(quoi + " : envoi vers GitHub…");
-    try{ await televerserPhoto(b, k, face); toast(quoi + " et envoyée sur GitHub."); }
-    catch(e){ toast(quoi + " sur cet appareil ; envoi GitHub impossible (" + e.message + ").", 6000); }
+    await envoyerPhotoAuto(b, k, face, quoi);
     if (f.isConnected) majPhoto();
   };
 
@@ -3843,20 +4035,22 @@ function ouvrirCompartiment(b, k){
       avantTroncature = null;
       face = cible; lignesVisibles = false;
       sauver(); majPhoto(); rendreBiblio();
-      toast((estAppoint(cible) ? "Photo d'appoint " + numeroAppoint(cs, cible) + " enregistrée"
-             : face === "photo2" ? "Photo de derrière enregistrée" : "Photo enregistrée")
-            + " sur cet appareil. Ouvrez ☁️ quand vous voudrez la sauvegarder.");
+      const quoiP = estAppoint(cible) ? "Photo d'appoint " + numeroAppoint(cs, cible) : face === "photo2" ? "Photo de derrière" : "Photo";
+      toast(quoiP + " enregistrée : envoi vers GitHub…", 2500);
+      await envoyerPhotoAuto(b, k, cible, quoiP);
+      if (f.isConnected) majPhoto();
     }catch(e){ toast("Photo illisible : " + e.message, 5000); }
     ev.target.value = "";
   };
 
+  f.querySelector("#cResultats").onclick = ()=>fenetreResultatsSauves(b, k);
   f.querySelector("#cAppointOrdre").onclick = async ()=>{
     if (!estAppoint(face)) return;
     const champ = face;
     const btnO = f.querySelector("#cAppointOrdre");
     btnO.disabled = true; btnO.textContent = "Lecture de la photo…";
     try{
-      const r = await lireAppoint(b, k, champ, { manuel:true });
+      const r = await lireAppoint(b, k, champ, { manuel:true, mode:"ordre" });
       fenetreFusionAppoint(b, k, champ, r.lus, r.source);
     }catch(e){
       if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle", idAppoint(champ) + "|ordre"); }
@@ -4038,6 +4232,7 @@ async function analyserListe(b, choix, titre){
       if (livres.source) parIA[livres.source.ia]++;
       trouves += livres.length;
       sauver();
+      if ((fait + 1) % 5 === 0){ pg.maj(fait + 1, choix.length, "Sauvegarde sur GitHub…"); await envoyerDonneesAuto("Analyse de « " + b.nom + " » (" + (fait + 1) + " / " + choix.length + ")"); }
     }catch(e){
       // Modèle retiré / quota / refus : inutile de continuer, toutes les photos échoueraient.
       if (e.modele){ erreurBloquante = e; break; }
@@ -4047,6 +4242,7 @@ async function analyserListe(b, choix, titre){
     pg.maj(fait, choix.length, "");
   }
   pg.fermer();
+  if (fait) envoyerDonneesAuto("Analyse de « " + b.nom + " »");
   if (erreurBloquante){
     rendreBiblio();
     toast(`Analyse arrêtée après ${fait} photo(s) sur ${choix.length}.`, 5000);
@@ -5458,10 +5654,11 @@ async function scannerPhotosDepot(){
     zone.innerHTML = vis.length ? vis.map(l=>{
       const i = lignes.indexOf(l);
       const bouton = l.coul === "orange"
-        ? (biblio(l.bibId)
-            ? `<button class="btn reaff" data-r="${i}">↩️ Réaffecter à ${esc(nomCaseCourt(l.k))} · ${esc(libelleChamp(l.champ))}</button>`
-            : `<div class="aide">Réaffectation impossible : la bibliothèque n'existe plus.</div>`) +
-          ` <button class="btn" data-na="${i}" style="margin-top:4px">✖ Marquer non associée</button>`
+        ? `<div style="display:flex;gap:14px;align-items:stretch;margin-top:4px">` +
+          (biblio(l.bibId)
+            ? `<button class="btn reaff" data-r="${i}" style="flex:1;margin:0">↩️ Réaffecter à ${esc(nomCaseCourt(l.k))} · ${esc(libelleChamp(l.champ))}</button>`
+            : `<div class="aide" style="flex:1;margin:0">Réaffectation impossible : la bibliothèque n'existe plus.</div>`) +
+          `<button class="btn" data-na="${i}" style="flex:1;margin:0">✖ Marquer non associée</button></div>`
         : (l.marquee ? `<button class="btn" data-ra="${i}">↩ Remettre en orpheline</button>` : "");
       return `<div class="scanLigne ${l.coul}" data-i="${i}"><span class="pt"></span>
          <div class="txt"><span class="qui">${esc(l.qui)}</span><br>${esc(l.detail)}<br>
