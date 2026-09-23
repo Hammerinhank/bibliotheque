@@ -370,8 +370,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.30.1";
+const VERSION = "V1.31.0";
 const HISTORIQUE = [
+  { v:"V1.31.0", d:"23/09/2026", l:[
+    "Contrôle par appoints : la fenêtre donne toujours la liste complète de ce que l'IA a lu sur les photos d'appoint, titre par titre, avec pour chacun : ✅ déjà relevé (et sous quel titre), 🆕 absent de la liste, ou ⚠️ rapprochement douteux.",
+    "Tout livre lu et absent de la liste peut être ajouté d'un geste, même si l'IA ne l'a pas proposé ; les rapprochements douteux sont proposés à l'ajout mais décochés.",
+    "L'IA doit désormais recopier le titre tel qu'elle le lit (et non un simple numéro), ce qui permet de vérifier ses rapprochements."
+  ]},
   { v:"V1.30.1", d:"23/09/2026", l:[
     "Bouton « 🔎 Contrôler la liste » renommé « 🔎 Compléter / vérifier la liste avec les appoints », avec une ligne d'explication dessous.",
     "Bouton « ➕ Appoint » placé sous la liste des appoints, à droite, un peu espacé et de même largeur."
@@ -1921,20 +1926,44 @@ function listeLivresPourIA(cs){
 
 /* Ajouté à la question (même personnalisée) : l'IA liste aussi tous les livres qu'elle lit, pour distinguer « déjà relevés » et « nouveaux ». */
 const APPOINT_VUS = `
-En plus de "corrections", ajoute au même objet JSON une clé "vus" : la liste de TOUS les livres que tu lis sur les photos d'appoint. Pour un livre qui figure dans la liste ci-dessous, donne seulement son numéro "i" ; pour un livre absent de la liste, donne "titre" et "auteur" (et propose-le aussi en "ajouter"). Exemple : {"corrections":[...],"vus":[{"i":3},{"i":7},{"titre":"...","auteur":"..."}]}`;
+En plus de "corrections", ajoute au même objet JSON une clé "vus" : la liste de TOUS les livres dont tu lis la tranche ou la couverture sur les photos d'appoint, et UNIQUEMENT ceux-là (ne recopie jamais la liste ci-dessous). Pour chacun :
+- "titre" et "auteur" : tels que tu les LIS sur la photo (obligatoire, même si le livre est dans la liste) ;
+- "i" : le numéro du livre de la liste ci-dessous s'il s'agit certainement du même livre ; sinon, n'indique pas "i" (et propose le livre en "ajouter").
+Exemple : {"corrections":[...],"vus":[{"titre":"Le Gardien des ruines","auteur":"François Nourissier","i":3},{"titre":"La Japolyonnaise","auteur":"Monique Pentissard"}]}`;
 
-/* Livres déjà relevés que l'IA dit avoir vus sur les photos d'appoint. */
+/* ressemblance grossière entre deux titres (0 à 1) : mots communs */
+function ressemblanceTitres(a, b){
+  const A = normaliser(a), B = normaliser(b);
+  if (!A || !B) return 0;
+  if (A === B || A.includes(B) || B.includes(A)) return 1;
+  const ma = A.split(" ").filter(m=>m.length > 2), mb = new Set(B.split(" ").filter(m=>m.length > 2));
+  if (!ma.length || !mb.size) return 0;
+  return ma.filter(m=>mb.has(m)).length / Math.max(ma.length, mb.size);
+}
+
+/* Ce que l'IA a lu sur les photos d'appoint : [{ titre, auteur, cible (livre de la liste ou null), douteux }] */
 function vusDepuisReponse(j, cs){
   const livres = cs.livres || [];
-  const out = new Set();
+  const out = [];
   (Array.isArray(j && j.vus) ? j.vus : []).forEach(v=>{
-    const i = Number(v && v.i);
-    if (Number.isInteger(i) && i >= 0 && i < livres.length) out.add(livres[i]);
-    else if (v && v.titre){ const t = normaliser(v.titre); const lv = livres.find(x=>normaliser(x.titre) === t); if (lv) out.add(lv); }
+    if (!v) return;
+    const titre = String(v.titre||"").trim(), auteur = String(v.auteur||"").trim();
+    const i = Number(v.i);
+    let cible = Number.isInteger(i) && i >= 0 && i < livres.length ? livres[i] : null;
+    if (!cible && titre){ const t = normaliser(titre); cible = livres.find(x=>normaliser(x.titre) === t) || null; }
+    if (!titre && !cible) return;
+    // un numéro donné sans titre lu, ou avec un titre qui ne ressemble pas : à vérifier
+    const douteux = !!cible && (!titre || ressemblanceTitres(titre, cible.titre) < 0.5);
+    out.push({ titre, auteur, cible, douteux });
   });
-  (Array.isArray(j && j.corrections) ? j.corrections : []).forEach(x=>{
-    const i = Number(x && x.i);
-    if (x && !/retir|suppr|ajout/i.test(String(x.action||"")) && Number.isInteger(i) && i >= 0 && i < livres.length) out.add(livres[i]);
+  return out;
+}
+function fusionnerVus(liste){
+  const vus = new Set(), out = [];
+  liste.forEach(v=>{
+    const c = normaliser(v.titre) + "|" + (v.cible ? (v.cible.id || v.cible.titre) : "");
+    if (vus.has(c)) return;
+    vus.add(c); out.push(v);
   });
   return out;
 }
@@ -1946,7 +1975,7 @@ async function controlerAvecAppoints(bib, cle, opts){
   if (!app.length) throw new Error("Aucune photo d'appoint sur ce compartiment.");
   const LOT = 3;
   const propositions = [];
-  const vus = new Set();
+  const vus = [];
   let source = null;
   const pg = app.length > LOT ? fenetreProgres("Contrôle par les photos d'appoint") : null;
   let fait = 0;
@@ -1964,12 +1993,12 @@ async function controlerAvecAppoints(bib, cle, opts){
       const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
       source = { ia:rep.ia, modele:rep.modele, echecs:rep.echecs };
       propositionsDepuisReponse(rep.res, cs).forEach(p=>propositions.push(p));
-      vusDepuisReponse(rep.res, cs).forEach(lv=>vus.add(lv));
+      vusDepuisReponse(rep.res, cs).forEach(v=>vus.push(v));
       fait += tranche.length;
       if (pg) pg.maj(fait, app.length, "");
     }
   } finally { if (pg) pg.fermer(); }
-  return { propositions: fusionnerPropositions(propositions), source, vus };
+  return { propositions: fusionnerPropositions(propositions), source, vus: fusionnerVus(vus) };
 }
 
 const CHAMPS_PROP = ["titre","auteur","annee","certitude","rang","remarque"];
@@ -2024,7 +2053,7 @@ function fusionnerPropositions(props){
    Rien n'est appliqué sans être coché. */
 function validerPropositions(b, k, props, source, vus){
   const cs = b.cases[k];
-  vus = vus || new Set();
+  vus = Array.isArray(vus) ? vus : [];
   const marquerControle = ()=>{
     cs.controle = { maj:new Date().toISOString(), ia:(source&&source.ia)||"gemini",
       modele:(source&&source.modele)||"", manuel:!!(source&&source.manuel), photos:(cs.appoints||[]).length };
@@ -2038,20 +2067,23 @@ function validerPropositions(b, k, props, source, vus){
     delete p.champs.rang;
     return Object.keys(p.champs).length > 0;
   });
+  // tout livre lu sur la photo et absent de la liste (ou rapproché de façon douteuse) peut être ajouté, même si l'IA ne l'a pas proposé
+  const dejaProp = new Set(props.filter(p=>p.action === "ajouter").map(p=>normaliser(p.champs.titre)));
+  const dansListe = new Set((cs.livres||[]).map(lv=>normaliser(lv.titre)));
+  vus.forEach(v=>{
+    if (!v.titre || (v.cible && !v.douteux)) return;
+    const t = normaliser(v.titre);
+    if (dejaProp.has(t) || dansListe.has(t)) return;
+    dejaProp.add(t);
+    props.push({ action:"ajouter", cible:null, champs:{ titre:v.titre, auteur:v.auteur },
+      motif: v.cible ? `Lu sur la photo ; l'IA l'a rapproché de « ${v.cible.titre} », ce qui paraît douteux` : "Lu sur la photo d'appoint, absent de la liste",
+      decoche: !!v.cible });
+  });
   const ajouts = props.filter(p=>p.action === "ajouter");
   const corrections = props.filter(p=>p.action === "corriger");
   const retraits = props.filter(p=>p.action === "retirer");
-  const confirmes = [...vus];
-
-  if (!props.length){
-    marquerControle(); sauver(); rafraichir();
-    modale({ titre:"Contrôle terminé",
-      html:`<div>Rien de nouveau : la photo d'appoint ne montre aucun livre qui manque à la liste, et ne signale aucune erreur.</div>
-            ${confirmes.length ? `<div class="aide">${confirmes.length} livre(s) déjà relevé(s) reconnu(s) sur la photo.</div>` : ""}
-            <div class="aide">${esc(texteSource(source).trim() || "")}</div>`,
-      boutons:[{texte:"Fermer"}]});
-    return;
-  }
+  const confirmes = vus.filter(v=>v.cible && !v.douteux);
+  const nbLus = vus.length || (confirmes.length + ajouts.length);
 
   // rangée choisie pour chaque ajout (proposition de l'IA si deux rangées, sinon rangée 1)
   const rangAjout = ajouts.map(p=> deuxRangees && p.champs.rang === "derriere" ? "derriere" : "devant");
@@ -2068,7 +2100,7 @@ function validerPropositions(b, k, props, source, vus){
   const htmlAjouts = ajouts.map((p,i)=>carte(p, props.indexOf(p),
     `<div class="t">${esc(p.champs.titre)}</div>
      <div class="chg">${esc(p.champs.auteur||"auteur inconnu")}${p.champs.annee?" · "+esc(p.champs.annee):""}</div>
-     ${boutonsRangee(i)}`, true)).join("");
+     ${boutonsRangee(i)}`, !p.decoche)).join("");
   const htmlCorr = corrections.map(p=>carte(p, props.indexOf(p),
     `<div class="t">${esc(p.cible.titre)} <span class="aide" style="font-weight:400">(${nomRangee(p.cible)})</span></div>` +
     Object.keys(p.champs).map(ch=>`<div class="chg">${esc(NOM_CHAMP[ch]||ch)} : ${esc(String(p.cible[ch]||"—"))} → <b>${esc(ch==="rang" ? (p.champs[ch]==="derriere"?"rangée 2":"rangée 1") : p.champs[ch])}</b></div>`).join(""), true)).join("");
@@ -2077,20 +2109,38 @@ function validerPropositions(b, k, props, source, vus){
      <div class="chg">${esc(p.cible.auteur||"auteur inconnu")}</div>`, false)).join("");
   const section = (titre, aide, contenu)=> contenu ? `<div class="titreSection" style="margin-top:14px">${titre}</div>${aide?`<div class="aide" style="margin:-4px 0 8px">${aide}</div>`:""}${contenu}` : "";
 
+  // liste intégrale de ce qui a été lu sur la photo, pour pouvoir trancher soi-même
+  const ligneVu = (v)=>{
+    const lu = v.titre ? `<b>${esc(v.titre)}</b>${v.auteur ? ` <span style="opacity:.75">— ${esc(v.auteur)}</span>` : ""}` : `<i>(titre non recopié par l'IA)</i>`;
+    let etat;
+    if (v.cible && !v.douteux)
+      etat = `<span style="color:var(--vert)">✅ déjà relevé</span>${normaliser(v.cible.titre) !== normaliser(v.titre) ? ` : « ${esc(v.cible.titre)} »` : ""} · ${nomRangee(v.cible)}`;
+    else if (v.cible)
+      etat = `<span style="color:var(--orange)">⚠️ rapproché de « ${esc(v.cible.titre)} » — à vérifier</span>`;
+    else etat = `<span style="color:var(--bronze)">🆕 absent de la liste</span>`;
+    return `<div style="padding:5px 0;border-bottom:1px solid var(--trait)">${lu}<div class="aide" style="margin:2px 0 0">${etat}</div></div>`;
+  };
+  const htmlLus = vus.length
+    ? vus.map(ligneVu).join("")
+    : `<div class="aide">L'IA n'a pas fourni la liste de ce qu'elle a lu (réponse d'un ancien format ou copier-coller incomplet). Relancez le contrôle pour l'obtenir.</div>`;
+  const nbDouteux = vus.filter(v=>v.douteux).length;
+  const nbAbsents = vus.filter(v=>!v.cible).length;
+
   const f = modale({
-    titre:"Photo d'appoint — " + lib(k),
-    html:`<div>La photo d'appoint montre <b>${confirmes.length + ajouts.length}</b> livre(s) lisible(s) :
-            <b>${confirmes.length}</b> déjà relevé(s) et <b>${ajouts.length}</b> qui avai${ajouts.length>1?"ent":"t"} échappé à la photo d'ensemble.</div>
-          <div class="aide">${deuxRangees ? "Compartiment à deux rangées : choisissez la rangée de chaque livre ajouté." : "Compartiment à une rangée : les livres ajoutés vont dans la rangée 1."}${esc(texteSource(source))}</div>
-          ${section(`🆕 Absents de la liste (${ajouts.length})`, "Cochés = seront ajoutés à la liste du compartiment.",
+    titre:"Photos d'appoint — " + lib(k),
+    html:`<div>L'IA a lu <b>${nbLus}</b> livre(s) sur ${(cs.appoints||[]).length > 1 ? "les " + (cs.appoints||[]).length + " photos" : "la photo"} d'appoint :
+            <b>${confirmes.length}</b> déjà relevé(s), <b>${nbAbsents}</b> absent(s) de la liste${nbDouteux ? `, <b>${nbDouteux}</b> rapprochement(s) douteux` : ""}.</div>
+          <div class="aide">Vérifiez ci-dessous, titre par titre, ce qu'elle a lu : c'est sur cette liste que vous pouvez trancher.${esc(texteSource(source))}</div>
+          <details style="margin-top:10px" open><summary style="cursor:pointer;font-weight:600">📷 Lu sur la photo d'appoint (${vus.length})</summary>
+            <div style="margin:6px 0 0">${htmlLus}</div></details>
+          ${section(`🆕 À ajouter à la liste (${ajouts.length})`, (deuxRangees ? "Choisissez la rangée de chaque livre. " : "Compartiment à une rangée : ajout en rangée 1. ") + "Cochés = seront ajoutés ; les rapprochements douteux sont décochés.",
              ajouts.length ? (deuxRangees && ajouts.length > 1 ? `<div class="barre" style="margin-bottom:8px">
                <button class="btn" id="pvTout1" style="flex:1">Tous en rangée 1</button>
                <button class="btn" id="pvTout2" style="flex:1">Tous en rangée 2</button></div>` : "") + htmlAjouts : "")}
           ${section(`✏️ Corrections proposées (${corrections.length})`, "Livres déjà relevés dont un renseignement serait faux.", htmlCorr)}
           ${section(`🗑 Retraits proposés (${retraits.length})`, "Livres de la liste que la photo ne montre pas ou compte deux fois — décochés par précaution.", htmlRet)}
-          ${confirmes.length ? `<details style="margin-top:14px"><summary style="cursor:pointer;font-weight:600;color:var(--vert)">✅ Déjà relevés, reconnus sur la photo (${confirmes.length})</summary>
-             <div class="aide" style="margin:6px 0 0 14px">${confirmes.map(lv=>esc(lv.titre) + ` <span style="opacity:.7">— ${nomRangee(lv)}</span>`).join("<br>")}</div></details>` : ""}`,
-    boutons:[
+          ${!props.length ? `<div class="aide" style="margin-top:12px">Aucun ajout, correction ni retrait proposé.</div>` : ""}`,
+    boutons: props.length ? [
       {texte:"Ne rien changer", action:()=>{ marquerControle(); sauver(); rafraichir(); }},
       {texte:"Appliquer les cochés", classe:"principal", action:(fd)=>{
         const coche = (p)=>fd.querySelector(`[data-p="${props.indexOf(p)}"]`).checked;
@@ -2112,7 +2162,7 @@ function validerPropositions(b, k, props, source, vus){
         marquerControle(); sauver(); rafraichir();
         toast(`${ajo} livre(s) ajouté(s), ${cor} correction(s), ${ret} retrait(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
       }}
-    ],
+    ] : [ {texte:"Fermer", action:()=>{ marquerControle(); sauver(); rafraichir(); }} ],
     surFermeture:()=>{ marquerControle(); sauver(); if (biblioCourante === b.id) rendreBiblio(); }
   });
   // choix de la rangée, livre par livre ou pour tous
