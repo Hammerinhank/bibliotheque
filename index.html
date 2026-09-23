@@ -380,8 +380,17 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.35.1";
+const VERSION = "V1.36.1";
 const HISTORIQUE = [
+  { v:"V1.36.1", d:"23/09/2026", l:[
+    "La récupération automatique depuis GitHub à l'ouverture ne remplace plus jamais en silence les données de l'appareil si elles contiennent des choses absentes de GitHub (livres, photos, rangs, « 1 rang », appoints, résumés) : elle demande d'abord."
+  ]},
+  { v:"V1.36.0", d:"23/09/2026", l:[
+    "Nouveau « 🕘 Restaurer une version précédente » (écran ☁️) : liste des 30 dernières versions envoyées sur GitHub avec livres, photos, compartiments à 2 rangs, « 1 rang » et appoints ; comparaison puis restauration (les photos orphelines sont à nouveau rattachées).",
+    "Garde-fou à l'envoi : si l'envoi ferait disparaître de GitHub des livres, photos, compartiments à 2 rangs, marques « 1 rang », appoints ou résumés, l'app le détaille et demande confirmation.",
+    "Protection contre plusieurs fenêtres ouvertes (onglet + écran d'accueil) : une page restée ouverte avec d'anciennes données ne peut plus écraser les nouvelles.",
+    "Tableau de comparaison enrichi : compartiments à 2 rangs, « 1 rang », appoints."
+  ]},
   { v:"V1.35.1", d:"23/09/2026", l:[
     "Correctif glisser-déposer : la poignée ≡ portait le même nom qu'une poignée des lignes de coupe (rendue insensible au doigt), d'où la sélection de texte en bleu au lieu du déplacement. Poignée renommée, sélection de texte et menu « Copier » bloqués pendant le glisser."
   ]},
@@ -602,6 +611,7 @@ const HISTORIQUE = [
    CONSTANTES ET ÉTAT
    ==================================================================== */
 const CLE_DATA   = "biblio_data";
+const CLE_REV    = "biblio_rev";      // compteur de révision partagé entre fenêtres
 const CLE_CFG    = "biblio_cfg";
 const CLE_SALE   = "biblio_sale";
 const CLE_TOKEN  = "biblio_token";
@@ -795,15 +805,23 @@ function charger(){
   // Un champ laissé vide reprend la valeur par défaut : le dépôt reste toujours lisible.
   ["ghUser","ghRepo","ghBranche"].forEach(k => { if (!cfg[k]) cfg[k] = CFG_DEFAUT[k]; });
   sale = localStorage.getItem(CLE_SALE) === "1";
+  try{ revConnue = localStorage.getItem(CLE_REV); if (revConnue === null){ revConnue = "init-" + Date.now(); localStorage.setItem(CLE_REV, revConnue); } }catch(e){}
   if (retirerMiniatures(data)){
     try{ localStorage.setItem(CLE_DATA, JSON.stringify(data)); }catch(e){}
   }
 }
 
 function sauver(marquerSale){
+  // une autre fenêtre a enregistré depuis le chargement de celle-ci : ne rien écraser
+  try{
+    const rev = localStorage.getItem(CLE_REV);
+    if (revConnue !== null && rev !== null && rev !== revConnue){ fenetrePerimee(); return; }
+  }catch(e){}
   if (marquerSale !== false){ sale = true; data.maj = new Date().toISOString(); }
   try{
     localStorage.setItem(CLE_DATA, JSON.stringify(data));
+    revConnue = String(Date.now()) + "-" + Math.random().toString(36).slice(2, 7);
+    localStorage.setItem(CLE_REV, revConnue);
     localStorage.setItem(CLE_SALE, sale ? "1" : "0");
   }catch(e){
     toast("Mémoire de l'appareil pleine : rien n'a été enregistré. Ouvrez ☁️ et envoyez les photos vers GitHub pour libérer de la place.", 7000);
@@ -1106,16 +1124,19 @@ function enBase64Utf8(txt){ return btoa(unescape(encodeURIComponent(txt))); }
 /* résumé chiffré d'un jeu de données, pour les comparaisons */
 function resume(jeu){
   if (!jeu || !Array.isArray(jeu.bibliotheques)) return null;
-  let livres=0, photos=0, resumes=0, categories=0, analyses=0, attente=0;
+  let livres=0, photos=0, resumes=0, categories=0, analyses=0, attente=0, deuxRangs=0, unRang=0, appoints=0;
   jeu.bibliotheques.forEach(b=>{
     Object.keys(b.cases||{}).forEach(k=>{
       const cs = b.cases[k];
       champsPhotoCase(cs).forEach(ch=>{ photos++; const ph = photoObj(cs, ch); if (ph && !ph.envoye) attente++; });
       (cs.livres||[]).forEach(lv=>{ livres++; if (lv.resume) resumes++; if (lv.categorie) categories++; });
       if (cs.analyse) analyses++;
+      if (cs.photo && cs.photo2) deuxRangs++;
+      if (cs.unRang && !cs.photo2) unRang++;
+      appoints += (cs.appoints || []).length;
     });
   });
-  return { bibliotheques: jeu.bibliotheques.length, livres, photos, resumes, categories, analyses, attente, maj: jeu.maj };
+  return { bibliotheques: jeu.bibliotheques.length, livres, photos, resumes, categories, analyses, attente, deuxRangs, unRang, appoints, maj: jeu.maj };
 }
 
 /* forme canonique (clés triées, sans la photo en mémoire) pour comparer deux objets */
@@ -1249,6 +1270,9 @@ function tableauComparaison(jeuLoc, jeuDist, titreDist){
     ${ligne("Catégories","categories")}
     ${ligne("Photos","photos")}
     ${ligne("Photos pas encore envoyées","attente")}
+    ${ligne("Compartiments à 2 rangs","deuxRangs")}
+    ${ligne("Marqués « 1 rang »","unRang")}
+    ${ligne("Photos d'appoint","appoints")}
     ${ligne("Compartiments analysés","analyses")}
     <tr class="${loc && dist && loc.maj !== dist.maj ? "diff" : ""}"><th>Modifiée le</th><td>${esc(loc&&loc.maj?dateFr(loc.maj):"—")}</td><td>${esc(dist&&dist.maj?dateFr(dist.maj):"—")}</td></tr>
     ${detail}
@@ -1278,6 +1302,10 @@ function ouvrirSync(){
        <div class="action">
          <button class="btn" id="sRecuperer">📥 Récupérer depuis GitHub</button>
          <div class="expl"><span class="sens">GitHub → cet appareil.</span> Remplace le contenu de cet appareil par celui du dépôt. Les photos pas encore envoyées sont conservées.</div>
+       </div>
+       <div class="action">
+         <button class="btn" id="sHistorique">🕘 Restaurer une version précédente</button>
+         <div class="expl"><span class="sens">Historique GitHub → cet appareil.</span> Chaque envoi a gardé une copie des données : choisissez une version antérieure (livres, photos, rangs, appoints comptés pour chacune) pour la remettre sur cet appareil.</div>
        </div>
        <div class="action">
          <button class="btn" id="sVerifier">🔍 Vérifier l'état de GitHub</button>
@@ -1337,6 +1365,7 @@ function ouvrirSync(){
   f.querySelector("#sVerifier").onclick = ()=>verifier(false);
   f.querySelector("#sEnvoyer").onclick = async ()=>{ f.remove(); await envoyerVersGitHub(); };
   f.querySelector("#sRecuperer").onclick = async ()=>{ f.remove(); await recupererDeGitHub(); };
+  f.querySelector("#sHistorique").onclick = async ()=>{ f.remove(); await ouvrirHistoriqueGitHub(); };
   f.querySelector("#sExport").onclick = ()=>exporterFichier();
   f.querySelector("#sImport").onclick = ()=>f.querySelector("#sFichier").click();
   f.querySelector("#sFichier").onchange = async (ev)=>{
@@ -1373,6 +1402,102 @@ function exporterFichier(){
   toast("Fichier exporté. Rien n'a été modifié.");
 }
 
+/* ====================================================================
+   HISTORIQUE GITHUB : restaurer une version précédente de bibliotheques.json
+   ==================================================================== */
+async function ouvrirHistoriqueGitHub(){
+  if (!ghLisible()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); return; }
+  const pg = fenetreProgres("Historique GitHub");
+  let commits;
+  try{
+    pg.maj(0, 1, "Liste des versions de " + FICHIER_JSON);
+    const r = await fetch(`https://api.github.com/repos/${cfg.ghUser}/${cfg.ghRepo}/commits?path=${encodeURIComponent(FICHIER_JSON)}&sha=${encodeURIComponent(cfg.ghBranche)}&per_page=30&t=${Date.now()}`, { headers: ghEntetes() });
+    if (!r.ok) throw new Error("GitHub " + r.status + " : " + (await r.text()).slice(0,200));
+    commits = await r.json();
+  }catch(e){ pg.fermer(); toast("Historique illisible : " + e.message, 6000); return; }
+  // lecture de chaque version, avec décompte (fait / restant)
+  const versions = [];
+  for (let i = 0; i < commits.length; i++){
+    const c = commits[i];
+    pg.maj(i, commits.length, `Version ${i + 1} / ${commits.length} — reste ${commits.length - i}`);
+    try{
+      const r = await fetch(ghUrl(FICHIER_JSON) + "?ref=" + c.sha, { headers: ghEntetes("application/vnd.github.raw") });
+      if (!r.ok) continue;
+      const j = JSON.parse(await r.text());
+      versions.push({ sha:c.sha, date:(c.commit && c.commit.committer && c.commit.committer.date) || "", message:(c.commit && c.commit.message) || "", jeu:j, res:resume(j) });
+    }catch(e){ /* version illisible : ignorée */ }
+  }
+  pg.fermer();
+  if (!versions.length){ toast("Aucune version lisible dans l'historique."); return; }
+  const actuelle = resume(data);
+  const cel = (v, ref)=> `<td class="n" style="${ref != null && v < ref ? "color:var(--orange);font-weight:700" : ""}">${v}</td>`;
+  const lignes = versions.map((v, i)=>`<tr>
+      <td style="white-space:nowrap">${esc(dateFr(v.date))}${i === 0 ? " <span class='aide'>(GitHub actuel)</span>" : ""}</td>
+      ${cel(v.res.livres)}${cel(v.res.photos)}${cel(v.res.deuxRangs)}${cel(v.res.unRang)}${cel(v.res.appoints)}
+      <td><button class="btn" data-v="${i}" style="padding:4px 10px">Voir</button></td></tr>`).join("");
+  const f = modale({
+    titre:"Restaurer une version précédente",
+    html:`<div>Chaque envoi vers GitHub a gardé une copie de ${FICHIER_JSON}. Voici les ${versions.length} dernières, de la plus récente à la plus ancienne.</div>
+          <div class="aide">Cet appareil : ${actuelle.livres} livres, ${actuelle.photos} photos, ${actuelle.deuxRangs} compartiment(s) à 2 rangs, ${actuelle.unRang} marqué(s) « 1 rang », ${actuelle.appoints} appoint(s).</div>
+          <div style="overflow-x:auto"><table class="compare">
+            <tr><th>Date</th><th>Livres</th><th>Photos</th><th>2 rangs</th><th>1 rang</th><th>Appoints</th><th></th></tr>
+            ${lignes}</table></div>
+          <div class="aide">« Voir » compare la version à cet appareil avant toute restauration. Les photos elles-mêmes sont toujours sur GitHub : restaurer une version rattache à nouveau les photos devenues orphelines. <b>Ne supprimez pas les photos orphelines avant d'avoir restauré.</b></div>`,
+    boutons:[{texte:"Fermer"}]
+  });
+  f.querySelectorAll("[data-v]").forEach(bt=>bt.onclick = async ()=>{
+    const v = versions[Number(bt.dataset.v)];
+    const ok = await confirmer(
+      `<div>Remplacer le contenu de cet appareil par la version du <b>${esc(dateFr(v.date))}</b> ?</div>` +
+      tableauComparaison(data, v.jeu, "Version du " + dateFr(v.date)) +
+      `<div class="aide">Les photos pas encore envoyées sont conservées. Ensuite, vérifiez l'application puis envoyez sur GitHub (☁️) pour que cette version redevienne la version de référence.</div>`,
+      "Restaurer cette version", "Restaurer");
+    if (!ok) return;
+    const attente = photosEnAttente();
+    const j = JSON.parse(JSON.stringify(v.jeu));
+    retirerMiniatures(j);
+    data = j;
+    attente.forEach(p=>{
+      const bb = data.bibliotheques.find(x=>x.id === p.bib.id);
+      if (bb){ bb.cases = bb.cases||{}; bb.cases[p.cle] = bb.cases[p.cle]||{livres:[]}; poserPhoto(bb.cases[p.cle], p.champ, photoObj(p.cs, p.champ)); }
+    });
+    // la version GitHub actuelle est connue : l'envoi suivant ne signalera pas un « changement venu d'ailleurs »
+    if (versions[0].jeu.maj) localStorage.setItem(CLE_SYNC, versions[0].jeu.maj);
+    sauver(true);
+    f.remove();
+    rendre();
+    toast("Version restaurée sur cet appareil. Vérifiez, puis envoyez sur GitHub ☁️.", 7000);
+  });
+}
+
+/* Ce qu'un envoi ferait disparaître de GitHub (compartiments à 2 rangs, « 1 rang », appoints, photos, livres). */
+function pertesEnvoi(loc, dist, libDist, libLoc){
+  libDist = libDist || "sur GitHub"; libLoc = libLoc || "après l'envoi";
+  const a = resume(loc), d = resume(dist);
+  if (!a || !d) return [];
+  const p = [];
+  const test = (cle, lib)=>{ if (a[cle] < d[cle]) p.push(`${lib} : ${d[cle]} ${libDist} → ${a[cle]} ${libLoc}`); };
+  test("livres", "livres");
+  test("photos", "photos rattachées");
+  test("deuxRangs", "compartiments à 2 rangs");
+  test("unRang", "compartiments marqués « 1 rang »");
+  test("appoints", "photos d'appoint");
+  test("resumes", "résumés");
+  return p;
+}
+
+/* Plusieurs fenêtres de l'application ouvertes : une fenêtre restée ouverte avec d'anciennes données ne doit pas écraser les nouvelles. */
+let revConnue = null;
+function fenetrePerimee(){
+  if (document.getElementById("avertPerime")) return;
+  const f = modale({ titre:"Page périmée",
+    html:`<div id="avertPerime">Les données ont été modifiées dans <b>une autre fenêtre</b> de l'application (autre onglet, ou application ouverte depuis l'écran d'accueil).</div>
+          <div class="aide">Pour ne pas écraser ces modifications avec les données plus anciennes de cette page, rien n'est plus enregistré ici. Rechargez la page.</div>`,
+    boutons:[{texte:"🔄 Recharger", classe:"principal", action:()=>{ location.reload(); }}] });
+  return f;
+}
+window.addEventListener("storage", (e)=>{ if (e.key === CLE_REV) fenetrePerimee(); });
+
 async function envoyerVersGitHub(){
   if (!ghLisible()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); ouvrirReglages("github"); return; }
   if (!ghToken()){ toast("Un jeton GitHub est nécessaire pour enregistrer sur GitHub. Ajoutez-le dans les réglages ⚙️.", 5000); ouvrirReglages("github"); return; }
@@ -1382,6 +1507,15 @@ async function envoyerVersGitHub(){
     const txt = await ghLireTexte(FICHIER_JSON);
     if (txt){
       const j = JSON.parse(txt);
+      const pertes = pertesEnvoi(data, j);
+      if (pertes.length){
+        const ok = await confirmer(
+          `<div><b>⚠️ Cet envoi ferait disparaître des éléments de GitHub :</b></div><ul>${pertes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` +
+          tableauComparaison(data, j, "GitHub") +
+          `<div class="aide">Si ce n'est pas voulu, annulez : cet appareil a sans doute des données anciennes. Faites plutôt « 📥 Récupérer depuis GitHub », ou « 🕘 Restaurer une version précédente ».</div>`,
+          "Envoi avec pertes", "Envoyer malgré tout");
+        if (!ok) return;
+      }
       const connue = localStorage.getItem(CLE_SYNC);
       if (j.maj && connue && j.maj !== connue){
         const ok = await confirmer(
@@ -1449,7 +1583,17 @@ async function recupererDeGitHub(silencieux){
     const j = JSON.parse(txt);
     if (!j || !Array.isArray(j.bibliotheques)) throw new Error("Fichier distant inattendu.");
 
-    if (!silencieux || sale){
+    // à l'ouverture : ne jamais écraser en silence des données locales plus riches que GitHub
+    const pertesLocales = pertesEnvoi(j, data, "sur cet appareil", "si on reprend GitHub");
+    if (silencieux && pertesLocales.length){
+      const ok = await confirmer(
+        `<div><b>⚠️ Cet appareil contient des éléments absents de GitHub :</b></div><ul>${pertesLocales.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` +
+        tableauComparaison(data, j, "GitHub") +
+        `<div class="aide">Recommandé : <b>Garder cet appareil</b>, puis envoyer ses données sur GitHub ☁️.</div>`,
+        "Données de cet appareil plus complètes", "Remplacer par GitHub quand même");
+      if (!ok){ etatSync = "ok"; sale = true; sauver(false); majBandeau(); toast("Données de cet appareil conservées. Pensez à les envoyer sur GitHub ☁️.", 7000); return false; }
+    }
+    else if (!silencieux || sale){
       if (silencieux && !sale && j.maj === data.maj){ etatSync="ok"; majBandeau(); return false; }
       const ok = await confirmer(
         `<div>Le contenu de cet appareil sera remplacé par celui de GitHub.</div>` +
