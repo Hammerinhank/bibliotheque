@@ -1,0 +1,175 @@
+{
+ "date": "2026-09-23T17:25:17.974Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "mue5rvl3sa4zy",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "L'ORDRE DU JOUR",
+   "auteur": "ÉRIC VUILLARD",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "L'automne à Pékin",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Cantilènes en gelée",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "L'écume des jours",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "L'herbe rouge",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "La croule",
+   "auteur": "Paul Vialar",
+   "annee": "2022",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "La Rose de la Mer",
+   "auteur": "Paul Vialar",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "mon seul amour",
+   "auteur": "Paul Vialar",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Un long si long après-midi",
+   "auteur": "Paul Valery",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "MONSIEUR TESTE",
+   "auteur": "PAUL VALERY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "BODY LANGUAGE",
+   "auteur": "A.K. Turner",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "JOHNNY S'EN VA-T-EN GUERRE",
+   "auteur": "DALTON TRUMBO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Les Eygletière (1)",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Les Eygletière (2)",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Les Eygletière (3)",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Le sac et la cendre I",
+   "auteur": "Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Le sac et la cendre II",
+   "auteur": "Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Etrangers sur la terre II",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Etrangers sur la terre I",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Andains",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "couché",
+   "illisible": false
+  }
+ ]
+}
