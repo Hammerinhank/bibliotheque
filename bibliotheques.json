@@ -3992,6 +3992,42 @@
        "origine": "ia"
       },
       {
+       "id": "mued5p7u4tgyw",
+       "titre": "La galande de l'idiot",
+       "auteur": "Zeruya Shalev",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued5p7u7zjpm",
+       "titre": "La croisade de l'idiot",
+       "auteur": "Zeruya Shalev",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued5p7u0kmvz",
+       "titre": "Les raisins verts",
+       "auteur": "Marie Censi",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
        "id": "mud5m1hs8n1qq",
        "titre": "L'écume des jours",
        "auteur": "Boris Vian (écrivain français, 1920-1959)",
@@ -4100,6 +4136,66 @@
        "resume": "",
        "categorie": "Policier",
        "origine": "ia"
+      },
+      {
+       "id": "mued5p7uhvg6k",
+       "titre": "L'Étrange Cas du docteur Jekyll et de M. Hyde",
+       "auteur": "Stevenson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued5p7u8i9yp",
+       "titre": "Sturgeon/killdozer",
+       "auteur": "Th. Sturgeon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued5p7upxjfk",
+       "titre": "Sturgeon/cristal qui songe",
+       "auteur": "T. Sturgeon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued5p7uecscb",
+       "titre": "Les fabuleuses aventures d'un Indien malchanceux qui devint milliardaire",
+       "auteur": "Vikas Swarup",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
+      },
+      {
+       "id": "mued5p7undqo3",
+       "titre": "Romanée-Conti 1935",
+       "auteur": "KAIKÔ",
+       "annee": "1935",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "rang": "devant"
       },
       {
        "id": "mued4peww9m0x",
@@ -4394,7 +4490,8 @@
        "envoye": true,
        "maj": "2026-09-23T16:52:49.464Z",
        "id": "muec92wh8n0ai",
-       "legende": ""
+       "legende": "",
+       "verif": "2026-09-23T17:15:10.106Z"
       },
       {
        "plein": null,
@@ -6815,7 +6912,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-23T17:14:25.366Z",
+ "maj": "2026-09-23T17:15:10.871Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
