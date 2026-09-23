@@ -357,8 +357,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.21.0";
+const VERSION = "V1.22.0";
 const HISTORIQUE = [
+  { v:"V1.22.0", d:"23/09/2026", l:[
+    "Suppression du gros bouton « 📄 PDF » redondant à côté de « Voir la liste » (le PDF reste disponible dans la fenêtre de la liste).",
+    "Nouveau « 🔤 PDF trié par auteur ou par titre » : tri par auteur (nom de famille ou tel qu'écrit) ou par titre (article initial ignoré), avec filtre facultatif sur tout ou partie du titre ou de l'auteur ; reprend les options d'emplacement. Choix mémorisés."
+  ]},
   { v:"V1.21.0", d:"23/09/2026", l:[
     "Liste des livres : bouton « 📄 PDF » à côté de « 📋 Voir », et dans la fenêtre de la liste ; le PDF reprend les options d'affichage choisies (mémorisées).",
     "La section « Ce que l'on peut en tirer » est repliée par défaut.",
@@ -2411,11 +2415,8 @@ function rendreBiblio(){
      <summary>Ce que l'on peut en tirer <span class="etat">${cfg.tirerOuvert ? "toucher pour replier" : "toucher pour déplier"}</span></summary>
      <div class="contenuPli">
      <div class="action">
-       <div class="boutonsDuo">
-         <button class="btn principal" id="bListe">📋 Voir la liste des livres</button>
-         <button class="btn" id="bListePdf" style="flex:0 0 auto">📄 PDF</button>
-       </div>
-       <div class="expl">Livres compartiment par compartiment, puis liste exhaustive. « Voir » : affichage réglable et copie dans le presse-papier ; « PDF » : la même liste en PDF, avec les dernières options choisies.</div>
+       <button class="btn principal" id="bListe">📋 Voir la liste des livres</button>
+       <div class="expl">Livres compartiment par compartiment, puis liste exhaustive : affichage réglable, copie dans le presse-papier et version PDF depuis la fenêtre.</div>
      </div>
      <div class="action">
        <button class="btn" id="bResumes">📝 Résumés et auteurs</button>
@@ -2424,6 +2425,10 @@ function rendreBiblio(){
      <div class="action">
        <button class="btn" id="bPdf">📄 PDF classé par thèmes</button>
        <div class="expl">Classe les livres par catégorie thématique puis produit un PDF à ouvrir ou télécharger.</div>
+     </div>
+     <div class="action">
+       <button class="btn" id="bPdfTri">🔤 PDF trié par auteur ou par titre</button>
+       <div class="expl">Tri alphabétique par auteur ou par titre, avec au besoin un filtre sur tout ou partie du titre (ou de l'auteur) pour ne garder que certains livres.</div>
      </div>
      <div class="coche" style="margin-top:8px"><input type="checkbox" id="bPdfEmpl" ${cfg.pdfEmplacement ? "checked" : ""}>
        <label for="bPdfEmpl" style="margin:0">Emplacement dans le PDF : ajouter « (rg: X, cl: Y, 1 ou 2) » après chaque livre (rangée, colonne, rang de devant ou de derrière), avec un schéma numéroté de la bibliothèque en tête</label></div>
@@ -2446,9 +2451,9 @@ function rendreBiblio(){
   };
   $("#bAnalyserTout").onclick = ()=>analyserToutesPhotos(b);
   $("#bListe").onclick = ()=>fenetreListe(b);
-  $("#bListePdf").onclick = ()=>pdfListe(b, optionsListe());
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
+  $("#bPdfTri").onclick = ()=>fenetrePdfTri(b);
   $("#bPdfEmpl").onchange = (e)=>{
     cfg.pdfEmplacement = e.target.checked; sauverCfg();
     const z = $("#bPdfSens"); z.style.opacity = e.target.checked ? "" : ".45"; z.style.pointerEvents = e.target.checked ? "" : "none";
@@ -3779,19 +3784,137 @@ async function lancerPdf(b){
   }
 }
 
-function construirePdf(jsPDF, b, livres){
+/* ====================================================================
+   PDF TRIÉ PAR AUTEUR OU PAR TITRE (avec filtre facultatif)
+   ==================================================================== */
+function optionsTri(){
+  const d = { tri:"auteur", nomFamille:true, champFiltre:"titre", filtre:"", resume:true };
+  return Object.assign(d, cfg.triOpts || {});
+}
+/* minuscules sans accents, pour comparer un filtre */
+function simplifier(t){
+  return String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim();
+}
+/* clé de tri d'un auteur : nom de famille (dernier mot, ou partie avant la virgule) ou tel qu'écrit */
+function cleAuteur(a, nomFamille){
+  const t = String(a||"").trim();
+  if (!t) return "";
+  if (!nomFamille) return simplifier(t);
+  if (t.includes(",")) return simplifier(t);                     // « Hugo, Victor » : déjà nom d'abord
+  const premier = t.split(/\s*(?:;|&|\bet\b|\band\b)\s*/i)[0].trim();  // premier auteur seulement
+  const mots = premier.replace(/\(.*?\)/g,"").trim().split(/\s+/);
+  if (mots.length < 2) return simplifier(premier);
+  // particules rattachées au nom : de, du, des, d', van, von, le, la, di, da
+  let i = mots.length - 1;
+  while (i > 0 && /^(de|du|des|d'|d’|van|von|der|le|la|di|da|del|della)$/i.test(mots[i-1])) i--;
+  const nom = mots.slice(i).join(" "), prenom = mots.slice(0, i).join(" ");
+  // à la française, « de Balzac » se range à B : on retire de / du / des / d' en tête de la clé
+  return simplifier(nom + " " + prenom).replace(/^(de |du |des |d'|d’)/, "");
+}
+function livresFiltres(b, o){
+  const f = simplifier(o.filtre);
+  return tousLesLivres(b).map(x=>x.livre).filter(lv=>{
+    if (!f) return true;
+    return simplifier(o.champFiltre === "auteur" ? lv.auteur : lv.titre).includes(f);
+  });
+}
+
+function fenetrePdfTri(b){
+  if (!compteLivres(b)){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
+  const o = optionsTri();
+  const f = modale({
+    titre:"PDF trié — " + b.nom,
+    html:
+      `<label style="margin-top:0">Trier par</label>
+       <div class="coche"><input type="radio" name="tTri" id="tTriA" value="auteur" ${o.tri==="auteur"?"checked":""}><label for="tTriA" style="margin:0">Auteur (livres regroupés sous chaque auteur, puis par titre)</label></div>
+       <div class="coche" id="tZoneNom" style="margin-left:26px"><input type="checkbox" id="tNom" ${o.nomFamille?"checked":""}><label for="tNom" style="margin:0">Classer sur le nom de famille (« Victor Hugo » rangé à H)</label></div>
+       <div class="coche"><input type="radio" name="tTri" id="tTriT" value="titre" ${o.tri==="titre"?"checked":""}><label for="tTriT" style="margin:0">Titre (par lettre ; l'article initial « Le, La, Les, L', Un, Une, Des » est ignoré)</label></div>
+       <div class="sep"></div>
+       <label>Ne garder que les livres dont…</label>
+       <div class="barre" style="margin-top:4px">
+         <select id="tChamp" style="flex:0 0 auto;width:auto">
+           <option value="titre" ${o.champFiltre!=="auteur"?"selected":""}>le titre</option>
+           <option value="auteur" ${o.champFiltre==="auteur"?"selected":""}>l'auteur</option>
+         </select>
+         <input type="text" id="tFiltre" value="${esc(o.filtre)}" placeholder="contient… (vide = tous)" style="flex:1">
+       </div>
+       <div class="aide">Tout ou partie du mot suffit, sans se soucier des majuscules ni des accents (« guerre » trouve « La Guerre et la Paix »).</div>
+       <div class="aide" id="tCompte" style="font-weight:600"></div>
+       <div class="sep"></div>
+       <div class="coche"><input type="checkbox" id="tResume" ${o.resume?"checked":""}><label for="tResume" style="margin:0">Résumés (s'ils existent)</label></div>
+       <div class="aide">Emplacements (rg, cl, rang) et schéma : selon la case « Emplacement dans le PDF » de l'écran de la bibliothèque (actuellement ${cfg.pdfEmplacement ? "cochée" : "décochée"}).</div>`,
+    boutons:[
+      {texte:"Fermer"},
+      {texte:"📄 Produire le PDF", classe:"principal", garder:true, action:()=>{
+        const op = lire(); cfg.triOpts = op; sauverCfg();
+        const n = livresFiltres(b, op).length;
+        if (!n){ toast("Aucun livre ne correspond au filtre."); return false; }
+        pdfTrie(b, op);
+      }}
+    ]
+  });
+  const lire = ()=>({
+    tri: f.querySelector("#tTriT").checked ? "titre" : "auteur",
+    nomFamille: f.querySelector("#tNom").checked,
+    champFiltre: f.querySelector("#tChamp").value,
+    filtre: f.querySelector("#tFiltre").value.trim(),
+    resume: f.querySelector("#tResume").checked
+  });
+  const maj = ()=>{
+    const op = lire(); cfg.triOpts = op; sauverCfg();
+    const zn = f.querySelector("#tZoneNom");
+    zn.style.opacity = op.tri === "auteur" ? "" : ".45"; zn.style.pointerEvents = op.tri === "auteur" ? "" : "none";
+    const n = livresFiltres(b, op).length, total = compteLivres(b);
+    f.querySelector("#tCompte").textContent = op.filtre ? `${n} livre(s) sur ${total} correspondent au filtre.` : `Les ${total} livres seront repris.`;
+  };
+  ["#tTriA","#tTriT","#tNom","#tChamp","#tResume"].forEach(s=>f.querySelector(s).onchange = maj);
+  f.querySelector("#tFiltre").oninput = maj;
+  maj();
+}
+
+async function pdfTrie(b, o){
+  const livres = livresFiltres(b, o);
+  try{
+    const jsPDF = await chargerJsPDF();
+    const blob = construirePdf(jsPDF, b, livres, o);
+    const nom = "tri-" + (o.tri === "titre" ? "titre" : "auteur") + "-" + b.nom.replace(/[^\w\-]+/g,"_") + "-" + new Date().toISOString().slice(0,10) + ".pdf";
+    proposerPdf(blob, nom, "PDF trié par " + (o.tri === "titre" ? "titre" : "auteur"),
+      `PDF prêt : ${livres.length} livre(s)${o.filtre ? ` dont ${o.champFiltre === "auteur" ? "l'auteur" : "le titre"} contient « ${esc(o.filtre)} »` : ""}.`);
+  }catch(e){
+    modale({titre:"PDF impossible", html:`<div class="aide">${esc(e.message)}</div>`, boutons:[{texte:"Fermer"}]});
+  }
+}
+
+/* PDF par catégories (mode absent) ou trié par auteur / titre (mode = options de tri) */
+function construirePdf(jsPDF, b, livres, mode){
   const doc = new jsPDF({ unit:"mm", format:"a4" });
   const MG = 18, LARG = 210 - MG*2;
   let y = MG;
   const groupes = {};
+  const INCONNU = mode ? (mode.tri === "titre" ? "Sans titre" : "Auteur inconnu") : "Non classé";
+  const cleTitre = (lv)=> normaliser(lv.titre);
+  // clé de groupe et clé de tri des groupes
+  const cleGroupe = {};
   livres.forEach(lv=>{
-    const cat = (lv.categorie || "Non classé").trim();
-    (groupes[cat] = groupes[cat] || []).push(lv);
+    let g, k;
+    if (!mode){ g = (lv.categorie || "").trim() || INCONNU; k = g.toLowerCase(); }
+    else if (mode.tri === "auteur"){
+      k = cleAuteur(lv.auteur, mode.nomFamille);
+      g = k ? String(lv.auteur).trim() : INCONNU;
+      // un même auteur écrit de façons légèrement différentes (casse, accents) reste groupé
+      g = Object.keys(groupes).find(x=>x !== INCONNU && cleAuteur(x, mode.nomFamille) === k) || g;
+    } else {
+      const t = cleTitre(lv);
+      g = t ? (/^[a-z]/.test(t) ? t[0].toUpperCase() : "0-9 / autres") : INCONNU;
+      k = g === "0-9 / autres" ? " " : g.toLowerCase();
+    }
+    (groupes[g] = groupes[g] || []).push(lv);
+    cleGroupe[g] = k;
   });
   const cats = Object.keys(groupes).sort((a,z)=>{
-    if (a === "Non classé") return 1;
-    if (z === "Non classé") return -1;
-    return a.localeCompare(z, "fr");
+    if (a === INCONNU) return 1;
+    if (z === INCONNU) return -1;
+    return (cleGroupe[a]||"").localeCompare(cleGroupe[z]||"", "fr", {sensitivity:"base"});
   });
   const saut = (h)=>{ if (y + h > 297 - MG){ doc.addPage(); y = MG; } };
   // emplacement de chaque livre (rangée, colonne), si la case est cochée
@@ -3817,7 +3940,14 @@ function construirePdf(jsPDF, b, livres){
   doc.setFont("helvetica","bold"); doc.setFontSize(20);
   doc.text(b.nom, MG, y); y += 9;
   doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setTextColor(110);
-  doc.text(`${livres.length} livres, ${cats.length} catégories${b.lieu ? " — " + b.lieu : ""} — ${new Date().toLocaleDateString("fr-FR")}`, MG, y);
+  const sousTitre = !mode ? `${livres.length} livres, ${cats.length} catégories`
+    : mode.tri === "auteur" ? `${livres.length} livres triés par auteur (${cats.filter(c=>c!==INCONNU).length} auteurs${mode.nomFamille ? ", classés sur le nom de famille" : ""})`
+    : `${livres.length} livres triés par titre`;
+  doc.text(`${sousTitre}${b.lieu ? " — " + b.lieu : ""} — ${new Date().toLocaleDateString("fr-FR")}`, MG, y);
+  if (mode && mode.filtre){
+    y += 5;
+    doc.text(`Filtre : ${mode.champFiltre === "auteur" ? "auteur" : "titre"} contenant « ${mode.filtre} »`, MG, y);
+  }
   y += 4; doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 7;
   doc.setTextColor(0);
 
@@ -3872,6 +4002,12 @@ function construirePdf(jsPDF, b, livres){
 
   cats.forEach(cat=>{
     const l = groupes[cat].slice().sort((x,z)=>{
+      if (mode && mode.tri === "titre"){
+        const d = cleTitre(x).localeCompare(cleTitre(z),"fr",{sensitivity:"base"});
+        return d !== 0 ? d : (x.auteur||"").localeCompare(z.auteur||"","fr",{sensitivity:"base"});
+      }
+      if (mode && mode.tri === "auteur")
+        return cleTitre(x).localeCompare(cleTitre(z),"fr",{sensitivity:"base"});
       const d = (x.auteur||"zzz").localeCompare(z.auteur||"zzz","fr",{sensitivity:"base"});
       return d !== 0 ? d : (x.titre||"").localeCompare(z.titre||"","fr",{sensitivity:"base"});
     });
@@ -3881,15 +4017,16 @@ function construirePdf(jsPDF, b, livres){
     doc.setDrawColor(150); doc.line(MG, y, MG+LARG, y); y += 6;
     l.forEach(lv=>{
       doc.setFont("helvetica","bold"); doc.setFontSize(10.5);
-      let entete = lv.titre;
-      if (lv.auteur) entete += " — " + lv.auteur;
+      let entete = lv.titre || "(sans titre)";
+      if (lv.auteur && !(mode && mode.tri === "auteur" && cat !== INCONNU)) entete += " — " + lv.auteur;
       if (lv.annee) entete += " (" + lv.annee + ")";
       const e = empl.get(lv);
       if (e) entete += " (rg: " + rgPdf(e.r) + ", cl: " + e.c + ", " + (lv.rang === "derriere" ? 2 : 1) + ")";
       const lignes = doc.splitTextToSize(entete, LARG);
-      saut(lignes.length*5 + (lv.resume?6:0) + 2);
+      const avecResume = lv.resume && (!mode || mode.resume);
+      saut(lignes.length*5 + (avecResume?6:0) + 2);
       doc.text(lignes, MG, y); y += lignes.length*5;
-      if (lv.resume){
+      if (avecResume){
         doc.setFont("helvetica","italic"); doc.setFontSize(9.5); doc.setTextColor(95);
         const lr = doc.splitTextToSize(lv.resume, LARG - 4);
         saut(lr.length*4.4 + 2);
