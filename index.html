@@ -380,8 +380,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.36.1";
+const VERSION = "V1.37.0";
 const HISTORIQUE = [
+  { v:"V1.37.0", d:"23/09/2026", l:[
+    "Scan des photos du dépôt : bouton « ✖ Marquer non associée » sur chaque photo orpheline (orange) qui n'a jamais été à la bonne place ; elle passe en rouge et sort des réaffectations. Réversible (« ↩ Remettre en orpheline »). Marque mémorisée avec les données (envoyée sur GitHub)."
+  ]},
   { v:"V1.36.1", d:"23/09/2026", l:[
     "La récupération automatique depuis GitHub à l'ouverture ne remplace plus jamais en silence les données de l'appareil si elles contiennent des choses absentes de GitHub (livres, photos, rangs, « 1 rang », appoints, résumés) : elle demande d'abord."
   ]},
@@ -5140,7 +5143,7 @@ function ouvrirReglages(ongletInitial){
          <div id="rStats"></div>
          <div class="sep"></div>
          <button class="btn plein" id="dScanPhotos">🗂️ Scanner les photos du dépôt GitHub</button>
-         <div class="aide">Liste toutes les images du dépôt : <b style="color:var(--vert)">vert</b> = associée à un compartiment, <b style="color:var(--orange)">orange</b> = a été associée mais est orpheline aujourd'hui, <b style="color:var(--rouge)">rouge</b> = jamais associée. Rien n'est modifié.</div>
+         <div class="aide">Liste toutes les images du dépôt : <b style="color:var(--vert)">vert</b> = associée à un compartiment, <b style="color:var(--orange)">orange</b> = a été associée mais est orpheline aujourd'hui, <b style="color:var(--rouge)">rouge</b> = jamais associée, ou marquée « non associée » à la main (photo orpheline qui n'a jamais été à la bonne place). Le scan ne modifie rien par lui-même.</div>
          <div class="sep"></div>
          <button class="btn rouge plein" id="dEffacer">Effacer les données de cet appareil</button>
          <div class="aide">GitHub n'est pas touché : les données pourront être récupérées via ☁️ si elles y ont été envoyées. Pensez à exporter un fichier avant, par sécurité.</div>
@@ -5382,6 +5385,8 @@ async function scannerPhotosDepot(){
     if (a){
       lignes.push({ coul:"vert", chemin:it.path, ko,
         qui: a.b.nom, detail: libelleCase(a.b, a.k) + " · " + libelleFace(a.ch, a.cs) });
+    } else if ((data.photosNonAssociees || []).includes(it.path)){
+      lignes.push({ coul:"rouge", chemin:it.path, ko, marquee:true, qui:"Non associée", detail:"marquée « non associée » à la main (n'a jamais été à la bonne place)" });
     } else {
       const m = it.path.match(RE_PHOTO_APP);
       if (m){
@@ -5455,8 +5460,9 @@ async function scannerPhotosDepot(){
       const bouton = l.coul === "orange"
         ? (biblio(l.bibId)
             ? `<button class="btn reaff" data-r="${i}">↩️ Réaffecter à ${esc(nomCaseCourt(l.k))} · ${esc(libelleChamp(l.champ))}</button>`
-            : `<div class="aide">Réaffectation impossible : la bibliothèque n'existe plus.</div>`)
-        : "";
+            : `<div class="aide">Réaffectation impossible : la bibliothèque n'existe plus.</div>`) +
+          ` <button class="btn" data-na="${i}" style="margin-top:4px">✖ Marquer non associée</button>`
+        : (l.marquee ? `<button class="btn" data-ra="${i}">↩ Remettre en orpheline</button>` : "");
       return `<div class="scanLigne ${l.coul}" data-i="${i}"><span class="pt"></span>
          <div class="txt"><span class="qui">${esc(l.qui)}</span><br>${esc(l.detail)}<br>
          <span class="ch">${esc(l.chemin)} · ${l.ko} Ko</span>${bouton ? "<br>" + bouton : ""}</div></div>`;
@@ -5464,11 +5470,40 @@ async function scannerPhotosDepot(){
 
     zone.querySelectorAll("[data-i]").forEach(el=>{
       el.onclick = async (ev)=>{
-        if (ev.target.closest("[data-r]")) return;
+        if (ev.target.closest("[data-r],[data-na],[data-ra]")) return;
         const l = lignes[Number(el.dataset.i)];
         toast("Chargement de la photo…", 1500);
         const d = await ghLireImage(l.chemin, String(Date.now()));
         if (d) visionneuse(d, l.qui + " — " + l.chemin); else toast("Impossible de charger cette photo.");
+      };
+    });
+    zone.querySelectorAll("[data-na]").forEach(el=>{
+      el.onclick = async (ev)=>{
+        ev.stopPropagation();
+        const l = lignes[Number(el.dataset.na)];
+        const ok = await confirmer(`<div>Marquer <b>${esc(l.chemin)}</b> comme « non associée » ?</div>
+          <div class="aide">Elle passera en rouge et ne sera plus proposée à la réaffectation. Le fichier reste sur GitHub ; vous pourrez annuler ce marquage.</div>`, "Photo non associée", "Marquer");
+        if (!ok) return;
+        data.photosNonAssociees = data.photosNonAssociees || [];
+        if (!data.photosNonAssociees.includes(l.chemin)) data.photosNonAssociees.push(l.chemin);
+        Object.assign(l, { coul:"rouge", marquee:true, qui:"Non associée", detail:"marquée « non associée » à la main (n'a jamais été à la bonne place)" });
+        delete l.bibId; delete l.k; delete l.champ;
+        sauver(); afficher();
+        toast("Photo marquée « non associée ». Pensez à envoyer vers GitHub (☁️).", 4000);
+      };
+    });
+    zone.querySelectorAll("[data-ra]").forEach(el=>{
+      el.onclick = (ev)=>{
+        ev.stopPropagation();
+        const l = lignes[Number(el.dataset.ra)];
+        data.photosNonAssociees = (data.photosNonAssociees || []).filter(c=>c !== l.chemin);
+        const m = l.chemin.match(RE_PHOTO_APP);
+        if (m){
+          const b = biblio(m[1]), k = m[2] + "-" + m[3];
+          Object.assign(l, { coul:"orange", marquee:false, bibId:m[1], k, champ: m[4] ? "photo2" : (m[5] ? PRE_APPOINT + m[5] : "photo"),
+            qui: b ? b.nom : "Bibliothèque inconnue", detail: `${b ? libelleCase(b, k) : "rangée " + m[2] + " · compartiment " + m[3]} · remise en orpheline` });
+        } else Object.assign(l, { marquee:false, qui:"Jamais associée", detail:"aucun compartiment ne porte ce nom de fichier" });
+        sauver(); afficher();
       };
     });
     zone.querySelectorAll("[data-r]").forEach(el=>{
@@ -5517,6 +5552,7 @@ async function scannerPhotosDepot(){
     const val = { chemin:l.chemin, envoye:true, maj:new Date().toISOString() };
     if (estAppoint(champ) && !ancienne) val.legende = champ === l.champ ? "" : "réaffectée";
     poserPhoto(cs, champ, val);
+    if (data.photosNonAssociees) data.photosNonAssociees = data.photosNonAssociees.filter(c=>c !== l.chemin);
     delete cachePhotos[cleCache(b, l.k, champ)];
     l.coul = "vert";
     l.detail = libelleCase(b, l.k) + " · " + libelleFace(champ, cs) + " — réaffectée";
