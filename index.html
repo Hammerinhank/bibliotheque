@@ -379,8 +379,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.34.0";
+const VERSION = "V1.35.0";
 const HISTORIQUE = [
+  { v:"V1.35.0", d:"23/09/2026", l:[
+    "Photo d'appoint : second bouton « 🔀 Vérifier (ordre respecté) ». L'app repère la zone de la rangée que couvre l'appoint (sans supposer qu'il commence au premier livre ni finit au dernier), puis aligne livre par livre dans cette zone ; les livres hors zone ne sont pas touchés.",
+    "Choix de la rangée comparée (la plus ressemblante par défaut, bouton pour comparer à l'autre).",
+    "Fusions (rangée et appoint) : chaque ligne a une poignée ≡ pour corriger au glisser-déposer l'ordre de deux livres voisins ; l'ordre affiché est celui enregistré."
+  ]},
   { v:"V1.34.0", d:"23/09/2026", l:[
     "Nouvelle analyse d'une rangée déjà relevée : bouton « 🔀 Fusionner (même rangée, même ordre) ». Les deux listes sont alignées dans l'ordre ; les livres reconnus sans ambiguïté servent de repères pour situer les autres.",
     "Une ligne par livre avec ses choix : ✅ identique (garder le titre ou prendre la nouvelle lecture), 🟡 à confirmer (même livre / deux livres), 📕 absent de la nouvelle photo (garder / retirer), 🆕 absent de la liste (ajouter / ignorer). Livres qui ont changé de place signalés."
@@ -1775,9 +1780,11 @@ function appliquerReponseClaude(a, txt, silencieux){
   if (a.genre === "controle"){
     localStorage.removeItem(CLE_ATTENTE_CLAUDE);
     majAttenteClaude();
-    const champ = PRE_APPOINT + (a.appoint || "");
+    const [idA, mode] = String(a.appoint || "").split("|");
+    const champ = PRE_APPOINT + idA;
     if (!photoObj(b.cases[a.cle], champ)){ toast("Cette photo d'appoint n'existe plus.", 5000); return true; }
-    fenetreVerifAppoint(b, a.cle, champ, lusDepuisReponse(j), source);
+    if (mode === "ordre") fenetreFusionAppoint(b, a.cle, champ, lusDepuisReponse(j), source);
+    else fenetreVerifAppoint(b, a.cle, champ, lusDepuisReponse(j), source);
     return true;
   }
   const portee = a.portee || (a.deux ? "deux" : (a.avecAvant ? "devant" : "derriere"));
@@ -2001,130 +2008,205 @@ function alignerListes(A, B){
   return out;
 }
 
-/* Fenêtre de fusion : une ligne par livre, dans l'ordre, avec les choix à faire.
-   surValider(resultatParRang) reçoit la nouvelle liste de chaque rangée concernée. */
-function fenetreFusion(k, rangs, parRang, surValider){
-  const NOMR = { devant:"Rangée 1 (devant)", derriere:"Rangée 2 (derrière)" };
-  const blocs = rangs.map(r=>({ r, etapes: alignerListes(parRang[r].vieux, parRang[r].neufs) }));
-  // choix par défaut
+/* Fenêtre de fusion générique : une ligne par livre, dans l'ordre, avec les choix à faire et une poignée ≡
+   pour corriger l'ordre de deux livres voisins (glisser-déposer).
+   blocs : [{ r, etapes, entete (html), avant:[livres hors zone avant], apres:[livres hors zone après] }]
+   surValider(resultatParRang, bilan) reçoit la liste complète de chaque rangée concernée. */
+function fenetreFusionGenerique(opts){
+  const { titre, intro, blocs, surValider, surAnnuler, texteValider } = opts;
   blocs.forEach(bl=>bl.etapes.forEach(e=>{
-    if (e.type === "paire"){ e.choix = "meme"; e.titreDe = e.parPlace ? "nouveau" : "ancien"; }   // à la même place mais titres très différents : la nouvelle photo (refaite) est présumée meilleure
+    if (e.type === "paire"){ e.choix = "meme"; e.titreDe = e.parPlace ? "nouveau" : "ancien"; }
     else if (e.type === "ancien") e.choix = e.deplace ? "retirer" : "garder";
-    else e.choix = e.deplace ? "ignorer" : "ajouter";
+    else e.choix = "ajouter";
   }));
   const titresDiff = (e)=> e.type === "paire" && normaliser(e.a.titre) !== normaliser(e.b.titre);
   const aut = (lv)=> lv.auteur ? ` <span style="opacity:.75">— ${esc(lv.auteur)}</span>` : "";
-  const boutons = (id, opts, v)=>`<div class="onglets" style="margin:6px 0 0" data-f="${id}">${opts.map(([val, lib])=>
+  const boutons = (id, liste, v)=>`<div class="onglets" style="margin:6px 0 0" data-f="${id}">${liste.map(([val, lib])=>
       `<button data-v="${val}" class="${v===val?"actif":""}">${lib}</button>`).join("")}</div>`;
-  const ligne = (e, id, n)=>{
-    let h = `<span class="aide" style="margin:0">${n}.</span> `;
+  const nomNouveau = opts.nomNouveau || "nouvelle photo";
+  const ligne = (e, id)=>{
+    let h = "";
     if (e.type === "paire" && e.sur){
       h += `<span style="color:var(--vert)">✅</span> <b>${esc(e.a.titre)}</b>${aut(e.a)}`;
-      if (titresDiff(e)) h += `<div class="aide" style="margin:2px 0 0">Nouvelle lecture : « ${esc(e.b.titre)} »</div>` + boutons(id + "t", [["ancien","Garder le titre actuel"],["nouveau","Prendre la nouvelle lecture"]], e.titreDe);
+      if (titresDiff(e)) h += `<div class="aide" style="margin:2px 0 0">Lecture de la ${nomNouveau} : « ${esc(e.b.titre)} »</div>` + boutons(id + "t", [["ancien","Garder le titre actuel"],["nouveau","Prendre la nouvelle lecture"]], e.titreDe);
     } else if (e.type === "paire"){
       h += `<span style="color:var(--orange)">🟡 à confirmer</span> — ${esc(e.raison)}
         <div style="margin:3px 0 0">Liste actuelle : <b>${esc(e.a.titre)}</b>${aut(e.a)}</div>
-        <div>Nouvelle photo : <b>${esc(e.b.titre)}</b>${aut(e.b)}</div>` +
+        <div>${nomNouveau[0].toUpperCase() + nomNouveau.slice(1)} : <b>${esc(e.b.titre)}</b>${aut(e.b)}</div>` +
         boutons(id, [["meme","Même livre"],["deux","Deux livres différents"]], e.choix) +
-        `<div data-ft="${id}" ${e.choix === "meme" ? "" : "hidden"}>${boutons(id + "t", [["ancien","Titre actuel"],["nouveau","Titre de la nouvelle photo"]], e.titreDe)}</div>`;
+        `<div data-ft="${id}" ${e.choix === "meme" ? "" : "hidden"}>${boutons(id + "t", [["ancien","Titre actuel"],["nouveau","Titre de la " + nomNouveau]], e.titreDe)}</div>`;
     } else if (e.type === "ancien"){
-      h += `<span style="color:var(--orange)">📕 absent de la nouvelle photo</span> : <b>${esc(e.a.titre)}</b>${aut(e.a)}` +
-        (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ semble avoir changé de place (retrouvé plus loin sur la nouvelle photo) : retiré ici par défaut.</div>` : "") +
+      h += `<span style="color:var(--orange)">📕 absent de la ${nomNouveau}</span> : <b>${esc(e.a.titre)}</b>${aut(e.a)}` +
+        (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ semble avoir changé de place (retrouvé plus loin) : retiré ici par défaut.</div>` : "") +
         boutons(id, [["garder","Garder"],["retirer","Retirer"]], e.choix);
     } else {
       h += `<span style="color:var(--bronze)">🆕 absent de la liste actuelle</span> : <b>${esc(e.b.titre)}</b>${aut(e.b)}` +
-        (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ c'est sans doute « ${esc(e.deplace.titre)} », déplacé : ajouté ici par défaut à la place de l'ancien.</div>` : "") +
+        (e.deplace ? `<div class="aide" style="margin:2px 0 0">⚠️ c'est sans doute « ${esc(e.deplace.titre)} », déplacé : ajouté ici par défaut.</div>` : "") +
         boutons(id, [["ajouter","Ajouter"],["ignorer","Ignorer"]], e.choix);
     }
-    return `<div style="padding:8px 0;border-bottom:1px solid var(--trait)">${h}</div>`;
+    return `<div class="livre deplacable" data-idx="${id.split("_")[1]}"><div class="poignee" title="Maintenir et glisser pour corriger l'ordre"><span><i></i><i></i><i></i><i></i></span></div>${h}</div>`;
   };
-  // ajuste le défaut des déplacés : on garde le livre à sa nouvelle place
-  blocs.forEach(bl=>bl.etapes.forEach(e=>{ if (e.type === "nouveau" && e.deplace) e.choix = "ajouter"; }));
   const compte = (bl, f)=>bl.etapes.filter(f).length;
+  const hors = (l, ou)=> l.length ? `<div class="aide" style="margin:4px 0">${ou} : ${l.length} livre(s) hors de la zone photographiée, inchangé(s) (${l.slice(0,2).map(x=>"« "+esc(x.titre)+" »").join(", ")}${l.length > 2 ? "…" : ""}).</div>` : "";
   const html = blocs.map((bl, nb)=>{
     const s = compte(bl, e=>e.type === "paire" && e.sur), p = compte(bl, e=>e.type === "paire" && !e.sur),
           a = compte(bl, e=>e.type === "ancien"), n = compte(bl, e=>e.type === "nouveau"),
           dep = compte(bl, e=>e.type === "ancien" && e.deplace);
-    return `<div class="titreSection" style="margin-top:${nb ? 16 : 4}px">${NOMR[bl.r]} — liste actuelle : ${parRang[bl.r].vieux.length}, nouvelle photo : ${parRang[bl.r].neufs.length}</div>
-      <div class="aide" style="margin:-4px 0 6px"><b>${s}</b> identique(s), <b>${p}</b> à confirmer, <b>${a}</b> seulement dans la liste actuelle, <b>${n}</b> seulement sur la nouvelle photo.</div>
-      ${dep ? `<div class="encadre">⚠️ ${dep} livre(s) semblent ne plus être à la même place : l'ordre n'est pas tout à fait le même.</div>` : ""}
-      ${bl.etapes.map((e, x)=>ligne(e, nb + "_" + x, x + 1)).join("")}`;
+    return `<div class="titreSection" style="margin-top:${nb ? 16 : 4}px">${bl.entete}</div>
+      <div class="aide" style="margin:-4px 0 6px"><b>${s}</b> identique(s), <b>${p}</b> à confirmer, <b>${a}</b> seulement dans la liste, <b>${n}</b> seulement sur la ${nomNouveau}.</div>
+      ${dep ? `<div class="encadre">⚠️ ${dep} livre(s) semblent ne plus être à la même place.</div>` : ""}
+      ${hors(bl.avant || [], "Avant")}
+      <div data-bloc="${nb}">${bl.etapes.map((e, x)=>ligne(e, nb + "_" + x)).join("")}</div>
+      ${hors(bl.apres || [], "Après")}`;
   }).join("");
 
   const f = modale({
-    titre:"Fusionner — " + lib(k),
-    html:`<div>La nouvelle photo montre <b>la même rangée, dans le même ordre</b>. Les deux listes sont mises côte à côte : les livres reconnus sans ambiguïté servent de repères pour situer les autres.</div>
-          <div class="aide">Vérifiez surtout les lignes 🟡, 📕 et 🆕 ; les choix proposés par défaut sont déjà sélectionnés. Résumés, catégories et renseignements déjà obtenus sont conservés.</div>
+    titre,
+    html:`${intro}
+          <div class="aide">Les choix par défaut sont déjà sélectionnés : vérifiez surtout les lignes 🟡, 📕 et 🆕. Si deux livres voisins sont dans le mauvais ordre, faites glisser l'un d'eux avec sa poignée ≡. Résumés, catégories et renseignements déjà obtenus sont conservés.</div>
           ${html}`,
     boutons:[
-      {texte:"Retour"},
-      {texte:"Valider la fusion", classe:"principal", action:()=>{
+      {texte:"Retour", action:()=>{ if (surAnnuler) surAnnuler(); }},
+      {texte: texteValider || "Valider la fusion", classe:"principal", action:(fd)=>{
         const res = {}; let aj = 0, re = 0, co = 0;
-        blocs.forEach(bl=>{
+        blocs.forEach((bl, nb)=>{
+          const ordre = [...fd.querySelectorAll(`[data-bloc="${nb}"] > .livre`)].map(x=>Number(x.dataset.idx));
           const l = [];
-          bl.etapes.forEach(e=>{
+          ordre.forEach(x=>{
+            const e = bl.etapes[x];
             if (e.type === "paire"){
               if (e.choix === "deux"){ l.push(e.a, e.b); aj++; return; }
               const lv = e.a;
               if (e.titreDe === "nouveau" && titresDiff(e)){ lv.titre = e.b.titre; if (e.b.auteur) lv.auteur = e.b.auteur; co++; }
-              ["auteur","annee","editeur"].forEach(c=>{ if (!lv[c] && e.b[c]) lv[c] = e.b[c]; });
+              ["auteur","annee"].forEach(c=>{ if (!lv[c] && e.b[c]) lv[c] = e.b[c]; });
               l.push(lv);
             } else if (e.type === "ancien"){ if (e.choix === "garder") l.push(e.a); else re++; }
             else if (e.choix === "ajouter"){ l.push(e.b); aj++; }
           });
-          res[bl.r] = l;
+          res[bl.r] = (bl.avant || []).concat(l, bl.apres || []);
         });
         surValider(res, { aj, re, co });
       }}
-    ]
+    ],
+    surFermeture:()=>{ if (surAnnuler) surAnnuler(); }
   });
   f.querySelectorAll("[data-f]").forEach(z=>{
-    const id = z.dataset.f, titre = id.endsWith("t");
-    const [nb, x] = (titre ? id.slice(0, -1) : id).split("_").map(Number);
+    const id = z.dataset.f, estTitre = id.endsWith("t");
+    const [nb, x] = (estTitre ? id.slice(0, -1) : id).split("_").map(Number);
     const e = blocs[nb].etapes[x];
     z.querySelectorAll("button").forEach(bt=>bt.onclick = (ev)=>{
       ev.preventDefault();
-      if (titre) e.titreDe = bt.dataset.v; else e.choix = bt.dataset.v;
+      if (estTitre) e.titreDe = bt.dataset.v; else e.choix = bt.dataset.v;
       z.querySelectorAll("button").forEach(y=>y.classList.toggle("actif", y === bt));
-      if (!titre){ const ft = f.querySelector(`[data-ft="${id}"]`); if (ft) ft.hidden = e.choix !== "meme"; }
+      if (!estTitre){ const ft = f.querySelector(`[data-ft="${id}"]`); if (ft) ft.hidden = e.choix !== "meme"; }
     });
   });
+  f.querySelectorAll("[data-bloc]").forEach(z=>glisserListe(z));
   return f;
+}
+
+/* Fusion de deux lectures complètes d'une même rangée (nouvelle analyse). */
+function fenetreFusion(k, rangs, parRang, surValider){
+  const NOMR = { devant:"Rangée 1 (devant)", derriere:"Rangée 2 (derrière)" };
+  return fenetreFusionGenerique({
+    titre:"Fusionner — " + lib(k),
+    intro:`<div>La nouvelle photo montre <b>la même rangée, dans le même ordre</b>. Les deux listes sont mises côte à côte : les livres reconnus sans ambiguïté servent de repères pour situer les autres.</div>`,
+    blocs: rangs.map(r=>({ r, etapes: alignerListes(parRang[r].vieux, parRang[r].neufs),
+      entete:`${NOMR[r]} — liste actuelle : ${parRang[r].vieux.length}, nouvelle photo : ${parRang[r].neufs.length}` })),
+    surValider
+  });
+}
+
+/* Vérification d'une photo d'appoint en supposant l'ordre respecté : l'appoint ne couvre qu'une partie de la rangée ;
+   on repère la zone correspondante de la liste, puis on aligne livre par livre à l'intérieur de cette zone. */
+function preparerFusionAppoint(cs, lus, rangForce){
+  const rangDe = (lv)=> lv.rang === "derriere" ? "derriere" : "devant";
+  const livresLus = lus.filter(x=>!x.illisible).map(x=>({ id:uid(), titre:x.titre || "(titre non lu)", auteur:x.auteur,
+    annee:/^\d{4}$/.test(x.annee) ? x.annee : "", certitude:x.certitude, remarque:"", resume:"", categorie:"", origine:"appoint" }));
+  const essai = (r)=>{
+    const liste = (cs.livres||[]).filter(lv=>rangDe(lv) === r);
+    const et = alignerListes(liste, livresLus);
+    const iP = et.findIndex(e=>e.type === "paire"), jP = et.length - 1 - [...et].reverse().findIndex(e=>e.type === "paire");
+    if (iP < 0) return { r, etapes: et.filter(e=>e.type === "nouveau"), avant: liste, apres: [], sur: 0, paires: 0 };
+    const avant = et.slice(0, iP).filter(e=>e.type === "ancien").map(e=>e.a);
+    const apres = et.slice(jP + 1).filter(e=>e.type === "ancien").map(e=>e.a);
+    const etapes = et.slice(0, iP).filter(e=>e.type === "nouveau").concat(et.slice(iP, jP + 1), et.slice(jP + 1).filter(e=>e.type === "nouveau"));
+    return { r, etapes, avant, apres, sur: et.filter(e=>e.type === "paire" && e.sur).length, paires: et.filter(e=>e.type === "paire").length };
+  };
+  if (rangForce) return essai(rangForce);
+  const deuxRangees = !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere"));
+  if (!deuxRangees) return essai("devant");
+  const a = essai("devant"), b = essai("derriere");
+  return (b.sur > a.sur || (b.sur === a.sur && b.paires > a.paires)) ? b : a;
+}
+
+function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
+  const cs = b.cases[k];
+  const appoint = photoObj(cs, champ);
+  const num = numeroAppoint(cs, champ);
+  const deuxRangees = !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere"));
+  const nomR = (r)=> r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
+  const marquer = ()=>{ if (appoint) appoint.verif = new Date().toISOString(); sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
+  const P = preparerFusionAppoint(cs, lus, rangForce);
+  if (deuxRangees || P.r === "derriere") P.etapes.forEach(e=>{ if (e.type === "nouveau") e.b.rang = P.r; });
+  const zone = P.paires
+    ? (()=>{ const pa = P.etapes.filter(e=>e.type === "paire"); return `de « ${esc(pa[0].a.titre)} » à « ${esc(pa[pa.length-1].a.titre)} »`; })()
+    : "";
+  const autre = P.r === "derriere" ? "devant" : "derriere";
+  let f;
+  f = fenetreFusionGenerique({
+    titre:"Appoint " + num + " — ordre respecté — " + lib(k),
+    nomNouveau:"photo d'appoint",
+    intro:`<div>L'IA a lu <b>${lus.length}</b> livre(s) sur la photo d'appoint, sans voir la liste. En supposant que l'ordre est le même que dans la liste,
+             ${P.paires ? `la photo correspond à la zone ${zone} de la ${nomR(P.r)}.` : `<b>aucun livre ne correspond</b> à la ${nomR(P.r)} : impossible de situer la zone ; tous les livres lus sont présentés comme nouveaux.`}</div>
+           ${deuxRangees ? `<div class="barre" style="margin-top:6px"><button class="btn" id="faAutre" style="flex:1">Comparer plutôt à la ${nomR(autre)}</button></div>` : ""}
+           <div class="aide">${esc(texteSource(source).trim())}</div>`,
+    blocs:[{ r:P.r, etapes:P.etapes, avant:P.avant, apres:P.apres,
+      entete:`Zone photographiée — ${nomR(P.r)}` }],
+    texteValider:"Appliquer",
+    surValider:(res, bilan)=>{
+      const rangDe = (lv)=> lv.rang === "derriere" ? "derriere" : "devant";
+      const autres = (cs.livres||[]).filter(lv=>rangDe(lv) !== P.r);
+      cs.livres = P.r === "devant" ? res[P.r].concat(autres) : autres.concat(res[P.r]);
+      marquer();
+      toast(`Appoint ${num} : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+    },
+    surAnnuler: marquer
+  });
+  const bA = f.querySelector("#faAutre");
+  if (bA) bA.onclick = ()=>{ f.remove(); fenetreFusionAppoint(b, k, champ, lus, source, autre); };
 }
 
 /* ====================================================================
    CONTRÔLE DE LA LISTE PAR LES PHOTOS D'APPOINT
    ==================================================================== */
-/* ====== GLISSER-DÉPOSER DES LIVRES D'UN COMPARTIMENT ======
-   La poignée ≡ déplace l'élément dans la liste affichée ; au lâcher, les livres affichés sont remis
-   dans cs.livres aux mêmes emplacements, dans leur nouvel ordre (compatible avec le filtre par rangée). */
-function activerGlisser(z, cs, apres){
+/* ====== GLISSER-DÉPOSER ======
+   glisserListe(z, surLacher) : les enfants .livre de z qui ont une .poignee peuvent être réordonnés.
+   surLacher(ordreAvant, ordreApres) reçoit les data-idx avant/après (si l'ordre a changé). */
+function glisserListe(z, surLacher){
   const defilant = (el)=>{ for (let p = el.parentElement; p; p = p.parentElement){ const o = getComputedStyle(p).overflowY; if ((o === "auto" || o === "scroll") && p.scrollHeight > p.clientHeight) return p; } return document.scrollingElement; };
-  z.querySelectorAll(".poignee").forEach(h=>{
+  const enfants = ()=>[...z.children].filter(x=>x.classList.contains("livre"));
+  z.querySelectorAll(":scope > .livre > .poignee").forEach(h=>{
     h.addEventListener("pointerdown", (e)=>{
       if (e.button && e.button !== 0) return;
       e.preventDefault();
       const item = h.closest(".livre");
       const scr = defilant(z);
-      const ordreAvant = [...z.querySelectorAll(".livre")].map(x=>Number(x.dataset.idx));
+      const ordreAvant = enfants().map(x=>Number(x.dataset.idx));
       let dernierY = e.clientY, minuterie = null, fini = false;
       item.classList.add("enDrag");
       try{ h.setPointerCapture(e.pointerId); }catch(_){}
       if (navigator.vibrate) try{ navigator.vibrate(10); }catch(_){}
       const placer = ()=>{
-        const autres = [...z.querySelectorAll(".livre")].filter(x=>x !== item);
+        const autres = enfants().filter(x=>x !== item);
         let avant = null;
         for (const x of autres){ const r = x.getBoundingClientRect(); if (dernierY < r.top + r.height / 2){ avant = x; break; } }
         // on ne déplace jamais l'élément tenu (iOS perdrait le suivi du doigt) : ce sont ses voisins qui changent de côté
-        const tous = [...z.querySelectorAll(".livre")];
+        const tous = enfants();
         const iItem = tous.indexOf(item);
-        const iCible = avant ? tous.indexOf(avant) : tous.length;     // l'élément doit se retrouver juste avant iCible
-        if (iCible > iItem + 1){
-          tous.slice(iItem + 1, iCible).forEach(x=>z.insertBefore(x, item));
-        } else if (iCible < iItem){
-          let ref = item.nextElementSibling;
-          tous.slice(iCible, iItem).forEach(x=>z.insertBefore(x, ref));
-        }
+        const iCible = avant ? tous.indexOf(avant) : tous.length;
+        if (iCible > iItem + 1) tous.slice(iItem + 1, iCible).forEach(x=>z.insertBefore(x, item));
+        else if (iCible < iItem){ const ref = item.nextElementSibling; tous.slice(iCible, iItem).forEach(x=>z.insertBefore(x, ref)); }
       };
       const defiler = ()=>{
         const r = scr === document.scrollingElement ? { top:0, bottom:window.innerHeight } : scr.getBoundingClientRect();
@@ -2144,19 +2226,24 @@ function activerGlisser(z, cs, apres){
         h.removeEventListener("pointerup", lacher);
         h.removeEventListener("pointercancel", lacher);
         item.classList.remove("enDrag");
-        const ordreApres = [...z.querySelectorAll(".livre")].map(x=>Number(x.dataset.idx));
-        if (ordreApres.join() === ordreAvant.join()) return;
-        const emplacements = [...ordreAvant].sort((a,b)=>a-b);           // positions occupées dans cs.livres
-        const copie = cs.livres.slice();
-        emplacements.forEach((pos, n)=>{ cs.livres[pos] = copie[ordreApres[n]]; });
-        sauver(); if (typeof rendreBiblio === "function") rendreBiblio();
-        apres();
-        toast("Ordre modifié.");
+        const ordreApres = enfants().map(x=>Number(x.dataset.idx));
+        if (ordreApres.join() !== ordreAvant.join() && surLacher) surLacher(ordreAvant, ordreApres);
       };
       h.addEventListener("pointermove", bouger, { passive:false });
       h.addEventListener("pointerup", lacher);
       h.addEventListener("pointercancel", lacher);
     });
+  });
+}
+/* Liste des livres d'un compartiment : au lâcher, les livres affichés reprennent les mêmes emplacements de cs.livres dans leur nouvel ordre. */
+function activerGlisser(z, cs, apres){
+  glisserListe(z, (ordreAvant, ordreApres)=>{
+    const emplacements = [...ordreAvant].sort((a,b)=>a-b);
+    const copie = cs.livres.slice();
+    emplacements.forEach((pos, n)=>{ cs.livres[pos] = copie[ordreApres[n]]; });
+    sauver(); if (typeof rendreBiblio === "function") rendreBiblio();
+    apres();
+    toast("Ordre modifié.");
   });
 }
 
@@ -3240,7 +3327,8 @@ function ouvrirCompartiment(b, k){
              <button class="btn" id="cPhoto" style="flex:1">📷 Ajouter une photo</button>
              <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Analyser</button>
            </div>
-           <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste ; l'application compare chaque livre lu aux listes des rangées 1 et 2 : déjà relevé, à confirmer ou absent (à ajouter à sa place). Rien n'est modifié sans votre accord.</div>
+           <button class="btn principal plein" id="cAppointOrdre" style="margin-top:8px;display:none">🔀 Vérifier avec cette photo (ordre respecté)</button>
+           <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste. <b>🔎 Vérifier</b> : chaque livre lu est cherché dans les listes des rangées 1 et 2 (titre, auteur, voisinage). <b>🔀 Ordre respecté</b> : l'app repère la zone de la rangée que couvre la photo et aligne les livres un à un dans l'ordre ; vous corrigez au besoin l'ordre de deux voisins avec la poignée ≡. Rien n'est modifié sans votre accord.</div>
            <div id="zoneUnRang" style="margin-top:8px"></div>
            <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
            <input type="file" id="cFichier" accept="image/*" hidden>
@@ -3440,6 +3528,8 @@ function ouvrirCompartiment(b, k){
     bAn.title = appoint ? "L'IA lit cette photo ; l'application compare ce qu'elle lit aux listes des rangées" : "";
     const expA = f.querySelector("#cExplAppoint");
     if (expA) expA.style.display = appoint ? "" : "none";
+    const bOrd = f.querySelector("#cAppointOrdre");
+    if (bOrd) bOrd.style.display = appoint && photoObj(cs, face) ? "" : "none";
     if (!photoObj(cs, face)){
       z.innerHTML = face === "photo2"
         ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à l'IA, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
@@ -3601,6 +3691,21 @@ function ouvrirCompartiment(b, k){
     ev.target.value = "";
   };
 
+  f.querySelector("#cAppointOrdre").onclick = async ()=>{
+    if (!estAppoint(face)) return;
+    const champ = face;
+    const btnO = f.querySelector("#cAppointOrdre");
+    btnO.disabled = true; btnO.textContent = "Lecture de la photo…";
+    try{
+      const r = await lireAppoint(b, k, champ, { manuel:true });
+      fenetreFusionAppoint(b, k, champ, r.lus, r.source);
+    }catch(e){
+      if (e.manuel){ lancerClaudeManuel(b, k, e.parties, e.echecs, e.ia, "controle", idAppoint(champ) + "|ordre"); }
+      else montrerErreurAnalyse(e);
+    }finally{
+      btnO.disabled = false; btnO.textContent = "🔀 Vérifier avec cette photo (ordre respecté)";
+    }
+  };
   f.querySelector("#cAnalyser").onclick = async ()=>{
     const btnA = f.querySelector("#cAnalyser");
     if (estAppoint(face)){
