@@ -4146,7 +4146,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4154,6 +4155,11 @@
          "champ": "appoint:muec75xnhw210",
          "x1": 690,
          "x2": 740
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 0,
+         "x2": 80
         }
        ]
       },
@@ -4170,7 +4176,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4178,8 +4185,36 @@
          "champ": "appoint:muec75xnhw210",
          "x1": 740,
          "x2": 810
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 80,
+         "x2": 150
         }
        ]
+      },
+      {
+       "id": "muf4dj0h10t9c",
+       "titre": "JANE SMILEY",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 150,
+         "x2": 220
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muf4basr743j7",
@@ -4194,7 +4229,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4202,6 +4238,11 @@
          "champ": "appoint:muec75xnhw210",
          "x1": 810,
          "x2": 880
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 220,
+         "x2": 280
         }
        ]
       },
@@ -4226,7 +4267,17 @@
        "temoins": [
         "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 265,
+         "x2": 295
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-24T05:57:40.249Z"
+       }
       },
       {
        "id": "muf4basrduiam",
@@ -4240,9 +4291,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 280,
+         "x2": 340
+        }
+       ]
       },
       {
        "id": "muf4basrxxelk",
@@ -4256,9 +4315,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 340,
+         "x2": 390
+        }
+       ]
       },
       {
        "id": "muf4basrsbhqs",
@@ -4272,9 +4339,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 390,
+         "x2": 450
+        }
+       ]
       },
       {
        "id": "muf4basrtg274",
@@ -4288,9 +4363,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 450,
+         "x2": 500
+        }
+       ]
       },
       {
        "id": "muf4basrp4zgy",
@@ -4304,7 +4387,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 500,
+         "x2": 560
+        }
+       ]
+      },
+      {
+       "id": "muf4dj0hwayed",
+       "titre": "Romancée-Conti 1935",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 560,
+         "x2": 590
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
        "statut": "probable"
       },
@@ -4320,9 +4434,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 590,
+         "x2": 640
+        }
+       ]
       },
       {
        "id": "muf4basrudd4n",
@@ -4336,9 +4458,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 640,
+         "x2": 700
+        }
+       ]
       },
       {
        "id": "muf4basrs25kq",
@@ -4352,9 +4482,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 700,
+         "x2": 750
+        }
+       ]
       },
       {
        "id": "muf4basr540v9",
@@ -4368,9 +4506,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 750,
+         "x2": 790
+        }
+       ]
       },
       {
        "id": "muf4basrbip4z",
@@ -4384,9 +4530,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 790,
+         "x2": 830
+        }
+       ]
       },
       {
        "id": "muf4basrctca1",
@@ -4400,9 +4554,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 830,
+         "x2": 880
+        }
+       ]
       },
       {
        "id": "muf4basr1vxib",
@@ -4416,9 +4578,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 880,
+         "x2": 930
+        }
+       ]
       },
       {
        "id": "muf4basrbticy",
@@ -4623,7 +4793,34 @@
        "envoye": true,
        "maj": "2026-09-24T05:53:07.325Z",
        "id": "muec92wh8n0ai",
-       "legende": ""
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 15,
+        "date": "2026-09-24T05:57:02.458Z"
+       },
+       "livresVus": [
+        "muf4basrccnsz",
+        "muf4basri8tl8",
+        "muf4dj0h10t9c",
+        "muf4basr743j7",
+        "muf4basrduiam",
+        "muf4basrxxelk",
+        "muf4basrsbhqs",
+        "muf4basrtg274",
+        "muf4basrp4zgy",
+        "muf4dj0hwayed",
+        "muf4basrvv86q",
+        "muf4basrudd4n",
+        "muf4basrs25kq",
+        "muf4basr540v9",
+        "muf4basrbip4z",
+        "muf4basrctca1",
+        "muf4basr1vxib"
+       ],
+       "verif": "2026-09-24T05:57:40.250Z"
       },
       {
        "plein": null,
@@ -8862,7 +9059,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:56:35.930Z",
+ "maj": "2026-09-24T05:57:41.306Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
