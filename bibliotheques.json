@@ -4261,17 +4261,7 @@
        "temoins": [
         "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muf4j5sbh0mwb",
-         "x1": 444,
-         "x2": 474
-        },
-        "source": "l'appoint 6",
-        "date": "2026-09-24T06:02:30.110Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "muf4basr743j7",
@@ -9284,7 +9274,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T06:02:30.789Z",
+ "maj": "2026-09-24T06:03:11.213Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
