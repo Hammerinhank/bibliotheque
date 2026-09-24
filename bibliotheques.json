@@ -4317,6 +4317,696 @@
         "photo:2026-09-22T16:36:08.886Z"
        ],
        "statut": "probable"
+      },
+      {
+       "id": "muf3e24v99qiu",
+       "titre": "Les mains sales",
+       "auteur": "Sartre",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 22,
+         "x2": 85
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24viso6v",
+       "titre": "Gomorra",
+       "auteur": "Roberto Saviano",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 4977",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 88,
+         "x2": 150
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v7tszw",
+       "titre": "L'affaire Collini",
+       "auteur": "Ferdinand von Schirach",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "Folio, titre partiellement lisible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 150,
+         "x2": 190
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vh11jw",
+       "titre": "Une vie entière",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Folio 7456",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 158,
+         "x2": 200
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v6a1f8",
+       "titre": "Le café sans nom",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 185,
+         "x2": 225
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vnnaqe",
+       "titre": "Le libraire de Kaboul",
+       "auteur": "Åsne Seierstad",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Folio 6527",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 210,
+         "x2": 260
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vogsrn",
+       "titre": "Douleur",
+       "auteur": "Zeruya Shalev",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "Folio, titre peu lisible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 250,
+         "x2": 290
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v6o2oj",
+       "titre": "Les raisins verts",
+       "auteur": "Pierre-Henri Simon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Livre de Poche 83",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 285,
+         "x2": 350
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v8g0ma",
+       "titre": "La maison de Bretagne",
+       "auteur": "Marie Sizun",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "Folio 7098, auteur incertain",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 305,
+         "x2": 345
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v18dwv",
+       "titre": "Nos premiers jours",
+       "auteur": "Jane Smiley",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Rivages poche 498",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 330,
+         "x2": 380
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vahxmy",
+       "titre": "Une journée d'Ivan Denissovitch",
+       "auteur": "Alexandre Soljenitsyne",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 368,
+         "x2": 415
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vfhpvm",
+       "titre": "L'étrange cas du Dr Jekyll et de M. Hyde",
+       "auteur": "Stevenson",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "Folio classique, peu lisible",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 390,
+         "x2": 430
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vnrmxh",
+       "titre": "Killdozer",
+       "auteur": "Theodore Sturgeon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai lu 407",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 418,
+         "x2": 462
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24voebp5",
+       "titre": "Cristal qui songe",
+       "auteur": "Theodore Sturgeon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 450,
+         "x2": 500
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vb4y72",
+       "titre": "Les fabuleuses aventures d'un Indien malchanceux qui devint milliardaire",
+       "auteur": "Vikas Swarup",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "10/18 4044",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 478,
+         "x2": 525
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v7kqh2",
+       "titre": "Le Guépard",
+       "auteur": "Giuseppe Tomasi di Lampedusa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 535,
+         "x2": 585
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v1ut7u",
+       "titre": "L'anomalie",
+       "auteur": "Hervé Le Tellier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 7096",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 550,
+         "x2": 610
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vqrm80",
+       "titre": "Théâtre complet I",
+       "auteur": "Tchekhov",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche 393",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 575,
+         "x2": 645
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vc6g88",
+       "titre": "Sur les chemins noirs",
+       "auteur": "Sylvain Tesson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 6597",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 618,
+         "x2": 658
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vghexc",
+       "titre": "Une vie à coucher dehors",
+       "auteur": "Sylvain Tesson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 5142",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 640,
+         "x2": 682
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24ve3392",
+       "titre": "Long Island",
+       "auteur": "Colm Tóibín",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 658,
+         "x2": 702
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vk8dg7",
+       "titre": "La sonate à Kreutzer",
+       "auteur": "Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche 622",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 682,
+         "x2": 738
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v0ydy4",
+       "titre": "Le cheval",
+       "auteur": "Léon Tolstoï",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 728,
+         "x2": 758
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vt3kq3",
+       "titre": "Résurrection tome 1",
+       "auteur": "Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 752,
+         "x2": 788
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v3pgsn",
+       "titre": "Résurrection tome 2",
+       "auteur": "Tolstoï",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 785,
+         "x2": 820
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vc7hzm",
+       "titre": "Les guerres intérieures",
+       "auteur": "Valérie Tong Cuong",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 825,
+         "x2": 842
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24v30ehz",
+       "titre": "La conjuration des imbéciles",
+       "auteur": "J.K. Toole",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "10/18",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 842,
+         "x2": 872
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vsaja0",
+       "titre": "Mémoires d'un chasseur",
+       "auteur": "Tourguéniev",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 872,
+         "x2": 912
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vjvjpt",
+       "titre": "Les météores",
+       "auteur": "Tournier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 905",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 912,
+         "x2": 955
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3e24vxw9qm",
+       "titre": "L'Italienne",
+       "auteur": "Adriana Trigiani",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points P4049",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 950,
+         "x2": 995
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable"
       }
      ],
      "photo": {
@@ -5202,14 +5892,15 @@
       ]
      },
      "analyse": {
-      "maj": "2026-09-24T05:25:22.595Z",
+      "maj": "2026-09-24T05:29:27.634Z",
       "rangs": {
-       "devant": "2026-09-24T05:25:22.595Z"
+       "devant": "2026-09-24T05:25:22.595Z",
+       "derriere": "2026-09-24T05:29:27.634Z"
       },
-      "ia": "gemini",
-      "modele": "gemini-2.5-flash",
+      "ia": "claude",
+      "modele": "claude.ai (copier-coller)",
       "photos": 2,
-      "manuel": false
+      "manuel": true
      }
     },
     "10-3": {
@@ -7615,7 +8306,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:25:23.320Z",
+ "maj": "2026-09-24T05:29:29.081Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
