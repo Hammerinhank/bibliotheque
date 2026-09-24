@@ -4480,6 +4480,52 @@
        "statut": "probable"
       },
       {
+       "id": "muf3gjxdujg7n",
+       "titre": "La légende de violet",
+       "auteur": "Zeruya Shalev",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 0,
+         "x2": 60
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3gjxd66cgy",
+       "titre": "La croisade de l'idiot",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 60,
+         "x2": 100
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "muf3e24v6o2oj",
        "titre": "Les raisins verts",
        "auteur": "Pierre-Henri Simon",
@@ -4495,12 +4541,18 @@
          "champ": "photo2",
          "x1": 285,
          "x2": 350
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 100,
+         "x2": 140
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24v8g0ma",
@@ -4523,7 +4575,21 @@
        "temoins": [
         "photo2:2026-09-23T16:26:57.591Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "La maison de D...",
+         "auteur": "JANE SMILEY"
+        },
+        "vue": {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 140,
+         "x2": 180
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-24T05:32:01.250Z"
+       }
       },
       {
        "id": "muf3e24v18dwv",
@@ -4546,7 +4612,21 @@
        "temoins": [
         "photo2:2026-09-23T16:26:57.591Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "NOS PREMIERS JOURS",
+         "auteur": "Maria"
+        },
+        "vue": {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 180,
+         "x2": 220
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-24T05:32:01.250Z"
+       }
       },
       {
        "id": "muf3e24vahxmy",
@@ -4569,7 +4649,17 @@
        "temoins": [
         "photo2:2026-09-23T16:26:57.591Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 205,
+         "x2": 235
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-24T05:32:01.250Z"
+       }
       },
       {
        "id": "muf3e24vfhpvm",
@@ -4587,12 +4677,18 @@
          "champ": "photo2",
          "x1": 390,
          "x2": 430
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 220,
+         "x2": 280
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24vnrmxh",
@@ -4610,12 +4706,18 @@
          "champ": "photo2",
          "x1": 418,
          "x2": 462
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 280,
+         "x2": 330
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24voebp5",
@@ -4633,12 +4735,18 @@
          "champ": "photo2",
          "x1": 450,
          "x2": 500
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 330,
+         "x2": 380
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24vb4y72",
@@ -4656,10 +4764,39 @@
          "champ": "photo2",
          "x1": 478,
          "x2": 525
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 380,
+         "x2": 440
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "muf3gjxd5tyo4",
+       "titre": "Romanée-Conti 1935",
+       "auteur": "KAIKÔ",
+       "annee": "1935",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 440,
+         "x2": 480
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
        "statut": "probable"
       },
@@ -4679,12 +4816,18 @@
          "champ": "photo2",
          "x1": 535,
          "x2": 585
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 480,
+         "x2": 520
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24v1ut7u",
@@ -4702,12 +4845,18 @@
          "champ": "photo2",
          "x1": 550,
          "x2": 610
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 520,
+         "x2": 570
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24vqrm80",
@@ -4725,12 +4874,18 @@
          "champ": "photo2",
          "x1": 575,
          "x2": 645
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 570,
+         "x2": 630
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24vc6g88",
@@ -4748,12 +4903,18 @@
          "champ": "photo2",
          "x1": 618,
          "x2": 658
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 630,
+         "x2": 680
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24vghexc",
@@ -4771,12 +4932,18 @@
          "champ": "photo2",
          "x1": 640,
          "x2": 682
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 680,
+         "x2": 720
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24ve3392",
@@ -4794,12 +4961,18 @@
          "champ": "photo2",
          "x1": 658,
          "x2": 702
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 720,
+         "x2": 780
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24vk8dg7",
@@ -4817,12 +4990,18 @@
          "champ": "photo2",
          "x1": 682,
          "x2": 738
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 780,
+         "x2": 870
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24v0ydy4",
@@ -4840,10 +5019,39 @@
          "champ": "photo2",
          "x1": 728,
          "x2": 758
+        },
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 870,
+         "x2": 910
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "muf3gjxd314vz",
+       "titre": "RÉSUMÉ",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec92wh8n0ai",
+         "x1": 910,
+         "x2": 950
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec92wh8n0ai:2026-09-23T16:52:49.464Z"
        ],
        "statut": "probable"
       },
@@ -5031,7 +5239,7 @@
        "maj": "2026-09-23T16:49:11.069Z",
        "id": "muec75xnhw210",
        "legende": "",
-       "verif": "2026-09-23T20:31:53.890Z",
+       "verif": "2026-09-24T05:30:52.245Z",
        "livresVus": [
         "muef9o75ouq4r",
         "muef9o75z1vkp",
@@ -5047,7 +5255,14 @@
         "muef9o7529m5a",
         "muef9o75ca8oy",
         "muefe6pf8qj4a"
-       ]
+       ],
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 10,
+        "date": "2026-09-24T05:30:01.832Z"
+       }
       },
       {
        "plein": null,
@@ -5056,7 +5271,33 @@
        "maj": "2026-09-23T16:52:49.464Z",
        "id": "muec92wh8n0ai",
        "legende": "",
-       "verif": "2026-09-23T18:53:29.391Z"
+       "verif": "2026-09-24T05:32:01.251Z",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 13,
+        "date": "2026-09-24T05:31:23.998Z"
+       },
+       "livresVus": [
+        "muf3gjxdujg7n",
+        "muf3gjxd66cgy",
+        "muf3e24v6o2oj",
+        "muf3e24vfhpvm",
+        "muf3e24vnrmxh",
+        "muf3e24voebp5",
+        "muf3e24vb4y72",
+        "muf3gjxd5tyo4",
+        "muf3e24v7kqh2",
+        "muf3e24v1ut7u",
+        "muf3e24vqrm80",
+        "muf3e24vc6g88",
+        "muf3e24vghexc",
+        "muf3e24ve3392",
+        "muf3e24vk8dg7",
+        "muf3e24v0ydy4",
+        "muf3gjxd314vz"
+       ]
       },
       {
        "plein": null,
@@ -8306,7 +8547,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:29:29.081Z",
+ "maj": "2026-09-24T05:32:02.225Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
