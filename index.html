@@ -383,8 +383,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.51.0";
+const VERSION = "V1.51.1";
 const HISTORIQUE = [
+  { v:"V1.51.1", d:"24/09/2026", l:[
+    "« ↩ Rétablir » (liste d'avant le vidage) n'est plus proposé dès qu'une rangée du compartiment est certifiée ★ : il aurait remplacé une liste certifiée par une ancienne liste."
+  ]},
   { v:"V1.51.0", d:"24/09/2026", l:[
     "Rangée certifiée ★ = consultation seule : pour ses photos (devant, derrière, appoints qui s'y rapportent), plus de changement ou retrait de photo, de lignes de coupe, de légende ni d'analyse ; pour ses livres, plus de Modifier, Supprimer, Confirmer, questions ni glisser-déposer. « Vider les listes » et « Ajouter un livre à la main » épargnent la rangée certifiée.",
     "Tout redevient accessible dès que la certification est retirée."
@@ -1665,6 +1668,7 @@ async function viderListesCompartiment(b, k){
 function retablirListesCompartiment(b, k){
   const cs = b.cases[k], sv = cs && cs.avantReconstruction;
   if (!sv) return;
+  if (cs.certif){ toast("Impossible : une rangée de ce compartiment est certifiée ★.", 5000); return; }
   cs.livres = sv.livres; delete cs.avantReconstruction; sauver();
   if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
   toast(`Liste du ${dateFr(sv.date)} rétablie (${cs.livres.length} livre(s)).`, 5000);
@@ -4666,12 +4670,12 @@ function ouvrirCompartiment(b, k){
     }
     const bVider = `<div class="barre" style="margin:-2px 0 8px">
          ${l.some(lv=>!certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")) ? `<button class="btn" data-vider="1" style="flex:1">🗑 Vider ${cs.certif ? "les rangées non certifiées" : "les listes"}</button>` : ""}
-         ${cs.avantReconstruction ? `<button class="btn" data-retablir="1" style="flex:1">↩ Rétablir (${cs.avantReconstruction.livres.length} livres du ${esc(dateFr(cs.avantReconstruction.date))})</button>` : ""}</div>`;
+         ${cs.avantReconstruction && !cs.certif ? `<button class="btn" data-retablir="1" style="flex:1">↩ Rétablir (${cs.avantReconstruction.livres.length} livres du ${esc(dateFr(cs.avantReconstruction.date))})</button>` : ""}</div>`;
     const brancherVider = ()=>{
       const v = zf.querySelector("[data-vider]"); if (v) v.onclick = ()=>viderListesCompartiment(b, k);
       const r = zf.querySelector("[data-retablir]"); if (r) r.onclick = ()=>retablirListesCompartiment(b, k);
     };
-    if (!l.length){ zf.innerHTML = cs.avantReconstruction ? bVider : ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Choisissez une photo en haut (Devant, Derrière, appoint), puis, dans l'encadré « Analyse de cette photo » : 🔍 nouvelle analyse par l'IA, ou ♻️ réutiliser l'analyse sauvegardée.</div>`; return; }
+    if (!l.length){ zf.innerHTML = cs.avantReconstruction && !cs.certif ? bVider : ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Choisissez une photo en haut (Devant, Derrière, appoint), puis, dans l'encadré « Analyse de cette photo » : 🔍 nouvelle analyse par l'IA, ou ♻️ réutiliser l'analyse sauvegardée.</div>`; return; }
     zf.innerHTML = bVider +
       ["devant","derriere"].filter(r=>etatRangee(cs, r).total).map(r=>{
         const e = etatRangee(cs, r), nomR = r === "derriere" ? "Rangée 2" : "Rangée 1";
