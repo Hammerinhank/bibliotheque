@@ -8356,7 +8356,20 @@
        "remarque": "Éditions Plon",
        "resume": "Ce dixième tome de la série Fortune de France retrace les péripéties amoureuses et politiques sous Louis XIII.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
+      },
+      {
+       "titre": "La pique du jour",
+       "auteur": "Robert Merle",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "muf6nf531kjyn",
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe7atb1o",
@@ -8367,7 +8380,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Neuvième volume de Fortune de France, ce roman historique dépeint la fin du règne d'Henri IV.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe7e76zp",
@@ -8378,7 +8392,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Onze volume de la saga, il narre l'enfance du futur roi Louis XIV au cœur des intrigues de cour.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe7w4snv",
@@ -8389,7 +8404,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Dernier tome de la fresque Fortune de France, il conclut les aventures de la lignée des Siorac.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe7wdfy9",
@@ -8400,7 +8416,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Ce septième roman de la série Fortune de France suit les soubresauts politiques et religieux sous le règne de Louis XIII.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe76n5vn",
@@ -8411,7 +8428,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Huitième volet de Fortune de France, l'œuvre s'attarde sur les passions amoureuses et les complots de la cour.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe7g8kai",
@@ -8422,7 +8440,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Sixième tome de Fortune de France, le récit plonge le lecteur dans les conspirations de l'époque de Richelieu.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe74qk7e",
@@ -8433,7 +8452,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Douzième et ultime volume des aventures de Fortune de France, marquant la fin de la grande fresque historique.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe7rqu5i",
@@ -8444,7 +8464,8 @@
        "remarque": "Éditions de Fallois Paris",
        "resume": "Ce roman d'anticipation aborde la menace d'une guerre nucléaire imminente à travers le regard de scientifiques.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "mudjmfe75v0ug",
@@ -8455,7 +8476,8 @@
        "remarque": "Éditions Plon",
        "resume": "Sous le règne de Louis XIII, un jeune garçon doté d'une voix d'ange bouleverse la cour en devenant le premier castrat adulé.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -8470,7 +8492,10 @@
       "photos": 1,
       "manuel": false
      },
-     "unRang": true
+     "unRang": true,
+     "certif": {
+      "devant": "2026-09-24T07:01:19.926Z"
+     }
     },
     "5-1": {
      "livres": [
@@ -9932,7 +9957,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T06:50:59.198Z",
+ "maj": "2026-09-24T07:01:24.814Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
