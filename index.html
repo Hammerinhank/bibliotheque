@@ -280,6 +280,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .photo-apercu{width:100%;border-radius:10px;border:1px solid var(--trait);display:block}
 /* ---------- lignes de coupe ---------- */
 .cadrePhoto{position:relative;border-radius:10px;overflow:hidden}
+/* affichage « Entière » : toute la photo dans le cadre, sans défilement interne */
+.cadreCentre{text-align:center}
+.cadreCentre .cadrePhoto{display:inline-block;vertical-align:top;max-width:100%}
+.cadreCentre .photo-apercu{width:auto;max-width:100%;max-height:52vh;margin:0 auto}
+/* affichages 100 % et 200 % : la photo défile dans son cadre */
+.cadreZoom{overflow:auto;-webkit-overflow-scrolling:touch;max-height:60vh;border:1px solid var(--trait);border-radius:10px;background:#000}
+.cadreZoom .photo-apercu{max-width:none;border:0;border-radius:0}
 .cadrePhoto .photo-apercu{-webkit-user-drag:none;-webkit-touch-callout:none}
 .cadrePhoto.coupe{touch-action:none;-webkit-user-select:none;user-select:none}
 .voile{position:absolute;left:0;right:0;background:rgba(0,0,0,.5);pointer-events:none}
@@ -383,8 +390,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.53.1";
+const VERSION = "V1.54.0";
 const HISTORIQUE = [
+  { v:"V1.54.0", d:"24/09/2026", l:[
+    "Fenêtre d'un compartiment : la photo s'affiche par défaut « Entière », visible en totalité dans son cadre ; faire défiler au-dessus d'elle fait défiler la page, pas la photo.",
+    "À côté, les trois autres affichages : Ajustée (pleine largeur), 100 % et 200 % (la photo défile alors dans son cadre). « Entière » est toujours resélectionnée à l'ouverture d'un compartiment et au changement de photo."
+  ]},
   { v:"V1.53.1", d:"24/09/2026", l:[
     "Demande à Claude / Gemini sans clé : « Copier la question à la main » placé en tête de l'étape 1, avant « Copier la photo » (qui reste le bouton principal). S'il est utilisé, les étapes se réécrivent d'elles-mêmes dans le bon ordre : coller la question dans l'IA ouverte vide, revenir copier la photo, la coller, envoyer."
   ]},
@@ -4463,6 +4474,7 @@ function ouvrirCompartiment(b, k){
   const ecrireCoupe = ()=>{ try{ localStorage.setItem(CLE_COUPE, JSON.stringify({ haut:coupe.haut, bas:coupe.bas })); }catch(e){} };
   let coupe = lireCoupe();
   let lignesVisibles = false;
+  let zoomPhoto = "entiere";        // "entiere" (par défaut) | "fit" (pleine largeur) | "1" | "2"
   let avantTroncature = null;     // pour « Annuler la troncature » tant que la fenêtre est ouverte
 
   const placerLignes = ()=>{
@@ -4574,7 +4586,7 @@ function ouvrirCompartiment(b, k){
 
   const changerFace = (nouvelle)=>{
     if (face === nouvelle) return;
-    face = nouvelle; lignesVisibles = false; avantTroncature = null;
+    face = nouvelle; lignesVisibles = false; avantTroncature = null; zoomPhoto = "entiere";
     majPhoto();
     if (typeof majLivres === "function") majLivres();
   };
@@ -4710,12 +4722,21 @@ function ouvrirCompartiment(b, k){
       return;
     }
 
-    z.innerHTML =
-      `<div class="cadrePhoto${lignesVisibles ? " coupe" : ""}" id="cCadre">
+    if (lignesVisibles && (zoomPhoto === "1" || zoomPhoto === "2")) zoomPhoto = "entiere";   // lignes de coupe : photo entière ou ajustée
+    const zoomNum = zoomPhoto === "1" || zoomPhoto === "2";
+    const cadreHtml = `<div class="cadrePhoto${lignesVisibles ? " coupe" : ""}" id="cCadre">
          <img class="photo-apercu" src="${src}" alt="Compartiment ${k}">
          ${lignesVisibles ? `<div class="voile h"></div><div class="voile b"></div><div class="voile g"></div><div class="voile d"></div>
            <div class="ligneCoupe h"></div><div class="ligneCoupe b"></div><div class="ligneV g"></div><div class="ligneV d"></div>` : ""}
+       </div>`;
+    z.innerHTML =
+      `<div class="onglets" id="cZoom" style="margin-bottom:6px">
+         <button data-pz="entiere" class="${zoomPhoto==="entiere"?"actif":""}">Entière</button>
+         <button data-pz="fit" class="${zoomPhoto==="fit"?"actif":""}">Ajustée</button>
+         ${lignesVisibles ? "" : `<button data-pz="1" class="${zoomPhoto==="1"?"actif":""}">100 %</button>
+         <button data-pz="2" class="${zoomPhoto==="2"?"actif":""}">200 %</button>`}
        </div>
+       ${zoomPhoto === "entiere" ? `<div class="cadreCentre">${cadreHtml}</div>` : zoomNum ? `<div class="cadreZoom" id="cZoneZoom">${cadreHtml}</div>` : cadreHtml}
        <div class="aide">Définition : <span class="dims" id="cDims">…</span>${lignesVisibles ? "" : " — touchez la photo pour la voir en taille réelle"}</div>
        <div class="barre" style="margin:8px 0 2px">
          <button class="btn" id="cTailleReelle" style="flex:1">🔍 Taille réelle</button>
@@ -4731,13 +4752,17 @@ function ouvrirCompartiment(b, k){
 
     const cadre = z.querySelector("#cCadre");
     const img = cadre.querySelector("img");
-    const dims = ()=>{ const d = z.querySelector("#cDims"); if (d) d.textContent = infoImage(img, src); };
+    const dims = ()=>{
+      const d = z.querySelector("#cDims"); if (d) d.textContent = infoImage(img, src);
+      if (zoomNum) img.style.width = (img.naturalWidth * Number(zoomPhoto)) + "px";      // même échelle que la visionneuse
+    };
     if (img.complete) dims(); else img.onload = dims;
+    z.querySelectorAll("[data-pz]").forEach(bt=>bt.onclick = ()=>{ zoomPhoto = bt.dataset.pz; majPhoto(); });
 
     if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
     img.addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
     const titrePhoto = `Compartiment ${lib(k)}${appoint ? " (appoint "+num+")" : face==="photo2" ? " (derrière)" : ""} — taille réelle`;
-    img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, titrePhoto); });
+    img.addEventListener("click", ()=>{ if (!lignesVisibles && !zoomNum) visionneuse(src, titrePhoto); });
 
     z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, titrePhoto);
     const bLig = z.querySelector("#cLignes");
