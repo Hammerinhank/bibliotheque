@@ -3869,7 +3869,456 @@
      }
     },
     "7-2": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "muf38t254yod3",
+       "titre": "L'art de perdre",
+       "auteur": "Alice Zeniter",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25fpr0m",
+       "titre": "Au long du grand canal",
+       "auteur": "Zhang Xinxin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25on18u",
+       "titre": "Actes Sud / L'Aire",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Collection",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25i7vva",
+       "titre": "Richard Wright",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25jyfwu",
+       "titre": "Virginia Woolf",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio classique",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t256un8m",
+       "titre": "Le Choeur des femmes",
+       "auteur": "Martin Winckler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25260xc",
+       "titre": "Le crime de Lord Arthur Savile",
+       "auteur": "Oscar Wilde",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25jl1kv",
+       "titre": "Le témoin oculaire",
+       "auteur": "Ernst Weiss",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25z6e81",
+       "titre": "Le plus clair de la lune",
+       "auteur": "Wang Anyi",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25ywr0p",
+       "titre": "L'automne à Pékin",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25cbd92",
+       "titre": "L'écume des jours",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25pfe1o",
+       "titre": "Cantilènes en gelée",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25hw519",
+       "titre": "Trouble dans les Andains",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25lodl5",
+       "titre": "L'herbe rouge",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25kddh0",
+       "titre": "La croule",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25phs7x",
+       "titre": "La Rose de la Mer",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t252zq2k",
+       "titre": "Mon seul amour",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t255kgrf",
+       "titre": "Si loin, si longtemps",
+       "auteur": "Inga Vesper",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25md9bb",
+       "titre": "Monsieur Teste",
+       "auteur": "Paul Valéry",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25dknjs",
+       "titre": "Body Language",
+       "auteur": "A.K. Turner",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25zipdt",
+       "titre": "Johnny s'en va-t-en guerre",
+       "auteur": "Dalton Trumbo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Babel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t251uhho",
+       "titre": "Les Eygletière (1)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25dnj1s",
+       "titre": "Les Eygletière (2)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25ti0mn",
+       "titre": "Les Eygletière (3)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25yxnzr",
+       "titre": "Le sac et la cendre I",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25vdowr",
+       "titre": "Le sac et la cendre II",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25visq3",
+       "titre": "Étrangers sur la terre I",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf38t25qaces",
+       "titre": "Étrangers sur la terre II",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "temoins": [
+        "photo:2026-09-22T16:36:08.886Z"
+       ],
+       "statut": "probable"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/7-2.jpg",
@@ -4751,6 +5200,16 @@
         "rang": "derriere"
        }
       ]
+     },
+     "analyse": {
+      "maj": "2026-09-24T05:25:22.595Z",
+      "rangs": {
+       "devant": "2026-09-24T05:25:22.595Z"
+      },
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash",
+      "photos": 2,
+      "manuel": false
      }
     },
     "10-3": {
@@ -7156,7 +7615,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:24:13.013Z",
+ "maj": "2026-09-24T05:25:23.320Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
