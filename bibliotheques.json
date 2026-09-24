@@ -2804,7 +2804,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkbeuc0",
@@ -2827,7 +2827,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qknisih",
@@ -2850,7 +2850,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkmota7",
@@ -2873,7 +2873,20 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
+      },
+      {
+       "titre": "Les autres",
+       "auteur": "Simenon",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "rang": "derriere",
+       "id": "mufro085iejrz",
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkebequ",
@@ -2954,7 +2967,7 @@
        "temoins": [
         "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qksgvbt",
@@ -3122,7 +3135,7 @@
        "temoins": [
         "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrm6w8si693",
@@ -3145,7 +3158,7 @@
        "temoins": [
         "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkccfu1",
@@ -3197,7 +3210,7 @@
        "temoins": [
         "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qklpqgm",
@@ -3307,7 +3320,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qky7osz",
@@ -3330,7 +3343,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkpbvtc",
@@ -3353,7 +3366,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkrky0a",
@@ -3376,7 +3389,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkcusmn",
@@ -3399,7 +3412,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkyopjm",
@@ -3422,7 +3435,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkpnedk",
@@ -3445,7 +3458,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkhdnx7",
@@ -3468,7 +3481,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkpzl3e",
@@ -3491,7 +3504,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkgyipc",
@@ -3514,7 +3527,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkgvx48",
@@ -3537,7 +3550,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkdvpti",
@@ -3560,7 +3573,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qk1ttux",
@@ -3583,7 +3596,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qk853we",
@@ -3606,7 +3619,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkoao9s",
@@ -3629,7 +3642,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qk8r3g4",
@@ -3652,7 +3665,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkt8rgj",
@@ -3675,7 +3688,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qkbccen",
@@ -3698,7 +3711,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qk6r89e",
@@ -3721,7 +3734,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufrd1qk6d3g9",
@@ -3744,7 +3757,7 @@
        "temoins": [
         "photo2:2026-09-23T16:26:54.695Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -4103,7 +4116,8 @@
       "manuel": true
      },
      "certif": {
-      "devant": "2026-09-24T15:23:19.875Z"
+      "devant": "2026-09-24T15:23:19.875Z",
+      "derriere": "2026-09-24T16:51:00.086Z"
      }
     },
     "6-1": {
@@ -11977,7 +11991,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T16:48:22.371Z",
+ "maj": "2026-09-24T16:51:05.088Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
