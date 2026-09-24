@@ -4031,6 +4031,52 @@
        "statut": "probable"
       },
       {
+       "id": "muf3j7to6g7gy",
+       "titre": "L'ORDRE DU JOUR",
+       "auteur": "ÉRIC VUILLARD",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 0,
+         "x2": 50
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3j7topn5v5",
+       "titre": "L'écume des jours",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 50,
+         "x2": 100
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "muf38t25cbd92",
        "titre": "L'écume des jours",
        "auteur": "Boris Vian",
@@ -4042,9 +4088,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 100,
+         "x2": 140
+        }
+       ]
       },
       {
        "id": "muf38t25pfe1o",
@@ -4058,9 +4112,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 140,
+         "x2": 180
+        }
+       ]
       },
       {
        "id": "muf38t25hw519",
@@ -4076,7 +4138,17 @@
        "temoins": [
         "photo:2026-09-22T16:36:08.886Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 165,
+         "x2": 195
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-24T05:33:30.447Z"
+       }
       },
       {
        "id": "muf38t25lodl5",
@@ -4090,9 +4162,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 180,
+         "x2": 220
+        }
+       ]
       },
       {
        "id": "muf38t25kddh0",
@@ -4106,9 +4186,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 220,
+         "x2": 260
+        }
+       ]
       },
       {
        "id": "muf38t25phs7x",
@@ -4122,9 +4210,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 260,
+         "x2": 300
+        }
+       ]
       },
       {
        "id": "muf38t252zq2k",
@@ -4138,9 +4234,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 300,
+         "x2": 340
+        }
+       ]
       },
       {
        "id": "muf38t255kgrf",
@@ -4156,7 +4260,21 @@
        "temoins": [
         "photo:2026-09-22T16:36:08.886Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "Un long si long après-midi",
+         "auteur": "PAUL VALERY"
+        },
+        "vue": {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 340,
+         "x2": 380
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-24T05:33:30.447Z"
+       }
       },
       {
        "id": "muf38t25md9bb",
@@ -4170,9 +4288,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 380,
+         "x2": 420
+        }
+       ]
       },
       {
        "id": "muf38t25dknjs",
@@ -4186,9 +4312,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 420,
+         "x2": 460
+        }
+       ]
       },
       {
        "id": "muf38t25zipdt",
@@ -4202,9 +4336,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 460,
+         "x2": 500
+        }
+       ]
       },
       {
        "id": "muf38t251uhho",
@@ -4218,9 +4360,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 500,
+         "x2": 540
+        }
+       ]
       },
       {
        "id": "muf38t25dnj1s",
@@ -4234,9 +4384,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 540,
+         "x2": 580
+        }
+       ]
       },
       {
        "id": "muf38t25ti0mn",
@@ -4250,9 +4408,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 580,
+         "x2": 620
+        }
+       ]
       },
       {
        "id": "muf38t25yxnzr",
@@ -4266,9 +4432,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 620,
+         "x2": 660
+        }
+       ]
       },
       {
        "id": "muf38t25vdowr",
@@ -4282,9 +4456,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 660,
+         "x2": 700
+        }
+       ]
       },
       {
        "id": "muf38t25visq3",
@@ -4298,9 +4480,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 700,
+         "x2": 740
+        }
+       ]
       },
       {
        "id": "muf38t25qaces",
@@ -4314,9 +4504,17 @@
        "origine": "ia",
        "rang": "devant",
        "temoins": [
-        "photo:2026-09-22T16:36:08.886Z"
+        "photo:2026-09-22T16:36:08.886Z",
+        "appoint:mue5rvl3sa4zy:2026-09-23T16:26:56.475Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:mue5rvl3sa4zy",
+         "x1": 740,
+         "x2": 780
+        }
+       ]
       },
       {
        "id": "muf3e24v99qiu",
@@ -5471,7 +5669,34 @@
        "maj": "2026-09-23T16:26:56.475Z",
        "legende": "",
        "id": "mue5rvl3sa4zy",
-       "verif": "2026-09-23T18:17:00.575Z"
+       "verif": "2026-09-24T05:33:30.447Z",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 17,
+        "n2": 0,
+        "date": "2026-09-24T05:33:28.261Z"
+       },
+       "livresVus": [
+        "muf3j7to6g7gy",
+        "muf3j7topn5v5",
+        "muf38t25cbd92",
+        "muf38t25pfe1o",
+        "muf38t25lodl5",
+        "muf38t25kddh0",
+        "muf38t25phs7x",
+        "muf38t252zq2k",
+        "muf38t25md9bb",
+        "muf38t25dknjs",
+        "muf38t25zipdt",
+        "muf38t251uhho",
+        "muf38t25dnj1s",
+        "muf38t25ti0mn",
+        "muf38t25yxnzr",
+        "muf38t25vdowr",
+        "muf38t25visq3",
+        "muf38t25qaces"
+       ]
       },
       {
        "plein": null,
@@ -8828,7 +9053,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:33:06.096Z",
+ "maj": "2026-09-24T05:33:31.157Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
