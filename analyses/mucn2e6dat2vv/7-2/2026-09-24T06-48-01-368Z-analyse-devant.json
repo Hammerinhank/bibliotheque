@@ -1,0 +1,660 @@
+{
+ "date": "2026-09-24T06:48:01.368Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "analyse",
+ "portee": "devant",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "livres": [
+  {
+   "id": "muf6739z403m1",
+   "titre": "L'art de perdre",
+   "auteur": "Alice Zeniter",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai Lu",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 34,
+     "x2": 69
+    }
+   ]
+  },
+  {
+   "id": "muf6739zos4o6",
+   "titre": "Mémoires d'une geisha",
+   "auteur": "Inoue Yuki",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "titre partiellement masqué",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 70,
+     "x2": 97
+    }
+   ]
+  },
+  {
+   "id": "muf6739zkv7ov",
+   "titre": "Au long du Grand Canal",
+   "auteur": "Zhang Xinxin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Actes Sud / L'Aire",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 98,
+     "x2": 125
+    }
+   ]
+  },
+  {
+   "id": "muf6739zjq4ar",
+   "titre": "Black Boy",
+   "auteur": "Richard Wright",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche 811-812",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 125,
+     "x2": 156
+    }
+   ]
+  },
+  {
+   "id": "muf6739z1i4wz",
+   "titre": "Mrs Dalloway",
+   "auteur": "Virginia Woolf",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio classique 2643",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 158,
+     "x2": 183
+    }
+   ]
+  },
+  {
+   "id": "muf6739zasuop",
+   "titre": "Le Chœur des femmes",
+   "auteur": "Martin Winckler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio 5198",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 184,
+     "x2": 222
+    }
+   ]
+  },
+  {
+   "id": "muf6739zzytwv",
+   "titre": "La chatte sur un toit brûlant",
+   "auteur": "Tennessee Williams",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "10/18 n°2507",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 223,
+     "x2": 249
+    }
+   ]
+  },
+  {
+   "id": "muf6739z4fjpq",
+   "titre": "Le crime de Lord Arthur Savile",
+   "auteur": "Oscar Wilde",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°674",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 250,
+     "x2": 266
+    }
+   ]
+  },
+  {
+   "id": "muf6739zxxzp3",
+   "titre": "Le témoin oculaire",
+   "auteur": "Ernst Weiss",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio 2261",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 266,
+     "x2": 288
+    }
+   ]
+  },
+  {
+   "id": "muf6739ze4wk0",
+   "titre": "Le plus clair de la lune",
+   "auteur": "Wang Anyi",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Picquier poche",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 288,
+     "x2": 311
+    }
+   ]
+  },
+  {
+   "id": "muf6739zbtukf",
+   "titre": "Sinouhé l'Égyptien I",
+   "auteur": "Mika Waltari",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°1297, jauni",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 312,
+     "x2": 347
+    }
+   ]
+  },
+  {
+   "id": "muf6739zoaiok",
+   "titre": "Sinouhé l'Égyptien II",
+   "auteur": "Mika Waltari",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°1298, jauni",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 348,
+     "x2": 378
+    }
+   ]
+  },
+  {
+   "id": "muf6739zkmd0j",
+   "titre": "Aurora, Kentucky",
+   "auteur": "Carolyn D. Wall",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Points P2640",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 379,
+     "x2": 413
+    }
+   ]
+  },
+  {
+   "id": "muf6739zqaco5",
+   "titre": "Une sortie honorable",
+   "auteur": "Éric Vuillard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Actes Sud",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 414,
+     "x2": 436
+    }
+   ]
+  },
+  {
+   "id": "muf6739z6588w",
+   "titre": "L'ordre du jour",
+   "auteur": "Éric Vuillard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Babel 1783",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 436,
+     "x2": 451
+    }
+   ]
+  },
+  {
+   "id": "muf6739zpxdx5",
+   "titre": "L'automne à Pékin",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "10/18 208-209, usé",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 452,
+     "x2": 486
+    }
+   ]
+  },
+  {
+   "id": "muf6739zdefhe",
+   "titre": "L'écume des jours",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche 14087",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 486,
+     "x2": 506
+    }
+   ]
+  },
+  {
+   "id": "muf6739zn5k64",
+   "titre": "Cantilènes en gelée",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "10/18 n°517",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 506,
+     "x2": 533
+    }
+   ]
+  },
+  {
+   "id": "muf6739ze5ipf",
+   "titre": "Trouble dans les Andains",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "10/18 n°497",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 533,
+     "x2": 553
+    }
+   ]
+  },
+  {
+   "id": "muf6739z8iuf7",
+   "titre": "L'herbe rouge",
+   "auteur": "Boris Vian",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 554,
+     "x2": 570
+    }
+   ]
+  },
+  {
+   "id": "muf6739z3w3tb",
+   "titre": "La croule",
+   "auteur": "Paul Vialar",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Livre de Poche 1798",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 570,
+     "x2": 584
+    }
+   ]
+  },
+  {
+   "id": "muf6739zf65ez",
+   "titre": "La Rose de la Mer",
+   "auteur": "Paul Vialar",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°410",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 586,
+     "x2": 609
+    }
+   ]
+  },
+  {
+   "id": "muf6739zezkaa",
+   "titre": "Mon seul amour",
+   "auteur": "Paul Vialar",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai Lu 501",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 611,
+     "x2": 630
+    }
+   ]
+  },
+  {
+   "id": "muf6739ztu5tc",
+   "titre": "Un long, si long après-midi",
+   "auteur": "Inga Vesper",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Points P5944",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 631,
+     "x2": 658
+    }
+   ]
+  },
+  {
+   "id": "muf6739zet5r5",
+   "titre": "Monsieur Teste",
+   "auteur": "Paul Valéry",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°29",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 659,
+     "x2": 672
+    }
+   ]
+  },
+  {
+   "id": "muf6739zp37vr",
+   "titre": "Body Language",
+   "auteur": "A. K. Turner",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche 36861",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 673,
+     "x2": 697
+    }
+   ]
+  },
+  {
+   "id": "muf6739zc1lj0",
+   "titre": "Johnny s'en va-t-en guerre",
+   "auteur": "Dalton Trumbo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Babel 624",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 698,
+     "x2": 724
+    }
+   ]
+  },
+  {
+   "id": "muf6739z6zkdm",
+   "titre": "Les Eygletière (1)",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai Lu 344",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 725,
+     "x2": 766
+    }
+   ]
+  },
+  {
+   "id": "muf6739ztco6n",
+   "titre": "Les Eygletière (2)",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai Lu 345",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 768,
+     "x2": 806
+    }
+   ]
+  },
+  {
+   "id": "muf6739z6gpov",
+   "titre": "Les Eygletière (3)",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai Lu 346",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 808,
+     "x2": 847
+    }
+   ]
+  },
+  {
+   "id": "muf6739zuixp0",
+   "titre": "Le sac et la cendre I",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°180",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 848,
+     "x2": 886
+    }
+   ]
+  },
+  {
+   "id": "muf6739zjc8px",
+   "titre": "Le sac et la cendre II",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°181",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 888,
+     "x2": 922
+    }
+   ]
+  },
+  {
+   "id": "muf6739zgk78f",
+   "titre": "Étrangers sur la terre II",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°201",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 923,
+     "x2": 955
+    }
+   ]
+  },
+  {
+   "id": "muf6739zzwmk3",
+   "titre": "Étrangers sur la terre I",
+   "auteur": "Henri Troyat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "poche n°200",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 956,
+     "x2": 991
+    }
+   ]
+  }
+ ]
+}
