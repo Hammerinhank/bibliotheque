@@ -7743,185 +7743,7 @@
      }
     },
     "8-3": {
-     "livres": [
-      {
-       "id": "muf7dutxuf2l2",
-       "titre": "Le pain de la mer",
-       "auteur": "Joël Raguénès",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Éditions JC Lattès",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "devant",
-       "vues": [
-        {
-         "champ": "photo",
-         "x1": 130,
-         "x2": 860
-        }
-       ],
-       "temoins": [
-        "photo:2026-09-24T07:20:13.471Z"
-       ],
-       "statut": "probable"
-      },
-      {
-       "id": "mudr1w95b6r11",
-       "titre": "Les Vierges & autres nouvelles",
-       "auteur": "Irène Némirovsky",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Denoël, collection poche",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95sajac",
-       "titre": "Stupeur et tremblements",
-       "auteur": "Amélie Nothomb",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Albin Michel",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w952s3xz",
-       "titre": "Le Gardien des ruines",
-       "auteur": "François Nourissier",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Grasset",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95u68yh",
-       "titre": "La Fabrique des mots",
-       "auteur": "Erik Orsenna",
-       "annee": "",
-       "certitude": "moyenne",
-       "remarque": "tranche partiellement lisible",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95xu1fs",
-       "titre": "L'Avenir de l'eau",
-       "auteur": "Erik Orsenna",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Fayard",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95r38u4",
-       "titre": "Les écureuils de Central Park sont tristes le lundi",
-       "auteur": "Katherine Pancol",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Albin Michel",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95liedt",
-       "titre": "Les Orphelins",
-       "auteur": "Louis Pauwels",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Editions de Fallois",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95pelts",
-       "titre": "La Japonaise",
-       "auteur": "Monique Penissard",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Favre",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95teyn2",
-       "titre": "Couleurs Venise",
-       "auteur": "Michel Peyramaure",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Robert Laffont",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95j4k4q",
-       "titre": "Pharaon",
-       "auteur": "Boleslaw Prus",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      },
-      {
-       "id": "mudr1w95whjf0",
-       "titre": "Le Pain de la mer",
-       "auteur": "Joël Raguénès",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "JC Lattès, livre retourné",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": []
-      }
-     ],
-     "analyse": {
-      "maj": "2026-09-24T07:21:16.635Z",
-      "rangs": {
-       "devant": "2026-09-24T07:21:16.635Z",
-       "derriere": "2026-09-23T06:56:18.569Z"
-      },
-      "ia": "gemini",
-      "modele": "gemini-2.5-flash",
-      "photos": 2,
-      "manuel": false
-     },
+     "livres": [],
      "appoints": [
       {
        "plein": null,
@@ -7950,10 +7772,10 @@
       }
      ],
      "photo2": {
+      "plein": null,
       "chemin": "images/mucn2e6dat2vv/8-3-derriere.jpg",
       "envoye": true,
-      "maj": "2026-09-23T03:25:59.122Z",
-      "plein": null
+      "maj": "2026-09-24T07:33:10.942Z"
      },
      "permutations": [
       "2026-09-24T07:19:05.498Z"
@@ -7963,6 +7785,177 @@
       "chemin": "images/mucn2e6dat2vv/8-3.jpg",
       "envoye": true,
       "maj": "2026-09-24T07:20:13.471Z"
+     },
+     "avantReconstruction": {
+      "date": "2026-09-24T07:43:48.973Z",
+      "livres": [
+       {
+        "id": "muf7dutxuf2l2",
+        "titre": "Le pain de la mer",
+        "auteur": "Joël Raguénès",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Éditions JC Lattès",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "devant",
+        "vues": [
+         {
+          "champ": "photo",
+          "x1": 130,
+          "x2": 860
+         }
+        ],
+        "temoins": [
+         "photo:2026-09-24T07:20:13.471Z"
+        ],
+        "statut": "probable"
+       },
+       {
+        "id": "mudr1w95b6r11",
+        "titre": "Les Vierges & autres nouvelles",
+        "auteur": "Irène Némirovsky",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Denoël, collection poche",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95sajac",
+        "titre": "Stupeur et tremblements",
+        "auteur": "Amélie Nothomb",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Albin Michel",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w952s3xz",
+        "titre": "Le Gardien des ruines",
+        "auteur": "François Nourissier",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Grasset",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95u68yh",
+        "titre": "La Fabrique des mots",
+        "auteur": "Erik Orsenna",
+        "annee": "",
+        "certitude": "moyenne",
+        "remarque": "tranche partiellement lisible",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95xu1fs",
+        "titre": "L'Avenir de l'eau",
+        "auteur": "Erik Orsenna",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Fayard",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95r38u4",
+        "titre": "Les écureuils de Central Park sont tristes le lundi",
+        "auteur": "Katherine Pancol",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Albin Michel",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95liedt",
+        "titre": "Les Orphelins",
+        "auteur": "Louis Pauwels",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Editions de Fallois",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95pelts",
+        "titre": "La Japonaise",
+        "auteur": "Monique Penissard",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Favre",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95teyn2",
+        "titre": "Couleurs Venise",
+        "auteur": "Michel Peyramaure",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "Robert Laffont",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95j4k4q",
+        "titre": "Pharaon",
+        "auteur": "Boleslaw Prus",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       },
+       {
+        "id": "mudr1w95whjf0",
+        "titre": "Le Pain de la mer",
+        "auteur": "Joël Raguénès",
+        "annee": "",
+        "certitude": "haute",
+        "remarque": "JC Lattès, livre retourné",
+        "resume": "",
+        "categorie": "",
+        "origine": "ia",
+        "rang": "derriere",
+        "temoins": []
+       }
+      ]
      }
     },
     "9-2": {
@@ -10016,7 +10009,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T07:21:17.307Z",
+ "maj": "2026-09-24T07:43:49.986Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
