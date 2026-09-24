@@ -1,0 +1,95 @@
+{
+ "date": "2026-09-24T05:33:02.954Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muejko3xqtzoi",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Les mains sales",
+   "auteur": "Sartre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 80,
+   "x2": 220,
+   "illisible": false
+  },
+  {
+   "titre": "LE SURSIS",
+   "auteur": "J. P. SARTRE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 270,
+   "x2": 400,
+   "illisible": false
+  },
+  {
+   "titre": "Gomorra",
+   "auteur": "Roberto Saviano",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 400,
+   "x2": 550,
+   "illisible": false
+  },
+  {
+   "titre": "L'affaire Collini",
+   "auteur": "Ferdinand von Schirach",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 550,
+   "x2": 670,
+   "illisible": false
+  },
+  {
+   "titre": "LES DIX ENFANTS QUE MADAME MING N'A JAMAIS EUS",
+   "auteur": "ERIC-EMMANUEL SCHMITT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 670,
+   "x2": 760,
+   "illisible": false
+  },
+  {
+   "titre": "Une vie entre",
+   "auteur": "Robert Seethaler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 760,
+   "x2": 850,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "Robert Seethaler",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "titre illisible",
+   "x1": 850,
+   "x2": 920,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "Åsne Seierstad",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "titre illisible",
+   "x1": 920,
+   "x2": 990,
+   "illisible": false
+  }
+ ]
+}
