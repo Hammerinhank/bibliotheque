@@ -390,8 +390,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.55.1";
+const VERSION = "V1.55.3";
 const HISTORIQUE = [
+  { v:"V1.55.3", d:"24/09/2026", l:[
+    "Appoints masqués dès que toutes les rangées qui ont des livres sont certifiées ★ (une rangée sans aucun livre n'est plus prise en compte)."
+  ]},
+  { v:"V1.55.2", d:"24/09/2026", l:[
+    "Quand toutes les rangées du compartiment sont certifiées ★, la liste des appoints et le bouton « ➕ Appoint » ne sont plus affichés."
+  ]},
   { v:"V1.55.1", d:"24/09/2026", l:[
     "Section « ⭐ Certification » : repliée, on ne voit que son titre ; dépliée, tout ce qui concerne les certifications — en tête l'état de la rangée de la photo affichée (consultation seule ou non), puis, pour chaque rangée, son état et le bouton pour certifier ou retirer la certification.",
     "Le bandeau « rangée certifiée » au-dessus de la photo et la mention ★ sur la ligne d'état des rangées sont déplacés dans cette section."
@@ -4604,19 +4610,24 @@ function ouvrirCompartiment(b, k){
   const majFaces = ()=>{
     const zf = f.querySelector("#cFaces");
     const app = cs.appoints || [];
+    // toutes les rangées qui ont des livres sont certifiées : plus rien à faire avec les appoints
+    const rangsAvecLivres = ["devant","derriere"].filter(r=>(cs.livres||[]).some(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r));
+    const tousCertifies = rangsAvecLivres.length > 0 && rangsAvecLivres.every(r=>certifiee(cs, r));
+    if (tousCertifies && estAppoint(face)) face = "photo";
     zf.innerHTML =
       `<button data-face="photo" class="${face==="photo"?"actif":""}">📚 Devant${cs.photo?"":" (vide)"}</button>
        <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Derrière"}</button>
-       <div class="colAppoint">
+       ${tousCertifies ? "" : `<div class="colAppoint">
        ${app.length ? `<select id="cAppoints" title="Photos d'appoint">
          <option value="">🖼 Appoints (${app.length})</option>
          ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.rang ? (a.rang === "derriere" ? " · rangée 2" : " · rangée 1") : " · rangée ?"}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
        </select>` : ""}
        <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)">➕ Appoint</button>
-       </div>`;
+       </div>`}`;
     zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>changerFace(bt.dataset.face));
     // bouton direct : Safari (iPhone) n'ouvre l'appareil photo que sur un vrai toucher, pas depuis une liste déroulante
-    zf.querySelector("#cAjoutAppoint").onclick = ajouterAppoint;
+    const bAjA = zf.querySelector("#cAjoutAppoint");
+    if (bAjA) bAjA.onclick = ajouterAppoint;
     const sel = zf.querySelector("#cAppoints");
     if (sel){
       sel.value = estAppoint(face) ? face : "";
