@@ -7753,7 +7753,9 @@
        "remarque": "Denoël, collection poche",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95sajac",
@@ -7764,7 +7766,9 @@
        "remarque": "Albin Michel",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w952s3xz",
@@ -7775,7 +7779,9 @@
        "remarque": "Grasset",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95u68yh",
@@ -7786,7 +7792,9 @@
        "remarque": "tranche partiellement lisible",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95xu1fs",
@@ -7797,7 +7805,9 @@
        "remarque": "Fayard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95r38u4",
@@ -7808,7 +7818,9 @@
        "remarque": "Albin Michel",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95liedt",
@@ -7819,7 +7831,9 @@
        "remarque": "Editions de Fallois",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95pelts",
@@ -7830,7 +7844,9 @@
        "remarque": "Favre",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95teyn2",
@@ -7841,7 +7857,9 @@
        "remarque": "Robert Laffont",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95j4k4q",
@@ -7852,7 +7870,9 @@
        "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       },
       {
        "id": "mudr1w95whjf0",
@@ -7863,14 +7883,11 @@
        "remarque": "JC Lattès, livre retourné",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "rang": "derriere",
+       "temoins": []
       }
      ],
-     "photo": {
-      "chemin": "images/mucn2e6dat2vv/8-3.jpg",
-      "envoye": true,
-      "maj": "2026-09-23T03:25:59.122Z"
-     },
      "analyse": {
       "maj": "2026-09-23T06:56:18.569Z",
       "ia": "gemini",
@@ -7904,6 +7921,15 @@
        "legende": "",
        "verif": "2026-09-23T12:19:21.012Z"
       }
+     ],
+     "photo2": {
+      "chemin": "images/mucn2e6dat2vv/8-3-derriere.jpg",
+      "envoye": true,
+      "maj": "2026-09-23T03:25:59.122Z",
+      "plein": null
+     },
+     "permutations": [
+      "2026-09-24T07:19:05.498Z"
      ]
     },
     "9-2": {
@@ -9957,7 +9983,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T07:01:24.814Z",
+ "maj": "2026-09-24T07:19:10.990Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
