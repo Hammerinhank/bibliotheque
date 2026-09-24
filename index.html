@@ -390,8 +390,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.55.0";
+const VERSION = "V1.55.1";
 const HISTORIQUE = [
+  { v:"V1.55.1", d:"24/09/2026", l:[
+    "Section « ⭐ Certification » : repliée, on ne voit que son titre ; dépliée, tout ce qui concerne les certifications — en tête l'état de la rangée de la photo affichée (consultation seule ou non), puis, pour chaque rangée, son état et le bouton pour certifier ou retirer la certification.",
+    "Le bandeau « rangée certifiée » au-dessus de la photo et la mention ★ sur la ligne d'état des rangées sont déplacés dans cette section."
+  ]},
   { v:"V1.55.0", d:"24/09/2026", l:[
     "Certifications regroupées dans une section repliable « ⭐ Certifications », repliée par défaut : il faut la déplier pour certifier une rangée ou retirer une certification. L'état (★ certifiée ou non) reste visible sur la ligne de chaque rangée et dans le titre de la section."
   ]},
@@ -4691,7 +4695,7 @@ function ouvrirCompartiment(b, k){
     const verrou = !!(rangFace && certifiee(cs, rangFace));
     if (verrou){ lignesVisibles = false; avantTroncature = null; }
     const bV = f.querySelector("#cVerrou");
-    bV.style.display = verrou ? "" : "none";
+    bV.style.display = "none";                     // l'information figure dans la section « ⭐ Certification »
     if (verrou) bV.innerHTML = `<b style="color:#ffd23f">★ ${rangFace === "derriere" ? "Rangée 2" : "Rangée 1"} certifiée — consultation seule.</b>
       <div class="aide" style="margin:4px 0 0">${appoint ? "Cette photo d'appoint se rapporte à cette rangée. " : ""}Pour la modifier, retirez d'abord la certification (dans « Livres de ce compartiment »).</div>`;
     f.querySelector("#cPhoto").style.display = verrou ? "none" : "";
@@ -4843,16 +4847,23 @@ function ouvrirCompartiment(b, k){
         const e = etatRangee(cs, r), nomR = r === "derriere" ? "Rangée 2" : "Rangée 1";
         return `<div class="aide" style="margin:-2px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span><b>${nomR}</b> : ${e.total} livre(s) — <b>${e.acquis}</b> 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions}</b> ❓${e.validee ? " — <b style='color:var(--vert)'>✓ validée</b>" : ""}</span>
-          ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ Certifiée</span>`
-            : `${!e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}`}</div>`;
+          ${!certifiee(cs, r) && !e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}</div>`;
       }).join("") +
       (()=>{
         const rangs = ["devant","derriere"].filter(r=>etatRangee(cs, r).total);
         if (!rangs.length) return "";
         const nomR = (r)=> r === "derriere" ? "Rangée 2" : "Rangée 1";
-        const resume = rangs.map(r=>nomR(r) + (certifiee(cs, r) ? " ★" : " —")).join(" · ");
+        // rangée de la photo affichée
+        const rf = estAppoint(face) ? ((photoObj(cs, face) || {}).rang || null) : (face === "photo2" ? "derriere" : "devant");
+        const nomPhoto = estAppoint(face) ? "l'appoint " + numeroAppoint(cs, face) : face === "photo2" ? "la photo de derrière" : "la photo de devant";
+        const tete = !rf ? `<div class="aide" style="margin:6px 0">La rangée de ${nomPhoto} n'est pas encore connue.</div>`
+          : certifiee(cs, rf)
+            ? `<div class="encadre" style="margin:6px 0;border-color:#ffd23f"><b style="color:#ffd23f">★ ${nomR(rf)} (${nomPhoto}) certifiée le ${esc(dateFr(cs.certif[rf]))} — consultation seule.</b>
+                <div class="aide" style="margin:4px 0 0">Photo et livres de cette rangée ne sont plus modifiables. Pour la modifier, retirez la certification ci-dessous.</div></div>`
+            : `<div class="aide" style="margin:6px 0">${nomR(rf)} (${nomPhoto}) : non certifiée, modifiable.</div>`;
         return `<details style="margin:2px 0 10px;border:1px solid var(--trait);border-radius:8px;padding:6px 10px">
-          <summary style="cursor:pointer;font-weight:600">⭐ Certifications <span class="aide" style="font-weight:400">(${resume})</span></summary>
+          <summary style="cursor:pointer;font-weight:600">⭐ Certification</summary>
+          ${tete}
           <div class="aide" style="margin:6px 0">Certifier une rangée = l'avoir vérifiée livre par livre contre l'étagère : elle passe alors en consultation seule.</div>
           ${rangs.map(r=>`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0">
             <span><b>${nomR(r)}</b> : ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ certifiée le ${esc(dateFr(cs.certif[r]))}</span>` : "non certifiée"}</span>
