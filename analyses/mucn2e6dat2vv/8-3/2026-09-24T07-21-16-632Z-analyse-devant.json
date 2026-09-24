@@ -1,0 +1,33 @@
+{
+ "date": "2026-09-24T07:21:16.632Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "8-3",
+ "genre": "analyse",
+ "portee": "devant",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "livres": [
+  {
+   "id": "muf7dutxuf2l2",
+   "titre": "Le pain de la mer",
+   "auteur": "Joël Raguénès",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions JC Lattès",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 130,
+     "x2": 860
+    }
+   ]
+  }
+ ]
+}
