@@ -4300,39 +4300,6 @@
        ]
       },
       {
-       "id": "muf4c032fpa0a",
-       "titre": "10 18",
-       "auteur": "Alexandre Bel",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muec75xnhw210",
-         "x1": 880,
-         "x2": 920
-        }
-       ],
-       "rang": "derriere",
-       "temoins": [
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
-       ],
-       "statut": "probable",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muec92wh8n0ai",
-         "x1": 265,
-         "x2": 295
-        },
-        "source": "l'appoint 3",
-        "date": "2026-09-24T05:57:40.249Z"
-       }
-      },
-      {
        "id": "muf4basrduiam",
        "titre": "Une journée d'Ivan Denissovitch",
        "auteur": "Alexandre Soljenitsyne",
@@ -4346,7 +4313,8 @@
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
         "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
-        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4359,6 +4327,11 @@
          "champ": "appoint:muf4j5sbh0mwb",
          "x1": 625,
          "x2": 746
+        },
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 880,
+         "x2": 920
         }
        ]
       },
@@ -9274,7 +9247,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T06:03:11.213Z",
+ "maj": "2026-09-24T06:12:40.572Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
