@@ -138,6 +138,9 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
 .case .deux.unRang{background:#ffffff}
+.case .etoile{position:absolute;bottom:3px;z-index:3;font-size:15px;line-height:1;color:#ffd23f;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8)}
+.case .etoile.g{left:4px}
+.case .etoile.d{right:4px}
 .case .deux small{font-size:10px;font-weight:700;opacity:.8}
 .legende .pastilleDeux.gris{background:#ffffff}
 .legende .pastilleDeux{display:inline-block;font-size:10px;font-weight:800;color:#1c1500;background:#ffd23f;border:1px solid #1c1500;border-radius:4px;padding:0 4px;margin-right:4px}
@@ -380,8 +383,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.49.0";
+const VERSION = "V1.50.0";
 const HISTORIQUE = [
+  { v:"V1.50.0", d:"24/09/2026", l:[
+    "Certification d'une rangée : bouton « ⭐ Certifier la rangée » (vérifiée à la main, 100 % conforme) ; tous ses livres deviennent acquis et ses questions sont closes. Réversible.",
+    "Grille : petite étoile dorée en bas à gauche quand la rangée 1 est certifiée, en bas à droite pour la rangée 2.",
+    "Une rangée certifiée n'est plus modifiée par les analyses (nouvelles ou réutilisées) ni par les photos d'appoint."
+  ]},
   { v:"V1.49.0", d:"24/09/2026", l:[
     "Bouton renommé « ♻️ Choisir parmi les analyses sauvegardées (n)… » : il ouvre un choix (laquelle réutiliser, ou ne rien faire), sans action immédiate.",
     "Suppression définitive des sauvegardes d'analyse (🗑, sur l'appareil et sur GitHub) ; les analyses faites sur une photo remplacée depuis sont signalées ⚠️ et supprimables d'un coup.",
@@ -2351,7 +2359,9 @@ function appliquerLivresCompartiment(b, k, livres){
     envoyerDonneesAuto("Listes de livres de " + lib(k)); };
   if (!livres.length){ toast(NOM_IA[(livres.source||{}).ia||"gemini"] + " n'a identifié aucun livre." + texteSource(livres.source), 5000); return; }
   const portee = livres.portee || porteeParDefaut(cs);
-  const concernes = portee === "deux" ? ["devant","derriere"] : [portee];
+  const concernesTous = portee === "deux" ? ["devant","derriere"] : [portee];
+  const concernes = concernesTous.filter(r=>!certifiee(cs, r));
+  if (!concernes.length){ toast("Rangée certifiée ★ : cette analyse ne la modifie pas (retirez la certification pour la mettre à jour).", 6000); return; }
   const anciens = cs.livres || [];
   const ancDe = (r)=>anciens.filter(lv=>rangDe(lv) === r);
   const nouvDe = (r)=>livres.filter(lv=>rangDe(lv) === r);
@@ -2520,6 +2530,7 @@ function ajouterTemoin(lv, t){
 function rendreAcquis(lv){ lv.statut = "acquis"; delete lv.question; }
 const estAcquis = (lv)=> lv.statut === "acquis";
 
+const certifiee = (cs, r)=> !!(cs && cs.certif && cs.certif[r]);
 /* État d'une rangée : { total, acquis, questions, probables, validee } */
 function etatRangee(cs, r){
   const l = (cs.livres||[]).filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r);
@@ -2995,6 +3006,7 @@ async function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
   const deuxRangees = !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere"));
   const nomR = (r)=> r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
   const marquer = ()=>{ if (appoint) appoint.verif = new Date().toISOString(); sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
+  if (certifiee(cs, rangForce)){ toast(`La ${nomR(rangForce)} est certifiée ★ : cette photo d'appoint ne la modifie pas.`, 6000); marquer(); return; }
   const P = preparerFusionAppoint(cs, lus, rangForce, champ);
   if (deuxRangees || P.r === "derriere") P.etapes.forEach(e=>{ if (e.type === "nouveau") e.b.rang = P.r; });
   const zone = P.paires
@@ -4045,7 +4057,7 @@ function rendreBiblio(){
               : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
                                      : `<span class="sansphoto charge">⏳</span>`)}
         <span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}${(()=>{ const q = cs.livres.filter(lv=>lv.question).length, ac = cs.livres.filter(estAcquis).length;
-          return q ? ` <span style="color:#ffb347">❓${q}</span>` : ac === nb ? ` <span style="color:#3ddc6a">✓</span>` : ""; })()}</span>` : ""}</div>`;
+          return q ? ` <span style="color:#ffb347">❓${q}</span>` : ac === nb ? ` <span style="color:#3ddc6a">✓</span>` : ""; })()}</span>` : ""}${cs && cs.certif && cs.certif.devant ? `<span class="etoile g" title="Rangée 1 certifiée">★</span>` : ""}${cs && cs.certif && cs.certif.derriere ? `<span class="etoile d" title="Rangée 2 certifiée">★</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
       <div class="cases" style="grid-template-columns:repeat(${b.compartiments},minmax(52px,1fr))">${cases}</div></div>`;
@@ -4639,7 +4651,10 @@ function ouvrirCompartiment(b, k){
         const e = etatRangee(cs, r), nomR = r === "derriere" ? "Rangée 2" : "Rangée 1";
         return `<div class="aide" style="margin:-2px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span><b>${nomR}</b> : ${e.total} livre(s) — <b>${e.acquis}</b> 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions}</b> ❓${e.validee ? " — <b style='color:var(--vert)'>✓ validée</b>" : ""}</span>
-          ${!e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}</div>`;
+          ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ Certifiée le ${esc(dateFr(cs.certif[r]))}</span>
+             <button class="btn" data-decertif="${r}" style="padding:3px 10px;font-size:12.5px">Retirer la certification</button>`
+            : `${!e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}
+             <button class="btn" data-certif="${r}" style="padding:3px 10px;font-size:12.5px;border-color:#ffd23f">⭐ Certifier la ${nomR.toLowerCase()}</button>`}</div>`;
       }).join("") +
       `<div class="aide" style="margin:-4px 0 8px">${l.length} livre(s) : <b>${n1}</b> sur la rangée 1 (devant) · <b>${n2}</b> sur la rangée 2 (derrière)</div>
        <div class="onglets" style="margin-bottom:10px">
@@ -4695,6 +4710,23 @@ function ouvrirCompartiment(b, k){
       repondreQuestion(cs, lv, el.dataset.v); apresReponse();
     });
     z.querySelectorAll("[data-conf]").forEach(el=>el.onclick=()=>{ rendreAcquis(cs.livres[Number(el.dataset.conf)]); apresReponse(); });
+    zf.querySelectorAll("[data-certif]").forEach(el=>el.onclick=async()=>{
+      const r = el.dataset.certif, e = etatRangee(cs, r), nomR = r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
+      const ok = await confirmer(`<div><b>Certifier la ${nomR}</b> : vous l'avez vérifiée livre par livre contre l'étagère, et elle est 100 % conforme ?</div>
+        <div class="aide">Ses ${e.total} livre(s) deviennent 🔒 acquis${e.questions ? `, et les ${e.questions} question(s) en suspens sont closes (livres gardés tels quels)` : ""}. Les analyses et photos d'appoint ne la modifieront plus. Une étoile dorée ★ l'indiquera sur la grille.</div>`, "Certifier la rangée", "⭐ Certifier");
+      if (!ok) return;
+      cs.livres.filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r).forEach(rendreAcquis);
+      cs.certif = Object.assign({}, cs.certif || {}, { [r]: new Date().toISOString() });
+      apresReponse();
+      toast(`★ ${nomR[0].toUpperCase() + nomR.slice(1)} certifiée.`, 4000);
+    });
+    zf.querySelectorAll("[data-decertif]").forEach(el=>el.onclick=async()=>{
+      const r = el.dataset.decertif;
+      const ok = await confirmer(`Retirer la certification de la ${r === "derriere" ? "rangée 2" : "rangée 1"} ?<div class="aide">Les livres restent 🔒 acquis ; la rangée pourra de nouveau recevoir des livres issus des analyses.</div>`, "Retirer la certification", "Retirer");
+      if (!ok) return;
+      delete cs.certif[r]; if (!Object.keys(cs.certif).length) delete cs.certif;
+      apresReponse();
+    });
     zf.querySelectorAll("[data-valider]").forEach(el=>el.onclick=async()=>{
       const r = el.dataset.valider, e = etatRangee(cs, r);
       const ok = await confirmer(`<div>Valider la ${r === "derriere" ? "rangée 2" : "rangée 1"} : les ${e.probables} livre(s) probable(s) deviennent 🔒 acquis ?</div><div class="aide">À faire quand la liste correspond à l'étagère. Les livres acquis ne sont plus modifiés par les analyses.</div>`, "Valider la rangée", "Valider");
