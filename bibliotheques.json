@@ -3915,7 +3915,7 @@
        "temoins": [
         "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf4basrn1v2x",
@@ -4087,8 +4087,8 @@
       },
       {
        "id": "muf4kfiuoq8zj",
-       "titre": "(titre non lu)",
-       "auteur": "Zeruya Shal…",
+       "titre": "Pygmalion",
+       "auteur": "Zeruya Shalev",
        "annee": "",
        "certitude": "faible",
        "remarque": "",
@@ -4106,37 +4106,7 @@
        "temoins": [
         "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
-       "statut": "probable"
-      },
-      {
-       "id": "muf4basr3pwdc",
-       "titre": "Pygmalion",
-       "auteur": "Bernard Shaw",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "folio",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
-        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
-       ],
-       "statut": "acquis",
-       "vues": [
-        {
-         "champ": "appoint:muec75xnhw210",
-         "x1": 570,
-         "x2": 620
-        },
-        {
-         "champ": "appoint:muf4j5sbh0mwb",
-         "x1": 20,
-         "x2": 125
-        }
-       ]
+       "statut": "acquis"
       },
       {
        "id": "muf4basrcv4ag",
@@ -4239,29 +4209,6 @@
          "x2": 467
         }
        ]
-      },
-      {
-       "id": "muf4dj0h10t9c",
-       "titre": "JANE SMILEY",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muec92wh8n0ai",
-         "x1": 150,
-         "x2": 220
-        }
-       ],
-       "rang": "derriere",
-       "temoins": [
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
-       ],
-       "statut": "acquis"
       },
       {
        "id": "muf4basr743j7",
@@ -4464,7 +4411,7 @@
        "temoins": [
         "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf4basrvv86q",
@@ -4990,24 +4937,6 @@
         "muf4basrqyu36"
        ],
        "verif": "2026-09-24T05:59:46.777Z"
-      },
-      {
-       "plein": null,
-       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muejko3xqtzoi.jpg",
-       "envoye": true,
-       "maj": "2026-09-23T20:15:45.709Z",
-       "id": "muejko3xqtzoi",
-       "legende": "",
-       "verif": "2026-09-24T05:33:05.466Z",
-       "livresVus": [
-        "muf3e24v99qiu",
-        "muf3iob290g38",
-        "muf3e24viso6v",
-        "muf3e24v7tszw",
-        "muf3iob21gpe5",
-        "muf3iob2zb7rr",
-        "muf3iob23seiq"
-       ]
       },
       {
        "plein": null,
@@ -6842,6 +6771,9 @@
       "modele": "gemini-2.5-flash",
       "photos": 2,
       "manuel": false
+     },
+     "certif": {
+      "derriere": "2026-09-24T06:38:04.492Z"
      }
     },
     "10-3": {
@@ -9247,7 +9179,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T06:12:40.572Z",
+ "maj": "2026-09-24T06:38:17.915Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
