@@ -1,0 +1,165 @@
+{
+ "date": "2026-09-24T05:30:01.800Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muec75xnhw210",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Les mains sales",
+   "auteur": "Sartre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 63,
+   "x2": 120,
+   "illisible": false
+  },
+  {
+   "titre": "L'Amant",
+   "auteur": "Duras",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 120,
+   "x2": 190,
+   "illisible": false
+  },
+  {
+   "titre": "Gomorra",
+   "auteur": "Roberto Saviano",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 190,
+   "x2": 250,
+   "illisible": false
+  },
+  {
+   "titre": "LES DIX ENFANTS QUE MADAME MING N'A JAMAIS EUS",
+   "auteur": "ERIC-EMMANUEL SCHMITT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 250,
+   "x2": 290,
+   "illisible": false
+  },
+  {
+   "titre": "Une vie entière",
+   "auteur": "Robert Seethaler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 290,
+   "x2": 350,
+   "illisible": false
+  },
+  {
+   "titre": "Le café sans nom",
+   "auteur": "Robert Seethaler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 350,
+   "x2": 410,
+   "illisible": false
+  },
+  {
+   "titre": "Le Libraire de Kaboul",
+   "auteur": "Åsne Seierstad",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 410,
+   "x2": 470,
+   "illisible": false
+  },
+  {
+   "titre": "Douleur",
+   "auteur": "Zeriya Shalov",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 470,
+   "x2": 530,
+   "illisible": false
+  },
+  {
+   "titre": "Pygmalion",
+   "auteur": "Bernard Shaw",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 530,
+   "x2": 580,
+   "illisible": false
+  },
+  {
+   "titre": "La croisade de l'idiot",
+   "auteur": "clifford d. simak",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 580,
+   "x2": 640,
+   "illisible": false
+  },
+  {
+   "titre": "Les raisins de la colère",
+   "auteur": "Pierre-Henri Simon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 640,
+   "x2": 700,
+   "illisible": false
+  },
+  {
+   "titre": "La maison de Bretagne",
+   "auteur": "Marie Sizun",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 700,
+   "x2": 760,
+   "illisible": false
+  },
+  {
+   "titre": "NOS PREMIERS JOURS",
+   "auteur": "JANE SMILEY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 760,
+   "x2": 820,
+   "illisible": false
+  },
+  {
+   "titre": "Une journée d'Ivan Denissovitch",
+   "auteur": "Alexandre Soljenitsyne",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 820,
+   "x2": 880,
+   "illisible": false
+  },
+  {
+   "titre": "L'Étrange Cas du docteur Jekyll et de Mr Hyde",
+   "auteur": "Stevenson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 880,
+   "x2": 940,
+   "illisible": false
+  }
+ ]
+}
