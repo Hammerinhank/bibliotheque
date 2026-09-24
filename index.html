@@ -383,8 +383,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.52.1";
+const VERSION = "V1.53.0";
 const HISTORIQUE = [
+  { v:"V1.53.0", d:"24/09/2026", l:[
+    "Photos plus nettes : taille maximale 3 000 px par défaut (au lieu de 1 600, jusqu'à 4 000 dans les réglages), qualité JPEG 88 % (au lieu de 72 %, réglable), photos d'appoint gardées jusqu'à 4 000 px.",
+    "Les réglages existants sont relevés automatiquement une fois ; ne s'applique qu'aux photos prises ensuite."
+  ]},
   { v:"V1.52.1", d:"24/09/2026", l:[
     "Analyses sauvegardées faites avant une permutation des rangées : signalées « ⇄ » dans la liste de choix, et rattachées automatiquement à la bonne photo (une analyse de l'ancienne photo de devant apparaît désormais sous la photo de derrière, et ses livres vont dans la bonne rangée)."
   ]},
@@ -791,7 +795,7 @@ const CFG_DEFAUT = {
   qLectureAppoint:QUESTION_APPOINT_DEFAUT,
   qResume:QUESTION_RESUME_DEFAUT,
   qCategorie:QUESTION_CATEGORIE_DEFAUT,
-  tailleMax:1600, qualite:0.72, tailleMini:260
+  tailleMax:3000, qualite:0.88, tailleAppoint:4000, tailleMini:260, versionPhotos:2
 };
 
 let data = { bibliotheques:[], maj:null };
@@ -902,6 +906,14 @@ function charger(){
   catch(e){ console.warn("Données locales illisibles", e); }
   if (!data || !Array.isArray(data.bibliotheques)) data = { bibliotheques:[], maj:null };
   try{ const c = localStorage.getItem(CLE_CFG); if (c) cfg = Object.assign({}, CFG_DEFAUT, JSON.parse(c)); }catch(e){}
+  // relèvement unique des anciens réglages de photo (1 600 px, 72 %) vers une définition plus lisible
+  if ((cfg.versionPhotos || 1) < 2){
+    cfg.tailleMax = Math.max(cfg.tailleMax || 0, 3000);
+    cfg.qualite = Math.max(cfg.qualite || 0, 0.88);
+    cfg.tailleAppoint = Math.max(cfg.tailleAppoint || 0, 4000);
+    cfg.versionPhotos = 2;
+    sauverCfg();
+  }
   // Un champ laissé vide reprend la valeur par défaut : le dépôt reste toujours lisible.
   ["ghUser","ghRepo","ghBranche"].forEach(k => { if (!cfg[k]) cfg[k] = CFG_DEFAUT[k]; });
   sale = localStorage.getItem(CLE_SALE) === "1";
@@ -2568,7 +2580,7 @@ async function extraitPhoto(b, k, champ, x1, x2){
   const centre = (x1 + x2) / 2 / 1000 * W;
   const larg = Math.max((x2 - x1) / 1000 * W * 3.2, W * 0.22);
   const g = Math.max(0, Math.min(W - larg, centre - larg / 2)), l = Math.min(W, larg);
-  const echelle = Math.min(1, 640 / l);
+  const echelle = Math.min(1, 1000 / l);          // extraits nets, même sur écran haute définition
   const c = document.createElement("canvas");
   c.width = Math.round(l * echelle); c.height = Math.round(H * echelle);
   const ctx = c.getContext("2d");
@@ -4881,7 +4893,8 @@ function ouvrirCompartiment(b, k){
     try{
       toast("Compression de la photo…");
       const brut = await lireFichier(file);
-      const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
+      const pourAppoint = nouveau || estAppoint(face);
+      const plein = await redimensionner(brut, pourAppoint ? Math.max(cfg.tailleMax, cfg.tailleAppoint || 4000) : cfg.tailleMax, cfg.qualite || 0.88);
       const cible = nouveau ? PRE_APPOINT + uid() : face;
       const demande = nouveau ? appointCible : null;
       appointCible = null;
@@ -6167,9 +6180,13 @@ function ouvrirReglages(ongletInitial){
          </div>
 
          <div class="titreSection">Photos</div>
-         <label for="rTaille">Taille maximale des photos envoyées (pixels)</label>
-         <input type="number" id="rTaille" min="600" max="3000" step="100" value="${cfg.tailleMax}">
-         <div class="aide">1600 px suffit en général pour lire les tranches. Plus grand : lecture plus fine, envoi plus lent.</div>
+         <label for="rTaille">Taille maximale des photos de rangée (pixels, plus grand côté)</label>
+         <input type="number" id="rTaille" min="600" max="4000" step="100" value="${cfg.tailleMax}">
+         <label for="rTailleAp">Taille maximale des photos d'appoint (pixels)</label>
+         <input type="number" id="rTailleAp" min="600" max="4000" step="100" value="${cfg.tailleAppoint || 4000}">
+         <label for="rQualite">Qualité JPEG (%)</label>
+         <input type="number" id="rQualite" min="50" max="95" step="1" value="${Math.round((cfg.qualite || 0.88) * 100)}">
+         <div class="aide">Recommandé : 3 000 px pour les rangées, 4 000 px pour les appoints, qualité 88 %. Une photo pèse alors environ 0,8 à 1,5 Mo. Sans réseau, n'accumulez pas plus de 3 ou 4 photos en attente (mémoire de l'appareil limitée). S'applique aux photos prises ensuite.</div>
        </div>
 
        <div id="pGithub" hidden>
@@ -6223,7 +6240,9 @@ function ouvrirReglages(ongletInitial){
         cfg.claudeMode = fd.querySelector("#rModeClaude").value;
         cfg.geminiMode = fd.querySelector("#rModeGemini").value;
         delete iaEnPanne.gemini; delete iaEnPanne.claude;   // nouvelle configuration : on redonne sa chance à chacune
-        cfg.tailleMax = Math.max(600, Math.min(3000, parseInt(fd.querySelector("#rTaille").value,10)||1600));
+        cfg.tailleMax = Math.max(600, Math.min(4000, parseInt(fd.querySelector("#rTaille").value,10)||3000));
+        cfg.tailleAppoint = Math.max(600, Math.min(4000, parseInt(fd.querySelector("#rTailleAp").value,10)||4000));
+        cfg.qualite = Math.max(0.5, Math.min(0.95, (parseInt(fd.querySelector("#rQualite").value,10)||88) / 100));
         cfg.ghUser = fd.querySelector("#rUser").value.trim() || CFG_DEFAUT.ghUser;
         cfg.ghRepo = fd.querySelector("#rRepo").value.trim() || CFG_DEFAUT.ghRepo;
         cfg.ghBranche = fd.querySelector("#rBranche").value.trim() || "main";
