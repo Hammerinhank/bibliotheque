@@ -2782,6 +2782,969 @@
         "photo:2026-09-22T16:33:18.870Z"
        ],
        "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkormtk",
+       "titre": "Les anneaux de Bicêtre",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses de la Cité",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 48,
+         "x2": 89
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkbeuc0",
+       "titre": "La chambre bleue",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses de la Cité",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 86,
+         "x2": 122
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qknisih",
+       "titre": "La rue aux trois poussins",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses de la Cité, tranche abîmée",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 121,
+         "x2": 159
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkmota7",
+       "titre": "3 chambres à Manhattan",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses de la Cité, ancien",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 156,
+         "x2": 190
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkebequ",
+       "titre": "Le fond de la bouteille",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses de la Cité",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 202,
+         "x2": 228
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 0,
+         "x2": 45
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkcj56w",
+       "titre": "Je me souviens",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "titre partiellement effacé",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 228,
+         "x2": 255
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 55,
+         "x2": 107
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrm6w81nbp4",
+       "titre": "Les volets verts",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 107,
+         "x2": 191
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qksgvbt",
+       "titre": "Maigret et le fantôme",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°40",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 283,
+         "x2": 307
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 218,
+         "x2": 290
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkn8ud6",
+       "titre": "Il pleut bergère...",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Gallimard, tranche verte",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 307,
+         "x2": 330
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 290,
+         "x2": 370
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkxtl85",
+       "titre": "Le voleur de Maigret",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°44",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 330,
+         "x2": 351
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 370,
+         "x2": 437
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkq5lqe",
+       "titre": "Maigret et la jeune morte",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°23, Presses de la Cité",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 351,
+         "x2": 372
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 437,
+         "x2": 500
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkwbktf",
+       "titre": "L'âne rouge",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Librairie Arthème Fayard",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 372,
+         "x2": 395
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 500,
+         "x2": 580
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrm6w8qaza4",
+       "titre": "Dimanche",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 575,
+         "x2": 655
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrm6w8si693",
+       "titre": "Le grand Bob",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 648,
+         "x2": 722
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkccfu1",
+       "titre": "Maigret et le clochard",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses de la Cité",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 436,
+         "x2": 457
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 707,
+         "x2": 780
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrm6w8l9koo",
+       "titre": "Feux rouges",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 775,
+         "x2": 865
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qklpqgm",
+       "titre": "Maigret et le corps sans tête",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°25, Presses de la Cité",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 479,
+         "x2": 502
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 852,
+         "x2": 928
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qk7ypf2",
+       "titre": "Le pendu de Saint-Pholien",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Presses Pocket n°135",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 502,
+         "x2": 514
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 915,
+         "x2": 970
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qkcxweu",
+       "titre": "La folie de Maigret",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°50",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 514,
+         "x2": 533
+        },
+        {
+         "champ": "appoint:mufrjzphman26",
+         "x1": 963,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z",
+        "appoint:mufrjzphman26:2026-09-24T16:46:35.202Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mufrd1qk77u2l",
+       "titre": "L'enterrement de Monsieur Bouvet",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 533,
+         "x2": 551
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qky7osz",
+       "titre": "Maigret et les vieillards",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 551,
+         "x2": 565
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkpbvtc",
+       "titre": "Strip-tease",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°27",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 565,
+         "x2": 587
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkrky0a",
+       "titre": "Maigret et le marchand de vin",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "n°49",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 587,
+         "x2": 608
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkcusmn",
+       "titre": "Au bout du rouleau",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 608,
+         "x2": 625
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkyopjm",
+       "titre": "Betty",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 625,
+         "x2": 643
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkpnedk",
+       "titre": "M. Gallet décédé",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "n°2914",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 643,
+         "x2": 663
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkhdnx7",
+       "titre": "Nouvelles exotiques",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio policier n°769",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 663,
+         "x2": 687
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkpzl3e",
+       "titre": "Les rescapés du Télémaque",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio n°1175",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 687,
+         "x2": 708
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkgyipc",
+       "titre": "Maigret chez le ministre",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 708,
+         "x2": 729
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkgvx48",
+       "titre": "Le chien jaune",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 729,
+         "x2": 745
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkdvpti",
+       "titre": "La vérité sur Bébé Donge",
+       "auteur": "Georges Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio n°665",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 745,
+         "x2": 770
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qk1ttux",
+       "titre": "Maigret en Auvergne",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "lecture de la tranche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 770,
+         "x2": 796
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qk853we",
+       "titre": "Les gens d'en face",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 796,
+         "x2": 818
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkoao9s",
+       "titre": "Maigret et les caïds",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 818,
+         "x2": 847
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qk8r3g4",
+       "titre": "L'ombre chinoise",
+       "auteur": "Simenon",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 847,
+         "x2": 866
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkt8rgj",
+       "titre": "Le crime de l'Orient-Express",
+       "auteur": "Agatha Christie",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Masque",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 866,
+         "x2": 885
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qkbccen",
+       "titre": "Le train de 16h50",
+       "auteur": "Agatha Christie",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche n°628",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 885,
+         "x2": 904
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qk6r89e",
+       "titre": "Mort sur le Nil",
+       "auteur": "Agatha Christie",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 904,
+         "x2": 929
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufrd1qk6d3g9",
+       "titre": "Le Dahlia noir",
+       "auteur": "James Ellroy",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Rivages/Noir n°100",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "photo2",
+         "x1": 941,
+         "x2": 985
+        }
+       ],
+       "temoins": [
+        "photo2:2026-09-23T16:26:54.695Z"
+       ],
+       "statut": "probable"
       }
      ],
      "photo": {
@@ -2797,6 +3760,39 @@
        "maj": "2026-09-23T16:26:52.563Z",
        "legende": "",
        "id": "mue2w9awojiic"
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-1-appoint-mufrjzphman26.jpg",
+       "envoye": true,
+       "maj": "2026-09-24T16:46:35.202Z",
+       "id": "mufrjzphman26",
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 11,
+        "date": "2026-09-24T16:47:37.829Z"
+       },
+       "livresVus": [
+        "mufrd1qkebequ",
+        "mufrd1qkcj56w",
+        "mufrm6w81nbp4",
+        "mufrd1qksgvbt",
+        "mufrd1qkn8ud6",
+        "mufrd1qkxtl85",
+        "mufrd1qkq5lqe",
+        "mufrd1qkwbktf",
+        "mufrm6w8qaza4",
+        "mufrm6w8si693",
+        "mufrd1qkccfu1",
+        "mufrm6w8l9koo",
+        "mufrd1qklpqgm",
+        "mufrd1qk7ypf2",
+        "mufrd1qkcxweu"
+       ],
+       "verif": "2026-09-24T16:48:21.566Z"
       }
      ],
      "photo2": {
@@ -3096,9 +4092,10 @@
       ]
      },
      "analyse": {
-      "maj": "2026-09-24T15:22:33.827Z",
+      "maj": "2026-09-24T16:40:31.247Z",
       "rangs": {
-       "devant": "2026-09-24T15:22:33.827Z"
+       "devant": "2026-09-24T15:22:33.827Z",
+       "derriere": "2026-09-24T16:40:31.247Z"
       },
       "ia": "claude",
       "modele": "claude.ai (copier-coller)",
@@ -10980,7 +11977,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T15:23:24.653Z",
+ "maj": "2026-09-24T16:48:22.371Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
