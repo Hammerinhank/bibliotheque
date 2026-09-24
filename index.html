@@ -390,8 +390,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.54.0";
+const VERSION = "V1.55.0";
 const HISTORIQUE = [
+  { v:"V1.55.0", d:"24/09/2026", l:[
+    "Certifications regroupées dans une section repliable « ⭐ Certifications », repliée par défaut : il faut la déplier pour certifier une rangée ou retirer une certification. L'état (★ certifiée ou non) reste visible sur la ligne de chaque rangée et dans le titre de la section."
+  ]},
   { v:"V1.54.0", d:"24/09/2026", l:[
     "Fenêtre d'un compartiment : la photo s'affiche par défaut « Entière », visible en totalité dans son cadre ; faire défiler au-dessus d'elle fait défiler la page, pas la photo.",
     "À côté, les trois autres affichages : Ajustée (pleine largeur), 100 % et 200 % (la photo défile alors dans son cadre). « Entière » est toujours resélectionnée à l'ouverture d'un compartiment et au changement de photo."
@@ -4840,11 +4843,25 @@ function ouvrirCompartiment(b, k){
         const e = etatRangee(cs, r), nomR = r === "derriere" ? "Rangée 2" : "Rangée 1";
         return `<div class="aide" style="margin:-2px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span><b>${nomR}</b> : ${e.total} livre(s) — <b>${e.acquis}</b> 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions}</b> ❓${e.validee ? " — <b style='color:var(--vert)'>✓ validée</b>" : ""}</span>
-          ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ Certifiée le ${esc(dateFr(cs.certif[r]))}</span>
-             <button class="btn" data-decertif="${r}" style="padding:3px 10px;font-size:12.5px">Retirer la certification</button>`
-            : `${!e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}
-             <button class="btn" data-certif="${r}" style="padding:3px 10px;font-size:12.5px;border-color:#ffd23f">⭐ Certifier la ${nomR.toLowerCase()}</button>`}</div>`;
+          ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ Certifiée</span>`
+            : `${!e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}`}</div>`;
       }).join("") +
+      (()=>{
+        const rangs = ["devant","derriere"].filter(r=>etatRangee(cs, r).total);
+        if (!rangs.length) return "";
+        const nomR = (r)=> r === "derriere" ? "Rangée 2" : "Rangée 1";
+        const resume = rangs.map(r=>nomR(r) + (certifiee(cs, r) ? " ★" : " —")).join(" · ");
+        return `<details style="margin:2px 0 10px;border:1px solid var(--trait);border-radius:8px;padding:6px 10px">
+          <summary style="cursor:pointer;font-weight:600">⭐ Certifications <span class="aide" style="font-weight:400">(${resume})</span></summary>
+          <div class="aide" style="margin:6px 0">Certifier une rangée = l'avoir vérifiée livre par livre contre l'étagère : elle passe alors en consultation seule.</div>
+          ${rangs.map(r=>`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0">
+            <span><b>${nomR(r)}</b> : ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ certifiée le ${esc(dateFr(cs.certif[r]))}</span>` : "non certifiée"}</span>
+            ${certifiee(cs, r)
+              ? `<button class="btn" data-decertif="${r}" style="padding:3px 10px;font-size:12.5px">Retirer la certification</button>`
+              : `<button class="btn" data-certif="${r}" style="padding:3px 10px;font-size:12.5px;border-color:#ffd23f">⭐ Certifier la ${nomR(r).toLowerCase()}</button>`}
+          </div>`).join("")}
+        </details>`;
+      })() +
       `<div class="aide" style="margin:-4px 0 8px">${l.length} livre(s) : <b>${n1}</b> sur la rangée 1 (devant) · <b>${n2}</b> sur la rangée 2 (derrière)</div>
        <div class="onglets" style="margin-bottom:10px">
          <button data-filtre="tous" class="${filtreRang==="tous"?"actif":""}">Tous (${l.length})</button>
