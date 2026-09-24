@@ -2644,306 +2644,12 @@
      }
     },
     "7-1": {
-     "livres": [
-      {
-       "id": "mud5lcolbiwp8",
-       "titre": "Le fond de la bouteille",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1949",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un homme débarque illégalement aux États-Unis pour retrouver son frère jumeau, déclenchant une confrontation psychologique intense et dramatique.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol14hfp",
-       "titre": "La femme au manteau bleu",
-       "auteur": "Deon Meyer (écrivain sud-africain, né en 1958)",
-       "annee": "2018",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Le capitaine Griessel enquête sur le meurtre d'une jeune femme liée à des secrets d'État sud-africains hautement compromettants.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcole39mb",
-       "titre": "De soie et de sang",
-       "auteur": "Qiu Xiaolong (écrivain sino-américain, né en 1953)",
-       "annee": "2019",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "L'inspecteur Chen enquête sur un meurtre macabre à Shanghai, révélant des tensions politiques et sociales du pays.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcoleqwux",
-       "titre": "La forme de l'eau",
-       "auteur": "Andrea Camilleri (écrivain italien, 1925-2019)",
-       "annee": "1994",
-       "certitude": "haute",
-       "remarque": "Pocket",
-       "resume": "Le commissaire Montalbano enquête sur la mort suspecte d'un notable retrouvé dans des circonstances embarrassantes à Vigàta.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolkr43l",
-       "titre": "La voix du violon",
-       "auteur": "Andrea Camilleri (écrivain italien, 1925-2019)",
-       "annee": "1997",
-       "certitude": "haute",
-       "remarque": "Pocket",
-       "resume": "Montalbano enquête sur le meurtre d'un médecin dont la maîtresse, une jeune femme séduisante, disparaît mystérieusement.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcoljeiud",
-       "titre": "Le voleur de goûter",
-       "auteur": "Andrea Camilleri (écrivain italien, 1925-2019)",
-       "annee": "1996",
-       "certitude": "haute",
-       "remarque": "Pocket",
-       "resume": "Le commissaire Montalbano doit résoudre l'enlèvement d'un petit garçon tout en gérant une affaire de meurtre complexe.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolkf2yu",
-       "titre": "La me souviens",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "",
-       "certitude": "moyenne",
-       "remarque": "",
-       "resume": "",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolls8ni",
-       "titre": "Le parfum",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1934",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un parfumeur prospère plonge dans la paranoïa et le drame conjugal après avoir découvert des secrets sur son épouse.",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcoluz9wm",
-       "titre": "Maigret et le corps sans tête",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1955",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Maigret enquête sur un torse humain repêché dans le canal Saint-Martin, tentant d'identifier la victime et son assassin.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol37d2h",
-       "titre": "Maigret et la jeune morte",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1966",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Le commissaire Maigret tente d'identifier une jeune femme élégante retrouvée assassinée sur un banc parisien.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol79swl",
-       "titre": "Maigret et le clochard",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1962",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Maigret prend en affection un clochard agressé sur les quais de la Seine et cherche à comprendre ses motivations.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol89py5",
-       "titre": "La pendaison de Saint-Pholien",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1931",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Lors d'un voyage en train, Maigret croise un groupe d'amis liés par un pacte ancien et tragique.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcold3co8",
-       "titre": "La folle de Maigret",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1962",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Une femme mystérieuse prétend qu'on essaie de l'assassiner chez elle, poussant Maigret à s'intéresser à son quotidien.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolew232",
-       "titre": "L'enterrement de Monsieur Bouvet",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1951",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un homme discret décide de changer radicalement de vie en simulant sa propre mort pour observer ses proches.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolm27x2",
-       "titre": "Maigret et les vieillards",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1960",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Maigret enquête sur la mort d'un vieil homme richissime et hautain fréquentant les cercles fermés de la haute société.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolohji6",
-       "titre": "Maigret et le marchand de vin",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1970",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Le commissaire Maigret enquête sur l'assassinat d'un riche marchand de vin peu apprécié de son entourage.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolfxtnn",
-       "titre": "Au bout du rouleau",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1947",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un homme brisé tente de survivre dans un univers hostile tout en faisant face à ses démons intérieurs.",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolkb3fm",
-       "titre": "Nouvelles exotiques",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1941",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "Recueil de nouvelles mettant en scène des personnages confrontés à l'exotisme et au dépaysement sous les tropiques.",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolj81eh",
-       "titre": "Les rescapés du Télémacque",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1938",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "Des jeunes découvrent une affaire criminelle à bord d'une vieille épave flottante, entraînant une enquête pleine de suspense.",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol1wys7",
-       "titre": "Maigret chez le ministre",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1954",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "Le commissaire Maigret doit enquêter sur un scandale politique menaçant un ministre français.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol03vhg",
-       "titre": "La vérité sur Bébé Donge",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1942",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "Un riche industriel survit à une tentative d'empoisonnement par sa femme et décide de comprendre ses motivations.",
-       "categorie": "Romans français",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolzy337",
-       "titre": "Maigret en Auvergne",
-       "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
-       "annee": "1967",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "En vacances en Auvergne, Maigret se retrouve mêlé à une affaire criminelle sur fond de secrets provinciaux.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol2t6q1",
-       "titre": "Le crime de l'Orient Express",
-       "auteur": "Agatha Christie (femme de lettres britannique, 1890-1976)",
-       "annee": "1934",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Bloqué par la neige, le detective Hercule Poirot résout le meurtre d'un riche Américain dans un train de luxe.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol1slax",
-       "titre": "Le train de 16h50",
-       "auteur": "Agatha Christie (femme de lettres britannique, 1890-1976)",
-       "annee": "1957",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Témoin d'un meurtre dans un train parallèle, Miss Marple mène son enquête dans l'ombre.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcolm3pfs",
-       "titre": "Mort sur le Nil",
-       "auteur": "Agatha Christie (femme de lettres britannique, 1890-1976)",
-       "annee": "1937",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Hercule Poirot élucide le meurtre d'une riche héritière à bord d'un bateau naviguant sur le Nil.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5lcol1oh95",
-       "titre": "Le Dahlia Noir",
-       "auteur": "James Ellroy (écrivain américain, né en 1948)",
-       "annee": "1987",
-       "certitude": "haute",
-       "remarque": "Rivages Noir",
-       "resume": "Deux inspecteurs de police enquêtent sur le meurtre atroce et macabre d'une aspirante actrice à Los Angeles.",
-       "categorie": "Policier",
-       "origine": "ia"
-      }
-     ],
+     "livres": [],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/7-1.jpg",
       "envoye": true,
       "maj": "2026-09-22T16:33:18.870Z"
-     },
-     "analyse": {
-      "maj": "2026-09-22T20:55:34.774Z",
-      "ia": "gemini",
-      "modele": "gemini-2.5-flash",
-      "photos": 1,
-      "manuel": false
      },
      "appoints": [
       {
@@ -2958,6 +2664,297 @@
       "chemin": "images/mucn2e6dat2vv/7-1-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-23T16:26:54.695Z"
+     },
+     "avantReconstruction": {
+      "date": "2026-09-24T15:21:44.739Z",
+      "livres": [
+       {
+        "id": "mud5lcolbiwp8",
+        "titre": "Le fond de la bouteille",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1949",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Un homme débarque illégalement aux États-Unis pour retrouver son frère jumeau, déclenchant une confrontation psychologique intense et dramatique.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol14hfp",
+        "titre": "La femme au manteau bleu",
+        "auteur": "Deon Meyer (écrivain sud-africain, né en 1958)",
+        "annee": "2018",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Le capitaine Griessel enquête sur le meurtre d'une jeune femme liée à des secrets d'État sud-africains hautement compromettants.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcole39mb",
+        "titre": "De soie et de sang",
+        "auteur": "Qiu Xiaolong (écrivain sino-américain, né en 1953)",
+        "annee": "2019",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "L'inspecteur Chen enquête sur un meurtre macabre à Shanghai, révélant des tensions politiques et sociales du pays.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcoleqwux",
+        "titre": "La forme de l'eau",
+        "auteur": "Andrea Camilleri (écrivain italien, 1925-2019)",
+        "annee": "1994",
+        "certitude": "haute",
+        "remarque": "Pocket",
+        "resume": "Le commissaire Montalbano enquête sur la mort suspecte d'un notable retrouvé dans des circonstances embarrassantes à Vigàta.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolkr43l",
+        "titre": "La voix du violon",
+        "auteur": "Andrea Camilleri (écrivain italien, 1925-2019)",
+        "annee": "1997",
+        "certitude": "haute",
+        "remarque": "Pocket",
+        "resume": "Montalbano enquête sur le meurtre d'un médecin dont la maîtresse, une jeune femme séduisante, disparaît mystérieusement.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcoljeiud",
+        "titre": "Le voleur de goûter",
+        "auteur": "Andrea Camilleri (écrivain italien, 1925-2019)",
+        "annee": "1996",
+        "certitude": "haute",
+        "remarque": "Pocket",
+        "resume": "Le commissaire Montalbano doit résoudre l'enlèvement d'un petit garçon tout en gérant une affaire de meurtre complexe.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolkf2yu",
+        "titre": "La me souviens",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "",
+        "certitude": "moyenne",
+        "remarque": "",
+        "resume": "",
+        "categorie": "Romans français",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolls8ni",
+        "titre": "Le parfum",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1934",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Un parfumeur prospère plonge dans la paranoïa et le drame conjugal après avoir découvert des secrets sur son épouse.",
+        "categorie": "Romans français",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcoluz9wm",
+        "titre": "Maigret et le corps sans tête",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1955",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Maigret enquête sur un torse humain repêché dans le canal Saint-Martin, tentant d'identifier la victime et son assassin.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol37d2h",
+        "titre": "Maigret et la jeune morte",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1966",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Le commissaire Maigret tente d'identifier une jeune femme élégante retrouvée assassinée sur un banc parisien.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol79swl",
+        "titre": "Maigret et le clochard",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1962",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Maigret prend en affection un clochard agressé sur les quais de la Seine et cherche à comprendre ses motivations.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol89py5",
+        "titre": "La pendaison de Saint-Pholien",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1931",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Lors d'un voyage en train, Maigret croise un groupe d'amis liés par un pacte ancien et tragique.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcold3co8",
+        "titre": "La folle de Maigret",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1962",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Une femme mystérieuse prétend qu'on essaie de l'assassiner chez elle, poussant Maigret à s'intéresser à son quotidien.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolew232",
+        "titre": "L'enterrement de Monsieur Bouvet",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1951",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Un homme discret décide de changer radicalement de vie en simulant sa propre mort pour observer ses proches.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolm27x2",
+        "titre": "Maigret et les vieillards",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1960",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Maigret enquête sur la mort d'un vieil homme richissime et hautain fréquentant les cercles fermés de la haute société.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolohji6",
+        "titre": "Maigret et le marchand de vin",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1970",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Le commissaire Maigret enquête sur l'assassinat d'un riche marchand de vin peu apprécié de son entourage.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolfxtnn",
+        "titre": "Au bout du rouleau",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1947",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Un homme brisé tente de survivre dans un univers hostile tout en faisant face à ses démons intérieurs.",
+        "categorie": "Romans français",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolkb3fm",
+        "titre": "Nouvelles exotiques",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1941",
+        "certitude": "haute",
+        "remarque": "Folio",
+        "resume": "Recueil de nouvelles mettant en scène des personnages confrontés à l'exotisme et au dépaysement sous les tropiques.",
+        "categorie": "Romans français",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolj81eh",
+        "titre": "Les rescapés du Télémacque",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1938",
+        "certitude": "haute",
+        "remarque": "Folio",
+        "resume": "Des jeunes découvrent une affaire criminelle à bord d'une vieille épave flottante, entraînant une enquête pleine de suspense.",
+        "categorie": "Romans français",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol1wys7",
+        "titre": "Maigret chez le ministre",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1954",
+        "certitude": "haute",
+        "remarque": "Folio",
+        "resume": "Le commissaire Maigret doit enquêter sur un scandale politique menaçant un ministre français.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol03vhg",
+        "titre": "La vérité sur Bébé Donge",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1942",
+        "certitude": "haute",
+        "remarque": "Folio",
+        "resume": "Un riche industriel survit à une tentative d'empoisonnement par sa femme et décide de comprendre ses motivations.",
+        "categorie": "Romans français",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolzy337",
+        "titre": "Maigret en Auvergne",
+        "auteur": "Georges Simenon (écrivain belge, 1903-1989)",
+        "annee": "1967",
+        "certitude": "haute",
+        "remarque": "Folio",
+        "resume": "En vacances en Auvergne, Maigret se retrouve mêlé à une affaire criminelle sur fond de secrets provinciaux.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol2t6q1",
+        "titre": "Le crime de l'Orient Express",
+        "auteur": "Agatha Christie (femme de lettres britannique, 1890-1976)",
+        "annee": "1934",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Bloqué par la neige, le detective Hercule Poirot résout le meurtre d'un riche Américain dans un train de luxe.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol1slax",
+        "titre": "Le train de 16h50",
+        "auteur": "Agatha Christie (femme de lettres britannique, 1890-1976)",
+        "annee": "1957",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Témoin d'un meurtre dans un train parallèle, Miss Marple mène son enquête dans l'ombre.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcolm3pfs",
+        "titre": "Mort sur le Nil",
+        "auteur": "Agatha Christie (femme de lettres britannique, 1890-1976)",
+        "annee": "1937",
+        "certitude": "haute",
+        "remarque": "",
+        "resume": "Hercule Poirot élucide le meurtre d'une riche héritière à bord d'un bateau naviguant sur le Nil.",
+        "categorie": "Policier",
+        "origine": "ia"
+       },
+       {
+        "id": "mud5lcol1oh95",
+        "titre": "Le Dahlia Noir",
+        "auteur": "James Ellroy (écrivain américain, né en 1948)",
+        "annee": "1987",
+        "certitude": "haute",
+        "remarque": "Rivages Noir",
+        "resume": "Deux inspecteurs de police enquêtent sur le meurtre atroce et macabre d'une aspirante actrice à Los Angeles.",
+        "categorie": "Policier",
+        "origine": "ia"
+       }
+      ]
      }
     },
     "6-1": {
@@ -10831,7 +10828,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T09:55:31.486Z",
+ "maj": "2026-09-24T15:21:45.725Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
