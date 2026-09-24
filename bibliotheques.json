@@ -4086,6 +4086,29 @@
        ]
       },
       {
+       "id": "muf4kfiuoq8zj",
+       "titre": "(titre non lu)",
+       "auteur": "Zeruya Shal…",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 0,
+         "x2": 95
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "muf4basr3pwdc",
        "titre": "Pygmalion",
        "auteur": "Bernard Shaw",
@@ -4098,7 +4121,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4106,6 +4130,11 @@
          "champ": "appoint:muec75xnhw210",
          "x1": 570,
          "x2": 620
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 20,
+         "x2": 125
         }
        ]
       },
@@ -4122,7 +4151,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4130,6 +4160,11 @@
          "champ": "appoint:muec75xnhw210",
          "x1": 620,
          "x2": 690
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 125,
+         "x2": 283
         }
        ]
       },
@@ -4147,7 +4182,8 @@
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
         "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4160,6 +4196,11 @@
          "champ": "appoint:muec92wh8n0ai",
          "x1": 0,
          "x2": 80
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 221,
+         "x2": 371
         }
        ]
       },
@@ -4177,7 +4218,8 @@
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
         "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4190,6 +4232,11 @@
          "champ": "appoint:muec92wh8n0ai",
          "x1": 80,
          "x2": 150
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 338,
+         "x2": 467
         }
        ]
       },
@@ -4214,7 +4261,17 @@
        "temoins": [
         "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 444,
+         "x2": 474
+        },
+        "source": "l'appoint 6",
+        "date": "2026-09-24T06:02:30.110Z"
+       }
       },
       {
        "id": "muf4basr743j7",
@@ -4230,7 +4287,8 @@
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
         "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z",
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4243,6 +4301,11 @@
          "champ": "appoint:muec92wh8n0ai",
          "x1": 220,
          "x2": 280
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 450,
+         "x2": 642
         }
        ]
       },
@@ -4292,7 +4355,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4300,6 +4364,11 @@
          "champ": "appoint:muec92wh8n0ai",
          "x1": 280,
          "x2": 340
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 625,
+         "x2": 746
         }
        ]
       },
@@ -4316,7 +4385,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4324,6 +4394,11 @@
          "champ": "appoint:muec92wh8n0ai",
          "x1": 340,
          "x2": 390
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 704,
+         "x2": 838
         }
        ]
       },
@@ -4340,7 +4415,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-24T05:54:03.198Z",
-        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z"
+        "appoint:muec92wh8n0ai:2026-09-24T05:53:07.325Z",
+        "appoint:muf4j5sbh0mwb:2026-09-24T06:01:25.259Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -4348,6 +4424,11 @@
          "champ": "appoint:muec92wh8n0ai",
          "x1": 390,
          "x2": 450
+        },
+        {
+         "champ": "appoint:muf4j5sbh0mwb",
+         "x1": 771,
+         "x2": 983
         }
        ]
       },
@@ -4964,6 +5045,33 @@
         "muf3iob2zb7rr",
         "muf3iob23seiq"
        ]
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muf4j5sbh0mwb.jpg",
+       "envoye": true,
+       "maj": "2026-09-24T06:01:25.259Z",
+       "legende": "Gros plan de la rangée de derrière, autour de « 10 18 », entre « Nos premiers jours » et « Une journée d'Ivan Denissovitch »",
+       "id": "muf4j5sbh0mwb",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 8,
+        "date": "2026-09-24T06:02:24.529Z"
+       },
+       "livresVus": [
+        "muf4kfiuoq8zj",
+        "muf4basr3pwdc",
+        "muf4basrcv4ag",
+        "muf4basrccnsz",
+        "muf4basri8tl8",
+        "muf4basr743j7",
+        "muf4basrduiam",
+        "muf4basrxxelk",
+        "muf4basrsbhqs"
+       ],
+       "verif": "2026-09-24T06:02:30.111Z"
       }
      ],
      "photo2": {
@@ -9176,7 +9284,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:59:47.594Z",
+ "maj": "2026-09-24T06:02:30.789Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
