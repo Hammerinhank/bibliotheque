@@ -383,8 +383,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.50.0";
+const VERSION = "V1.51.0";
 const HISTORIQUE = [
+  { v:"V1.51.0", d:"24/09/2026", l:[
+    "Rangée certifiée ★ = consultation seule : pour ses photos (devant, derrière, appoints qui s'y rapportent), plus de changement ou retrait de photo, de lignes de coupe, de légende ni d'analyse ; pour ses livres, plus de Modifier, Supprimer, Confirmer, questions ni glisser-déposer. « Vider les listes » et « Ajouter un livre à la main » épargnent la rangée certifiée.",
+    "Tout redevient accessible dès que la certification est retirée."
+  ]},
   { v:"V1.50.0", d:"24/09/2026", l:[
     "Certification d'une rangée : bouton « ⭐ Certifier la rangée » (vérifiée à la main, 100 % conforme) ; tous ses livres deviennent acquis et ses questions sont closes. Réversible.",
     "Grille : petite étoile dorée en bas à gauche quand la rangée 1 est certifiée, en bas à droite pour la rangée 2.",
@@ -1646,12 +1650,14 @@ async function listerResultatsSauves(b, k){
 /* Vider les listes d'un compartiment (photos conservées ; liste d'avant mise de côté). */
 async function viderListesCompartiment(b, k){
   const cs = b.cases[k] = b.cases[k] || { livres:[] };
-  const ok = await confirmer(`<div>Vider les listes de livres de ${esc(lib(k))} (${(cs.livres||[]).length} livre(s)) ?</div>
+  const ok = await confirmer(`<div>Vider les listes de livres de ${esc(lib(k))} (${(cs.livres||[]).filter(lv=>!certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")).length} livre(s)) ?${cs.certif ? " Les rangées certifiées ★ sont conservées." : ""}</div>
     <div class="aide">Les photos (devant, derrière, appoints) sont conservées. Vous pourrez ensuite, photo par photo, relancer une analyse ou réutiliser un résultat sauvegardé. La liste actuelle est mise de côté : « ↩ Rétablir » la remet.</div>`, "Vider les listes", "Vider");
   if (!ok) return;
   cs.avantReconstruction = { date:new Date().toISOString(), livres:(cs.livres||[]).slice() };
-  cs.livres = []; delete cs.analyse;
-  (cs.appoints||[]).forEach(a=>{ delete a.rang; delete a.rangInfo; });
+  // les rangées certifiées ★ sont épargnées
+  cs.livres = (cs.livres||[]).filter(lv=>certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant"));
+  delete cs.analyse;
+  (cs.appoints||[]).forEach(a=>{ if (!(a.rang && certifiee(cs, a.rang))){ delete a.rang; delete a.rangInfo; } });
   sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
   toast("Listes vidées. Choisissez une photo, puis 🔍 nouvelle analyse ou ♻️ analyse sauvegardée.", 6000);
   envoyerDonneesAuto("Listes de livres de " + lib(k), { livresEnMoinsVoulus:true });
@@ -4286,6 +4292,7 @@ function ouvrirCompartiment(b, k){
     titre: `Rangée ${r} · compartiment ${c}`,
     html: `<div class="onglets" id="cFaces"></div>
            <div id="zonePhoto"></div>
+           <div class="encadre" id="cVerrou" style="display:none;border-color:#ffd23f"></div>
            <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
            <div class="encadre" id="cBlocAnalyse" style="margin-top:10px">
              <div id="cTitreAnalyse" style="font-weight:700;margin-bottom:8px">Analyse de cette photo</div>
@@ -4473,6 +4480,7 @@ function ouvrirCompartiment(b, k){
       z.innerHTML = `<div class="aide" style="margin:0">Ce compartiment a une photo de derrière : il est marqué <b>2 RANGS</b>.${cs.unRang ? " (L'ancienne mention « 1 rang » est ignorée.)" : ""}</div>`;
       return;
     }
+    if (certifiee(cs, "devant")){ z.innerHTML = cs.unRang ? `<div class="aide" style="margin:0">Un seul rang, compartiment complet (rangée 1 certifiée ★).</div>` : ""; return; }
     z.innerHTML = `<div class="coche" style="margin:0"><input type="checkbox" id="cUnRang" ${cs.unRang ? "checked" : ""}>
         <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette blanche <b style="font-size:11px;font-weight:800;color:#1c1500;background:#ffffff;border:1px solid #1c1500;border-radius:4px;padding:0 4px">1 RANG</b> sur la grille</label></div>`;
     z.querySelector("#cUnRang").onchange = (e)=>{
@@ -4525,6 +4533,16 @@ function ouvrirCompartiment(b, k){
     f.querySelector("#cTitreAnalyse").textContent = "Analyse de cette photo — " +
       (appoint ? "appoint " + num : face === "photo2" ? "rangée 2 (derrière)" : cs.photo2 ? "rangée 1 (devant)" : "rangée 1");
     majReutiliser();
+    // rangée certifiée : consultation seule pour cette photo
+    const rangFace = appoint ? ((photoObj(cs, face) || {}).rang || null) : (face === "photo2" ? "derriere" : "devant");
+    const verrou = !!(rangFace && certifiee(cs, rangFace));
+    if (verrou){ lignesVisibles = false; avantTroncature = null; }
+    const bV = f.querySelector("#cVerrou");
+    bV.style.display = verrou ? "" : "none";
+    if (verrou) bV.innerHTML = `<b style="color:#ffd23f">★ ${rangFace === "derriere" ? "Rangée 2" : "Rangée 1"} certifiée — consultation seule.</b>
+      <div class="aide" style="margin:4px 0 0">${appoint ? "Cette photo d'appoint se rapporte à cette rangée. " : ""}Pour la modifier, retirez d'abord la certification (dans « Livres de ce compartiment »).</div>`;
+    f.querySelector("#cPhoto").style.display = verrou ? "none" : "";
+    if (verrou && bloc) bloc.style.display = "none";
     const bOrd = f.querySelector("#cAppointOrdre");
     if (bOrd) bOrd.style.display = "none";
     if (!photoObj(cs, face)){
@@ -4536,7 +4554,7 @@ function ouvrirCompartiment(b, k){
     const src = photoImmediate(b, k, face);
     const statut = `<div class="aide">${appoint ? "<b>Appoint "+num+"</b> · " : face==="photo2" ? "<b>Rang de derrière</b> · " : (cs.photo2 ? "<b>Rang de devant</b> · " : "")}${photoObj(cs, face).envoye ? "Photo sauvegardée sur GitHub ("+esc(photoObj(cs, face).chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
        · ${esc(dateFr(photoObj(cs, face).maj))}
-       <button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button></div>`;
+       ${verrou ? "" : `<button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button>`}</div>`;
 
     if (!src){
       // pas encore en mémoire : chargement de la vraie photo, jamais de version dégradée
@@ -4563,13 +4581,13 @@ function ouvrirCompartiment(b, k){
        <div class="aide">Définition : <span class="dims" id="cDims">…</span>${lignesVisibles ? "" : " — touchez la photo pour la voir en taille réelle"}</div>
        <div class="barre" style="margin:8px 0 2px">
          <button class="btn" id="cTailleReelle" style="flex:1">🔍 Taille réelle</button>
-         <button class="btn ${lignesVisibles ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVisibles ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
+         ${verrou ? "" : `<button class="btn ${lignesVisibles ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVisibles ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>`}
          ${lignesVisibles ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
          ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
        </div>
        ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes (sur les bords au départ) pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
        ${appoint ? `<label for="cLegende">Légende de cette photo d'appoint</label>
-         <input type="text" id="cLegende" value="${esc(photoObj(cs, face).legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…">
+         <input type="text" id="cLegende" value="${esc(photoObj(cs, face).legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…" ${verrou ? "disabled" : ""}>
          <div class="aide">Cette légende est transmise à l'IA lors du contrôle : elle l'aide à savoir ce que vous vouliez montrer.</div>` : ""}
        ${statut}`;
 
@@ -4584,7 +4602,8 @@ function ouvrirCompartiment(b, k){
     img.addEventListener("click", ()=>{ if (!lignesVisibles) visionneuse(src, titrePhoto); });
 
     z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, titrePhoto);
-    z.querySelector("#cLignes").onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
+    const bLig = z.querySelector("#cLignes");
+    if (bLig) bLig.onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
     const bt = z.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
     const ba = z.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
     const bl = z.querySelector("#cLegende");
@@ -4638,8 +4657,15 @@ function ouvrirCompartiment(b, k){
     if (!appointVu && filtreRang === "appoint") filtreRang = "tous";
     const nQ = l.filter(lv=>lv.question).length;
     if (!nQ && filtreRang === "questions") filtreRang = "tous";
+    const bAj = f.querySelector("#cAjouter");
+    if (bAj){
+      const deux = !cs.unRang && (!!cs.photo2 || l.some(lv=>lv.rang === "derriere"));
+      const possible = !certifiee(cs, "devant") || (deux && !certifiee(cs, "derriere"));
+      bAj.style.display = possible ? "" : "none";
+      bAj.textContent = certifiee(cs, "devant") ? "➕ Ajouter un livre à la main (rangée 2)" : "➕ Ajouter un livre à la main";
+    }
     const bVider = `<div class="barre" style="margin:-2px 0 8px">
-         ${l.length ? `<button class="btn" data-vider="1" style="flex:1">🗑 Vider les listes</button>` : ""}
+         ${l.some(lv=>!certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")) ? `<button class="btn" data-vider="1" style="flex:1">🗑 Vider ${cs.certif ? "les rangées non certifiées" : "les listes"}</button>` : ""}
          ${cs.avantReconstruction ? `<button class="btn" data-retablir="1" style="flex:1">↩ Rétablir (${cs.avantReconstruction.livres.length} livres du ${esc(dateFr(cs.avantReconstruction.date))})</button>` : ""}</div>`;
     const brancherVider = ()=>{
       const v = zf.querySelector("[data-vider]"); if (v) v.onclick = ()=>viderListesCompartiment(b, k);
@@ -4671,24 +4697,25 @@ function ouvrirCompartiment(b, k){
     if (!visibles.length){ z.innerHTML = filtreRang === "appoint"
         ? `<div class="vide">Aucun livre de la liste n'est encore rattaché à cette photo d'appoint : faites une lecture (🔍) ou réutilisez une analyse (♻️), puis validez.</div>`
         : `<div class="vide">Aucun livre sur la ${filtreRang === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)"}.</div>`; return; }
+    const bloque = (lv)=> certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant");
     z.innerHTML = visibles.map(({lv,i})=>
-      `<div class="livre ${visibles.length > 1 ? "deplacable" : ""} ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}" data-idx="${i}">
-         ${visibles.length > 1 ? `<div class="poigneeGlisser" title="Maintenir et glisser pour déplacer"><span><i></i><i></i><i></i><i></i></span></div>` : ""}
+      `<div class="livre ${visibles.length > 1 && !bloque(lv) ? "deplacable" : ""} ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}" data-idx="${i}">
+         ${visibles.length > 1 && !bloque(lv) ? `<div class="poigneeGlisser" title="Maintenir et glisser pour déplacer"><span><i></i><i></i><i></i><i></i></span></div>` : ""}
          <div class="t">${estAcquis(lv) ? `<span title="Acquis : vu sur deux photos ou confirmé">🔒 </span>` : lv.question ? "❓ " : ""}${esc(lv.titre)}</div>
          <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
          ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
          ${lv.categorie?`<div class="cat">${esc(lv.categorie)}</div>`:""}
-         ${lv.question ? (()=>{ const tq = texteQuestion(lv); return `<div class="encadre" style="margin:6px 0 0;padding:8px">
+         ${lv.question && !bloque(lv) ? (()=>{ const tq = texteQuestion(lv); return `<div class="encadre" style="margin:6px 0 0;padding:8px">
              <div style="font-weight:700">❓ ${esc(tq.q)}</div>
              ${tq.pourquoi ? `<div class="aide" style="margin:4px 0 0">${esc(tq.pourquoi)}</div>` : ""}
              ${htmlExtraitsQuestion(cs, lv)}
              <div class="barre" style="margin-top:8px;flex-direction:column;align-items:stretch">${boutonsQuestion(lv, i, cs)}</div>`; })() : ""}${lv.question ? `
              <button class="btn" data-photoq="${i}" style="margin-top:6px;width:100%">📷 Photographier cet endroit (photo d'appoint lue aussitôt)</button></div>` : ""}
-         <div class="actions">
+         ${bloque(lv) ? `<div class="aide" style="margin:4px 0 0;color:#ffd23f">★ rangée certifiée</div>` : `<div class="actions">
            ${!estAcquis(lv) && !lv.question ? `<button class="btn" data-conf="${i}" title="Je l'ai vérifié : il est bien à cette place">✓ Confirmer</button>` : ""}
            <button class="btn" data-modif="${i}">Modifier</button>
            <button class="btn rouge" data-suppr="${i}">Supprimer</button>
-         </div></div>`).join("");
+         </div>`}</div>`).join("");
     const apresReponse = ()=>{ sauver(); majLivres(); rendreBiblio(); envoiListesDiffere(b, k); };
     remplirExtraits(z, b, k);
     z.querySelectorAll("[data-photoq]").forEach(el=>el.onclick=()=>{
@@ -4717,7 +4744,7 @@ function ouvrirCompartiment(b, k){
       if (!ok) return;
       cs.livres.filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r).forEach(rendreAcquis);
       cs.certif = Object.assign({}, cs.certif || {}, { [r]: new Date().toISOString() });
-      apresReponse();
+      apresReponse(); majPhoto();
       toast(`★ ${nomR[0].toUpperCase() + nomR.slice(1)} certifiée.`, 4000);
     });
     zf.querySelectorAll("[data-decertif]").forEach(el=>el.onclick=async()=>{
@@ -4725,7 +4752,7 @@ function ouvrirCompartiment(b, k){
       const ok = await confirmer(`Retirer la certification de la ${r === "derriere" ? "rangée 2" : "rangée 1"} ?<div class="aide">Les livres restent 🔒 acquis ; la rangée pourra de nouveau recevoir des livres issus des analyses.</div>`, "Retirer la certification", "Retirer");
       if (!ok) return;
       delete cs.certif[r]; if (!Object.keys(cs.certif).length) delete cs.certif;
-      apresReponse();
+      apresReponse(); majPhoto();
     });
     zf.querySelectorAll("[data-valider]").forEach(el=>el.onclick=async()=>{
       const r = el.dataset.valider, e = etatRangee(cs, r);
@@ -4819,7 +4846,15 @@ function ouvrirCompartiment(b, k){
     }
   };
 
-  f.querySelector("#cAjouter").onclick = ()=>formLivre(cs, -1, majLivres);
+  f.querySelector("#cAjouter").onclick = ()=>{
+    // un livre ajouté à la main va dans la rangée 1, ou dans la rangée 2 si la 1 est certifiée
+    const n = (cs.livres||[]).length;
+    const cible = certifiee(cs, "devant") ? "derriere" : "devant";
+    formLivre(cs, -1, ()=>{
+      if (cs.livres.length > n && cible === "derriere") cs.livres[cs.livres.length - 1].rang = "derriere";
+      sauver(); majLivres();
+    });
+  };
   rafraichirCompartimentOuvert = (bid, kk)=>{ if (f.isConnected && bid === b.id && kk === k){ majLivres(); majFaces(); } };
 
   majPhoto(); majLivres();
