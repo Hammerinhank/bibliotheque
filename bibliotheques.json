@@ -7745,6 +7745,29 @@
     "8-3": {
      "livres": [
       {
+       "id": "muf7dutxuf2l2",
+       "titre": "Le pain de la mer",
+       "auteur": "Joël Raguénès",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditions JC Lattès",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 130,
+         "x2": 860
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T07:20:13.471Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "mudr1w95b6r11",
        "titre": "Les Vierges & autres nouvelles",
        "auteur": "Irène Némirovsky",
@@ -7889,10 +7912,14 @@
       }
      ],
      "analyse": {
-      "maj": "2026-09-23T06:56:18.569Z",
+      "maj": "2026-09-24T07:21:16.635Z",
+      "rangs": {
+       "devant": "2026-09-24T07:21:16.635Z",
+       "derriere": "2026-09-23T06:56:18.569Z"
+      },
       "ia": "gemini",
-      "modele": "gemini-flash-lite-latest",
-      "photos": 1,
+      "modele": "gemini-2.5-flash",
+      "photos": 2,
       "manuel": false
      },
      "appoints": [
@@ -7930,7 +7957,13 @@
      },
      "permutations": [
       "2026-09-24T07:19:05.498Z"
-     ]
+     ],
+     "photo": {
+      "plein": null,
+      "chemin": "images/mucn2e6dat2vv/8-3.jpg",
+      "envoye": true,
+      "maj": "2026-09-24T07:20:13.471Z"
+     }
     },
     "9-2": {
      "livres": [
@@ -9983,7 +10016,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T07:19:10.990Z",
+ "maj": "2026-09-24T07:21:17.307Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
