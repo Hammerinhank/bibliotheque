@@ -2644,7 +2644,146 @@
      }
     },
     "7-1": {
-     "livres": [],
+     "livres": [
+      {
+       "id": "mufoksm8kcygv",
+       "titre": "Le Nouveau",
+       "auteur": "Keigo Higashino",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Babel Noir n°291",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 90,
+         "x2": 335
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-22T16:33:18.870Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufoksm8k6fie",
+       "titre": "La femme au manteau bleu",
+       "auteur": "Deon Meyer",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio Policier n°970",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 335,
+         "x2": 435
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-22T16:33:18.870Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufoksm8p1adg",
+       "titre": "De soie et de sang",
+       "auteur": "Qiu Xiaolong",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points Policier P1939",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 435,
+         "x2": 630
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-22T16:33:18.870Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufoksm8hxk7x",
+       "titre": "La forme de l'eau",
+       "auteur": "Andrea Camilleri",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Pocket n°11264",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 630,
+         "x2": 755
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-22T16:33:18.870Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufoksm8wmlgv",
+       "titre": "La Voix du violon",
+       "auteur": "Andrea Camilleri",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Pocket n°11390",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 758,
+         "x2": 900
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-22T16:33:18.870Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mufoksm8xjsdq",
+       "titre": "Le Voleur de goûter",
+       "auteur": "Andrea Camilleri",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Pocket n°11391",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 870,
+         "x2": 975
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-22T16:33:18.870Z"
+       ],
+       "statut": "probable"
+      }
+     ],
      "photo": {
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/7-1.jpg",
@@ -2955,6 +3094,16 @@
         "origine": "ia"
        }
       ]
+     },
+     "analyse": {
+      "maj": "2026-09-24T15:22:33.827Z",
+      "rangs": {
+       "devant": "2026-09-24T15:22:33.827Z"
+      },
+      "ia": "claude",
+      "modele": "claude.ai (copier-coller)",
+      "photos": 2,
+      "manuel": true
      }
     },
     "6-1": {
@@ -10828,7 +10977,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T15:21:45.725Z",
+ "maj": "2026-09-24T15:22:34.673Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
