@@ -383,8 +383,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.53.0";
+const VERSION = "V1.53.1";
 const HISTORIQUE = [
+  { v:"V1.53.1", d:"24/09/2026", l:[
+    "Demande à Claude / Gemini sans clé : « Copier la question à la main » placé en tête de l'étape 1, avant « Copier la photo » (qui reste le bouton principal). S'il est utilisé, les étapes se réécrivent d'elles-mêmes dans le bon ordre : coller la question dans l'IA ouverte vide, revenir copier la photo, la coller, envoyer."
+  ]},
   { v:"V1.53.0", d:"24/09/2026", l:[
     "Photos plus nettes : taille maximale 3 000 px par défaut (au lieu de 1 600, jusqu'à 4 000 dans les réglages), qualité JPEG 88 % (au lieu de 72 %, réglable), photos d'appoint gardées jusqu'à 4 000 px.",
     "Les réglages existants sont relevés automatiquement une fois ; ne s'applique qu'aux photos prises ensuite."
@@ -2313,8 +2316,8 @@ function majAttenteClaude(){
 
 /* Ouvre la démarche pas à pas. parties = la demande préparée (texte + photo(s)), echecs = IA déjà tombées en panne. */
 const SITE_IA = {
-  claude:{ url:q=>"https://claude.ai/new?q=" + encodeURIComponent(q) },
-  gemini:{ url:q=>"https://gemini.google.com/app?q=" + encodeURIComponent(q) }
+  claude:{ url:q=>"https://claude.ai/new" + (q ? "?q=" + encodeURIComponent(q) : "") },
+  gemini:{ url:q=>"https://gemini.google.com/app" + (q ? "?q=" + encodeURIComponent(q) : "") }
 };
 function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
   ia = ia || "claude";
@@ -2341,44 +2344,66 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
     html:
       (tombees.length ? `<div class="encadre" style="margin-top:0">${NOM_IA[autre]} a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
       (genre === "controle" ? `<div class="encadre" style="margin-top:0">Lecture d'une photo d'appoint : ${NOM} lit la photo sans voir la liste ; l'application fera ensuite le rapprochement.</div>` : "") +
-      `<div class="etape"><div class="n">1</div><div class="c">Copier ${deux ? "les deux photos (réunies côte à côte)" : "la photo"} dans le presse-papier.
-         <button class="btn principal plein" id="mcCopier">📋 Copier ${deux ? "les 2 photos" : "la photo"}</button>
-         ${deux ? `<div class="aide">Pour une lecture plus fine, vous pouvez aussi les envoyer une par une :</div>
-           <div class="barre"><button class="btn" id="mcP1" style="flex:1">Photo 1</button><button class="btn" id="mcP2" style="flex:1">Photo 2</button></div>` : ""}
-         <div class="aide" id="mcEtatCopie"></div></div></div>
-       <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOM} : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
-         <button class="btn plein" id="mcOuvrir">↗️ Ouvrir ${NOM} avec la question</button>
-         <button class="btn plein" id="mcQuestion">Copier seulement le texte de la question</button>
-         ${ia === "gemini" ? `<div class="aide">Si la question n'apparaît pas déjà écrite dans Gemini, collez d'abord la photo, revenez ici toucher « Copier seulement le texte de la question », puis collez-la sous la photo.</div>` : ""}</div></div>
-       <div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
-         <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de ${NOM}</button>
-         <div class="aide">Dès que vous avez ouvert ${NOM} (étape 2), le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir ${NOM} n'enregistre aucune attente.</div></div></div>`,
+      `<div id="mcEtapes"></div>`,
     boutons:[{texte:"Fermer"}]
   });
-  const etat = f.querySelector("#mcEtatCopie");
+  // deux déroulés : question pré-remplie par le lien (normal), ou question copiée à la main (le presse-papier ne tient qu'une chose à la fois)
+  let questionManuelle = false;
+  const btnsPhotos = ()=> `<button class="btn principal plein" id="mcCopier">📋 Copier ${deux ? "les 2 photos" : "la photo"}</button>
+         ${deux ? `<div class="aide">Pour une lecture plus fine, vous pouvez aussi les envoyer une par une :</div>
+           <div class="barre"><button class="btn" id="mcP1" style="flex:1">Photo 1</button><button class="btn" id="mcP2" style="flex:1">Photo 2</button></div>` : ""}
+         <div class="aide" id="mcEtatCopie"></div>`;
+  const etape3 = `<div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
+         <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de ${NOM}</button>
+         <div class="aide">Dès que vous avez ouvert ${NOM}, le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir ${NOM} n'enregistre aucune attente.</div></div></div>`;
+  const rendreEtapes = ()=>{
+    const z = f.querySelector("#mcEtapes");
+    z.innerHTML = !questionManuelle
+      ? `<div class="etape"><div class="n">1</div><div class="c">
+           <button class="btn plein" id="mcQuestion" style="margin-top:0">✍️ Copier la question à la main</button>
+           <div class="aide" style="margin:2px 0 10px">Seulement si, d'habitude, la question n'apparaît pas déjà écrite dans ${NOM} (étape 2). Les étapes s'adaptent alors.</div>
+           Copier ${deux ? "les deux photos (réunies côte à côte)" : "la photo"} dans le presse-papier.
+           ${btnsPhotos()}</div></div>
+         <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOM} : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
+           <button class="btn plein" id="mcOuvrir">↗️ Ouvrir ${NOM} avec la question</button></div></div>` + etape3
+      : `<div class="etape"><div class="n">1</div><div class="c"><b>✓ La question est dans le presse-papier.</b> Ouvrez ${NOM} (page vide) et <b>collez-la</b> dans la zone de saisie, sans envoyer.
+           <button class="btn plein" id="mcOuvrirVide">↗️ Ouvrir ${NOM}</button>
+           <button class="btn plein" id="mcQuestion">Recopier la question</button>
+           <button class="btn plein" id="mcRetour">↩ Revenir au déroulé normal</button></div></div>
+         <div class="etape"><div class="n">2</div><div class="c">Revenez ici, copiez ${deux ? "les photos" : "la photo"}, puis retournez dans ${NOM} : <b>collez-la en pièce jointe</b> sous la question et envoyez.
+           ${btnsPhotos()}</div></div>` + etape3;
+    brancher();
+  };
+  const brancher = ()=>{
+    f.querySelector("#mcCopier").onclick = ()=>copier(images, deux ? "Les deux photos sont" : "La photo est");
+    if (deux){
+      f.querySelector("#mcP1").onclick = ()=>copier([images[0]], "Photo 1 copiée ; collez-la, puis revenez copier la photo 2. Elle est");
+      f.querySelector("#mcP2").onclick = ()=>copier([images[1]], "La photo 2 est");
+    }
+    const bO = f.querySelector("#mcOuvrir");
+    if (bO) bO.onclick = ()=>{ marquerEnvoi(); window.open(SITE_IA[ia].url(question), "_blank"); };
+    const bV = f.querySelector("#mcOuvrirVide");
+    if (bV) bV.onclick = ()=>{ marquerEnvoi(); window.open(SITE_IA[ia].url(""), "_blank"); };
+    f.querySelector("#mcQuestion").onclick = async ()=>{
+      if (!(await copierTexte(question))){ toast("Copie impossible.", 4000); return; }
+      toast("Question copiée.", 2500);
+      if (!questionManuelle){ questionManuelle = true; rendreEtapes(); }
+    };
+    const bR = f.querySelector("#mcRetour");
+    if (bR) bR.onclick = ()=>{ questionManuelle = false; rendreEtapes(); };
+    f.querySelector("#mcReponse").onclick = ()=>{ if (!lireAttenteClaude()) marquerEnvoi(); recevoirReponseClaude(f); };
+  };
   const copier = async (liste, quoi)=>{
+    const etat = f.querySelector("#mcEtatCopie");
     try{
       await copierImagePresse(blobPourClaude(liste));        // la promesse est passée telle quelle : exigence de Safari
-      etat.textContent = "✓ " + quoi + " dans le presse-papier. Passez à l'étape 2.";
+      etat.textContent = "✓ " + quoi + " dans le presse-papier. " + (questionManuelle ? "Collez-la dans " + NOM + " en pièce jointe, puis envoyez." : "Passez à l'étape 2.");
     }catch(e){
       etat.innerHTML = "Copie automatique impossible (" + esc(e.message) + "). Ouvrez l'image ci-dessous, appui long → Copier.";
       visionneuse(liste[0], "Appui long sur l'image → Copier");
     }
   };
-  f.querySelector("#mcCopier").onclick = ()=>copier(images, deux ? "Les deux photos sont" : "La photo est");
-  if (deux){
-    f.querySelector("#mcP1").onclick = ()=>copier([images[0]], "Photo 1 copiée ; collez-la, puis revenez copier la photo 2. Elle est");
-    f.querySelector("#mcP2").onclick = ()=>copier([images[1]], "La photo 2 est");
-  }
-  f.querySelector("#mcOuvrir").onclick = ()=>{
-    marquerEnvoi();
-    window.open(SITE_IA[ia].url(question), "_blank");
-  };
-  f.querySelector("#mcQuestion").onclick = async ()=>{
-    marquerEnvoi();
-    toast(await copierTexte(question) ? "Question copiée (la photo n'est plus dans le presse-papier : recopiez-la ensuite)." : "Copie impossible.", 5000);
-  };
-  f.querySelector("#mcReponse").onclick = ()=>{ if (!lireAttenteClaude()) marquerEnvoi(); recevoirReponseClaude(f); };
+  rendreEtapes();
 }
 
 async function recevoirReponseClaude(fenetre){
