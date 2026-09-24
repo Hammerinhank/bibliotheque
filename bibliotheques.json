@@ -7745,6 +7745,29 @@
     "8-3": {
      "livres": [
       {
+       "id": "muf8c8crbrsgw",
+       "titre": "Le pain de la mer",
+       "auteur": "Joël Raguénès",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditions JC Lattès",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 130,
+         "x2": 860
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T07:20:13.471Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "muf8771s1uk73",
        "titre": "Les vierges & autres nouvelles",
        "auteur": "Irène Némirovsky",
@@ -8534,12 +8557,13 @@
       ]
      },
      "analyse": {
-      "maj": "2026-09-24T07:44:05.490Z",
+      "maj": "2026-09-24T07:48:00.460Z",
       "rangs": {
-       "derriere": "2026-09-24T07:44:05.490Z"
+       "derriere": "2026-09-24T07:44:05.490Z",
+       "devant": "2026-09-24T07:48:00.460Z"
       },
-      "ia": "claude",
-      "modele": "claude.ai (copier-coller) — résultat sauvegardé du 24/09 09:42",
+      "ia": "gemini",
+      "modele": "gemini-2.5-flash — résultat sauvegardé du 24/09 09:21",
       "photos": 2,
       "manuel": false
      },
@@ -10598,7 +10622,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T07:46:19.615Z",
+ "maj": "2026-09-24T07:48:01.326Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
