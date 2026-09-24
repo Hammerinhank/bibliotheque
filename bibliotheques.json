@@ -3882,7 +3882,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 46,
+         "x2": 118
+        }
+       ]
+      },
+      {
+       "id": "muf4c0315z2ge",
+       "titre": "Sartre. Le Sursis",
+       "auteur": "Sartre",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 118,
+         "x2": 190
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
        "statut": "probable"
       },
@@ -3898,9 +3929,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 190,
+         "x2": 260
+        }
+       ]
       },
       {
        "id": "muf4basrnzc2g",
@@ -3914,9 +3953,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 260,
+         "x2": 330
+        }
+       ]
       },
       {
        "id": "muf4basrhvr1o",
@@ -3930,13 +3977,21 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 330,
+         "x2": 370
+        }
+       ]
       },
       {
        "id": "muf4basrazksb",
-       "titre": "Une vie à coucher dehors",
+       "titre": "Une vie entière",
        "auteur": "Robert Seethaler",
        "annee": "",
        "certitude": "haute",
@@ -3946,9 +4001,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 370,
+         "x2": 420
+        }
+       ]
       },
       {
        "id": "muf4basrspfbh",
@@ -3962,9 +4025,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 420,
+         "x2": 470
+        }
+       ]
       },
       {
        "id": "muf4basrim742",
@@ -3978,9 +4049,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 470,
+         "x2": 520
+        }
+       ]
       },
       {
        "id": "muf4basr79x1j",
@@ -3994,9 +4073,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 520,
+         "x2": 570
+        }
+       ]
       },
       {
        "id": "muf4basr3pwdc",
@@ -4010,9 +4097,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 570,
+         "x2": 620
+        }
+       ]
       },
       {
        "id": "muf4basrcv4ag",
@@ -4026,9 +4121,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 620,
+         "x2": 690
+        }
+       ]
       },
       {
        "id": "muf4basrccnsz",
@@ -4042,9 +4145,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 690,
+         "x2": 740
+        }
+       ]
       },
       {
        "id": "muf4basri8tl8",
@@ -4058,9 +4169,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 740,
+         "x2": 810
+        }
+       ]
       },
       {
        "id": "muf4basr743j7",
@@ -4074,7 +4193,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-24T05:54:03.198Z"
+        "photo2:2026-09-24T05:54:03.198Z",
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 810,
+         "x2": 880
+        }
+       ]
+      },
+      {
+       "id": "muf4c032fpa0a",
+       "titre": "10 18",
+       "auteur": "Alexandre Bel",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muec75xnhw210",
+         "x1": 880,
+         "x2": 920
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muec75xnhw210:2026-09-24T05:52:48.137Z"
        ],
        "statut": "probable"
       },
@@ -4440,7 +4590,32 @@
        "envoye": true,
        "maj": "2026-09-24T05:52:48.137Z",
        "id": "muec75xnhw210",
-       "legende": ""
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 12,
+        "date": "2026-09-24T05:55:51.271Z"
+       },
+       "livresVus": [
+        "muf4basr0d0im",
+        "muf4c0315z2ge",
+        "muf4basrn1v2x",
+        "muf4basrnzc2g",
+        "muf4basrhvr1o",
+        "muf4basrazksb",
+        "muf4basrspfbh",
+        "muf4basrim742",
+        "muf4basr79x1j",
+        "muf4basr3pwdc",
+        "muf4basrcv4ag",
+        "muf4basrccnsz",
+        "muf4basri8tl8",
+        "muf4basr743j7",
+        "muf4c032fpa0a"
+       ],
+       "verif": "2026-09-24T05:56:35.059Z"
       },
       {
        "plein": null,
@@ -8687,7 +8862,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:55:19.222Z",
+ "maj": "2026-09-24T05:56:35.930Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
