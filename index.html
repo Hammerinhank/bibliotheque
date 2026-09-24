@@ -380,8 +380,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.48.0";
+const VERSION = "V1.48.1";
 const HISTORIQUE = [
+  { v:"V1.48.1", d:"23/09/2026", l:[
+    "Questions reformulées : une vraie question en gras (« Ce livre est-il bien à cette place ? », « Quel est le bon titre ? »), une phrase d'explication, et des légendes d'extraits explicites (quel livre, sur quelle photo, ce que montre le cadre rouge).",
+    "Réponses plus complètes : « ✏️ Corriger » (titre mal lu), et pour un livre non vu, « C'est le même livre que « … » » quand un voisin lu sur la même photo occupe cet endroit (les deux fiches sont fusionnées)."
+  ]},
   { v:"V1.48.0", d:"23/09/2026", l:[
     "Convergence, 2e étape : l'IA indique la position de chaque livre sur la photo ; chaque question affiche l'extrait agrandi de la photo à l'endroit concerné (cadre rouge), pour trancher sans aller à l'étagère.",
     "Sur chaque question, « 📷 Photographier cet endroit » : prend une photo d'appoint avec la légende « entre A et B », la fait lire aussitôt par l'IA et la rapproche de la liste.",
@@ -2417,15 +2421,18 @@ function remplirExtraits(el, b, k){
 const nomChampCourt = (cs, champ)=> estAppoint(champ) ? "l'appoint " + numeroAppoint(cs, champ) : champ === "photo2" ? "la photo de derrière" : "la photo de devant";
 /* emplacements d'extraits pour une question (livre de la liste) */
 function htmlExtraitsQuestion(cs, lv){
-  const q = lv.question || {}, out = [];
+  const q = lv.question || {}, out = [], t = `« ${lv.titre} »`;
   const place = (v, leg)=>{ if (v && photoObj(cs, v.champ)) out.push(`<div data-ex="${v.champ}|${v.x1}|${v.x2}" data-leg="${esc(leg)}"></div>`); };
+  const autreVue = (champ)=> (lv.vues || []).filter(v=>v.champ !== champ)[0];
   if (q.type === "lecture"){
-    place(q.vue, "Sur " + nomChampCourt(cs, q.vue ? q.vue.champ : "") + " : lu « " + (q.autre ? q.autre.titre : "") + " »");
-    (lv.vues || []).filter(v=>!q.vue || v.champ !== q.vue.champ).slice(0, 1).forEach(v=>place(v, "Sur " + nomChampCourt(cs, v.champ) + " : lu « " + lv.titre + " »"));
+    place(q.vue, `Sur ${nomChampCourt(cs, q.vue ? q.vue.champ : "")}, l'IA a lu ici « ${q.autre ? q.autre.titre : ""} » (cadre rouge) :`);
+    const v = autreVue(q.vue && q.vue.champ);
+    place(v, `Sur ${nomChampCourt(cs, v ? v.champ : "")}, l'IA avait lu ici ${t} (cadre rouge) :`);
   } else if (q.zone){
-    place(q.zone, "Sur " + nomChampCourt(cs, q.zone.champ) + " : endroit où il devrait être");
-    (lv.vues || []).filter(v=>v.champ !== q.zone.champ).slice(0, 1).forEach(v=>place(v, "Sur " + nomChampCourt(cs, v.champ) + " : vu ici"));
-  } else (lv.vues || []).slice(0, 1).forEach(v=>place(v, "Sur " + nomChampCourt(cs, v.champ)));
+    place(q.zone, `Sur ${nomChampCourt(cs, q.zone.champ)}, l'endroit où ${t} devrait se trouver (cadre rouge). Y voyez-vous ce livre ?`);
+    const v = autreVue(q.zone.champ);
+    place(v, `Pour comparer : sur ${nomChampCourt(cs, v ? v.champ : "")}, l'endroit où ${t} avait été lu (cadre rouge) :`);
+  } else { const v = (lv.vues || [])[0]; place(v, `Sur ${nomChampCourt(cs, v ? v.champ : "")}, là où ${t} a été lu (cadre rouge) :`); }
   return out.join("");
 }
 
@@ -2483,15 +2490,16 @@ function fusionConvergente(opts){
 
   const btn = (id, v, lib, actif)=>`<button data-q="${id}" data-v="${v}" class="${actif ? "actif" : ""}">${lib}</button>`;
   const htmlQuestions = de("question").map(({ e, id })=>`<div class="prop" style="border-left:3px solid var(--orange)">
-      <div class="aide" style="margin:0">❓ Même place, lectures différentes :</div>
+      <div style="font-weight:700">❓ Quel est le bon titre de ce livre ?</div>
+      <div class="aide" style="margin:2px 0 4px">À la même place, deux lectures différentes : même livre lu de deux façons, ou deux livres voisins ?</div>
       <div>Liste : <b>${esc(e.a.titre)}</b>${aut(e.a)}</div>
       <div>${esc(nomSource[0].toUpperCase() + nomSource.slice(1))} : <b>${esc(e.b.titre)}</b>${aut(e.b)}</div>
-      ${opts.b && e.b.vues && e.b.vues[0] ? `<div data-ex="${e.b.vues[0].champ}|${e.b.vues[0].x1}|${e.b.vues[0].x2}" data-leg="Sur ${esc(nomSource)}"></div>` : ""}
+      ${opts.b && e.b.vues && e.b.vues[0] ? `<div data-ex="${e.b.vues[0].champ}|${e.b.vues[0].x1}|${e.b.vues[0].x2}" data-leg="Sur ${esc(nomSource)}, l'IA a lu ici « ${esc(e.b.titre)} » (cadre rouge) :"></div>` : ""}
       ${opts.b && (e.a.vues || []).filter(v=>!e.b.vues || v.champ !== e.b.vues[0].champ)[0] ? (()=>{ const v = e.a.vues.filter(v=>!e.b.vues || v.champ !== e.b.vues[0].champ)[0];
-        return `<div data-ex="${v.champ}|${v.x1}|${v.x2}" data-leg="Sur ${esc(nomChampCourt(opts.cs, v.champ))}"></div>`; })() : ""}
+        return `<div data-ex="${v.champ}|${v.x1}|${v.x2}" data-leg="Sur ${esc(nomChampCourt(opts.cs, v.champ))}, l'IA avait lu ici « ${esc(e.a.titre)} » (cadre rouge) :"></div>`; })() : ""}
       <div class="onglets" style="margin-top:6px">
-        ${btn(id, "a", "« " + esc(e.a.titre.slice(0, 28)) + " »", false)}${btn(id, "b", "« " + esc(e.b.titre.slice(0, 28)) + " »", false)}
-        ${btn(id, "deux", "Deux livres", false)}${btn(id, "plusTard", "Plus tard", true)}</div></div>`).join("");
+        ${btn(id, "a", "« " + esc(e.a.titre.slice(0, 28)) + " » est le bon", false)}${btn(id, "b", "« " + esc(e.b.titre.slice(0, 28)) + " » est le bon", false)}
+        ${btn(id, "deux", "Deux livres différents", false)}${btn(id, "plusTard", "Je verrai plus tard", true)}</div></div>`).join("");
   const liste = (items, rendu)=>items.map(rendu).join("");
   const htmlAjouts = liste(de("ajout"), ({ e, id })=>`<div class="coche" style="margin:4px 0"><input type="checkbox" data-aj="${id}" checked><label style="margin:0"><b>${esc(e.b.titre)}</b>${aut(e.b)}</label></div>`);
   const htmlNonVus = liste(de("nonVu").concat(de("deplace")), ({ e, id })=>`<div class="coche" style="margin:4px 0"><input type="checkbox" data-ret="${id}"><label style="margin:0">Retirer <b>${esc(e.a.titre)}</b>${aut(e.a)}${e.cat === "deplace" ? " <span class='aide'>(semble ailleurs sur la photo)</span>" : ""}</label></div>`);
@@ -2589,22 +2597,56 @@ function repondreQuestion(cs, lv, rep){
     cs.livres.splice(cs.livres.indexOf(lv) + 1, 0, nv);
   }
   if (rep === "retirer"){ cs.livres.splice(cs.livres.indexOf(lv), 1); return; }
+  if (rep.startsWith("fusion:")){
+    // même livre : on garde la fiche du voisin (bien lue), enrichie de ce que l'autre avait
+    const v = cs.livres.find(x=>x.id === rep.slice(7));
+    if (v){
+      ["auteur","annee","resume","categorie","remarque"].forEach(c=>{ if (!v[c] && lv[c]) v[c] = lv[c]; });
+      (lv.vues || []).forEach(x=>{ if (!vueSur(v, x.champ)) ajouterVue(v, x); });
+      v.temoins = [...new Set((v.temoins || []).concat(lv.temoins || []))];
+      rendreAcquis(v);
+      cs.livres.splice(cs.livres.indexOf(lv), 1);
+      return;
+    }
+  }
   rendreAcquis(lv);
 }
+/* libellé de la question : { q: question en gras, pourquoi: explication } */
 function texteQuestion(lv){
-  const q = lv.question || {};
-  if (q.type === "lecture") return `Lu « ${q.autre.titre} »${q.autre.auteur ? " — " + q.autre.auteur : ""} sur ${q.source || "une autre photo"}, à la même place.`;
-  if (q.type === "absent") return `Pas vu sur ${q.source || "une autre photo"} qui couvre pourtant cet endroit.`;
-  if (q.type === "deplace") return `Semble ailleurs sur ${q.source || "une autre photo"} : ordre à vérifier.`;
-  return "À vérifier.";
+  const q = lv.question || {}, t = `« ${lv.titre} »`;
+  if (q.type === "lecture") return { q:`Quel est le bon titre de ce livre ?`,
+    pourquoi:`À la même place, la liste dit ${t}, mais sur ${q.source || "une autre photo"} l'IA a lu « ${q.autre.titre} »${q.autre.auteur ? " (" + q.autre.auteur + ")" : ""}. Soit c'est le même livre lu de deux façons, soit ce sont deux livres voisins.` };
+  if (q.type === "absent") return { q:`${t}${lv.auteur ? " (" + lv.auteur + ")" : ""} est-il vraiment un livre de cette rangée ?`,
+    pourquoi:`Il est dans la liste, mais l'IA ne l'a pas lu sur ${q.source || "une autre photo"}, qui montre pourtant l'endroit où il devrait être. Souvent, son titre a été mal lu la première fois et le vrai livre est juste là.` };
+  if (q.type === "deplace") return { q:`${t} est-il bien à cette place ?`,
+    pourquoi:`Sur ${q.source || "une autre photo"}, il semble se trouver ailleurs dans la rangée.` };
+  return { q:`${t} : à vérifier.`, pourquoi:"" };
 }
-function boutonsQuestion(lv, i){
+/* voisins lus sur la même photo à l'endroit où ce livre devrait être : sans doute le même livre, mal lu la première fois */
+function voisinsCandidats(cs, lv){
   const q = lv.question || {};
-  if (q.type === "lecture") return `<button class="btn" data-rq="${i}" data-v="a">C'est « ${esc(lv.titre.slice(0, 24))} »</button>
-    <button class="btn" data-rq="${i}" data-v="b">C'est « ${esc(q.autre.titre.slice(0, 24))} »</button>
-    <button class="btn" data-rq="${i}" data-v="deux">Les deux</button>`;
-  return `<button class="btn" data-rq="${i}" data-v="a">✓ Il est bien là</button>
-    <button class="btn rouge" data-rq="${i}" data-v="retirer">Retirer</button>`;
+  if (!q.zone) return [];
+  const rg = (x)=> x.rang === "derriere" ? "derriere" : "devant";
+  const meme = (cs.livres || []).filter(x=>rg(x) === rg(lv));
+  const j = meme.indexOf(lv);
+  return [meme[j - 1], meme[j + 1]].filter(x=>{
+    if (!x) return false;
+    const v = vueSur(x, q.zone.champ);
+    return v && v.x2 >= q.zone.x1 - 40 && v.x1 <= q.zone.x2 + 40;
+  });
+}
+function boutonsQuestion(lv, i, cs){
+  const q = lv.question || {};
+  const court = (t)=> esc(t.length > 30 ? t.slice(0, 29) + "…" : t);
+  if (q.type === "lecture") return `<button class="btn" data-rq="${i}" data-v="a">« ${court(lv.titre)} » est le bon titre</button>
+    <button class="btn" data-rq="${i}" data-v="b">« ${court(q.autre.titre)} » est le bon titre</button>
+    <button class="btn" data-rq="${i}" data-v="deux">Ce sont deux livres différents</button>
+    <button class="btn" data-rq="${i}" data-v="corriger">✏️ Autre titre…</button>`;
+  const cand = cs ? voisinsCandidats(cs, lv) : [];
+  return `<button class="btn" data-rq="${i}" data-v="a">✓ Oui, il est bien là</button>
+    ${cand.map(x=>`<button class="btn" data-rq="${i}" data-v="fusion:${esc(x.id)}">C'est le même livre que « ${court(x.titre)} »</button>`).join("")}
+    <button class="btn" data-rq="${i}" data-v="corriger">✏️ Il est là, mais le titre est faux…</button>
+    <button class="btn rouge" data-rq="${i}" data-v="retirer">Non, le retirer</button>`;
 }
 
 /* ====== FUSION DE DEUX LECTURES D'UNE MÊME RANGÉE (livres dans le même ordre) ====== */
@@ -4560,9 +4602,11 @@ function ouvrirCompartiment(b, k){
          <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
          ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
          ${lv.categorie?`<div class="cat">${esc(lv.categorie)}</div>`:""}
-         ${lv.question ? `<div class="encadre" style="margin:6px 0 0;padding:8px">❓ ${esc(texteQuestion(lv))}
+         ${lv.question ? (()=>{ const tq = texteQuestion(lv); return `<div class="encadre" style="margin:6px 0 0;padding:8px">
+             <div style="font-weight:700">❓ ${esc(tq.q)}</div>
+             ${tq.pourquoi ? `<div class="aide" style="margin:4px 0 0">${esc(tq.pourquoi)}</div>` : ""}
              ${htmlExtraitsQuestion(cs, lv)}
-             <div class="barre" style="margin-top:6px;flex-wrap:wrap">${boutonsQuestion(lv, i)}</div>
+             <div class="barre" style="margin-top:8px;flex-direction:column;align-items:stretch">${boutonsQuestion(lv, i, cs)}</div>`; })() : ""}${lv.question ? `
              <button class="btn" data-photoq="${i}" style="margin-top:6px;width:100%">📷 Photographier cet endroit (photo d'appoint lue aussitôt)</button></div>` : ""}
          <div class="actions">
            ${!estAcquis(lv) && !lv.question ? `<button class="btn" data-conf="${i}" title="Je l'ai vérifié : il est bien à cette place">✓ Confirmer</button>` : ""}
@@ -4581,7 +4625,14 @@ function ouvrirCompartiment(b, k){
       toast("Photographiez cet endroit en gros plan : la photo sera lue aussitôt.", 4000);
       ajouterAppoint();
     });
-    z.querySelectorAll("[data-rq]").forEach(el=>el.onclick=()=>{ repondreQuestion(cs, cs.livres[Number(el.dataset.rq)], el.dataset.v); apresReponse(); });
+    z.querySelectorAll("[data-rq]").forEach(el=>el.onclick=()=>{
+      const i = Number(el.dataset.rq), lv = cs.livres[i];
+      if (el.dataset.v === "corriger"){
+        formLivre(cs, i, ()=>{ if (cs.livres.includes(lv)) rendreAcquis(lv); apresReponse(); });
+        return;
+      }
+      repondreQuestion(cs, lv, el.dataset.v); apresReponse();
+    });
     z.querySelectorAll("[data-conf]").forEach(el=>el.onclick=()=>{ rendreAcquis(cs.livres[Number(el.dataset.conf)]); apresReponse(); });
     zf.querySelectorAll("[data-valider]").forEach(el=>el.onclick=async()=>{
       const r = el.dataset.valider, e = etatRangee(cs, r);
