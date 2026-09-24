@@ -1,0 +1,205 @@
+{
+ "date": "2026-09-24T05:57:02.442Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muec92wh8n0ai",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Clifford D. Simak / Les raisins verts",
+   "auteur": "Pierre-Henri Simon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 0,
+   "x2": 80,
+   "illisible": false
+  },
+  {
+   "titre": "La maison de Bretagne",
+   "auteur": "Marie Sizun",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 80,
+   "x2": 150,
+   "illisible": false
+  },
+  {
+   "titre": "JANE SMILEY",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 150,
+   "x2": 220,
+   "illisible": false
+  },
+  {
+   "titre": "NOS PREMIERS JOURS",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 220,
+   "x2": 280,
+   "illisible": false
+  },
+  {
+   "titre": "Une journée d'Ivan Denissovitch",
+   "auteur": "Alexandre Soljenitsyne",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 280,
+   "x2": 340,
+   "illisible": false
+  },
+  {
+   "titre": "L'Étrange Cas du docteur Jekyll et de M. Hyde",
+   "auteur": "Stevenson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 340,
+   "x2": 390,
+   "illisible": false
+  },
+  {
+   "titre": "Th. Sturgeon / killdozer",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 390,
+   "x2": 450,
+   "illisible": false
+  },
+  {
+   "titre": "T. Sturgeon / cristal qui songe",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 450,
+   "x2": 500,
+   "illisible": false
+  },
+  {
+   "titre": "Vikas Swarup - Les fabuleuses aventures d'un Indien malchanceux qui devint milliardaire",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 500,
+   "x2": 560,
+   "illisible": false
+  },
+  {
+   "titre": "Romancée-Conti 1935",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 560,
+   "x2": 590,
+   "illisible": false
+  },
+  {
+   "titre": "Le Guépard",
+   "auteur": "Giuseppe Tomasi di Lampedusa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 590,
+   "x2": 640,
+   "illisible": false
+  },
+  {
+   "titre": "L'anomalie",
+   "auteur": "Hervé Le Tellier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 640,
+   "x2": 700,
+   "illisible": false
+  },
+  {
+   "titre": "Théâtre complet I",
+   "auteur": "Tchekhov",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 700,
+   "x2": 750,
+   "illisible": false
+  },
+  {
+   "titre": "Sur les chemins noirs",
+   "auteur": "Sylvain Tesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 750,
+   "x2": 790,
+   "illisible": false
+  },
+  {
+   "titre": "Une vie à coucher dehors",
+   "auteur": "Sylvain Tesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 790,
+   "x2": 830,
+   "illisible": false
+  },
+  {
+   "titre": "LONG ISLAND",
+   "auteur": "COLM TÓIBÍN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 830,
+   "x2": 880,
+   "illisible": false
+  },
+  {
+   "titre": "La sonate à Kreutzer",
+   "auteur": "Tolstoï",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 880,
+   "x2": 930,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 930,
+   "x2": 960,
+   "illisible": true
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 960,
+   "x2": 1000,
+   "illisible": true
+  }
+ ]
+}
