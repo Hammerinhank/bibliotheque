@@ -2666,7 +2666,7 @@
        "temoins": [
         "photo:2026-09-22T16:33:18.870Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufoksm8k6fie",
@@ -2689,7 +2689,7 @@
        "temoins": [
         "photo:2026-09-22T16:33:18.870Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufoksm8p1adg",
@@ -2712,7 +2712,7 @@
        "temoins": [
         "photo:2026-09-22T16:33:18.870Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufoksm8hxk7x",
@@ -2735,7 +2735,7 @@
        "temoins": [
         "photo:2026-09-22T16:33:18.870Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufoksm8wmlgv",
@@ -2758,7 +2758,7 @@
        "temoins": [
         "photo:2026-09-22T16:33:18.870Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mufoksm8xjsdq",
@@ -2781,7 +2781,7 @@
        "temoins": [
         "photo:2026-09-22T16:33:18.870Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -3104,6 +3104,9 @@
       "modele": "claude.ai (copier-coller)",
       "photos": 2,
       "manuel": true
+     },
+     "certif": {
+      "devant": "2026-09-24T15:23:19.875Z"
      }
     },
     "6-1": {
@@ -10977,7 +10980,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T15:22:34.673Z",
+ "maj": "2026-09-24T15:23:24.653Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
