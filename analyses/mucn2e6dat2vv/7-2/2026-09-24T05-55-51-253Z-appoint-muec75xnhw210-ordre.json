@@ -1,0 +1,165 @@
+{
+ "date": "2026-09-24T05:55:51.253Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muec75xnhw210",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Sartre. Les mains sales",
+   "auteur": "Sartre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 46,
+   "x2": 118,
+   "illisible": false
+  },
+  {
+   "titre": "Sartre. Le Sursis",
+   "auteur": "Sartre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 118,
+   "x2": 190,
+   "illisible": false
+  },
+  {
+   "titre": "Gomorra",
+   "auteur": "Roberto Saviano",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 190,
+   "x2": 260,
+   "illisible": false
+  },
+  {
+   "titre": "L'affaire Collini",
+   "auteur": "Ferdinand von Schirach",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 260,
+   "x2": 330,
+   "illisible": false
+  },
+  {
+   "titre": "Les dix enfants que Madame Ming n'a jamais eus",
+   "auteur": "Eric-Emmanuel Schmitt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 330,
+   "x2": 370,
+   "illisible": false
+  },
+  {
+   "titre": "Une vie entière",
+   "auteur": "Robert Seethaler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 370,
+   "x2": 420,
+   "illisible": false
+  },
+  {
+   "titre": "Le café sans nom",
+   "auteur": "Robert Seethaler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 420,
+   "x2": 470,
+   "illisible": false
+  },
+  {
+   "titre": "Le Libraire de Kaboul",
+   "auteur": "Åsne Seierstad",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 470,
+   "x2": 520,
+   "illisible": false
+  },
+  {
+   "titre": "Douleur",
+   "auteur": "Zeruya Shalev",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 520,
+   "x2": 570,
+   "illisible": false
+  },
+  {
+   "titre": "Pygmalion",
+   "auteur": "Bernard Shaw",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 570,
+   "x2": 620,
+   "illisible": false
+  },
+  {
+   "titre": "La croisade de l'idiot",
+   "auteur": "Clifford D. Simak",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 620,
+   "x2": 690,
+   "illisible": false
+  },
+  {
+   "titre": "Simon / Les raisins verts",
+   "auteur": "Pierre-Henri Simon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 690,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "La maison de Bretagne",
+   "auteur": "Marie Sizun",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 740,
+   "x2": 810,
+   "illisible": false
+  },
+  {
+   "titre": "Nos premiers jours",
+   "auteur": "Jane Smiley",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 810,
+   "x2": 880,
+   "illisible": false
+  },
+  {
+   "titre": "10 18",
+   "auteur": "Alexandre Bel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 880,
+   "x2": 920,
+   "illisible": false
+  }
+ ]
+}
