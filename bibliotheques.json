@@ -4334,10 +4334,39 @@
          "champ": "photo2",
          "x1": 22,
          "x2": 85
+        },
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 80,
+         "x2": 220
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "muf3iob290g38",
+       "titre": "LE SURSIS",
+       "auteur": "J. P. SARTRE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 270,
+         "x2": 400
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
        ],
        "statut": "probable"
       },
@@ -4357,12 +4386,18 @@
          "champ": "photo2",
          "x1": 88,
          "x2": 150
+        },
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 400,
+         "x2": 550
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muf3e24v7tszw",
@@ -4380,10 +4415,39 @@
          "champ": "photo2",
          "x1": 150,
          "x2": 190
+        },
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 550,
+         "x2": 670
         }
        ],
        "temoins": [
-        "photo2:2026-09-23T16:26:57.591Z"
+        "photo2:2026-09-23T16:26:57.591Z",
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "muf3iob21gpe5",
+       "titre": "LES DIX ENFANTS QUE MADAME MING N'A JAMAIS EUS",
+       "auteur": "ERIC-EMMANUEL SCHMITT",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 670,
+         "x2": 760
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
        ],
        "statut": "probable"
       },
@@ -4407,6 +4471,66 @@
        ],
        "temoins": [
         "photo2:2026-09-23T16:26:57.591Z"
+       ],
+       "statut": "probable",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "Une vie entre",
+         "auteur": "Robert Seethaler"
+        },
+        "vue": {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 760,
+         "x2": 850
+        },
+        "source": "l'appoint 5",
+        "date": "2026-09-24T05:33:05.466Z"
+       }
+      },
+      {
+       "id": "muf3iob2zb7rr",
+       "titre": "(titre non lu)",
+       "auteur": "Robert Seethaler",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 850,
+         "x2": 920
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf3iob23seiq",
+       "titre": "(titre non lu)",
+       "auteur": "Åsne Seierstad",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muejko3xqtzoi",
+         "x1": 920,
+         "x2": 990
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muejko3xqtzoi:2026-09-23T20:15:45.709Z"
        ],
        "statut": "probable"
       },
@@ -5456,7 +5580,23 @@
        "maj": "2026-09-23T20:15:45.709Z",
        "id": "muejko3xqtzoi",
        "legende": "",
-       "verif": "2026-09-23T20:16:46.857Z"
+       "verif": "2026-09-24T05:33:05.466Z",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 3,
+        "date": "2026-09-24T05:33:02.964Z"
+       },
+       "livresVus": [
+        "muf3e24v99qiu",
+        "muf3iob290g38",
+        "muf3e24viso6v",
+        "muf3e24v7tszw",
+        "muf3iob21gpe5",
+        "muf3iob2zb7rr",
+        "muf3iob23seiq"
+       ]
       }
      ],
      "photo2": {
@@ -8688,7 +8828,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T05:32:35.513Z",
+ "maj": "2026-09-24T05:33:06.096Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
