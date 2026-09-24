@@ -380,8 +380,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.48.1";
+const VERSION = "V1.49.0";
 const HISTORIQUE = [
+  { v:"V1.49.0", d:"24/09/2026", l:[
+    "Bouton renommé « ♻️ Choisir parmi les analyses sauvegardées (n)… » : il ouvre un choix (laquelle réutiliser, ou ne rien faire), sans action immédiate.",
+    "Suppression définitive des sauvegardes d'analyse (🗑, sur l'appareil et sur GitHub) ; les analyses faites sur une photo remplacée depuis sont signalées ⚠️ et supprimables d'un coup.",
+    "Heures des sauvegardes affichées à l'heure locale (elles l'étaient en heure UTC)."
+  ]},
   { v:"V1.48.1", d:"23/09/2026", l:[
     "Questions reformulées : une vraie question en gras (« Ce livre est-il bien à cette place ? », « Quel est le bon titre ? »), une phrase d'explication, et des légendes d'extraits explicites (quel livre, sur quelle photo, ce que montre le cadre rouge).",
     "Réponses plus complètes : « ✏️ Corriger » (titre mal lu), et pour un livre non vu, « C'est le même livre que « … » » quand un voisin lu sur la même photo occupe cet endroit (les deux fiches sont fusionnées)."
@@ -1616,11 +1621,14 @@ async function listerResultatsSauves(b, k){
   }
   const connus = new Set(locaux.concat(distants).map(x=>x.nom));
   const session = resultatsSession.filter(x=>x.doc.bibliotheque === b.id && x.doc.compartiment === k)
-    .map(x=>({ nom:x.chemin.split("/").pop(), doc:x.doc })).filter(x=>!connus.has(x.nom));
+    .map(x=>({ nom:x.chemin.split("/").pop(), doc:x.doc, cheminSession:x.chemin })).filter(x=>!connus.has(x.nom));
   return locaux.concat(distants, session).map(x=>{
     const m = x.nom.match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d)-(\d\d)-(\d\d)/);
-    const t = m ? `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}` : x.nom;
-    const quand = m ? `${m[3]}/${m[2]} ${m[4]}:${m[5]}` : x.nom;
+    // les noms de fichier portent l'heure UTC : on l'affiche à l'heure locale
+    const t = m ? `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}Z` : x.nom;
+    const dl = m ? new Date(t) : null;
+    const deux = (n)=>String(n).padStart(2, "0");
+    const quand = dl ? `${deux(dl.getDate())}/${deux(dl.getMonth() + 1)} ${deux(dl.getHours())}:${deux(dl.getMinutes())}` : x.nom;
     const ma = x.nom.match(/-appoint-([a-z0-9]+)(-ordre)?\.json$/i);
     const mp = x.nom.match(/-analyse-(deux|devant|derriere)\.json$/i);
     return Object.assign(x, { t, quand, genre: ma ? "appoint" : "analyse", appoint: ma ? ma[1] : null, mode: ma && ma[2] ? "ordre" : "verif", portee: mp ? mp[1] : null });
@@ -1649,7 +1657,26 @@ function retablirListesCompartiment(b, k){
   envoyerDonneesAuto("Listes de livres de " + lib(k));
 }
 
-/* Résultats sauvegardés de LA photo affichée : devant (analyses devant ou deux rangs), derrière (derrière ou deux rangs), ou un appoint. */
+/* Résultats sauvegardés de LA photo affichée : choisir lequel réutiliser (ou aucun), supprimer ceux devenus inutiles. */
+async function supprimerResultat(x){
+  // 1. gardé de côté sur l'appareil (pas encore envoyé)
+  ecrireJournalEnAttente(journalEnAttente().filter(y=>y.chemin.split("/").pop() !== x.nom));
+  // 2. obtenu pendant cette session
+  for (let i = resultatsSession.length - 1; i >= 0; i--) if (resultatsSession[i].chemin.split("/").pop() === x.nom) resultatsSession.splice(i, 1);
+  // 3. sur GitHub
+  const chemin = x.chemin || x.cheminSession;
+  if (chemin && ghPret()) await ghSupprimer(chemin, "Suppression d'un résultat d'analyse sauvegardé");
+  versionJournal++;
+}
+async function ghSupprimer(chemin, message){
+  const sha = await ghSha(chemin);
+  if (!sha) return false;
+  const r = await fetch(ghUrl(chemin), { method:"DELETE", headers: ghEntetes("application/vnd.github+json"),
+    body: JSON.stringify({ message: message || "Suppression", sha, branch: cfg.ghBranche }) });
+  if (!r.ok) throw new Error("GitHub " + r.status + " : " + (await r.text()).slice(0, 150));
+  return true;
+}
+
 async function fenetreReutiliserPhoto(b, k, face){
   const cs = b.cases[k];
   let liste;
@@ -1661,15 +1688,49 @@ async function fenetreReutiliserPhoto(b, k, face){
   const nomPhoto = appoint ? "l'appoint " + numeroAppoint(cs, face) : face === "photo2" ? "la photo de derrière" : "la photo de devant";
   const nomPortee = { deux:"analyse des deux rangées (devant + derrière)", devant:"analyse de la rangée 1 seule", derriere:"analyse de la rangée 2 seule" };
   if (!retenus.length){
-    modale({ titre:"Résultats sauvegardés", html:`<div>Aucun résultat sauvegardé pour ${nomPhoto}.</div><div class="aide">Touchez ${appoint ? "🔎 Vérifier" : "🔍 Analyser"} pour en demander un à l'IA.</div>`, boutons:[{texte:"Fermer"}] });
+    modale({ titre:"Analyses sauvegardées", html:`<div>Aucune analyse sauvegardée pour ${nomPhoto}.</div><div class="aide">Utilisez « 🔍 Nouvelle analyse par l'IA ».</div>`, boutons:[{texte:"Fermer"}] });
     return;
   }
-  const f = modale({ titre:"Réutiliser — " + nomPhoto,
-    html:`<div class="aide" style="margin-top:0">Résultats déjà obtenus de l'IA pour ${nomPhoto}, du plus récent au plus ancien. Réutiliser ne redemande rien à l'IA.</div>
-      ${retenus.map((x, i)=>`<div class="prop" style="display:flex;gap:10px;align-items:center">
-        <div style="flex:1"><div class="t">${esc(x.quand)}</div><div class="chg">${appoint ? "lecture de l'appoint" : esc(nomPortee[x.portee] || "analyse")}${x.local ? " — pas encore sur GitHub" : ""}</div></div>
-        <button class="btn" data-r="${i}">Utiliser</button></div>`).join("")}`,
-    boutons:[{texte:"Fermer"}] });
+  // une analyse faite avant le dernier changement de la photo concerne une photo remplacée depuis
+  const photoMaj = (champ)=>{ const p = photoObj(cs, champ); return p ? Date.parse(p.maj || "") || 0 : 0; };
+  const obsolete = (x)=>{
+    const t = Date.parse(x.t) || 0;
+    if (appoint) return t < photoMaj(face);
+    if (x.portee === "deux") return t < Math.max(photoMaj("photo"), photoMaj("photo2"));
+    return t < photoMaj(face);
+  };
+  const nObs = retenus.filter(obsolete).length;
+  const f = modale({ titre:"Analyses sauvegardées — " + nomPhoto,
+    html:`<div>Choisissez l'analyse à réutiliser (aucune question n'est reposée à l'IA), ou fermez sans rien faire.</div>
+      <div class="aide">🗑 supprime définitivement une sauvegarde (sur cet appareil et sur GitHub).${nObs ? ` Les analyses marquées ⚠️ ont été faites sur une photo remplacée depuis : elles ne correspondent plus à la photo actuelle.` : ""}</div>
+      ${retenus.map((x, i)=>`<div class="prop" style="display:flex;gap:8px;align-items:center;${obsolete(x) ? "opacity:.75" : ""}">
+        <div style="flex:1"><div class="t">${esc(x.quand)}${i === 0 ? " <span class='aide'>(la plus récente)</span>" : ""}</div>
+          <div class="chg">${appoint ? "lecture de l'appoint" : esc(nomPortee[x.portee] || "analyse")}${x.local ? " — pas encore sur GitHub" : ""}</div>
+          ${obsolete(x) ? `<div class="mot" style="color:var(--orange)">⚠️ faite sur une photo remplacée depuis</div>` : ""}</div>
+        <button class="btn principal" data-r="${i}">Utiliser</button>
+        <button class="btn rouge" data-sup="${i}" title="Supprimer définitivement cette sauvegarde">🗑</button></div>`).join("")}`,
+    boutons:[
+      ...(nObs ? [{ texte:`🗑 Supprimer les ${nObs} obsolète(s)`, classe:"rouge", garder:true, action:async ()=>{
+        const ok = await confirmer(`Supprimer définitivement les ${nObs} analyse(s) faites sur une photo remplacée depuis ?`, "Supprimer des sauvegardes", "Supprimer");
+        if (!ok) return false;
+        try{ for (const x of retenus.filter(obsolete)) await supprimerResultat(x); }
+        catch(e){ toast("Suppression incomplète : " + e.message, 6000); }
+        f.remove(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+        toast("Sauvegardes obsolètes supprimées.");
+        fenetreReutiliserPhoto(b, k, face);
+        return false;
+      }}] : []),
+      { texte:"Ne rien faire" }
+    ] });
+  f.querySelectorAll("[data-sup]").forEach(bt=>bt.onclick = async ()=>{
+    const x = retenus[Number(bt.dataset.sup)];
+    const ok = await confirmer(`Supprimer définitivement l'analyse du ${esc(x.quand)} ?<div class="aide">Elle ne pourra plus être réutilisée.</div>`, "Supprimer une sauvegarde", "Supprimer");
+    if (!ok) return;
+    try{ await supprimerResultat(x); toast("Sauvegarde supprimée."); }
+    catch(e){ toast("Suppression impossible : " + e.message, 6000); return; }
+    f.remove(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k);
+    fenetreReutiliserPhoto(b, k, face);
+  });
   f.querySelectorAll("[data-r]").forEach(bt=>bt.onclick = async ()=>{
     const x = retenus[Number(bt.dataset.r)];
     let doc = x.doc;
@@ -1678,8 +1739,7 @@ async function fenetreReutiliserPhoto(b, k, face){
     const src = Object.assign({ ia:"gemini", modele:"", echecs:[] }, doc.source || {});
     src.modele = (src.modele || "") + " — résultat sauvegardé du " + x.quand;
     if (appoint){
-      const lus = (doc.lus || []).map(l=>Object.assign({}, l));
-      fenetreFusionAppoint(b, k, face, lus, src);
+      fenetreFusionAppoint(b, k, face, (doc.lus || []).map(l=>Object.assign({}, l)), src);
     } else {
       const livres = (doc.livres || []).map(l=>Object.assign({}, l, { id:uid() }));
       livres.source = src;
@@ -1688,6 +1748,7 @@ async function fenetreReutiliserPhoto(b, k, face){
     }
   });
 }
+
 
 /* ====================================================================
    HISTORIQUE GITHUB : restaurer une version précédente de bibliotheques.json
@@ -4430,8 +4491,8 @@ function ouvrirCompartiment(b, k){
     if (!l.length){ bR.textContent = "♻️ Aucune analyse sauvegardée pour cette photo"; info.textContent = "Seule une nouvelle analyse par l'IA est possible ; son résultat sera sauvegardé et réutilisable ensuite."; return; }
     const der = l[l.length - 1];
     bR.disabled = false;
-    bR.textContent = `♻️ Réutiliser l'analyse du ${der.quand}` + (l.length > 1 ? ` (+${l.length - 1} plus ancienne${l.length > 2 ? "s" : ""})` : "");
-    info.textContent = "Réutiliser ne redemande rien à l'IA : le résultat passe par les mêmes fenêtres de choix qu'une nouvelle analyse.";
+    bR.textContent = `♻️ Choisir parmi les analyses sauvegardées (${l.length})…`;
+    info.textContent = `La plus récente date du ${der.quand}. Vous choisirez laquelle réutiliser — sans redemander à l'IA — ou aucune ; vous pourrez aussi supprimer celles devenues inutiles.`;
   };
   const majPhoto = ()=>{
     majUnRang();
