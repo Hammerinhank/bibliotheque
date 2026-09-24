@@ -1,0 +1,165 @@
+{
+ "date": "2026-09-24T05:59:41.957Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muecc28d4vsvn",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 0,
+   "x2": 28,
+   "illisible": true
+  },
+  {
+   "titre": "Théâtre complet I",
+   "auteur": "Tchekhov",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 28,
+   "x2": 119,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 78,
+   "x2": 94,
+   "illisible": true
+  },
+  {
+   "titre": "Sur les chemins noirs",
+   "auteur": "Sylvain Tesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 84,
+   "x2": 156,
+   "illisible": false
+  },
+  {
+   "titre": "Une vie à coucher dehors",
+   "auteur": "Sylvain Tesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 128,
+   "x2": 197,
+   "illisible": false
+  },
+  {
+   "titre": "Long Island",
+   "auteur": "Colm Tóibín",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 175,
+   "x2": 244,
+   "illisible": false
+  },
+  {
+   "titre": "La sonate à Kreutzer",
+   "auteur": "Tolstoï",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 241,
+   "x2": 313,
+   "illisible": false
+  },
+  {
+   "titre": "Le cheval",
+   "auteur": "Léon Tolstoï",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 316,
+   "x2": 341,
+   "illisible": false
+  },
+  {
+   "titre": "Résurrection tome 1",
+   "auteur": "Tolstoï",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 341,
+   "x2": 416,
+   "illisible": false
+  },
+  {
+   "titre": "Résurrection tome 2",
+   "auteur": "Tolstoï",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 416,
+   "x2": 481,
+   "illisible": false
+  },
+  {
+   "titre": "Les guerres intérieures",
+   "auteur": "Valérie Tong Cuong",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 463,
+   "x2": 528,
+   "illisible": false
+  },
+  {
+   "titre": "La conjuration des imbéciles",
+   "auteur": "J. K. Toole",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 500,
+   "x2": 609,
+   "illisible": false
+  },
+  {
+   "titre": "Mémoires d'un chasseur",
+   "auteur": "Tourgueniev",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 575,
+   "x2": 709,
+   "illisible": false
+  },
+  {
+   "titre": "Les météores",
+   "auteur": "Tournier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 656,
+   "x2": 809,
+   "illisible": false
+  },
+  {
+   "titre": "L'Italienne",
+   "auteur": "Adriana Trigiani",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 747,
+   "x2": 919,
+   "illisible": false
+  }
+ ]
+}
