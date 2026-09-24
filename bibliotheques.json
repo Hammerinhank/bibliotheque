@@ -3871,6 +3871,788 @@
     "7-2": {
      "livres": [
       {
+       "id": "muf6739z403m1",
+       "titre": "L'art de perdre",
+       "auteur": "Alice Zeniter",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 34,
+         "x2": 69
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zos4o6",
+       "titre": "Mémoires d'une geisha",
+       "auteur": "Inoue Yuki",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "titre partiellement masqué",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 70,
+         "x2": 97
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zkv7ov",
+       "titre": "Au long du Grand Canal",
+       "auteur": "Zhang Xinxin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Actes Sud / L'Aire",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 98,
+         "x2": 125
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zjq4ar",
+       "titre": "Black Boy",
+       "auteur": "Richard Wright",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche 811-812",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 125,
+         "x2": 156
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z1i4wz",
+       "titre": "Mrs Dalloway",
+       "auteur": "Virginia Woolf",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio classique 2643",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 158,
+         "x2": 183
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zasuop",
+       "titre": "Le Chœur des femmes",
+       "auteur": "Martin Winckler",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 5198",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 184,
+         "x2": 222
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zzytwv",
+       "titre": "La chatte sur un toit brûlant",
+       "auteur": "Tennessee Williams",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "10/18 n°2507",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 223,
+         "x2": 249
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z4fjpq",
+       "titre": "Le crime de Lord Arthur Savile",
+       "auteur": "Oscar Wilde",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°674",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 250,
+         "x2": 266
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zxxzp3",
+       "titre": "Le témoin oculaire",
+       "auteur": "Ernst Weiss",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Folio 2261",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 266,
+         "x2": 288
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739ze4wk0",
+       "titre": "Le plus clair de la lune",
+       "auteur": "Wang Anyi",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Picquier poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 288,
+         "x2": 311
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zbtukf",
+       "titre": "Sinouhé l'Égyptien I",
+       "auteur": "Mika Waltari",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°1297, jauni",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 312,
+         "x2": 347
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zoaiok",
+       "titre": "Sinouhé l'Égyptien II",
+       "auteur": "Mika Waltari",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°1298, jauni",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 348,
+         "x2": 378
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zkmd0j",
+       "titre": "Aurora, Kentucky",
+       "auteur": "Carolyn D. Wall",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points P2640",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 379,
+         "x2": 413
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zqaco5",
+       "titre": "Une sortie honorable",
+       "auteur": "Éric Vuillard",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Actes Sud",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 414,
+         "x2": 436
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z6588w",
+       "titre": "L'ordre du jour",
+       "auteur": "Éric Vuillard",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Babel 1783",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 436,
+         "x2": 451
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zpxdx5",
+       "titre": "L'automne à Pékin",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "10/18 208-209, usé",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 452,
+         "x2": 486
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zdefhe",
+       "titre": "L'écume des jours",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche 14087",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 486,
+         "x2": 506
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zn5k64",
+       "titre": "Cantilènes en gelée",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "10/18 n°517",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 506,
+         "x2": 533
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739ze5ipf",
+       "titre": "Trouble dans les Andains",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "10/18 n°497",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 533,
+         "x2": 553
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z8iuf7",
+       "titre": "L'herbe rouge",
+       "auteur": "Boris Vian",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 554,
+         "x2": 570
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z3w3tb",
+       "titre": "La croule",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "Livre de Poche 1798",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 570,
+         "x2": 584
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zf65ez",
+       "titre": "La Rose de la Mer",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°410",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 586,
+         "x2": 609
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zezkaa",
+       "titre": "Mon seul amour",
+       "auteur": "Paul Vialar",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu 501",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 611,
+         "x2": 630
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739ztu5tc",
+       "titre": "Un long, si long après-midi",
+       "auteur": "Inga Vesper",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Points P5944",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 631,
+         "x2": 658
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zet5r5",
+       "titre": "Monsieur Teste",
+       "auteur": "Paul Valéry",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°29",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 659,
+         "x2": 672
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zp37vr",
+       "titre": "Body Language",
+       "auteur": "A. K. Turner",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Livre de Poche 36861",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 673,
+         "x2": 697
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zc1lj0",
+       "titre": "Johnny s'en va-t-en guerre",
+       "auteur": "Dalton Trumbo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Babel 624",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 698,
+         "x2": 724
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z6zkdm",
+       "titre": "Les Eygletière (1)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu 344",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 725,
+         "x2": 766
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739ztco6n",
+       "titre": "Les Eygletière (2)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu 345",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 768,
+         "x2": 806
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739z6gpov",
+       "titre": "Les Eygletière (3)",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "J'ai Lu 346",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 808,
+         "x2": 847
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zuixp0",
+       "titre": "Le sac et la cendre I",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°180",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 848,
+         "x2": 886
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zjc8px",
+       "titre": "Le sac et la cendre II",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°181",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 888,
+         "x2": 922
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zgk78f",
+       "titre": "Étrangers sur la terre II",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°201",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 923,
+         "x2": 955
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muf6739zzwmk3",
+       "titre": "Étrangers sur la terre I",
+       "auteur": "Henri Troyat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "poche n°200",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 956,
+         "x2": 991
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-24T06:44:15.164Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "muf4basr0d0im",
        "titre": "Les mains sales",
        "auteur": "Sartre",
@@ -4808,37 +5590,9 @@
       "plein": null,
       "chemin": "images/mucn2e6dat2vv/7-2.jpg",
       "envoye": true,
-      "maj": "2026-09-22T16:36:08.886Z"
+      "maj": "2026-09-24T06:44:15.164Z"
      },
      "appoints": [
-      {
-       "chemin": "images/mucn2e6dat2vv/7-2-appoint-mue5rvl3sa4zy.jpg",
-       "envoye": true,
-       "maj": "2026-09-23T16:26:56.475Z",
-       "legende": "",
-       "id": "mue5rvl3sa4zy",
-       "verif": "2026-09-24T05:33:30.447Z",
-       "livresVus": [
-        "muf3j7to6g7gy",
-        "muf3j7topn5v5",
-        "muf38t25cbd92",
-        "muf38t25pfe1o",
-        "muf38t25lodl5",
-        "muf38t25kddh0",
-        "muf38t25phs7x",
-        "muf38t252zq2k",
-        "muf38t25md9bb",
-        "muf38t25dknjs",
-        "muf38t25zipdt",
-        "muf38t251uhho",
-        "muf38t25dnj1s",
-        "muf38t25ti0mn",
-        "muf38t25yxnzr",
-        "muf38t25vdowr",
-        "muf38t25visq3",
-        "muf38t25qaces"
-       ]
-      },
       {
        "plein": null,
        "chemin": "images/mucn2e6dat2vv/7-2-appoint-muec75xnhw210.jpg",
@@ -4940,30 +5694,27 @@
       },
       {
        "plein": null,
-       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muf4j5sbh0mwb.jpg",
+       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muf62tf8z759m.jpg",
        "envoye": true,
-       "maj": "2026-09-24T06:01:25.259Z",
-       "legende": "Gros plan de la rangée de derrière, autour de « 10 18 », entre « Nos premiers jours » et « Une journée d'Ivan Denissovitch »",
-       "id": "muf4j5sbh0mwb",
-       "rang": "derriere",
-       "rangInfo": {
-        "auto": true,
-        "n1": 0,
-        "n2": 8,
-        "date": "2026-09-24T06:02:24.529Z"
-       },
-       "livresVus": [
-        "muf4kfiuoq8zj",
-        "muf4basr3pwdc",
-        "muf4basrcv4ag",
-        "muf4basrccnsz",
-        "muf4basri8tl8",
-        "muf4basr743j7",
-        "muf4basrduiam",
-        "muf4basrxxelk",
-        "muf4basrsbhqs"
-       ],
-       "verif": "2026-09-24T06:02:30.111Z"
+       "maj": "2026-09-24T06:44:41.972Z",
+       "id": "muf62tf8z759m",
+       "legende": ""
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muf63eefxpp6k.jpg",
+       "envoye": true,
+       "maj": "2026-09-24T06:45:51.749Z",
+       "id": "muf63eefxpp6k",
+       "legende": ""
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-2-appoint-muf63vcqqf4kt.jpg",
+       "envoye": true,
+       "maj": "2026-09-24T06:45:40.232Z",
+       "id": "muf63vcqqf4kt",
+       "legende": ""
       }
      ],
      "photo2": {
@@ -6763,14 +7514,15 @@
       ]
      },
      "analyse": {
-      "maj": "2026-09-24T05:55:18.512Z",
+      "maj": "2026-09-24T06:48:01.370Z",
       "rangs": {
-       "derriere": "2026-09-24T05:55:18.512Z"
+       "derriere": "2026-09-24T05:55:18.512Z",
+       "devant": "2026-09-24T06:48:01.370Z"
       },
-      "ia": "gemini",
-      "modele": "gemini-2.5-flash",
+      "ia": "claude",
+      "modele": "claude.ai (copier-coller)",
       "photos": 2,
-      "manuel": false
+      "manuel": true
      },
      "certif": {
       "derriere": "2026-09-24T06:38:04.492Z"
@@ -9179,7 +9931,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T06:38:17.915Z",
+ "maj": "2026-09-24T06:48:02.368Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
