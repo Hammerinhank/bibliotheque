@@ -380,8 +380,18 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.46.0";
+const VERSION = "V1.48.0";
 const HISTORIQUE = [
+  { v:"V1.48.0", d:"23/09/2026", l:[
+    "Convergence, 2e étape : l'IA indique la position de chaque livre sur la photo ; chaque question affiche l'extrait agrandi de la photo à l'endroit concerné (cadre rouge), pour trancher sans aller à l'étagère.",
+    "Sur chaque question, « 📷 Photographier cet endroit » : prend une photo d'appoint avec la légende « entre A et B », la fait lire aussitôt par l'IA et la rapproche de la liste.",
+    "Les extraits apparaissent aussi dans la fenêtre de fusion, pour les contradictions de lecture."
+  ]},
+  { v:"V1.47.0", d:"23/09/2026", l:[
+    "Convergence, 1re étape : chaque livre a un statut — 🔒 acquis, probable ou ❓ question. Un livre retrouvé à la même place sur deux photos différentes devient acquis automatiquement ; un livre acquis n'est plus jamais modifié, déplacé ni retiré par une analyse.",
+    "Fusions (nouvelle analyse d'une rangée, photo d'appoint) : tout ce qui concorde est appliqué sans rien demander ; seules les contradictions de lecture sont posées, à trancher tout de suite ou « Plus tard ». Les livres non vus restent, avec une question.",
+    "Liste d'un compartiment : état par rangée (acquis / probables / questions), filtre ❓ Questions, réponse aux questions en un geste, « ✓ Valider la rangée » quand il n'en reste plus. Grille : ✓ sur les compartiments entièrement acquis."
+  ]},
   { v:"V1.46.0", d:"23/09/2026", l:[
     "Quand une photo d'appoint est affichée, 4e bouton de filtre « Appoint n » à côté de Tous / Rangée 1 / Rangée 2 : il montre les livres de la liste issus de cette photo (reconnus ou ajoutés lors de sa dernière vérification)."
   ]},
@@ -2297,6 +2307,7 @@ function appliquerLivresCompartiment(b, k, livres){
   };
   const conserves = horsPortee.map(r=>`${ancDe(r).length} livre(s) du ${NOM_RANG[r]} conservé(s)`);
 
+  remplisDirect.forEach(r=>nouvDe(r).forEach(lv=>{ lv.temoins = [temoinRang(cs, r)]; lv.statut = "probable"; }));
   if (!disputes.length){
     cs.livres = assembler(()=>[]);
     cs.analyse = infoAnalyse(livres, cs);
@@ -2341,9 +2352,259 @@ function appliquerLivresCompartiment(b, k, livres){
   fenetreFusion(k, disputes, parRang, (res, bilan)=>{
     cs.livres = assembler(r=>res[r]);
     cs.analyse = infoAnalyse(livres, cs); fin();
-    toast(`Fusion : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+    toast(`${bilan.acquis} livre(s) devenu(s) 🔒 acquis, ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.questions} question(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
   }, `<div class="aide"><b>${enTete}.</b> ${esc(texteBilanAnalyse(livres))}${autoTxt.length ? " En plus : " + autoTxt.join(" ; ") + "." : ""}</div>` +
-     (aucunCommun.length ? `<div class="encadre">⚠️ <b>Aucun livre en commun</b> avec la liste actuelle de la ${aucunCommun.map(r=>r === "derriere" ? "rangée 2" : "rangée 1").join(" et de la ")} : la photo montre sans doute un autre compartiment ou l'autre rangée. Dans ce cas, touchez « Retour » et vérifiez la photo.</div>` : ""));
+     (aucunCommun.length ? `<div class="encadre">⚠️ <b>Aucun livre en commun</b> avec la liste actuelle de la ${aucunCommun.map(r=>r === "derriere" ? "rangée 2" : "rangée 1").join(" et de la ")} : la photo montre sans doute un autre compartiment ou l'autre rangée. Dans ce cas, touchez « Annuler » et vérifiez la photo.</div>` : ""), cs);
+}
+
+/* ====== POSITIONS SUR LES PHOTOS ET EXTRAITS AGRANDIS ======
+   L'IA donne, pour chaque livre, sa position horizontale sur la photo (x1, x2 en millièmes de la largeur).
+   On garde pour chaque livre ses « vues » : [{ champ, x1, x2 }] ; une question garde l'endroit concerné. */
+const CONSIGNE_POSITION = `
+
+Pour chaque livre, ajoute aussi "x1" et "x2" : la position horizontale de sa tranche sur la photo, en millièmes de la largeur (0 = bord gauche, 1000 = bord droit), par exemple {"titre":"...","x1":120,"x2":165}. Donne les livres de gauche à droite.`;
+
+function lirePosition(x){
+  const a = Number(x && x.x1), z = Number(x && x.x2);
+  if (!isFinite(a) || !isFinite(z)) return null;
+  const x1 = Math.max(0, Math.min(1000, Math.min(a, z))), x2 = Math.max(0, Math.min(1000, Math.max(a, z)));
+  return x2 > x1 ? { x1, x2 } : null;
+}
+/* ajoute ou remplace la vue d'un livre sur une photo donnée */
+function ajouterVue(lv, vue){
+  if (!vue) return;
+  lv.vues = (lv.vues || []).filter(v=>v.champ !== vue.champ).concat([vue]);
+}
+const vueSur = (lv, champ)=> (lv.vues || []).find(v=>v.champ === champ) || null;
+
+/* découpe l'endroit [x1, x2] d'une photo, élargi pour voir les voisins ; renvoie une image (data URL) */
+const cacheExtraits = {};
+async function extraitPhoto(b, k, champ, x1, x2){
+  const cle = [b.id, k, champ, x1, x2].join("|");
+  if (cacheExtraits[cle]) return cacheExtraits[cle];
+  const src = await photoPleine(b, k, champ);
+  if (!src) return null;
+  const img = await new Promise((res, rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = rej; i.src = src; });
+  const W = img.naturalWidth, H = img.naturalHeight;
+  const centre = (x1 + x2) / 2 / 1000 * W;
+  const larg = Math.max((x2 - x1) / 1000 * W * 3.2, W * 0.22);
+  const g = Math.max(0, Math.min(W - larg, centre - larg / 2)), l = Math.min(W, larg);
+  const echelle = Math.min(1, 640 / l);
+  const c = document.createElement("canvas");
+  c.width = Math.round(l * echelle); c.height = Math.round(H * echelle);
+  const ctx = c.getContext("2d");
+  ctx.drawImage(img, g, 0, l, H, 0, 0, c.width, c.height);
+  // repère de l'endroit visé
+  const rx1 = (x1 / 1000 * W - g) * echelle, rx2 = (x2 / 1000 * W - g) * echelle;
+  ctx.strokeStyle = "#ff3b30"; ctx.lineWidth = 3;
+  ctx.strokeRect(Math.max(1, rx1), 2, Math.max(4, rx2 - rx1), c.height - 4);
+  return cacheExtraits[cle] = c.toDataURL("image/jpeg", 0.85);
+}
+/* remplit les emplacements <div data-ex="champ|x1|x2" data-leg="…"> d'un élément */
+function remplirExtraits(el, b, k){
+  el.querySelectorAll("[data-ex]").forEach(async z=>{
+    if (z.dataset.fait) return; z.dataset.fait = "1";
+    const [champ, x1, x2] = z.dataset.ex.split("|");
+    z.innerHTML = `<div class="aide" style="margin:4px 0">${esc(z.dataset.leg || "")} — chargement…</div>`;
+    try{
+      const d = await extraitPhoto(b, k, champ, Number(x1), Number(x2));
+      z.innerHTML = d ? `<div class="aide" style="margin:6px 0 2px">${esc(z.dataset.leg || "")}</div>
+        <img src="${d}" style="max-width:100%;max-height:260px;border-radius:6px;border:1px solid var(--trait);display:block">`
+        : `<div class="aide">${esc(z.dataset.leg || "")} : photo indisponible.</div>`;
+    }catch(e){ z.innerHTML = `<div class="aide">${esc(z.dataset.leg || "")} : extrait impossible.</div>`; }
+  });
+}
+const nomChampCourt = (cs, champ)=> estAppoint(champ) ? "l'appoint " + numeroAppoint(cs, champ) : champ === "photo2" ? "la photo de derrière" : "la photo de devant";
+/* emplacements d'extraits pour une question (livre de la liste) */
+function htmlExtraitsQuestion(cs, lv){
+  const q = lv.question || {}, out = [];
+  const place = (v, leg)=>{ if (v && photoObj(cs, v.champ)) out.push(`<div data-ex="${v.champ}|${v.x1}|${v.x2}" data-leg="${esc(leg)}"></div>`); };
+  if (q.type === "lecture"){
+    place(q.vue, "Sur " + nomChampCourt(cs, q.vue ? q.vue.champ : "") + " : lu « " + (q.autre ? q.autre.titre : "") + " »");
+    (lv.vues || []).filter(v=>!q.vue || v.champ !== q.vue.champ).slice(0, 1).forEach(v=>place(v, "Sur " + nomChampCourt(cs, v.champ) + " : lu « " + lv.titre + " »"));
+  } else if (q.zone){
+    place(q.zone, "Sur " + nomChampCourt(cs, q.zone.champ) + " : endroit où il devrait être");
+    (lv.vues || []).filter(v=>v.champ !== q.zone.champ).slice(0, 1).forEach(v=>place(v, "Sur " + nomChampCourt(cs, v.champ) + " : vu ici"));
+  } else (lv.vues || []).slice(0, 1).forEach(v=>place(v, "Sur " + nomChampCourt(cs, v.champ)));
+  return out.join("");
+}
+
+/* ====================================================================
+   CONVERGENCE : statut de chaque livre (acquis 🔒 / probable / question ❓)
+   - un livre retrouvé à la même place sur deux photos différentes devient acquis automatiquement ;
+   - un livre acquis n'est plus jamais modifié, déplacé ni retiré par une analyse ;
+   - seules les contradictions deviennent des questions, que l'on peut trancher tout de suite ou plus tard.
+   ==================================================================== */
+/* bibliothèque qui contient un compartiment donné */
+function biblioDeCase(cs){ return (data.bibliotheques || []).find(x=>Object.values(x.cases || {}).includes(cs)) || null; }
+function temoinPhoto(cs, champ){
+  const p = photoObj(cs, champ);
+  return champ + ":" + ((p && (p.maj || p.chemin)) || "");
+}
+function temoinRang(cs, r){ return temoinPhoto(cs, r === "derriere" ? "photo2" : "photo"); }
+/* ajoute un témoin ; deux photos différentes → acquis (sauf question en suspens) */
+function ajouterTemoin(lv, t){
+  if (!t) return false;
+  lv.temoins = [...new Set((lv.temoins || []).concat([t]))];
+  if (lv.statut !== "acquis" && lv.temoins.length >= 2 && !lv.question){ lv.statut = "acquis"; return true; }
+  return false;
+}
+function rendreAcquis(lv){ lv.statut = "acquis"; delete lv.question; }
+const estAcquis = (lv)=> lv.statut === "acquis";
+
+/* État d'une rangée : { total, acquis, questions, probables, validee } */
+function etatRangee(cs, r){
+  const l = (cs.livres||[]).filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r);
+  const acquis = l.filter(estAcquis).length, questions = l.filter(lv=>lv.question).length;
+  return { total:l.length, acquis, questions, probables:l.length - acquis - questions, validee: l.length > 0 && acquis === l.length };
+}
+
+/* Fusion convergente : n'interroge que sur les vraies contradictions.
+   opts : { titre, intro, blocs:[{r, etapes, avant, apres, entete}], temoin(r), nomSource, surValider(res, bilan), surAnnuler } */
+function fusionConvergente(opts){
+  const { titre, intro, blocs, temoin, surValider, surAnnuler } = opts;
+  const nomSource = opts.nomSource || "cette photo";
+  const aut = (lv)=> lv.auteur ? ` <span style="opacity:.75">— ${esc(lv.auteur)}</span>` : "";
+  // classement automatique de chaque étape
+  blocs.forEach(bl=>bl.etapes.forEach(e=>{
+    if (e.type === "paire") e.cat = (e.sur || estAcquis(e.a)) ? "confirme" : "question";
+    else if (e.type === "ancien") e.cat = estAcquis(e.a) ? "acquisNonVu" : (e.deplace ? "deplace" : "nonVu");
+    else e.cat = e.deplace ? "doublonDeplace" : "ajout";
+    if (e.cat === "question") e.choix = "plusTard";
+    if (e.cat === "ajout") e.ajouter = true;
+    if (e.cat === "nonVu" || e.cat === "deplace") e.retirer = false;
+  }));
+  const tous = blocs.flatMap((bl, nb)=>bl.etapes.map((e, x)=>({ e, id: nb + "_" + x, r: bl.r })));
+  const de = (c)=>tous.filter(t=>t.e.cat === c);
+  const nConf = de("confirme").length, nQ = de("question").length, nAj = de("ajout").length,
+        nNonVu = de("nonVu").length + de("deplace").length, nDep = de("deplace").length + de("doublonDeplace").length;
+  const nNouvAcquis = de("confirme").filter(t=>!estAcquis(t.e.a) && !t.e.a.question &&
+    [...new Set((t.e.a.temoins || []).concat([temoin(t.r)]))].length >= 2).length;
+
+  const btn = (id, v, lib, actif)=>`<button data-q="${id}" data-v="${v}" class="${actif ? "actif" : ""}">${lib}</button>`;
+  const htmlQuestions = de("question").map(({ e, id })=>`<div class="prop" style="border-left:3px solid var(--orange)">
+      <div class="aide" style="margin:0">❓ Même place, lectures différentes :</div>
+      <div>Liste : <b>${esc(e.a.titre)}</b>${aut(e.a)}</div>
+      <div>${esc(nomSource[0].toUpperCase() + nomSource.slice(1))} : <b>${esc(e.b.titre)}</b>${aut(e.b)}</div>
+      ${opts.b && e.b.vues && e.b.vues[0] ? `<div data-ex="${e.b.vues[0].champ}|${e.b.vues[0].x1}|${e.b.vues[0].x2}" data-leg="Sur ${esc(nomSource)}"></div>` : ""}
+      ${opts.b && (e.a.vues || []).filter(v=>!e.b.vues || v.champ !== e.b.vues[0].champ)[0] ? (()=>{ const v = e.a.vues.filter(v=>!e.b.vues || v.champ !== e.b.vues[0].champ)[0];
+        return `<div data-ex="${v.champ}|${v.x1}|${v.x2}" data-leg="Sur ${esc(nomChampCourt(opts.cs, v.champ))}"></div>`; })() : ""}
+      <div class="onglets" style="margin-top:6px">
+        ${btn(id, "a", "« " + esc(e.a.titre.slice(0, 28)) + " »", false)}${btn(id, "b", "« " + esc(e.b.titre.slice(0, 28)) + " »", false)}
+        ${btn(id, "deux", "Deux livres", false)}${btn(id, "plusTard", "Plus tard", true)}</div></div>`).join("");
+  const liste = (items, rendu)=>items.map(rendu).join("");
+  const htmlAjouts = liste(de("ajout"), ({ e, id })=>`<div class="coche" style="margin:4px 0"><input type="checkbox" data-aj="${id}" checked><label style="margin:0"><b>${esc(e.b.titre)}</b>${aut(e.b)}</label></div>`);
+  const htmlNonVus = liste(de("nonVu").concat(de("deplace")), ({ e, id })=>`<div class="coche" style="margin:4px 0"><input type="checkbox" data-ret="${id}"><label style="margin:0">Retirer <b>${esc(e.a.titre)}</b>${aut(e.a)}${e.cat === "deplace" ? " <span class='aide'>(semble ailleurs sur la photo)</span>" : ""}</label></div>`);
+
+  const f = modale({ titre,
+    html:`${intro || ""}
+      <div style="margin-top:8px">
+        <div>✅ <b>${nConf}</b> livre(s) retrouvé(s) à leur place${nNouvAcquis ? ` — dont <b>${nNouvAcquis}</b> deviennent <b>🔒 acquis</b> (vus sur deux photos)` : ""}.</div>
+        ${nAj ? `<div>🆕 <b>${nAj}</b> livre(s) nouveau(x), ajouté(s) à leur place.</div>` : ""}
+        ${nNonVu ? `<div>👁 <b>${nNonVu}</b> livre(s) de la liste non vu(s) sur ${esc(nomSource)} : gardés, avec une question ❓.</div>` : ""}
+        ${nQ ? `<div>❓ <b>${nQ}</b> contradiction(s) de lecture : tranchez maintenant, ou « Plus tard ».</div>` : ""}
+        ${nDep ? `<div class="encadre">⚠️ ${nDep} livre(s) semblent avoir changé de place : ils sont signalés en question, rien n'est déplacé.</div>` : ""}
+        ${!nQ && !nAj && !nNonVu ? `<div class="aide">Rien à trancher.</div>` : ""}
+      </div>
+      ${nQ ? `<div class="titreSection" style="margin-top:12px">❓ À trancher (facultatif)</div>${htmlQuestions}` : ""}
+      ${nAj ? `<details style="margin-top:10px"><summary style="cursor:pointer;font-weight:600">🆕 Livres ajoutés (${nAj}) — décocher pour ne pas ajouter</summary>${htmlAjouts}</details>` : ""}
+      ${nNonVu ? `<details style="margin-top:10px"><summary style="cursor:pointer;font-weight:600">👁 Non vus sur ${esc(nomSource)} (${nNonVu})</summary>
+         <div class="aide">Ils restent dans la liste avec une question ; cochez seulement si vous êtes sûr qu'ils ne sont pas là.</div>${htmlNonVus}</details>` : ""}
+      <div class="aide" style="margin-top:10px">Les livres 🔒 acquis ne sont jamais modifiés par une analyse.</div>`,
+    boutons:[
+      { texte:"Annuler", action:()=>{ if (surAnnuler) surAnnuler(); } },
+      { texte:"Appliquer", classe:"principal", action:(fd)=>{
+        const res = {}; const bilan = { aj:0, re:0, co:0, acquis:0, questions:0, vus:[] };
+        blocs.forEach((bl, nb)=>{
+          const t = temoin(bl.r);
+          const l = [];
+          const vueB = (e)=> e && e.b && e.b.vues ? e.b.vues[0] : null;
+          // endroit, sur la photo lue, où un livre de la liste aurait dû apparaître : entre ses voisins vus
+          const zoneEntre = (x)=>{
+            let g = null, d = null;
+            for (let y = x - 1; y >= 0; y--) if (vueB(bl.etapes[y])){ g = vueB(bl.etapes[y]); break; }
+            for (let y = x + 1; y < bl.etapes.length; y++) if (vueB(bl.etapes[y])){ d = vueB(bl.etapes[y]); break; }
+            const ref = g || d; if (!ref) return null;
+            let x1 = g ? g.x2 : Math.max(0, d.x1 - 60), x2 = d ? d.x1 : Math.min(1000, g.x2 + 60);
+            if (x2 - x1 < 20){ const c = (x1 + x2) / 2; x1 = Math.max(0, c - 15); x2 = Math.min(1000, c + 15); }
+            return { champ: ref.champ, x1: Math.round(x1), x2: Math.round(x2) };
+          };
+          bl.etapes.forEach((e, x)=>{
+            const id = nb + "_" + x;
+            if (e.type === "paire" && (e.cat === "confirme" || (e.cat === "question" && (e.choix === "a" || e.choix === "b")))) ajouterVue(e.a, vueB(e));
+            if (e.cat === "confirme"){
+              const lv = e.a;
+              if (!estAcquis(lv)) ["auteur","annee"].forEach(c=>{ if (!lv[c] && e.b[c]) lv[c] = e.b[c]; });
+              if (ajouterTemoin(lv, t)) bilan.acquis++;
+              l.push(lv); bilan.vus.push(lv);
+            } else if (e.cat === "question"){
+              const lv = e.a;
+              if (e.choix === "a"){ rendreAcquis(lv); ajouterTemoin(lv, t); bilan.acquis++; l.push(lv); bilan.vus.push(lv); }
+              else if (e.choix === "b"){ lv.titre = e.b.titre; if (e.b.auteur) lv.auteur = e.b.auteur; rendreAcquis(lv); ajouterTemoin(lv, t); bilan.co++; bilan.acquis++; l.push(lv); bilan.vus.push(lv); }
+              else if (e.choix === "deux"){ e.b.temoins = [t]; e.b.statut = "probable"; l.push(lv, e.b); bilan.aj++; bilan.vus.push(e.b); }
+              else { lv.question = { type:"lecture", autre:{ titre:e.b.titre, auteur:e.b.auteur || "" }, vue: vueB(e), source:nomSource, date:new Date().toISOString() }; l.push(lv); bilan.questions++; }
+            } else if (e.cat === "acquisNonVu"){ l.push(e.a); }
+            else if (e.cat === "nonVu" || e.cat === "deplace"){
+              const c = fd.querySelector(`[data-ret="${id}"]`);
+              if (c && c.checked){ bilan.re++; return; }
+              if (!e.a.question) e.a.question = { type: e.cat === "deplace" ? "deplace" : "absent", zone: zoneEntre(x), source:nomSource, date:new Date().toISOString() };
+              l.push(e.a); bilan.questions++;
+            } else if (e.cat === "ajout"){
+              const c = fd.querySelector(`[data-aj="${id}"]`);
+              if (c && !c.checked) return;
+              e.b.temoins = [t]; e.b.statut = "probable";
+              l.push(e.b); bilan.aj++; bilan.vus.push(e.b);
+            }
+            // "doublonDeplace" : le même livre lu ailleurs — rien n'est ajouté
+          });
+          res[bl.r] = (bl.avant || []).concat(l, bl.apres || []);
+        });
+        surValider(res, bilan);
+      }}
+    ],
+    surFermeture:()=>{ if (surAnnuler) surAnnuler(); } });
+  if (opts.b) remplirExtraits(f, opts.b, opts.k);
+  f.querySelectorAll("[data-q]").forEach(bt=>bt.onclick = (ev)=>{
+    ev.preventDefault();
+    const [nb, x] = bt.dataset.q.split("_").map(Number);
+    blocs[nb].etapes[x].choix = bt.dataset.v;
+    f.querySelectorAll(`[data-q="${bt.dataset.q}"]`).forEach(y=>y.classList.toggle("actif", y === bt));
+  });
+  return f;
+}
+
+/* réponses aux questions : une seule sauvegarde GitHub après quelques secondes de calme */
+let minuterieListes = null;
+function envoiListesDiffere(b, k){
+  clearTimeout(minuterieListes);
+  minuterieListes = setTimeout(()=>envoyerDonneesAuto("Listes de livres de " + lib(k)), 4000);
+}
+/* Réponse à une question en suspens, depuis la liste du compartiment. */
+function repondreQuestion(cs, lv, rep){
+  const q = lv.question || {};
+  if (rep === "b" && q.autre){ lv.titre = q.autre.titre; if (q.autre.auteur) lv.auteur = q.autre.auteur; }
+  if (rep === "deux" && q.autre){
+    const nv = { id:uid(), titre:q.autre.titre, auteur:q.autre.auteur || "", annee:"", certitude:"moyenne", remarque:"", resume:"", categorie:"", statut:"acquis", temoins:[] };
+    if (lv.rang) nv.rang = lv.rang;
+    cs.livres.splice(cs.livres.indexOf(lv) + 1, 0, nv);
+  }
+  if (rep === "retirer"){ cs.livres.splice(cs.livres.indexOf(lv), 1); return; }
+  rendreAcquis(lv);
+}
+function texteQuestion(lv){
+  const q = lv.question || {};
+  if (q.type === "lecture") return `Lu « ${q.autre.titre} »${q.autre.auteur ? " — " + q.autre.auteur : ""} sur ${q.source || "une autre photo"}, à la même place.`;
+  if (q.type === "absent") return `Pas vu sur ${q.source || "une autre photo"} qui couvre pourtant cet endroit.`;
+  if (q.type === "deplace") return `Semble ailleurs sur ${q.source || "une autre photo"} : ordre à vérifier.`;
+  return "À vérifier.";
+}
+function boutonsQuestion(lv, i){
+  const q = lv.question || {};
+  if (q.type === "lecture") return `<button class="btn" data-rq="${i}" data-v="a">C'est « ${esc(lv.titre.slice(0, 24))} »</button>
+    <button class="btn" data-rq="${i}" data-v="b">C'est « ${esc(q.autre.titre.slice(0, 24))} »</button>
+    <button class="btn" data-rq="${i}" data-v="deux">Les deux</button>`;
+  return `<button class="btn" data-rq="${i}" data-v="a">✓ Il est bien là</button>
+    <button class="btn rouge" data-rq="${i}" data-v="retirer">Retirer</button>`;
 }
 
 /* ====== FUSION DE DEUX LECTURES D'UNE MÊME RANGÉE (livres dans le même ordre) ====== */
@@ -2500,9 +2761,12 @@ function fenetreFusionGenerique(opts){
 }
 
 /* Fusion de deux lectures complètes d'une même rangée (nouvelle analyse). */
-function fenetreFusion(k, rangs, parRang, surValider, introSupp){
+function fenetreFusion(k, rangs, parRang, surValider, introSupp, cs){
   const NOMR = { devant:"Rangée 1 (devant)", derriere:"Rangée 2 (derrière)" };
-  return fenetreFusionGenerique({
+  return fusionConvergente({
+    b: biblioDeCase(cs), k, cs,
+    temoin:(r)=>temoinRang(cs, r),
+    nomSource: rangs.length > 1 ? "les nouvelles photos" : (rangs[0] === "derriere" ? "la photo de derrière" : "la photo de devant"),
     titre:"Nouvelle analyse — " + lib(k),
     intro:`<div>Cette rangée avait déjà une liste. Les livres étant rangés dans le même ordre d'une photo à l'autre, la nouvelle lecture est alignée sur la liste actuelle : les livres reconnus sans ambiguïté servent de repères pour situer les autres.</div>${introSupp || ""}`,
     blocs: rangs.map(r=>({ r, etapes: alignerListes(parRang[r].vieux, parRang[r].neufs),
@@ -2513,10 +2777,11 @@ function fenetreFusion(k, rangs, parRang, surValider, introSupp){
 
 /* Vérification d'une photo d'appoint en supposant l'ordre respecté : l'appoint ne couvre qu'une partie de la rangée ;
    on repère la zone correspondante de la liste, puis on aligne livre par livre à l'intérieur de cette zone. */
-function preparerFusionAppoint(cs, lus, rangForce){
+function preparerFusionAppoint(cs, lus, rangForce, champAppoint){
   const rangDe = (lv)=> lv.rang === "derriere" ? "derriere" : "devant";
   const livresLus = lus.filter(x=>!x.illisible).map(x=>({ id:uid(), titre:x.titre || "(titre non lu)", auteur:x.auteur,
-    annee:/^\d{4}$/.test(x.annee) ? x.annee : "", certitude:x.certitude, remarque:"", resume:"", categorie:"", origine:"appoint" }));
+    annee:/^\d{4}$/.test(x.annee) ? x.annee : "", certitude:x.certitude, remarque:"", resume:"", categorie:"", origine:"appoint",
+    ...(x.x1 != null ? { vues:[{ champ: champAppoint || "", x1:x.x1, x2:x.x2 }] } : {}) }));
   const essai = (r)=>{
     const liste = (cs.livres||[]).filter(lv=>rangDe(lv) === r);
     const et = alignerListes(liste, livresLus);
@@ -2627,16 +2892,18 @@ async function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
   const deuxRangees = !cs.unRang && (!!cs.photo2 || (cs.livres||[]).some(lv=>lv.rang === "derriere"));
   const nomR = (r)=> r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
   const marquer = ()=>{ if (appoint) appoint.verif = new Date().toISOString(); sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); if (biblioCourante === b.id) rendreBiblio(); };
-  const P = preparerFusionAppoint(cs, lus, rangForce);
+  const P = preparerFusionAppoint(cs, lus, rangForce, champ);
   if (deuxRangees || P.r === "derriere") P.etapes.forEach(e=>{ if (e.type === "nouveau") e.b.rang = P.r; });
   const zone = P.paires
     ? (()=>{ const pa = P.etapes.filter(e=>e.type === "paire"); return `de « ${esc(pa[0].a.titre)} » à « ${esc(pa[pa.length-1].a.titre)} »`; })()
     : "";
   const autre = P.r === "derriere" ? "devant" : "derriere";
   let f;
-  f = fenetreFusionGenerique({
-    titre:"Appoint " + num + " — ordre respecté — " + lib(k),
-    nomNouveau:"photo d'appoint",
+  f = fusionConvergente({
+    b, k, cs,
+    temoin:()=>temoinPhoto(cs, champ),
+    nomSource:"l'appoint " + num,
+    titre:"Appoint " + num + " — " + lib(k),
     intro:`<div>L'IA a lu <b>${lus.length}</b> livre(s) sur la photo d'appoint, sans voir la liste. En supposant que l'ordre est le même que dans la liste,
              ${P.paires ? `la photo correspond à la zone ${zone} de la ${nomR(P.r)}.` : `<b>aucun livre ne correspond</b> à la ${nomR(P.r)} : impossible de situer la zone ; tous les livres lus sont présentés comme nouveaux.`}</div>
            ${deuxRangees ? `<div class="barre" style="margin-top:6px"><button class="btn" id="faAutre" style="flex:1">Comparer plutôt à la ${nomR(autre)}</button></div>` : ""}
@@ -2653,7 +2920,7 @@ async function fenetreFusionAppoint(b, k, champ, lus, source, rangForce){
         appoint.livresVus = (bilan.vus || []).map(lv=>lv.id);
       }
       marquer();
-      toast(`Appoint ${num} : ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
+      toast(`Appoint ${num} : ${bilan.acquis} livre(s) devenu(s) 🔒 acquis, ${bilan.aj} ajout(s), ${bilan.questions} question(s). ${cs.livres.length} livre(s) dans ${lib(k)}.`, 5000);
       envoyerDonneesAuto("Listes de livres de " + lib(k));
     },
     surAnnuler: marquer
@@ -2770,7 +3037,7 @@ async function lireAppoint(bib, cle, champ, opts){
   if (!img) throw new Error("Photo d'appoint introuvable (ni sur cet appareil ni sur GitHub).");
   let q = cfg.qLectureAppoint || QUESTION_APPOINT_DEFAUT;
   if (/"corrections"/.test(q)) q = QUESTION_APPOINT_DEFAUT;      // ancienne question (format d'avant la V1.32) : ignorée
-  const parties = [{ text: q + (a.legende ? "\n\nIndication de la personne qui a pris la photo : " + a.legende : "") }];
+  const parties = [{ text: q + CONSIGNE_POSITION + (a.legende ? "\n\nIndication de la personne qui a pris la photo : " + a.legende : "") }];
   parties.push({ inline_data:{ mime_type:"image/jpeg", data: base64Seul(img) } });
   const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
   const lus = lusDepuisReponse(rep.res);
@@ -2783,7 +3050,8 @@ function lusDepuisReponse(j){
   return l.filter(Boolean).map(x=>({
     titre: String(x.titre||"").trim(), auteur: String(x.auteur||"").trim(), annee: String(x.annee||"").trim(),
     certitude: ["haute","moyenne","faible"].includes(x.certitude) ? x.certitude : "moyenne",
-    remarque: String(x.remarque||"").trim()
+    remarque: String(x.remarque||"").trim(),
+    ...(lirePosition(x) || {})
   })).map(x=>Object.assign(x, { illisible: !x.titre && !x.auteur }));
 }
 
@@ -3368,6 +3636,11 @@ function porteeParDefaut(cs){ return cs && cs.photo && cs.photo2 ? "deux" : (cs 
 function finaliserPortee(livres, portee, cs){
   if (portee === "devant" && cs && cs.photo2) livres.forEach(lv=>{ lv.rang = "devant"; });
   if (portee === "derriere") livres.forEach(lv=>{ lv.rang = "derriere"; });
+  // position sur la photo analysée
+  if (portee !== "deux") livres.forEach(lv=>{
+    if (lv.x1 != null){ ajouterVue(lv, { champ: portee === "derriere" ? "photo2" : "photo", x1:lv.x1, x2:lv.x2 }); }
+    delete lv.x1; delete lv.x2;
+  });
   livres.portee = portee;
   return livres;
 }
@@ -3392,7 +3665,7 @@ async function analyserPhoto(bib, cle, opts){
     ];
   } else {
     parties = [
-      { text: cfg.qAnalyse },
+      { text: cfg.qAnalyse + CONSIGNE_POSITION },
       { inline_data: { mime_type:"image/jpeg", data: base64Seul(avant || arriere) } }
     ];
   }
@@ -3418,6 +3691,8 @@ function livresDepuisReponse(j, deux, avecAvant, source){
       resume:"", categorie:"",
       origine:"ia"
     };
+    const pos = lirePosition(x);
+    if (pos && !deux){ lv.x1 = pos.x1; lv.x2 = pos.x2; }
     if (deux){
       const r = String(x.rang||"").toLowerCase();
       lv.rang = /derri/.test(r) ? "derriere" : "devant";
@@ -3666,7 +3941,8 @@ function rendreBiblio(){
         ${!ph ? `<span class="sansphoto">📷</span>`
               : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
                                      : `<span class="sansphoto charge">⏳</span>`)}
-        <span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
+        <span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}${(()=>{ const q = cs.livres.filter(lv=>lv.question).length, ac = cs.livres.filter(estAcquis).length;
+          return q ? ` <span style="color:#ffb347">❓${q}</span>` : ac === nb ? ` <span style="color:#3ddc6a">✓</span>` : ""; })()}</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
       <div class="cases" style="grid-template-columns:repeat(${b.compartiments},minmax(52px,1fr))">${cases}</div></div>`;
@@ -4045,6 +4321,7 @@ function ouvrirCompartiment(b, k){
     if (typeof majLivres === "function") majLivres();
   };
 
+  let appointCible = null;          // photo d'appoint demandée depuis une question : légende préparée, lecture automatique
   const ajouterAppoint = ()=>{ enAjoutAppoint = true; f.querySelector("#cFichier").click(); };
 
   const majFaces = ()=>{
@@ -4244,6 +4521,8 @@ function ouvrirCompartiment(b, k){
     const idsAppoint = new Set((appointVu && appointVu.livresVus) || []);
     const nA = l.filter(lv=>lv.id && idsAppoint.has(lv.id)).length;
     if (!appointVu && filtreRang === "appoint") filtreRang = "tous";
+    const nQ = l.filter(lv=>lv.question).length;
+    if (!nQ && filtreRang === "questions") filtreRang = "tous";
     const bVider = `<div class="barre" style="margin:-2px 0 8px">
          ${l.length ? `<button class="btn" data-vider="1" style="flex:1">🗑 Vider les listes</button>` : ""}
          ${cs.avantReconstruction ? `<button class="btn" data-retablir="1" style="flex:1">↩ Rétablir (${cs.avantReconstruction.livres.length} livres du ${esc(dateFr(cs.avantReconstruction.date))})</button>` : ""}</div>`;
@@ -4253,35 +4532,68 @@ function ouvrirCompartiment(b, k){
     };
     if (!l.length){ zf.innerHTML = cs.avantReconstruction ? bVider : ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Choisissez une photo en haut (Devant, Derrière, appoint), puis, dans l'encadré « Analyse de cette photo » : 🔍 nouvelle analyse par l'IA, ou ♻️ réutiliser l'analyse sauvegardée.</div>`; return; }
     zf.innerHTML = bVider +
+      ["devant","derriere"].filter(r=>etatRangee(cs, r).total).map(r=>{
+        const e = etatRangee(cs, r), nomR = r === "derriere" ? "Rangée 2" : "Rangée 1";
+        return `<div class="aide" style="margin:-2px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span><b>${nomR}</b> : ${e.total} livre(s) — <b>${e.acquis}</b> 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions}</b> ❓${e.validee ? " — <b style='color:var(--vert)'>✓ validée</b>" : ""}</span>
+          ${!e.questions && e.probables ? `<button class="btn" data-valider="${r}" style="padding:3px 10px;font-size:12.5px">✓ Valider la ${nomR.toLowerCase()}</button>` : ""}</div>`;
+      }).join("") +
       `<div class="aide" style="margin:-4px 0 8px">${l.length} livre(s) : <b>${n1}</b> sur la rangée 1 (devant) · <b>${n2}</b> sur la rangée 2 (derrière)</div>
        <div class="onglets" style="margin-bottom:10px">
          <button data-filtre="tous" class="${filtreRang==="tous"?"actif":""}">Tous (${l.length})</button>
          <button data-filtre="devant" class="${filtreRang==="devant"?"actif":""}">Rangée 1 (${n1})</button>
          <button data-filtre="derriere" class="${filtreRang==="derriere"?"actif":""}">Rangée 2 (${n2})</button>
+         ${nQ ? `<button data-filtre="questions" class="${filtreRang==="questions"?"actif":""}">❓ Questions (${nQ})</button>` : ""}
          ${appointVu ? `<button data-filtre="appoint" class="${filtreRang==="appoint"?"actif":""}">Appoint ${numeroAppoint(cs, face)} (${nA})</button>` : ""}
        </div>`;
     zf.querySelectorAll("[data-filtre]").forEach(bt=>bt.onclick=()=>{ filtreRang = bt.dataset.filtre; majLivres(); });
     brancherVider();
     const visibles = l.map((lv,i)=>({lv,i})).filter(({lv})=>
-      filtreRang === "tous" || (filtreRang === "appoint" ? (lv.id && idsAppoint.has(lv.id)) : filtreRang === "derriere" ? lv.rang === "derriere" : lv.rang !== "derriere"));
+      filtreRang === "tous" || (filtreRang === "questions" ? !!lv.question : filtreRang === "appoint" ? (lv.id && idsAppoint.has(lv.id)) : filtreRang === "derriere" ? lv.rang === "derriere" : lv.rang !== "derriere"));
     if (!visibles.length){ z.innerHTML = filtreRang === "appoint"
         ? `<div class="vide">Aucun livre de la liste n'est encore rattaché à cette photo d'appoint : faites une lecture (🔍) ou réutilisez une analyse (♻️), puis validez.</div>`
         : `<div class="vide">Aucun livre sur la ${filtreRang === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)"}.</div>`; return; }
     z.innerHTML = visibles.map(({lv,i})=>
       `<div class="livre ${visibles.length > 1 ? "deplacable" : ""} ${lv.certitude==="faible"?"certitude-faible":(lv.certitude==="moyenne"?"certitude-moyenne":"")}" data-idx="${i}">
          ${visibles.length > 1 ? `<div class="poigneeGlisser" title="Maintenir et glisser pour déplacer"><span><i></i><i></i><i></i><i></i></span></div>` : ""}
-         <div class="t">${esc(lv.titre)}</div>
+         <div class="t">${estAcquis(lv) ? `<span title="Acquis : vu sur deux photos ou confirmé">🔒 </span>` : lv.question ? "❓ " : ""}${esc(lv.titre)}</div>
          <div class="a">${lv.rang ? `<span class="rang ${lv.rang}">${lv.rang==="derriere"?"derrière":"devant"}</span> ` : ""}${esc(lv.auteur||"auteur inconnu")}${lv.annee?" · "+esc(lv.annee):""}${lv.remarque?" · "+esc(lv.remarque):""}</div>
          ${lv.resume?`<div class="r">${esc(lv.resume)}</div>`:""}
          ${lv.categorie?`<div class="cat">${esc(lv.categorie)}</div>`:""}
+         ${lv.question ? `<div class="encadre" style="margin:6px 0 0;padding:8px">❓ ${esc(texteQuestion(lv))}
+             ${htmlExtraitsQuestion(cs, lv)}
+             <div class="barre" style="margin-top:6px;flex-wrap:wrap">${boutonsQuestion(lv, i)}</div>
+             <button class="btn" data-photoq="${i}" style="margin-top:6px;width:100%">📷 Photographier cet endroit (photo d'appoint lue aussitôt)</button></div>` : ""}
          <div class="actions">
+           ${!estAcquis(lv) && !lv.question ? `<button class="btn" data-conf="${i}" title="Je l'ai vérifié : il est bien à cette place">✓ Confirmer</button>` : ""}
            <button class="btn" data-modif="${i}">Modifier</button>
            <button class="btn rouge" data-suppr="${i}">Supprimer</button>
          </div></div>`).join("");
+    const apresReponse = ()=>{ sauver(); majLivres(); rendreBiblio(); envoiListesDiffere(b, k); };
+    remplirExtraits(z, b, k);
+    z.querySelectorAll("[data-photoq]").forEach(el=>el.onclick=()=>{
+      const lv = cs.livres[Number(el.dataset.photoq)];
+      const rg = (x)=> x.rang === "derriere" ? "derriere" : "devant";
+      const meme = cs.livres.filter(x=>rg(x) === rg(lv));
+      const j = meme.indexOf(lv), g = meme[j - 1], d = meme[j + 1];
+      appointCible = { legende: `Gros plan de la ${rg(lv) === "derriere" ? "rangée de derrière" : "rangée de devant"}, autour de « ${lv.titre} »` +
+        (g || d ? `, entre « ${g ? g.titre : "le bord"} » et « ${d ? d.titre : "le bord"} »` : "") };
+      toast("Photographiez cet endroit en gros plan : la photo sera lue aussitôt.", 4000);
+      ajouterAppoint();
+    });
+    z.querySelectorAll("[data-rq]").forEach(el=>el.onclick=()=>{ repondreQuestion(cs, cs.livres[Number(el.dataset.rq)], el.dataset.v); apresReponse(); });
+    z.querySelectorAll("[data-conf]").forEach(el=>el.onclick=()=>{ rendreAcquis(cs.livres[Number(el.dataset.conf)]); apresReponse(); });
+    zf.querySelectorAll("[data-valider]").forEach(el=>el.onclick=async()=>{
+      const r = el.dataset.valider, e = etatRangee(cs, r);
+      const ok = await confirmer(`<div>Valider la ${r === "derriere" ? "rangée 2" : "rangée 1"} : les ${e.probables} livre(s) probable(s) deviennent 🔒 acquis ?</div><div class="aide">À faire quand la liste correspond à l'étagère. Les livres acquis ne sont plus modifiés par les analyses.</div>`, "Valider la rangée", "Valider");
+      if (!ok) return;
+      cs.livres.filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r && !lv.question).forEach(rendreAcquis);
+      apresReponse();
+    });
     z.querySelectorAll("[data-modif]").forEach(el=>el.onclick=()=>formLivre(cs, Number(el.dataset.modif), majLivres));
     z.querySelectorAll("[data-suppr]").forEach(el=>el.onclick=async()=>{
       const i = Number(el.dataset.suppr);
-      const ok = await confirmer(`Supprimer « ${esc(cs.livres[i].titre)} » ?`, "Supprimer le livre", "Supprimer");
+      const ok = await confirmer(`Supprimer « ${esc(cs.livres[i].titre)} » ?${estAcquis(cs.livres[i]) ? "<div class='aide'>Ce livre est 🔒 acquis.</div>" : ""}`, "Supprimer le livre", "Supprimer");
       if (!ok) return;
       cs.livres.splice(i,1); sauver(); majLivres(); rendreBiblio();
     });
@@ -4299,7 +4611,9 @@ function ouvrirCompartiment(b, k){
       const brut = await lireFichier(file);
       const plein = await redimensionner(brut, cfg.tailleMax, cfg.qualite);
       const cible = nouveau ? PRE_APPOINT + uid() : face;
-      poserPhoto(cs, cible, { plein, chemin:cheminPhoto(b,k,cible), envoye:false, maj:new Date().toISOString() });
+      const demande = nouveau ? appointCible : null;
+      appointCible = null;
+      poserPhoto(cs, cible, Object.assign({ plein, chemin:cheminPhoto(b,k,cible), envoye:false, maj:new Date().toISOString() }, demande ? { legende: demande.legende } : {}));
       delete cachePhotos[cleCache(b,k,cible)];
       avantTroncature = null;
       face = cible; lignesVisibles = false;
@@ -4308,6 +4622,7 @@ function ouvrirCompartiment(b, k){
       toast(quoiP + " enregistrée : envoi vers GitHub…", 2500);
       await envoyerPhotoAuto(b, k, cible, quoiP);
       if (f.isConnected) majPhoto();
+      if (demande && f.isConnected && face === cible) f.querySelector("#cAnalyser").click();   // lecture immédiate de l'appoint demandé
     }catch(e){ toast("Photo illisible : " + e.message, 5000); }
     ev.target.value = "";
   };
