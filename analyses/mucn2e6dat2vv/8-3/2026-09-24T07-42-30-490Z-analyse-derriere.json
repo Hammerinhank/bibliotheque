@@ -1,0 +1,489 @@
+{
+ "date": "2026-09-24T07:42:30.490Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "8-3",
+ "genre": "analyse",
+ "portee": "derriere",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "livres": [
+  {
+   "id": "muf855qxonopq",
+   "titre": "Les vierges & autres nouvelles",
+   "auteur": "Irène Némirovsky",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Denoël",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 14,
+     "x2": 43
+    }
+   ]
+  },
+  {
+   "id": "muf855qxb47e5",
+   "titre": "Stupeur et tremblements",
+   "auteur": "Amélie Nothomb",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 43,
+     "x2": 72
+    }
+   ]
+  },
+  {
+   "id": "muf855qx0ob52",
+   "titre": "Le Gardien des ruines",
+   "auteur": "François Nourissier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 66,
+     "x2": 125
+    }
+   ]
+  },
+  {
+   "id": "muf855qxuq2ti",
+   "titre": "Histoire du Juif errant",
+   "auteur": "Jean d'Ormesson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard, nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 104,
+     "x2": 178
+    }
+   ]
+  },
+  {
+   "id": "muf855qxbe2e7",
+   "titre": "L'Exposition coloniale",
+   "auteur": "Erik Orsenna",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions du Seuil",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 155,
+     "x2": 226
+    }
+   ]
+  },
+  {
+   "id": "muf855qxzr15l",
+   "titre": "La Fabrique des mots",
+   "auteur": "Erik Orsenna",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Stock",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 209,
+     "x2": 247
+    }
+   ]
+  },
+  {
+   "id": "muf855qxpjfh6",
+   "titre": "L'avenir de l'eau",
+   "auteur": "Erik Orsenna",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Fayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 228,
+     "x2": 303
+    }
+   ]
+  },
+  {
+   "id": "muf855qx51zxi",
+   "titre": "Les écureuils de Central Park sont tristes le lundi",
+   "auteur": "Katherine Pancol",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 281,
+     "x2": 366
+    }
+   ]
+  },
+  {
+   "id": "muf855qxc15tl",
+   "titre": "Les Orphelins",
+   "auteur": "Louis Pauwels",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions de Fallois",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 350,
+     "x2": 408
+    }
+   ]
+  },
+  {
+   "id": "muf855qx1n5w1",
+   "titre": "La Japolyonnaise",
+   "auteur": "Monique Pénissard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Favre",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 393,
+     "x2": 438
+    }
+   ]
+  },
+  {
+   "id": "muf855qxd1px3",
+   "titre": "Ainsi Berlin",
+   "auteur": "Laurent Petitmangin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Liana Levi",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 429,
+     "x2": 466
+    }
+   ]
+  },
+  {
+   "id": "muf855qx7z8mr",
+   "titre": "Couleurs Venise, la vie de Titien",
+   "auteur": "Michel Peyramaure",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Robert Laffont",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 453,
+     "x2": 505
+    }
+   ]
+  },
+  {
+   "id": "muf855qxcec3r",
+   "titre": "Les Américains",
+   "auteur": "Roger Peyrefitte",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Flammarion",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 503,
+     "x2": 551
+    }
+   ]
+  },
+  {
+   "id": "muf855qxlj4mr",
+   "titre": "Le nègre du Palais",
+   "auteur": "Thierry Pfister",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 530,
+     "x2": 578
+    }
+   ]
+  },
+  {
+   "id": "muf855qx2old9",
+   "titre": "Le roman des phares",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Omnibus, auteur non visible",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 578,
+     "x2": 624
+    }
+   ]
+  },
+  {
+   "id": "muf855qxuly8j",
+   "titre": "Une étincelle de vie",
+   "auteur": "Jodi Picoult",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Actes Sud",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 594,
+     "x2": 666
+    }
+   ]
+  },
+  {
+   "id": "muf855qx2fhr8",
+   "titre": "Une chance minuscule",
+   "auteur": "Claudia Piñeiro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Actes Sud",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 661,
+     "x2": 694
+    }
+   ]
+  },
+  {
+   "id": "muf855qxgg57l",
+   "titre": "Yellow Birds",
+   "auteur": "Kevin Powers",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Stock",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 684,
+     "x2": 716
+    }
+   ]
+  },
+  {
+   "id": "muf855qx5v00e",
+   "titre": "Fenêtres sur Seine",
+   "auteur": "Jean Prasteau",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Presses de la Cité",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 708,
+     "x2": 763
+    }
+   ]
+  },
+  {
+   "id": "muf855qxj846w",
+   "titre": "Pharaon",
+   "auteur": "Boleslaw Prus",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 750,
+     "x2": 820
+    }
+   ]
+  },
+  {
+   "id": "muf855qxlskq8",
+   "titre": "L'armoire des robes oubliées",
+   "auteur": "Riikka Pulkkinen",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 806,
+     "x2": 863
+    }
+   ]
+  },
+  {
+   "id": "muf855qxx7x53",
+   "titre": "Osmose",
+   "auteur": "Yann Queffélec",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Robert Laffont",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 849,
+     "x2": 897
+    }
+   ]
+  },
+  {
+   "id": "muf855qxewmbt",
+   "titre": "L'homme de ma vie",
+   "auteur": "Yann Queffélec",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions Guérin",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 864,
+     "x2": 925
+    }
+   ]
+  },
+  {
+   "id": "muf855qxk8wa6",
+   "titre": "Les noces barbares",
+   "auteur": "Yann Queffélec",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard, nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 888,
+     "x2": 956
+    }
+   ]
+  },
+  {
+   "id": "muf855qx14xbt",
+   "titre": "Un feu s'allume sur la mer",
+   "auteur": "Henri Queffélec",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "prénom non lisible, Presses de la Cité",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 919,
+     "x2": 991
+    }
+   ]
+  }
+ ]
+}
