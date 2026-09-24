@@ -1,0 +1,115 @@
+{
+ "date": "2026-09-24T06:02:24.522Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-2",
+ "genre": "appoint",
+ "appoint": "muf4j5sbh0mwb",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "",
+   "auteur": "Zeruya Shal…",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "tranche partiellement visible, titre non lisible",
+   "x1": 0,
+   "x2": 95,
+   "illisible": false
+  },
+  {
+   "titre": "Pygmalion",
+   "auteur": "Bernard Shaw",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Le Livre de Poche 2433",
+   "x1": 20,
+   "x2": 125,
+   "illisible": false
+  },
+  {
+   "titre": "La croisade de l'idiot",
+   "auteur": "Clifford D. Simak",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 52",
+   "x1": 125,
+   "x2": 283,
+   "illisible": false
+  },
+  {
+   "titre": "Les raisins verts",
+   "auteur": "Pierre-Henri Simon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai lu 83",
+   "x1": 221,
+   "x2": 371,
+   "illisible": false
+  },
+  {
+   "titre": "La maison de Bretagne",
+   "auteur": "Marie Sizun",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "folio 7098",
+   "x1": 338,
+   "x2": 467,
+   "illisible": false
+  },
+  {
+   "titre": "Nos premiers jours",
+   "auteur": "Jane Smiley",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Rivages poche 905",
+   "x1": 450,
+   "x2": 642,
+   "illisible": false
+  },
+  {
+   "titre": "Une journée d'Ivan Denissovitch",
+   "auteur": "Alexandre Soljenitsyne",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "10/18 488",
+   "x1": 625,
+   "x2": 746,
+   "illisible": false
+  },
+  {
+   "titre": "L'Étrange Cas du docteur Jekyll et de M. Hyde",
+   "auteur": "Stevenson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "folio classique 3890",
+   "x1": 704,
+   "x2": 838,
+   "illisible": false
+  },
+  {
+   "titre": "Killdozer",
+   "auteur": "Th. Sturgeon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "J'ai lu 407",
+   "x1": 771,
+   "x2": 983,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible (J'ai lu, n° 36…)",
+   "x1": 900,
+   "x2": 1000,
+   "illisible": true
+  }
+ ]
+}
