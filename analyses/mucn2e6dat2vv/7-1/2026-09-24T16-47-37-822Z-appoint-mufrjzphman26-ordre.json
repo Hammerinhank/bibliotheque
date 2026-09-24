@@ -1,0 +1,175 @@
+{
+ "date": "2026-09-24T16:47:37.822Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-1",
+ "genre": "appoint",
+ "appoint": "mufrjzphman26",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Le fond de la bouteille",
+   "auteur": "Georges Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 0,
+   "x2": 45,
+   "illisible": false
+  },
+  {
+   "titre": "Je me souviens",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 55,
+   "x2": 107,
+   "illisible": false
+  },
+  {
+   "titre": "Les volets verts",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 107,
+   "x2": 191,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "illisible",
+   "x1": 191,
+   "x2": 218,
+   "illisible": true
+  },
+  {
+   "titre": "Maigret et le fantôme",
+   "auteur": "Georges Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 218,
+   "x2": 290,
+   "illisible": false
+  },
+  {
+   "titre": "Il pleut bergère...",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 290,
+   "x2": 370,
+   "illisible": false
+  },
+  {
+   "titre": "Le voleur de Maigret",
+   "auteur": "Georges Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 370,
+   "x2": 437,
+   "illisible": false
+  },
+  {
+   "titre": "Maigret et la jeune morte",
+   "auteur": "Georges Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 437,
+   "x2": 500,
+   "illisible": false
+  },
+  {
+   "titre": "L'Âne Rouge",
+   "auteur": "Georges Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 500,
+   "x2": 580,
+   "illisible": false
+  },
+  {
+   "titre": "Dimanche",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 575,
+   "x2": 655,
+   "illisible": false
+  },
+  {
+   "titre": "Le grand Bob",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 648,
+   "x2": 722,
+   "illisible": false
+  },
+  {
+   "titre": "Maigret et le clochard",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 707,
+   "x2": 780,
+   "illisible": false
+  },
+  {
+   "titre": "Feux rouges",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 775,
+   "x2": 865,
+   "illisible": false
+  },
+  {
+   "titre": "Maigret et le corps sans tête",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 852,
+   "x2": 928,
+   "illisible": false
+  },
+  {
+   "titre": "Le pendu de Saint-Pholien",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 915,
+   "x2": 970,
+   "illisible": false
+  },
+  {
+   "titre": "La folle de Maigret",
+   "auteur": "Simenon",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 963,
+   "x2": 1000,
+   "illisible": false
+  }
+ ]
+}
