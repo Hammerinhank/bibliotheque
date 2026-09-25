@@ -1,0 +1,135 @@
+{
+ "date": "2026-09-25T06:29:59.515Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "8-1",
+ "genre": "appoint",
+ "appoint": "mugkw8u2dx0wy",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 0,
+   "x2": 12,
+   "illisible": true
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible (mention « nov édit » visible)",
+   "x1": 12,
+   "x2": 70,
+   "illisible": true
+  },
+  {
+   "titre": "Les Motos",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "éditeur Fleurus",
+   "x1": 70,
+   "x2": 150,
+   "illisible": false
+  },
+  {
+   "titre": "La colère des volcans",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 38",
+   "x1": 150,
+   "x2": 228,
+   "illisible": false
+  },
+  {
+   "titre": "Les Reptiles",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "collection Life - Le monde vivant",
+   "x1": 180,
+   "x2": 302,
+   "illisible": false
+  },
+  {
+   "titre": "La Grande Encyclopédie des Pays - Europe du Sud",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 272,
+   "x2": 385,
+   "illisible": false
+  },
+  {
+   "titre": "Mega nature",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 372,
+   "x2": 508,
+   "illisible": false
+  },
+  {
+   "titre": "Mega monde",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 508,
+   "x2": 630,
+   "illisible": false
+  },
+  {
+   "titre": "L'Égypte au temps des pharaons",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "collection Miroirs de la connaissance, n° 2",
+   "x1": 628,
+   "x2": 688,
+   "illisible": false
+  },
+  {
+   "titre": "Toi, futur citoyen 1",
+   "auteur": "Sylvie Furois",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 688,
+   "x2": 738,
+   "illisible": false
+  },
+  {
+   "titre": "Le Livre des Uniformes Militaires",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard Jeunesse, n° 36",
+   "x1": 738,
+   "x2": 792,
+   "illisible": false
+  },
+  {
+   "titre": "La Poste du Docteur Dolittle",
+   "auteur": "H. Lofting",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 780,
+   "x2": 952,
+   "illisible": false
+  }
+ ]
+}
