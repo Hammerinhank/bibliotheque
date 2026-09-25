@@ -1,0 +1,717 @@
+{
+ "date": "2026-09-25T17:32:04.101Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "9-1",
+ "genre": "analyse",
+ "portee": "derriere",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "livres": [
+  {
+   "id": "muh8n6v81oqlz",
+   "titre": "L'or sous la neige",
+   "auteur": "Nicolas Vanier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "XO Éditions",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 34,
+     "x2": 76
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8illn7",
+   "titre": "Jonathan Livingston le goéland",
+   "auteur": "Richard Bach",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "auteur non visible",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 76,
+     "x2": 97
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8g3czk",
+   "titre": "Pinocchio",
+   "auteur": "Carlo Collodi",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Hachette",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 97,
+     "x2": 133
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v81x0ko",
+   "titre": "Pointe Blanche",
+   "auteur": "Anthony Horowitz",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Hachette",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 133,
+     "x2": 164
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8570bx",
+   "titre": "Silverwing",
+   "auteur": "Kenneth Oppel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Bayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 164,
+     "x2": 203
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v83pf6y",
+   "titre": "Stormbreaker",
+   "auteur": "Anthony Horowitz",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Hachette",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 203,
+     "x2": 233
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8wtwv6",
+   "titre": "La grande aventure des éléphants",
+   "auteur": "Georges Blond",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "reliure toile grise",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 233,
+     "x2": 270
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v84buiz",
+   "titre": "La planète Kalgar",
+   "auteur": "Maurice Vauthier",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Hachette, reliure claire",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 270,
+     "x2": 294
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8f2k5o",
+   "titre": "Un si long orage, tome I : Les enfants trahis",
+   "auteur": "Jean-Louis Foncine",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Chronique d'une jeunesse",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 294,
+     "x2": 319
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v86sn0p",
+   "titre": "Un si long orage, tome II : Les eaux vertes de la Flôha",
+   "auteur": "Jean-Louis Foncine",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Chronique d'une jeunesse",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 319,
+     "x2": 347
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8txvd6",
+   "titre": "L'île au trésor",
+   "auteur": "R. L. Stevenson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard Jeunesse, Chefs-d'œuvre universels",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 347,
+     "x2": 374
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v83d4rk",
+   "titre": "Le prince d'Omeyya",
+   "auteur": "Anthony Fon Eisen",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Robert Laffont",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 374,
+     "x2": 400
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8ab3fg",
+   "titre": "Mer Baltique",
+   "auteur": "Édouard Peisson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Nelson 424",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 400,
+     "x2": 434
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8qu2io",
+   "titre": "Histoires de bêtes qu'on dit sauvages",
+   "auteur": "André Demaison",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Nelson, titre peu lisible",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 434,
+     "x2": 461
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8bu20d",
+   "titre": "Age of Empires : The Conquerors Expansion",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Microsoft, tactiques de jeu",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 466,
+     "x2": 500
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v89hrqz",
+   "titre": "Age of Empires II : The Age of Kings",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Microsoft, tactiques de jeu",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 500,
+     "x2": 541
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8z1iww",
+   "titre": "Harry Potter et la chambre des secrets",
+   "auteur": "J. K. Rowling",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 961",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 541,
+     "x2": 566
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8rcdj9",
+   "titre": "Harry Potter et la coupe de feu",
+   "auteur": "J. K. Rowling",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 1173",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 566,
+     "x2": 609
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v891bty",
+   "titre": "Harry Potter et le prisonnier d'Azkaban",
+   "auteur": "J. K. Rowling",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 1006",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 609,
+     "x2": 641
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v84sntc",
+   "titre": "Harry Potter à l'école des sorciers",
+   "auteur": "J. K. Rowling",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 899",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 641,
+     "x2": 663
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v82bk4z",
+   "titre": "Mon bel oranger",
+   "auteur": "José Mauro de Vasconcelos",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche Jeunesse",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 663,
+     "x2": 684
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8zmcyx",
+   "titre": "Charlie et le grand ascenseur de verre",
+   "auteur": "Roald Dahl",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 65",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 684,
+     "x2": 703
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8oa3zf",
+   "titre": "Allons réveiller le soleil",
+   "auteur": "José Mauro de Vasconcelos",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche Jeunesse 408",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 703,
+     "x2": 728
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8zppsm",
+   "titre": "Charlie et la chocolaterie",
+   "auteur": "Roald Dahl",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 446",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 728,
+     "x2": 753
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8plbev",
+   "titre": "Matilda",
+   "auteur": "Roald Dahl",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 744",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 753,
+     "x2": 775
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8xqssv",
+   "titre": "Sans Atout et le cheval fantôme",
+   "auteur": "Boileau-Narcejac",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 476",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 775,
+     "x2": 794
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8g25fy",
+   "titre": "L'enfant qui disait n'importe quoi",
+   "auteur": "André Dhôtel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 491",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 794,
+     "x2": 806
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8j1f4s",
+   "titre": "The Umbrella Man and Other Short Stories",
+   "auteur": "Roald Dahl",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Lire en anglais",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 806,
+     "x2": 816
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8eo4n3",
+   "titre": "Les pistolets de Sans Atout",
+   "auteur": "Boileau-Narcejac",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 604",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 816,
+     "x2": 834
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8asnyn",
+   "titre": "La potion magique de Georges Bouillon",
+   "auteur": "Roald Dahl",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 463",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 834,
+     "x2": 848
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8elo9g",
+   "titre": "La célèbre grenouille sauteuse",
+   "auteur": "Mark Twain",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "titre partiellement lisible",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 848,
+     "x2": 866
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v84yo5a",
+   "titre": "Référence du Mac (?)",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "couché derrière, peu lisible",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 876,
+     "x2": 900
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v84etnr",
+   "titre": "Star Wars Épisode II : L'attaque des clones",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "collection jeunesse J 825",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 876,
+     "x2": 900
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8mdlcu",
+   "titre": "La guerre du feu",
+   "auteur": "J.-H. Rosny aîné",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Livre de Poche Jeunesse 1129",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 900,
+     "x2": 922
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8gdltk",
+   "titre": "Kamo, l'agence Babel",
+   "auteur": "Daniel Pennac",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Folio Junior 800",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 922,
+     "x2": 938
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8gt8jo",
+   "titre": "Langelot agent secret",
+   "auteur": "Vladimir Volkoff",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "collection L'enfant X",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 938,
+     "x2": 966
+    }
+   ]
+  },
+  {
+   "id": "muh8n6v8db38z",
+   "titre": "Nils Holgersson",
+   "auteur": "Selma Lagerlöf",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Flammarion 654",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 966,
+     "x2": 984
+    }
+   ]
+  }
+ ]
+}
