@@ -11431,7 +11431,25 @@
       "modele": "gemini-2.5-flash",
       "photos": 1,
       "manuel": false
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-3-appoint-mugor73n1gwc3.jpg",
+       "envoye": true,
+       "maj": "2026-09-25T08:15:18.707Z",
+       "id": "mugor73n1gwc3",
+       "legende": ""
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-3-appoint-mugors527bjs6.jpg",
+       "envoye": true,
+       "maj": "2026-09-25T08:15:45.974Z",
+       "id": "mugors527bjs6",
+       "legende": ""
+      }
+     ]
     },
     "8-2": {
      "livres": [
@@ -13045,7 +13063,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:12:02.556Z",
+ "maj": "2026-09-25T08:37:47.924Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
