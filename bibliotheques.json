@@ -2232,17 +2232,6 @@
     "8-1": {
      "livres": [
       {
-       "titre": "Le domaine des dieux",
-       "auteur": "René Gosciny",
-       "annee": "",
-       "resume": "",
-       "categorie": "",
-       "remarque": "",
-       "certitude": "haute",
-       "id": "mugokzis3zg7w",
-       "origine": "main"
-      },
-      {
        "titre": "Civilisations disparues",
        "auteur": "Nov’edit",
        "annee": "",
@@ -3185,6 +3174,17 @@
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
        "statut": "acquis"
+      },
+      {
+       "titre": "Le domaine des dieux",
+       "auteur": "René Gosciny",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugokzis3zg7w",
+       "origine": "main"
       },
       {
        "id": "muglx4xn5jhb5",
@@ -13014,7 +13014,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:10:36.117Z",
+ "maj": "2026-09-25T08:10:51.306Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
