@@ -397,8 +397,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.64.0";
+const VERSION = "V1.65.0";
 const HISTORIQUE = [
+  { v:"V1.65.0", d:"25/09/2026", l:[
+    "« Supprimer la bibliothèque » déplacé dans Réglages ⚙️ › Entretien, avec confirmation en tapant son nom.",
+    "Encadré des légendes nettement plus visible (bordure dorée, fond plus clair).",
+    "Modifier la grille : toute réduction qui ferait sortir de la grille un compartiment ayant un contenu (livres, photos, appoints) est refusée, avec la liste des compartiments concernés.",
+    "Boutons « Rangées 1 » et « Rangées 2 » sur toute la largeur, symétriques."
+  ]},
   { v:"V1.64.0", d:"25/09/2026", l:[
     "L'étiquette « 1 RANG » n'est plus coupée dans la case à cocher « Un seul rang ».",
     "« Ce que l'on peut en tirer » est toujours replié au lancement de l'app.",
@@ -4506,7 +4512,7 @@ function formBiblio(id){
          <div><label for="fR">Rangées horizontales</label><input type="number" id="fR" min="1" max="30" value="${b?b.rangees:5}"></div>
          <div><label for="fC">Compartiments par rangée</label><input type="number" id="fC" min="1" max="30" value="${b?b.compartiments:4}"></div>
        </div>
-       <div class="aide">Ces deux nombres restent modifiables. Si vous les réduisez, les photos et les livres des compartiments retirés sont conservés et signalés séparément.</div>`,
+       <div class="aide">Ces deux nombres restent modifiables. Une réduction n'est acceptée que si les rangées ou compartiments retirés sont vides.</div>`,
     boutons:[
       {texte:"Annuler"},
       {texte: b?"Enregistrer":"Créer", classe:"principal", garder:true, action:async (f)=>{
@@ -4517,11 +4523,20 @@ function formBiblio(id){
         if (!nom){ toast("Donnez un nom à la bibliothèque."); return; }
         if (b){
           if (r<b.rangees || c<b.compartiments){
-            const perdus = Object.keys(b.cases||{}).filter(k=>{
-              const [kr,kc]=k.split("-").map(Number); return kr>r||kc>c; }).length;
-            if (perdus){
-              const ok = await confirmer(`${perdus} compartiment(s) sortiront de la grille. Leur contenu est conservé mais n'apparaîtra plus dans la grille.`, "Réduire la grille", "Réduire");
-              if (!ok) return;
+            // refus si un compartiment qui sortirait de la grille a le moindre contenu
+            const pleins = Object.keys(b.cases||{}).filter(k=>{
+              const [kr,kc]=k.split("-").map(Number);
+              if (!(kr>r||kc>c)) return false;
+              const cs = b.cases[k];
+              return (cs.livres||[]).length || cs.photo || cs.photo2 || (cs.appoints||[]).length;
+            });
+            if (pleins.length){
+              modale({ titre:"Réduction refusée",
+                html:`<div>Cette réduction ferait disparaître de la grille ${pleins.length} compartiment(s) qui ont un contenu (livres ou photos) :</div>
+                  <div class="aide">${pleins.map(k=>esc(k.replace("-", "·"))).join(", ")}</div>
+                  <div class="aide">Videz d'abord ces compartiments (ou choisissez des dimensions qui les gardent dans la grille).</div>`,
+                boutons:[{ texte:"Compris", classe:"principal" }] });
+              return;
             }
           }
           b.nom=nom; b.lieu=lieu; b.rangees=r; b.compartiments=c;
@@ -4591,14 +4606,14 @@ function rendreBiblio(){
        <input type="search" id="bRech" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Chercher un livre : quelques lettres du titre ou de l'auteur" value="${esc(rechercheBiblio)}">
        <div id="bRechRes"></div>
      </div>
-     <div class="onglets" id="bVueRangee" style="margin-bottom:10px">
-       <button data-vr="devant" class="${vueRangee !== "derriere" ? "actif" : ""}">📚 Rangées 1 (devant)</button>
-       <button data-vr="derriere" class="${vueRangee === "derriere" ? "actif" : ""}">📚 Rangées 2 (derrière)</button>
+     <div class="onglets" id="bVueRangee" style="margin-bottom:10px;display:flex;gap:8px;flex-wrap:nowrap">
+       <button data-vr="devant" class="${vueRangee !== "derriere" ? "actif" : ""}" style="flex:1 1 0;min-width:0;text-align:center">📚 Rangées 1 (devant)</button>
+       <button data-vr="derriere" class="${vueRangee === "derriere" ? "actif" : ""}" style="flex:1 1 0;min-width:0;text-align:center">📚 Rangées 2 (derrière)</button>
      </div>
      <div class="titreSection">La grille — ${vueRangee === "derriere" ? "rangées de derrière" : "rangées de devant"} — touchez un compartiment pour sa photo et ses livres</div>
      <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ». Photos d'appoint (zooms) : liste déroulante à droite des deux onglets.</div>
      ${grille}
-     <div class="encadre" style="margin-top:10px">
+     <div class="encadre" style="margin-top:12px;border:2px solid var(--bronze);background:rgba(255,255,255,.07)">
      <div class="legende" style="margin-top:0">
        <span><i style="border-color:#3ddc6a;border-width:3px"></i>toutes les photos analysées</span>
        <span><i class="cV" style="border-color:#3ddc6a;border-width:3px"></i>un rang non analysé</span>
@@ -4614,7 +4629,6 @@ function rendreBiblio(){
      <div class="barre">
        <button class="btn" id="bModifier" style="flex:1">Modifier la grille</button>
        <button class="btn" id="bProportions" style="flex:1">📐 Proportions</button>
-       <button class="btn rouge" id="bSupprimer">Supprimer</button>
      </div>
 
 
@@ -4657,12 +4671,7 @@ function rendreBiblio(){
     vueRangee = bt.dataset.vr; rendreBiblio();
   });
   $("#bProportions").onclick = ()=>formProportions(b);
-  $("#bSupprimer").onclick = async ()=>{
-    const ok = await confirmer(`Supprimer « ${esc(b.nom)} » et tout son contenu sur cet appareil ?<br><br>Les photos déjà envoyées restent dans le dépôt GitHub jusqu'au prochain envoi.`, "Supprimer la bibliothèque", "Supprimer");
-    if (!ok) return;
-    data.bibliotheques = data.bibliotheques.filter(x=>x.id!==b.id);
-    biblioCourante = null; sauver(); rendre();
-  };
+
 
   $("#bListe").onclick = ()=>fenetreListe(b);
   $("#bResumes").onclick = ()=>lancerResumes(b);
@@ -6761,6 +6770,9 @@ function ouvrirReglages(ongletInitial){
        <div id="pEntretien" hidden>
          <div id="rStats"></div>
          <button class="btn plein" id="rStockage" style="margin-top:8px">📊 Espace de stockage de cet appareil</button>
+         ${biblioCourante && biblio(biblioCourante) ? `<div class="sep"></div>
+           <button class="btn rouge plein" id="rSupprBiblio">🗑 Supprimer la bibliothèque « ${esc(biblio(biblioCourante).nom)} »</button>
+           <div class="aide">Supprime la bibliothèque ouverte et tout son contenu (compartiments, listes, certifications). Confirmation en tapant son nom. Récupérable ensuite par ☁️ › 🕘 Restaurer une version précédente.</div>` : ""}
          <div class="sep"></div>
          <button class="btn plein" id="dScanPhotos">🗂️ Scanner les photos du dépôt GitHub</button>
          <div class="aide">Liste toutes les images du dépôt : <b style="color:var(--vert)">vert</b> = associée à un compartiment, <b style="color:var(--orange)">orange</b> = a été associée mais est orpheline aujourd'hui, <b style="color:var(--rouge)">rouge</b> = jamais associée, ou marquée « non associée » à la main (photo orpheline qui n'a jamais été à la bonne place). Le scan ne modifie rien par lui-même.</div>
@@ -6815,6 +6827,21 @@ function ouvrirReglages(ongletInitial){
   };
   f.querySelector("#rLogMaj").onclick = afficherLog;
   f.querySelector("#rStockage").onclick = ()=>diagnosticStockage();
+  const bSB = f.querySelector("#rSupprBiblio");
+  if (bSB) bSB.onclick = ()=>{
+    const bb = biblio(biblioCourante); if (!bb) return;
+    const fs = modale({ titre:"Supprimer la bibliothèque",
+      html:`<div>Pour supprimer <b>« ${esc(bb.nom)} »</b> et tout son contenu (${(resume({ bibliotheques:[bb] }) || {}).livres || 0} livres), tapez son nom exact ci-dessous.</div>
+        <input type="text" id="sbNom" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(bb.nom)}" style="margin-top:8px">
+        <div class="aide">Les fichiers photos restent sur GitHub (ils deviendront orphelins). Une version antérieure reste restaurable depuis ☁️ › 🕘.</div>`,
+      boutons:[{ texte:"Annuler" }, { texte:"Supprimer définitivement", classe:"rouge", garder:true, action:(fd)=>{
+        if (fd.querySelector("#sbNom").value.trim() !== bb.nom){ toast("Le nom tapé ne correspond pas : rien n'a été supprimé.", 4000); return false; }
+        journal(`Bibliothèque supprimée : « ${bb.nom} »`);
+        data.bibliotheques = data.bibliotheques.filter(x=>x.id !== bb.id);
+        biblioCourante = null; sauver(); fs.remove(); f.remove(); rendre();
+        toast(`« ${bb.nom} » supprimée.`, 4000);
+      }}] });
+  };
   const bAT = f.querySelector("#rAnalyserTout");
   if (bAT) bAT.onclick = ()=>{ const bb = biblio(biblioCourante); f.remove(); if (bb) analyserToutesPhotos(bb); };
   f.querySelector("#rLogCopier").onclick = async ()=>{ const l = lireLog(); toast(await copierTexte("Log du " + l.jour + " (" + VERSION + ")\n" + l.lignes.join("\n")) ? "Log copié." : "Copie impossible."); };
