@@ -397,8 +397,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.65.0";
+const VERSION = "V1.65.1";
 const HISTORIQUE = [
+  { v:"V1.65.1", d:"25/09/2026", l:[
+    "Recherche d'un livre : tous les livres qui correspondent aussi bien sont listés (par exemple tous les livres d'un auteur), et non plus 4 au maximum ; ils sont classés par emplacement.",
+    "« 📍 Localiser tous » : met en évidence d'un coup tous les compartiments concernés (sur la vue devant ou derrière choisie)."
+  ]},
   { v:"V1.65.0", d:"25/09/2026", l:[
     "« Supprimer la bibliothèque » déplacé dans Réglages ⚙️ › Entretien, avec confirmation en tapant son nom.",
     "Encadré des légendes nettement plus visible (bordure dorée, fond plus clair).",
@@ -4586,7 +4590,7 @@ function rendreBiblio(){
         : (cs && cs.unRang)
           ? `<span class="deux unRang" title="Un seul rang de livres : compartiment complet${nbAppoints ? " + " + nbAppoints + " photo(s) d'appoint" : ""}">1 RANG${nbAppoints ? ` <small>+${nbAppoints} zoom</small>` : ""}</span>`
           : (nbAppoints ? `<span class="deux appoint" title="${nbAppoints} photo(s) d'appoint">+${nbAppoints} zoom</span>` : "");
-      if (caseCible && caseCible.bib === b.id && caseCible.k === k) cls.push("cible");
+      if (caseCible && caseCible.bib === b.id && (caseCible.ks ? caseCible.ks.has(k + "|" + vueRangee) : caseCible.k === k)) cls.push("cible");
       cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
         ${!ph ? `<span class="sansphoto">📷</span>`
               : (photoImmediate(b,k,champVue) ? `<img src="${photoImmediate(b,k,champVue)}" alt="Compartiment ${k}" decoding="async">`
@@ -4707,7 +4711,9 @@ function afficherRechercheBiblio(b){
   Object.entries(b.cases || {}).forEach(([k, cs])=>(cs.livres || []).forEach(lv=>tous.push({ k, cs, lv })));
   const tri = tous.map(o=>Object.assign(o, { s: scoreRecherche(q, o.lv) })).filter(o=>o.s > 0.45).sort((a, z2)=>z2.s - a.s);
   if (!tri.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; return; }
-  const net = tri.length === 1 || tri[0].s - tri[1].s >= 0.12;
+  // tous ceux qui correspondent presque aussi bien que le meilleur (ex. tous les livres d'un auteur)
+  const groupe = tri.filter(o=>o.s >= tri[0].s - 0.12);
+  const net = groupe.length === 1;
   const ou = (o)=>{
     const [r, c] = o.k.split("-");
     const rg = o.lv.rang === "derriere" ? "derriere" : "devant";
@@ -4718,9 +4724,24 @@ function afficherRechercheBiblio(b){
   const carte = (o, i, principal)=>`<div class="prop" style="display:flex;gap:10px;align-items:center;${principal ? "border-left:3px solid var(--vert)" : ""}">
       <div style="flex:1"><div class="t">${esc(o.lv.titre)}</div><div class="chg">${esc(o.lv.auteur || "auteur inconnu")}</div><div class="aide" style="margin:2px 0 0">${esc(ou(o))}</div></div>
       <button class="btn ${principal ? "principal" : ""}" data-loc="${i}">📍 Localiser</button></div>`;
-  const liste = net ? [tri[0]] : tri.slice(0, 4);
-  z.innerHTML = `<div class="aide" style="margin:6px 0 4px">${net ? "Livre trouvé :" : "Plusieurs livres possibles (continuez à taper pour préciser) :"}</div>` +
-    liste.map((o, i)=>carte(o, i, i === 0)).join("");
+  const pos = (o)=>{ const [r, c] = o.k.split("-").map(Number); return r * 1000 + c * 10 + (o.lv.rang === "derriere" ? 1 : 0); };
+  const MAX = 80;
+  const liste = net ? [tri[0]] : groupe.slice().sort((a, z2)=>pos(a) - pos(z2) || a.cs.livres.indexOf(a.lv) - z2.cs.livres.indexOf(z2.lv)).slice(0, MAX);
+  const nbCases = new Set(groupe.map(o=>o.k + (o.lv.rang === "derriere" ? "|d" : ""))).size;
+  z.innerHTML = `<div class="aide" style="margin:6px 0 4px">${net ? "Livre trouvé :" : `<b>${groupe.length}</b> livres correspondent${groupe.length > MAX ? ` (${MAX} premiers affichés)` : ""} — continuez à taper pour préciser :`}</div>` +
+    (!net ? `<button class="btn principal plein" id="bLocTous" style="margin-bottom:6px">📍 Localiser tous (${nbCases} emplacement${nbCases > 1 ? "s" : ""})</button>` : "") +
+    `<div style="${!net && liste.length > 6 ? "max-height:50vh;overflow:auto;border:1px solid var(--trait);border-radius:10px;padding:4px" : ""}">` +
+    liste.map((o, i)=>carte(o, i, net)).join("") + `</div>`;
+  const bT = z.querySelector("#bLocTous");
+  if (bT) bT.onclick = ()=>{
+    const devant = groupe.filter(o=>o.lv.rang !== "derriere").length, derriere = groupe.length - devant;
+    if (!(vueRangee === "derriere" ? derriere : devant)) vueRangee = vueRangee === "derriere" ? "devant" : "derriere";
+    caseCible = { bib: b.id, ks: new Set(groupe.map(o=>o.k + "|" + (o.lv.rang === "derriere" ? "derriere" : "devant"))) };
+    rendreBiblio();
+    const el = document.querySelector("#vueBiblio .case .cadreCible");
+    if (el) el.closest(".case").scrollIntoView({ behavior:"smooth", block:"center" });
+    toast(`${groupe.length} livre(s) : ${devant} en rangée de devant, ${derriere} en rangée de derrière.` + (devant && derriere ? " Basculez Rangées 1 / Rangées 2 pour voir les autres." : ""), 7000);
+  };
   z.querySelectorAll("[data-loc]").forEach(bt=>bt.onclick = ()=>{
     const o = liste[Number(bt.dataset.loc)];
     vueRangee = o.lv.rang === "derriere" ? "derriere" : "devant";
