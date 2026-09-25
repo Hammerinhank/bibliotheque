@@ -138,8 +138,11 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
 .case .deux.unRang{background:#ffffff}
-.case.cible{outline:4px solid #ff3b30;outline-offset:2px;z-index:4;animation:cibleClignote 1s ease-in-out 5}
-@keyframes cibleClignote{0%,100%{outline-color:#ff3b30}50%{outline-color:rgba(255,59,48,.15)}}
+.case .cadreCible{position:absolute;inset:0;border:5px solid #ff3b30;border-radius:inherit;z-index:6;pointer-events:none;
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.55);animation:cibleClignote 1s ease-in-out 5}
+@keyframes cibleClignote{0%,100%{border-color:#ff3b30}50%{border-color:rgba(255,59,48,.2)}}
+#bRech{display:block;width:100%;box-sizing:border-box;height:48px;font-size:17px;padding:10px 14px;margin:6px 0 10px;
+  border-radius:12px;-webkit-appearance:none;appearance:none}
 .case .etoile{position:absolute;bottom:3px;z-index:3;font-size:15px;line-height:1;color:#ffd23f;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8)}
 .case .etoile.g{left:4px}
 .case .etoile.d{right:4px}
@@ -180,7 +183,7 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .modale > .pied{padding:11px 13px;border-top:1px solid var(--trait);display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 
 label{display:block;font-size:13px;color:var(--texte2);margin:10px 0 4px}
-input[type=text],input[type=number],input[type=password],select,textarea{
+input[type=text],input[type=search],input[type=number],input[type=password],select,textarea{
   width:100%;background:var(--encre);color:var(--texte);border:1px solid var(--trait);
   border-radius:9px;padding:9px 10px;font-size:16px;font-family:inherit;
 }
@@ -393,8 +396,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.63.0";
+const VERSION = "V1.63.1";
 const HISTORIQUE = [
+  { v:"V1.63.1", d:"25/09/2026", l:[
+    "Recherche d'un livre : zone de saisie sur toute la largeur, plus haute et mieux espacée.",
+    "Localisation : le cadre rouge est tracé à l'intérieur du compartiment (il était rogné par ses voisins) ; il clignote puis reste affiché."
+  ]},
   { v:"V1.63.0", d:"25/09/2026", l:[
     "Vue de la bibliothèque : zone de recherche au-dessus de la grille. On tape librement quelques lettres du titre ou de l'auteur (fautes et mots manquants tolérés) ; le livre le plus probable s'affiche aussitôt (et les suivants si c'est ambigu).",
     "« 📍 Localiser » : la grille bascule sur la bonne rangée (devant / derrière) et le compartiment est mis en évidence (cadre rouge clignotant), avec sa position dans la rangée."
@@ -4561,7 +4568,7 @@ function rendreBiblio(){
         ${!ph ? `<span class="sansphoto">📷</span>`
               : (photoImmediate(b,k,champVue) ? `<img src="${photoImmediate(b,k,champVue)}" alt="Compartiment ${k}" decoding="async">`
                                      : `<span class="sansphoto charge">⏳</span>`)}
-        <span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}${(()=>{ const q = livresVue.filter(lv=>lv.question).length, ac = livresVue.filter(estAcquis).length;
+        ${cls.includes("cible") ? `<span class="cadreCible"></span>` : ""}<span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}${(()=>{ const q = livresVue.filter(lv=>lv.question).length, ac = livresVue.filter(estAcquis).length;
           return q ? ` <span style="color:#ffb347">❓${q}</span>` : ac === nb ? ` <span style="color:#3ddc6a">✓</span>` : ""; })()}</span>` : ""}${cs && cs.certif && cs.certif.devant ? `<span class="etoile g" title="Rangée 1 certifiée">★</span>` : ""}${cs && cs.certif && cs.certif.derriere ? `<span class="etoile d" title="Rangée 2 certifiée">★</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
