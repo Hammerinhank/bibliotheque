@@ -390,8 +390,15 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.55.3";
+const VERSION = "V1.57.0";
 const HISTORIQUE = [
+  { v:"V1.57.0", d:"24/09/2026", l:[
+    "Moins de questions inutiles : deux lectures sont tenues pour le même livre, sans rien demander, si leurs titres sont identiques une fois ignorés casse, accents, ponctuation, tirets et article initial (quels que soient les auteurs), ou si les titres sont très proches et les auteurs ont au moins un nom en commun (ou si l'auteur manque d'un côté).",
+    "Auteurs comparés nom par nom : « W. Vance — J. Van Hamme » = « Jean Van Hamme et William Vance » ; mentions comme « scénariste français, 1926-1977 », « texte », « dessin » ignorées. Le titre de la liste est conservé."
+  ]},
+  { v:"V1.56.0", d:"24/09/2026", l:[
+    "Second bouton « ➕ Ajouter un livre à la main » juste avant la liste des livres : le nouveau livre est placé en tête de sa rangée. Le bouton du bas continue d'ajouter en fin de liste."
+  ]},
   { v:"V1.55.3", d:"24/09/2026", l:[
     "Appoints masqués dès que toutes les rangées qui ont des livres sont certifiées ★ (une rangée sans aucun livre n'est plus prise en compte)."
   ]},
@@ -2911,7 +2918,7 @@ function alignerListes(A, B){
   while (i > 0 || j > 0){
     const x = i > 0 && j > 0 ? memo[i-1][j-1] : null;
     if (x && Math.abs(S[i][j] - (S[i-1][j-1] + x.s)) < 1e-9){
-      etapes.push({ type:"paire", a:A[i-1], b:B[j-1], sur: x.t >= 0.85 && (x.au === null || x.au >= 0.6),
+      etapes.push({ type:"paire", a:A[i-1], b:B[j-1], sur: memeLivreSur(x.t, x.au),
         raison: x.t >= 0.85 ? "auteur différent" : "titre approchant" + (x.au !== null && x.au >= 0.8 ? ", même auteur" : "") });
       i--; j--;
     } else if (i > 0 && (j === 0 || S[i][j] === S[i-1][j])){ etapes.push({ type:"ancien", a:A[i-1] }); i--; }
@@ -3088,7 +3095,7 @@ function correspondancesRangee(cs, lus, r){
   let n = 0;
   lus.forEach(lu=>{
     if (lu.illisible || !lu.titre) return;
-    if (liste.some(lv=>{ const t = simTitre(lu.titre, lv.titre), au = simAuteur(lu.auteur, lv.auteur); return t >= 0.85 && (au === null || au >= 0.6); })) n++;
+    if (liste.some(lv=>{ const t = simTitre(lu.titre, lv.titre), au = simAuteur(lu.auteur, lv.auteur); return memeLivreSur(t, au); })) n++;
   });
   return { n, total: liste.length };
 }
@@ -3375,11 +3382,23 @@ function nomDeFamille(a){
   const mots = t.split(/\s+/).filter(Boolean);
   return mots[mots.length - 1] || "";
 }
-function simAuteur(a, b){
-  const A = nomDeFamille(a), B = nomDeFamille(b);
-  if (!A || !B) return null;
-  return ratioTexte(A, B);
+/* noms significatifs d'un champ auteur (plusieurs auteurs, initiales, mentions entre parenthèses ignorées) */
+const MOTS_AUTEUR_VIDES = new Set(["texte","textes","dessin","dessins","scenario","scenariste","scenaristes","illustrations","illustre","traduction","traduit","auteur","auteurs","collectif","par","avec","et","and","de","du","des","la","le","les","van","von","der","den","ne","nee","en","francais","francaise","belge","americain","anglais","ecrivain","romancier","dessinateur","couleurs"]);
+function nomsAuteur(a){
+  return simplifier(String(a||"").replace(/\(.*?\)/g, " ")).replace(/[^a-z\s'-]/g, " ").split(/[\s'-]+/)
+    .filter(m=>m.length >= 3 && !MOTS_AUTEUR_VIDES.has(m));
 }
+/* auteurs : 1 si au moins un nom en commun (à une faute près), sinon ressemblance du meilleur couple ; null si un côté est vide */
+function simAuteur(a, b){
+  const A = nomsAuteur(a), B = nomsAuteur(b);
+  if (!A.length || !B.length) return null;
+  let m = 0;
+  A.forEach(x=>B.forEach(y=>{ m = Math.max(m, ratioTexte(x, y)); }));
+  return m >= 0.8 ? 1 : m;
+}
+/* même livre sans rien demander ? titres identiques (normalisés) quels que soient les auteurs,
+   ou titres très proches et auteurs compatibles (un nom en commun, ou auteur absent d'un côté) */
+function memeLivreSur(t, au){ return t >= 0.99 || (t >= 0.85 && (au === null || au >= 0.8)); }
 
 /* ---------- rapprochement ----------
    Renvoie pour chaque livre lu : { lu, etat:"sur"|"probable"|"absent"|"illisible", cible, pos, rang, raison }
@@ -3405,7 +3424,7 @@ function rapprocherAppoint(cs, lus){
   paires.forEach(p=>{
     const r = res[p.i];
     if (r.cible || pris.has(p.lv)) return;
-    if (p.sc.t >= 0.85 && (p.sc.au === null || p.sc.au >= 0.6)){ r.etat = "sur"; r.cible = p.lv; pris.add(p.lv); }
+    if (memeLivreSur(p.sc.t, p.sc.au)){ r.etat = "sur"; r.cible = p.lv; pris.add(p.lv); }
   });
 
   // 2. voisinage : un livre non reconnu est cherché entre les livres sûrs qui l'encadrent sur la photo
@@ -4469,6 +4488,7 @@ function ouvrirCompartiment(b, k){
            <input type="file" id="cFichier" accept="image/*" hidden>
            <div class="titreSection">Livres de ce compartiment</div>
            <div id="zoneFiltreRang"></div>
+           <button class="btn plein" id="cAjouterTete" style="margin-bottom:8px">➕ Ajouter un livre à la main (en tête)</button>
            <div id="zoneLivres"></div>
            <button class="btn plein" id="cAjouter">➕ Ajouter un livre à la main</button>`,
     boutons:[{texte:"Fermer"}],
@@ -4839,6 +4859,12 @@ function ouvrirCompartiment(b, k){
     const nQ = l.filter(lv=>lv.question).length;
     if (!nQ && filtreRang === "questions") filtreRang = "tous";
     const bAj = f.querySelector("#cAjouter");
+    const bAjT = f.querySelector("#cAjouterTete");
+    if (bAjT){
+      const deuxT = !cs.unRang && (!!cs.photo2 || l.some(lv=>lv.rang === "derriere"));
+      bAjT.style.display = !certifiee(cs, "devant") || (deuxT && !certifiee(cs, "derriere")) ? "" : "none";
+      bAjT.textContent = certifiee(cs, "devant") ? "➕ Ajouter un livre à la main (en tête de la rangée 2)" : "➕ Ajouter un livre à la main (en tête)";
+    }
     if (bAj){
       const deux = !cs.unRang && (!!cs.photo2 || l.some(lv=>lv.rang === "derriere"));
       const possible = !certifiee(cs, "devant") || (deux && !certifiee(cs, "derriere"));
@@ -5056,6 +5082,21 @@ function ouvrirCompartiment(b, k){
     const cible = certifiee(cs, "devant") ? "derriere" : "devant";
     formLivre(cs, -1, ()=>{
       if (cs.livres.length > n && cible === "derriere") cs.livres[cs.livres.length - 1].rang = "derriere";
+      sauver(); majLivres();
+    });
+  };
+  f.querySelector("#cAjouterTete").onclick = ()=>{
+    // même rangée que le bouton du bas, mais le nouveau livre est placé en tête de cette rangée
+    const n = (cs.livres||[]).length;
+    const cible = certifiee(cs, "devant") ? "derriere" : "devant";
+    formLivre(cs, -1, ()=>{
+      if (cs.livres.length > n){
+        const lv = cs.livres.pop();
+        if (cible === "derriere") lv.rang = "derriere";
+        const rg = (x)=> x.rang === "derriere" ? "derriere" : "devant";
+        const premier = cs.livres.findIndex(x=>rg(x) === cible);
+        cs.livres.splice(premier < 0 ? (cible === "derriere" ? cs.livres.length : 0) : premier, 0, lv);
+      }
       sauver(); majLivres();
     });
   };
