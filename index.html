@@ -201,8 +201,8 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 
 /* ---------- livres ---------- */
 .livre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:9px 10px;margin-bottom:8px;position:relative}
-.livre.deplacable{padding-right:52px}
-.livre .poigneeGlisser{position:absolute;top:0;right:0;bottom:0;width:52px;pointer-events:auto;z-index:2;display:flex;align-items:center;justify-content:center;
+.livre.deplacable{padding-left:56px}
+.livre .poigneeGlisser{position:absolute;top:0;left:0;bottom:0;width:52px;pointer-events:auto;z-index:2;display:flex;align-items:center;justify-content:center;
   cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .livre .poigneeGlisser span{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid var(--trait);border-radius:7px;background:var(--encre3)}
 .livre .poigneeGlisser i{display:block;width:18px;height:2px;border-radius:2px;background:var(--texte2)}
@@ -390,8 +390,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.57.0";
+const VERSION = "V1.57.1";
 const HISTORIQUE = [
+  { v:"V1.57.1", d:"25/09/2026", l:[
+    "Poignée ≡ de glisser-déposer placée tout à gauche de chaque livre (au lieu de tout à droite), pour éviter de la toucher par inadvertance."
+  ]},
   { v:"V1.57.0", d:"24/09/2026", l:[
     "Moins de questions inutiles : deux lectures sont tenues pour le même livre, sans rien demander, si leurs titres sont identiques une fois ignorés casse, accents, ponctuation, tirets et article initial (quels que soient les auteurs), ou si les titres sont très proches et les auteurs ont au moins un nom en commun (ou si l'auteur manque d'un côté).",
     "Auteurs comparés nom par nom : « W. Vance — J. Van Hamme » = « Jean Van Hamme et William Vance » ; mentions comme « scénariste français, 1926-1977 », « texte », « dessin » ignorées. Le titre de la liste est conservé."
