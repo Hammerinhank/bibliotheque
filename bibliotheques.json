@@ -2232,17 +2232,6 @@
     "8-1": {
      "livres": [
       {
-       "titre": "Civilisations disparues",
-       "auteur": "Nov’edit",
-       "annee": "",
-       "resume": "",
-       "categorie": "",
-       "remarque": "",
-       "certitude": "haute",
-       "id": "mugl3i5e36t2y",
-       "origine": "main"
-      },
-      {
        "id": "mugkzr72dlbxh",
        "titre": "Les Motos",
        "auteur": "",
@@ -2263,6 +2252,17 @@
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
        ],
        "statut": "probable"
+      },
+      {
+       "titre": "Civilisations disparues",
+       "auteur": "Nov’edit",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugl3i5e36t2y",
+       "origine": "main"
       },
       {
        "id": "mucs864hq98cf",
@@ -2832,16 +2832,7 @@
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
        ],
-       "question": {
-        "type": "deplace",
-        "zone": {
-         "champ": "appoint:muglcvfjpj9fj",
-         "x1": 35,
-         "x2": 65
-        },
-        "source": "l'appoint 3",
-        "date": "2026-09-25T06:56:34.501Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mucs864ha3177",
@@ -13101,7 +13092,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T06:56:36.012Z",
+ "maj": "2026-09-25T07:03:28.020Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
