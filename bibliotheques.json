@@ -2232,6 +2232,28 @@
     "8-1": {
      "livres": [
       {
+       "id": "mugkzr72dlbxh",
+       "titre": "Les Motos",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 70,
+         "x2": 150
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "mucs864hq98cf",
        "titre": "La colère des volcans",
        "auteur": "",
@@ -2239,7 +2261,39 @@
        "certitude": "haute",
        "remarque": "Tranche noire et bleue",
        "resume": "",
-       "categorie": "Sciences"
+       "categorie": "Sciences",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 150,
+         "x2": 228
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
+      },
+      {
+       "id": "mugkzr72c1ook",
+       "titre": "Les Reptiles",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 180,
+         "x2": 302
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hbxymy",
@@ -2249,27 +2303,59 @@
        "certitude": "haute",
        "remarque": "Éditions Atlas",
        "resume": "",
-       "categorie": "Essais"
+       "categorie": "Essais",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 272,
+         "x2": 385
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
       },
       {
        "id": "mucs864h1a3wg",
-       "titre": "MEGA Junior",
+       "titre": "Mega nature",
        "auteur": "",
        "annee": "",
        "certitude": "haute",
        "remarque": "Édition Nathan",
        "resume": "",
-       "categorie": "Jeunesse"
+       "categorie": "Jeunesse",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 372,
+         "x2": 508
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
       },
       {
        "id": "mucs864hbfxkd",
-       "titre": "MEGA",
+       "titre": "Mega monde",
        "auteur": "",
        "annee": "",
        "certitude": "haute",
        "remarque": "Édition Nathan",
        "resume": "",
-       "categorie": "Essais"
+       "categorie": "Essais",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 508,
+         "x2": 630
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
       },
       {
        "id": "mucs864hjhl2d",
@@ -2279,7 +2365,39 @@
        "certitude": "haute",
        "remarque": "Tranche rouge",
        "resume": "",
-       "categorie": "Histoire"
+       "categorie": "Histoire",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 628,
+         "x2": 688
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
+      },
+      {
+       "id": "mugkzr727iwt3",
+       "titre": "Toi, futur citoyen 1",
+       "auteur": "Sylvie Furois",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 688,
+         "x2": 738
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hzshhp",
@@ -2289,7 +2407,17 @@
        "certitude": "haute",
        "remarque": "Tranche bleue",
        "resume": "",
-       "categorie": "Histoire"
+       "categorie": "Histoire",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 738,
+         "x2": 792
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
       },
       {
        "id": "mucs864h7n7gi",
@@ -2299,7 +2427,17 @@
        "certitude": "haute",
        "remarque": "Livre ancien, tranche rose",
        "resume": "Le célèbre médecin qui parle aux animaux vit de fabuleuses aventures à travers le monde avec ses fidèles compagnons.",
-       "categorie": "Jeunesse"
+       "categorie": "Jeunesse",
+       "vues": [
+        {
+         "champ": "appoint:mugkw8u2dx0wy",
+         "x1": 780,
+         "x2": 952
+        }
+       ],
+       "temoins": [
+        "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
+       ]
       },
       {
        "id": "mucs864ho4lzz",
@@ -2641,7 +2779,37 @@
      "analyse": {
       "maj": "2026-09-22T14:41:24.738Z",
       "modele": "gemini-3.5-flash"
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/8-1-appoint-mugkw8u2dx0wy.jpg",
+       "envoye": true,
+       "maj": "2026-09-25T06:27:29.764Z",
+       "id": "mugkw8u2dx0wy",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 5,
+        "n2": 0,
+        "date": "2026-09-25T06:29:59.526Z"
+       },
+       "livresVus": [
+        "mugkzr72dlbxh",
+        "mucs864hq98cf",
+        "mugkzr72c1ook",
+        "mucs864hbxymy",
+        "mucs864h1a3wg",
+        "mucs864hbfxkd",
+        "mucs864hjhl2d",
+        "mugkzr727iwt3",
+        "mucs864hzshhp",
+        "mucs864h7n7gi"
+       ],
+       "verif": "2026-09-25T06:31:44.840Z"
+      }
+     ]
     },
     "7-1": {
      "livres": [
@@ -11991,7 +12159,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-24T16:51:05.088Z",
+ "maj": "2026-09-25T06:31:46.216Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
