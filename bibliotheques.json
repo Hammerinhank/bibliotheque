@@ -2800,11 +2800,17 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 620,
          "x2": 655
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 8,
+         "x2": 35
         }
        ],
        "statut": "acquis",
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ]
       },
       {
@@ -2825,7 +2831,17 @@
        ],
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
-       ]
+       ],
+       "question": {
+        "type": "deplace",
+        "zone": {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 35,
+         "x2": 65
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-25T06:56:34.501Z"
+       }
       },
       {
        "id": "mucs864ha3177",
@@ -2841,11 +2857,18 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 735,
          "x2": 790
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 65,
+         "x2": 95
         }
        ],
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
-       ]
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muglffx21ma20",
@@ -2862,12 +2885,18 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 780,
          "x2": 830
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 95,
+         "x2": 118
         }
        ],
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hq7pi7",
@@ -2883,12 +2912,40 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 815,
          "x2": 865
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 118,
+         "x2": 132
         }
        ],
        "statut": "acquis",
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ]
+      },
+      {
+       "id": "muglx4xnl1q4a",
+       "titre": "Astérix chez les Belges",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 132,
+         "x2": 145
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muglffx2zfn6o",
@@ -2905,12 +2962,18 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 850,
          "x2": 895
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 145,
+         "x2": 158
         }
        ],
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864h7vfzo",
@@ -2926,12 +2989,62 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 880,
          "x2": 920
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 172,
+         "x2": 190
         }
        ],
        "statut": "acquis",
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ]
+      },
+      {
+       "id": "muglx4xnjsift",
+       "titre": "Astérix chez les Helvètes",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 190,
+         "x2": 215
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muglx4xnnkyzs",
+       "titre": "Astérix chez Rahàzade",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 215,
+         "x2": 243
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hoymu4",
@@ -2947,11 +3060,17 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 905,
          "x2": 950
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 268,
+         "x2": 298
         }
        ],
        "statut": "acquis",
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ]
       },
       {
@@ -2972,7 +3091,39 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.988Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 298,
+         "x2": 320
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
+      },
+      {
+       "id": "muglx4xn0g35r",
+       "titre": "L'Odyssée d'Astérix",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 320,
+         "x2": 348
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hc002q",
@@ -2982,7 +3133,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix traversent la Manche pour aider leurs cousins britanniques à résister aux légions romaines grâce à de la potion magique.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 350,
+         "x2": 378
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       },
       {
        "id": "muglffx25qt02",
@@ -3004,7 +3165,17 @@
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "deplace",
+        "zone": {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 363,
+         "x2": 393
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-25T06:56:34.501Z"
+       }
       },
       {
        "id": "mucs864hygt0a",
@@ -3024,7 +3195,17 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.988Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 378,
+         "x2": 406
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       },
       {
        "id": "mucs864h8ypua",
@@ -3044,7 +3225,61 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.989Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 408,
+         "x2": 437
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
+      },
+      {
+       "id": "muglx4xn5jhb5",
+       "titre": "… des dieux",
+       "auteur": "",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 438,
+         "x2": 478
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muglx4xnr2izz",
+       "titre": "Astérix légionnaire",
+       "auteur": "Goscinny / Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 478,
+         "x2": 510
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864h0efz9",
@@ -3064,7 +3299,17 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.989Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 511,
+         "x2": 540
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       },
       {
        "id": "mucs864hy9pxh",
@@ -3084,7 +3329,39 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.989Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 540,
+         "x2": 566
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
+      },
+      {
+       "id": "muglx4xne0vp7",
+       "titre": "Astérix aux Jeux olympiques",
+       "auteur": "Goscinny / Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 567,
+         "x2": 600
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864h61vut",
@@ -3104,7 +3381,17 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.989Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 600,
+         "x2": 627
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       },
       {
        "id": "mucs864h3996p",
@@ -3124,7 +3411,39 @@
         },
         "source": "l'appoint 2",
         "date": "2026-09-25T06:47:06.989Z"
-       }
+       },
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 627,
+         "x2": 654
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
+      },
+      {
+       "id": "muglx4xnvbbxd",
+       "titre": "Astérix et Cléopâtre",
+       "auteur": "R. Goscinny / A. Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 676,
+         "x2": 703
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hz3xej",
@@ -3140,11 +3459,62 @@
          "champ": "appoint:muglbuwlcunj9",
          "x1": 970,
          "x2": 1000
+        },
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 703,
+         "x2": 740
         }
        ],
        "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
-       ]
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z",
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "muglx4xnqkndj",
+       "titre": "Astérix : Scope, le poteau magique",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 740,
+         "x2": 767
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muglx4xn74twb",
+       "titre": "Astérix et le chaudron",
+       "auteur": "Goscinny / Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 767,
+         "x2": 797
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864h9kswq",
@@ -3154,7 +3524,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Un fauteur de troubles romain sème la zizanie et la discorde au sein du village gaulois.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 800,
+         "x2": 827
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       },
       {
        "id": "mucs864ho4bgj",
@@ -3164,7 +3544,39 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Un combat des chefs est organisé entre le chef Abraracourcix et un rival gaulois sous influence romaine.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 827,
+         "x2": 854
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
+      },
+      {
+       "id": "muglx4xn1vfot",
+       "titre": "(titre non lu)",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 854,
+         "x2": 886
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hfwpnw",
@@ -3174,7 +3586,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Les Vikings débarquent en Gaule pour apprendre la peur, qu'ils espèrent trouver auprès d'un jeune lâche.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 886,
+         "x2": 915
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       },
       {
        "id": "mucs864hdlqtf",
@@ -3184,7 +3606,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Abraracourcix parie qu'il offrira à ses beaux-parents un ragoût assaisonné aux lauriers de César.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglcvfjpj9fj",
+         "x1": 918,
+         "x2": 955
+        }
+       ],
+       "temoins": [
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
+       ]
       }
      ],
      "photo": {
@@ -3274,9 +3706,50 @@
        "plein": null,
        "chemin": "images/mucn2e6dat2vv/8-1-appoint-muglcvfjpj9fj.jpg",
        "envoye": true,
-       "maj": "2026-09-25T06:40:11.551Z",
+       "maj": "2026-09-25T06:54:18.349Z",
        "id": "muglcvfjpj9fj",
-       "legende": ""
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 25,
+        "n2": 0,
+        "date": "2026-09-25T06:55:56.943Z"
+       },
+       "livresVus": [
+        "mucs864hfw8i3",
+        "mucs864ha3177",
+        "muglffx21ma20",
+        "mucs864hq7pi7",
+        "muglx4xnl1q4a",
+        "muglffx2zfn6o",
+        "mucs864h7vfzo",
+        "muglx4xnjsift",
+        "muglx4xnnkyzs",
+        "mucs864hoymu4",
+        "mucs864h9snok",
+        "muglx4xn0g35r",
+        "mucs864hc002q",
+        "mucs864hygt0a",
+        "mucs864h8ypua",
+        "muglx4xn5jhb5",
+        "muglx4xnr2izz",
+        "mucs864h0efz9",
+        "mucs864hy9pxh",
+        "muglx4xne0vp7",
+        "mucs864h61vut",
+        "mucs864h3996p",
+        "muglx4xnvbbxd",
+        "mucs864hz3xej",
+        "muglx4xnqkndj",
+        "muglx4xn74twb",
+        "mucs864h9kswq",
+        "mucs864ho4bgj",
+        "muglx4xn1vfot",
+        "mucs864hfwpnw",
+        "mucs864hdlqtf"
+       ],
+       "verif": "2026-09-25T06:56:34.502Z"
       }
      ]
     },
@@ -12628,7 +13101,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T06:47:07.908Z",
+ "maj": "2026-09-25T06:56:36.012Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
