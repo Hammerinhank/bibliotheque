@@ -2917,28 +2917,6 @@
        ]
       },
       {
-       "id": "muglx4xnl1q4a",
-       "titre": "Astérix chez les Belges",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muglcvfjpj9fj",
-         "x1": 132,
-         "x2": 145
-        }
-       ],
-       "temoins": [
-        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ],
-       "statut": "probable"
-      },
-      {
        "id": "muglffx2zfn6o",
        "titre": "Le Fils d'Astérix",
        "auteur": "Uderzo",
@@ -3073,16 +3051,6 @@
        "remarque": "BD Astérix",
        "resume": "Un jeune publicitaire romain introduit le capitalisme et la surproduction dans le village gaulois pour affaiblir ses habitants.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 923,
-         "x2": 953
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.988Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
@@ -3092,7 +3060,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muglx4xn0g35r",
@@ -3137,38 +3106,6 @@
        ]
       },
       {
-       "id": "muglffx25qt02",
-       "titre": "Astérix chez Rahâzade",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 925,
-         "x2": 975
-        }
-       ],
-       "temoins": [
-        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
-       ],
-       "statut": "probable",
-       "question": {
-        "type": "deplace",
-        "zone": {
-         "champ": "appoint:muglcvfjpj9fj",
-         "x1": 363,
-         "x2": 393
-        },
-        "source": "l'appoint 3",
-        "date": "2026-09-25T06:56:34.501Z"
-       }
-      },
-      {
        "id": "mucs864hygt0a",
        "titre": "Le Papyrus de César",
        "auteur": "Albert Uderzo (Français, 1927-2020)",
@@ -3177,26 +3114,23 @@
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix aident un journaliste romain à publier un livre compromettant pour Jules César.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 958,
-         "x2": 988
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.988Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
          "x1": 378,
          "x2": 406
+        },
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 925,
+         "x2": 975
         }
        ],
        "temoins": [
-        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+        "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z",
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864h8ypua",
@@ -3207,16 +3141,6 @@
        "remarque": "BD Astérix",
        "resume": "Nos irréductibles Gaulois voyagent en Corse pour escorter un chef local et affronter les Romains.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 958,
-         "x2": 988
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.989Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
@@ -3226,12 +3150,13 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muglx4xn5jhb5",
-       "titre": "… des dieux",
-       "auteur": "",
+       "titre": "Le domaine  des dieux",
+       "auteur": "René Gosciny",
        "annee": "",
        "certitude": "faible",
        "remarque": "",
@@ -3281,16 +3206,6 @@
        "remarque": "BD Astérix",
        "resume": "Un cabaretier romain offre par erreur un faux cadeau empoisonné à Astérix, semant la pagaille au village.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 958,
-         "x2": 988
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.989Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
@@ -3300,7 +3215,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864hy9pxh",
@@ -3311,16 +3227,6 @@
        "remarque": "BD Astérix",
        "resume": "Un faux devin s'installe dans la forêt gauloise et manipule les villageois crédules, provoquant le chaos.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 958,
-         "x2": 988
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.989Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
@@ -3330,7 +3236,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muglx4xne0vp7",
@@ -3363,16 +3270,6 @@
        "remarque": "Titre partiellement coupé",
        "resume": "Astérix et Obélix escortent le fils d'un chef ibère prisonnier jusqu'en Hispanie.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 958,
-         "x2": 988
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.989Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
@@ -3382,7 +3279,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864h3996p",
@@ -3393,16 +3291,6 @@
        "remarque": "BD Astérix",
        "resume": "Grâce à la potion magique de Panoramix, les irréductibles Gaulois résistent victorieusement aux troupes de Jules César.",
        "categorie": "Bandes dessinées",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muglbuwlcunj9",
-         "x1": 958,
-         "x2": 988
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-25T06:47:06.989Z"
-       },
        "vues": [
         {
          "champ": "appoint:muglcvfjpj9fj",
@@ -3412,7 +3300,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muglx4xnvbbxd",
@@ -13092,7 +12981,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T07:03:28.020Z",
+ "maj": "2026-09-25T07:13:48.606Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
