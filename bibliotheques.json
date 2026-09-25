@@ -2232,17 +2232,6 @@
     "8-1": {
      "livres": [
       {
-       "titre": "Le tour de Gaulle d’Astérix",
-       "auteur": "René Gosciny",
-       "annee": "",
-       "resume": "",
-       "categorie": "",
-       "remarque": "",
-       "certitude": "haute",
-       "id": "mugohy48fr3l0",
-       "origine": "main"
-      },
-      {
        "titre": "Civilisations disparues",
        "auteur": "Nov’edit",
        "annee": "",
@@ -2844,6 +2833,17 @@
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
        ],
        "statut": "acquis"
+      },
+      {
+       "titre": "Le tour de Gaulle d’Astérix",
+       "auteur": "René Gosciny",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugohy48fr3l0",
+       "origine": "main"
       },
       {
        "id": "mucs864ha3177",
@@ -12992,7 +12992,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:08:13.237Z",
+ "maj": "2026-09-25T08:08:37.385Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
