@@ -1,0 +1,165 @@
+{
+ "date": "2026-09-25T08:55:39.292Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-3",
+ "genre": "appoint",
+ "appoint": "mugor73n1gwc3",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Le Sillage de l'oubli",
+   "auteur": "Bruce Machart",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 27,
+   "x2": 101,
+   "illisible": false
+  },
+  {
+   "titre": "Des villes dans la plaine",
+   "auteur": "Cormac McCarthy",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "fin du titre en partie masquée par le reflet",
+   "x1": 101,
+   "x2": 151,
+   "illisible": false
+  },
+  {
+   "titre": "Le grand passage",
+   "auteur": "Cormac McCarthy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 151,
+   "x2": 204,
+   "illisible": false
+  },
+  {
+   "titre": "La Neuvième Heure",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "auteur non visible sur la tranche",
+   "x1": 204,
+   "x2": 252,
+   "illisible": false
+  },
+  {
+   "titre": "Chronique d'un château hanté",
+   "auteur": "Pierre Magnan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 252,
+   "x2": 330,
+   "illisible": false
+  },
+  {
+   "titre": "Laure du bout du monde",
+   "auteur": "Pierre Magnan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 330,
+   "x2": 386,
+   "illisible": false
+  },
+  {
+   "titre": "La Folie Forcalquier",
+   "auteur": "Pierre Magnan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 386,
+   "x2": 455,
+   "illisible": false
+  },
+  {
+   "titre": "Madame Perfecta",
+   "auteur": "Antonine Maillet",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 455,
+   "x2": 487,
+   "illisible": false
+  },
+  {
+   "titre": "La Pie",
+   "auteur": "Pierre-Henri Malafosse",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 487,
+   "x2": 512,
+   "illisible": false
+  },
+  {
+   "titre": "L'Accordeur de piano",
+   "auteur": "Daniel Mason",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 512,
+   "x2": 590,
+   "illisible": false
+  },
+  {
+   "titre": "Les Joachim",
+   "auteur": "Brigitte Massin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 590,
+   "x2": 657,
+   "illisible": false
+  },
+  {
+   "titre": "La Crique du Français",
+   "auteur": "Daphné du Maurier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 657,
+   "x2": 700,
+   "illisible": false
+  },
+  {
+   "titre": "Les Souffleurs de verre",
+   "auteur": "Daphné du Maurier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 700,
+   "x2": 762,
+   "illisible": false
+  },
+  {
+   "titre": "Colorado Saga",
+   "auteur": "James A. Michener",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 762,
+   "x2": 897,
+   "illisible": false
+  },
+  {
+   "titre": "Chesapeake",
+   "auteur": "James A. Michener",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 897,
+   "x2": 1000,
+   "illisible": false
+  }
+ ]
+}
