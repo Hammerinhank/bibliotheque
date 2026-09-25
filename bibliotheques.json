@@ -2240,7 +2240,8 @@
        "remarque": "",
        "certitude": "haute",
        "id": "mugl3i5e36t2y",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mugkzr72dlbxh",
@@ -2262,7 +2263,7 @@
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hq98cf",
@@ -2282,7 +2283,8 @@
        ],
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mugkzr72c1ook",
@@ -2304,7 +2306,7 @@
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hbxymy",
@@ -2324,7 +2326,8 @@
        ],
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864h1a3wg",
@@ -2386,7 +2389,8 @@
        ],
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mugkzr727iwt3",
@@ -2408,7 +2412,7 @@
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hzshhp",
@@ -2428,7 +2432,8 @@
        ],
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864h7n7gi",
@@ -2448,7 +2453,8 @@
        ],
        "temoins": [
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864ho4lzz",
@@ -2468,7 +2474,8 @@
        ],
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864hc1sti",
@@ -2488,7 +2495,8 @@
        ],
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864ha17ck",
@@ -2552,7 +2560,7 @@
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hjl1n8",
@@ -2742,7 +2750,7 @@
        "temoins": [
         "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864h7tulb",
@@ -2843,7 +2851,8 @@
        "remarque": "",
        "certitude": "haute",
        "id": "mugohy48fr3l0",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "titre": "Astérix gladiateur",
@@ -2854,7 +2863,8 @@
        "remarque": "",
        "certitude": "haute",
        "id": "mugojgtpygbm0",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mucs864ha3177",
@@ -3013,7 +3023,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muglx4xnnkyzs",
@@ -3035,7 +3045,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hoymu4",
@@ -3105,7 +3115,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hc002q",
@@ -3125,7 +3135,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864hygt0a",
@@ -3184,7 +3195,8 @@
        "remarque": "",
        "certitude": "haute",
        "id": "mugokzis3zg7w",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "muglx4xn5jhb5",
@@ -3206,7 +3218,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muglx4xnr2izz",
@@ -3228,7 +3240,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864h0efz9",
@@ -3292,7 +3304,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864h61vut",
@@ -3356,7 +3368,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hz3xej",
@@ -3405,7 +3417,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muglx4xn74twb",
@@ -3427,7 +3439,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864h9kswq",
@@ -3447,7 +3459,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864ho4bgj",
@@ -3467,7 +3480,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "titre": "Astérix et les Goths",
@@ -3478,7 +3492,8 @@
        "remarque": "",
        "certitude": "haute",
        "id": "mugolxwmmas06",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "muglx4xn1vfot",
@@ -3500,7 +3515,7 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mucs864hfwpnw",
@@ -3520,7 +3535,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mucs864hdlqtf",
@@ -3540,7 +3556,8 @@
        ],
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
-       ]
+       ],
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -3675,7 +3692,10 @@
        ],
        "verif": "2026-09-25T06:56:34.502Z"
       }
-     ]
+     ],
+     "certif": {
+      "devant": "2026-09-25T08:11:56.696Z"
+     }
     },
     "7-1": {
      "livres": [
@@ -13025,7 +13045,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:11:45.409Z",
+ "maj": "2026-09-25T08:12:02.556Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
