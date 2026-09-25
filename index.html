@@ -391,8 +391,19 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.58.0";
+const VERSION = "V1.60.0";
 const HISTORIQUE = [
+  { v:"V1.60.0", d:"25/09/2026", l:[
+    "Les modifications faites à la main (ajout, modification, suppression, déplacement, glisser-déposer, réponses aux questions) partent sur GitHub automatiquement, 5 secondes après la dernière action.",
+    "Hors réseau : rien ne s'affiche à chaque action ; dès que le réseau revient, l'app envoie d'elle-même tout ce qui attend (photos, résultats d'analyse, données), avec les garde-fous habituels. Également à l'ouverture de l'app s'il reste des modifications non envoyées."
+  ]},
+  { v:"V1.59.0", d:"25/09/2026", l:[
+    "Réglages ⚙️ : nouvel onglet « Log » — le journal horodaté de la journée (ouverture de l'app, ajouts / modifications / suppressions / déplacements de livres, analyses, fusions, certifications, envois et récupérations GitHub avec leur résultat, alertes, erreurs). Remis à zéro chaque jour ; boutons Copier et Effacer."
+  ]},
+  { v:"V1.58.1", d:"25/09/2026", l:[
+    "Garde-fou renforcé : les comparaisons entre cet appareil et GitHub ne se contentent plus des totaux ; elles repèrent livre par livre ceux qui disparaîtraient (par ex. 3 livres ajoutés à la main ici et 3 retirés ailleurs ne s'annulent plus). À l'ouverture, l'app ne remplace plus en silence des données locales qui contiennent des livres absents de GitHub.",
+    "Une page restée ouverte avec des données anciennes (autre onglet, app de l'écran d'accueil) ne peut plus rien envoyer sur GitHub, ni à la main ni automatiquement."
+  ]},
   { v:"V1.58.0", d:"25/09/2026", l:[
     "Bouton « Déplacer » à droite de « Supprimer » : on tape quelques lettres du titre (ou de l'auteur) d'un autre livre, avec fautes de frappe et mots manquants tolérés ; le livre trouvé s'affiche à chaque lettre (ou les meilleurs candidats si c'est ambigu), puis : déplacer avant, déplacer après, ou ne pas déplacer.",
     "La fenêtre d'un compartiment ne peut plus défiler de côté."
@@ -969,7 +980,7 @@ function sauver(marquerSale){
   // une autre fenêtre a enregistré depuis le chargement de celle-ci : ne rien écraser
   try{
     const rev = localStorage.getItem(CLE_REV);
-    if (revConnue !== null && rev !== null && rev !== revConnue){ fenetrePerimee(); return; }
+    if (revConnue !== null && rev !== null && rev !== revConnue){ journal("Enregistrement refusé : page périmée (autre fenêtre de l'app)"); fenetrePerimee(); return; }
   }catch(e){}
   if (marquerSale !== false){ sale = true; data.maj = new Date().toISOString(); }
   try{
@@ -979,10 +990,38 @@ function sauver(marquerSale){
     localStorage.setItem(CLE_SALE, sale ? "1" : "0");
   }catch(e){
     toast("Mémoire de l'appareil pleine : rien n'a été enregistré. Ouvrez ☁️ et envoyez les photos vers GitHub pour libérer de la place.", 7000);
+    journal("ÉCHEC d'enregistrement sur l'appareil (mémoire pleine) : " + (e && e.message));
     console.error(e);
   }
   majBandeau();
 }
+
+/* ====================================================================
+   LOG DE LA JOURNÉE : ce qui s'est passé, heure par heure (remis à zéro chaque jour)
+   ==================================================================== */
+const CLE_LOG = "biblio_log";
+function aujourdhui(){ const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+function lireLog(){
+  try{ const l = JSON.parse(localStorage.getItem(CLE_LOG) || "null"); if (l && l.jour === aujourdhui()) return l; }catch(e){}
+  return { jour: aujourdhui(), lignes: [] };
+}
+function journal(texte){
+  try{
+    const l = lireLog();
+    const d = new Date();
+    l.lignes.push(String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0") + ":" + String(d.getSeconds()).padStart(2,"0") + "  " + texte);
+    if (l.lignes.length > 1500) l.lignes = l.lignes.slice(-1500);
+    localStorage.setItem(CLE_LOG, JSON.stringify(l));
+  }catch(e){}
+}
+/* résumé compact des données, pour situer chaque événement */
+function etatCourt(jeu){
+  const r = resume(jeu || data);
+  return r ? `${r.livres} livres, ${r.photos} photos` : "";
+}
+window.addEventListener("error", (e)=>journal("ERREUR : " + (e.message || e) + (e.lineno ? " (ligne " + e.lineno + ")" : "")));
+window.addEventListener("unhandledrejection", (e)=>journal("ERREUR (promesse) : " + ((e.reason && e.reason.message) || e.reason)));
+document.addEventListener("visibilitychange", ()=>journal(document.hidden ? "App mise en arrière-plan" : "App revenue au premier plan"));
 
 function sauverCfg(){ try{ localStorage.setItem(CLE_CFG, JSON.stringify(cfg)); }catch(e){} }
 
@@ -1587,6 +1626,7 @@ async function envoyerPhotoAuto(b, k, champ, quoi){
   try{
     await televerserPhoto(b, k, champ);
     toast(quoi + " : sauvegardée sur GitHub ✓", 3000);
+    journal(quoi + " de " + k + " envoyée sur GitHub");
     return true;
   }catch(e){ avertirNonSauve(quoi, raisonEchec(e)); return false; }
 }
@@ -1641,15 +1681,21 @@ async function envoyerDonneesAuto(quoi, opts){
   if (reconstructionEnCours) return false;                     // une seule sauvegarde, à la fin de la reconstruction
   if (envoiAutoEnCours){ try{ await envoiAutoEnCours; }catch(e){} }
   envoiAutoEnCours = (async ()=>{
-    if (!ghPret() || navigator.onLine === false){ avertirNonSauve(quoi, raisonEchec()); return false; }
+    if (pagePerimee()){ journal("Sauvegarde auto refusée (page périmée) : " + quoi); fenetrePerimee(); return false; }
+    if (!ghPret() || navigator.onLine === false){
+      journal("Sauvegarde auto impossible (" + raisonEchec() + ") : " + quoi + (opts.silencieuxHorsReseau ? " — envoi au retour du réseau" : ""));
+      if (!opts.silencieuxHorsReseau) avertirNonSauve(quoi, raisonEchec());
+      return false;
+    }
     try{
       const txt = await ghLireTexte(FICHIER_JSON);
       if (txt){
         const j = JSON.parse(txt);
         const connue = localStorage.getItem(CLE_SYNC);
         // une reconstruction peut légitimement réduire le nombre de livres et de résumés
-        const pertes = pertesEnvoi(data, j).filter(x=>!(opts.livresEnMoinsVoulus && /^(livres|résumés) :/.test(x)));
+        const pertes = pertesEnvoi(data, j).filter(x=>!(opts.livresEnMoinsVoulus && (/^(livres|résumés|dont) :/.test(x) || /^\d+ livre\(s\) .* absent/.test(x))));
         if ((j.maj && connue && j.maj !== connue) || pertes.length){
+          journal("Sauvegarde auto SUSPENDUE : " + quoi + (pertes.length ? " — " + pertes.join(" ; ") : " — GitHub modifié ailleurs"));
           modale({ titre:"⚠️ Sauvegarde automatique suspendue",
             html:`<div><b>${esc(quoi)}</b> est enregistré sur cet appareil, mais n'a pas été envoyé automatiquement :</div>
                   <ul>${j.maj && connue && j.maj !== connue ? "<li>la version GitHub a été modifiée ailleurs (autre appareil ou autre fenêtre) depuis votre dernier échange ;</li>" : ""}
@@ -1668,9 +1714,11 @@ async function envoyerDonneesAuto(quoi, opts){
       sale = photosEnAttente().length > 0; etatSync = "ok";
       sauver(false);
       toast(quoi + " : sauvegardé sur GitHub ✓", 3000);
+      journal("Sauvegarde auto réussie : " + quoi + " (" + etatCourt() + ")");
       return true;
     }catch(e){
       etatSync = "echec"; majBandeau();
+      journal("ÉCHEC sauvegarde auto : " + quoi + " — " + (e && e.message));
       avertirNonSauve(quoi, raisonEchec(e));
       return false;
     }
@@ -1717,6 +1765,7 @@ async function viderListesCompartiment(b, k){
   const ok = await confirmer(`<div>Vider les listes de livres de ${esc(lib(k))} (${(cs.livres||[]).filter(lv=>!certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")).length} livre(s)) ?${cs.certif ? " Les rangées certifiées ★ sont conservées." : ""}</div>
     <div class="aide">Les photos (devant, derrière, appoints) sont conservées. Vous pourrez ensuite, photo par photo, relancer une analyse ou réutiliser un résultat sauvegardé. La liste actuelle est mise de côté : « ↩ Rétablir » la remet.</div>`, "Vider les listes", "Vider");
   if (!ok) return;
+  journal(`Listes vidées pour ${lib(k)} (${(cs.livres||[]).length} livre(s) mis de côté)`);
   cs.avantReconstruction = { date:new Date().toISOString(), livres:(cs.livres||[]).slice() };
   // les rangées certifiées ★ sont épargnées
   cs.livres = (cs.livres||[]).filter(lv=>certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant"));
@@ -1731,6 +1780,7 @@ function retablirListesCompartiment(b, k){
   if (!sv) return;
   if (cs.certif){ toast("Impossible : une rangée de ce compartiment est certifiée ★.", 5000); return; }
   cs.livres = sv.livres; delete cs.avantReconstruction; sauver();
+  journal(`Listes rétablies pour ${lib(k)} (${cs.livres.length} livre(s))`);
   if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
   toast(`Liste du ${dateFr(sv.date)} rétablie (${cs.livres.length} livre(s)).`, 5000);
   envoyerDonneesAuto("Listes de livres de " + lib(k));
@@ -1910,6 +1960,7 @@ async function permuterRangees(b, k){
       avertirNonSauve("Permutation des rangées de " + lib(k), raisonEchec());
     }
     toast("Rangées permutées.", 4000);
+    journal(`Rangées permutées pour ${lib(k)}`);
   }catch(e){
     pg.fermer();
     toast("Permutation impossible : " + e.message, 6000);
@@ -1968,6 +2019,7 @@ function fenetreDeplacer(cs, lv, apres){
     if (rg(choisi) === "derriere") lv.rang = "derriere"; else if (lv.rang === "derriere") lv.rang = "devant";
     f.remove();
     toast(`« ${lv.titre} » déplacé ${ou === "avant" ? "avant" : "après"} « ${choisi.titre} ».`, 4000);
+    journal(`Livre déplacé : « ${lv.titre} » ${ou === "avant" ? "avant" : "après"} « ${choisi.titre} »`);
     apres();
   };
   const afficher = ()=>{
@@ -2059,6 +2111,7 @@ async function ouvrirHistoriqueGitHub(){
     f.remove();
     rendre();
     toast("Version restaurée sur cet appareil. Vérifiez, puis envoyez sur GitHub ☁️.", 7000);
+    journal(`Version GitHub du ${dateFr(v.date)} restaurée sur l'appareil (${etatCourt()})`);
   });
 }
 
@@ -2075,7 +2128,21 @@ function pertesEnvoi(loc, dist, libDist, libLoc){
   test("unRang", "compartiments marqués « 1 rang »");
   test("appoints", "photos d'appoint");
   test("resumes", "résumés");
+  // livre par livre : ceux qui existent d'un côté et pas de l'autre (les totaux peuvent se compenser)
+  const titres = (jeu)=>{ const m = new Map();
+    (jeu.bibliotheques || []).forEach(b=>Object.entries(b.cases || {}).forEach(([k, cs])=>(cs.livres || []).forEach(lv=>{
+      m.set(lv.id || (b.id + "|" + k + "|" + normaliser(lv.titre)), { titre: lv.titre, ou: b.nom + " " + k }); }))); return m; };
+  const A = titres(loc), D = titres(dist);
+  const manquants = [...D.keys()].filter(c=>!A.has(c)).map(c=>D.get(c));
+  if (manquants.length && !p.some(x=>x.startsWith("livres :")))
+    p.push(`${manquants.length} livre(s) ${libDist} absent(s) ${libLoc} : ` + manquants.slice(0, 5).map(x=>`« ${x.titre} » (${x.ou})`).join(", ") + (manquants.length > 5 ? "…" : ""));
+  else if (manquants.length)
+    p.push(`dont : ` + manquants.slice(0, 5).map(x=>`« ${x.titre} » (${x.ou})`).join(", ") + (manquants.length > 5 ? "…" : ""));
   return p;
+}
+/* cette page a-t-elle des données périmées (une autre fenêtre a enregistré depuis) ? */
+function pagePerimee(){
+  try{ const rev = localStorage.getItem(CLE_REV); return revConnue !== null && rev !== null && rev !== revConnue; }catch(e){ return false; }
 }
 
 /* Plusieurs fenêtres de l'application ouvertes : une fenêtre restée ouverte avec d'anciennes données ne doit pas écraser les nouvelles. */
@@ -2091,6 +2158,8 @@ function fenetrePerimee(){
 window.addEventListener("storage", (e)=>{ if (e.key === CLE_REV) fenetrePerimee(); });
 
 async function envoyerVersGitHub(){
+  journal("Envoi vers GitHub demandé — " + etatCourt());
+  if (pagePerimee()){ journal("Envoi refusé : page périmée"); fenetrePerimee(); return; }
   if (!ghLisible()){ toast("Configurez d'abord le dépôt dans les réglages ⚙️."); ouvrirReglages("github"); return; }
   if (!ghToken()){ toast("Un jeton GitHub est nécessaire pour enregistrer sur GitHub. Ajoutez-le dans les réglages ⚙️.", 5000); ouvrirReglages("github"); return; }
 
@@ -2106,10 +2175,12 @@ async function envoyerVersGitHub(){
           tableauComparaison(data, j, "GitHub") +
           `<div class="aide">Si ce n'est pas voulu, annulez : cet appareil a sans doute des données anciennes. Faites plutôt « 📥 Récupérer depuis GitHub », ou « 🕘 Restaurer une version précédente ».</div>`,
           "Envoi avec pertes", "Envoyer malgré tout");
+        journal("Alerte « envoi avec pertes » : " + pertes.join(" ; ") + " → " + (ok ? "envoyé malgré tout" : "annulé"));
         if (!ok) return;
       }
       const connue = localStorage.getItem(CLE_SYNC);
       if (j.maj && connue && j.maj !== connue){
+        journal("Alerte : version GitHub modifiée ailleurs");
         const ok = await confirmer(
           `<div>La version présente sur GitHub a changé depuis votre dernier échange avec ce dépôt : elle vient probablement d'un autre appareil.</div>` +
           tableauComparaison(data, j, "GitHub") +
@@ -2152,9 +2223,11 @@ async function envoyerVersGitHub(){
     sauver(false);
     pg.fermer();
     toast(attente.length ? `Envoyé : ${attente.length} photo(s) et les données.` : "Données envoyées sur GitHub.");
+    journal(`Envoi GitHub réussi : ${attente.length} photo(s) + données (${etatCourt()})`);
   }catch(e){
     pg.fermer();
     etatSync = "echec"; majBandeau();
+    journal("ÉCHEC de l'envoi GitHub : " + e.message);
     modale({titre:"Envoi interrompu",
       html:`<div>L'envoi s'est arrêté après ${fait} élément(s) sur ${total}.</div>
             <div class="aide">${esc(e.message)}</div>
@@ -2184,6 +2257,7 @@ async function recupererDeGitHub(silencieux){
         tableauComparaison(data, j, "GitHub") +
         `<div class="aide">Recommandé : <b>Garder cet appareil</b>, puis envoyer ses données sur GitHub ☁️.</div>`,
         "Données de cet appareil plus complètes", "Remplacer par GitHub quand même");
+      journal("À l'ouverture, appareil plus complet que GitHub : " + pertesLocales.join(" ; ") + " → " + (ok ? "remplacé par GitHub" : "appareil conservé"));
       if (!ok){ etatSync = "ok"; sale = true; sauver(false); majBandeau(); toast("Données de cet appareil conservées. Pensez à les envoyer sur GitHub ☁️.", 7000); return false; }
     }
     else if (!silencieux || sale){
@@ -2197,6 +2271,7 @@ async function recupererDeGitHub(silencieux){
     }
 
     const attente = photosEnAttente();   // ne jamais perdre une photo pas encore envoyée
+    journal(`Données remplacées par la version GitHub${silencieux ? " (à l'ouverture)" : ""} : ${etatCourt()} → ${etatCourt(j)}`);
     retirerMiniatures(j);
     data = j;
     attente.forEach(p=>{
@@ -2644,6 +2719,7 @@ function appliquerLivresCompartiment(b, k, livres){
   if (!disputes.length){
     cs.livres = assembler(()=>[]);
     cs.analyse = infoAnalyse(livres, cs);
+    journal(`Rangée remplie directement pour ${lib(k)} : ${cs.livres.length} livre(s)`);
     fin();
     const ajouts = remplisDirect.map(r=>`${nouvDe(r).length} livre(s) pour le ${NOM_RANG[r]}`);
     toast(`${enTete} : ${ajouts.join(", ")}${conserves.length ? " ; " + conserves.join(", ") : ""}. Total : ${cs.livres.length}.`, 6000);
@@ -2897,6 +2973,7 @@ function fusionConvergente(opts){
           });
           res[bl.r] = (bl.avant || []).concat(l, bl.apres || []);
         });
+        journal(`${titre} appliqué : ${bilan.acquis} acquis, ${bilan.aj} ajout(s), ${bilan.re} retrait(s), ${bilan.co} titre(s) corrigé(s), ${bilan.questions} question(s)`);
         surValider(res, bilan);
       }}
     ],
@@ -2913,10 +2990,23 @@ function fusionConvergente(opts){
 
 /* réponses aux questions : une seule sauvegarde GitHub après quelques secondes de calme */
 let minuterieListes = null;
-function envoiListesDiffere(b, k){
+function envoiListesDiffere(b, k){ planifierEnvoi("Listes de livres de " + lib(k)); }
+/* modifications à la main : une seule sauvegarde GitHub, 5 s après la dernière action ; hors réseau, elle attendra le retour du réseau */
+function planifierEnvoi(quoi){
   clearTimeout(minuterieListes);
-  minuterieListes = setTimeout(()=>envoyerDonneesAuto("Listes de livres de " + lib(k)), 4000);
+  minuterieListes = setTimeout(()=>envoyerDonneesAuto(quoi, { livresEnMoinsVoulus:true, silencieuxHorsReseau:true }), 5000);
 }
+/* retour du réseau (ou ouverture de l'app) : envoyer ce qui attend */
+function envoyerCeQuiAttend(raison){
+  if (!ghPret() || navigator.onLine === false) return;
+  const nP = photosEnAttente().length, nJ = journalEnAttente().length;
+  if (!sale && !nP && !nJ) return;
+  journal(`${raison} : envoi de ce qui attend (${sale ? "données modifiées" : "données à jour"}, ${nP} photo(s), ${nJ} résultat(s) d'analyse)`);
+  toast(`${raison} : envoi sur GitHub de ce qui attend…`, 3000);
+  envoyerDonneesAuto("Modifications en attente", { livresEnMoinsVoulus:true, silencieuxHorsReseau:true });
+}
+window.addEventListener("online", ()=>{ journal("Réseau revenu"); setTimeout(()=>envoyerCeQuiAttend("Réseau revenu"), 2500); });
+window.addEventListener("offline", ()=>journal("Réseau perdu"));
 /* Réponse à une question en suspens, depuis la liste du compartiment. */
 function repondreQuestion(cs, lv, rep){
   const q = lv.question || {};
@@ -3396,6 +3486,8 @@ function activerGlisser(z, cs, apres){
     sauver(); if (typeof rendreBiblio === "function") rendreBiblio();
     apres();
     toast("Ordre modifié.");
+    journal("Ordre des livres modifié (glisser-déposer)");
+    planifierEnvoi("Ordre des livres modifié");
   });
 }
 
@@ -3414,6 +3506,7 @@ async function lireAppoint(bib, cle, champ, opts){
   parties.push({ inline_data:{ mime_type:"image/jpeg", data: base64Seul(img) } });
   const rep = await interrogerIA(parties, jsonDepuisTexte, opts);
   const lus = lusDepuisReponse(rep.res);
+  journal(`Lecture IA de l'appoint ${numeroAppoint(cs, champ)} de ${cle} (${rep.ia} ${rep.modele || ""}) : ${lus.length} livre(s) lu(s)`);
   journaliserResultat(bib, cle, "appoint", { appoint: idAppoint(champ), mode: (opts && opts.mode) || "", source:{ ia:rep.ia, modele:rep.modele }, lus });
   return { lus, source:{ ia:rep.ia, modele:rep.modele, echecs:rep.echecs } };
 }
@@ -4058,6 +4151,7 @@ async function analyserPhoto(bib, cle, opts){
   try{ rep = await interrogerIA(parties, jsonDepuisTexte, opts); }
   catch(e){ e.portee = portee; throw e; }
   const livresA = finaliserPortee(livresDepuisReponse(rep.res, deux, !!avant, { ia:rep.ia, modele:rep.modele, echecs:rep.echecs }), portee, cs);
+  journal(`Analyse IA de ${cle} (${portee}, ${rep.ia} ${rep.modele || ""}) : ${livresA.length} livre(s)`);
   journaliserResultat(bib, cle, "analyse", { portee, source:{ ia:rep.ia, modele:rep.modele }, livres: livresA.map(l=>Object.assign({}, l)) });
   return livresA;
 }
@@ -5060,6 +5154,7 @@ function ouvrirCompartiment(b, k){
       if (!ok) return;
       cs.livres.filter(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r).forEach(rendreAcquis);
       cs.certif = Object.assign({}, cs.certif || {}, { [r]: new Date().toISOString() });
+      journal(`Certification de la ${nomR} de ${lib(k)}`);
       apresReponse(); majPhoto();
       toast(`★ ${nomR[0].toUpperCase() + nomR.slice(1)} certifiée.`, 4000);
     });
@@ -5068,6 +5163,7 @@ function ouvrirCompartiment(b, k){
       const ok = await confirmer(`Retirer la certification de la ${r === "derriere" ? "rangée 2" : "rangée 1"} ?<div class="aide">Les livres restent 🔒 acquis ; la rangée pourra de nouveau recevoir des livres issus des analyses.</div>`, "Retirer la certification", "Retirer");
       if (!ok) return;
       delete cs.certif[r]; if (!Object.keys(cs.certif).length) delete cs.certif;
+      journal(`Certification retirée : ${r === "derriere" ? "rangée 2" : "rangée 1"} de ${lib(k)}`);
       apresReponse(); majPhoto();
     });
     zf.querySelectorAll("[data-valider]").forEach(el=>el.onclick=async()=>{
@@ -5082,7 +5178,9 @@ function ouvrirCompartiment(b, k){
       const i = Number(el.dataset.suppr);
       const ok = await confirmer(`Supprimer « ${esc(cs.livres[i].titre)} » ?${estAcquis(cs.livres[i]) ? "<div class='aide'>Ce livre est 🔒 acquis.</div>" : ""}`, "Supprimer le livre", "Supprimer");
       if (!ok) return;
+      journal(`Livre supprimé : « ${cs.livres[i].titre} »`);
       cs.livres.splice(i,1); sauver(); majLivres(); rendreBiblio();
+      planifierEnvoi("Livres modifiés à la main");
     });
     activerGlisser(z, cs, majLivres);
   };
@@ -5288,8 +5386,10 @@ function formLivre(cs, index, apres){
         lv.resume=f.querySelector("#lR").value.trim();
         lv.remarque=f.querySelector("#lM").value.trim();
         const g = f.querySelector("#lG"); if (g) lv.rang = g.value;
-        if (index < 0){ lv.id = uid(); lv.certitude="haute"; lv.origine="main"; cs.livres = cs.livres||[]; cs.livres.push(lv); }
+        if (index < 0){ lv.id = uid(); lv.certitude="haute"; lv.origine="main"; cs.livres = cs.livres||[]; cs.livres.push(lv); journal(`Livre ajouté à la main : « ${lv.titre} »`); }
+        else journal(`Livre modifié : « ${lv.titre} »`);
         sauver(); f.remove(); if (apres) apres(); rendreBiblio();
+        planifierEnvoi("Livres modifiés à la main");
       }}
     ]
   });
@@ -6343,6 +6443,7 @@ function ouvrirReglages(ongletInitial){
          <button data-o="github">GitHub</button>
          <button data-o="questions">Questions</button>
          <button data-o="entretien">Entretien</button>
+         <button data-o="log">Log</button>
        </div>
        <div class="aide" style="margin-top:-6px">Configuration uniquement. Les envois, récupérations, exports et imports se font dans l'écran ☁️.</div>
 
@@ -6435,6 +6536,11 @@ function ouvrirReglages(ongletInitial){
          <button class="btn" id="qCr" style="margin-top:6px">Texte par défaut</button>
        </div>
 
+       <div id="pLog" hidden>
+         <div class="aide" style="margin-top:0">Ce qui s'est passé aujourd'hui sur cet appareil, avec l'heure. Le journal repart de zéro chaque jour.</div>
+         <textarea id="rLog" readonly style="min-height:360px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;white-space:pre;overflow:auto"></textarea>
+         <div class="barre"><button class="btn" id="rLogCopier" style="flex:1">📋 Copier</button><button class="btn" id="rLogMaj" style="flex:1">🔄 Actualiser</button><button class="btn rouge" id="rLogEffacer" style="flex:1">Effacer</button></div>
+       </div>
        <div id="pEntretien" hidden>
          <div id="rStats"></div>
          <div class="sep"></div>
@@ -6480,10 +6586,18 @@ function ouvrirReglages(ongletInitial){
 
   const activer = (nom)=>{
     f.querySelectorAll("[data-o]").forEach(x=>x.classList.toggle("actif", x.dataset.o===nom));
-    ["gemini","github","questions","entretien"].forEach(o=>{
+    ["gemini","github","questions","entretien","log"].forEach(o=>{
       f.querySelector("#p"+o[0].toUpperCase()+o.slice(1)).hidden = (o !== nom);
     });
+    if (nom === "log") afficherLog();
   };
+  const afficherLog = ()=>{
+    const t = f.querySelector("#rLog"), l = lireLog();
+    t.value = l.lignes.length ? l.lignes.slice().reverse().join("\n") : "(rien aujourd'hui)";
+  };
+  f.querySelector("#rLogMaj").onclick = afficherLog;
+  f.querySelector("#rLogCopier").onclick = async ()=>{ const l = lireLog(); toast(await copierTexte("Log du " + l.jour + " (" + VERSION + ")\n" + l.lignes.join("\n")) ? "Log copié." : "Copie impossible."); };
+  f.querySelector("#rLogEffacer").onclick = ()=>{ try{ localStorage.removeItem(CLE_LOG); }catch(e){} journal("Log effacé"); afficherLog(); };
   f.querySelectorAll("[data-o]").forEach(btn=>{ btn.onclick = ()=>activer(btn.dataset.o); });
   activer(ongletInitial || "gemini");
 
@@ -6920,6 +7034,14 @@ document.addEventListener("keydown", e=>{
 });
 
 charger();
+journal(`Ouverture de l'app ${VERSION} — ${etatCourt()}${sale ? " — modifications non envoyées" : ""}`);
+// après la vérification de GitHub au démarrage ; si une fenêtre (question de synchronisation…) est ouverte, on attend qu'elle soit réglée
+(function envoiOuverture(essai){
+  setTimeout(()=>{
+    if ($("#zoneModales").children.length && essai < 12) return envoiOuverture(essai + 1);
+    envoyerCeQuiAttend("Ouverture de l'app");
+  }, essai ? 10000 : 8000);
+})(0);
 rendre();
 if (ghLisible()) recupererDeGitHub(true);
 if (!cleGemini()) setTimeout(()=>toast("Renseignez votre clé Gemini dans les réglages ⚙️ pour analyser les photos.", 5000), 900);
