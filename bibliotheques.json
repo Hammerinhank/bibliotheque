@@ -2239,7 +2239,7 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "id": "mugoezi9t9f6c",
+       "id": "mugl3i5e36t2y",
        "origine": "main"
       },
       {
@@ -2263,17 +2263,6 @@
         "appoint:mugkw8u2dx0wy:2026-09-25T06:27:29.764Z"
        ],
        "statut": "probable"
-      },
-      {
-       "titre": "Civilisations disparues",
-       "auteur": "Nov’edit",
-       "annee": "",
-       "resume": "",
-       "categorie": "",
-       "remarque": "",
-       "certitude": "haute",
-       "id": "mugl3i5e36t2y",
-       "origine": "main"
       },
       {
        "id": "mucs864hq98cf",
@@ -12992,7 +12981,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:05:54.948Z",
+ "maj": "2026-09-25T08:06:16.369Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
