@@ -2232,17 +2232,6 @@
     "8-1": {
      "livres": [
       {
-       "titre": "Astérix et les Goths",
-       "auteur": "René Gosciny",
-       "annee": "",
-       "resume": "",
-       "categorie": "",
-       "remarque": "",
-       "certitude": "haute",
-       "id": "mugolxwmmas06",
-       "origine": "main"
-      },
-      {
        "titre": "Civilisations disparues",
        "auteur": "Nov’edit",
        "annee": "",
@@ -3479,6 +3468,17 @@
        "temoins": [
         "appoint:muglcvfjpj9fj:2026-09-25T06:54:18.349Z"
        ]
+      },
+      {
+       "titre": "Astérix et les Goths",
+       "auteur": "René Gosciny",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugolxwmmas06",
+       "origine": "main"
       },
       {
        "id": "muglx4xn1vfot",
@@ -13025,7 +13025,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:11:19.359Z",
+ "maj": "2026-09-25T08:11:45.409Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
