@@ -148,6 +148,7 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case .etoile.d{right:4px}
 .case .deux small{font-size:10px;font-weight:700;opacity:.8}
 .legende .pastilleDeux.gris{background:#ffffff}
+.legende .pastilleDeux, .legende b{white-space:nowrap}
 .legende .pastilleDeux{display:inline-block;font-size:10px;font-weight:800;color:#1c1500;background:#ffd23f;border:1px solid #1c1500;border-radius:4px;padding:0 4px;margin-right:4px}
 .rang{display:inline-block;font-size:11px;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:1px}
 .rang.devant{background:var(--encre3);color:var(--texte2)}
@@ -396,8 +397,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.63.1";
+const VERSION = "V1.64.0";
 const HISTORIQUE = [
+  { v:"V1.64.0", d:"25/09/2026", l:[
+    "L'étiquette « 1 RANG » n'est plus coupée dans la case à cocher « Un seul rang ».",
+    "« Ce que l'on peut en tirer » est toujours replié au lancement de l'app.",
+    "Légendes sous la grille regroupées dans un encadré.",
+    "« Analyser les photos avec Gemini » (toute la bibliothèque) déplacé dans les Réglages ⚙️, nouvel onglet « Analyse »."
+  ]},
   { v:"V1.63.1", d:"25/09/2026", l:[
     "Recherche d'un livre : zone de saisie sur toute la largeur, plus haute et mieux espacée.",
     "Localisation : le cadre rouge est tracé à l'intérieur du compartiment (il était rogné par ses voisins) ; il clignote puis reste affiché."
@@ -981,6 +988,7 @@ function charger(){
   if (!data || !Array.isArray(data.bibliotheques)) data = { bibliotheques:[], maj:null };
   try{ const c = localStorage.getItem(CLE_CFG); if (c) cfg = Object.assign({}, CFG_DEFAUT, JSON.parse(c)); }catch(e){}
   // relèvement unique des anciens réglages de photo (1 600 px, 72 %) vers une définition plus lisible
+  cfg.tirerOuvert = false;          // « Ce que l'on peut en tirer » toujours replié au lancement
   if ((cfg.versionPhotos || 1) < 2){
     cfg.tailleMax = Math.max(cfg.tailleMax || 0, 3000);
     cfg.qualite = Math.max(cfg.qualite || 0, 0.88);
@@ -4590,7 +4598,8 @@ function rendreBiblio(){
      <div class="titreSection">La grille — ${vueRangee === "derriere" ? "rangées de derrière" : "rangées de devant"} — touchez un compartiment pour sa photo et ses livres</div>
      <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ». Photos d'appoint (zooms) : liste déroulante à droite des deux onglets.</div>
      ${grille}
-     <div class="legende">
+     <div class="encadre" style="margin-top:10px">
+     <div class="legende" style="margin-top:0">
        <span><i style="border-color:#3ddc6a;border-width:3px"></i>toutes les photos analysées</span>
        <span><i class="cV" style="border-color:#3ddc6a;border-width:3px"></i>un rang non analysé</span>
        <span><i class="sB" style="border-color:#3ddc6a;border-width:3px"></i>une photo d'appoint non prise en compte</span>
@@ -4598,19 +4607,16 @@ function rendreBiblio(){
        <span><i style="border-color:var(--trait)"></i>vide</span>
        <span><b class="pastilleDeux">2 RANGS</b>livres sur deux rangs (2 photos)</span>
        <span><b class="pastilleDeux gris">1 RANG</b>un seul rang, compartiment complet</span>
+       <span><b style="color:#ffd23f">★</b>rangée certifiée (à gauche : rangée 1, à droite : rangée 2)</span>
      </div>
-     ${hors.length ? `<div class="aide">⚠️ ${hors.length} compartiment(s) hors grille (${esc(hors.join(", "))}) : leur contenu est conservé et reste compté dans les listes et le PDF.</div>` : ""}
+     ${hors.length ? `<div class="aide" style="margin-bottom:0">⚠️ ${hors.length} compartiment(s) hors grille (${esc(hors.join(", "))}) : leur contenu est conservé et reste compté dans les listes et le PDF.</div>` : ""}
+     </div>
      <div class="barre">
        <button class="btn" id="bModifier" style="flex:1">Modifier la grille</button>
        <button class="btn" id="bProportions" style="flex:1">📐 Proportions</button>
        <button class="btn rouge" id="bSupprimer">Supprimer</button>
      </div>
 
-     <div class="titreSection">Relever les livres à partir des photos</div>
-     <div class="action">
-       <button class="btn" id="bAnalyserTout">🔍 Analyser les photos avec Gemini</button>
-       <div class="expl">Parcourt les compartiments photographiés et remplit la liste de leurs livres, avec décompte de progression.</div>
-     </div>
 
      <details class="pliable" id="plTirer" ${cfg.tirerOuvert ? "open" : ""}>
      <summary>Ce que l'on peut en tirer <span class="etat">${cfg.tirerOuvert ? "toucher pour replier" : "toucher pour déplier"}</span></summary>
@@ -4657,7 +4663,7 @@ function rendreBiblio(){
     data.bibliotheques = data.bibliotheques.filter(x=>x.id!==b.id);
     biblioCourante = null; sauver(); rendre();
   };
-  $("#bAnalyserTout").onclick = ()=>analyserToutesPhotos(b);
+
   $("#bListe").onclick = ()=>fenetreListe(b);
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
@@ -5053,7 +5059,7 @@ function ouvrirCompartiment(b, k){
     }
     if (certifiee(cs, "devant")){ z.innerHTML = cs.unRang ? `<div class="aide" style="margin:0">Un seul rang, compartiment complet (rangée 1 certifiée ★).</div>` : ""; return; }
     z.innerHTML = `<div class="coche" style="margin:0"><input type="checkbox" id="cUnRang" ${cs.unRang ? "checked" : ""}>
-        <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette blanche <b style="font-size:11px;font-weight:800;color:#1c1500;background:#ffffff;border:1px solid #1c1500;border-radius:4px;padding:0 4px">1 RANG</b> sur la grille</label></div>`;
+        <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette blanche <b style="display:inline-block;white-space:nowrap;font-size:11px;font-weight:800;color:#1c1500;background:#ffffff;border:1px solid #1c1500;border-radius:4px;padding:0 4px;vertical-align:1px">1 RANG</b> sur la grille</label></div>`;
     z.querySelector("#cUnRang").onchange = (e)=>{
       if (e.target.checked) cs.unRang = true; else delete cs.unRang;
       sauver(); rendreBiblio();
@@ -6647,6 +6653,7 @@ function ouvrirReglages(ongletInitial){
          <button data-o="github">GitHub</button>
          <button data-o="questions">Questions</button>
          <button data-o="entretien">Entretien</button>
+         <button data-o="analyse">Analyse</button>
          <button data-o="log">Log</button>
        </div>
        <div class="aide" style="margin-top:-6px">Configuration uniquement. Les envois, récupérations, exports et imports se font dans l'écran ☁️.</div>
@@ -6740,6 +6747,12 @@ function ouvrirReglages(ongletInitial){
          <button class="btn" id="qCr" style="margin-top:6px">Texte par défaut</button>
        </div>
 
+       <div id="pAnalyse" hidden>
+         <div class="aide" style="margin-top:0">Traitement d'ensemble d'une bibliothèque : parcourt les compartiments photographiés et remplit la liste de leurs livres, avec décompte de progression. Pour un seul compartiment, utilisez plutôt « Analyse de cette photo » dans sa fenêtre.</div>
+         ${biblioCourante && biblio(biblioCourante)
+           ? `<button class="btn plein" id="rAnalyserTout">🔍 Analyser les photos de « ${esc(biblio(biblioCourante).nom)} » avec Gemini</button>`
+           : `<div class="aide">Ouvrez d'abord une bibliothèque pour pouvoir l'analyser.</div>`}
+       </div>
        <div id="pLog" hidden>
          <div class="aide" style="margin-top:0">Ce qui s'est passé aujourd'hui sur cet appareil, avec l'heure. Le journal repart de zéro chaque jour.</div>
          <textarea id="rLog" readonly style="min-height:360px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;white-space:pre;overflow:auto"></textarea>
@@ -6791,7 +6804,7 @@ function ouvrirReglages(ongletInitial){
 
   const activer = (nom)=>{
     f.querySelectorAll("[data-o]").forEach(x=>x.classList.toggle("actif", x.dataset.o===nom));
-    ["gemini","github","questions","entretien","log"].forEach(o=>{
+    ["gemini","github","questions","entretien","analyse","log"].forEach(o=>{
       f.querySelector("#p"+o[0].toUpperCase()+o.slice(1)).hidden = (o !== nom);
     });
     if (nom === "log") afficherLog();
@@ -6802,6 +6815,8 @@ function ouvrirReglages(ongletInitial){
   };
   f.querySelector("#rLogMaj").onclick = afficherLog;
   f.querySelector("#rStockage").onclick = ()=>diagnosticStockage();
+  const bAT = f.querySelector("#rAnalyserTout");
+  if (bAT) bAT.onclick = ()=>{ const bb = biblio(biblioCourante); f.remove(); if (bb) analyserToutesPhotos(bb); };
   f.querySelector("#rLogCopier").onclick = async ()=>{ const l = lireLog(); toast(await copierTexte("Log du " + l.jour + " (" + VERSION + ")\n" + l.lignes.join("\n")) ? "Log copié." : "Copie impossible."); };
   f.querySelector("#rLogEffacer").onclick = ()=>{ try{ localStorage.removeItem(CLE_LOG); }catch(e){} journal("Log effacé"); afficherLog(); };
   f.querySelectorAll("[data-o]").forEach(btn=>{ btn.onclick = ()=>activer(btn.dataset.o); });
