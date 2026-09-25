@@ -2232,6 +2232,17 @@
     "8-1": {
      "livres": [
       {
+       "titre": "Astérix et les Goths",
+       "auteur": "René Gosciny",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugolxwmmas06",
+       "origine": "main"
+      },
+      {
        "titre": "Civilisations disparues",
        "auteur": "Nov’edit",
        "annee": "",
@@ -13014,7 +13025,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:10:51.306Z",
+ "maj": "2026-09-25T08:11:19.359Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
