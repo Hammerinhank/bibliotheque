@@ -202,6 +202,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.4}
 /* ---------- livres ---------- */
 .livre{background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:9px 10px;margin-bottom:8px;position:relative}
 .livre.deplacable{padding-left:56px}
+.modale .corps{overflow-x:hidden}
 .livre .poigneeGlisser{position:absolute;top:0;left:0;bottom:0;width:52px;pointer-events:auto;z-index:2;display:flex;align-items:center;justify-content:center;
   cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .livre .poigneeGlisser span{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid var(--trait);border-radius:7px;background:var(--encre3)}
@@ -390,8 +391,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.57.1";
+const VERSION = "V1.58.0";
 const HISTORIQUE = [
+  { v:"V1.58.0", d:"25/09/2026", l:[
+    "Bouton « Déplacer » à droite de « Supprimer » : on tape quelques lettres du titre (ou de l'auteur) d'un autre livre, avec fautes de frappe et mots manquants tolérés ; le livre trouvé s'affiche à chaque lettre (ou les meilleurs candidats si c'est ambigu), puis : déplacer avant, déplacer après, ou ne pas déplacer.",
+    "La fenêtre d'un compartiment ne peut plus défiler de côté."
+  ]},
   { v:"V1.57.1", d:"25/09/2026", l:[
     "Poignée ≡ de glisser-déposer placée tout à gauche de chaque livre (au lieu de tout à droite), pour éviter de la toucher par inadvertance."
   ]},
@@ -1909,6 +1914,84 @@ async function permuterRangees(b, k){
     pg.fermer();
     toast("Permutation impossible : " + e.message, 6000);
   }
+}
+
+/* ====== DÉPLACER UN LIVRE PAR RECHERCHE TOLÉRANTE ======
+   On tape quelques lettres du titre (ou de l'auteur) d'un autre livre ; fautes de frappe et mots manquants tolérés. */
+function motsRecherche(t){ return simplifier(String(t||"")).replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(Boolean); }
+function scoreRecherche(q, lv){
+  const mq = motsRecherche(q);
+  if (!mq.length) return 0;
+  const mt = motsRecherche((lv.titre || "") + " " + (lv.auteur || ""));
+  const mtTitre = motsRecherche(lv.titre || "");
+  if (!mt.length) return 0;
+  let total = 0;
+  mq.forEach(w=>{
+    let best = 0;
+    mt.forEach(x=>{
+      let sc;
+      if (x === w) sc = 1;
+      else if (x.startsWith(w)) sc = 0.92 + 0.08 * w.length / x.length;          // début de mot tapé
+      else if (w.length >= 3 && x.includes(w)) sc = 0.8;
+      else {
+        // faute de frappe : comparer au début du mot de même longueur, et au mot entier
+        const debut = x.slice(0, Math.max(w.length, 1));
+        sc = Math.max(ratioTexte(w, debut) * 0.9, ratioTexte(w, x) * 0.85);
+      }
+      if (mtTitre.includes(x)) sc += 0.02;                                     // léger avantage au titre
+      best = Math.max(best, sc);
+    });
+    total += best;
+  });
+  const q2 = simplifier(q).replace(/[^a-z0-9]/g, ""), t2 = simplifier(lv.titre || "").replace(/[^a-z0-9]/g, "");
+  const bonus = q2.length >= 3 && t2.startsWith(q2) ? 0.15 : (q2.length >= 3 && t2.includes(q2) ? 0.08 : 0);
+  return total / mq.length + bonus;
+}
+
+function fenetreDeplacer(cs, lv, apres){
+  const rg = (x)=> x.rang === "derriere" ? "derriere" : "devant";
+  const candidats = (cs.livres || []).filter(x=>x !== lv && !certifiee(cs, rg(x)));
+  let choisi = null;
+  const f = modale({ titre:"Déplacer « " + lv.titre + " »",
+    html:`<label for="dRech" style="margin-top:0">Près de quel livre ? Tapez quelques lettres de son titre (ou de son auteur)</label>
+      <input type="text" id="dRech" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ex. « bouclier arv », « cascad », « goscin »">
+      <div class="aide">Fautes de frappe et mots manquants tolérés ; la liste se met à jour à chaque lettre.</div>
+      <div id="dRes" style="margin-top:8px"></div>`,
+    boutons:[{ texte:"Ne pas déplacer" }] });
+  const inp = f.querySelector("#dRech"), zr = f.querySelector("#dRes");
+  const nomR = (x)=> cs.photo2 || (cs.livres||[]).some(y=>y.rang === "derriere") ? (rg(x) === "derriere" ? " · rangée 2" : " · rangée 1") : "";
+  const deplacer = (ou)=>{
+    if (!choisi) return;
+    cs.livres.splice(cs.livres.indexOf(lv), 1);
+    const j = cs.livres.indexOf(choisi);
+    cs.livres.splice(ou === "avant" ? j : j + 1, 0, lv);
+    if (rg(choisi) === "derriere") lv.rang = "derriere"; else if (lv.rang === "derriere") lv.rang = "devant";
+    f.remove();
+    toast(`« ${lv.titre} » déplacé ${ou === "avant" ? "avant" : "après"} « ${choisi.titre} ».`, 4000);
+    apres();
+  };
+  const afficher = ()=>{
+    const q = inp.value.trim();
+    if (!q){ zr.innerHTML = ""; choisi = null; return; }
+    const tri = candidats.map(x=>({ x, s: scoreRecherche(q, x) })).filter(o=>o.s > 0.45).sort((a, z)=>z.s - a.s);
+    if (!tri.length){ zr.innerHTML = `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; choisi = null; return; }
+    if (!choisi || !tri.slice(0, 4).some(o=>o.x === choisi)) choisi = tri[0].x;
+    // quand le premier se détache nettement, on le dit ; sinon on montre les suivants pour choisir
+    const net = tri.length === 1 || tri[0].s - tri[1].s >= 0.12;
+    zr.innerHTML = `<div class="prop" style="border-left:3px solid var(--vert)">
+        <div class="aide" style="margin:0">${net ? "Livre trouvé :" : "Meilleure correspondance :"}</div>
+        <div class="t">${esc(choisi.titre)}</div><div class="chg">${esc(choisi.auteur || "auteur inconnu")}${nomR(choisi)}</div>
+        <div class="barre" style="margin-top:8px;flex-direction:column;align-items:stretch">
+          <button class="btn principal" data-ou="avant">⬆ Déplacer avant « ${esc(choisi.titre.length > 30 ? choisi.titre.slice(0, 29) + "…" : choisi.titre)} »</button>
+          <button class="btn principal" data-ou="apres">⬇ Déplacer après « ${esc(choisi.titre.length > 30 ? choisi.titre.slice(0, 29) + "…" : choisi.titre)} »</button>
+        </div></div>
+      ${!net ? `<div class="aide" style="margin-top:6px">Ce n'est pas celui-là ? Touchez le bon, ou continuez à taper :</div>` +
+        tri.slice(0, 4).filter(o=>o.x !== choisi).map(o=>`<button class="btn plein" data-alt="${(cs.livres||[]).indexOf(o.x)}" style="margin-top:4px;text-align:left">${esc(o.x.titre)} <span class="aide">— ${esc(o.x.auteur || "")}</span></button>`).join("") : ""}`;
+    zr.querySelectorAll("[data-ou]").forEach(bt=>bt.onclick = ()=>deplacer(bt.dataset.ou));
+    zr.querySelectorAll("[data-alt]").forEach(bt=>bt.onclick = ()=>{ choisi = cs.livres[Number(bt.dataset.alt)]; afficher(); });
+  };
+  inp.oninput = afficher;
+  setTimeout(()=>inp.focus(), 50);
 }
 
 /* ====================================================================
@@ -4946,6 +5029,7 @@ function ouvrirCompartiment(b, k){
            ${!estAcquis(lv) && !lv.question ? `<button class="btn" data-conf="${i}" title="Je l'ai vérifié : il est bien à cette place">✓ Confirmer</button>` : ""}
            <button class="btn" data-modif="${i}">Modifier</button>
            <button class="btn rouge" data-suppr="${i}">Supprimer</button>
+           ${visibles.length > 1 || (cs.livres||[]).length > 1 ? `<button class="btn" data-depl="${i}">Déplacer</button>` : ""}
          </div>`}</div>`).join("");
     const apresReponse = ()=>{ sauver(); majLivres(); rendreBiblio(); envoiListesDiffere(b, k); };
     remplirExtraits(z, b, k);
@@ -4967,6 +5051,7 @@ function ouvrirCompartiment(b, k){
       }
       repondreQuestion(cs, lv, el.dataset.v); apresReponse();
     });
+    z.querySelectorAll("[data-depl]").forEach(el=>el.onclick=()=>fenetreDeplacer(cs, cs.livres[Number(el.dataset.depl)], apresReponse));
     z.querySelectorAll("[data-conf]").forEach(el=>el.onclick=()=>{ rendreAcquis(cs.livres[Number(el.dataset.conf)]); apresReponse(); });
     zf.querySelectorAll("[data-certif]").forEach(el=>el.onclick=async()=>{
       const r = el.dataset.certif, e = etatRangee(cs, r), nomR = r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
