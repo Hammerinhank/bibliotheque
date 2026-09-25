@@ -11263,7 +11263,39 @@
        "remarque": "",
        "resume": "Un traducteur se lance dans une enquête littéraire et existentielle obsessionnelle autour de la disparition d'un écrivain énigmatique.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 27,
+         "x2": 101
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
+      },
+      {
+       "id": "mugq72ukqdip6",
+       "titre": "Des villes dans la plaine",
+       "auteur": "Cormac McCarthy",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 101,
+         "x2": 151
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudjl6phszumd",
@@ -11274,7 +11306,17 @@
        "remarque": "",
        "resume": "Un père et son jeune fils luttent pour leur survie dans un monde post-apocalyptique carbonisé, glacé et dangereux.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 151,
+         "x2": 204
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6phmen94",
@@ -11285,7 +11327,21 @@
        "remarque": "",
        "resume": "",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "La Neuvième Heure",
+         "auteur": ""
+        },
+        "vue": {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 204,
+         "x2": 252
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-25T08:55:41.280Z"
+       }
       },
       {
        "id": "mudjl6phk0uph",
@@ -11296,7 +11352,17 @@
        "remarque": "Denoël",
        "resume": "Dans un village provençal, un commissaire mène une enquête complexe liée au passé mystérieux d'un vieux château local.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 252,
+         "x2": 330
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6phn3878",
@@ -11307,7 +11373,17 @@
        "remarque": "Denoël",
        "resume": "Un commissaire se retrouve mêlé à une ténébreuse affaire criminelle au cœur de la Haute-Provence mystérieuse et sauvage.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 330,
+         "x2": 386
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6ph4sw9c",
@@ -11318,7 +11394,17 @@
        "remarque": "Denoël",
        "resume": "Lavallière enquête sur des événements tragiques et mystérieux dans un village provençal marqué par le secret et la passion.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 386,
+         "x2": 455
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6php8tg6",
@@ -11329,7 +11415,39 @@
        "remarque": "partiellement lisible",
        "resume": "Un jeune homme progressiste affronte le fanatisme religieux et l'intolérance dans l'Espagne provinciale du XIXe siècle.",
        "categorie": "Romans étrangers",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 455,
+         "x2": 487
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
+      },
+      {
+       "id": "mugq72ukdvth8",
+       "titre": "La Pie",
+       "auteur": "Pierre-Henri Malafosse",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 487,
+         "x2": 512
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudjl6ph808nb",
@@ -11340,7 +11458,17 @@
        "remarque": "Plon",
        "resume": "Un accordeur de piano quitte Londres en 1886 pour accorder un instrument rare dans la jungle birmane.",
        "categorie": "Romans étrangers",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 512,
+         "x2": 590
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6phadzyd",
@@ -11351,7 +11479,61 @@
        "remarque": "",
        "resume": "",
        "categorie": "Histoire",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 590,
+         "x2": 657
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
+      },
+      {
+       "id": "mugq72uk5z9zu",
+       "titre": "La Crique du Français",
+       "auteur": "Daphné du Maurier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 657,
+         "x2": 700
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mugq72ukcdv7u",
+       "titre": "Les Souffleurs de verre",
+       "auteur": "Daphné du Maurier",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 700,
+         "x2": 762
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudjl6ph4x20z",
@@ -11362,7 +11544,17 @@
        "remarque": "",
        "resume": "L'histoire tumultueuse de l'Ouest américain à travers plusieurs générations de familles pionnières et leurs luttes.",
        "categorie": "Romans étrangers",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 762,
+         "x2": 897
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6phbwj0l",
@@ -11373,7 +11565,17 @@
        "remarque": "Seuil",
        "resume": "La grande fresque historique de la baie de Chesapeake, du XVIe siècle jusqu'à l'époque contemporaine.",
        "categorie": "Romans étrangers",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mugor73n1gwc3",
+         "x1": 897,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+       ]
       },
       {
        "id": "mudjl6phujh98",
@@ -11439,7 +11641,31 @@
        "envoye": true,
        "maj": "2026-09-25T08:15:18.707Z",
        "id": "mugor73n1gwc3",
-       "legende": ""
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 10,
+        "n2": 0,
+        "date": "2026-09-25T08:55:39.302Z"
+       },
+       "livresVus": [
+        "mudjl6ph7vxwg",
+        "mugq72ukqdip6",
+        "mudjl6phszumd",
+        "mudjl6phk0uph",
+        "mudjl6phn3878",
+        "mudjl6ph4sw9c",
+        "mudjl6php8tg6",
+        "mugq72ukdvth8",
+        "mudjl6ph808nb",
+        "mudjl6phadzyd",
+        "mugq72uk5z9zu",
+        "mugq72ukcdv7u",
+        "mudjl6ph4x20z",
+        "mudjl6phbwj0l"
+       ],
+       "verif": "2026-09-25T08:55:41.280Z"
       },
       {
        "plein": null,
@@ -13063,7 +13289,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T08:37:47.924Z",
+ "maj": "2026-09-25T08:55:42.430Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
