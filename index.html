@@ -391,8 +391,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.60.0";
+const VERSION = "V1.61.0";
 const HISTORIQUE = [
+  { v:"V1.61.0", d:"25/09/2026", l:[
+    "Cause des pertes identifiée : les photos non envoyées étaient stockées dans le localStorage (≈ 5 Mo, partagés par toutes les apps de hammerinhank.github.io) ; une seule photo de 4 000 px le saturait, et plus rien ne s'enregistrait.",
+    "Les photos en attente vont désormais dans IndexedDB (beaucoup plus de place) ; le localStorage ne garde que les données. Migration automatique au premier enregistrement.",
+    "Si un enregistrement échoue malgré tout : fenêtre bloquante (au lieu d'un message fugace) avec envoi GitHub immédiat ; nouveau diagnostic « Espace de stockage » (Réglages ⚙️ › Entretien) : place prise par cette app, par les autres apps de la même adresse, par les photos en attente. Log limité à 800 lignes."
+  ]},
   { v:"V1.60.0", d:"25/09/2026", l:[
     "Les modifications faites à la main (ajout, modification, suppression, déplacement, glisser-déposer, réponses aux questions) partent sur GitHub automatiquement, 5 secondes après la dernière action.",
     "Hors réseau : rien ne s'affiche à chaque action ; dès que le réseau revient, l'app envoie d'elle-même tout ce qui attend (photos, résultats d'analyse, données), avec les garde-fous habituels. Également à l'ouverture de l'app s'il reste des modifications non envoyées."
@@ -983,14 +988,16 @@ function sauver(marquerSale){
     if (revConnue !== null && rev !== null && rev !== revConnue){ journal("Enregistrement refusé : page périmée (autre fenêtre de l'app)"); fenetrePerimee(); return; }
   }catch(e){}
   if (marquerSale !== false){ sale = true; data.maj = new Date().toISOString(); }
+  try{ synchroniserPhotosIdb(); }catch(e){}
   try{
-    localStorage.setItem(CLE_DATA, JSON.stringify(data));
+    // les images en attente sont dans IndexedDB : on ne garde ici que les données
+    localStorage.setItem(CLE_DATA, JSON.stringify(data, (cle, v)=> cle === "plein" && typeof v === "string" && v.length > 2000 ? undefined : v));
     revConnue = String(Date.now()) + "-" + Math.random().toString(36).slice(2, 7);
     localStorage.setItem(CLE_REV, revConnue);
     localStorage.setItem(CLE_SALE, sale ? "1" : "0");
   }catch(e){
-    toast("Mémoire de l'appareil pleine : rien n'a été enregistré. Ouvrez ☁️ et envoyez les photos vers GitHub pour libérer de la place.", 7000);
     journal("ÉCHEC d'enregistrement sur l'appareil (mémoire pleine) : " + (e && e.message));
+    avertirEchecStockage(e);
     console.error(e);
   }
   majBandeau();
@@ -1010,7 +1017,7 @@ function journal(texte){
     const l = lireLog();
     const d = new Date();
     l.lignes.push(String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0") + ":" + String(d.getSeconds()).padStart(2,"0") + "  " + texte);
-    if (l.lignes.length > 1500) l.lignes = l.lignes.slice(-1500);
+    if (l.lignes.length > 800) l.lignes = l.lignes.slice(-800);
     localStorage.setItem(CLE_LOG, JSON.stringify(l));
   }catch(e){}
 }
@@ -1022,6 +1029,124 @@ function etatCourt(jeu){
 window.addEventListener("error", (e)=>journal("ERREUR : " + (e.message || e) + (e.lineno ? " (ligne " + e.lineno + ")" : "")));
 window.addEventListener("unhandledrejection", (e)=>journal("ERREUR (promesse) : " + ((e.reason && e.reason.message) || e.reason)));
 document.addEventListener("visibilitychange", ()=>journal(document.hidden ? "App mise en arrière-plan" : "App revenue au premier plan"));
+
+/* ====================================================================
+   PHOTOS EN ATTENTE DANS INDEXEDDB (et non plus dans le localStorage, limité à ~5 Mo partagés par toutes les apps)
+   ==================================================================== */
+const IDB_NOM = "biblio_photos", IDB_STORE = "attente";
+let idbPromesse = null;
+function idbOuvrir(){
+  if (idbPromesse) return idbPromesse;
+  idbPromesse = new Promise((res, rej)=>{
+    try{
+      const r = indexedDB.open(IDB_NOM, 1);
+      r.onupgradeneeded = ()=>{ r.result.createObjectStore(IDB_STORE); };
+      r.onsuccess = ()=>res(r.result);
+      r.onerror = ()=>rej(r.error);
+    }catch(e){ rej(e); }
+  });
+  return idbPromesse;
+}
+async function idbOp(mode, fn){
+  const db = await idbOuvrir();
+  return await new Promise((res, rej)=>{
+    const tx = db.transaction(IDB_STORE, mode), st = tx.objectStore(IDB_STORE);
+    const r = fn(st);
+    tx.oncomplete = ()=>res(r && r.result);
+    tx.onerror = ()=>rej(tx.error);
+    tx.onabort = ()=>rej(tx.error);
+  });
+}
+const idbLire = (cle)=> idbOp("readonly", st=>st.get(cle));
+const idbEcrire = (cle, val)=> idbOp("readwrite", st=>st.put(val, cle));
+const idbSupprimer = (cle)=> idbOp("readwrite", st=>st.delete(cle));
+const idbCles = ()=> idbOp("readonly", st=>st.getAllKeys());
+
+/* tous les objets photo (rangées et appoints) */
+function toutesPhotos(){
+  const l = [];
+  (data.bibliotheques || []).forEach(b=>Object.keys(b.cases || {}).forEach(k=>{
+    const cs = b.cases[k];
+    champsPhotoCase(cs).forEach(ch=>{ const ph = photoObj(cs, ch); if (ph) l.push({ b, k, cs, ch, ph }); });
+  }));
+  return l;
+}
+const cleIdb = (x)=> x.ph.chemin || (x.b.id + "|" + x.k + "|" + x.ch);
+const dejaDansIdb = new Map();          // clé → taille de l'image déjà écrite (évite de réécrire à chaque enregistrement)
+
+/* avant chaque enregistrement : les photos non envoyées passent dans IndexedDB ; celles envoyées en sortent */
+function synchroniserPhotosIdb(){
+  toutesPhotos().forEach(x=>{
+    const cle = cleIdb(x);
+    if (x.ph.plein && !x.ph.envoye){
+      x.ph.enIDB = cle;
+      if (dejaDansIdb.get(cle) !== x.ph.plein.length){
+        dejaDansIdb.set(cle, x.ph.plein.length);
+        idbEcrire(cle, x.ph.plein).catch(e=>{ dejaDansIdb.delete(cle); journal("ÉCHEC d'écriture d'une photo en attente (IndexedDB) : " + (e && e.message)); });
+      }
+    } else if (x.ph.enIDB && (x.ph.envoye || !x.ph.plein)){
+      const c = x.ph.enIDB; delete x.ph.enIDB; dejaDansIdb.delete(c);
+      idbSupprimer(c).catch(()=>{});
+    }
+  });
+}
+/* au démarrage : remettre en mémoire les photos en attente */
+async function rechargerPhotosIdb(){
+  let n = 0;
+  for (const x of toutesPhotos()){
+    if (x.ph.enIDB && !x.ph.plein && !x.ph.envoye){
+      try{ const d = await idbLire(x.ph.enIDB); if (d){ x.ph.plein = d; dejaDansIdb.set(x.ph.enIDB, d.length); n++; } }
+      catch(e){ journal("ÉCHEC de lecture d'une photo en attente (IndexedDB) : " + (e && e.message)); }
+    }
+  }
+  if (n){ journal(`${n} photo(s) en attente rechargée(s) depuis IndexedDB`); rendre(); }
+}
+
+/* ====== DIAGNOSTIC DE L'ESPACE ====== */
+async function diagnosticStockage(){
+  const lignes = [];
+  let totalLS = 0, bib = 0, autres = [];
+  try{
+    for (let i = 0; i < localStorage.length; i++){
+      const c = localStorage.key(i), v = localStorage.getItem(c) || "";
+      const o = (c.length + v.length) * 2;          // le navigateur compte 2 octets par caractère
+      totalLS += o;
+      if (c.startsWith("biblio_")) { bib += o; lignes.push([c, o]); }
+      else autres.push([c, o]);
+    }
+  }catch(e){}
+  autres.sort((a, z)=>z[1] - a[1]);
+  let nIdb = 0, oIdb = 0;
+  try{ const cles = await idbCles(); nIdb = cles.length; for (const c of cles){ const v = await idbLire(c); oIdb += (v || "").length; } }catch(e){}
+  let est = null;
+  try{ if (navigator.storage && navigator.storage.estimate) est = await navigator.storage.estimate(); }catch(e){}
+  const ko = (o)=> o >= 1048576 ? (o / 1048576).toFixed(2).replace(".", ",") + " Mo" : Math.round(o / 1024) + " Ko";
+  modale({ titre:"Espace de stockage de cet appareil",
+    html:`<div><b>Stockage local (localStorage)</b> : ${ko(totalLS)} utilisés sur environ 5 Mo, <b>partagés par toutes vos apps</b> de l'adresse ${esc(location.host)}.</div>
+      <div class="titreSection" style="margin-top:10px">Cette app : ${ko(bib)}</div>
+      ${lignes.sort((a, z)=>z[1] - a[1]).map(([c, o])=>`<div class="aide" style="margin:2px 0">${esc(c)} : ${ko(o)}</div>`).join("")}
+      <div class="titreSection" style="margin-top:10px">Autres apps de la même adresse : ${ko(autres.reduce((s, x)=>s + x[1], 0))}</div>
+      ${autres.slice(0, 15).map(([c, o])=>`<div class="aide" style="margin:2px 0">${esc(c)} : ${ko(o)}</div>`).join("") || `<div class="aide">aucune</div>`}
+      <div class="titreSection" style="margin-top:10px">Photos en attente (IndexedDB) : ${nIdb} — ${ko(oIdb)}</div>
+      <div class="aide">IndexedDB dispose de beaucoup plus de place ; les photos y attendent d'être envoyées sur GitHub.</div>
+      ${est ? `<div class="aide">Estimation du navigateur : ${ko(est.usage || 0)} utilisés${est.quota ? " sur " + ko(est.quota) : ""}.</div>` : ""}`,
+    boutons:[{texte:"Fermer"}] });
+}
+
+/* ====== ÉCHEC D'ENREGISTREMENT : fenêtre bloquante (une fois par minute au plus) ====== */
+let dernierAvertStockage = 0;
+function avertirEchecStockage(e){
+  if (Date.now() - dernierAvertStockage < 60000) return;
+  dernierAvertStockage = Date.now();
+  modale({ titre:"⚠️ Enregistrement impossible sur cet appareil",
+    html:`<div><b>Vos dernières modifications ne sont PAS enregistrées sur l'iPhone</b> : elles n'existent que dans cette page. Ne la rechargez pas et n'ouvrez pas une autre fenêtre de l'app.</div>
+      <div class="aide">Cause : l'espace de stockage local est plein (${esc((e && e.message) || "")}). Il est partagé par toutes vos apps de la même adresse.</div>
+      <div class="aide">Solution immédiate : envoyer sur GitHub (dès que le réseau le permet). Voir ce qui occupe la place : « Espace de stockage ».</div>`,
+    boutons:[
+      { texte:"Espace de stockage", action:()=>diagnosticStockage() },
+      { texte:"☁️ Envoyer sur GitHub", classe:"principal", action:()=>envoyerVersGitHub() }
+    ] });
+}
 
 function sauverCfg(){ try{ localStorage.setItem(CLE_CFG, JSON.stringify(cfg)); }catch(e){} }
 
@@ -1172,6 +1297,7 @@ function photoPleine(bib, cle, champ){
   if (!photo) return Promise.resolve(null);
   const deja = photoImmediate(bib, cle, champ);
   if (deja) return Promise.resolve(deja);
+  if (!photo.envoye && photo.enIDB) return idbLire(photo.enIDB).then(d=>{ if (d) photo.plein = d; return d || null; }).catch(()=>null);
   if (!photo.envoye || !photo.chemin) return Promise.resolve(null);
   const id = cleCache(bib, cle, champ);
   if (chargementsPhotos[id]) return chargementsPhotos[id];
@@ -1235,7 +1361,7 @@ function photosEnAttente(){
       const cs = b.cases[k];
       champsPhotoCase(cs).forEach(ch=>{
         const ph = photoObj(cs, ch);
-        if (ph && ph.plein && !ph.envoye) l.push({bib:b, cle:k, cs, champ:ch});
+        if (ph && (ph.plein || ph.enIDB) && !ph.envoye) l.push({bib:b, cle:k, cs, champ:ch});
       });
     });
   });
@@ -2202,6 +2328,8 @@ async function envoyerVersGitHub(){
     if (journalEnAttente().length) await viderJournalEnAttente(pg);
     for (const p of attente){
       const ph = photoObj(p.cs, p.champ);
+      if (!ph.plein && ph.enIDB){ try{ ph.plein = await idbLire(ph.enIDB); }catch(e){} }
+      if (!ph.plein){ journal("Photo en attente introuvable : " + p.cle + " " + p.champ); fait++; continue; }
       const quoi = estAppoint(p.champ) ? " (appoint " + numeroAppoint(p.cs, p.champ) + ")" : (p.champ === "photo2" ? " (derrière)" : "");
       pg.maj(fait, total, "Photo " + p.cle + quoi + " de « " + p.bib.nom + " »");
       const chemin = cheminPhoto(p.bib, p.cle, p.champ);
@@ -5685,6 +5813,7 @@ async function televerserPhoto(b, k, champ){
   champ = champ || "photo";
   const cs = b.cases[k];
   const ph = photoObj(cs, champ);
+  if (ph && !ph.plein && ph.enIDB && !ph.envoye){ try{ ph.plein = await idbLire(ph.enIDB); }catch(e){} }
   if (!ph || !ph.plein) return;
   const plein = ph.plein;
   const chemin = cheminPhoto(b, k, champ);
@@ -6543,6 +6672,7 @@ function ouvrirReglages(ongletInitial){
        </div>
        <div id="pEntretien" hidden>
          <div id="rStats"></div>
+         <button class="btn plein" id="rStockage" style="margin-top:8px">📊 Espace de stockage de cet appareil</button>
          <div class="sep"></div>
          <button class="btn plein" id="dScanPhotos">🗂️ Scanner les photos du dépôt GitHub</button>
          <div class="aide">Liste toutes les images du dépôt : <b style="color:var(--vert)">vert</b> = associée à un compartiment, <b style="color:var(--orange)">orange</b> = a été associée mais est orpheline aujourd'hui, <b style="color:var(--rouge)">rouge</b> = jamais associée, ou marquée « non associée » à la main (photo orpheline qui n'a jamais été à la bonne place). Le scan ne modifie rien par lui-même.</div>
@@ -6596,6 +6726,7 @@ function ouvrirReglages(ongletInitial){
     t.value = l.lignes.length ? l.lignes.slice().reverse().join("\n") : "(rien aujourd'hui)";
   };
   f.querySelector("#rLogMaj").onclick = afficherLog;
+  f.querySelector("#rStockage").onclick = ()=>diagnosticStockage();
   f.querySelector("#rLogCopier").onclick = async ()=>{ const l = lireLog(); toast(await copierTexte("Log du " + l.jour + " (" + VERSION + ")\n" + l.lignes.join("\n")) ? "Log copié." : "Copie impossible."); };
   f.querySelector("#rLogEffacer").onclick = ()=>{ try{ localStorage.removeItem(CLE_LOG); }catch(e){} journal("Log effacé"); afficherLog(); };
   f.querySelectorAll("[data-o]").forEach(btn=>{ btn.onclick = ()=>activer(btn.dataset.o); });
@@ -7035,6 +7166,7 @@ document.addEventListener("keydown", e=>{
 
 charger();
 journal(`Ouverture de l'app ${VERSION} — ${etatCourt()}${sale ? " — modifications non envoyées" : ""}`);
+rechargerPhotosIdb().then(()=>sauver(false));      // remet les photos en attente en mémoire, et migre les anciennes hors du localStorage
 // après la vérification de GitHub au démarrage ; si une fenêtre (question de synchronisation…) est ouverte, on attend qu'elle soit réglée
 (function envoiOuverture(essai){
   setTimeout(()=>{
