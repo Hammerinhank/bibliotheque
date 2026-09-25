@@ -138,6 +138,8 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
 .case .deux.unRang{background:#ffffff}
+.case.cible{outline:4px solid #ff3b30;outline-offset:2px;z-index:4;animation:cibleClignote 1s ease-in-out 5}
+@keyframes cibleClignote{0%,100%{outline-color:#ff3b30}50%{outline-color:rgba(255,59,48,.15)}}
 .case .etoile{position:absolute;bottom:3px;z-index:3;font-size:15px;line-height:1;color:#ffd23f;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8)}
 .case .etoile.g{left:4px}
 .case .etoile.d{right:4px}
@@ -391,8 +393,15 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.61.0";
+const VERSION = "V1.63.0";
 const HISTORIQUE = [
+  { v:"V1.63.0", d:"25/09/2026", l:[
+    "Vue de la bibliothèque : zone de recherche au-dessus de la grille. On tape librement quelques lettres du titre ou de l'auteur (fautes et mots manquants tolérés) ; le livre le plus probable s'affiche aussitôt (et les suivants si c'est ambigu).",
+    "« 📍 Localiser » : la grille bascule sur la bonne rangée (devant / derrière) et le compartiment est mis en évidence (cadre rouge clignotant), avec sa position dans la rangée."
+  ]},
+  { v:"V1.62.0", d:"25/09/2026", l:[
+    "Vue de la bibliothèque : bouton au-dessus de la grille pour basculer entre toutes les rangées 1 (devant) et toutes les rangées 2 (derrière). En vue rangée 2, un compartiment sans photo de derrière apparaît vide ; les nombres de livres sont ceux de la rangée affichée. Un compartiment s'ouvre sur la rangée affichée."
+  ]},
   { v:"V1.61.0", d:"25/09/2026", l:[
     "Cause des pertes identifiée : les photos non envoyées étaient stockées dans le localStorage (≈ 5 Mo, partagés par toutes les apps de hammerinhank.github.io) ; une seule photo de 4 000 px le saturait, et plus rien ne s'enregistrait.",
     "Les photos en attente vont désormais dans IndexedDB (beaucoup plus de place) ; le localStorage ne garde que les données. Migration automatique au premier enregistrement.",
@@ -4518,14 +4527,17 @@ function rendreBiblio(){
   $("#btnRetour").hidden = false;
   $("#titrePage").textContent = b.nom;
 
+  const champVue = vueRangee === "derriere" ? "photo2" : "photo";
   let grille = "";
   for (let r=1; r<=b.rangees; r++){
     let cases = "";
     for (let c=1; c<=b.compartiments; c++){
       const k = clef(r,c);
       const cs = b.cases[k];
-      const nb = cs && cs.livres ? cs.livres.length : 0;
-      const ph = cs && cs.photo;
+      // livres et photo de la rangée affichée (devant ou derrière)
+      const livresVue = cs && cs.livres ? cs.livres.filter(lv=>(lv.rang === "derriere") === (vueRangee === "derriere")) : [];
+      const nb = livresVue.length;
+      const ph = cs && cs[champVue];
       const champs = cs ? champsPhotoCase(cs) : [];
       const cls = ["case"];
       if (nb) cls.push("analysee");
@@ -4544,11 +4556,12 @@ function rendreBiblio(){
         : (cs && cs.unRang)
           ? `<span class="deux unRang" title="Un seul rang de livres : compartiment complet${nbAppoints ? " + " + nbAppoints + " photo(s) d'appoint" : ""}">1 RANG${nbAppoints ? ` <small>+${nbAppoints} zoom</small>` : ""}</span>`
           : (nbAppoints ? `<span class="deux appoint" title="${nbAppoints} photo(s) d'appoint">+${nbAppoints} zoom</span>` : "");
+      if (caseCible && caseCible.bib === b.id && caseCible.k === k) cls.push("cible");
       cases += `<div class="${cls.join(" ")}" data-case="${k}" style="aspect-ratio:1 / ${ratioBiblio(b)}">
         ${!ph ? `<span class="sansphoto">📷</span>`
-              : (photoImmediate(b,k) ? `<img src="${photoImmediate(b,k)}" alt="Compartiment ${k}" decoding="async">`
+              : (photoImmediate(b,k,champVue) ? `<img src="${photoImmediate(b,k,champVue)}" alt="Compartiment ${k}" decoding="async">`
                                      : `<span class="sansphoto charge">⏳</span>`)}
-        <span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}${(()=>{ const q = cs.livres.filter(lv=>lv.question).length, ac = cs.livres.filter(estAcquis).length;
+        <span class="num">${r}·${c}</span>${etiquette}${nb ? `<span class="nb">${nb}${(()=>{ const q = livresVue.filter(lv=>lv.question).length, ac = livresVue.filter(estAcquis).length;
           return q ? ` <span style="color:#ffb347">❓${q}</span>` : ac === nb ? ` <span style="color:#3ddc6a">✓</span>` : ""; })()}</span>` : ""}${cs && cs.certif && cs.certif.devant ? `<span class="etoile g" title="Rangée 1 certifiée">★</span>` : ""}${cs && cs.certif && cs.certif.derriere ? `<span class="etoile d" title="Rangée 2 certifiée">★</span>` : ""}</div>`;
     }
     grille += `<div class="rangee"><div class="titre">Rangée ${r}</div>
@@ -4559,7 +4572,15 @@ function rendreBiblio(){
     const [r,c]=k.split("-").map(Number); return r>b.rangees||c>b.compartiments; });
 
   $("#vueBiblio").innerHTML =
-    `<div class="titreSection">La grille — touchez un compartiment pour sa photo et ses livres</div>
+    `<div style="margin-bottom:10px">
+       <input type="search" id="bRech" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Chercher un livre : quelques lettres du titre ou de l'auteur" value="${esc(rechercheBiblio)}">
+       <div id="bRechRes"></div>
+     </div>
+     <div class="onglets" id="bVueRangee" style="margin-bottom:10px">
+       <button data-vr="devant" class="${vueRangee !== "derriere" ? "actif" : ""}">📚 Rangées 1 (devant)</button>
+       <button data-vr="derriere" class="${vueRangee === "derriere" ? "actif" : ""}">📚 Rangées 2 (derrière)</button>
+     </div>
+     <div class="titreSection">La grille — ${vueRangee === "derriere" ? "rangées de derrière" : "rangées de devant"} — touchez un compartiment pour sa photo et ses livres</div>
      <div class="aide" style="margin:-2px 0 8px">Série de photos : appui long sur le premier compartiment, puis touchez le dernier. Livres sur deux rangs : ouvrez le compartiment, onglet « Derrière ». Photos d'appoint (zooms) : liste déroulante à droite des deux onglets.</div>
      ${grille}
      <div class="legende">
@@ -4615,6 +4636,13 @@ function rendreBiblio(){
      <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
 
   $("#bModifier").onclick = ()=>formBiblio(b.id);
+  const inpR = $("#bRech");
+  inpR.oninput = ()=>{ rechercheBiblio = inpR.value; if (!rechercheBiblio.trim()){ caseCible = null; document.querySelectorAll("#vueBiblio .case.cible").forEach(x=>x.classList.remove("cible")); } afficherRechercheBiblio(b); };
+  afficherRechercheBiblio(b);
+  document.querySelectorAll("#bVueRangee [data-vr]").forEach(bt=>bt.onclick = ()=>{
+    if (vueRangee === bt.dataset.vr) return;
+    vueRangee = bt.dataset.vr; rendreBiblio();
+  });
   $("#bProportions").onclick = ()=>formProportions(b);
   $("#bSupprimer").onclick = async ()=>{
     const ok = await confirmer(`Supprimer « ${esc(b.nom)} » et tout son contenu sur cet appareil ?<br><br>Les photos déjà envoyées restent dans le dépôt GitHub jusqu'au prochain envoi.`, "Supprimer la bibliothèque", "Supprimer");
@@ -4644,10 +4672,50 @@ function rendreBiblio(){
   chargerPhotosGrille(b);
 }
 
+let vueRangee = "devant";          // rangée affichée dans la grille : "devant" | "derriere"
+let rechercheBiblio = "", caseCible = null;   // recherche d'un livre dans la bibliothèque, et compartiment mis en évidence
+
+/* résultats de la recherche au-dessus de la grille */
+function afficherRechercheBiblio(b){
+  const z = $("#bRechRes");
+  if (!z) return;
+  const q = rechercheBiblio.trim();
+  if (!q){ z.innerHTML = ""; return; }
+  const tous = [];
+  Object.entries(b.cases || {}).forEach(([k, cs])=>(cs.livres || []).forEach(lv=>tous.push({ k, cs, lv })));
+  const tri = tous.map(o=>Object.assign(o, { s: scoreRecherche(q, o.lv) })).filter(o=>o.s > 0.45).sort((a, z2)=>z2.s - a.s);
+  if (!tri.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; return; }
+  const net = tri.length === 1 || tri[0].s - tri[1].s >= 0.12;
+  const ou = (o)=>{
+    const [r, c] = o.k.split("-");
+    const rg = o.lv.rang === "derriere" ? "derriere" : "devant";
+    const memeRang = (o.cs.livres || []).filter(x=>(x.rang === "derriere" ? "derriere" : "devant") === rg);
+    const deux = !!o.cs.photo2 || (o.cs.livres || []).some(x=>x.rang === "derriere");
+    return `rangée ${r}, compartiment ${c}${deux ? (rg === "derriere" ? ", rang de derrière" : ", rang de devant") : ""} — ${memeRang.indexOf(o.lv) + 1}${memeRang.indexOf(o.lv) ? "e" : "er"} livre en partant de la gauche`;
+  };
+  const carte = (o, i, principal)=>`<div class="prop" style="display:flex;gap:10px;align-items:center;${principal ? "border-left:3px solid var(--vert)" : ""}">
+      <div style="flex:1"><div class="t">${esc(o.lv.titre)}</div><div class="chg">${esc(o.lv.auteur || "auteur inconnu")}</div><div class="aide" style="margin:2px 0 0">${esc(ou(o))}</div></div>
+      <button class="btn ${principal ? "principal" : ""}" data-loc="${i}">📍 Localiser</button></div>`;
+  const liste = net ? [tri[0]] : tri.slice(0, 4);
+  z.innerHTML = `<div class="aide" style="margin:6px 0 4px">${net ? "Livre trouvé :" : "Plusieurs livres possibles (continuez à taper pour préciser) :"}</div>` +
+    liste.map((o, i)=>carte(o, i, i === 0)).join("");
+  z.querySelectorAll("[data-loc]").forEach(bt=>bt.onclick = ()=>{
+    const o = liste[Number(bt.dataset.loc)];
+    vueRangee = o.lv.rang === "derriere" ? "derriere" : "devant";
+    caseCible = { bib: b.id, k: o.k };
+    rendreBiblio();
+    const el = document.querySelector(`#vueBiblio [data-case="${o.k}"]`);
+    if (el) el.scrollIntoView({ behavior:"smooth", block:"center" });
+    toast(`« ${o.lv.titre} » : ${ou(o)}.`, 6000);
+    journal(`Livre localisé : « ${o.lv.titre} » (${o.k}${vueRangee === "derriere" ? ", derrière" : ""})`);
+  });
+}
 function chargerPhotosGrille(b){
+  const champVue = vueRangee === "derriere" ? "photo2" : "photo", vue = vueRangee;
   document.querySelectorAll("#vueBiblio [data-case] .sansphoto.charge").forEach(sp=>{
     const el = sp.closest("[data-case]"), k = el.dataset.case;
-    photoPleine(b, k).then(d=>{
+    photoPleine(b, k, champVue).then(d=>{
+      if (vue !== vueRangee) return;
       if (biblioCourante !== b.id) return;
       const cible = document.querySelector(`#vueBiblio [data-case="${k}"] .sansphoto.charge`);
       if (!cible) return;
@@ -4771,7 +4839,7 @@ function ouvrirCompartiment(b, k){
   b.cases[k] = b.cases[k] || { livres:[] };
   const cs = b.cases[k];
   const [r,c] = k.split("-");
-  let face = "photo";            // "photo" = devant, "photo2" = derrière, "appoint:<id>" = photo d'appoint
+  let face = vueRangee === "derriere" ? "photo2" : "photo";   // s'ouvre sur la rangée affichée dans la grille ; "appoint:<id>" = photo d'appoint
   let enAjoutAppoint = false;    // la prochaine photo choisie crée un appoint au lieu de remplacer
 
   const f = modale({
