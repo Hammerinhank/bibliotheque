@@ -1,0 +1,375 @@
+{
+ "date": "2026-09-25T06:55:56.914Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "8-1",
+ "genre": "appoint",
+ "appoint": "muglcvfjpj9fj",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Le Tapis mag…",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "tranche coupée au bord gauche",
+   "x1": 0,
+   "x2": 8,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Le Jou…",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "Éditions Tabary ; titre tronqué",
+   "x1": 8,
+   "x2": 35,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 35,
+   "x2": 65,
+   "illisible": true
+  },
+  {
+   "titre": "Astérix et Latraviata",
+   "auteur": "Albert René",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 31 ; Texte et dessins d'Uderzo",
+   "x1": 65,
+   "x2": 95,
+   "illisible": false
+  },
+  {
+   "titre": "Le Grand Fossé",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 95,
+   "x2": 118,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix",
+   "auteur": "Goscinny",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "titre incomplet",
+   "x1": 118,
+   "x2": 132,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez les Belges",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 132,
+   "x2": 145,
+   "illisible": false
+  },
+  {
+   "titre": "Le Fils d'Astérix",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 145,
+   "x2": 158,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "titre incomplet",
+   "x1": 158,
+   "x2": 172,
+   "illisible": false
+  },
+  {
+   "titre": "Le Bouclier arverne",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 172,
+   "x2": 190,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez les Helvètes",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Hachette",
+   "x1": 190,
+   "x2": 215,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez Rahàzade",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Texte et dessins de Uderzo",
+   "x1": 215,
+   "x2": 243,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 243,
+   "x2": 268,
+   "illisible": true
+  },
+  {
+   "titre": "Astérix chez les Helvètes",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 268,
+   "x2": 298,
+   "illisible": false
+  },
+  {
+   "titre": "Obélix et Compagnie",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 298,
+   "x2": 320,
+   "illisible": false
+  },
+  {
+   "titre": "L'Odyssée d'Astérix",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 320,
+   "x2": 348,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez les Bretons",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 350,
+   "x2": 378,
+   "illisible": false
+  },
+  {
+   "titre": "Le Papyrus de César",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 36",
+   "x1": 378,
+   "x2": 406,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix en Corse",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 408,
+   "x2": 437,
+   "illisible": false
+  },
+  {
+   "titre": "… des dieux",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "tranche rouge, texte très pâle",
+   "x1": 438,
+   "x2": 478,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix légionnaire",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 478,
+   "x2": 510,
+   "illisible": false
+  },
+  {
+   "titre": "Le Cadeau de César",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 511,
+   "x2": 540,
+   "illisible": false
+  },
+  {
+   "titre": "Le Devin",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 540,
+   "x2": 566,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix aux Jeux olympiques",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 567,
+   "x2": 600,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix en Hispanie",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 600,
+   "x2": 627,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix le Gaulois",
+   "auteur": "R. Goscinny / A. Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 627,
+   "x2": 654,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 654,
+   "x2": 676,
+   "illisible": true
+  },
+  {
+   "titre": "Astérix et Cléopâtre",
+   "auteur": "R. Goscinny / A. Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 676,
+   "x2": 703,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez les Pictes",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 35",
+   "x1": 703,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix : Scope, le poteau magique",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 740,
+   "x2": 767,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix et le chaudron",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 767,
+   "x2": 797,
+   "illisible": false
+  },
+  {
+   "titre": "La Zizanie",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 800,
+   "x2": 827,
+   "illisible": false
+  },
+  {
+   "titre": "Le Combat des chefs",
+   "auteur": "R. Goscinny / A. Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 827,
+   "x2": 854,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "titre illisible ; « Dessins de Uderzo »",
+   "x1": 854,
+   "x2": 886,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix et les Normands",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 886,
+   "x2": 915,
+   "illisible": false
+  },
+  {
+   "titre": "Les Lauriers de César",
+   "auteur": "Goscinny / Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 918,
+   "x2": 955,
+   "illisible": false
+  }
+ ]
+}
