@@ -1,0 +1,285 @@
+{
+ "date": "2026-09-25T06:42:11.387Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "8-1",
+ "genre": "appoint",
+ "appoint": "muglbuwlcunj9",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "XIII — L'Or de Maximilien",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 17, Dargaud",
+   "x1": 10,
+   "x2": 60,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Opération Montecristo",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 16, Dargaud",
+   "x1": 55,
+   "x2": 95,
+   "illisible": false
+  },
+  {
+   "titre": "The XIII Mystery — L'Enquête",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Dargaud",
+   "x1": 95,
+   "x2": 140,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Lachez les chiens !",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 15, Dargaud",
+   "x1": 140,
+   "x2": 180,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Secret Défense",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 14, Dargaud",
+   "x1": 180,
+   "x2": 225,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Le Jugement",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 12",
+   "x1": 225,
+   "x2": 265,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Trois montres d'argent",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 11",
+   "x1": 265,
+   "x2": 305,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — El Cascador",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 10",
+   "x1": 305,
+   "x2": 340,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Pour Maria",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 9",
+   "x1": 340,
+   "x2": 375,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Treize contre un",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 8",
+   "x1": 375,
+   "x2": 410,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — La Nuit du 3 août",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 7",
+   "x1": 410,
+   "x2": 450,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Le Dossier Jason Fly",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 6",
+   "x1": 450,
+   "x2": 485,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Rouge total",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 5",
+   "x1": 485,
+   "x2": 520,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Spads",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 4",
+   "x1": 520,
+   "x2": 555,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Toutes les larmes de l'enfer",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 3",
+   "x1": 555,
+   "x2": 590,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Là où va l'Indien...",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 2",
+   "x1": 590,
+   "x2": 620,
+   "illisible": false
+  },
+  {
+   "titre": "XIII — Le Jour du Soleil Noir",
+   "auteur": "W. Vance — J. Van Hamme",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 1",
+   "x1": 620,
+   "x2": 655,
+   "illisible": false
+  },
+  {
+   "titre": "Le Tapis magique",
+   "auteur": "Goscinny — Tabary",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 9, Éditions Tabary",
+   "x1": 655,
+   "x2": 705,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 700,
+   "x2": 735,
+   "illisible": true
+  },
+  {
+   "titre": "Astérix et Latraviata",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 31, Albert René",
+   "x1": 735,
+   "x2": 790,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix — Le Grand Fossé",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 780,
+   "x2": 830,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez les Belges",
+   "auteur": "Goscinny — Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 815,
+   "x2": 865,
+   "illisible": false
+  },
+  {
+   "titre": "Le Fils d'Astérix",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 850,
+   "x2": 895,
+   "illisible": false
+  },
+  {
+   "titre": "Le Bouclier arverne",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 880,
+   "x2": 920,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez les Helvètes",
+   "auteur": "Goscinny — Uderzo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "tome 16",
+   "x1": 905,
+   "x2": 950,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix chez Rahâzade",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 925,
+   "x2": 975,
+   "illisible": false
+  },
+  {
+   "titre": "Astérix",
+   "auteur": "Uderzo",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "titre partiel, coupé au bord",
+   "x1": 970,
+   "x2": 1000,
+   "illisible": false
+  }
+ ]
+}
