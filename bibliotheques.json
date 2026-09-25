@@ -2232,6 +2232,17 @@
     "8-1": {
      "livres": [
       {
+       "titre": "Civilisations disparues",
+       "auteur": "Nov’edit",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugl3i5e36t2y",
+       "origine": "main"
+      },
+      {
        "id": "mugkzr72dlbxh",
        "titre": "Les Motos",
        "auteur": "",
@@ -2447,7 +2458,17 @@
        "certitude": "haute",
        "remarque": "Tome 17",
        "resume": "Le mystérieux amnésique XIII poursuit sa quête d'identité en découvrant un fabuleux trésor caché dans les montagnes.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 10,
+         "x2": 60
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hc1sti",
@@ -2457,17 +2478,38 @@
        "certitude": "haute",
        "remarque": "Tome 16",
        "resume": "XIII se retrouve impliqué dans un complot international complexe inspiré du célèbre roman Le Comte de Monte-Cristo.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 55,
+         "x2": 95
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864ha17ck",
-       "titre": "XIII Mystery - L'enquête",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "The XIII Mystery — L'Enquête",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2008",
        "certitude": "haute",
        "remarque": "Tome 13",
        "resume": "Ce premier tome de la série dérivée explore le passé secret des personnages secondaires de l'univers de XIII.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 95,
+         "x2": 140
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864ht8tal",
@@ -2477,117 +2519,293 @@
        "certitude": "haute",
        "remarque": "Tome 14",
        "resume": "XIII se retrouve traqué par des mercenaires impitoyables dans une lutte de survie intense au cœur d'une nature hostile.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 140,
+         "x2": 180
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
+      },
+      {
+       "id": "muglffx2roraq",
+       "titre": "XIII — Secret Défense",
+       "auteur": "W. Vance — J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 180,
+         "x2": 225
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hjl1n8",
-       "titre": "XIII - Le jugement",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Le Jugement",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2007",
        "certitude": "haute",
        "remarque": "Tome 12",
        "resume": "Le procès de XIII s'ouvre, révélant de lourds secrets sur son implication dans le complot présidentiel.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 225,
+         "x2": 265
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hfgh46",
-       "titre": "XIII - Trois montres d'argent",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Trois montres d'argent",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2005",
        "certitude": "haute",
        "remarque": "Tome 11",
        "resume": "Une quête haletante autour de trois montres d'argent mène XIII sur les traces de son passé mystérieux.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 265,
+         "x2": 305
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864h8fho6",
-       "titre": "XIII - Le Cascador",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — El Cascador",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2006",
        "certitude": "haute",
        "remarque": "Tome 10",
        "resume": "XIII et ses alliés unissent leurs forces pour déjouer les plans machiavéliques de leurs puissants ennemis.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 305,
+         "x2": 340
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864h4dab6",
-       "titre": "XIII - Pour Maria",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Pour Maria",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "1999",
        "certitude": "haute",
        "remarque": "Tome 9",
        "resume": "XIII infiltre une dictature sud-américaine pour libérer une femme qu'il a aimée et régler ses comptes.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 340,
+         "x2": 375
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hbrsyk",
-       "titre": "XIII - Treize contre un",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Treize contre un",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2001",
        "certitude": "haute",
        "remarque": "Tome 8",
        "resume": "Acculé de toutes parts, XIII doit affronter seul une armée d'adversaires déterminés à l'éliminer définitivement.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 375,
+         "x2": 410
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hox3ia",
-       "titre": "XIII - La nuit du 3 août",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — La Nuit du 3 août",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2004",
        "certitude": "haute",
        "remarque": "Tome 7",
        "resume": "Les zones d'ombre du passé de Jason Fly s'éclaircissent lors d'une nuit tragique riche en révélations.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 410,
+         "x2": 450
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864h735vh",
-       "titre": "XIII - Le dossier Jason Fly",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Le Dossier Jason Fly",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "1995",
        "certitude": "haute",
        "remarque": "Tome 6",
        "resume": "Le journaliste Jason Fly cherche à comprendre l'assassinat de son père, point de départ de toute l'intrigue.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 450,
+         "x2": 485
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hsqkx2",
-       "titre": "XIII - Rouge total",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Rouge total",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "1997",
        "certitude": "haute",
        "remarque": "Tome 5",
        "resume": "XIII plonge au cœur d'un complot politique et financier d'envergure menaçant la sécurité des États-Unis.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 485,
+         "x2": 520
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
+      },
+      {
+       "id": "muglffx2ofgpg",
+       "titre": "XIII — Spads",
+       "auteur": "W. Vance — J. Van Hamme",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 520,
+         "x2": 555
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864h7tulb",
-       "titre": "XIII - Toutes les larmes de l'enfer",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Toutes les larmes de l'enfer",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "1996",
        "certitude": "haute",
        "remarque": "Tome 3",
        "resume": "Capturé et torturé dans une prison secrète, XIII lutte pour survivre et s'évader de cet enfer.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 555,
+         "x2": 590
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hdyy7e",
-       "titre": "XIII - Là où va l'indien...",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Là où va l'Indien...",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "2000",
        "certitude": "haute",
        "remarque": "Tome 2",
        "resume": "XIII retourne sur les terres amérindiennes à la recherche de ses origines et de la vérité.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 590,
+         "x2": 620
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hfw8i3",
-       "titre": "XIII - Le jour du soleil noir",
-       "auteur": "Jean Van Hamme (scénariste belge né en 1939) et William Vance",
+       "titre": "XIII — Le Jour du Soleil Noir",
+       "auteur": "W. Vance — J. Van Hamme",
        "annee": "1984",
        "certitude": "haute",
        "remarque": "Tome 1",
        "resume": "Un homme amnésique est retrouvé blessé sur une plage américaine, porteur d'un tatouage intrigant : le chiffre XIII.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 620,
+         "x2": 655
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hzh7v9",
@@ -2597,7 +2815,17 @@
        "certitude": "haute",
        "remarque": "Iznogoud",
        "resume": "Iznogoud et son fidèle complice Waat al-Gah tentent d'utiliser un tapis magique pour se débarrasser du Calife.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 655,
+         "x2": 705
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864ha3177",
@@ -2607,37 +2835,124 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix reçoivent la visite de faux parents et doivent faire face à de mystérieuses disparitions au village.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 735,
+         "x2": 790
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
+      },
+      {
+       "id": "muglffx21ma20",
+       "titre": "Astérix — Le Grand Fossé",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 780,
+         "x2": 830
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864hq7pi7",
        "titre": "Astérix chez les Belges",
-       "auteur": "René Goscinny (scénariste français, 1926-1977)",
+       "auteur": "Goscinny — Uderzo",
        "annee": "1979",
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Les irréductibles Gaulois se rendent en Belgique pour prouver à Jules César que ce peuple est le plus courageux.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 815,
+         "x2": 865
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
+      },
+      {
+       "id": "muglffx2zfn6o",
+       "titre": "Le Fils d'Astérix",
+       "auteur": "Uderzo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 850,
+         "x2": 895
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mucs864h7vfzo",
        "titre": "Le Bouclier arverne",
-       "auteur": "René Goscinny (scénariste français, 1926-1977)",
+       "auteur": "Uderzo",
        "annee": "1968",
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix partent à la recherche du fameux bouclier de Vercingétorix pour soigner les rhumatismes d'Abraracourcix.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 880,
+         "x2": 920
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864hoymu4",
        "titre": "Astérix chez les Helvètes",
-       "auteur": "René Goscinny (scénariste français, 1926-1977)",
+       "auteur": "Goscinny — Uderzo",
        "annee": "1970",
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix doivent trouver une fleur rare en Helvétie pour sauver le questeur romain empoisonné par le gouverneur.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 905,
+         "x2": 950
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864h9snok",
@@ -2647,7 +2962,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Un jeune publicitaire romain introduit le capitalisme et la surproduction dans le village gaulois pour affaiblir ses habitants.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 923,
+         "x2": 953
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.988Z"
+       }
       },
       {
        "id": "mucs864hc002q",
@@ -2660,6 +2985,28 @@
        "categorie": "Bandes dessinées"
       },
       {
+       "id": "muglffx25qt02",
+       "titre": "Astérix chez Rahâzade",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 925,
+         "x2": 975
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "mucs864hygt0a",
        "titre": "Le Papyrus de César",
        "auteur": "Albert Uderzo (Français, 1927-2020)",
@@ -2667,7 +3014,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix aident un journaliste romain à publier un livre compromettant pour Jules César.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 958,
+         "x2": 988
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.988Z"
+       }
       },
       {
        "id": "mucs864h8ypua",
@@ -2677,7 +3034,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Nos irréductibles Gaulois voyagent en Corse pour escorter un chef local et affronter les Romains.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 958,
+         "x2": 988
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.989Z"
+       }
       },
       {
        "id": "mucs864h0efz9",
@@ -2687,7 +3054,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Un cabaretier romain offre par erreur un faux cadeau empoisonné à Astérix, semant la pagaille au village.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 958,
+         "x2": 988
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.989Z"
+       }
       },
       {
        "id": "mucs864hy9pxh",
@@ -2697,7 +3074,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Un faux devin s'installe dans la forêt gauloise et manipule les villageois crédules, provoquant le chaos.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 958,
+         "x2": 988
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.989Z"
+       }
       },
       {
        "id": "mucs864h61vut",
@@ -2707,7 +3094,17 @@
        "certitude": "moyenne",
        "remarque": "Titre partiellement coupé",
        "resume": "Astérix et Obélix escortent le fils d'un chef ibère prisonnier jusqu'en Hispanie.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 958,
+         "x2": 988
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.989Z"
+       }
       },
       {
        "id": "mucs864h3996p",
@@ -2717,7 +3114,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Grâce à la potion magique de Panoramix, les irréductibles Gaulois résistent victorieusement aux troupes de Jules César.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 958,
+         "x2": 988
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-25T06:47:06.989Z"
+       }
       },
       {
        "id": "mucs864hz3xej",
@@ -2727,7 +3134,17 @@
        "certitude": "haute",
        "remarque": "BD Astérix",
        "resume": "Astérix et Obélix découvrent l'Écosse et viennent en aide à un chef picte prisonnier des glaces.",
-       "categorie": "Bandes dessinées"
+       "categorie": "Bandes dessinées",
+       "vues": [
+        {
+         "champ": "appoint:muglbuwlcunj9",
+         "x1": 970,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "appoint:muglbuwlcunj9:2026-09-25T06:39:24.213Z"
+       ]
       },
       {
        "id": "mucs864h9kswq",
@@ -2808,6 +3225,58 @@
         "mucs864h7n7gi"
        ],
        "verif": "2026-09-25T06:31:44.840Z"
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/8-1-appoint-muglbuwlcunj9.jpg",
+       "envoye": true,
+       "maj": "2026-09-25T06:39:24.213Z",
+       "id": "muglbuwlcunj9",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 5,
+        "n2": 0,
+        "date": "2026-09-25T06:42:11.409Z"
+       },
+       "livresVus": [
+        "mucs864ho4lzz",
+        "mucs864hc1sti",
+        "mucs864ha17ck",
+        "mucs864ht8tal",
+        "muglffx2roraq",
+        "mucs864hjl1n8",
+        "mucs864hfgh46",
+        "mucs864h8fho6",
+        "mucs864h4dab6",
+        "mucs864hbrsyk",
+        "mucs864hox3ia",
+        "mucs864h735vh",
+        "mucs864hsqkx2",
+        "muglffx2ofgpg",
+        "mucs864h7tulb",
+        "mucs864hdyy7e",
+        "mucs864hfw8i3",
+        "mucs864hzh7v9",
+        "mucs864ha3177",
+        "muglffx21ma20",
+        "mucs864hq7pi7",
+        "muglffx2zfn6o",
+        "mucs864h7vfzo",
+        "mucs864hoymu4",
+        "muglffx25qt02",
+        "mucs864hz3xej"
+       ],
+       "verif": "2026-09-25T06:47:06.989Z"
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/8-1-appoint-muglcvfjpj9fj.jpg",
+       "envoye": true,
+       "maj": "2026-09-25T06:40:11.551Z",
+       "id": "muglcvfjpj9fj",
+       "legende": ""
       }
      ]
     },
@@ -12159,7 +12628,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T06:31:46.216Z",
+ "maj": "2026-09-25T06:47:07.908Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
