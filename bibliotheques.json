@@ -2232,6 +2232,17 @@
     "8-1": {
      "livres": [
       {
+       "titre": "Civilisations disparues",
+       "auteur": "Nov’edit",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mugoezi9t9f6c",
+       "origine": "main"
+      },
+      {
        "id": "mugkzr72dlbxh",
        "titre": "Les Motos",
        "auteur": "",
@@ -12981,7 +12992,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T07:13:48.606Z",
+ "maj": "2026-09-25T08:05:54.948Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
