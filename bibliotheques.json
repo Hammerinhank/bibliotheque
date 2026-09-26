@@ -16045,8 +16045,8 @@
       },
       {
        "id": "mudscom19yjxu",
-       "titre": "Le vieil homme et la mer",
-       "auteur": "Ernest Hemingway",
+       "titre": "AU-DELÀ DU FLEUVE ET SOUS LES ARBRES",
+       "auteur": "ERNEST HEMINGWAY",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "titre partiellement lisible",
@@ -16054,20 +16054,7 @@
        "categorie": "",
        "origine": "ia",
        "rang": "derriere",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "AU-DELÀ DU FLEUVE ET SOUS LES ARBRES",
-         "auteur": "ERNEST HEMINGWAY"
-        },
-        "vue": {
-         "champ": "appoint:muiacjub77sbj",
-         "x1": 653,
-         "x2": 676
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T11:09:17.206Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mudscom17xacy",
@@ -16679,7 +16666,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:10:22.526Z",
+ "maj": "2026-09-26T11:12:24.053Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
