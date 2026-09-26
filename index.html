@@ -397,8 +397,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.65.1";
+const VERSION = "V1.66.0";
 const HISTORIQUE = [
+  { v:"V1.66.0", d:"25/09/2026", l:[
+    "Fenêtre d'un compartiment en deux modes : à l'ouverture, consultation — trois boutons « Devant », « Derrière » (filtrent la liste par rangée) et « ✏️ Éditer », puis seulement la liste des titres et auteurs. « ✏️ Éditer » affiche tout ce qui existait jusqu'ici (photos, analyses, outils, boutons des livres) ; un nouvel appui revient à la consultation.",
+    "Recherche d'un livre : petite croix pour effacer la saisie."
+  ]},
   { v:"V1.65.1", d:"25/09/2026", l:[
     "Recherche d'un livre : tous les livres qui correspondent aussi bien sont listés (par exemple tous les livres d'un auteur), et non plus 4 au maximum ; ils sont classés par emplacement.",
     "« 📍 Localiser tous » : met en évidence d'un coup tous les compartiments concernés (sur la vue devant ou derrière choisie)."
@@ -4607,7 +4611,10 @@ function rendreBiblio(){
 
   $("#vueBiblio").innerHTML =
     `<div style="margin-bottom:10px">
-       <input type="search" id="bRech" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Chercher un livre : quelques lettres du titre ou de l'auteur" value="${esc(rechercheBiblio)}">
+       <div style="position:relative">
+         <input type="search" id="bRech" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Chercher un livre : quelques lettres du titre ou de l'auteur" value="${esc(rechercheBiblio)}" style="padding-right:46px">
+         <button id="bRechEffacer" aria-label="Effacer" title="Effacer" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);margin-top:2px;width:34px;height:34px;border-radius:50%;border:0;background:var(--trait);color:var(--texte);font-size:18px;line-height:34px;padding:0;${rechercheBiblio ? "" : "display:none"}">×</button>
+       </div>
        <div id="bRechRes"></div>
      </div>
      <div class="onglets" id="bVueRangee" style="margin-bottom:10px;display:flex;gap:8px;flex-wrap:nowrap">
@@ -4668,7 +4675,14 @@ function rendreBiblio(){
 
   $("#bModifier").onclick = ()=>formBiblio(b.id);
   const inpR = $("#bRech");
-  inpR.oninput = ()=>{ rechercheBiblio = inpR.value; if (!rechercheBiblio.trim()){ caseCible = null; document.querySelectorAll("#vueBiblio .case.cible").forEach(x=>x.classList.remove("cible")); } afficherRechercheBiblio(b); };
+  const bEff = $("#bRechEffacer");
+  inpR.oninput = ()=>{
+    rechercheBiblio = inpR.value;
+    bEff.style.display = rechercheBiblio ? "" : "none";
+    if (!rechercheBiblio.trim()){ caseCible = null; document.querySelectorAll("#vueBiblio .case .cadreCible").forEach(x=>x.remove()); document.querySelectorAll("#vueBiblio .case.cible").forEach(x=>x.classList.remove("cible")); }
+    afficherRechercheBiblio(b);
+  };
+  bEff.onclick = (e)=>{ e.preventDefault(); inpR.value = ""; inpR.oninput(); inpR.focus(); };
   afficherRechercheBiblio(b);
   document.querySelectorAll("#bVueRangee [data-vr]").forEach(bt=>bt.onclick = ()=>{
     if (vueRangee === bt.dataset.vr) return;
@@ -4887,7 +4901,10 @@ function ouvrirCompartiment(b, k){
 
   const f = modale({
     titre: `Rangée ${r} · compartiment ${c}`,
-    html: `<div class="onglets" id="cFaces"></div>
+    html: `<div class="onglets" id="cModes" style="display:flex;gap:8px;flex-wrap:nowrap;margin-bottom:10px"></div>
+           <div id="cConsult"></div>
+           <div id="cEdition" hidden>
+           <div class="onglets" id="cFaces"></div>
            <div id="zonePhoto"></div>
            <div class="encadre" id="cVerrou" style="display:none;border-color:#ffd23f"></div>
            <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
@@ -4909,11 +4926,41 @@ function ouvrirCompartiment(b, k){
            <div id="zoneFiltreRang"></div>
            <button class="btn plein" id="cAjouterTete" style="margin-bottom:8px">➕ Ajouter un livre à la main (en tête)</button>
            <div id="zoneLivres"></div>
-           <button class="btn plein" id="cAjouter">➕ Ajouter un livre à la main</button>`,
+           <button class="btn plein" id="cAjouter">➕ Ajouter un livre à la main</button>
+           </div>`,
     boutons:[{texte:"Fermer"}],
     surFermeture:()=>{ rafraichirCompartimentOuvert = null; rendreBiblio(); }
   });
   f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; });
+
+  /* ---------- deux modes : consultation (par défaut) / édition ---------- */
+  let modeEdition = false;
+  let filtreConsult = vueRangee === "derriere" ? "derriere" : "devant";
+  const majConsult = ()=>{
+    const zm = f.querySelector("#cModes"), zc = f.querySelector("#cConsult"), ze = f.querySelector("#cEdition");
+    const l = cs.livres || [];
+    const n1 = l.filter(lv=>lv.rang !== "derriere").length, n2 = l.length - n1;
+    const bt = (v, lib, actif)=>`<button data-mode="${v}" class="${actif ? "actif" : ""}" style="flex:1 1 0;min-width:0;text-align:center">${lib}</button>`;
+    zm.innerHTML = modeEdition
+      ? bt("consulter", "✏️ Éditer (touchez pour revenir à la liste)", true)
+      : bt("devant", `Devant (${n1})`, filtreConsult === "devant") + bt("derriere", `Derrière (${n2})`, filtreConsult === "derriere") + bt("editer", "✏️ Éditer", false);
+    ze.hidden = !modeEdition;
+    zc.hidden = modeEdition;
+    if (!modeEdition){
+      const vis = l.filter(lv=>(lv.rang === "derriere") === (filtreConsult === "derriere"));
+      zc.innerHTML = vis.length
+        ? vis.map(lv=>`<div class="livre"><div class="t">${esc(lv.titre)}</div>${lv.auteur ? `<div class="a">${esc(lv.auteur)}</div>` : ""}</div>`).join("")
+        : `<div class="vide">Aucun livre ${filtreConsult === "derriere" ? "sur la rangée de derrière" : "sur la rangée de devant"}.</div>`;
+    }
+    zm.querySelectorAll("[data-mode]").forEach(b2=>b2.onclick = ()=>{
+      const v = b2.dataset.mode;
+      if (v === "editer"){ modeEdition = true; }
+      else if (v === "consulter"){ modeEdition = false; }
+      else filtreConsult = v;
+      majConsult();
+      if (modeEdition){ majPhoto(); majLivres(); }
+    });
+  };
 
   /* ---------- lignes de coupe (haut / bas, en % de la hauteur) ---------- */
   const lireCoupe = ()=>{
@@ -5525,7 +5572,8 @@ function ouvrirCompartiment(b, k){
       sauver(); majLivres();
     });
   };
-  rafraichirCompartimentOuvert = (bid, kk)=>{ if (f.isConnected && bid === b.id && kk === k){ majLivres(); majFaces(); } };
+  rafraichirCompartimentOuvert = (bid, kk)=>{ if (f.isConnected && bid === b.id && kk === k){ majLivres(); majFaces(); majConsult(); } };
+  majConsult();
 
   majPhoto(); majLivres();
 }
