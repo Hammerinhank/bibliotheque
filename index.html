@@ -407,8 +407,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.68.1";
+const VERSION = "V1.68.2";
 const HISTORIQUE = [
+  { v:"V1.68.2", d:"25/09/2026", l:[
+    "Demande à Claude / Gemini sans clé : le bouton mis en évidence suit l'avancement — d'abord « Copier la photo », puis « Ouvrir Claude avec la question » une fois la photo copiée, et seulement ensuite « Copier la réponse » en vert vif."
+  ]},
   { v:"V1.68.1", d:"25/09/2026", l:[
     "Réglages : le bouton « Enregistrer » (clé Gemini, GitHub, questions) n'apparaît plus que dans les onglets qu'il concerne ; il est masqué dans Grille, Entretien, Analyse et Log, qui ont leurs propres boutons."
   ]},
@@ -2873,7 +2876,7 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
            <div class="barre"><button class="btn" id="mcP1" style="flex:1">Photo 1</button><button class="btn" id="mcP2" style="flex:1">Photo 2</button></div>` : ""}
          <div class="aide" id="mcEtatCopie"></div>`;
   const etape3 = `<div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
-         <button class="btn vif plein" id="mcReponse">📥 Copier la réponse de ${NOM}</button>
+         <button class="btn plein" id="mcReponse">📥 Copier la réponse de ${NOM}</button>
          <div class="aide">Dès que vous avez ouvert ${NOM}, le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir ${NOM} n'enregistre aucune attente.</div></div></div>`;
   const rendreEtapes = ()=>{
     const z = f.querySelector("#mcEtapes");
@@ -2892,6 +2895,15 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
          <div class="etape"><div class="n">2</div><div class="c">Revenez ici, copiez ${deux ? "les photos" : "la photo"}, puis retournez dans ${NOM} : <b>collez-la en pièce jointe</b> sous la question et envoyez.
            ${btnsPhotos()}</div></div>` + etape3;
     brancher();
+    majVifs();
+  };
+  // mise en évidence progressive : copier la photo → ouvrir l'IA → copier sa réponse
+  let photoCopiee = false, iaOuverte = false;
+  const majVifs = ()=>{
+    const bC = f.querySelector("#mcCopier"), bO = f.querySelector("#mcOuvrir"), bR = f.querySelector("#mcReponse");
+    if (bC) bC.classList.toggle("principal", !photoCopiee);
+    if (bO) bO.classList.toggle("principal", photoCopiee && !iaOuverte);
+    if (bR) bR.classList.toggle("vif", photoCopiee && iaOuverte);
   };
   const brancher = ()=>{
     f.querySelector("#mcCopier").onclick = ()=>copier(images, deux ? "Les deux photos sont" : "La photo est");
@@ -2900,9 +2912,9 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
       f.querySelector("#mcP2").onclick = ()=>copier([images[1]], "La photo 2 est");
     }
     const bO = f.querySelector("#mcOuvrir");
-    if (bO) bO.onclick = ()=>{ marquerEnvoi(); window.open(SITE_IA[ia].url(question), "_blank"); };
+    if (bO) bO.onclick = ()=>{ marquerEnvoi(); iaOuverte = true; majVifs(); window.open(SITE_IA[ia].url(question), "_blank"); };
     const bV = f.querySelector("#mcOuvrirVide");
-    if (bV) bV.onclick = ()=>{ marquerEnvoi(); window.open(SITE_IA[ia].url(""), "_blank"); };
+    if (bV) bV.onclick = ()=>{ marquerEnvoi(); iaOuverte = true; majVifs(); window.open(SITE_IA[ia].url(""), "_blank"); };
     f.querySelector("#mcQuestion").onclick = async ()=>{
       if (!(await copierTexte(question))){ toast("Copie impossible.", 4000); return; }
       toast("Question copiée.", 2500);
@@ -2917,6 +2929,7 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
     try{
       await copierImagePresse(blobPourClaude(liste));        // la promesse est passée telle quelle : exigence de Safari
       etat.textContent = "✓ " + quoi + " dans le presse-papier. " + (questionManuelle ? "Collez-la dans " + NOM + " en pièce jointe, puis envoyez." : "Passez à l'étape 2.");
+      photoCopiee = true; majVifs();
     }catch(e){
       etat.innerHTML = "Copie automatique impossible (" + esc(e.message) + "). Ouvrez l'image ci-dessous, appui long → Copier.";
       visionneuse(liste[0], "Appui long sur l'image → Copier");
