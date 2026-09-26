@@ -407,8 +407,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.68.0";
+const VERSION = "V1.68.1";
 const HISTORIQUE = [
+  { v:"V1.68.1", d:"25/09/2026", l:[
+    "Réglages : le bouton « Enregistrer » (clé Gemini, GitHub, questions) n'apparaît plus que dans les onglets qu'il concerne ; il est masqué dans Grille, Entretien, Analyse et Log, qui ont leurs propres boutons."
+  ]},
   { v:"V1.68.0", d:"25/09/2026", l:[
     "Nouvel onglet « Grille » dans ⚙️ Réglages (bibliothèque ouverte) : nom, lieu, proportions et structure de la grille, avec un aperçu (rangées de devant) des changements proposés, sans toucher la vraie bibliothèque.",
     "Insertion et suppression d'une rangée ou d'une colonne n'importe où (renumérotation des compartiments suivants) ; suppression refusée dès l'aperçu si un compartiment concerné n'est pas vide. « Appliquer les changements proposés » les rend réels ; « Abandonner les propositions » revient à l'état actuel.",
@@ -7055,6 +7058,9 @@ function ouvrirReglages(ongletInitial){
     ["gemini","github","questions","entretien","grille","analyse","log"].forEach(o=>{
       f.querySelector("#p"+o[0].toUpperCase()+o.slice(1)).hidden = (o !== nom);
     });
+    // « Enregistrer » ne concerne que les onglets Gemini, GitHub et Questions
+    const bEnr = f.querySelector(".pied [data-b='1']");
+    if (bEnr) bEnr.style.display = ["gemini","github","questions"].includes(nom) ? "" : "none";
     if (nom === "log") afficherLog();
     if (nom === "grille"){ const zg = f.querySelector("#pGrilleZone"); if (zg && !zg.dataset.fait){ zg.dataset.fait = "1"; panneauGrille(zg, biblio(biblioCourante)); } }
   };
