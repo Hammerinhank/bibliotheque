@@ -15157,6 +15157,27 @@
     "5-2": {
      "livres": [
       {
+       "id": "mudsari8raeok",
+       "titre": "Les aiguilles d'or",
+       "auteur": "Michael McDowell",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Monsieur Toussaint Louverture",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 13,
+         "x2": 80
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
+      },
+      {
        "id": "mudsari8ktnyl",
        "titre": "KATE",
        "auteur": "MICHAEL MCDOWELL",
@@ -15174,27 +15195,6 @@
         }
        ],
        "statut": "acquis",
-       "temoins": [
-        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
-      },
-      {
-       "id": "mudsari8raeok",
-       "titre": "Les aiguilles d'or",
-       "auteur": "Michael McDowell",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Monsieur Toussaint Louverture",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "vues": [
-        {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 13,
-         "x2": 80
-        }
-       ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ]
@@ -15326,27 +15326,6 @@
        ]
       },
       {
-       "id": "mudsari8r0e0v",
-       "titre": "La cicatrice",
-       "auteur": "Bruce Lowery",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Le Livre de Poche",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "vues": [
-        {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 408,
-         "x2": 430
-        }
-       ],
-       "temoins": [
-        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
-      },
-      {
        "id": "muiaql00fk6ub",
        "titre": "Les trois dames de la Kasbah",
        "auteur": "Pierre Loti",
@@ -15370,29 +15349,37 @@
        "statut": "probable"
       },
       {
+       "id": "mudsari8r0e0v",
+       "titre": "La cicatrice",
+       "auteur": "Bruce Lowery",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Le Livre de Poche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 408,
+         "x2": 430
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
+      },
+      {
        "id": "mudsari8gm1mm",
-       "titre": "Jack London : Pêcheur d'islande",
-       "auteur": "Martin Eden",
+       "titre": "PÊCHEUR D'ISLANDE",
+       "auteur": "PIERRE LOTI",
        "annee": "",
        "certitude": "haute",
        "remarque": "Bibliothèque étrangère",
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "PÊCHEUR D'ISLANDE",
-         "auteur": "PIERRE LOTI"
-        },
-        "vue": {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 458,
-         "x2": 480
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-26T11:19:42.413Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "muiaql001rzq1",
@@ -15439,27 +15426,6 @@
        ]
       },
       {
-       "id": "mudsari82xiuq",
-       "titre": "Arrêtez-moi là !",
-       "auteur": "Iain Levison",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Folio",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "vues": [
-        {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 573,
-         "x2": 595
-        }
-       ],
-       "temoins": [
-        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
-      },
-      {
        "id": "mudsari8yvwjv",
        "titre": "Le Christ s'est arrêté à Eboli",
        "auteur": "Carlo Levi",
@@ -15469,16 +15435,19 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "question": {
-        "type": "deplace",
-        "zone": {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 582,
-         "x2": 612
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-26T11:19:42.413Z"
-       }
+       "statut": "acquis"
+      },
+      {
+       "titre": "Arrêtez-moi là",
+       "auteur": "Iain levison",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "rang": "devant",
+       "id": "muifbybgh4sdp",
+       "origine": "main"
       },
       {
        "id": "mudsari8dz7w5",
@@ -15528,7 +15497,7 @@
        "auteur": "Harper Lee",
        "annee": "",
        "certitude": "haute",
-       "remarque": "",
+       "remarque": "Points",
        "resume": "",
        "categorie": "",
        "origine": "ia",
@@ -15541,28 +15510,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
-      },
-      {
-       "id": "mudsari83lww8",
-       "titre": "Silbermann",
-       "auteur": "Jacques de Lacretelle",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Points",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 657,
-         "x2": 687
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-26T11:19:42.413Z"
-       }
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muiaql00zmy4i",
@@ -17195,7 +17144,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T13:22:49.073Z",
+ "maj": "2026-09-26T13:29:17.930Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
