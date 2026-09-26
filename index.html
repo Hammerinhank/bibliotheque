@@ -407,8 +407,17 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.68.2";
+const VERSION = "V1.68.5";
 const HISTORIQUE = [
+  { v:"V1.68.5", d:"25/09/2026", l:[
+    "Section Certification : chaque rangée dans son propre bloc, boutons « Certifier » / « Retirer la certification » sur toute la largeur, plus hauts, et nettement espacés, pour ne plus toucher l'un à la place de l'autre."
+  ]},
+  { v:"V1.68.4", d:"25/09/2026", l:[
+    "La rangée choisie (Devant / Derrière) est la même partout et le reste : la choisir dans un compartiment (consultation ou édition) met aussi la grille sur cette rangée, et les compartiments suivants s'ouvrent sur elle, en consultation comme en édition."
+  ]},
+  { v:"V1.68.3", d:"25/09/2026", l:[
+    "Mode ✏️ Éditer : le filtre de la liste (Tous / Rangée 1 / Rangée 2) part sur la rangée choisie en consultation (Devant ou Derrière), et non plus sur « Tous » ; la photo affichée est celle de cette rangée. Changer de photo (Devant / Derrière) change aussi le filtre ; « Tous » reste disponible."
+  ]},
   { v:"V1.68.2", d:"25/09/2026", l:[
     "Demande à Claude / Gemini sans clé : le bouton mis en évidence suit l'avancement — d'abord « Copier la photo », puis « Ouvrir Claude avec la question » une fois la photo copiée, et seulement ensuite « Copier la réponse » en vert vif."
   ]},
@@ -5102,7 +5111,7 @@ function ouvrirCompartiment(b, k){
     boutons:[{texte:"Fermer"}],
     surFermeture:()=>{ rafraichirCompartimentOuvert = null; rendreBiblio(); }
   });
-  f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; });
+  f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; setTimeout(rendreBiblio, 0); });
 
   /* ---------- deux modes : consultation (par défaut) / édition ---------- */
   let modeEdition = false;
@@ -5133,9 +5142,15 @@ function ouvrirCompartiment(b, k){
     }
     zm.querySelectorAll("[data-mode]").forEach(b2=>b2.onclick = ()=>{
       const v = b2.dataset.mode;
-      if (v === "editer"){ modeEdition = true; }
-      else if (v === "consulter"){ modeEdition = false; }
-      else filtreConsult = v;
+      if (v === "editer"){
+        modeEdition = true;
+        // l'édition part sur la rangée choisie en consultation : filtre de la liste et photo correspondante
+        filtreRang = filtreConsult;
+        const fc = filtreConsult === "derriere" ? "photo2" : "photo";
+        if (!estAppoint(face) && face !== fc){ face = fc; lignesVisibles = false; avantTroncature = null; zoomPhoto = "entiere"; }
+      }
+      else if (v === "consulter"){ modeEdition = false; if (filtreRang === "devant" || filtreRang === "derriere"){ filtreConsult = filtreRang; vueRangee = filtreRang; } }
+      else { filtreConsult = v; vueRangee = v; }          // la rangée choisie vaut aussi pour la grille et les prochains compartiments
       majConsult();
       if (modeEdition){ majPhoto(); majLivres(); }
     });
@@ -5265,6 +5280,8 @@ function ouvrirCompartiment(b, k){
   const changerFace = (nouvelle)=>{
     if (face === nouvelle) return;
     face = nouvelle; lignesVisibles = false; avantTroncature = null; zoomPhoto = "entiere";
+    if (nouvelle === "photo") filtreRang = "devant"; else if (nouvelle === "photo2") filtreRang = "derriere";   // la liste suit la rangée de la photo
+    if (nouvelle === "photo" || nouvelle === "photo2"){ vueRangee = filtreRang; filtreConsult = filtreRang; }
     majPhoto();
     if (typeof majLivres === "function") majLivres();
   };
@@ -5547,11 +5564,11 @@ function ouvrirCompartiment(b, k){
           <summary style="cursor:pointer;font-weight:600">⭐ Certification</summary>
           ${tete}
           <div class="aide" style="margin:6px 0">Certifier une rangée = l'avoir vérifiée livre par livre contre l'étagère : elle passe alors en consultation seule.</div>
-          ${rangs.map(r=>`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0">
-            <span><b>${nomR(r)}</b> : ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ certifiée le ${esc(dateFr(cs.certif[r]))}</span>` : "non certifiée"}</span>
+          ${rangs.map((r, i)=>`<div style="margin:${i ? "18px" : "8px"} 0 4px;padding-top:${i ? "14px" : "0"};${i ? "border-top:1px solid var(--trait)" : ""}">
+            <div style="margin-bottom:8px"><b>${nomR(r)}</b> : ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ certifiée le ${esc(dateFr(cs.certif[r]))}</span>` : "non certifiée"}</div>
             ${certifiee(cs, r)
-              ? `<button class="btn" data-decertif="${r}" style="padding:3px 10px;font-size:12.5px">Retirer la certification</button>`
-              : `<button class="btn" data-certif="${r}" style="padding:3px 10px;font-size:12.5px;border-color:#ffd23f">⭐ Certifier la ${nomR(r).toLowerCase()}</button>`}
+              ? `<button class="btn plein" data-decertif="${r}" style="min-height:48px;font-size:15.5px">Retirer la certification de la ${nomR(r).toLowerCase()}</button>`
+              : `<button class="btn plein" data-certif="${r}" style="min-height:48px;font-size:15.5px;border:2px solid #ffd23f">⭐ Certifier la ${nomR(r).toLowerCase()}</button>`}
           </div>`).join("")}
         </details>`;
       })() +
@@ -5563,7 +5580,11 @@ function ouvrirCompartiment(b, k){
          ${nQ ? `<button data-filtre="questions" class="${filtreRang==="questions"?"actif":""}">❓ Questions (${nQ})</button>` : ""}
          ${appointVu ? `<button data-filtre="appoint" class="${filtreRang==="appoint"?"actif":""}">Appoint ${numeroAppoint(cs, face)} (${nA})</button>` : ""}
        </div>`;
-    zf.querySelectorAll("[data-filtre]").forEach(bt=>bt.onclick=()=>{ filtreRang = bt.dataset.filtre; majLivres(); });
+    zf.querySelectorAll("[data-filtre]").forEach(bt=>bt.onclick=()=>{
+      filtreRang = bt.dataset.filtre;
+      if (filtreRang === "devant" || filtreRang === "derriere"){ vueRangee = filtreRang; filtreConsult = filtreRang; }
+      majLivres();
+    });
     brancherVider();
     const visibles = l.map((lv,i)=>({lv,i})).filter(({lv})=>
       filtreRang === "tous" || (filtreRang === "questions" ? !!lv.question : filtreRang === "appoint" ? (lv.id && idsAppoint.has(lv.id)) : filtreRang === "derriere" ? lv.rang === "derriere" : lv.rang !== "derriere"));
