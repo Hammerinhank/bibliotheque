@@ -1,0 +1,369 @@
+{
+ "date": "2026-09-26T11:18:27.744Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "5-2",
+ "genre": "appoint",
+ "appoint": "muiapudy44zcu",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "LES AIGUILLES D'OR",
+   "auteur": "MICHAEL MCDOWELL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 13,
+   "x2": 80,
+   "illisible": false
+  },
+  {
+   "titre": "KATE",
+   "auteur": "MICHAEL MCDOWELL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 85,
+   "x2": 147,
+   "illisible": false
+  },
+  {
+   "titre": "BLACKWATER VI",
+   "auteur": "MICHAEL MCDOWELL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 150,
+   "x2": 195,
+   "illisible": false
+  },
+  {
+   "titre": "BLACKWATER V",
+   "auteur": "MICHAEL MCDOWELL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 198,
+   "x2": 240,
+   "illisible": false
+  },
+  {
+   "titre": "BLACKWATER IV",
+   "auteur": "MICHAEL MCDOWELL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 243,
+   "x2": 285,
+   "illisible": false
+  },
+  {
+   "titre": "BLACKWATER III",
+   "auteur": "MICHAEL MCDOWELL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 288,
+   "x2": 330,
+   "illisible": false
+  },
+  {
+   "titre": "Noces indiennes",
+   "auteur": "Sharon Maas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 335,
+   "x2": 375,
+   "illisible": false
+  },
+  {
+   "titre": "LA VÉRITÉ SUR LORIN JONES",
+   "auteur": "ALISON LURIE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 380,
+   "x2": 405,
+   "illisible": false
+  },
+  {
+   "titre": "La cicatrice",
+   "auteur": "Bruce Lowery",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 408,
+   "x2": 430,
+   "illisible": false
+  },
+  {
+   "titre": "Les trois dames de la Kasbah",
+   "auteur": "Pierre Loti",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 433,
+   "x2": 455,
+   "illisible": false
+  },
+  {
+   "titre": "PÊCHEUR D'ISLANDE",
+   "auteur": "PIERRE LOTI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 458,
+   "x2": 480,
+   "illisible": false
+  },
+  {
+   "titre": "Martin Eden",
+   "auteur": "Jack London",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 483,
+   "x2": 510,
+   "illisible": false
+  },
+  {
+   "titre": "Jeu de société",
+   "auteur": "David Lodge",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 513,
+   "x2": 540,
+   "illisible": false
+  },
+  {
+   "titre": "Le Christ s'est arrêté à Éboli",
+   "auteur": "Carlo Levi",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 543,
+   "x2": 570,
+   "illisible": false
+  },
+  {
+   "titre": "Arrêtez-moi là!",
+   "auteur": "IAIN LEVISON",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 573,
+   "x2": 595,
+   "illisible": false
+  },
+  {
+   "titre": "Son nom d'avant",
+   "auteur": "Hélène Lenoir",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 598,
+   "x2": 620,
+   "illisible": false
+  },
+  {
+   "titre": "Métisse blanche",
+   "auteur": "Kim Lefèvre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 623,
+   "x2": 645,
+   "illisible": false
+  },
+  {
+   "titre": "VA ET POSTE UNE SENTINELLE",
+   "auteur": "HARPER LEE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 648,
+   "x2": 670,
+   "illisible": false
+  },
+  {
+   "titre": "La bâtarde",
+   "auteur": "Violette Leduc",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 673,
+   "x2": 700,
+   "illisible": false
+  },
+  {
+   "titre": "LES SOURCES",
+   "auteur": "MARIE-HÉLÈNE LAFON",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 703,
+   "x2": 725,
+   "illisible": false
+  },
+  {
+   "titre": "Jacques de Lacretelle",
+   "auteur": "Silbermann",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 728,
+   "x2": 750,
+   "illisible": false
+  },
+  {
+   "titre": "La preuve",
+   "auteur": "Agota Kristof",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 753,
+   "x2": 770,
+   "illisible": false
+  },
+  {
+   "titre": "Le grand cahier",
+   "auteur": "Agota Kristof",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 773,
+   "x2": 790,
+   "illisible": false
+  },
+  {
+   "titre": "Le dîner",
+   "auteur": "Herman KOCH",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 793,
+   "x2": 815,
+   "illisible": false
+  },
+  {
+   "titre": "La fabrique des officiers",
+   "auteur": "H.H. KIRST",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 818,
+   "x2": 840,
+   "illisible": false
+  },
+  {
+   "titre": "L'homme qui voulut être roi",
+   "auteur": "Kipling",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 843,
+   "x2": 865,
+   "illisible": false
+  },
+  {
+   "titre": "UN TAUREAU INTELLIGENT",
+   "auteur": "RUDYARD KIPLING",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 868,
+   "x2": 890,
+   "illisible": false
+  },
+  {
+   "titre": "FANTÔMES",
+   "auteur": "CHRISTIAN KIEFER",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 893,
+   "x2": 910,
+   "illisible": false
+  },
+  {
+   "titre": "L'attentat",
+   "auteur": "Yasmina Khadra",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 913,
+   "x2": 930,
+   "illisible": false
+  },
+  {
+   "titre": "Les envolés",
+   "auteur": "Étienne Kern",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 933,
+   "x2": 950,
+   "illisible": false
+  },
+  {
+   "titre": "Mirage",
+   "auteur": "DOUGLAS KENNEDY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 953,
+   "x2": 970,
+   "illisible": false
+  },
+  {
+   "titre": "Quitter le monde",
+   "auteur": "Douglas Kennedy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 973,
+   "x2": 990,
+   "illisible": false
+  },
+  {
+   "titre": "TANT QUE LE CAFÉ EST ENCORE CHAUD",
+   "auteur": "TOSHIKAZU KAWAGUCHI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 993,
+   "x2": 1000,
+   "illisible": false
+  },
+  {
+   "titre": "La lettre qui allait changer le destin d'Harold Fry",
+   "auteur": "Rachel Joyce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Lumière pâle sur les collines",
+   "auteur": "Kazuo Ishiguro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  },
+  {
+   "titre": "Quand nous étions orphelins",
+   "auteur": "Kazuo Ishiguro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "illisible": false
+  }
+ ]
+}
