@@ -1,0 +1,445 @@
+{
+ "date": "2026-09-26T09:21:26.937Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "6-1",
+ "genre": "appoint",
+ "appoint": "mui6hxzkxlj48",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Bravo, docteur Béru",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "n° 661",
+   "x1": 10,
+   "x2": 46,
+   "illisible": false
+  },
+  {
+   "titre": "Ça ne s'invente pas",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "collection SA1",
+   "x1": 35,
+   "x2": 70,
+   "illisible": false
+  },
+  {
+   "titre": "Du poulet au menu",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 151",
+   "x1": 56,
+   "x2": 93,
+   "illisible": false
+  },
+  {
+   "titre": "… de Bérurier",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "titre partiellement lisible, n° 844",
+   "x1": 81,
+   "x2": 128,
+   "illisible": false
+  },
+  {
+   "titre": "Safari, sang et sexe",
+   "auteur": "Serge Jacquemard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 1243",
+   "x1": 116,
+   "x2": 150,
+   "illisible": false
+  },
+  {
+   "titre": "Plus diabolique sera le piège",
+   "auteur": "Serge Jacquemard",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "n° 1123",
+   "x1": 138,
+   "x2": 171,
+   "illisible": false
+  },
+  {
+   "titre": "Qui votera mort arrive",
+   "auteur": "Serge Jacquemard",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "n° 1173, titre peu lisible",
+   "x1": 159,
+   "x2": 191,
+   "illisible": false
+  },
+  {
+   "titre": "J'suis comme ça",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 233",
+   "x1": 181,
+   "x2": 214,
+   "illisible": false
+  },
+  {
+   "titre": "Ne mangez pas la consigne",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 250",
+   "x1": 204,
+   "x2": 237,
+   "illisible": false
+  },
+  {
+   "titre": "La vérité en salade",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "n° 173",
+   "x1": 229,
+   "x2": 255,
+   "illisible": false
+  },
+  {
+   "titre": "Béru contre San-Antonio",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 31",
+   "x1": 253,
+   "x2": 272,
+   "illisible": false
+  },
+  {
+   "titre": "Tango chinetoque",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "HS n° 511",
+   "x1": 271,
+   "x2": 297,
+   "illisible": false
+  },
+  {
+   "titre": "San-Antonio renvoie la balle",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 78",
+   "x1": 297,
+   "x2": 326,
+   "illisible": false
+  },
+  {
+   "titre": "J'suis comme ça",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 233",
+   "x1": 318,
+   "x2": 346,
+   "illisible": false
+  },
+  {
+   "titre": "Meurs pas, on a du monde",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 103",
+   "x1": 345,
+   "x2": 367,
+   "illisible": false
+  },
+  {
+   "titre": "Le loup habillé en grand-mère",
+   "auteur": "San-Antonio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 12",
+   "x1": 367,
+   "x2": 389,
+   "illisible": false
+  },
+  {
+   "titre": "OSS 117 contre OSS",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 189",
+   "x1": 386,
+   "x2": 412,
+   "illisible": false
+  },
+  {
+   "titre": "Ramdam à Lausanne",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 137",
+   "x1": 406,
+   "x2": 428,
+   "illisible": false
+  },
+  {
+   "titre": "3 Maltaises pour OSS 117",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 162",
+   "x1": 423,
+   "x2": 443,
+   "illisible": false
+  },
+  {
+   "titre": "OSS 117 fin prêt à Taipeh",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 163",
+   "x1": 441,
+   "x2": 460,
+   "illisible": false
+  },
+  {
+   "titre": "Franc et fort à Francfort",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 154",
+   "x1": 458,
+   "x2": 476,
+   "illisible": false
+  },
+  {
+   "titre": "Autopsie en Tunisie",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 145",
+   "x1": 474,
+   "x2": 493,
+   "illisible": false
+  },
+  {
+   "titre": "Sarabande à Hong Kong pour OSS 117",
+   "auteur": "Josette Bruce",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 102",
+   "x1": 491,
+   "x2": 509,
+   "illisible": false
+  },
+  {
+   "titre": "On y va, patron ?",
+   "auteur": "R. Pidoux",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Hachette",
+   "x1": 507,
+   "x2": 528,
+   "illisible": false
+  },
+  {
+   "titre": "Touchez pas au grisbi !",
+   "auteur": "Albert Simonin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 148",
+   "x1": 526,
+   "x2": 553,
+   "illisible": false
+  },
+  {
+   "titre": "Motel 007",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007 n° 8, Plon",
+   "x1": 551,
+   "x2": 580,
+   "illisible": false
+  },
+  {
+   "titre": "Casino Royal",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007 n° 1, Plon",
+   "x1": 580,
+   "x2": 606,
+   "illisible": false
+  },
+  {
+   "titre": "Bons baisers de Paris",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007 n° 6, Plon",
+   "x1": 606,
+   "x2": 633,
+   "illisible": false
+  },
+  {
+   "titre": "Opération Tonnerre",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007 n° 7, Plon",
+   "x1": 633,
+   "x2": 661,
+   "illisible": false
+  },
+  {
+   "titre": "Vivre et laisser mourir",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007, Plon",
+   "x1": 662,
+   "x2": 691,
+   "illisible": false
+  },
+  {
+   "titre": "Au service secret de Sa Majesté",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007, Plon",
+   "x1": 691,
+   "x2": 720,
+   "illisible": false
+  },
+  {
+   "titre": "James Bond contre Dr No",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007, Plon",
+   "x1": 720,
+   "x2": 749,
+   "illisible": false
+  },
+  {
+   "titre": "On ne vit que deux fois",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "James Bond 007, Plon",
+   "x1": 749,
+   "x2": 780,
+   "illisible": false
+  },
+  {
+   "titre": "Entourloupe dans l'azimut",
+   "auteur": "Ian Fleming",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Carré noir n° 121",
+   "x1": 778,
+   "x2": 802,
+   "illisible": false
+  },
+  {
+   "titre": "De quoi se marrer",
+   "auteur": "Peter Cheyney",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Carré noir n° 74",
+   "x1": 802,
+   "x2": 819,
+   "illisible": false
+  },
+  {
+   "titre": "Charmante soirée",
+   "auteur": "Mickey Spillane",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 3856",
+   "x1": 819,
+   "x2": 835,
+   "illisible": false
+  },
+  {
+   "titre": "L'homme sans nom",
+   "auteur": "Harry Carmichael",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Librairie des Champs-Élysées n° 1600",
+   "x1": 835,
+   "x2": 854,
+   "illisible": false
+  },
+  {
+   "titre": "Les pièces du dossier",
+   "auteur": "Dorothy Sayers",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 1668",
+   "x1": 852,
+   "x2": 874,
+   "illisible": false
+  },
+  {
+   "titre": "Pertes et fracas",
+   "auteur": "Horace Mac Coy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Carré noir n° 215",
+   "x1": 874,
+   "x2": 891,
+   "illisible": false
+  },
+  {
+   "titre": "Le démon",
+   "auteur": "Hubert Selby Jr.",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "10/18 n° 1606",
+   "x1": 887,
+   "x2": 912,
+   "illisible": false
+  },
+  {
+   "titre": "L'homme aux lèvres de saphir",
+   "auteur": "Hervé Le Corre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Rivages/Noir n° 531",
+   "x1": 912,
+   "x2": 945,
+   "illisible": false
+  },
+  {
+   "titre": "La note noire",
+   "auteur": "Costantini",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "n° 2520",
+   "x1": 945,
+   "x2": 970,
+   "illisible": false
+  },
+  {
+   "titre": "Un raccourci saisissant",
+   "auteur": "Dorothée Chifflot",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "n° 2437, mention Cognac 2000",
+   "x1": 970,
+   "x2": 990,
+   "illisible": false
+  }
+ ]
+}
