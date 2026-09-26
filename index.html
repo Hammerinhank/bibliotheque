@@ -171,7 +171,9 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 #cFaces{align-items:flex-start}
 #cFaces .colAppoint{flex:1;min-width:130px;display:flex;flex-direction:column;align-items:stretch;gap:10px}
 #cFaces select{width:100%;border-radius:999px;padding:7px 10px;font-size:13.5px}
-#cFaces .colAppoint button{width:100%}
+#cFaces .colAppoint button#cAjoutAppoint{width:84px;height:70px;align-self:flex-end;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  background:var(--bronze);border:2px solid #ffd23f;border-radius:12px;color:#1c1500;font-weight:800;font-size:15px;line-height:1.1;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+#cFaces .colAppoint button#cAjoutAppoint .ico{font-size:22px;line-height:1}
 .prop{background:var(--encre);border:1px solid var(--trait);border-left:3px solid var(--bronze);border-radius:10px;padding:9px 11px;margin-bottom:8px}
 .prop.ajouter{border-left-color:var(--vert)}
 .prop.retirer{border-left-color:var(--rouge)}
@@ -418,8 +420,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.70.0";
+const VERSION = "V1.70.1";
 const HISTORIQUE = [
+  { v:"V1.70.1", d:"25/09/2026", l:[
+    "Bouton « ➕ Appoint » presque carré (largeur = 1,2 × hauteur), fond coloré pour le faire ressortir, libellé sur deux lignes, gras et très lisible."
+  ]},
   { v:"V1.70.0", d:"25/09/2026", l:[
     "Sauvegarde des modifications à la main beaucoup moins fréquente : elle attend 2 minutes sans aucune action (au lieu de 5 s), et part aussi dès qu'on ferme le compartiment ou qu'on quitte l'app. Plus de message à chaque sauvegarde automatique réussie (le log la note) ; l'alerte « sauvegarde suspendue » n'est plus répétée plus d'une fois toutes les 10 minutes.",
     "Glisser-déposer : après chaque déplacement, une barre « ↩ Annuler ce déplacement » s'affiche en bas de l'écran (sans avoir à faire défiler la liste) pendant 15 secondes ; le geste de glisser-déposer lui-même est inchangé. Même chose après « Déplacer »."
@@ -5383,7 +5388,7 @@ function ouvrirCompartiment(b, k){
          <option value="">🖼 Appoints (${app.length})</option>
          ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.rang ? (a.rang === "derriere" ? " · rangée 2" : " · rangée 1") : " · rangée ?"}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
        </select>` : ""}
-       <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)">➕ Appoint</button>
+       <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)"><span class="ico">➕</span><span>Appoint</span></button>
        </div>`}`;
     zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>changerFace(bt.dataset.face));
     // bouton direct : Safari (iPhone) n'ouvre l'appareil photo que sur un vrai toucher, pas depuis une liste déroulante
