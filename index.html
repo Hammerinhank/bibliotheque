@@ -144,6 +144,14 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 @keyframes cibleClignote{0%,100%{border-color:#ff3b30}50%{border-color:rgba(255,59,48,.2)}}
 #bRech{display:block;width:100%;box-sizing:border-box;height:48px;font-size:17px;padding:10px 14px;margin:6px 0 10px;
   border-radius:12px;-webkit-appearance:none;appearance:none}
+.pgEntete{display:grid;gap:6px;margin-bottom:6px}
+.pgCol{text-align:center;font-size:12px}
+.pgNum{font-weight:700;margin-bottom:2px}
+.pgBtns{display:inline-flex;gap:3px;flex-wrap:nowrap;justify-content:center}
+.pgBtns button{font-size:12px;padding:3px 6px;border-radius:6px;border:1px solid var(--trait);background:var(--encre3);color:var(--texte);min-width:30px}
+.pgLigne{display:flex;justify-content:space-between;align-items:center;margin:10px 0 4px;font-weight:600;color:var(--bronze)}
+.pgApercu .grille{display:grid;gap:6px}
+.case.pgNouvelle{border:2px dashed var(--bronze);background:transparent}
 .case .etoile{position:absolute;bottom:3px;z-index:3;font-size:15px;line-height:1;color:#ffd23f;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8)}
 .case .etoile.g{left:4px}
 .case .etoile.d{right:4px}
@@ -399,8 +407,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.67.0";
+const VERSION = "V1.68.0";
 const HISTORIQUE = [
+  { v:"V1.68.0", d:"25/09/2026", l:[
+    "Nouvel onglet « Grille » dans ⚙️ Réglages (bibliothèque ouverte) : nom, lieu, proportions et structure de la grille, avec un aperçu (rangées de devant) des changements proposés, sans toucher la vraie bibliothèque.",
+    "Insertion et suppression d'une rangée ou d'une colonne n'importe où (renumérotation des compartiments suivants) ; suppression refusée dès l'aperçu si un compartiment concerné n'est pas vide. « Appliquer les changements proposés » les rend réels ; « Abandonner les propositions » revient à l'état actuel.",
+    "Les boutons « Modifier la grille » et « Proportions » quittent la page principale, où nom et lieu sont seulement affichés. Les analyses sauvegardées suivent les compartiments renumérotés."
+  ]},
   { v:"V1.67.0", d:"25/09/2026", l:[
     "Après « 📍 Localiser », en ouvrant le compartiment encadré de rouge, le livre recherché est lui aussi encadré de rouge dans la liste (mode consultation), et la liste défile jusqu'à lui ; avec « Localiser tous », tous les livres trouvés du compartiment sont encadrés."
   ]},
@@ -1907,6 +1920,25 @@ async function envoyerDonneesAuto(quoi, opts){
 let reconstructionEnCours = false;
 
 async function listerResultatsSauves(b, k){
+  // un compartiment renuméroté garde ses analyses : on lit aussi ses anciens emplacements
+  const csK = (b.cases || {})[k] || {};
+  if ((csK.cleDepuis || (csK.historiqueCles || []).length) && !listerResultatsSauves.enCours){
+    // périodes : sous la clé actuelle depuis cleDepuis, et sous chaque ancienne clé pendant sa période
+    const periodes = [{ k, du: csK.cleDepuis || null, au: null }].concat(csK.historiqueCles || []);
+    listerResultatsSauves.enCours = true;
+    try{
+      const tous = [], vus = new Set();
+      for (const pe of periodes){
+        (await listerResultatsSauves(b, pe.k)).forEach(x=>{
+          const t = Date.parse(x.t) || 0;
+          if (pe.du && t < Date.parse(pe.du)) return;
+          if (pe.au && t >= Date.parse(pe.au)) return;
+          if (!vus.has(x.nom)){ vus.add(x.nom); tous.push(x); }
+        });
+      }
+      return tous.sort((a, z)=>a.t.localeCompare(z.t));
+    } finally { listerResultatsSauves.enCours = false; }
+  }
   const locaux = journalEnAttente().filter(x=>x.doc.bibliotheque === b.id && x.doc.compartiment === k)
     .map(x=>({ nom:x.chemin.split("/").pop(), doc:x.doc, local:true }));
   let distants = [];
@@ -2216,6 +2248,124 @@ function fenetreDeplacer(cs, lv, apres){
   };
   inp.oninput = afficher;
   setTimeout(()=>inp.focus(), 50);
+}
+
+/* ====================================================================
+   PARAMÉTRAGE DE LA GRILLE (Réglages ⚙️ › Grille) : aperçu des changements proposés, appliqués seulement sur demande
+   ==================================================================== */
+const caseNonVide = (cs)=> !!(cs && ((cs.livres || []).length || cs.photo || cs.photo2 || (cs.appoints || []).length));
+
+function panneauGrille(zone, b){
+  // proposition : ordre des rangées et colonnes d'origine (null = nouvelle), nom, lieu, proportions
+  const initiale = ()=>({ nom:b.nom, lieu:b.lieu || "", ratio:ratioBiblio(b),
+    rows: Array.from({ length:b.rangees }, (_, i)=>i + 1), cols: Array.from({ length:b.compartiments }, (_, i)=>i + 1) });
+  let p = initiale();
+  const modifiee = ()=>{ const q = initiale(); return p.nom !== q.nom || p.lieu !== q.lieu || p.ratio !== q.ratio || p.rows.join() !== q.rows.join() || p.cols.join() !== q.cols.join(); };
+  // contenu d'une rangée / colonne d'origine (toutes colonnes / rangées d'origine confondues)
+  const pleinsRangee = (r0)=> Object.keys(b.cases || {}).filter(k=>{ const [r, c] = k.split("-").map(Number); return r === r0 && caseNonVide(b.cases[k]); });
+  const pleinsColonne = (c0)=> Object.keys(b.cases || {}).filter(k=>{ const [r, c] = k.split("-").map(Number); return c === c0 && caseNonVide(b.cases[k]); });
+  const refuser = (quoi, liste)=> modale({ titre:"Changement refusé",
+    html:`<div>${quoi} contient des compartiments non vides : ${liste.map(k=>esc(k.replace("-", "·"))).join(", ")}.</div><div class="aide">Même dans l'aperçu, on ne peut pas faire disparaître un compartiment qui a des livres ou des photos. Videz-les d'abord.</div>`,
+    boutons:[{ texte:"Compris", classe:"principal" }] });
+
+  const rendre = ()=>{
+    const R = p.rows.length, C = p.cols.length;
+    const lab = (i, j)=>{ const r0 = p.rows[i], c0 = p.cols[j]; return (r0 && c0) ? r0 + "-" + c0 : null; };
+    let grille = "";
+    // en-tête des colonnes : supprimer / insérer
+    grille += `<div class="pgEntete" style="grid-template-columns:repeat(${C}, 1fr)">` +
+      p.cols.map((c0, j)=>`<div class="pgCol"><div class="pgNum">Col. ${j + 1}${c0 && c0 !== j + 1 ? ` <span class="aide">(ex ${c0})</span>` : !c0 ? ` <span class="aide">nouvelle</span>` : ""}</div>
+        <div class="pgBtns"><button data-ic="${j}" title="Insérer une colonne à gauche">＋◀</button><button data-sc="${j}" title="Supprimer cette colonne">✕</button><button data-ic="${j + 1}" title="Insérer une colonne à droite">▶＋</button></div></div>`).join("") + `</div>`;
+    p.rows.forEach((r0, i)=>{
+      grille += `<div class="pgLigne"><span>Rangée ${i + 1}${r0 && r0 !== i + 1 ? ` <span class="aide">(ex ${r0})</span>` : !r0 ? ` <span class="aide">nouvelle</span>` : ""}</span>
+        <span class="pgBtns"><button data-ir="${i}" title="Insérer une rangée au-dessus">＋▲</button><button data-sr="${i}" title="Supprimer cette rangée">✕</button><button data-ir="${i + 1}" title="Insérer une rangée en dessous">▼＋</button></span></div>`;
+      grille += `<div class="grille" style="grid-template-columns:repeat(${C}, 1fr)">` + p.cols.map((c0, j)=>{
+        const k0 = lab(i, j), cs = k0 ? (b.cases || {})[k0] : null;
+        const img = cs && cs.photo ? photoImmediate(b, k0, "photo") : null;
+        const nb = cs ? (cs.livres || []).filter(lv=>lv.rang !== "derriere").length : 0;
+        return `<div class="case${k0 ? "" : " pgNouvelle"}" style="aspect-ratio:1 / ${p.ratio}">
+          ${img ? `<img src="${img}" alt="">` : `<span class="sansphoto">${k0 ? (cs && cs.photo ? "⏳" : "📷") : "＋"}</span>`}
+          <span class="num">${i + 1}·${j + 1}</span>${nb ? `<span class="nb">${nb}</span>` : ""}</div>`;
+      }).join("") + `</div>`;
+    });
+    zone.innerHTML = `
+      <div class="aide" style="margin-top:0">Les changements ci-dessous ne sont qu'un <b>aperçu</b> (rangées de devant) : la vraie bibliothèque ne change qu'avec « Appliquer les changements proposés ».</div>
+      <label for="gNom">Nom</label><input type="text" id="gNom" value="${esc(p.nom)}">
+      <label for="gLieu">Lieu</label><input type="text" id="gLieu" value="${esc(p.lieu)}" placeholder="Mur nord, près de la fenêtre…">
+      <div class="ligne2" style="align-items:flex-end;margin-top:8px">
+        <div><label for="gRatio">Proportions : hauteur ÷ largeur</label><input type="number" id="gRatio" step="0.01" min="${RATIO_MIN}" max="${RATIO_MAX}" value="${p.ratio}"></div>
+        <div><button class="btn" id="gRect" style="width:100%">📐 Ajuster au doigt</button></div>
+      </div>
+      <div class="titreSection" style="margin-top:12px">Aperçu — ${R} rangée(s) × ${C} compartiment(s)</div>
+      <div class="aide" style="margin:-4px 0 6px">＋▲ / ▼＋ : insérer une rangée au-dessus / en dessous · ＋◀ / ▶＋ : insérer une colonne à gauche / à droite · ✕ : supprimer (refusé si un compartiment n'est pas vide). Les compartiments suivants sont renumérotés.</div>
+      <div class="pgApercu">${grille}</div>
+      ${modifiee() ? `<div class="encadre" style="margin-top:10px">Des changements sont proposés.</div>` : ""}
+      <div class="barre" style="margin-top:10px">
+        <button class="btn" id="gAbandon" style="flex:1" ${modifiee() ? "" : "disabled"}>Abandonner les propositions</button>
+        <button class="btn principal" id="gAppliquer" style="flex:1" ${modifiee() ? "" : "disabled"}>Appliquer les changements proposés</button>
+      </div>`;
+    zone.querySelector("#gNom").oninput = (e)=>{ p.nom = e.target.value; majBoutons(); };
+    zone.querySelector("#gLieu").oninput = (e)=>{ p.lieu = e.target.value; majBoutons(); };
+    zone.querySelector("#gRatio").onchange = (e)=>{ const v = Number(e.target.value); if (isFinite(v) && v >= RATIO_MIN && v <= RATIO_MAX){ p.ratio = Math.round(v * 1000) / 1000; rendre(); } else { toast(`Entre ${RATIO_MIN} et ${RATIO_MAX}.`); e.target.value = p.ratio; } };
+    zone.querySelector("#gRect").onclick = ()=>formProportions(b, { ratio:p.ratio, surValider:(r)=>{ p.ratio = r; rendre(); } });
+    zone.querySelectorAll("[data-ir]").forEach(x=>x.onclick = ()=>{ if (p.rows.length >= 30) return toast("30 rangées au maximum."); p.rows.splice(Number(x.dataset.ir), 0, null); rendre(); });
+    zone.querySelectorAll("[data-ic]").forEach(x=>x.onclick = ()=>{ if (p.cols.length >= 30) return toast("30 compartiments au maximum."); p.cols.splice(Number(x.dataset.ic), 0, null); rendre(); });
+    zone.querySelectorAll("[data-sr]").forEach(x=>x.onclick = ()=>{
+      const i = Number(x.dataset.sr), r0 = p.rows[i];
+      if (p.rows.length <= 1) return toast("Il faut au moins une rangée.");
+      if (r0){ const pl = pleinsRangee(r0); if (pl.length) return refuser(`La rangée ${i + 1}`, pl); }
+      p.rows.splice(i, 1); rendre();
+    });
+    zone.querySelectorAll("[data-sc]").forEach(x=>x.onclick = ()=>{
+      const j = Number(x.dataset.sc), c0 = p.cols[j];
+      if (p.cols.length <= 1) return toast("Il faut au moins un compartiment par rangée.");
+      if (c0){ const pl = pleinsColonne(c0); if (pl.length) return refuser(`La colonne ${j + 1}`, pl); }
+      p.cols.splice(j, 1); rendre();
+    });
+    zone.querySelector("#gAbandon").onclick = ()=>{ p = initiale(); rendre(); };
+    zone.querySelector("#gAppliquer").onclick = appliquer;
+  };
+  const majBoutons = ()=>{ const m = modifiee(); zone.querySelector("#gAbandon").disabled = !m; zone.querySelector("#gAppliquer").disabled = !m; };
+
+  const appliquer = async ()=>{
+    if (!p.nom.trim()){ toast("Le nom ne peut pas être vide."); return; }
+    // nouvelle numérotation des compartiments
+    const nouv = {}, vus = new Set(), instant = new Date().toISOString();
+    p.rows.forEach((r0, i)=>p.cols.forEach((c0, j)=>{
+      const k1 = (i + 1) + "-" + (j + 1);
+      // emplacement nouveau ou vide déplacé : repart de zéro (ne récupère pas les analyses d'un autre compartiment passé par cette clé)
+      if (!r0 || !c0){ nouv[k1] = { livres:[], cleDepuis: instant }; return; }
+      const k0 = r0 + "-" + c0, cs = (b.cases || {})[k0];
+      vus.add(k0);
+      if (!cs){ if (k1 !== k0) nouv[k1] = { livres:[], cleDepuis: instant }; return; }
+      if (k1 !== k0){
+        // mémorise l'ancien emplacement et sa période, pour retrouver les analyses sauvegardées sous l'ancienne clé
+        cs.historiqueCles = (cs.historiqueCles || []).concat([{ k:k0, du: cs.cleDepuis || null, au: instant }]);
+        cs.cleDepuis = instant;
+      }
+      nouv[k1] = cs;
+    }));
+    // compartiments hors grille déjà existants : gardés s'ils ne gênent pas, sinon refus
+    const hors = Object.keys(b.cases || {}).filter(k=>!vus.has(k));
+    const pleinsPerdus = hors.filter(k=>{ const [r, c] = k.split("-").map(Number); return r <= b.rangees && c <= b.compartiments && caseNonVide(b.cases[k]); });
+    if (pleinsPerdus.length){ refuser("La proposition", pleinsPerdus); return; }
+    const conflits = hors.filter(k=>nouv[k] && caseNonVide(b.cases[k]));
+    if (conflits.length){ modale({ titre:"Changement refusé", html:`<div>Des compartiments hors grille (${conflits.map(k=>esc(k.replace("-", "·"))).join(", ")}) occuperaient la même place que des compartiments renumérotés.</div>`, boutons:[{ texte:"Compris" }] }); return; }
+    hors.forEach(k=>{ if (!nouv[k] && caseNonVide(b.cases[k])) nouv[k] = b.cases[k]; });
+    const avant = `${b.rangees}×${b.compartiments}`;
+    const ok = await confirmer(`<div>Appliquer à « ${esc(b.nom)} » : ${p.rows.length} rangée(s) × ${p.cols.length} compartiment(s)${p.nom !== b.nom ? `, nom « ${esc(p.nom)} »` : ""}${p.ratio !== ratioBiblio(b) ? `, proportions ${fmtRatio(p.ratio)}` : ""} ?</div>
+      <div class="aide">Les compartiments déplacés gardent leurs photos, livres et analyses sauvegardées.</div>`, "Appliquer les changements", "Appliquer");
+    if (!ok) return;
+    b.nom = p.nom.trim(); b.lieu = p.lieu.trim(); b.ratio = p.ratio;
+    b.rangees = p.rows.length; b.compartiments = p.cols.length; b.cases = nouv;
+    caseCible = null;
+    journal(`Grille de « ${b.nom} » modifiée : ${avant} → ${b.rangees}×${b.compartiments}`);
+    sauver(); rendreBiblio();
+    planifierEnvoi("Grille modifiée");
+    toast("Changements appliqués.", 4000);
+    p = initiale(); rendre();
+  };
+  rendre();
 }
 
 /* ====================================================================
@@ -4645,10 +4795,6 @@ function rendreBiblio(){
      </div>
      ${hors.length ? `<div class="aide" style="margin-bottom:0">⚠️ ${hors.length} compartiment(s) hors grille (${esc(hors.join(", "))}) : leur contenu est conservé et reste compté dans les listes et le PDF.</div>` : ""}
      </div>
-     <div class="barre">
-       <button class="btn" id="bModifier" style="flex:1">Modifier la grille</button>
-       <button class="btn" id="bProportions" style="flex:1">📐 Proportions</button>
-     </div>
 
 
      <details class="pliable" id="plTirer" ${cfg.tirerOuvert ? "open" : ""}>
@@ -4681,7 +4827,7 @@ function rendreBiblio(){
      </details>
      <div class="aide">${compteLivres(b)} livre(s) relevé(s) dans ${comptePhotos(b)} photo(s).</div>`;
 
-  $("#bModifier").onclick = ()=>formBiblio(b.id);
+
   const inpR = $("#bRech");
   const bEff = $("#bRechEffacer");
   inpR.oninput = ()=>{
@@ -4696,7 +4842,7 @@ function rendreBiblio(){
     if (vueRangee === bt.dataset.vr) return;
     vueRangee = bt.dataset.vr; rendreBiblio();
   });
-  $("#bProportions").onclick = ()=>formProportions(b);
+
 
 
   $("#bListe").onclick = ()=>fenetreListe(b);
@@ -4803,8 +4949,8 @@ function ratioBiblio(b){
 }
 const fmtRatio = r => r.toLocaleString("fr-FR", { minimumFractionDigits:2, maximumFractionDigits:2 });
 
-function formProportions(b){
-  let ratio = ratioBiblio(b);
+function formProportions(b, opts){
+  let ratio = opts && opts.ratio ? opts.ratio : ratioBiblio(b);
   const f = modale({
     titre:"Proportions d'un compartiment — " + b.nom,
     html:
@@ -4884,6 +5030,7 @@ function formProportions(b){
   f.querySelector("#pL").oninput = depuisMesures;
 
   const enregistrer = async ()=>{
+    if (opts && opts.surValider){ opts.surValider(Math.round(ratio * 1000) / 1000); return; }   // simple proposition (aperçu)
     b.ratio = Math.round(ratio * 1000) / 1000;
     sauver(); rendreBiblio();
     if (ghPret()){
@@ -6747,6 +6894,7 @@ function ouvrirReglages(ongletInitial){
          <button data-o="github">GitHub</button>
          <button data-o="questions">Questions</button>
          <button data-o="entretien">Entretien</button>
+         <button data-o="grille">Grille</button>
          <button data-o="analyse">Analyse</button>
          <button data-o="log">Log</button>
        </div>
@@ -6841,6 +6989,9 @@ function ouvrirReglages(ongletInitial){
          <button class="btn" id="qCr" style="margin-top:6px">Texte par défaut</button>
        </div>
 
+       <div id="pGrille" hidden>
+         ${biblioCourante && biblio(biblioCourante) ? `<div id="pGrilleZone"></div>` : `<div class="aide">Ouvrez d'abord une bibliothèque pour paramétrer sa grille.</div>`}
+       </div>
        <div id="pAnalyse" hidden>
          <div class="aide" style="margin-top:0">Traitement d'ensemble d'une bibliothèque : parcourt les compartiments photographiés et remplit la liste de leurs livres, avec décompte de progression. Pour un seul compartiment, utilisez plutôt « Analyse de cette photo » dans sa fenêtre.</div>
          ${biblioCourante && biblio(biblioCourante)
@@ -6901,10 +7052,11 @@ function ouvrirReglages(ongletInitial){
 
   const activer = (nom)=>{
     f.querySelectorAll("[data-o]").forEach(x=>x.classList.toggle("actif", x.dataset.o===nom));
-    ["gemini","github","questions","entretien","analyse","log"].forEach(o=>{
+    ["gemini","github","questions","entretien","grille","analyse","log"].forEach(o=>{
       f.querySelector("#p"+o[0].toUpperCase()+o.slice(1)).hidden = (o !== nom);
     });
     if (nom === "log") afficherLog();
+    if (nom === "grille"){ const zg = f.querySelector("#pGrilleZone"); if (zg && !zg.dataset.fait){ zg.dataset.fait = "1"; panneauGrille(zg, biblio(biblioCourante)); } }
   };
   const afficherLog = ()=>{
     const t = f.querySelector("#rLog"), l = lireLog();
