@@ -1,0 +1,195 @@
+{
+ "date": "2026-09-26T10:54:08.978Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "6-1",
+ "genre": "appoint",
+ "appoint": "mui9oxj9waynk",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Un beau matin d'été",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 0,
+   "x2": 60,
+   "illisible": false
+  },
+  {
+   "titre": "Simple question de temps",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 60,
+   "x2": 105,
+   "illisible": false
+  },
+  {
+   "titre": "Fais-moi confiance",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 105,
+   "x2": 145,
+   "illisible": false
+  },
+  {
+   "titre": "On replique au jeu",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 145,
+   "x2": 185,
+   "illisible": false
+  },
+  {
+   "titre": "Une bouffée d'or pur",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 185,
+   "x2": 225,
+   "illisible": false
+  },
+  {
+   "titre": "Pochette surprise",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 225,
+   "x2": 265,
+   "illisible": false
+  },
+  {
+   "titre": "Ça n'arrive qu'aux vivants",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 265,
+   "x2": 305,
+   "illisible": false
+  },
+  {
+   "titre": "À vous le plaisir",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 305,
+   "x2": 345,
+   "illisible": false
+  },
+  {
+   "titre": "C'est pas dans mes cordes",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 345,
+   "x2": 385,
+   "illisible": false
+  },
+  {
+   "titre": "La petite vertu",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 385,
+   "x2": 425,
+   "illisible": false
+  },
+  {
+   "titre": "On replique au jeu",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 425,
+   "x2": 465,
+   "illisible": false
+  },
+  {
+   "titre": "Trop petit, mon ami",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 465,
+   "x2": 510,
+   "illisible": false
+  },
+  {
+   "titre": "Éva",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 510,
+   "x2": 550,
+   "illisible": false
+  },
+  {
+   "titre": "Vipère au sein",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 550,
+   "x2": 590,
+   "illisible": false
+  },
+  {
+   "titre": "Tu seras tout seul dans ton cercueil",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 590,
+   "x2": 630,
+   "illisible": false
+  },
+  {
+   "titre": "C'est le bouquet !",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 630,
+   "x2": 670,
+   "illisible": false
+  },
+  {
+   "titre": "Qu'est-ce qu'on déguste !",
+   "auteur": "James Hadley Chase",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 670,
+   "x2": 710,
+   "illisible": false
+  },
+  {
+   "titre": "Des demoiselles imprudentes",
+   "auteur": "Exbrayat",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 710,
+   "x2": 750,
+   "illisible": false
+  }
+ ]
+}
