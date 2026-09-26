@@ -15496,7 +15496,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 28,
+         "x2": 80
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom0tcd9j",
@@ -15508,7 +15518,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 80,
+         "x2": 124
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
+      },
+      {
+       "id": "muiadgcklt5ww",
+       "titre": "RROÛ",
+       "auteur": "MAURICE GENEVOIX",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 124,
+         "x2": 147
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom13ts7r",
@@ -15520,7 +15563,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 147,
+         "x2": 170
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1b3j9k",
@@ -15532,7 +15585,63 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 155,
+         "x2": 185
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T11:09:17.206Z"
+       }
+      },
+      {
+       "id": "muiadgckhgzng",
+       "titre": "LES FAUX-MONNAYEURS",
+       "auteur": "ANDRÉ GIDE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 170,
+         "x2": 193
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muiadgcky7kj0",
+       "titre": "LES CAVES DU VATICAN",
+       "auteur": "ANDRÉ GIDE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 193,
+         "x2": 216
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom1fqynb",
@@ -15544,7 +15653,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 216,
+         "x2": 239
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom16a7f1",
@@ -15556,7 +15675,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 239,
+         "x2": 262
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
+      },
+      {
+       "id": "muiadgckysjec",
+       "titre": "QUE MA JOIE DEMEURE",
+       "auteur": "JEAN GIONO",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 262,
+         "x2": 285
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom1d1134",
@@ -15568,7 +15720,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 285,
+         "x2": 308
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1i1xsg",
@@ -15580,7 +15742,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 308,
+         "x2": 331
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1hvuxo",
@@ -15592,19 +15764,62 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 331,
+         "x2": 354
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
+      },
+      {
+       "id": "muiadgckir1wg",
+       "titre": "LE SERPENT D'ÉTOILES",
+       "auteur": "JEAN GIONO",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 354,
+         "x2": 377
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom1x6x5w",
        "titre": "Voyage à pied dans la Haute-Durance",
-       "auteur": "",
+       "auteur": "JEAN GIONO",
        "annee": "",
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 377,
+         "x2": 400
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1m6in7",
@@ -15616,7 +15831,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 400,
+         "x2": 423
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom146qqu",
@@ -15628,7 +15853,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 423,
+         "x2": 446
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1k39ez",
@@ -15640,7 +15875,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 446,
+         "x2": 469
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1r5xxc",
@@ -15652,7 +15897,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 469,
+         "x2": 492
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom19r64t",
@@ -15664,7 +15919,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 492,
+         "x2": 515
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
+      },
+      {
+       "id": "muiadgck0x0at",
+       "titre": "LA TOUCHE ÉTOILE",
+       "auteur": "BENOÎTE GROULT",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 515,
+         "x2": 538
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom14rip2",
@@ -15676,7 +15964,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 538,
+         "x2": 561
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1d7dxu",
@@ -15688,7 +15986,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 561,
+         "x2": 584
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom115jhi",
@@ -15700,7 +16008,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 584,
+         "x2": 607
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
+      },
+      {
+       "id": "muiadgckbrefv",
+       "titre": "NOS ÂMES LA NUIT",
+       "auteur": "KENT HARUF",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 607,
+         "x2": 630
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom1waqrn",
@@ -15712,7 +16053,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 630,
+         "x2": 653
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom19yjxu",
@@ -15724,7 +16075,21 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "AU-DELÀ DU FLEUVE ET SOUS LES ARBRES",
+         "auteur": "ERNEST HEMINGWAY"
+        },
+        "vue": {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 653,
+         "x2": 676
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T11:09:17.206Z"
+       }
       },
       {
        "id": "mudscom17xacy",
@@ -15736,7 +16101,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 676,
+         "x2": 699
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1cu7hb",
@@ -15748,7 +16123,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 699,
+         "x2": 722
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1qkzwk",
@@ -15760,7 +16145,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 722,
+         "x2": 745
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1gqx4m",
@@ -15772,7 +16167,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 745,
+         "x2": 768
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom168qyo",
@@ -15784,7 +16189,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 768,
+         "x2": 791
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1mp2l4",
@@ -15796,7 +16211,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 791,
+         "x2": 814
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1n1xw5",
@@ -15808,7 +16233,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 814,
+         "x2": 837
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1cu7bp",
@@ -15820,7 +16255,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 837,
+         "x2": 860
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1qxzi0",
@@ -15832,7 +16277,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 860,
+         "x2": 883
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1ys73j",
@@ -15844,7 +16299,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 883,
+         "x2": 906
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
+      },
+      {
+       "id": "muiadgckzronx",
+       "titre": "LA GUERRE À NEUF ANS",
+       "auteur": "PASCAL JARDIN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 906,
+         "x2": 929
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudscom1fsj1h",
@@ -15856,7 +16344,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 929,
+         "x2": 952
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       },
       {
        "id": "mudscom1fwnnn",
@@ -15868,7 +16366,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:muiacjub77sbj",
+         "x1": 952,
+         "x2": 975
+        }
+       ],
+       "temoins": [
+        "appoint:muiacjub77sbj:2026-09-26T11:07:48.282Z"
+       ]
       }
      ],
      "photo": {
@@ -15893,7 +16401,65 @@
       "chemin": "images/mucn2e6dat2vv/5-2-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-23T07:32:27.016Z"
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/5-2-appoint-muiacjub77sbj.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T11:07:48.282Z",
+       "id": "muiacjub77sbj",
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 30,
+        "date": "2026-09-26T11:08:15.231Z"
+       },
+       "livresVus": [
+        "mudscom0i8com",
+        "mudscom0tcd9j",
+        "muiadgcklt5ww",
+        "mudscom13ts7r",
+        "muiadgckhgzng",
+        "muiadgcky7kj0",
+        "mudscom1fqynb",
+        "mudscom16a7f1",
+        "muiadgckysjec",
+        "mudscom1d1134",
+        "mudscom1i1xsg",
+        "mudscom1hvuxo",
+        "muiadgckir1wg",
+        "mudscom1x6x5w",
+        "mudscom1m6in7",
+        "mudscom146qqu",
+        "mudscom1k39ez",
+        "mudscom1r5xxc",
+        "mudscom19r64t",
+        "muiadgck0x0at",
+        "mudscom14rip2",
+        "mudscom1d7dxu",
+        "mudscom115jhi",
+        "muiadgckbrefv",
+        "mudscom1waqrn",
+        "mudscom17xacy",
+        "mudscom1cu7hb",
+        "mudscom1qkzwk",
+        "mudscom1gqx4m",
+        "mudscom168qyo",
+        "mudscom1mp2l4",
+        "mudscom1n1xw5",
+        "mudscom1cu7bp",
+        "mudscom1qxzi0",
+        "mudscom1ys73j",
+        "muiadgckzronx",
+        "mudscom1fsj1h",
+        "mudscom1fwnnn"
+       ],
+       "verif": "2026-09-26T11:09:17.206Z"
+      }
+     ]
     },
     "5-3": {
      "livres": [
@@ -16135,7 +16701,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:03:45.298Z",
+ "maj": "2026-09-26T11:09:18.800Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
