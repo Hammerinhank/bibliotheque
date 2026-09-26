@@ -13271,7 +13271,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847lh9dlf",
@@ -13283,7 +13284,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847lujz46",
@@ -13295,7 +13297,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847lmoclx",
@@ -13307,7 +13310,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847lgd8g6",
@@ -13319,7 +13323,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847l4w8rw",
@@ -13331,7 +13336,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847l2cm7p",
@@ -13343,7 +13349,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847laru8q",
@@ -13365,7 +13372,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudr847ls2t13",
@@ -13387,7 +13395,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mui4s1m23i6q7",
@@ -13410,7 +13419,7 @@
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudr847li7002",
@@ -13432,7 +13441,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudr847lvrh73",
@@ -13454,7 +13464,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudr847lhsnxq",
@@ -13476,7 +13487,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mui4s1m2mkme0",
@@ -13499,7 +13511,7 @@
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudr847lg6ujh",
@@ -13521,7 +13533,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudr847ls0a1w",
@@ -13543,7 +13556,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudr847lonbwi",
@@ -13565,7 +13579,8 @@
        ],
        "temoins": [
         "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudr847l11tc4",
@@ -13577,7 +13592,8 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudr847lrixk9",
@@ -13892,7 +13908,10 @@
        ],
        "verif": "2026-09-26T08:31:42.624Z"
       }
-     ]
+     ],
+     "certif": {
+      "devant": "2026-09-26T08:32:47.044Z"
+     }
     },
     "5-2": {
      "livres": [
@@ -14875,7 +14894,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T08:31:43.657Z",
+ "maj": "2026-09-26T08:32:53.119Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
