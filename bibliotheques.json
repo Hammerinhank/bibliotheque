@@ -8485,6 +8485,50 @@
        "origine": "ia"
       },
       {
+       "id": "muimfakhfhym2",
+       "titre": "La cavale",
+       "auteur": "Albertine Sarrazin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 25,
+         "x2": 70
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhnbgft",
+       "titre": "LES CADETS",
+       "auteur": "ERNST VON SALOMON",
+       "annee": "1950",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 70,
+         "x2": 115
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "mud5yytj0b5q4",
        "titre": "UN MOIS DANS UN AN",
        "auteur": "Françoise Sagan (femme de lettres française, 1935-2004)",
@@ -8493,7 +8537,17 @@
        "remarque": "",
        "resume": "Une jeune femme fortunée s'interroge sur sa vie oisive et ses amours lors d'un séjour en station balnéaire.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 115,
+         "x2": 155
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjcqetl",
@@ -8504,7 +8558,18 @@
        "remarque": "",
        "resume": "Des mercenaires engagés dans une guerre civile africaine tentent de survivre à une traversée périlleuse à travers la jungle.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 155,
+         "x2": 195
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjc7uy2",
@@ -8515,7 +8580,215 @@
        "remarque": "",
        "resume": "",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 180,
+         "x2": 210
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T16:47:32.565Z"
+       }
+      },
+      {
+       "id": "muimfakhs59jr",
+       "titre": "La marche de Radetzky",
+       "auteur": "Joseph Roth",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 195,
+         "x2": 235
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakh4ghn9",
+       "titre": "ARC DE TRIOMPHE",
+       "auteur": "ERICH MARIA REMARQUE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 235,
+         "x2": 275
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhkfxxb",
+       "titre": "L'amour et les forêts",
+       "auteur": "Éric Reinhardt",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 275,
+         "x2": 315
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhr0iro",
+       "titre": "La ferme des Neshov",
+       "auteur": "Anne B. RAGDE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 315,
+         "x2": 355
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhvp76d",
+       "titre": "L'héritage impossible",
+       "auteur": "Anne B. RAGDE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 355,
+         "x2": 395
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhl2c7v",
+       "titre": "La terre des mensonges",
+       "auteur": "Anne B. RAGDE",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 395,
+         "x2": 435
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhgi0xb",
+       "titre": "Cabane",
+       "auteur": "ABEL QUENTIN",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 435,
+         "x2": 475
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhvonhd",
+       "titre": "Journal d'un salaud",
+       "auteur": "Henri Queffélec",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 475,
+         "x2": 515
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhcmjxt",
+       "titre": "Un homme d'Ouessant",
+       "auteur": "Henri Queffélec",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 515,
+         "x2": 555
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5yytjodwxj",
@@ -8526,7 +8799,17 @@
        "remarque": "",
        "resume": "",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 555,
+         "x2": 595
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytj7v0qt",
@@ -8537,7 +8820,21 @@
        "remarque": "titre partiellement visible",
        "resume": "",
        "categorie": "Essais",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "Les plaisirs et les jours",
+         "auteur": "Marcel Proust"
+        },
+        "vue": {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 595,
+         "x2": 635
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T16:47:32.565Z"
+       }
       },
       {
        "id": "mud5yytj7jbe7",
@@ -8548,7 +8845,17 @@
        "remarque": "collection Le Livre de Poche",
        "resume": "Le récit autobiographique d'un médecin allemand engagé dans les aventures et les péripéties au cœur du désert arabique.",
        "categorie": "Histoire",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 635,
+         "x2": 675
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytj28ds9",
@@ -8559,7 +8866,21 @@
        "remarque": "collection Folio",
        "resume": "Biographie historique fouillée consacrée à la vie du chef cosaque rebelle Iemelyan Pougatchev par le grand maître de la littérature russe.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "La fille du capitaine",
+         "auteur": "Alexandre Pouchkine"
+        },
+        "vue": {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 675,
+         "x2": 715
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T16:47:32.565Z"
+       }
       },
       {
        "id": "mud5yytjq78g0",
@@ -8570,7 +8891,17 @@
        "remarque": "collection Points",
        "resume": "Une jeune femme quitte tout pour partir pêcher la morue en Alaska, menant un combat rude au milieu des hommes.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 715,
+         "x2": 755
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjvh0xz",
@@ -8581,7 +8912,17 @@
        "remarque": "collection Points",
        "resume": "Le journal fictif de l'architecte maître Guillaume construisant l'abbaye du Thoronet, hymne à la pierre et à la spiritualité.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 755,
+         "x2": 795
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjjshi9",
@@ -8592,7 +8933,17 @@
        "remarque": "collection Folio",
        "resume": "Un homme ordinaire voit sa vie basculer lorsqu'il est soupçonné et accusé à tort d'un crime terrible.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 795,
+         "x2": 835
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjince2",
@@ -8603,7 +8954,17 @@
        "remarque": "",
        "resume": "",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 835,
+         "x2": 875
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjz3wft",
@@ -8614,29 +8975,61 @@
        "remarque": "titre et auteur partiellement visibles",
        "resume": "",
        "categorie": "Non classé",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 860,
+         "x2": 890
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T16:47:32.565Z"
+       }
       },
       {
        "id": "mud5yytjwp8gf",
-       "titre": "LES CULOTTES DU DIMANCHE",
-       "auteur": "Valérie Perrin (romancière et photographe française, née en 1967)",
+       "titre": "LES OUBLIÉS DU DIMANCHE",
+       "auteur": "VALÉRIE PERRIN",
        "annee": "",
        "certitude": "haute",
        "remarque": "",
        "resume": "",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 875,
+         "x2": 915
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjjdkdd",
-       "titre": "ORAL ÉPINGLE",
-       "auteur": "",
+       "titre": "Bande à part",
+       "auteur": "JACQUES PERRET",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "titre partiellement visible",
        "resume": "",
        "categorie": "Non classé",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 915,
+         "x2": 955
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
       },
       {
        "id": "mud5yytjhswyo",
@@ -8647,7 +9040,61 @@
        "remarque": "collection Folio",
        "resume": "Un journaliste désabusé plaque sa vie citadine après avoir blessé un lièvre en voiture, s'enfuyant avec lui dans la nature.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 955,
+         "x2": 995
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ]
+      },
+      {
+       "id": "muimfakhoa9i8",
+       "titre": "La Belle du Caire",
+       "auteur": "",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 970,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muimfakhgkf9y",
+       "titre": "SCIENCE FICTION",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muim27gxnhvw1",
+         "x1": 235,
+         "x2": 275
+        }
+       ],
+       "temoins": [
+        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
+       ],
+       "statut": "probable"
       }
      ],
      "photo": {
@@ -8670,7 +9117,41 @@
        "envoye": true,
        "maj": "2026-09-26T16:36:55.331Z",
        "id": "muim27gxnhvw1",
-       "legende": ""
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 8,
+        "n2": 0,
+        "date": "2026-09-26T16:45:36.442Z"
+       },
+       "livresVus": [
+        "muimfakhfhym2",
+        "muimfakhnbgft",
+        "mud5yytj0b5q4",
+        "mud5yytjcqetl",
+        "muimfakhs59jr",
+        "muimfakh4ghn9",
+        "muimfakhkfxxb",
+        "muimfakhr0iro",
+        "muimfakhvp76d",
+        "muimfakhl2c7v",
+        "muimfakhgi0xb",
+        "muimfakhvonhd",
+        "muimfakhcmjxt",
+        "mud5yytjodwxj",
+        "mud5yytj7jbe7",
+        "mud5yytjq78g0",
+        "mud5yytjvh0xz",
+        "mud5yytjjshi9",
+        "mud5yytjince2",
+        "mud5yytjwp8gf",
+        "mud5yytjjdkdd",
+        "mud5yytjhswyo",
+        "muimfakhoa9i8",
+        "muimfakhgkf9y"
+       ],
+       "verif": "2026-09-26T16:47:32.566Z"
       }
      ]
     },
@@ -18642,7 +19123,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T16:44:46.618Z",
+ "maj": "2026-09-26T16:47:33.360Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
