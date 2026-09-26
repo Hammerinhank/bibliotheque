@@ -17144,7 +17144,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z",
-        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z",
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -17152,8 +17153,36 @@
          "champ": "appoint:muig3pqtou0x5",
          "x1": 15,
          "x2": 70
+        },
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 108,
+         "x2": 224
         }
        ]
+      },
+      {
+       "id": "muig7wvvdykts",
+       "titre": "PIRATES DU RHONE",
+       "auteur": "BERNARD CLAVEL",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 228,
+         "x2": 308
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muig4dptutq47",
@@ -17170,13 +17199,19 @@
          "champ": "appoint:muig3pqtou0x5",
          "x1": 70,
          "x2": 100
+        },
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 312,
+         "x2": 435
         }
        ],
        "rang": "derriere",
        "temoins": [
-        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z",
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muig21njwd1om",
@@ -17191,7 +17226,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z",
-        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z",
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -17199,6 +17235,11 @@
          "champ": "appoint:muig3pqtou0x5",
          "x1": 100,
          "x2": 140
+        },
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 439,
+         "x2": 520
         }
        ]
       },
@@ -17215,7 +17256,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z",
-        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z",
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -17223,6 +17265,11 @@
          "champ": "appoint:muig3pqtou0x5",
          "x1": 140,
          "x2": 170
+        },
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 524,
+         "x2": 699
         }
        ]
       },
@@ -17239,7 +17286,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z",
-        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z",
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -17247,6 +17295,11 @@
          "champ": "appoint:muig3pqtou0x5",
          "x1": 170,
          "x2": 200
+        },
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 703,
+         "x2": 845
         }
        ]
       },
@@ -17287,7 +17340,8 @@
        "rang": "derriere",
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z",
-        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z",
+        "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
        "statut": "acquis",
        "vues": [
@@ -17295,6 +17349,11 @@
          "champ": "appoint:muig3pqtou0x5",
          "x1": 230,
          "x2": 260
+        },
+        {
+         "champ": "appoint:muig7c0nomboo",
+         "x1": 849,
+         "x2": 951
         }
        ]
       },
@@ -17940,6 +17999,31 @@
         "muig4dptzoc4o"
        ],
        "verif": "2026-09-26T13:50:11.378Z"
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/5-3-appoint-muig7c0nomboo.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T13:51:27.383Z",
+       "id": "muig7c0nomboo",
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 6,
+        "date": "2026-09-26T13:51:54.410Z"
+       },
+       "livresVus": [
+        "muig21ni0x0ln",
+        "muig7wvvdykts",
+        "muig4dptutq47",
+        "muig21njwd1om",
+        "muig21njua70e",
+        "muig21nj94xyv",
+        "muig21njrj7gv"
+       ],
+       "verif": "2026-09-26T13:52:00.799Z"
       }
      ]
     }
@@ -17948,7 +18032,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T13:50:13.995Z",
+ "maj": "2026-09-26T13:52:02.335Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
