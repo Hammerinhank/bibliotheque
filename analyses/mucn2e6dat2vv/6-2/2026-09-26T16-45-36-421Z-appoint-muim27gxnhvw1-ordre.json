@@ -1,0 +1,275 @@
+{
+ "date": "2026-09-26T16:45:36.421Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "6-2",
+ "genre": "appoint",
+ "appoint": "muim27gxnhvw1",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "La cavale",
+   "auteur": "Albertine Sarrazin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 25,
+   "x2": 70,
+   "illisible": false
+  },
+  {
+   "titre": "LES CADETS",
+   "auteur": "ERNST VON SALOMON",
+   "annee": "1950",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 70,
+   "x2": 115,
+   "illisible": false
+  },
+  {
+   "titre": "DANS UN MOIS DANS UN AN",
+   "auteur": "FRANÇOISE SAGAN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 115,
+   "x2": 155,
+   "illisible": false
+  },
+  {
+   "titre": "Sept histoires qui reviennent de loin",
+   "auteur": "Corinne Royer • Pleine Terre",
+   "annee": "1889",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 155,
+   "x2": 195,
+   "illisible": false
+  },
+  {
+   "titre": "La marche de Radetzky",
+   "auteur": "Joseph Roth",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 195,
+   "x2": 235,
+   "illisible": false
+  },
+  {
+   "titre": "ARC DE TRIOMPHE",
+   "auteur": "ERICH MARIA REMARQUE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 235,
+   "x2": 275,
+   "illisible": false
+  },
+  {
+   "titre": "L'amour et les forêts",
+   "auteur": "Éric Reinhardt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 275,
+   "x2": 315,
+   "illisible": false
+  },
+  {
+   "titre": "La ferme des Neshov",
+   "auteur": "Anne B. RAGDE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 315,
+   "x2": 355,
+   "illisible": false
+  },
+  {
+   "titre": "L'héritage impossible",
+   "auteur": "Anne B. RAGDE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 355,
+   "x2": 395,
+   "illisible": false
+  },
+  {
+   "titre": "La terre des mensonges",
+   "auteur": "Anne B. RAGDE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 395,
+   "x2": 435,
+   "illisible": false
+  },
+  {
+   "titre": "Cabane",
+   "auteur": "ABEL QUENTIN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 435,
+   "x2": 475,
+   "illisible": false
+  },
+  {
+   "titre": "Journal d'un salaud",
+   "auteur": "Henri Queffélec",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 475,
+   "x2": 515,
+   "illisible": false
+  },
+  {
+   "titre": "Un homme d'Ouessant",
+   "auteur": "Henri Queffélec",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 515,
+   "x2": 555,
+   "illisible": false
+  },
+  {
+   "titre": "LAISSEZ VENIR LA MER",
+   "auteur": "Henri Queffélec",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 555,
+   "x2": 595,
+   "illisible": false
+  },
+  {
+   "titre": "Les plaisirs et les jours",
+   "auteur": "Marcel Proust",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 595,
+   "x2": 635,
+   "illisible": false
+  },
+  {
+   "titre": "médecin du désert",
+   "auteur": "HERBERT PRITZKE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 635,
+   "x2": 675,
+   "illisible": false
+  },
+  {
+   "titre": "La fille du capitaine",
+   "auteur": "Alexandre Pouchkine",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 675,
+   "x2": 715,
+   "illisible": false
+  },
+  {
+   "titre": "Le grand marin",
+   "auteur": "Catherine Poulain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 715,
+   "x2": 755,
+   "illisible": false
+  },
+  {
+   "titre": "Les pierres sauvages",
+   "auteur": "Fernand Pouillon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 755,
+   "x2": 795,
+   "illisible": false
+  },
+  {
+   "titre": "Un homme effacé",
+   "auteur": "Alexandre Postel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 795,
+   "x2": 835,
+   "illisible": false
+  },
+  {
+   "titre": "La Fabrique de Souvenirs",
+   "auteur": "PHILIPPE POLLET-VILLARD",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 835,
+   "x2": 875,
+   "illisible": false
+  },
+  {
+   "titre": "LES OUBLIÉS DU DIMANCHE",
+   "auteur": "VALÉRIE PERRIN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 875,
+   "x2": 915,
+   "illisible": false
+  },
+  {
+   "titre": "Bande à part",
+   "auteur": "JACQUES PERRET",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 915,
+   "x2": 955,
+   "illisible": false
+  },
+  {
+   "titre": "Le lièvre de Vatanen",
+   "auteur": "Arto Paasilinna",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 955,
+   "x2": 995,
+   "illisible": false
+  },
+  {
+   "titre": "La Belle du Caire",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "couché",
+   "x1": 970,
+   "x2": 1000,
+   "illisible": false
+  },
+  {
+   "titre": "SCIENCE FICTION",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "couché",
+   "x1": 235,
+   "x2": 275,
+   "illisible": false
+  }
+ ]
+}
