@@ -13740,9 +13740,9 @@
        "rang": "derriere"
       },
       {
-       "id": "mudr847l41g97",
-       "titre": "La petite fille au tambour",
-       "auteur": "John le Carré",
+       "id": "mudr847lapt1z",
+       "titre": "Le parc jurassique",
+       "auteur": "Michael Crichton",
        "annee": "",
        "certitude": "haute",
        "remarque": "Robert Laffont",
@@ -13752,9 +13752,9 @@
        "rang": "derriere"
       },
       {
-       "id": "mudr847lapt1z",
-       "titre": "Le parc jurassique",
-       "auteur": "Michael Crichton",
+       "id": "mudr847l41g97",
+       "titre": "La petite fille au tambour",
+       "auteur": "John le Carré",
        "annee": "",
        "certitude": "haute",
        "remarque": "Robert Laffont",
@@ -14906,7 +14906,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T09:07:26.942Z",
+ "maj": "2026-09-26T09:08:01.904Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
