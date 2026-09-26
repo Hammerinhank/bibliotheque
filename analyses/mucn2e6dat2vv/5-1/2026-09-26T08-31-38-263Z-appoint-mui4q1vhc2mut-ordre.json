@@ -1,0 +1,115 @@
+{
+ "date": "2026-09-26T08:31:38.263Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "5-1",
+ "genre": "appoint",
+ "appoint": "mui4q1vhc2mut",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Forteresse Digitale",
+   "auteur": "Dan Brown",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 0,
+   "x2": 128,
+   "illisible": false
+  },
+  {
+   "titre": "L'Iceberg",
+   "auteur": "Arnaud de Borchgrave & Robert Moss",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 131,
+   "x2": 262,
+   "illisible": false
+  },
+  {
+   "titre": "Coule la Seine",
+   "auteur": "Fred Vargas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 262,
+   "x2": 304,
+   "illisible": false
+  },
+  {
+   "titre": "La Madone de Notre-Dame",
+   "auteur": "Alexis Ragougneau",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 302,
+   "x2": 367,
+   "illisible": false
+  },
+  {
+   "titre": "Mortes-eaux",
+   "auteur": "Donna Leon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 369,
+   "x2": 476,
+   "illisible": false
+  },
+  {
+   "titre": "Un lieu incertain",
+   "auteur": "Fred Vargas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 475,
+   "x2": 572,
+   "illisible": false
+  },
+  {
+   "titre": "Salut et liberté",
+   "auteur": "Fred Vargas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 567,
+   "x2": 608,
+   "illisible": false
+  },
+  {
+   "titre": "Temps glaciaires",
+   "auteur": "Fred Vargas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 597,
+   "x2": 760,
+   "illisible": false
+  },
+  {
+   "titre": "Quand sort la recluse",
+   "auteur": "Fred Vargas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 742,
+   "x2": 922,
+   "illisible": false
+  },
+  {
+   "titre": "L'Armée furieuse",
+   "auteur": "Fred Vargas",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 922,
+   "x2": 1000,
+   "illisible": false
+  }
+ ]
+}
