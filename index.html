@@ -160,6 +160,12 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .secIa .sousTitre{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--texte2);margin:12px 0 4px;padding-top:8px;border-top:1px solid var(--trait)}
 .secIa .sousTitre:first-of-type{border-top:0;padding-top:0;margin-top:4px}
 .infoLigne{display:flex;gap:8px;font-size:14px;margin:3px 0}
+.groupeOutil{border:1.5px solid var(--bronze);border-radius:12px;padding:10px 12px 12px;margin-top:12px;background:rgba(255,255,255,.03)}
+.groupeOutil .titreGroupe{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--bronze);margin-bottom:8px}
+.groupeOutil .btn{min-height:46px}
+.caseUnRang{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--trait);border-radius:10px;background:var(--encre);cursor:pointer}
+.caseUnRang input{width:26px;height:26px;flex:0 0 26px;margin:0}
+.caseUnRang span{font-size:14.5px;line-height:1.35}
 .infoLigne .cle{color:var(--texte2);min-width:92px}
 .case .etoile{position:absolute;bottom:3px;z-index:3;font-size:15px;line-height:1;color:#ffd23f;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8)}
 .case .etoile.g{left:4px}
@@ -424,8 +430,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.71.0";
+const VERSION = "V1.71.1";
 const HISTORIQUE = [
+  { v:"V1.71.1", d:"25/09/2026", l:[
+    "Outils : chaque partie (Photo, Analyse, Compartiment) dans un encadré à liseré ; boutons de la photo nettement espacés, « Retirer cette photo » isolé en bas derrière un trait ; case « Un seul rang » agrandie, dans une zone entièrement touchable ; boutons du compartiment espacés."
+  ]},
   { v:"V1.71.0", d:"25/09/2026", l:[
     "Mode ✏️ Éditer réorganisé entre la photo et les filtres : sous la photo, seulement son affichage (Entière / Ajustée / 100 % / 200 %, Taille réelle) ; puis deux encadrés repliables, ouverts par défaut.",
     "« ℹ️ Informations » : la photo affichée (rangée, définition, sauvegarde) et le compartiment (1 ou 2 rangs, livres par rangée avec acquis / probables / questions, certification, dernière analyse).",
@@ -5188,10 +5197,13 @@ function ouvrirCompartiment(b, k){
            </details>
            <details class="secIa" id="cOutils" open>
              <summary>🛠 Outils</summary>
-             <div class="sousTitre">Photo</div>
+             <div class="groupeOutil">
+             <div class="titreGroupe">Photo</div>
              <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
              <div id="cOutilsPhoto"></div>
-             <div class="sousTitre">Analyse</div>
+             </div>
+             <div class="groupeOutil">
+             <div class="titreGroupe">Analyse</div>
            <div class="encadre" id="cBlocAnalyse" style="margin-top:6px">
              <div id="cTitreAnalyse" style="font-weight:700;margin-bottom:8px">Analyse de cette photo</div>
              <div class="barre" style="align-items:stretch">
@@ -5202,10 +5214,13 @@ function ouvrirCompartiment(b, k){
              <div class="aide" id="cInfoReu" style="margin:6px 0 0"></div>
            </div>
            <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste. <b>🔎 Vérifier</b> : chaque livre lu est cherché dans les listes des rangées 1 et 2 (titre, auteur, voisinage). <b>🔀 Ordre respecté</b> : l'app repère la zone de la rangée que couvre la photo et aligne les livres un à un dans l'ordre ; vous corrigez au besoin l'ordre de deux voisins avec la poignée ≡. Rien n'est modifié sans votre accord.</div>
-             <div class="sousTitre">Compartiment</div>
-             <div id="zoneUnRang" style="margin-top:4px"></div>
-             <button class="btn plein" id="cPermuter" style="margin-top:8px">⇄ Permuter les rangées devant / derrière</button>
-             <div id="cOutilsComp"></div>
+             </div>
+             <div class="groupeOutil">
+             <div class="titreGroupe">Compartiment</div>
+             <div id="zoneUnRang"></div>
+             <button class="btn plein" id="cPermuter" style="margin-top:14px;min-height:46px">⇄ Permuter les rangées devant / derrière</button>
+             <div id="cOutilsComp" style="margin-top:6px"></div>
+             </div>
            </details>
            <input type="file" id="cFichier" accept="image/*" hidden>
            <div class="titreSection">Livres de ce compartiment</div>
@@ -5438,8 +5453,8 @@ function ouvrirCompartiment(b, k){
       return;
     }
     if (certifiee(cs, "devant")){ z.innerHTML = cs.unRang ? `<div class="aide" style="margin:0">Un seul rang, compartiment complet (rangée 1 certifiée ★).</div>` : ""; return; }
-    z.innerHTML = `<div class="coche" style="margin:0"><input type="checkbox" id="cUnRang" ${cs.unRang ? "checked" : ""}>
-        <label for="cUnRang" style="margin:0">Un seul rang, compartiment complet — étiquette blanche <b style="display:inline-block;white-space:nowrap;font-size:11px;font-weight:800;color:#1c1500;background:#ffffff;border:1px solid #1c1500;border-radius:4px;padding:0 4px;vertical-align:1px">1 RANG</b> sur la grille</label></div>`;
+    z.innerHTML = `<label class="caseUnRang" for="cUnRang"><input type="checkbox" id="cUnRang" ${cs.unRang ? "checked" : ""}>
+        <span>Un seul rang, compartiment complet<br><span class="aide" style="margin:0">étiquette blanche <b style="display:inline-block;white-space:nowrap;font-size:11px;font-weight:800;color:#1c1500;background:#ffffff;border:1px solid #1c1500;border-radius:4px;padding:0 4px;vertical-align:1px">1 RANG</b> sur la grille</span></span></label>`;
     z.querySelector("#cUnRang").onchange = (e)=>{
       if (e.target.checked) cs.unRang = true; else delete cs.unRang;
       sauver(); rendreBiblio();
@@ -5500,6 +5515,7 @@ function ouvrirCompartiment(b, k){
       <div class="aide" style="margin:4px 0 0">${appoint ? "Cette photo d'appoint se rapporte à cette rangée. " : ""}Pour la modifier, retirez d'abord la certification (dans « Livres de ce compartiment »).</div>`;
     f.querySelector("#cPhoto").style.display = verrou ? "none" : "";
     if (verrou && bloc) bloc.style.display = "none";
+    if (bloc) bloc.closest(".groupeOutil").style.display = bloc.style.display;      // pas de groupe « Analyse » vide
     const bOrd = f.querySelector("#cAppointOrdre");
     if (bOrd) bOrd.style.display = "none";
     const zIP = f.querySelector("#cInfoPhoto"), zOP = f.querySelector("#cOutilsPhoto");
@@ -5523,16 +5539,18 @@ function ouvrirCompartiment(b, k){
       (verrou ? ligneInfo("État", "★ rangée certifiée — consultation seule") : "");
     const statut = "";
     const outilsPhoto = (lignesVis)=> verrou ? "" : `
-       <div class="barre" style="margin:8px 0 2px">
-         <button class="btn ${lignesVis ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVis ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
-         ${lignesVis ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
-         ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
+       <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px">
+         <button class="btn plein ${lignesVis ? "coupeOn" : ""}" id="cLignes">${lignesVis ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
+         ${lignesVis ? `<button class="btn rouge plein" id="cTronquer">✂️ Tronquer</button>` : ""}
+         ${avantTroncature ? `<button class="btn plein" id="cAnnulerCoupe">↶ Annuler la troncature</button>` : ""}
        </div>
        ${lignesVis ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
        ${appoint ? `<label for="cLegende">Légende de cette photo d'appoint</label>
          <input type="text" id="cLegende" value="${esc(ph0.legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…">
          <div class="aide">Transmise à l'IA : elle l'aide à savoir ce que vous vouliez montrer.</div>` : ""}
-       <button class="btn rouge plein" id="cRetirer" style="margin-top:8px">🗑 Retirer cette photo</button>`;
+       <div style="margin-top:22px;padding-top:16px;border-top:1px dashed var(--trait)">
+         <button class="btn rouge plein" id="cRetirer">🗑 Retirer cette photo</button>
+       </div>`;
 
     if (!src){
       // pas encore en mémoire : chargement de la vraie photo, jamais de version dégradée
