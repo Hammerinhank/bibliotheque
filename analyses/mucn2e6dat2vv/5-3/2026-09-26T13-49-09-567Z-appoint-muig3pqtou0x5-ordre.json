@@ -1,0 +1,315 @@
+{
+ "date": "2026-09-26T13:49:09.567Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "5-3",
+ "genre": "appoint",
+ "appoint": "muig3pqtou0x5",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "L'Enquête",
+   "auteur": "Philippe Claudel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 15,
+   "x2": 70,
+   "illisible": false
+  },
+  {
+   "titre": "Le seigneur du fleuve",
+   "auteur": "Bernard Clavel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 70,
+   "x2": 100,
+   "illisible": false
+  },
+  {
+   "titre": "Meurtre sur le Grandvaux",
+   "auteur": "Bernard Clavel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 100,
+   "x2": 140,
+   "illisible": false
+  },
+  {
+   "titre": "Pour l'amour de l'Inde",
+   "auteur": "Catherine Clément",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 140,
+   "x2": 170,
+   "illisible": false
+  },
+  {
+   "titre": "La Reine des cipayes",
+   "auteur": "Catherine Clément",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 170,
+   "x2": 200,
+   "illisible": false
+  },
+  {
+   "titre": "Le dernier des nôtres",
+   "auteur": "Adélaïde de Clermont-Tonnerre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 200,
+   "x2": 230,
+   "illisible": false
+  },
+  {
+   "titre": "Le dernier des nôtres",
+   "auteur": "Adélaïde de Clermont-Tonnerre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 230,
+   "x2": 260,
+   "illisible": false
+  },
+  {
+   "titre": "Étoile errante",
+   "auteur": "J.M.G. Le Clézio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 260,
+   "x2": 290,
+   "illisible": false
+  },
+  {
+   "titre": "Diego & Frida",
+   "auteur": "J.M.G. Le Clézio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 290,
+   "x2": 320,
+   "illisible": false
+  },
+  {
+   "titre": "Le chercheur d'or",
+   "auteur": "J.M.G. Le Clézio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 320,
+   "x2": 350,
+   "illisible": false
+  },
+  {
+   "titre": "Onitsha",
+   "auteur": "J.M.G. Le Clézio",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 350,
+   "x2": 370,
+   "illisible": false
+  },
+  {
+   "titre": "Testament à l'anglaise",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 370,
+   "x2": 400,
+   "illisible": false
+  },
+  {
+   "titre": "L'Alchimiste",
+   "auteur": "Paulo Coelho",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 400,
+   "x2": 430,
+   "illisible": false
+  },
+  {
+   "titre": "La félicité du loup",
+   "auteur": "Paolo Cognetti",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 430,
+   "x2": 460,
+   "illisible": false
+  },
+  {
+   "titre": "Les huit montagnes",
+   "auteur": "Paolo Cognetti",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 460,
+   "x2": 480,
+   "illisible": false
+  },
+  {
+   "titre": "La tresse",
+   "auteur": "Laetitia Colombani",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 480,
+   "x2": 500,
+   "illisible": false
+  },
+  {
+   "titre": "Mariage en Provence",
+   "auteur": "Marquise Colombani",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 500,
+   "x2": 530,
+   "illisible": false
+  },
+  {
+   "titre": "L'ivresse du kangourou",
+   "auteur": "Kenneth Cook",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 530,
+   "x2": 560,
+   "illisible": false
+  },
+  {
+   "titre": "Passage de la comète",
+   "auteur": "Henri Coulonge",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 560,
+   "x2": 590,
+   "illisible": false
+  },
+  {
+   "titre": "La Marche Hongroise",
+   "auteur": "Henri Coulonges",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 590,
+   "x2": 620,
+   "illisible": false
+  },
+  {
+   "titre": "Six oies cendrées",
+   "auteur": "Henri Coulonges",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 620,
+   "x2": 650,
+   "illisible": false
+  },
+  {
+   "titre": "Monument national",
+   "auteur": "Julia Deck",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 650,
+   "x2": 670,
+   "illisible": false
+  },
+  {
+   "titre": "Docile",
+   "auteur": "Didier Decoin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 670,
+   "x2": 700,
+   "illisible": false
+  },
+  {
+   "titre": "La promeneuse d'oiseaux",
+   "auteur": "Didier Decoin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 700,
+   "x2": 730,
+   "illisible": false
+  },
+  {
+   "titre": "Une Anglaise à bicyclette",
+   "auteur": "Didier Decoin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 730,
+   "x2": 760,
+   "illisible": false
+  },
+  {
+   "titre": "Madame Seyerling",
+   "auteur": "Grégoire Delacourt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 760,
+   "x2": 790,
+   "illisible": false
+  },
+  {
+   "titre": "La première chose qu'on regarde",
+   "auteur": "Grégoire Delacourt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 790,
+   "x2": 820,
+   "illisible": false
+  },
+  {
+   "titre": "L'extase du selfi",
+   "auteur": "Philippe Delerm",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 820,
+   "x2": 850,
+   "illisible": false
+  },
+  {
+   "titre": "Elle marchait sur un fil",
+   "auteur": "Philippe Delerm",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 850,
+   "x2": 880,
+   "illisible": false
+  },
+  {
+   "titre": "Les eaux troubles du mojito",
+   "auteur": "Philippe Delerm",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 880,
+   "x2": 910,
+   "illisible": false
+  }
+ ]
+}
