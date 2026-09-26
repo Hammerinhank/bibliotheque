@@ -251,6 +251,12 @@ body.glisseEnCours, body.glisseEnCours *{-webkit-user-select:none!important;user
   box-shadow:0 6px 24px rgba(0,0,0,.5);
 }
 #toast.masque{display:none}
+#barreAnnuler{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9999;display:none;
+  align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:#2a2f38;border:2px solid var(--bronze);box-shadow:0 8px 24px rgba(0,0,0,.6)}
+#barreAnnuler.visible{display:flex}
+#barreAnnuler span{flex:1;font-size:14px}
+#barreAnnuler button{min-height:42px;padding:0 14px;border-radius:10px;border:1px solid var(--bronze);background:var(--bronze);color:#1c1500;font-weight:700;font-size:15px}
+#barreAnnuler button.fermer{background:transparent;color:var(--texte);border-color:var(--trait);padding:0 12px}
 /* ---------- IA sans clé (Claude ou Gemini) : bouton vert vif en attente de la réponse ---------- */
 .btn.vif,#attenteClaude button.vif{background:#19e35f;border-color:#7dffa8;color:#062611;font-weight:700;box-shadow:0 0 0 3px rgba(25,227,95,.28),0 6px 20px rgba(25,227,95,.35)}
 .btn.vif:active{background:#12b84b}
@@ -412,8 +418,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.69.2";
+const VERSION = "V1.70.0";
 const HISTORIQUE = [
+  { v:"V1.70.0", d:"25/09/2026", l:[
+    "Sauvegarde des modifications à la main beaucoup moins fréquente : elle attend 2 minutes sans aucune action (au lieu de 5 s), et part aussi dès qu'on ferme le compartiment ou qu'on quitte l'app. Plus de message à chaque sauvegarde automatique réussie (le log la note) ; l'alerte « sauvegarde suspendue » n'est plus répétée plus d'une fois toutes les 10 minutes.",
+    "Glisser-déposer : après chaque déplacement, une barre « ↩ Annuler ce déplacement » s'affiche en bas de l'écran (sans avoir à faire défiler la liste) pendant 15 secondes ; le geste de glisser-déposer lui-même est inchangé. Même chose après « Déplacer »."
+  ]},
   { v:"V1.69.2", d:"25/09/2026", l:[
     "Titre de la section Certification : deux étoiles, une par rangée — contour gris si la rangée n'a aucun livre, contour jaune vif si elle a des livres, étoile dorée pleine ⭐ si elle est certifiée."
   ]},
@@ -1924,6 +1934,8 @@ async function envoyerDonneesAuto(quoi, opts){
         const pertes = pertesEnvoi(data, j).filter(x=>!(opts.livresEnMoinsVoulus && (/^(livres|résumés|dont) :/.test(x) || /^\d+ livre\(s\) .* absent/.test(x))));
         if ((j.maj && connue && j.maj !== connue) || pertes.length){
           journal("Sauvegarde auto SUSPENDUE : " + quoi + (pertes.length ? " — " + pertes.join(" ; ") : " — GitHub modifié ailleurs"));
+          if (Date.now() - (envoyerDonneesAuto.derniereAlerte || 0) < 600000){ etatSync = "echec"; majBandeau(); return false; }
+          envoyerDonneesAuto.derniereAlerte = Date.now();
           modale({ titre:"⚠️ Sauvegarde automatique suspendue",
             html:`<div><b>${esc(quoi)}</b> est enregistré sur cet appareil, mais n'a pas été envoyé automatiquement :</div>
                   <ul>${j.maj && connue && j.maj !== connue ? "<li>la version GitHub a été modifiée ailleurs (autre appareil ou autre fenêtre) depuis votre dernier échange ;</li>" : ""}
@@ -1941,7 +1953,7 @@ async function envoyerDonneesAuto(quoi, opts){
       localStorage.setItem(CLE_SYNC, data.maj);
       sale = photosEnAttente().length > 0; etatSync = "ok";
       sauver(false);
-      toast(quoi + " : sauvegardé sur GitHub ✓", 3000);
+      if (!opts.discret) toast(quoi + " : sauvegardé sur GitHub ✓", 3000);
       journal("Sauvegarde auto réussie : " + quoi + " (" + etatCourt() + ")");
       return true;
     }catch(e){
@@ -2260,6 +2272,7 @@ function fenetreDeplacer(cs, lv, apres){
   const nomR = (x)=> cs.photo2 || (cs.livres||[]).some(y=>y.rang === "derriere") ? (rg(x) === "derriere" ? " · rangée 2" : " · rangée 1") : "";
   const deplacer = (ou)=>{
     if (!choisi) return;
+    const avant = cs.livres.slice(), rangAvant = lv.rang;
     cs.livres.splice(cs.livres.indexOf(lv), 1);
     const j = cs.livres.indexOf(choisi);
     cs.livres.splice(ou === "avant" ? j : j + 1, 0, lv);
@@ -2267,6 +2280,10 @@ function fenetreDeplacer(cs, lv, apres){
     f.remove();
     toast(`« ${lv.titre} » déplacé ${ou === "avant" ? "avant" : "après"} « ${choisi.titre} ».`, 4000);
     journal(`Livre déplacé : « ${lv.titre} » ${ou === "avant" ? "avant" : "après"} « ${choisi.titre} »`);
+    proposerAnnulation(`« ${lv.titre} » déplacé.`, ()=>{
+      cs.livres = avant; if (rangAvant) lv.rang = rangAvant; else delete lv.rang;
+      journal(`Déplacement annulé : « ${lv.titre} »`); apres();
+    });
     apres();
   };
   const afficher = ()=>{
@@ -3377,10 +3394,20 @@ function fusionConvergente(opts){
 let minuterieListes = null;
 function envoiListesDiffere(b, k){ planifierEnvoi("Listes de livres de " + lib(k)); }
 /* modifications à la main : une seule sauvegarde GitHub, 5 s après la dernière action ; hors réseau, elle attendra le retour du réseau */
+let envoiEnAttente = null;
 function planifierEnvoi(quoi){
   clearTimeout(minuterieListes);
-  minuterieListes = setTimeout(()=>envoyerDonneesAuto(quoi, { livresEnMoinsVoulus:true, silencieuxHorsReseau:true }), 5000);
+  envoiEnAttente = quoi;
+  minuterieListes = setTimeout(envoyerMaintenantSiEnAttente, 120000);     // 2 minutes sans action
 }
+/* envoie tout de suite ce qui attendait (fermeture d'un compartiment, sortie de l'app) */
+function envoyerMaintenantSiEnAttente(){
+  clearTimeout(minuterieListes);
+  if (!envoiEnAttente) return;
+  const quoi = envoiEnAttente; envoiEnAttente = null;
+  envoyerDonneesAuto(quoi, { livresEnMoinsVoulus:true, silencieuxHorsReseau:true, discret:true });
+}
+document.addEventListener("visibilitychange", ()=>{ if (document.hidden) envoyerMaintenantSiEnAttente(); });
 /* retour du réseau (ou ouverture de l'app) : envoyer ce qui attend */
 function envoyerCeQuiAttend(raison){
   if (!ghPret() || navigator.onLine === false) return;
@@ -3870,10 +3897,25 @@ function activerGlisser(z, cs, apres){
     emplacements.forEach((pos, n)=>{ cs.livres[pos] = copie[ordreApres[n]]; });
     sauver(); if (typeof rendreBiblio === "function") rendreBiblio();
     apres();
-    toast("Ordre modifié.");
     journal("Ordre des livres modifié (glisser-déposer)");
     planifierEnvoi("Ordre des livres modifié");
+    proposerAnnulation("Livre déplacé.", ()=>{
+      cs.livres = copie; sauver(); if (typeof rendreBiblio === "function") rendreBiblio(); apres();
+      journal("Glisser-déposer annulé"); planifierEnvoi("Ordre des livres modifié");
+    });
   });
+}
+/* barre fixe en bas de l'écran : « ↩ Annuler » pendant 15 s (visible sans faire défiler la liste) */
+function proposerAnnulation(texte, annuler){
+  let barre = document.getElementById("barreAnnuler");
+  if (!barre){ barre = document.createElement("div"); barre.id = "barreAnnuler"; document.body.appendChild(barre); }
+  clearTimeout(proposerAnnulation.minuterie);
+  barre.innerHTML = `<span>${esc(texte)}</span><button>↩ Annuler ce déplacement</button><button class="fermer" aria-label="Fermer">✕</button>`;
+  barre.className = "visible";
+  const cacher = ()=>{ barre.className = ""; };
+  barre.querySelector("button").onclick = ()=>{ cacher(); annuler(); toast("Déplacement annulé."); };
+  barre.querySelector(".fermer").onclick = cacher;
+  proposerAnnulation.minuterie = setTimeout(cacher, 15000);
 }
 
 /* ====== LECTURE D'UNE PHOTO D'APPOINT (l'IA lit à l'aveugle, l'application rapproche) ====== */
@@ -5146,9 +5188,9 @@ function ouvrirCompartiment(b, k){
            <div id="zoneCertif" style="margin-top:12px"></div>
            </div>`,
     boutons:[{texte:"Fermer"}],
-    surFermeture:()=>{ rafraichirCompartimentOuvert = null; rendreBiblio(); }
+    surFermeture:()=>{ rafraichirCompartimentOuvert = null; rendreBiblio(); envoyerMaintenantSiEnAttente(); }
   });
-  f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; setTimeout(rendreBiblio, 0); });
+  f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; setTimeout(rendreBiblio, 0); envoyerMaintenantSiEnAttente(); });
 
   /* ---------- deux modes : consultation (par défaut) / édition ---------- */
   let modeEdition = false;
