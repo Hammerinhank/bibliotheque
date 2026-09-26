@@ -13668,6 +13668,18 @@
        "rang": "derriere"
       },
       {
+       "titre": "L’amateur d’escargot",
+       "auteur": "Patricia Highsmith",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "rang": "derriere",
+       "id": "mui61jjktn97s",
+       "origine": "main"
+      },
+      {
        "id": "mudr847lxyb2i",
        "titre": "Sang d'encre au 36",
        "auteur": "Hervé Jourdain",
@@ -13858,18 +13870,6 @@
        "categorie": "",
        "origine": "ia",
        "rang": "derriere"
-      },
-      {
-       "titre": "L’amateur d’escargot",
-       "auteur": "Patricia Highsmith",
-       "annee": "",
-       "resume": "",
-       "categorie": "",
-       "remarque": "",
-       "certitude": "haute",
-       "rang": "derriere",
-       "id": "mui61jjktn97s",
-       "origine": "main"
       }
      ],
      "photo": {
@@ -14906,7 +14906,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T09:07:06.988Z",
+ "maj": "2026-09-26T09:07:26.942Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
