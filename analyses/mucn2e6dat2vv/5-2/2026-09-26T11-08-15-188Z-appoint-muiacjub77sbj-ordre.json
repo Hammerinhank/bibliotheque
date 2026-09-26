@@ -1,0 +1,405 @@
+{
+ "date": "2026-09-26T11:08:15.188Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "5-2",
+ "genre": "appoint",
+ "appoint": "muiacjub77sbj",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "DANS L'OR DU TEMPS",
+   "auteur": "CLAUDIE GALLAY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 28,
+   "x2": 80,
+   "illisible": false
+  },
+  {
+   "titre": "ENSEMBLE, C'EST TOUT",
+   "auteur": "ANNA GAVALDA",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 80,
+   "x2": 124,
+   "illisible": false
+  },
+  {
+   "titre": "RROÛ",
+   "auteur": "MAURICE GENEVOIX",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 124,
+   "x2": 147,
+   "illisible": false
+  },
+  {
+   "titre": "LA DERNIÈRE HARDE",
+   "auteur": "MAURICE GENEVOIX",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 147,
+   "x2": 170,
+   "illisible": false
+  },
+  {
+   "titre": "LES FAUX-MONNAYEURS",
+   "auteur": "ANDRÉ GIDE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 170,
+   "x2": 193,
+   "illisible": false
+  },
+  {
+   "titre": "LES CAVES DU VATICAN",
+   "auteur": "ANDRÉ GIDE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 193,
+   "x2": 216,
+   "illisible": false
+  },
+  {
+   "titre": "REGAIN",
+   "auteur": "JEAN GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 216,
+   "x2": 239,
+   "illisible": false
+  },
+  {
+   "titre": "SOLITUDE DE LA PITIÉ",
+   "auteur": "GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 239,
+   "x2": 262,
+   "illisible": false
+  },
+  {
+   "titre": "QUE MA JOIE DEMEURE",
+   "auteur": "JEAN GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 262,
+   "x2": 285,
+   "illisible": false
+  },
+  {
+   "titre": "COLLINE",
+   "auteur": "JEAN GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 285,
+   "x2": 308,
+   "illisible": false
+  },
+  {
+   "titre": "JEAN LE BLEU",
+   "auteur": "GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 308,
+   "x2": 331,
+   "illisible": false
+  },
+  {
+   "titre": "RONDEUR DES JOURS",
+   "auteur": "GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 331,
+   "x2": 354,
+   "illisible": false
+  },
+  {
+   "titre": "LE SERPENT D'ÉTOILES",
+   "auteur": "JEAN GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 354,
+   "x2": 377,
+   "illisible": false
+  },
+  {
+   "titre": "VOYAGE À PIED DANS LA HAUTE-DRÔME",
+   "auteur": "JEAN GIONO",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 377,
+   "x2": 400,
+   "illisible": false
+  },
+  {
+   "titre": "LES SOUFFRANCES DU JEUNE WERTHER",
+   "auteur": "GOETHE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 400,
+   "x2": 423,
+   "illisible": false
+  },
+  {
+   "titre": "GEISHA",
+   "auteur": "ARTHUR GOLDEN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 423,
+   "x2": 446,
+   "illisible": false
+  },
+  {
+   "titre": "L'HÔPITAL DU SOUPÇON",
+   "auteur": "NOAH GORDON",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 446,
+   "x2": 469,
+   "illisible": false
+  },
+  {
+   "titre": "ENFANCE",
+   "auteur": "GORKI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 469,
+   "x2": 492,
+   "illisible": false
+  },
+  {
+   "titre": "LE CONFIDENT",
+   "auteur": "HÉLÈNE GRÉMILLON",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 492,
+   "x2": 515,
+   "illisible": false
+  },
+  {
+   "titre": "LA TOUCHE ÉTOILE",
+   "auteur": "BENOÎTE GROULT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 515,
+   "x2": 538,
+   "illisible": false
+  },
+  {
+   "titre": "LE SANG NOIR",
+   "auteur": "LOUIS GUILLOUX",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 538,
+   "x2": 561,
+   "illisible": false
+  },
+  {
+   "titre": "NO HOME",
+   "auteur": "YAA GYASI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 561,
+   "x2": 584,
+   "illisible": false
+  },
+  {
+   "titre": "TESS D'URBERVILLE",
+   "auteur": "THOMAS HARDY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 584,
+   "x2": 607,
+   "illisible": false
+  },
+  {
+   "titre": "NOS ÂMES LA NUIT",
+   "auteur": "KENT HARUF",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 607,
+   "x2": 630,
+   "illisible": false
+  },
+  {
+   "titre": "LE VIN DE LA LIBERTÉ",
+   "auteur": "DAVID HAZIOT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 630,
+   "x2": 653,
+   "illisible": false
+  },
+  {
+   "titre": "AU-DELÀ DU FLEUVE ET SOUS LES ARBRES",
+   "auteur": "ERNEST HEMINGWAY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 653,
+   "x2": 676,
+   "illisible": false
+  },
+  {
+   "titre": "L'INDIEN BLANC",
+   "auteur": "WILL HENRY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 676,
+   "x2": 699,
+   "illisible": false
+  },
+  {
+   "titre": "L'ÎLE DES OUBLIÉS",
+   "auteur": "VICTORIA HISLOP",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 699,
+   "x2": 722,
+   "illisible": false
+  },
+  {
+   "titre": "LA CÔTE SAUVAGE",
+   "auteur": "JEAN-RENÉ HUGUENIN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 722,
+   "x2": 745,
+   "illisible": false
+  },
+  {
+   "titre": "NEVERHOME",
+   "auteur": "LAIRD HUNT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 745,
+   "x2": 768,
+   "illisible": false
+  },
+  {
+   "titre": "LA-BAS",
+   "auteur": "J.-K. HUYSMANS",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 768,
+   "x2": 791,
+   "illisible": false
+  },
+  {
+   "titre": "LES ANNÉES DE ZETH",
+   "auteur": "SONALLAH IBRAHIM",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 791,
+   "x2": 814,
+   "illisible": false
+  },
+  {
+   "titre": "LES REVENANTS",
+   "auteur": "H. IBSEN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 814,
+   "x2": 837,
+   "illisible": false
+  },
+  {
+   "titre": "LE MONDE SELON GARP",
+   "auteur": "JOHN IRVING",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 837,
+   "x2": 860,
+   "illisible": false
+  },
+  {
+   "titre": "LES INVISIBLES",
+   "auteur": "ROY JACOBSEN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 860,
+   "x2": 883,
+   "illisible": false
+  },
+  {
+   "titre": "WASHINGTON SQUARE",
+   "auteur": "HENRY JAMES",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 883,
+   "x2": 906,
+   "illisible": false
+  },
+  {
+   "titre": "LA GUERRE À NEUF ANS",
+   "auteur": "PASCAL JARDIN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 906,
+   "x2": 929,
+   "illisible": false
+  },
+  {
+   "titre": "UN ÉTÉ À L'ISLETTE",
+   "auteur": "GÉRALDINE JEFFREY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 929,
+   "x2": 952,
+   "illisible": false
+  },
+  {
+   "titre": "LA NUIT DES PÈRES",
+   "auteur": "GAËLLE JOSSE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 952,
+   "x2": 975,
+   "illisible": false
+  }
+ ]
+}
