@@ -8474,17 +8474,6 @@
     "6-2": {
      "livres": [
       {
-       "id": "mud5yytjwz2b4",
-       "titre": "MARIE PADLEY CHASE",
-       "auteur": "",
-       "annee": "",
-       "certitude": "moyenne",
-       "remarque": "tranche partiellement visible",
-       "resume": "",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
        "id": "muimfakhfhym2",
        "titre": "La cavale",
        "auteur": "Albertine Sarrazin",
@@ -8530,7 +8519,7 @@
       },
       {
        "id": "mud5yytj0b5q4",
-       "titre": "UN MOIS DANS UN AN",
+       "titre": "Dans UN MOIS DANS UN AN",
        "auteur": "Françoise Sagan (femme de lettres française, 1935-2004)",
        "annee": "1957",
        "certitude": "haute",
@@ -8573,24 +8562,15 @@
       },
       {
        "id": "mud5yytjc7uy2",
-       "titre": "ABEL QUENTIN",
-       "auteur": "Abel Quentin (écrivain et romancier français, né en 1985)",
+       "titre": "Pleine terre",
+       "auteur": "Corinne royer",
        "annee": "",
        "certitude": "haute",
        "remarque": "",
        "resume": "",
        "categorie": "Romans français",
        "origine": "ia",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muim27gxnhvw1",
-         "x1": 180,
-         "x2": 210
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T16:47:32.565Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "muimfakhs59jr",
@@ -8613,6 +8593,17 @@
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
        "statut": "probable"
+      },
+      {
+       "titre": "Rosny",
+       "auteur": "",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "muims3yn70hzh",
+       "origine": "main"
       },
       {
        "id": "muimfakh4ghn9",
@@ -19123,7 +19114,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T16:47:33.360Z",
+ "maj": "2026-09-26T16:56:38.332Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
