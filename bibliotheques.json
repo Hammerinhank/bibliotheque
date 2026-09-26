@@ -17143,7 +17143,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 15,
+         "x2": 70
+        }
+       ]
+      },
+      {
+       "id": "muig4dptutq47",
+       "titre": "Le seigneur du fleuve",
+       "auteur": "Bernard Clavel",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 70,
+         "x2": 100
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
        "statut": "probable"
       },
@@ -17159,14 +17190,22 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 100,
+         "x2": 140
+        }
+       ]
       },
       {
        "id": "muig21njua70e",
        "titre": "Pour l'amour de l'Inde",
-       "auteur": "",
+       "auteur": "Catherine Clément",
        "annee": "",
        "certitude": "haute",
        "remarque": "Flammarion",
@@ -17175,9 +17214,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 140,
+         "x2": 170
+        }
+       ]
       },
       {
        "id": "muig21nj94xyv",
@@ -17191,9 +17238,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 170,
+         "x2": 200
+        }
+       ]
       },
       {
        "id": "muig21njrpvj1",
@@ -17207,9 +17262,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 200,
+         "x2": 230
+        }
+       ]
       },
       {
        "id": "muig21njrj7gv",
@@ -17223,9 +17286,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 230,
+         "x2": 260
+        }
+       ]
       },
       {
        "id": "muig21njvp8wy",
@@ -17239,9 +17310,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 260,
+         "x2": 290
+        }
+       ]
       },
       {
        "id": "muig21nj2m7od",
@@ -17255,9 +17334,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 290,
+         "x2": 320
+        }
+       ]
       },
       {
        "id": "muig21nj33ek2",
@@ -17271,7 +17358,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 320,
+         "x2": 350
+        }
+       ]
+      },
+      {
+       "id": "muig4dptmwc9f",
+       "titre": "Onitsha",
+       "auteur": "J.M.G. Le Clézio",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 350,
+         "x2": 370
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
        "statut": "probable"
       },
@@ -17287,9 +17405,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 370,
+         "x2": 400
+        }
+       ]
       },
       {
        "id": "muig21njtn021",
@@ -17303,9 +17429,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 400,
+         "x2": 430
+        }
+       ]
       },
       {
        "id": "muig21nj77dba",
@@ -17319,9 +17453,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 430,
+         "x2": 460
+        }
+       ]
       },
       {
        "id": "muig21nj211i5",
@@ -17335,7 +17477,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 460,
+         "x2": 480
+        }
+       ]
+      },
+      {
+       "id": "muig4dptyhvye",
+       "titre": "La tresse",
+       "auteur": "Laetitia Colombani",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 480,
+         "x2": 500
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
        "statut": "probable"
       },
@@ -17351,9 +17524,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 500,
+         "x2": 530
+        }
+       ]
       },
       {
        "id": "muig21nj7gsqs",
@@ -17367,9 +17548,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 530,
+         "x2": 560
+        }
+       ]
       },
       {
        "id": "muig21nj3rv8y",
@@ -17383,9 +17572,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 560,
+         "x2": 590
+        }
+       ]
       },
       {
        "id": "muig21njs7exp",
@@ -17399,9 +17596,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 590,
+         "x2": 620
+        }
+       ]
       },
       {
        "id": "muig21njgvqbp",
@@ -17415,9 +17620,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 620,
+         "x2": 650
+        }
+       ]
       },
       {
        "id": "muig21njew03k",
@@ -17431,9 +17644,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 650,
+         "x2": 670
+        }
+       ]
       },
       {
        "id": "muig21nj8ycai",
@@ -17447,9 +17668,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 670,
+         "x2": 700
+        }
+       ]
       },
       {
        "id": "muig21njdd5q7",
@@ -17463,9 +17692,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 700,
+         "x2": 730
+        }
+       ]
       },
       {
        "id": "muig21njvgpeg",
@@ -17479,9 +17716,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 730,
+         "x2": 760
+        }
+       ]
       },
       {
        "id": "muig21njvh9wo",
@@ -17497,7 +17742,21 @@
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z"
        ],
-       "statut": "probable"
+       "statut": "probable",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "Madame Seyerling",
+         "auteur": "Grégoire Delacourt"
+        },
+        "vue": {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 760,
+         "x2": 790
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-26T13:50:11.377Z"
+       }
       },
       {
        "id": "muig21njquul1",
@@ -17511,9 +17770,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 790,
+         "x2": 820
+        }
+       ]
       },
       {
        "id": "muig21njmj1uj",
@@ -17527,9 +17794,17 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 820,
+         "x2": 850
+        }
+       ]
       },
       {
        "id": "muig21njrzm5u",
@@ -17543,7 +17818,38 @@
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
-        "photo2:2026-09-26T13:47:06.581Z"
+        "photo2:2026-09-26T13:47:06.581Z",
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
+       ],
+       "statut": "acquis",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 850,
+         "x2": 880
+        }
+       ]
+      },
+      {
+       "id": "muig4dptzoc4o",
+       "titre": "Les eaux troubles du mojito",
+       "auteur": "Philippe Delerm",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muig3pqtou0x5",
+         "x1": 880,
+         "x2": 910
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
        "statut": "probable"
       },
@@ -17586,14 +17892,63 @@
       "chemin": "images/mucn2e6dat2vv/5-3-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-26T13:47:06.581Z"
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/5-3-appoint-muig3pqtou0x5.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T13:48:54.133Z",
+       "id": "muig3pqtou0x5",
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 0,
+        "n2": 25,
+        "date": "2026-09-26T13:49:09.608Z"
+       },
+       "livresVus": [
+        "muig21ni0x0ln",
+        "muig4dptutq47",
+        "muig21njwd1om",
+        "muig21njua70e",
+        "muig21nj94xyv",
+        "muig21njrpvj1",
+        "muig21njrj7gv",
+        "muig21njvp8wy",
+        "muig21nj2m7od",
+        "muig21nj33ek2",
+        "muig4dptmwc9f",
+        "muig21njcf1fh",
+        "muig21njtn021",
+        "muig21nj77dba",
+        "muig21nj211i5",
+        "muig4dptyhvye",
+        "muig21nj3sa1s",
+        "muig21nj7gsqs",
+        "muig21nj3rv8y",
+        "muig21njs7exp",
+        "muig21njgvqbp",
+        "muig21njew03k",
+        "muig21nj8ycai",
+        "muig21njdd5q7",
+        "muig21njvgpeg",
+        "muig21njquul1",
+        "muig21njmj1uj",
+        "muig21njrzm5u",
+        "muig4dptzoc4o"
+       ],
+       "verif": "2026-09-26T13:50:11.378Z"
+      }
+     ]
     }
    },
    "cree": "2026-09-22T12:16:57.158Z",
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T13:47:21.662Z",
+ "maj": "2026-09-26T13:50:13.995Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
