@@ -15576,28 +15576,6 @@
        ]
       },
       {
-       "id": "mudscom1b3j9k",
-       "titre": "Ceux de la vigne",
-       "auteur": "Maurice Genevoix",
-       "annee": "",
-       "certitude": "moyenne",
-       "remarque": "tranche usée",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muiacjub77sbj",
-         "x1": 155,
-         "x2": 185
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T11:09:17.206Z"
-       }
-      },
-      {
        "id": "muiadgckhgzng",
        "titre": "LES FAUX-MONNAYEURS",
        "auteur": "ANDRÉ GIDE",
@@ -16701,7 +16679,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:09:18.800Z",
+ "maj": "2026-09-26T11:10:22.526Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
