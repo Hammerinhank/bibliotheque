@@ -138,6 +138,7 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
   background:#ffd23f;border:1.5px solid #1c1500;border-radius:6px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .case .deux.appoint{background:#e8e2cf;font-weight:700}
 .case .deux.unRang{background:#ffffff}
+.livre.livreCible{border:3px solid #ff3b30;box-shadow:0 0 0 2px rgba(255,59,48,.25)}
 .case .cadreCible{position:absolute;inset:0;border:5px solid #ff3b30;border-radius:inherit;z-index:6;pointer-events:none;
   box-shadow:inset 0 0 0 2px rgba(0,0,0,.55);animation:cibleClignote 1s ease-in-out 5}
 @keyframes cibleClignote{0%,100%{border-color:#ff3b30}50%{border-color:rgba(255,59,48,.2)}}
@@ -398,8 +399,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.66.1";
+const VERSION = "V1.67.0";
 const HISTORIQUE = [
+  { v:"V1.67.0", d:"25/09/2026", l:[
+    "Après « 📍 Localiser », en ouvrant le compartiment encadré de rouge, le livre recherché est lui aussi encadré de rouge dans la liste (mode consultation), et la liste défile jusqu'à lui ; avec « Localiser tous », tous les livres trouvés du compartiment sont encadrés."
+  ]},
   { v:"V1.66.1", d:"25/09/2026", l:[
     "iPhone : plus de zoom automatique de l'écran quand on touche un champ de saisie (recherche d'un livre, Déplacer, légendes…). Le zoom à deux doigts reste possible."
   ]},
@@ -4754,7 +4758,7 @@ function afficherRechercheBiblio(b){
   if (bT) bT.onclick = ()=>{
     const devant = groupe.filter(o=>o.lv.rang !== "derriere").length, derriere = groupe.length - devant;
     if (!(vueRangee === "derriere" ? derriere : devant)) vueRangee = vueRangee === "derriere" ? "devant" : "derriere";
-    caseCible = { bib: b.id, ks: new Set(groupe.map(o=>o.k + "|" + (o.lv.rang === "derriere" ? "derriere" : "devant"))) };
+    caseCible = { bib: b.id, ks: new Set(groupe.map(o=>o.k + "|" + (o.lv.rang === "derriere" ? "derriere" : "devant"))), livres: new Set(groupe.map(o=>o.lv)) };
     rendreBiblio();
     const el = document.querySelector("#vueBiblio .case .cadreCible");
     if (el) el.closest(".case").scrollIntoView({ behavior:"smooth", block:"center" });
@@ -4763,7 +4767,7 @@ function afficherRechercheBiblio(b){
   z.querySelectorAll("[data-loc]").forEach(bt=>bt.onclick = ()=>{
     const o = liste[Number(bt.dataset.loc)];
     vueRangee = o.lv.rang === "derriere" ? "derriere" : "devant";
-    caseCible = { bib: b.id, k: o.k };
+    caseCible = { bib: b.id, k: o.k, livres: new Set([o.lv]) };
     rendreBiblio();
     const el = document.querySelector(`#vueBiblio [data-case="${o.k}"]`);
     if (el) el.scrollIntoView({ behavior:"smooth", block:"center" });
@@ -4940,6 +4944,10 @@ function ouvrirCompartiment(b, k){
   /* ---------- deux modes : consultation (par défaut) / édition ---------- */
   let modeEdition = false;
   let filtreConsult = vueRangee === "derriere" ? "derriere" : "devant";
+  if (caseCible && caseCible.bib === b.id && caseCible.livres){
+    const ici = [...caseCible.livres].filter(lv=>(cs.livres || []).includes(lv));
+    if (ici.length && !ici.some(lv=>(lv.rang === "derriere") === (filtreConsult === "derriere"))) filtreConsult = ici[0].rang === "derriere" ? "derriere" : "devant";
+  }
   const majConsult = ()=>{
     const zm = f.querySelector("#cModes"), zc = f.querySelector("#cConsult"), ze = f.querySelector("#cEdition");
     const l = cs.livres || [];
@@ -4952,9 +4960,13 @@ function ouvrirCompartiment(b, k){
     zc.hidden = modeEdition;
     if (!modeEdition){
       const vis = l.filter(lv=>(lv.rang === "derriere") === (filtreConsult === "derriere"));
+      // livre(s) recherché(s) et localisé(s) depuis la grille : encadrés de rouge
+      const cibles = caseCible && caseCible.bib === b.id && caseCible.livres ? caseCible.livres : null;
       zc.innerHTML = vis.length
-        ? vis.map(lv=>`<div class="livre"><div class="t">${esc(lv.titre)}</div>${lv.auteur ? `<div class="a">${esc(lv.auteur)}</div>` : ""}</div>`).join("")
+        ? vis.map(lv=>`<div class="livre${cibles && cibles.has(lv) ? " livreCible" : ""}"><div class="t">${esc(lv.titre)}</div>${lv.auteur ? `<div class="a">${esc(lv.auteur)}</div>` : ""}</div>`).join("")
         : `<div class="vide">Aucun livre ${filtreConsult === "derriere" ? "sur la rangée de derrière" : "sur la rangée de devant"}.</div>`;
+      const premier = zc.querySelector(".livreCible");
+      if (premier && !majConsult.dejaDefile){ majConsult.dejaDefile = true; setTimeout(()=>premier.scrollIntoView({ behavior:"smooth", block:"center" }), 150); }
     }
     zm.querySelectorAll("[data-mode]").forEach(b2=>b2.onclick = ()=>{
       const v = b2.dataset.mode;
