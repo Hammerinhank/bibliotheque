@@ -16931,18 +16931,61 @@
        "remarque": "Albin Michel",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 25,
+         "x2": 85
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
+      },
+      {
+       "id": "muil8twnb8kx6",
+       "titre": "Amertume",
+       "auteur": "Stéphane Denis",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 90,
+         "x2": 115
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsofgybeuxy",
        "titre": "La Cour des grands",
-       "auteur": "",
+       "auteur": "Michel Déon",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "Collection blanche",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 115,
+         "x2": 140
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgylqgst",
@@ -16953,18 +16996,38 @@
        "remarque": "Tranche jaune Verdier",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 140,
+         "x2": 165
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgy99tgh",
        "titre": "La Demande",
-       "auteur": "",
+       "auteur": "Michèle Desbordes",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "nrf Gallimard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 165,
+         "x2": 185
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgytre9c",
@@ -16975,7 +17038,17 @@
        "remarque": "Éditions de Fallois",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 185,
+         "x2": 230
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgyz3mv2",
@@ -16986,7 +17059,17 @@
        "remarque": "Éditions de Fallois",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 230,
+         "x2": 270
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgyz7q9a",
@@ -16997,7 +17080,17 @@
        "remarque": "Éditions de Fallois",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 270,
+         "x2": 310
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgyuxml9",
@@ -17008,7 +17101,86 @@
        "remarque": "Éditions de Fallois",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 310,
+         "x2": 350
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
+      },
+      {
+       "id": "muil8twn2inua",
+       "titre": "La chair de la lune",
+       "auteur": "Christophe Donner",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 350,
+         "x2": 370
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnhysb8",
+       "titre": "Olga",
+       "auteur": "Roland Dubillard",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 370,
+         "x2": 390
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnl6pbf",
+       "titre": "Tous les hommes n'habitent pas le monde de la même façon",
+       "auteur": "Jean-Paul Dubois",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 390,
+         "x2": 420
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsofgyjx2sf",
@@ -17019,7 +17191,17 @@
        "remarque": "L'Olivier poche",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 420,
+         "x2": 445
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgyvy10n",
@@ -17030,7 +17212,17 @@
        "remarque": "Gallimard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 445,
+         "x2": 470
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgy2bo5w",
@@ -17041,7 +17233,17 @@
        "remarque": "nrf Gallimard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "deplace",
+        "zone": {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 455,
+         "x2": 485
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-26T16:12:55.084Z"
+       }
       },
       {
        "id": "mudsofgy38jmj",
@@ -17052,7 +17254,17 @@
        "remarque": "nrf Gallimard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 470,
+         "x2": 495
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgy7rjfj",
@@ -17063,7 +17275,40 @@
        "remarque": "Flammarion",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 520,
+         "x2": 545
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
+      },
+      {
+       "id": "muil8twn5rzi8",
+       "titre": "Le chagrin",
+       "auteur": "Lionel Duroy",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 545,
+         "x2": 570
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsofgy0e9s6",
@@ -17074,7 +17319,63 @@
        "remarque": "Julliard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 570,
+         "x2": 590
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
+      },
+      {
+       "id": "muil8twne3g0x",
+       "titre": "Les pieds dans l'eau",
+       "auteur": "Benoît Duteurtre",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 590,
+         "x2": 610
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnowbpt",
+       "titre": "14",
+       "auteur": "Jean Echenoz",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 610,
+         "x2": 630
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsofgy5rqkn",
@@ -17085,7 +17386,17 @@
        "remarque": "Grasset",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 630,
+         "x2": 660
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgyj3kc1",
@@ -17096,7 +17407,17 @@
        "remarque": "Grasset",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 660,
+         "x2": 690
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgybetus",
@@ -17107,7 +17428,17 @@
        "remarque": "Grasset",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 690,
+         "x2": 720
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
       },
       {
        "id": "mudsofgyc4cxc",
@@ -17118,7 +17449,63 @@
        "remarque": "Denoël",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 720,
+         "x2": 740
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
+      },
+      {
+       "id": "muil8twni6g1l",
+       "titre": "Chrysis",
+       "auteur": "Jim Fergus",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 740,
+         "x2": 760
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnnvrf9",
+       "titre": "Mille femmes blanches",
+       "auteur": "Jim Fergus",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 760,
+         "x2": 790
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsofgyf8cwm",
@@ -17129,7 +17516,178 @@
        "remarque": "cherche midi",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 790,
+         "x2": 820
+        }
+       ],
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ]
+      },
+      {
+       "id": "muil8twno5cwe",
+       "titre": "Celle qui fuit et celle qui reste",
+       "auteur": "Elena Ferrante",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 820,
+         "x2": 845
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnato74",
+       "titre": "La princesse de Mantoue",
+       "auteur": "Marie Ferranti",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 845,
+         "x2": 860
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnlgt59",
+       "titre": "L'hiver des hommes",
+       "auteur": "Lionel Duroy",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 860,
+         "x2": 880
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnimc5w",
+       "titre": "Les Compagnons du Sud",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 880,
+         "x2": 900
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnri46w",
+       "titre": "Histoires de chiens",
+       "auteur": "Bernard Clavel",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 900,
+         "x2": 930
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnj6pua",
+       "titre": "La liste de mes envies",
+       "auteur": "Grégoire Delacourt",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 930,
+         "x2": 950
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muil8twnngsd3",
+       "titre": "illisible",
+       "auteur": "",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muil82p5jygwx",
+         "x1": 950,
+         "x2": 970
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muig21ni0x0ln",
@@ -18023,6 +18581,58 @@
         "muig21njrj7gv"
        ],
        "verif": "2026-09-26T13:52:00.799Z"
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/5-3-appoint-muil82p5jygwx.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T16:12:10.294Z",
+       "id": "muil82p5jygwx",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 19,
+        "n2": 0,
+        "date": "2026-09-26T16:12:35.298Z"
+       },
+       "livresVus": [
+        "mudsofgy3tjh4",
+        "muil8twnb8kx6",
+        "mudsofgybeuxy",
+        "mudsofgylqgst",
+        "mudsofgy99tgh",
+        "mudsofgytre9c",
+        "mudsofgyz3mv2",
+        "mudsofgyz7q9a",
+        "mudsofgyuxml9",
+        "muil8twn2inua",
+        "muil8twnhysb8",
+        "muil8twnl6pbf",
+        "mudsofgyjx2sf",
+        "mudsofgyvy10n",
+        "mudsofgy38jmj",
+        "mudsofgy7rjfj",
+        "muil8twn5rzi8",
+        "mudsofgy0e9s6",
+        "muil8twne3g0x",
+        "muil8twnowbpt",
+        "mudsofgy5rqkn",
+        "mudsofgyj3kc1",
+        "mudsofgybetus",
+        "mudsofgyc4cxc",
+        "muil8twni6g1l",
+        "muil8twnnvrf9",
+        "mudsofgyf8cwm",
+        "muil8twno5cwe",
+        "muil8twnato74",
+        "muil8twnlgt59",
+        "muil8twnimc5w",
+        "muil8twnri46w",
+        "muil8twnj6pua",
+        "muil8twnngsd3"
+       ],
+       "verif": "2026-09-26T16:12:55.085Z"
       }
      ],
      "certif": {
@@ -18034,7 +18644,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T14:02:24.815Z",
+ "maj": "2026-09-26T16:12:55.938Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
