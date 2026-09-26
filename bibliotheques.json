@@ -6960,19 +6960,6 @@
        ]
       },
       {
-       "id": "mud5yqkripc4o",
-       "titre": "On repique au jeu",
-       "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
-       "annee": "1969",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un politicien corrompu et ambitieux voit son emprise sur sa ville menacée par des révélations et des oppositions farouches.",
-       "categorie": "Policier",
-       "origine": "ia",
-       "rang": "devant",
-       "statut": "acquis"
-      },
-      {
        "id": "mud5yqkrfaevr",
        "titre": "fais-moi confiance",
        "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
@@ -16129,7 +16116,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:00:00.543Z",
+ "maj": "2026-09-26T11:00:44.249Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
