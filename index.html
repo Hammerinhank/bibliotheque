@@ -157,6 +157,10 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .secIa{margin-top:12px;border:1px solid var(--trait);border-radius:10px;padding:8px 12px}
 .secIa > summary{cursor:pointer;font-weight:700;color:var(--bronze);font-size:15px;padding:4px 0}
 .secIa[open] > summary{margin-bottom:6px}
+.secIa .sousTitre{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--texte2);margin:12px 0 4px;padding-top:8px;border-top:1px solid var(--trait)}
+.secIa .sousTitre:first-of-type{border-top:0;padding-top:0;margin-top:4px}
+.infoLigne{display:flex;gap:8px;font-size:14px;margin:3px 0}
+.infoLigne .cle{color:var(--texte2);min-width:92px}
 .case .etoile{position:absolute;bottom:3px;z-index:3;font-size:15px;line-height:1;color:#ffd23f;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.8)}
 .case .etoile.g{left:4px}
 .case .etoile.d{right:4px}
@@ -420,8 +424,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.70.1";
+const VERSION = "V1.71.0";
 const HISTORIQUE = [
+  { v:"V1.71.0", d:"25/09/2026", l:[
+    "Mode ✏️ Éditer réorganisé entre la photo et les filtres : sous la photo, seulement son affichage (Entière / Ajustée / 100 % / 200 %, Taille réelle) ; puis deux encadrés repliables, ouverts par défaut.",
+    "« ℹ️ Informations » : la photo affichée (rangée, définition, sauvegarde) et le compartiment (1 ou 2 rangs, livres par rangée avec acquis / probables / questions, certification, dernière analyse).",
+    "« 🛠 Outils » : photo (changer, retirer, lignes de coupe, légende), analyse (nouvelle, sauvegardées), compartiment (un seul rang, permuter, rétablir, valider des livres). Texte d'aide « Livres sur deux rangs… » supprimé."
+  ]},
   { v:"V1.70.1", d:"25/09/2026", l:[
     "Bouton « ➕ Appoint » presque carré (largeur = 1,2 × hauteur), fond coloré pour le faire ressortir, libellé sur deux lignes, gras et très lisible."
   ]},
@@ -5170,8 +5179,20 @@ function ouvrirCompartiment(b, k){
            <div class="onglets" id="cFaces"></div>
            <div id="zonePhoto"></div>
            <div class="encadre" id="cVerrou" style="display:none;border-color:#ffd23f"></div>
-           <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
-           <div class="encadre" id="cBlocAnalyse" style="margin-top:10px">
+           <details class="secIa" id="cInfos" open>
+             <summary>ℹ️ Informations</summary>
+             <div class="sousTitre">Photo affichée</div>
+             <div id="cInfoPhoto"></div>
+             <div class="sousTitre">Compartiment</div>
+             <div id="cInfoComp"></div>
+           </details>
+           <details class="secIa" id="cOutils" open>
+             <summary>🛠 Outils</summary>
+             <div class="sousTitre">Photo</div>
+             <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
+             <div id="cOutilsPhoto"></div>
+             <div class="sousTitre">Analyse</div>
+           <div class="encadre" id="cBlocAnalyse" style="margin-top:6px">
              <div id="cTitreAnalyse" style="font-weight:700;margin-bottom:8px">Analyse de cette photo</div>
              <div class="barre" style="align-items:stretch">
                <button class="btn principal" id="cAnalyser" style="flex:1">🔍 Nouvelle analyse par l'IA</button>
@@ -5181,9 +5202,11 @@ function ouvrirCompartiment(b, k){
              <div class="aide" id="cInfoReu" style="margin:6px 0 0"></div>
            </div>
            <div class="aide" id="cExplAppoint" style="margin:6px 0 0;display:none">L'IA lit <b>cette seule photo</b>, sans voir la liste. <b>🔎 Vérifier</b> : chaque livre lu est cherché dans les listes des rangées 1 et 2 (titre, auteur, voisinage). <b>🔀 Ordre respecté</b> : l'app repère la zone de la rangée que couvre la photo et aligne les livres un à un dans l'ordre ; vous corrigez au besoin l'ordre de deux voisins avec la poignée ≡. Rien n'est modifié sans votre accord.</div>
-           <div id="zoneUnRang" style="margin-top:8px"></div>
-           <button class="btn plein" id="cPermuter" style="margin-top:8px">⇄ Permuter les rangées devant / derrière</button>
-           <div class="aide" style="margin:4px 0 0">Livres sur deux rangs : prenez aussi la photo de derrière (onglet « Derrière »). Chaque analyse porte sur un rang ou sur les deux ; celle d'un rang ne touche jamais les livres de l'autre.</div>
+             <div class="sousTitre">Compartiment</div>
+             <div id="zoneUnRang" style="margin-top:4px"></div>
+             <button class="btn plein" id="cPermuter" style="margin-top:8px">⇄ Permuter les rangées devant / derrière</button>
+             <div id="cOutilsComp"></div>
+           </details>
            <input type="file" id="cFichier" accept="image/*" hidden>
            <div class="titreSection">Livres de ce compartiment</div>
            <div id="zoneFiltreRang"></div>
@@ -5479,21 +5502,43 @@ function ouvrirCompartiment(b, k){
     if (verrou && bloc) bloc.style.display = "none";
     const bOrd = f.querySelector("#cAppointOrdre");
     if (bOrd) bOrd.style.display = "none";
+    const zIP = f.querySelector("#cInfoPhoto"), zOP = f.querySelector("#cOutilsPhoto");
+    const nomFace = appoint ? `Appoint ${num}${(photoObj(cs, face) || {}).rang ? " · " + ((photoObj(cs, face) || {}).rang === "derriere" ? "rangée 2" : "rangée 1") : " · rangée pas encore établie"}` : face === "photo2" ? "Rangée 2 (derrière)" : (cs.photo2 ? "Rangée 1 (devant)" : "Rangée 1");
+    const ligneInfo = (c, v)=>`<div class="infoLigne"><span class="cle">${c}</span><span>${v}</span></div>`;
+    majInfoComp();
     if (!photoObj(cs, face)){
+      zIP.innerHTML = ligneInfo("Photo", esc(nomFace) + " — aucune photo");
+      zOP.innerHTML = "";
       z.innerHTML = face === "photo2"
         ? `<div class="vide">Pour un compartiment rangé sur deux rangs : retirez les livres de devant, puis photographiez le rang de derrière.<br><br>« Analyser » enverra alors les deux photos ensemble à l'IA, qui dressera une seule liste : les livres du fond déjà visibles sur la première photo ne seront pas comptés deux fois.</div>`
         : `<div class="vide">Aucune photo. Photographiez le compartiment de face, bien éclairé, tranches lisibles.</div>`;
       return;
     }
     const src = photoImmediate(b, k, face);
-    const statut = `<div class="aide">${appoint ? "<b>Appoint "+num+"</b> · " : face==="photo2" ? "<b>Rang de derrière</b> · " : (cs.photo2 ? "<b>Rang de devant</b> · " : "")}${photoObj(cs, face).envoye ? "Photo sauvegardée sur GitHub ("+esc(photoObj(cs, face).chemin)+")" : "Photo encore sur cet appareil seulement — ouvrez ☁️ pour l'envoyer"}
-       · ${esc(dateFr(photoObj(cs, face).maj))}
-       ${verrou ? "" : `<button class="btn rouge" id="cRetirer" style="margin-left:8px;padding:4px 9px;font-size:12px">Retirer</button>`}</div>`;
+    const ph0 = photoObj(cs, face);
+    zIP.innerHTML = ligneInfo("Photo", esc(nomFace)) +
+      ligneInfo("Définition", `<span class="dims" id="cDims">…</span>`) +
+      ligneInfo("Prise le", esc(dateFr(ph0.maj))) +
+      ligneInfo("Sauvegarde", ph0.envoye ? "✓ sur GitHub" : "⚠️ encore sur cet appareil seulement") +
+      (verrou ? ligneInfo("État", "★ rangée certifiée — consultation seule") : "");
+    const statut = "";
+    const outilsPhoto = (lignesVis)=> verrou ? "" : `
+       <div class="barre" style="margin:8px 0 2px">
+         <button class="btn ${lignesVis ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVis ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
+         ${lignesVis ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
+         ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
+       </div>
+       ${lignesVis ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
+       ${appoint ? `<label for="cLegende">Légende de cette photo d'appoint</label>
+         <input type="text" id="cLegende" value="${esc(ph0.legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…">
+         <div class="aide">Transmise à l'IA : elle l'aide à savoir ce que vous vouliez montrer.</div>` : ""}
+       <button class="btn rouge plein" id="cRetirer" style="margin-top:8px">🗑 Retirer cette photo</button>`;
 
     if (!src){
       // pas encore en mémoire : chargement de la vraie photo, jamais de version dégradée
-      z.innerHTML = `<div class="chargePhoto">⏳ Chargement de la photo en pleine résolution…</div>` + statut;
-      brancherRetirer(z);
+      z.innerHTML = `<div class="chargePhoto">⏳ Chargement de la photo en pleine résolution…</div>`;
+      zOP.innerHTML = outilsPhoto(false);
+      brancherRetirer(zOP);
       const photoAvant = photoObj(cs, face);
       photoPleine(b, k, face).then(d=>{
         if (!f.isConnected || photoObj(cs, face) !== photoAvant) return;
@@ -5521,23 +5566,13 @@ function ouvrirCompartiment(b, k){
          <button data-pz="2" class="${zoomPhoto==="2"?"actif":""}">200 %</button>`}
        </div>
        ${zoomPhoto === "entiere" ? `<div class="cadreCentre">${cadreHtml}</div>` : zoomNum ? `<div class="cadreZoom" id="cZoneZoom">${cadreHtml}</div>` : cadreHtml}
-       <div class="aide">Définition : <span class="dims" id="cDims">…</span>${lignesVisibles ? "" : " — touchez la photo pour la voir en taille réelle"}</div>
-       <div class="barre" style="margin:8px 0 2px">
-         <button class="btn" id="cTailleReelle" style="flex:1">🔍 Taille réelle</button>
-         ${verrou ? "" : `<button class="btn ${lignesVisibles ? "coupeOn" : ""}" id="cLignes" style="flex:1">${lignesVisibles ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>`}
-         ${lignesVisibles ? `<button class="btn rouge" id="cTronquer" style="flex:1">✂️ Tronquer</button>` : ""}
-         ${avantTroncature ? `<button class="btn" id="cAnnulerCoupe" style="flex:1">↶ Annuler la troncature</button>` : ""}
-       </div>
-       ${lignesVisibles ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes (sur les bords au départ) pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
-       ${appoint ? `<label for="cLegende">Légende de cette photo d'appoint</label>
-         <input type="text" id="cLegende" value="${esc(photoObj(cs, face).legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…" ${verrou ? "disabled" : ""}>
-         <div class="aide">Cette légende est transmise à l'IA lors du contrôle : elle l'aide à savoir ce que vous vouliez montrer.</div>` : ""}
-       ${statut}`;
+       <button class="btn plein" id="cTailleReelle" style="margin:8px 0 2px">🔍 Taille réelle</button>`;
+    zOP.innerHTML = outilsPhoto(lignesVisibles);
 
     const cadre = z.querySelector("#cCadre");
     const img = cadre.querySelector("img");
     const dims = ()=>{
-      const d = z.querySelector("#cDims"); if (d) d.textContent = infoImage(img, src);
+      const d = f.querySelector("#cDims"); if (d) d.textContent = infoImage(img, src);
       if (zoomNum) img.style.width = (img.naturalWidth * Number(zoomPhoto)) + "px";      // même échelle que la visionneuse
     };
     if (img.complete) dims(); else img.onload = dims;
@@ -5549,18 +5584,38 @@ function ouvrirCompartiment(b, k){
     img.addEventListener("click", ()=>{ if (!lignesVisibles && !zoomNum) visionneuse(src, titrePhoto); });
 
     z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, titrePhoto);
-    const bLig = z.querySelector("#cLignes");
+    const bLig = zOP.querySelector("#cLignes");
     if (bLig) bLig.onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
-    const bt = z.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
-    const ba = z.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
-    const bl = z.querySelector("#cLegende");
+    const bt = zOP.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
+    const ba = zOP.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
+    const bl = zOP.querySelector("#cLegende");
     if (bl) bl.onchange = ()=>{
       const ph = photoObj(cs, face);
       if (!ph) return;
       ph.legende = bl.value.trim();
       sauver(); majFaces();
     };
-    brancherRetirer(z);
+    brancherRetirer(zOP);
+  };
+  // informations sur le compartiment (encadré « ℹ️ Informations »)
+  const majInfoComp = ()=>{
+    const zc = f.querySelector("#cInfoComp");
+    if (!zc) return;
+    const l = cs.livres || [];
+    const ligne = (c, v)=>`<div class="infoLigne"><span class="cle">${c}</span><span>${v}</span></div>`;
+    const deux = !cs.unRang && (!!cs.photo2 || l.some(lv=>lv.rang === "derriere"));
+    let h = ligne("Structure", deux ? "2 rangs (devant + derrière)" : cs.unRang ? "1 rang — compartiment complet" : "1 rang (pas de photo de derrière)");
+    ["devant","derriere"].forEach(r=>{
+      if (r === "derriere" && !deux) return;
+      const e = etatRangee(cs, r);
+      h += ligne(r === "derriere" ? "Rangée 2" : "Rangée 1", e.total
+        ? `${e.total} livre(s) — ${e.acquis} 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions} ❓</b>${certifiee(cs, r) ? ` · <b style="color:#ffd23f">★ certifiée</b>` : ""}`
+        : "aucun livre");
+    });
+    if (cs.analyse && cs.analyse.maj) h += ligne("Dernière analyse", `${esc(dateFr(cs.analyse.maj))}${cs.analyse.ia ? " — " + esc(NOM_IA[cs.analyse.ia] || cs.analyse.ia) : ""}`);
+    const nA = (cs.appoints || []).length;
+    if (nA) h += ligne("Appoints", `${nA} photo(s) d'appoint`);
+    zc.innerHTML = h;
   };
 
   const brancherRetirer = (z)=>{
@@ -5648,18 +5703,16 @@ function ouvrirCompartiment(b, k){
     if (bAj){ bAj.style.display = ajoutPossible ? "" : "none"; bAj.textContent = "➕ Ajouter un livre à la main, en fin" + nomCible; }
     const bVider = `<div class="barre" style="margin:-2px 0 8px">
          ${cs.avantReconstruction && !cs.certif ? `<button class="btn" data-retablir="1" style="flex:1">↩ Rétablir (${cs.avantReconstruction.livres.length} livres du ${esc(dateFr(cs.avantReconstruction.date))})</button>` : ""}</div>`;
+    const zOC = f.querySelector("#cOutilsComp");
     const brancherVider = ()=>{
-      const v = zf.querySelector("[data-vider]"); if (v) v.onclick = ()=>viderListesCompartiment(b, k);
-      const r = zf.querySelector("[data-retablir]"); if (r) r.onclick = ()=>retablirListesCompartiment(b, k);
+      const r = zOC.querySelector("[data-retablir]"); if (r) r.onclick = ()=>retablirListesCompartiment(b, k);
     };
-    if (!l.length){ const zC0 = f.querySelector("#zoneCertif"); if (zC0) zC0.innerHTML = ""; zf.innerHTML = cs.avantReconstruction && !cs.certif ? bVider : ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Choisissez une photo en haut (Devant, Derrière, appoint), puis, dans l'encadré « Analyse de cette photo » : 🔍 nouvelle analyse par l'IA, ou ♻️ réutiliser l'analyse sauvegardée.</div>`; return; }
-    zf.innerHTML = bVider +
+    majInfoComp();
+    if (!l.length){ const zC0 = f.querySelector("#zoneCertif"); if (zC0) zC0.innerHTML = ""; zOC.innerHTML = cs.avantReconstruction && !cs.certif ? bVider : ""; zf.innerHTML = ""; brancherVider(); z.innerHTML = `<div class="vide">Aucun livre relevé ici. Choisissez une photo en haut (Devant, Derrière, appoint), puis, dans l'encadré « Analyse de cette photo » : 🔍 nouvelle analyse par l'IA, ou ♻️ réutiliser l'analyse sauvegardée.</div>`; return; }
+    zOC.innerHTML = bVider +
       ["devant","derriere"].filter(r=>etatRangee(cs, r).total).map(r=>{
         const e = etatRangee(cs, r), nomR = r === "derriere" ? "Rangée 2" : "Rangée 1";
-        return `<div class="aide" style="margin:-2px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <span><b>${nomR}</b> : ${e.total} livre(s) — <b>${e.acquis}</b> 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions}</b> ❓${e.validee ? " — <b style='color:var(--vert)'>✓ validée</b>" : ""}</span>
-          </div>
-          ${!certifiee(cs, r) && !e.questions && e.probables ? `<div class="encadre" style="margin:4px 0 12px;border:2px solid var(--vert)">
+        return `${!certifiee(cs, r) && !e.questions && e.probables ? `<div class="encadre" style="margin:4px 0 12px;border:2px solid var(--vert)">
             <div style="font-weight:700">✓ Valider des livres de la ${nomR.toLowerCase()} (facultatif)</div>
             <div class="aide" style="margin:4px 0 8px">Il ne reste aucune question ❓ sur cette rangée, mais <b>${e.probables} livre(s)</b> n'ont été vus que sur une seule photo (« probables »).
               Vous pouvez choisir ceux dont vous êtes sûr : ils passent en <b>🔒 acquis</b> :
@@ -5696,16 +5749,15 @@ function ouvrirCompartiment(b, k){
             <div class="aide">Vide les listes de livres${cs.certif ? " des rangées non certifiées" : ""} (photos conservées) ; la liste d'avant est mise de côté.</div></div>` : ""}
         </details>`;
       })();
-    zf.innerHTML +=
-      `<div class="aide" style="margin:-4px 0 8px">${l.length} livre(s) : <b>${n1}</b> sur la rangée 1 (devant) · <b>${n2}</b> sur la rangée 2 (derrière)</div>
-       <div class="onglets filtresListe" style="margin-bottom:10px">
+    zf.innerHTML =
+      `<div class="onglets filtresListe" style="margin-bottom:10px">
          <button data-filtre="tous" class="${filtreRang==="tous"?"actif":""}">Tous (${l.length})</button>
          <button data-filtre="devant" class="${filtreRang==="devant"?"actif":""}">Rangée 1 (${n1})</button>
          <button data-filtre="derriere" class="${filtreRang==="derriere"?"actif":""}">Rangée 2 (${n2})</button>
          ${nQ ? `<button data-filtre="questions" class="${filtreRang==="questions"?"actif":""}">❓ Questions (${nQ})</button>` : ""}
          ${appointVu ? `<button data-filtre="appoint" class="${filtreRang==="appoint"?"actif":""}">Appoint ${numeroAppoint(cs, face)} (${nA})</button>` : ""}
        </div>`;
-    zf.querySelectorAll("[data-valider]").forEach(el=>el.onclick=()=>fenetreValidation(el.dataset.valider));
+    zOC.querySelectorAll("[data-valider]").forEach(el=>el.onclick=()=>fenetreValidation(el.dataset.valider));
     zf.querySelectorAll("[data-filtre]").forEach(bt=>bt.onclick=()=>{
       filtreRang = bt.dataset.filtre;
       if (filtreRang === "devant" || filtreRang === "derriere"){ vueRangee = filtreRang; filtreConsult = filtreRang; }
