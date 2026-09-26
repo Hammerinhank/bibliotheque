@@ -430,8 +430,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.71.1";
+const VERSION = "V1.71.2";
 const HISTORIQUE = [
+  { v:"V1.71.2", d:"25/09/2026", l:[
+    "Mode ✏️ Éditer : l'encadré « ℹ️ Informations » est replié par défaut (l'encadré « 🛠 Outils » reste ouvert)."
+  ]},
   { v:"V1.71.1", d:"25/09/2026", l:[
     "Outils : chaque partie (Photo, Analyse, Compartiment) dans un encadré à liseré ; boutons de la photo nettement espacés, « Retirer cette photo » isolé en bas derrière un trait ; case « Un seul rang » agrandie, dans une zone entièrement touchable ; boutons du compartiment espacés."
   ]},
@@ -5188,7 +5191,7 @@ function ouvrirCompartiment(b, k){
            <div class="onglets" id="cFaces"></div>
            <div id="zonePhoto"></div>
            <div class="encadre" id="cVerrou" style="display:none;border-color:#ffd23f"></div>
-           <details class="secIa" id="cInfos" open>
+           <details class="secIa" id="cInfos">
              <summary>ℹ️ Informations</summary>
              <div class="sousTitre">Photo affichée</div>
              <div id="cInfoPhoto"></div>
