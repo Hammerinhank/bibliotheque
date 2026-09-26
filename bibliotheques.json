@@ -15175,7 +15175,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8ktnyl",
@@ -15218,7 +15219,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8d9hhk",
@@ -15239,7 +15241,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8fz7hq",
@@ -15260,7 +15263,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari82agjw",
@@ -15281,7 +15285,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari817j3x",
@@ -15302,7 +15307,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8953qg",
@@ -15323,7 +15329,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8r0e0v",
@@ -15344,7 +15351,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muiaql00fk6ub",
@@ -15367,7 +15375,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsari8gm1mm",
@@ -15402,7 +15410,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsari8b0nr5",
@@ -15423,7 +15431,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8yvwjv",
@@ -15447,7 +15456,8 @@
        "certitude": "haute",
        "rang": "devant",
        "id": "muifbybgh4sdp",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mudsari8dz7w5",
@@ -15468,7 +15478,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8xobkk",
@@ -15489,7 +15500,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8hinsd",
@@ -15534,7 +15546,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muiaql00srk2h",
@@ -15557,7 +15569,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muiaql007m4sq",
@@ -15580,7 +15592,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muiaql00z0voa",
@@ -15603,7 +15615,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muiaql00ka2vu",
@@ -15626,7 +15638,7 @@
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsari8qdg9m",
@@ -15647,7 +15659,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8i8ckv",
@@ -15668,7 +15681,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8s5khn",
@@ -15689,7 +15703,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8b76kk",
@@ -15710,7 +15725,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari812rz6",
@@ -15743,7 +15759,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8r8hqt",
@@ -15764,7 +15781,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8ae1zl",
@@ -15785,7 +15803,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8c3o4o",
@@ -15806,7 +15825,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8th4bu",
@@ -15827,7 +15847,8 @@
        ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari88vem4",
@@ -15841,7 +15862,8 @@
        "origine": "ia",
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari80hl1h",
@@ -15855,7 +15877,8 @@
        "origine": "ia",
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsari8ldnc1",
@@ -15869,7 +15892,8 @@
        "origine": "ia",
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudscom0i8com",
@@ -16892,7 +16916,8 @@
       }
      ],
      "certif": {
-      "derriere": "2026-09-26T11:14:01.459Z"
+      "derriere": "2026-09-26T11:14:01.459Z",
+      "devant": "2026-09-26T13:36:55.286Z"
      }
     },
     "5-3": {
@@ -17135,7 +17160,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T13:36:28.395Z",
+ "maj": "2026-09-26T13:37:00.939Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
