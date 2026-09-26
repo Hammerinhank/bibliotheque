@@ -1,0 +1,365 @@
+{
+ "date": "2026-09-26T16:12:35.253Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "5-3",
+ "genre": "appoint",
+ "appoint": "muil82p5jygwx",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Madame Rose",
+   "auteur": "Michel Déon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 25,
+   "x2": 85,
+   "illisible": false
+  },
+  {
+   "titre": "Amertume",
+   "auteur": "Stéphane Denis",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 90,
+   "x2": 115,
+   "illisible": false
+  },
+  {
+   "titre": "La Cour des Grands",
+   "auteur": "Michel Déon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 115,
+   "x2": 140,
+   "illisible": false
+  },
+  {
+   "titre": "Un souvenir",
+   "auteur": "Michel Déon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 140,
+   "x2": 165,
+   "illisible": false
+  },
+  {
+   "titre": "La Demande",
+   "auteur": "Michèle Desbordes",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 165,
+   "x2": 185,
+   "illisible": false
+  },
+  {
+   "titre": "La Disparition de Stephanie Mailer",
+   "auteur": "Joël Dicker",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 185,
+   "x2": 230,
+   "illisible": false
+  },
+  {
+   "titre": "Le Livre des Baltimore",
+   "auteur": "Joël Dicker",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 230,
+   "x2": 270,
+   "illisible": false
+  },
+  {
+   "titre": "La Vérité sur l'Affaire Harry Quebert",
+   "auteur": "Joël Dicker",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 270,
+   "x2": 310,
+   "illisible": false
+  },
+  {
+   "titre": "L'Énigme de la chambre 622",
+   "auteur": "Joël Dicker",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 310,
+   "x2": 350,
+   "illisible": false
+  },
+  {
+   "titre": "La chair de la lune",
+   "auteur": "Christophe Donner",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 350,
+   "x2": 370,
+   "illisible": false
+  },
+  {
+   "titre": "Olga",
+   "auteur": "Roland Dubillard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 370,
+   "x2": 390,
+   "illisible": false
+  },
+  {
+   "titre": "Tous les hommes n'habitent pas le monde de la même façon",
+   "auteur": "Jean-Paul Dubois",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 390,
+   "x2": 420,
+   "illisible": false
+  },
+  {
+   "titre": "Le cas Sneijder",
+   "auteur": "Jean-Paul Dubois",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 420,
+   "x2": 445,
+   "illisible": false
+  },
+  {
+   "titre": "Les Barcelonnettes",
+   "auteur": "Dugrand Vallaey",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 445,
+   "x2": 470,
+   "illisible": false
+  },
+  {
+   "titre": "Ultime partie",
+   "auteur": "Marc Dugain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 470,
+   "x2": 495,
+   "illisible": false
+  },
+  {
+   "titre": "Ils vont tuer Robert Kennedy",
+   "auteur": "Marc Dugain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 495,
+   "x2": 520,
+   "illisible": false
+  },
+  {
+   "titre": "En bas, les nuages",
+   "auteur": "Marc Dugain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 520,
+   "x2": 545,
+   "illisible": false
+  },
+  {
+   "titre": "Le chagrin",
+   "auteur": "Lionel Duroy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 545,
+   "x2": 570,
+   "illisible": false
+  },
+  {
+   "titre": "Colères",
+   "auteur": "Lionel Duroy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 570,
+   "x2": 590,
+   "illisible": false
+  },
+  {
+   "titre": "Les pieds dans l'eau",
+   "auteur": "Benoît Duteurtre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 590,
+   "x2": 610,
+   "illisible": false
+  },
+  {
+   "titre": "14",
+   "auteur": "Jean Echenoz",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 610,
+   "x2": 630,
+   "illisible": false
+  },
+  {
+   "titre": "Le Nom de la Rose",
+   "auteur": "Umberto Eco",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 630,
+   "x2": 660,
+   "illisible": false
+  },
+  {
+   "titre": "Le Pendule de Foucault",
+   "auteur": "Umberto Eco",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 660,
+   "x2": 690,
+   "illisible": false
+  },
+  {
+   "titre": "L'île du jour d'avant",
+   "auteur": "Umberto Eco",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 690,
+   "x2": 720,
+   "illisible": false
+  },
+  {
+   "titre": "Le beaujolais nouveau est arrivé",
+   "auteur": "René Fallet",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 720,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "Chrysis",
+   "auteur": "Jim Fergus",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 740,
+   "x2": 760,
+   "illisible": false
+  },
+  {
+   "titre": "Mille femmes blanches",
+   "auteur": "Jim Fergus",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 760,
+   "x2": 790,
+   "illisible": false
+  },
+  {
+   "titre": "Mon Amérique",
+   "auteur": "Jim Fergus",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 790,
+   "x2": 820,
+   "illisible": false
+  },
+  {
+   "titre": "Celle qui fuit et celle qui reste",
+   "auteur": "Elena Ferrante",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 820,
+   "x2": 845,
+   "illisible": false
+  },
+  {
+   "titre": "La princesse de Mantoue",
+   "auteur": "Marie Ferranti",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 845,
+   "x2": 860,
+   "illisible": false
+  },
+  {
+   "titre": "L'hiver des hommes",
+   "auteur": "Lionel Duroy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 860,
+   "x2": 880,
+   "illisible": false
+  },
+  {
+   "titre": "Les Compagnons du Sud",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 880,
+   "x2": 900,
+   "illisible": false
+  },
+  {
+   "titre": "Histoires de chiens",
+   "auteur": "Bernard Clavel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 900,
+   "x2": 930,
+   "illisible": false
+  },
+  {
+   "titre": "La liste de mes envies",
+   "auteur": "Grégoire Delacourt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 930,
+   "x2": 950,
+   "illisible": false
+  },
+  {
+   "titre": "illisible",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "",
+   "x1": 950,
+   "x2": 970,
+   "illisible": false
+  }
+ ]
+}
