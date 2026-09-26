@@ -430,8 +430,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.74.0";
+const VERSION = "V1.74.1";
 const HISTORIQUE = [
+  { v:"V1.74.1", d:"25/09/2026", l:[
+    "Lots par copier-coller : un seul bouton « Copier la demande et ouvrir Claude » (la demande est mise dans le presse-papier au même toucher) ; il ne reste qu'à coller dans Claude, puis à rapporter sa réponse. Bouton « Recopier la demande » en secours."
+  ]},
   { v:"V1.74.0", d:"25/09/2026", l:[
     "Résumés et auteurs, classement thématique : possibles aussi avec une IA « sans clé » (Claude ou Gemini par copier-coller). Pour chaque lot : copier la demande, ouvrir l'IA et coller, copier sa réponse, la coller ici ; le lot suivant s'enchaîne. Arrêt et reprise possibles à tout moment.",
     "Lots adaptés : Claude sans clé 80 livres (résumés) / 150 (classement), Gemini sans clé 40 / 80."
@@ -1035,6 +1038,21 @@ function toast(msg, ms){
   minuteurToast = setTimeout(()=>t.classList.add("masque"), ms||3200);
 }
 
+/* copie immédiate (dans le même geste que l'ouverture d'un onglet, qui ferait perdre la main à une copie asynchrone) */
+function copierTexteImmediat(txt){
+  let ok = false;
+  try{
+    const z = document.createElement("textarea");
+    z.value = txt; z.setAttribute("readonly", "");
+    z.style.position="fixed"; z.style.top="0"; z.style.left="0"; z.style.opacity="0";
+    document.body.appendChild(z);
+    z.focus(); z.select(); z.setSelectionRange(0, txt.length);
+    ok = document.execCommand("copy");
+    document.body.removeChild(z);
+  }catch(e){}
+  try{ if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).catch(()=>{}); ok = true; }catch(e){}
+  return ok;
+}
 async function copierTexte(txt){
   try{
     if (navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(txt); return true; }
@@ -4757,25 +4775,29 @@ function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia
       const z = f.querySelector("#lmZone");
       z.innerHTML = `
         <div class="encadre" style="margin-top:0"><b>Lot ${n + 1} sur ${nLots}</b> — ${tranche.length} livre(s). Déjà traités : ${fait} / ${livres.length}, reste ${livres.length - fait}.</div>
-        <div class="etape"><div class="n">1</div><div class="c">Copier la demande (question + liste des livres de ce lot).
-          <button class="btn principal plein" id="lmCopier">📋 Copier la demande</button><div class="aide" id="lmEtat"></div></div></div>
-        <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOM}, <b>coller la demande</b> dans la zone de saisie et l'envoyer.
-          <button class="btn plein" id="lmOuvrir">↗️ Ouvrir ${NOM}</button></div></div>
-        <div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copier toute sa réponse (le bloc JSON), revenir ici et :
+        <div class="etape"><div class="n">1</div><div class="c">Un seul toucher : la demande (question + liste des livres de ce lot) est copiée et ${NOM} s'ouvre. Dans ${NOM}, <b>collez</b> (appui long › Coller) et envoyez.
+          <button class="btn principal plein" id="lmOuvrir">📋↗️ Copier la demande et ouvrir ${NOM}</button>
+          <div class="aide" id="lmEtat"></div>
+          <button class="btn plein" id="lmCopier" style="margin-top:6px;font-size:13.5px">Recopier la demande (si le collage ne marche pas)</button></div></div>
+        <div class="etape"><div class="n">2</div><div class="c">Dans ${NOM}, copiez toute sa réponse (le bloc JSON), revenez ici et :
           <button class="btn plein" id="lmReponse">📥 Coller la réponse de ${NOM}</button>
           <div id="lmMain" hidden><textarea id="lmTexte" placeholder="Collez ici la réponse de ${NOM}" style="min-height:120px"></textarea>
             <button class="btn principal plein" id="lmValider">Valider la réponse collée</button></div></div></div>
         <div class="aide">Chaque lot est enregistré dès sa réponse appliquée. Vous pouvez arrêter à tout moment et reprendre plus tard : seuls les livres restants seront proposés.</div>`;
       const majVifs = ()=>{
-        z.querySelector("#lmCopier").classList.toggle("principal", !copie);
-        z.querySelector("#lmOuvrir").classList.toggle("principal", copie && !ouvert);
-        z.querySelector("#lmReponse").classList.toggle("vif", copie && ouvert);
+        z.querySelector("#lmOuvrir").classList.toggle("principal", !ouvert);
+        z.querySelector("#lmReponse").classList.toggle("vif", ouvert);
+      };
+      z.querySelector("#lmOuvrir").onclick = ()=>{
+        copie = copierTexteImmediat(texte);                 // copie et ouverture dans le même toucher
+        ouvert = true; majVifs();
+        z.querySelector("#lmEtat").textContent = copie ? "✓ Demande copiée : collez-la dans " + NOM + " et envoyez." : "⚠️ Copie impossible : utilisez « Recopier la demande ».";
+        window.open(SITE_IA[ia].url(""), "_blank");
       };
       z.querySelector("#lmCopier").onclick = async ()=>{
         if (!(await copierTexte(texte))){ toast("Copie impossible."); return; }
-        copie = true; z.querySelector("#lmEtat").textContent = "✓ Demande copiée : passez à l'étape 2."; majVifs();
+        copie = true; z.querySelector("#lmEtat").textContent = "✓ Demande recopiée : collez-la dans " + NOM + "."; toast("Demande copiée.");
       };
-      z.querySelector("#lmOuvrir").onclick = ()=>{ ouvert = true; majVifs(); window.open(SITE_IA[ia].url(""), "_blank"); };
       const appliquer = (txt)=>{
         let j;
         try{ j = jsonDepuisTexte(String(txt || "")); }catch(e){ return false; }
