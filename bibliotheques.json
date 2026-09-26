@@ -13596,18 +13596,6 @@
        "statut": "acquis"
       },
       {
-       "id": "mudr847ljm79b",
-       "titre": "Survivre !",
-       "auteur": "Dougal Robertson",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Grasset",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "rang": "derriere"
-      },
-      {
        "id": "mudr847ltp384",
        "titre": "Les survivants",
        "auteur": "Piers Paul Read",
@@ -13830,6 +13818,18 @@
        "annee": "",
        "certitude": "haute",
        "remarque": "Bleu",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "derriere"
+      },
+      {
+       "id": "mudr847ljm79b",
+       "titre": "Survivre !",
+       "auteur": "Dougal Robertson",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Grasset",
        "resume": "",
        "categorie": "",
        "origine": "ia",
@@ -14894,7 +14894,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T09:05:06.692Z",
+ "maj": "2026-09-26T09:05:23.837Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
