@@ -430,8 +430,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.74.1";
+const VERSION = "V1.74.2";
 const HISTORIQUE = [
+  { v:"V1.74.2", d:"25/09/2026", l:[
+    "Lots par copier-coller : la demande est maintenant écrite directement dans Claude à l'ouverture (comme pour les photos), il suffit d'envoyer. La taille de chaque lot est ajustée pour que la demande tienne dans le lien (jusqu'à 80 livres)."
+  ]},
   { v:"V1.74.1", d:"25/09/2026", l:[
     "Lots par copier-coller : un seul bouton « Copier la demande et ouvrir Claude » (la demande est mise dans le presse-papier au même toucher) ; il ne reste qu'à coller dans Claude, puis à rapporter sa réponse. Bouton « Recopier la demande » en secours."
   ]},
@@ -4758,8 +4761,17 @@ function avertirSansIaLots(){
    Pour chaque lot : copier la demande → ouvrir l'IA et coller → copier la réponse → la coller ici ; puis lot suivant. */
 function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia){
   const NOM = NOM_IA[ia] || "l'IA";
-  const lot = taille;
-  const nLots = Math.ceil(livres.length / lot);
+  const LIMITE_LIEN = 12000;             // longueur maximale du lien qui pré-remplit la question dans l'IA
+  const construire = (tranche)=> question + "\n\nListe :\n" + tranche.map((lv, i)=>`${i}. ${lv.titre}${lv.auteur ? " — " + lv.auteur : ""}${lv.annee ? " (" + lv.annee + ")" : ""}`).join("\n") +
+    "\n\nRéponds uniquement avec le bloc JSON demandé, sans texte autour.";
+  // découpe : au plus « taille » livres, et une demande qui tient dans le lien
+  const lotsDecoupes = [];
+  for (let p = 0; p < livres.length; ){
+    let nb = Math.min(taille, livres.length - p);
+    while (nb > 1 && encodeURIComponent(construire(livres.slice(p, p + nb))).length > LIMITE_LIEN) nb = Math.max(1, Math.floor(nb * 0.85));
+    lotsDecoupes.push(livres.slice(p, p + nb)); p += nb;
+  }
+  const nLots = lotsDecoupes.length;
   let n = 0, fait = 0;
   return new Promise(res=>{
     let fini = false;
@@ -4768,15 +4780,14 @@ function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia
       boutons:[{ texte:"Arrêter (ce qui est fait est gardé)", action:()=>{ journal(`${titreFenetre} arrêté : ${fait} / ${livres.length}`); terminer(false); } }],
       surFermeture:()=>terminer(false) });
     const rendre = ()=>{
-      const tranche = livres.slice(n * lot, (n + 1) * lot);
-      const texte = question + "\n\nListe :\n" + tranche.map((lv, i)=>`${i}. ${lv.titre}${lv.auteur ? " — " + lv.auteur : ""}${lv.annee ? " (" + lv.annee + ")" : ""}`).join("\n") +
-        "\n\nRéponds uniquement avec le bloc JSON demandé, sans texte autour.";
+      const tranche = lotsDecoupes[n];
+      const texte = construire(tranche);
       let copie = false, ouvert = false;
       const z = f.querySelector("#lmZone");
       z.innerHTML = `
         <div class="encadre" style="margin-top:0"><b>Lot ${n + 1} sur ${nLots}</b> — ${tranche.length} livre(s). Déjà traités : ${fait} / ${livres.length}, reste ${livres.length - fait}.</div>
-        <div class="etape"><div class="n">1</div><div class="c">Un seul toucher : la demande (question + liste des livres de ce lot) est copiée et ${NOM} s'ouvre. Dans ${NOM}, <b>collez</b> (appui long › Coller) et envoyez.
-          <button class="btn principal plein" id="lmOuvrir">📋↗️ Copier la demande et ouvrir ${NOM}</button>
+        <div class="etape"><div class="n">1</div><div class="c">Ouvrir ${NOM} : la demande (question + liste des livres de ce lot) est <b>déjà écrite</b>, il suffit de l'<b>envoyer</b>.
+          <button class="btn principal plein" id="lmOuvrir">↗️ Ouvrir ${NOM} avec la demande</button>
           <div class="aide" id="lmEtat"></div>
           <button class="btn plein" id="lmCopier" style="margin-top:6px;font-size:13.5px">Recopier la demande (si le collage ne marche pas)</button></div></div>
         <div class="etape"><div class="n">2</div><div class="c">Dans ${NOM}, copiez toute sa réponse (le bloc JSON), revenez ici et :
@@ -4789,10 +4800,10 @@ function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia
         z.querySelector("#lmReponse").classList.toggle("vif", ouvert);
       };
       z.querySelector("#lmOuvrir").onclick = ()=>{
-        copie = copierTexteImmediat(texte);                 // copie et ouverture dans le même toucher
+        copie = copierTexteImmediat(texte);                 // en plus, au cas où la demande n'apparaîtrait pas
         ouvert = true; majVifs();
-        z.querySelector("#lmEtat").textContent = copie ? "✓ Demande copiée : collez-la dans " + NOM + " et envoyez." : "⚠️ Copie impossible : utilisez « Recopier la demande ».";
-        window.open(SITE_IA[ia].url(""), "_blank");
+        z.querySelector("#lmEtat").textContent = "✓ " + NOM + " ouvert avec la demande. Si elle n'apparaît pas, touchez « Recopier la demande » et collez-la.";
+        window.open(SITE_IA[ia].url(texte), "_blank");
       };
       z.querySelector("#lmCopier").onclick = async ()=>{
         if (!(await copierTexte(texte))){ toast("Copie impossible."); return; }
