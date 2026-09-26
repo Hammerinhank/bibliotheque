@@ -15722,16 +15722,7 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "question": {
-        "type": "deplace",
-        "zone": {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 917,
-         "x2": 947
-        },
-        "source": "l'appoint 2",
-        "date": "2026-09-26T11:19:42.413Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mudsari8hya71",
@@ -17144,7 +17135,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T13:36:08.348Z",
+ "maj": "2026-09-26T13:36:28.395Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
