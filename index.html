@@ -430,8 +430,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.71.2";
+const VERSION = "V1.72.0";
 const HISTORIQUE = [
+  { v:"V1.72.0", d:"25/09/2026", l:[
+    "Résumés et auteurs : fenêtre refaite — ce que fait l'opération, état actuel (complets / sans résumé / sans auteur), choix clairs à cocher avec pour chacun le nombre de livres, de requêtes et la durée estimée, et s'il écrase ou non l'existant ; puis « Lancer ».",
+    "« Compléter » ne remplit plus que les champs vides (les résumés ou auteurs existants, y compris corrigés à la main, sont gardés) ; « Tout refaire » demande une confirmation et épargne les rangées certifiées ★. Reprise possible après interruption sans rien refaire."
+  ]},
   { v:"V1.71.2", d:"25/09/2026", l:[
     "Mode ✏️ Éditer : l'encadré « ℹ️ Informations » est replié par défaut (l'encadré « 🛠 Outils » reste ouvert)."
   ]},
@@ -6713,47 +6717,80 @@ function texteListe(b, o){
 async function lancerResumes(b){
   const tous = tousLesLivres(b).map(x=>x.livre);
   if (!tous.length){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
-  const manquants = tous.filter(lv=>!lv.resume);
-  const incomplets = tous.filter(lv=>!lv.resume || !lv.auteur);
-  const boutons = [{texte:"Annuler", action:()=>null}];
-  boutons.push({texte:`Tous (${tous.length})`, action:()=>"tous"});
-  if (incomplets.length > manquants.length)
-    boutons.push({texte:`Sans résumé ou sans auteur (${incomplets.length})`, action:()=>"incomplets"});
-  if (manquants.length)
-    boutons.push({texte:`Les ${manquants.length} sans résumé`, classe:"principal", action:()=>"manquants"});
-  const choix = await new Promise(res=>{
-    modale({ titre:"Résumés et auteurs",
-      html:`<div>${tous.length} livre(s) dans cette bibliothèque : ${tous.length - manquants.length} ont déjà un résumé, ${manquants.length} n'en ont pas${incomplets.length > manquants.length ? `, et ${incomplets.length - manquants.length} ont un résumé mais pas d'auteur` : ""}.</div>
-            <div class="aide">Gemini renvoie un résumé d'une ligne, l'auteur complet avec une précision brève et l'année de première parution. Traitement par lots de 20, avec décompte.</div>
-            ${!manquants.length ? `<div class="aide">✅ Tous les livres ont déjà un résumé.</div>` : ""}`,
-      boutons: boutons.map(x=>({ texte:x.texte, classe:x.classe, action:()=>res(x.action()) })),
-      surFermeture:()=>res(null)});
+  const sansResume = tous.filter(lv=>!lv.resume);
+  const sansAuteurSeul = tous.filter(lv=>lv.resume && !lv.auteur);
+  const complets = tous.filter(lv=>lv.resume && lv.auteur);
+  // durée estimée : moyenne des vraies requêtes récentes du modèle, sinon 20 s par lot de 20
+  const memo = lireTestsModeles(), m = memo && memo.liste.find(x=>x.id === cfg.modele);
+  const msLot = m && (m.analyses || []).length ? m.analyses.reduce((s, h)=>s + h.ms, 0) / m.analyses.length : 20000;
+  const duree = (n)=>{ const s = Math.ceil(n / 20) * msLot / 1000; return s < 90 ? `environ ${Math.max(10, Math.round(s / 10) * 10)} s` : `environ ${Math.round(s / 60)} min`; };
+  const lots = (n)=>Math.ceil(n / 20);
+  const options = [
+    sansResume.length && { id:"manquants", liste:sansResume, ecrase:false, titre:`Compléter les ${sansResume.length} livre(s) sans résumé`,
+      detail:`Ajoute résumé, auteur et année là où ils manquent. <b>N'écrase rien</b> de ce qui existe déjà.`, recommande:true },
+    (sansResume.length + sansAuteurSeul.length) > sansResume.length && { id:"incomplets", liste:sansResume.concat(sansAuteurSeul), ecrase:false,
+      titre:`Compléter aussi les ${sansAuteurSeul.length} livre(s) qui ont un résumé mais pas d'auteur`,
+      detail:`Les ${sansResume.length + sansAuteurSeul.length} livres incomplets. Seuls les champs vides sont remplis : les résumés existants <b>sont gardés</b>.` },
+    { id:"tous", liste:tous, ecrase:true, titre:`Tout refaire (${tous.length} livres)`,
+      detail:`Redemande tout, y compris pour les ${tous.length - sansResume.length} livre(s) qui ont déjà un résumé : <b>remplace</b> les résumés, auteurs et années existants (sauf dans les rangées certifiées ★, où seuls les champs vides sont remplis). Rarement utile.` }
+  ].filter(Boolean);
+  let choix = options[0].id;
+  const f = modale({ titre:"Résumés et auteurs",
+    html:`<div class="aide" style="margin-top:0"><b>À quoi ça sert ?</b> Pour chaque livre, l'IA (${esc(NOM_IA[cfg.iaPrincipale] || "Gemini")}) donne un <b>résumé d'une ligne</b>, l'<b>auteur complet</b> et l'<b>année de première parution</b>. Ils apparaissent dans les compartiments, dans la liste et dans les PDF. Les titres et l'ordre des livres ne sont jamais touchés.</div>
+      <div class="encadre" style="margin:10px 0">
+        <div class="infoLigne"><span class="cle">Livres</span><span><b>${tous.length}</b></span></div>
+        <div class="infoLigne"><span class="cle">Complets</span><span>✅ ${complets.length} (résumé et auteur)</span></div>
+        <div class="infoLigne"><span class="cle">Sans résumé</span><span>${sansResume.length ? "⏳ " : ""}${sansResume.length}</span></div>
+        ${sansAuteurSeul.length ? `<div class="infoLigne"><span class="cle">Sans auteur</span><span>${sansAuteurSeul.length} (mais avec résumé)</span></div>` : ""}
+      </div>
+      ${!sansResume.length && !sansAuteurSeul.length ? `<div class="encadre" style="border-color:var(--vert)">✅ Tout est déjà complet : il n'y a rien à faire.</div>` : ""}
+      <div class="titreSection" style="margin-top:12px">Que voulez-vous faire ?</div>
+      ${options.map(o=>`<label class="caseUnRang" style="margin-top:8px;align-items:flex-start${o.ecrase ? ";border-color:var(--orange)" : ""}">
+        <input type="radio" name="rsChoix" value="${o.id}" ${o.id === choix ? "checked" : ""} style="margin-top:2px">
+        <span><b>${o.titre}</b>${o.recommande ? ` <span style="color:var(--vert);font-weight:700">— recommandé</span>` : ""}
+          <br><span class="aide" style="margin:0">${o.detail}</span>
+          <br><span class="aide" style="margin:0">⏱ ${lots(o.liste.length)} requête(s) à l'IA, ${duree(o.liste.length)}.</span></span></label>`).join("")}
+      <div class="aide" style="margin-top:10px">Pendant le traitement, un décompte s'affiche. Ce qui est fait est enregistré au fur et à mesure : en cas d'interruption, « Compléter » reprend là où ça s'était arrêté, sans rien refaire.</div>
+      <div class="encadre" id="rsResume" style="margin-top:10px;font-weight:600"></div>`,
+    boutons:[{ texte:"Annuler" }, { texte:"Lancer", classe:"principal", garder:true, action:async ()=>{
+      const o = options.find(x=>x.id === choix);
+      if (o.ecrase){
+        const ok = await confirmer(`<div><b>Tout refaire remplacera les résumés, auteurs et années de ${tous.length - sansResume.length} livre(s) qui en ont déjà.</b></div>
+          <div class="aide">${lots(o.liste.length)} requête(s), ${duree(o.liste.length)}. Les corrections faites à la main sur ces champs seront perdues (sauf rangées certifiées).</div>`, "Tout refaire ?", "Oui, tout refaire");
+        if (!ok) return false;
+      }
+      f.remove();
+      await executerResumes(b, o);
+    }}] });
+  const majResume = ()=>{
+    const o = options.find(x=>x.id === choix);
+    f.querySelector("#rsResume").innerHTML = `Lancer : ${o.liste.length} livre(s), ${lots(o.liste.length)} requête(s), ${duree(o.liste.length)}${o.ecrase ? " — ⚠️ remplace l'existant" : " — n'écrase rien"}.`;
+  };
+  f.querySelectorAll('input[name="rsChoix"]').forEach(x=>x.onchange = ()=>{ choix = x.value; majResume(); });
+  majResume();
+}
+
+async function executerResumes(b, o){
+  // on garde ce qui existait si l'option n'écrase pas (ou si la rangée est certifiée)
+  const certifLv = new Set();
+  Object.values(b.cases || {}).forEach(cs=>(cs.livres || []).forEach(lv=>{ if (certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")) certifLv.add(lv); }));
+  const avant = new Map(o.liste.map(lv=>[lv, { resume:lv.resume, auteur:lv.auteur, annee:lv.annee }]));
+  journal(`Résumés et auteurs lancés : ${o.titre}`);
+  const ok = await traiterParLots(o.liste, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", 20);
+  let restaures = 0;
+  o.liste.forEach(lv=>{
+    const a = avant.get(lv); if (!a) return;
+    if (!o.ecrase || certifLv.has(lv)) ["resume","auteur","annee"].forEach(c=>{ if (a[c] && lv[c] !== a[c]){ lv[c] = a[c]; restaures++; } });
   });
-  if (!choix) return;
-  const liste = choix === "tous" ? tous : choix === "incomplets" ? incomplets : manquants;
-  if (!liste.length) return;
-
-  // garde-fou : ne pas redemander par accident ce qui a déjà été obtenu (Gemini est souvent saturé)
-  const deja = liste.filter(lv=>lv.resume);
-  if (deja.length){
-    const pct = Math.round(deja.length * 100 / liste.length);
-    const ok = await confirmer(
-      `<div><b>${deja.length} livre(s) sur ${liste.length} (${pct} %) ont déjà un résumé.</b></div>
-       <div class="aide">Les redemander refera ${Math.ceil(liste.length / 20)} requête(s) à Gemini au lieu de ${Math.ceil((liste.length - deja.length) / 20)}, alors que son serveur est souvent saturé, et <b>remplacera</b> les résumés, auteurs et années déjà obtenus par les nouvelles réponses.</div>
-       ${liste.length > deja.length ? `<div class="aide">Pour ne traiter que les ${liste.length - deja.length} livre(s) qui en manquent, annulez puis choisissez « sans résumé ».</div>` : ""}`,
-      "Redemander des résumés déjà obtenus ?", `Oui, redemander les ${liste.length}`);
-    if (!ok) return;
-  }
-
-  const ok = await traiterParLots(liste, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", 20);
-  rendreBiblio();
-  if (ok){
-    const avec = liste.filter(lv=>lv.resume).length;
-    modale({ titre:"Résumés obtenus",
-      html:`<div>${avec} livre(s) sur ${liste.length} ont maintenant un résumé.</div>
-            <div class="aide">Ils apparaissent dans chaque compartiment, dans la liste (case « Résumé ») et dans le PDF.</div>`,
-      boutons:[{texte:"Fermer"}]});
-  }
+  sauver(); rendreBiblio();
+  planifierEnvoi("Résumés et auteurs");
+  const avec = o.liste.filter(lv=>lv.resume).length;
+  journal(`Résumés et auteurs ${ok ? "terminés" : "interrompus"} : ${avec} / ${o.liste.length} livres avec résumé`);
+  if (ok) modale({ titre:"Résumés obtenus",
+    html:`<div>${avec} livre(s) sur ${o.liste.length} ont maintenant un résumé.</div>
+      ${restaures && !o.ecrase ? `<div class="aide">Les champs déjà remplis ont été conservés tels quels.</div>` : ""}
+      <div class="aide">Ils apparaissent dans chaque compartiment, dans la liste (case « Résumé ») et dans les PDF.</div>`,
+    boutons:[{texte:"Fermer"}] });
 }
 
 /* ====================================================================
