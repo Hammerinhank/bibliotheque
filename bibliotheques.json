@@ -15157,27 +15157,6 @@
     "5-2": {
      "livres": [
       {
-       "id": "mudsari8raeok",
-       "titre": "Les aiguilles d'or",
-       "auteur": "Michael McDowell",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Monsieur Toussaint Louverture",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "vues": [
-        {
-         "champ": "appoint:muiapudy44zcu",
-         "x1": 13,
-         "x2": 80
-        }
-       ],
-       "temoins": [
-        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
-       ]
-      },
-      {
        "id": "mudsari8ktnyl",
        "titre": "KATE",
        "auteur": "MICHAEL MCDOWELL",
@@ -15195,6 +15174,27 @@
         }
        ],
        "statut": "acquis",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
+      },
+      {
+       "id": "mudsari8raeok",
+       "titre": "Les aiguilles d'or",
+       "auteur": "Michael McDowell",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Monsieur Toussaint Louverture",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 13,
+         "x2": 80
+        }
+       ],
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
        ]
@@ -17195,7 +17195,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:19:43.910Z",
+ "maj": "2026-09-26T13:22:49.073Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
