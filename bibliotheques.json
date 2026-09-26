@@ -14888,7 +14888,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "Un thriller d'espionnage où un agent de la CIA traque un terroriste international à travers l'Europe, mêlant action et suspense.",
-       "categorie": "",
+       "categorie": "Thriller",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14901,7 +14901,7 @@
        "certitude": "haute",
        "remarque": "Actes Sud",
        "resume": "Un journaliste déchu et une hackeuse rebelle enquêtent sur la disparition d'une jeune femme, révélant de sombres secrets familiaux et sociaux.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14914,7 +14914,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "L'inspecteur Dalgliesh enquête sur le meurtre d'un membre du conseil d'administration d'une clinique privée, révélant des tensions et des secrets.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14927,7 +14927,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un tailleur londonien exilé à Panama se retrouve malgré lui espion pour les services secrets britanniques, inventant des histoires rocambolesques.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14940,7 +14940,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un diplomate britannique découvre une conspiration impliquant des sociétés pharmaceutiques et le gouvernement, risquant sa vie pour la vérité.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14953,7 +14953,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un diplomate britannique enquête sur la disparition d'un collègue dans une petite ville allemande, découvrant un réseau d'espionnage complexe.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14966,7 +14966,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un thriller politique et religieux explorant les coulisses du Vatican et les enjeux de pouvoir lors de l'élection d'un nouveau pape.",
-       "categorie": "",
+       "categorie": "Politique fiction",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -14979,7 +14979,7 @@
        "certitude": "haute",
        "remarque": "JC Lattès",
        "resume": "Une cryptologue est appelée à déchiffrer un code indéchiffrable du NSA, révélant une conspiration menaçant la sécurité nationale.",
-       "categorie": "",
+       "categorie": "Thriller",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15002,7 +15002,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un thriller d'espionnage international impliquant des agents secrets et des complots politiques, avec des enjeux mondiaux.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15025,7 +15025,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le commissaire Adamsberg enquête sur des noyades suspectes dans la Seine, découvrant des liens avec un passé mystérieux et des légendes urbaines.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -15048,7 +15048,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Le commissaire Adamsberg enquête sur le meurtre d'une femme retrouvée devant Notre-Dame, avec des indices étranges et des légendes médiévales.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15071,7 +15071,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le commissaire Adamsberg enquête sur des morts étranges liées à des araignées et un passé trouble, entre Paris et le Québec.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15094,7 +15094,7 @@
        "certitude": "haute",
        "remarque": "Viviane Hamy",
        "resume": "Le commissaire Adamsberg enquête sur des morts étranges liées à des araignées et un passé trouble, entre Paris et le Québec.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15117,7 +15117,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le commissaire Adamsberg enquête sur une série de meurtres liés à une secte et des légendes anciennes, mêlant histoire et mystère.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -15140,7 +15140,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Le commissaire Adamsberg enquête sur des meurtres liés à des légendes islandaises et des événements passés, entre Paris et l'Islande.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15163,7 +15163,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Le commissaire Adamsberg enquête sur des meurtres liés à des araignées recluses et des légendes locales, dans une petite ville française.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15186,7 +15186,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Le commissaire Adamsberg enquête sur des meurtres liés à une légende médiévale bretonne et une mystérieuse armée de morts.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -15209,7 +15209,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Le commissaire Adamsberg enquête sur un meurtre en Bretagne, lié à une légende locale et des secrets de famille enfouis.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -15222,7 +15222,7 @@
        "certitude": "haute",
        "remarque": "Série Noire",
        "resume": "Un thriller politique où un bibliothécaire se retrouve impliqué dans une conspiration gouvernementale après avoir découvert des secrets compromettants.",
-       "categorie": "",
+       "categorie": "Thriller",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15235,7 +15235,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme amnésique est accusé d'un meurtre qu'il ne se souvient pas avoir commis, plongeant dans un passé trouble pour découvrir la vérité.",
-       "categorie": "",
+       "categorie": "Suspense",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15248,7 +15248,7 @@
        "certitude": "haute",
        "remarque": "JC Lattès",
        "resume": "Un symbologiste et une cryptologue enquêtent sur un meurtre au Louvre, découvrant une conspiration religieuse liée à l'histoire du christianisme et au Saint Graal.",
-       "categorie": "",
+       "categorie": "Thriller",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15261,7 +15261,7 @@
        "certitude": "haute",
        "remarque": "Seuil Policiers",
        "resume": "Un journaliste d'investigation, Jack McEvoy, traque un tueur en série qui utilise des sites de rencontres pour cibler ses victimes, le surnommant l'Épouvantail.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15274,7 +15274,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Kay Scarpetta, médecin légiste, enquête sur des meurtres mystérieux liés à un passé trouble et à des secrets de famille, dans une atmosphère oppressante.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15287,7 +15287,7 @@
        "certitude": "haute",
        "remarque": "Série Noire",
        "resume": "Un détective français enquête sur des meurtres rituels au Chili, plongeant dans l'histoire des Mapuches et les sombres secrets de la dictature de Pinochet.",
-       "categorie": "",
+       "categorie": "Roman noir",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15297,7 +15297,7 @@
        "auteur": "Patricia Highsmith",
        "annee": "1970",
        "resume": "Un homme solitaire et misanthrope développe une obsession pour les escargots, trouvant refuge dans leur monde face à la cruauté et l'absurdité de la société humaine.",
-       "categorie": "",
+       "categorie": "Suspense",
        "remarque": "",
        "certitude": "haute",
        "rang": "derriere",
@@ -15313,7 +15313,7 @@
        "certitude": "haute",
        "remarque": "Les Nouveaux Auteurs",
        "resume": "Le commandant Jourdain enquête sur un meurtre complexe au 36 quai des Orfèvres, mêlant secrets de famille, trahisons et les arcanes du milieu policier parisien.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15326,7 +15326,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir",
        "resume": "Un thriller haletant où un détective privé se retrouve plongé dans une affaire de disparition et de complot, avec des enjeux personnels et des rebondissements inattendus.",
-       "categorie": "",
+       "categorie": "Thriller",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15339,7 +15339,7 @@
        "certitude": "haute",
        "remarque": "Collection Bérurier",
        "resume": "Un roman satirique et burlesque mettant en scène le commissaire San-Antonio et son adjoint Bérurier, confrontés à une affaire loufoque dans le monde du luxe et de la mode.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15352,7 +15352,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un roman d'espionnage où un agent secret britannique, Solo, est envoyé en Afrique pour une mission dangereuse, confronté à des dilemmes moraux et des trahisons.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15362,7 +15362,7 @@
        "auteur": "John Le Carré",
        "annee": "2001",
        "resume": "Un diplomate britannique enquête sur le meurtre de sa femme au Kenya, découvrant une conspiration impliquant des multinationales pharmaceutiques et des enjeux politiques.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "remarque": "",
        "certitude": "haute",
        "rang": "derriere",
@@ -15378,7 +15378,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un roman d'espionnage complexe explorant les liens ambigus entre un agent secret britannique et un espion soviétique, sur fond de Guerre Froide et de trahisons personnelles.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15391,7 +15391,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "Une jeune actrice est recrutée par les services secrets britanniques pour infiltrer un groupe terroriste palestinien, se retrouvant prise au piège entre deux mondes.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15404,7 +15404,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "Des scientifiques recréent des dinosaures sur une île isolée, mais le parc tourne au cauchemar lorsque les créatures s'échappent, menaçant la vie des visiteurs.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15417,7 +15417,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "Un homme amnésique est retrouvé avec des balles dans le dos et un implant sous la peau, découvrant qu'il est un agent secret traqué par une organisation mystérieuse.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15430,7 +15430,7 @@
        "certitude": "haute",
        "remarque": "Bestseller",
        "resume": "Un inspecteur de police moscovite enquête sur un meurtre brutal au parc Gorki, se heurtant aux autorités soviétiques et découvrant une conspiration internationale.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15443,7 +15443,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Un thriller aérien où un avion de ligne est confronté à une série de problèmes critiques en plein vol, mettant en péril la vie des passagers et de l'équipage.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15456,7 +15456,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Un groupe de criminels tente de voler un train transportant des bijoux précieux sous Park Avenue, mais leur plan est compromis par des imprévus et des trahisons.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15469,7 +15469,7 @@
        "certitude": "haute",
        "remarque": "Bleu",
        "resume": "Un sous-marin nucléaire soviétique, l'Octobre Rouge, fait défection vers les États-Unis, déclenchant une course-poursuite haletante et une crise internationale majeure.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15482,7 +15482,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Le récit véridique d'une famille qui survit 38 jours en mer après le naufrage de leur voilier, affrontant la faim, la soif et les éléments déchaînés.",
-       "categorie": "",
+       "categorie": "Aventure et Témoignage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15495,7 +15495,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le récit poignant de la survie d'un groupe de passagers d'un avion uruguayen qui s'est écrasé dans les Andes, contraints à des choix extrêmes pour rester en vie.",
-       "categorie": "",
+       "categorie": "Aventure et Témoignage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15508,7 +15508,7 @@
        "certitude": "moyenne",
        "remarque": "Couverture rouge",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15521,7 +15521,7 @@
        "certitude": "haute",
        "remarque": "Éditions du Chêne",
        "resume": "Un groupe de scientifiques est piégé dans une base arctique isolée, confronté à un saboteur et à des meurtres mystérieux.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -15591,7 +15591,7 @@
        "certitude": "haute",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "Ce roman explore les secrets et les dangers d'une famille du Sud des États-Unis, mêlant horreur gothique et drame familial.",
-       "categorie": "",
+       "categorie": "Fantastique et Horreur",
        "origine": "ia",
        "vues": [
         {
@@ -15613,7 +15613,7 @@
        "certitude": "haute",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "Ce roman suit l'histoire d'une femme confrontée à des événements étranges et surnaturels dans un cadre sudiste.",
-       "categorie": "",
+       "categorie": "Fantastique et Horreur",
        "origine": "ia",
        "vues": [
         {
@@ -15635,7 +15635,7 @@
        "certitude": "haute",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "La conclusion de la saga Blackwater, où la famille Caskey affronte les conséquences finales de ses alliances et de ses secrets.",
-       "categorie": "",
+       "categorie": "Fantastique et Horreur",
        "origine": "ia",
        "vues": [
         {
@@ -15657,7 +15657,7 @@
        "certitude": "haute",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "La famille Caskey est confrontée à de nouveaux défis et conflits, alors que les tensions montent et que les secrets s'épaississent.",
-       "categorie": "",
+       "categorie": "Fantastique et Horreur",
        "origine": "ia",
        "vues": [
         {
@@ -15679,7 +15679,7 @@
        "certitude": "faible",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "Ce volume de la saga Blackwater explore les conflits et les alliances de la famille Caskey dans le sud de l'Alabama.",
-       "categorie": "",
+       "categorie": "Fantastique et Horreur",
        "origine": "ia",
        "vues": [
         {
@@ -15701,7 +15701,7 @@
        "certitude": "faible",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "Ce volume de la saga Blackwater continue de suivre les destins entrelacés de la famille Caskey et de ses mystères.",
-       "categorie": "",
+       "categorie": "Fantastique et Horreur",
        "origine": "ia",
        "vues": [
         {
@@ -15723,7 +15723,7 @@
        "certitude": "faible",
        "remarque": "J'ai lu",
        "resume": "Une jeune femme indienne est tiraillée entre tradition et modernité, confrontée à un mariage arrangé et à ses propres désirs.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -15745,7 +15745,7 @@
        "certitude": "haute",
        "remarque": "Rivages poche",
        "resume": "Une artiste new-yorkaise tente de percer les mystères de la vie de Lorin Jones, une peintre oubliée, tout en explorant sa propre existence.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -15767,7 +15767,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Un homme est hanté par une cicatrice physique et émotionnelle, explorant les thèmes de la culpabilité et de la rédemption.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -15789,7 +15789,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman dépeint la vie de trois femmes européennes dans la Kasbah d'Alger, explorant les mœurs et les rencontres interculturelles.",
-       "categorie": "",
+       "categorie": "Littérature française",
        "origine": "appoint",
        "vues": [
         {
@@ -15812,7 +15812,7 @@
        "certitude": "haute",
        "remarque": "Bibliothèque étrangère",
        "resume": "Ce roman raconte la vie rude et dangereuse des pêcheurs bretons partant pour les bancs de Terre-Neuve, et leurs amours.",
-       "categorie": "",
+       "categorie": "Littérature française",
        "origine": "ia",
        "statut": "acquis"
       },
@@ -15824,7 +15824,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un jeune marin autodidacte aspire à s'élever socialement et intellectuellement, mais se heurte aux limites de la société et de l'amour.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -15847,7 +15847,7 @@
        "certitude": "faible",
        "remarque": "roman",
        "resume": "Ce roman satirique explore les relations complexes et les rivalités académiques au sein d'une université britannique.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -15869,7 +15869,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Un intellectuel italien est exilé dans un village reculé du sud de l'Italie, découvrant la misère et la culture paysanne.",
-       "categorie": "",
+       "categorie": "Aventure et Témoignage",
        "origine": "ia",
        "statut": "acquis"
       },
@@ -15878,7 +15878,7 @@
        "auteur": "Iain levison",
        "annee": "2003",
        "resume": "Un jeune homme écossais se retrouve mêlé à des situations absurdes et violentes, tentant d'échapper à son destin.",
-       "categorie": "",
+       "categorie": "Thriller et Espionnage",
        "remarque": "",
        "certitude": "haute",
        "rang": "devant",
@@ -15894,7 +15894,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Une femme se remémore son passé et son identité, explorant les liens familiaux et les secrets qui ont façonné sa vie.",
-       "categorie": "",
+       "categorie": "Littérature française",
        "origine": "ia",
        "vues": [
         {
@@ -15916,7 +15916,7 @@
        "certitude": "haute",
        "remarque": "Libretto",
        "resume": "Une jeune femme d'origine mixte explore son identité et ses racines entre la France et le Vietnam, confrontée aux préjugés.",
-       "categorie": "",
+       "categorie": "Aventure et Témoignage",
        "origine": "ia",
        "vues": [
         {
@@ -15938,7 +15938,7 @@
        "certitude": "haute",
        "remarque": "Points",
        "resume": "Ce roman explore les tensions raciales et les préjugés dans le Sud des États-Unis à travers les yeux d'une jeune femme adulte.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -19059,7 +19059,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T19:18:03.574Z",
+ "maj": "2026-09-26T21:01:03.136Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
