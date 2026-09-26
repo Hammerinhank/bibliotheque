@@ -430,8 +430,16 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.72.0";
+const VERSION = "V1.74.0";
 const HISTORIQUE = [
+  { v:"V1.74.0", d:"25/09/2026", l:[
+    "Résumés et auteurs, classement thématique : possibles aussi avec une IA « sans clé » (Claude ou Gemini par copier-coller). Pour chaque lot : copier la demande, ouvrir l'IA et coller, copier sa réponse, la coller ici ; le lot suivant s'enchaîne. Arrêt et reprise possibles à tout moment.",
+    "Lots adaptés : Claude sans clé 80 livres (résumés) / 150 (classement), Gemini sans clé 40 / 80."
+  ]},
+  { v:"V1.73.0", d:"25/09/2026", l:[
+    "Traitements par lots (résumés et auteurs, classement thématique) : les textes nomment l'IA réellement utilisée (celle choisie dans les réglages, ou l'autre si elle est « sans clé ») au lieu de toujours dire Gemini ; avertissement si aucune IA n'est utilisable par clé.",
+    "Lots plus gros avec Claude : 60 livres par requête pour les résumés (au lieu de 20) et 100 pour le classement (au lieu de 30) ; Gemini garde 20 et 30. Durées estimées selon l'IA."
+  ]},
   { v:"V1.72.0", d:"25/09/2026", l:[
     "Résumés et auteurs : fenêtre refaite — ce que fait l'opération, état actuel (complets / sans résumé / sans auteur), choix clairs à cocher avec pour chacun le nombre de livres, de requêtes et la durée estimée, et s'il écrase ou non l'existant ; puis « Lancer ».",
     "« Compléter » ne remplit plus que les champs vides (les résumés ou auteurs existants, y compris corrigés à la main, sont gardés) ; « Tout refaire » demande une confirmation et épargne les rangées certifiées ★. Reprise possible après interruption sans rien refaire."
@@ -4711,14 +4719,103 @@ function texteBilanSimple(livres){
          (livres.fusionnes ? ` (${livres.fusionnes} doublon(s) fusionné(s))` : "") + ".";
 }
 
+/* IA qui traitera réellement un lot : la première de l'ordre choisi qui a une clé (le mode « sans clé » ne permet pas les lots) */
+function iaPourLots(){ return cfg.iaPrincipale === "claude" ? "claude" : "gemini"; }     // l'IA choisie, avec ou sans clé
+const lotsManuels = ()=> modeManuel(iaPourLots());
+/* taille des lots selon l'IA et le mode : Claude accepte des réponses bien plus longues ; en copier-coller, moins d'allers-retours */
+function tailleLot(genre){
+  const ia = iaPourLots(), man = lotsManuels();
+  if (genre === "resume") return ia === "claude" ? (man ? 80 : 60) : (man ? 40 : 20);
+  return ia === "claude" ? (man ? 150 : 100) : (man ? 80 : 30);
+}
+/* avertissement si aucune IA n'est utilisable pour un traitement par lots */
+function avertirSansIaLots(){
+  const ordre = cfg.iaPrincipale === "claude" ? "Claude" : "Gemini";
+  modale({ titre:"Aucune IA utilisable",
+    html:`<div>${ordre} est réglé « sans clé » (copier-coller)${cfg.secours ? " et l'autre IA aussi" : " et le secours par l'autre IA est désactivé"}.</div>
+      <div class="aide">Les traitements par lots (résumés, classement) ont besoin d'une IA avec clé API : réglez-en une dans ⚙️ Réglages › IA.</div>`,
+    boutons:[{ texte:"Compris" }] });
+}
+/* Traitement par lots « sans clé » : l'utilisateur transmet chaque lot à l'IA par copier-coller.
+   Pour chaque lot : copier la demande → ouvrir l'IA et coller → copier la réponse → la coller ici ; puis lot suivant. */
+function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia){
+  const NOM = NOM_IA[ia] || "l'IA";
+  const lot = taille;
+  const nLots = Math.ceil(livres.length / lot);
+  let n = 0, fait = 0;
+  return new Promise(res=>{
+    let fini = false;
+    const terminer = (ok)=>{ if (fini) return; fini = true; res(ok); };
+    const f = modale({ titre: titreFenetre + " — " + NOM + " (sans clé)", html:`<div id="lmZone"></div>`,
+      boutons:[{ texte:"Arrêter (ce qui est fait est gardé)", action:()=>{ journal(`${titreFenetre} arrêté : ${fait} / ${livres.length}`); terminer(false); } }],
+      surFermeture:()=>terminer(false) });
+    const rendre = ()=>{
+      const tranche = livres.slice(n * lot, (n + 1) * lot);
+      const texte = question + "\n\nListe :\n" + tranche.map((lv, i)=>`${i}. ${lv.titre}${lv.auteur ? " — " + lv.auteur : ""}${lv.annee ? " (" + lv.annee + ")" : ""}`).join("\n") +
+        "\n\nRéponds uniquement avec le bloc JSON demandé, sans texte autour.";
+      let copie = false, ouvert = false;
+      const z = f.querySelector("#lmZone");
+      z.innerHTML = `
+        <div class="encadre" style="margin-top:0"><b>Lot ${n + 1} sur ${nLots}</b> — ${tranche.length} livre(s). Déjà traités : ${fait} / ${livres.length}, reste ${livres.length - fait}.</div>
+        <div class="etape"><div class="n">1</div><div class="c">Copier la demande (question + liste des livres de ce lot).
+          <button class="btn principal plein" id="lmCopier">📋 Copier la demande</button><div class="aide" id="lmEtat"></div></div></div>
+        <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOM}, <b>coller la demande</b> dans la zone de saisie et l'envoyer.
+          <button class="btn plein" id="lmOuvrir">↗️ Ouvrir ${NOM}</button></div></div>
+        <div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copier toute sa réponse (le bloc JSON), revenir ici et :
+          <button class="btn plein" id="lmReponse">📥 Coller la réponse de ${NOM}</button>
+          <div id="lmMain" hidden><textarea id="lmTexte" placeholder="Collez ici la réponse de ${NOM}" style="min-height:120px"></textarea>
+            <button class="btn principal plein" id="lmValider">Valider la réponse collée</button></div></div></div>
+        <div class="aide">Chaque lot est enregistré dès sa réponse appliquée. Vous pouvez arrêter à tout moment et reprendre plus tard : seuls les livres restants seront proposés.</div>`;
+      const majVifs = ()=>{
+        z.querySelector("#lmCopier").classList.toggle("principal", !copie);
+        z.querySelector("#lmOuvrir").classList.toggle("principal", copie && !ouvert);
+        z.querySelector("#lmReponse").classList.toggle("vif", copie && ouvert);
+      };
+      z.querySelector("#lmCopier").onclick = async ()=>{
+        if (!(await copierTexte(texte))){ toast("Copie impossible."); return; }
+        copie = true; z.querySelector("#lmEtat").textContent = "✓ Demande copiée : passez à l'étape 2."; majVifs();
+      };
+      z.querySelector("#lmOuvrir").onclick = ()=>{ ouvert = true; majVifs(); window.open(SITE_IA[ia].url(""), "_blank"); };
+      const appliquer = (txt)=>{
+        let j;
+        try{ j = jsonDepuisTexte(String(txt || "")); }catch(e){ return false; }
+        const reps = Array.isArray(j.livres) ? j.livres : (Array.isArray(j) ? j : []);
+        if (!reps.length) return false;
+        reps.forEach(rep=>{
+          const i = Number(rep.i);
+          if (!Number.isInteger(i) || i < 0 || i >= tranche.length) return;
+          champs.forEach(ch=>{ const v = rep[ch]; if (v != null && String(v).trim() && String(v).trim() !== "?") tranche[i][ch] = String(v).trim(); });
+        });
+        fait += tranche.length; n++;
+        sauver();
+        journal(`${titreFenetre} (${NOM} sans clé) : lot ${n} / ${nLots} appliqué`);
+        if (n >= nLots){ f.remove(); terminer(true); }
+        else { toast(`Lot ${n} appliqué. Lot suivant…`, 2500); rendre(); f.querySelector(".corps").scrollTop = 0; }
+        return true;
+      };
+      z.querySelector("#lmReponse").onclick = async ()=>{
+        let txt = ""; try{ txt = await navigator.clipboard.readText(); }catch(e){}
+        if (!appliquer(txt)){
+          z.querySelector("#lmMain").hidden = false;
+          toast("Réponse illisible depuis le presse-papier : collez-la dans la zone ci-dessous.", 5000);
+        }
+      };
+      z.querySelector("#lmValider").onclick = ()=>{ if (!appliquer(z.querySelector("#lmTexte").value)) toast("Pas de JSON lisible : copiez bien toute la réponse de " + NOM + ".", 5000); };
+      majVifs();
+    };
+    rendre();
+  });
+}
+
 async function traiterParLots(livres, question, champs, titreFenetre, taille){
+  if (lotsManuels()) return traiterParLotsManuel(livres, question, champs, titreFenetre, taille || 40, iaPourLots());
   const lot = taille || 20;
   const pg = fenetreProgres(titreFenetre);
   let fait = 0;
   try{
     for (let d=0; d<livres.length; d+=lot){
       const tranche = livres.slice(d, d+lot);
-      pg.maj(fait, livres.length, `Lot ${Math.floor(d/lot)+1} sur ${Math.ceil(livres.length/lot)} — envoi à Gemini…`);
+      pg.maj(fait, livres.length, `Lot ${Math.floor(d/lot)+1} sur ${Math.ceil(livres.length/lot)} — envoi à ${NOM_IA[iaPourLots()] || "l'IA"}…`);
       const liste = tranche.map((lv,i)=>`${i}. ${lv.titre}${lv.auteur?" — "+lv.auteur:""}${lv.annee?" ("+lv.annee+")":""}`).join("\n");
       const j = (await interrogerIA([{ text: question + "\n\nListe :\n" + liste }], jsonDepuisTexte)).res;
       (Array.isArray(j.livres)?j.livres:[]).forEach(rep=>{
@@ -4939,7 +5036,7 @@ function rendreBiblio(){
      </div>
      <div class="action">
        <button class="btn" id="bResumes">📝 Résumés et auteurs</button>
-       <div class="expl">Demande à Gemini un résumé d'une ligne, l'auteur détaillé et l'année de parution pour chaque livre.</div>
+       <div class="expl">Demande à l'IA (${esc(NOM_IA[iaPourLots()] || "réglée dans ⚙️")}) un résumé d'une ligne, l'auteur détaillé et l'année de parution pour chaque livre.</div>
      </div>
      <div class="action">
        <button class="btn" id="bPdf">📄 PDF classé par thèmes</button>
@@ -6720,11 +6817,14 @@ async function lancerResumes(b){
   const sansResume = tous.filter(lv=>!lv.resume);
   const sansAuteurSeul = tous.filter(lv=>lv.resume && !lv.auteur);
   const complets = tous.filter(lv=>lv.resume && lv.auteur);
-  // durée estimée : moyenne des vraies requêtes récentes du modèle, sinon 20 s par lot de 20
+  const ia = iaPourLots();
+  if (!ia){ avertirSansIaLots(); return; }
+  const T = tailleLot("resume");
+  // durée estimée : pour Gemini, moyenne des vraies requêtes récentes du modèle ; pour Claude, environ 30 s par lot
   const memo = lireTestsModeles(), m = memo && memo.liste.find(x=>x.id === cfg.modele);
-  const msLot = m && (m.analyses || []).length ? m.analyses.reduce((s, h)=>s + h.ms, 0) / m.analyses.length : 20000;
-  const duree = (n)=>{ const s = Math.ceil(n / 20) * msLot / 1000; return s < 90 ? `environ ${Math.max(10, Math.round(s / 10) * 10)} s` : `environ ${Math.round(s / 60)} min`; };
-  const lots = (n)=>Math.ceil(n / 20);
+  const msLot = lotsManuels() ? 60000 : ia === "claude" ? 30000 : (m && (m.analyses || []).length ? m.analyses.reduce((s, h)=>s + h.ms, 0) / m.analyses.length : 20000);
+  const duree = (n)=>{ const s = Math.ceil(n / T) * msLot / 1000; return s < 90 ? `environ ${Math.max(10, Math.round(s / 10) * 10)} s` : `environ ${Math.round(s / 60)} min`; };
+  const lots = (n)=>Math.ceil(n / T);
   const options = [
     sansResume.length && { id:"manquants", liste:sansResume, ecrase:false, titre:`Compléter les ${sansResume.length} livre(s) sans résumé`,
       detail:`Ajoute résumé, auteur et année là où ils manquent. <b>N'écrase rien</b> de ce qui existe déjà.`, recommande:true },
@@ -6736,7 +6836,7 @@ async function lancerResumes(b){
   ].filter(Boolean);
   let choix = options[0].id;
   const f = modale({ titre:"Résumés et auteurs",
-    html:`<div class="aide" style="margin-top:0"><b>À quoi ça sert ?</b> Pour chaque livre, l'IA (${esc(NOM_IA[cfg.iaPrincipale] || "Gemini")}) donne un <b>résumé d'une ligne</b>, l'<b>auteur complet</b> et l'<b>année de première parution</b>. Ils apparaissent dans les compartiments, dans la liste et dans les PDF. Les titres et l'ordre des livres ne sont jamais touchés.</div>
+    html:`<div class="aide" style="margin-top:0"><b>À quoi ça sert ?</b> Pour chaque livre, <b>${esc(NOM_IA[ia])}</b>${lotsManuels() ? " (sans clé : par copier-coller, lot par lot)" : ""} donne un <b>résumé d'une ligne</b>, l'<b>auteur complet</b> et l'<b>année de première parution</b>. Ils apparaissent dans les compartiments, dans la liste et dans les PDF. Les titres et l'ordre des livres ne sont jamais touchés.</div>
       <div class="encadre" style="margin:10px 0">
         <div class="infoLigne"><span class="cle">Livres</span><span><b>${tous.length}</b></span></div>
         <div class="infoLigne"><span class="cle">Complets</span><span>✅ ${complets.length} (résumé et auteur)</span></div>
@@ -6749,7 +6849,7 @@ async function lancerResumes(b){
         <input type="radio" name="rsChoix" value="${o.id}" ${o.id === choix ? "checked" : ""} style="margin-top:2px">
         <span><b>${o.titre}</b>${o.recommande ? ` <span style="color:var(--vert);font-weight:700">— recommandé</span>` : ""}
           <br><span class="aide" style="margin:0">${o.detail}</span>
-          <br><span class="aide" style="margin:0">⏱ ${lots(o.liste.length)} requête(s) à l'IA, ${duree(o.liste.length)}.</span></span></label>`).join("")}
+          <br><span class="aide" style="margin:0">⏱ ${lots(o.liste.length)} ${lotsManuels() ? "copier-coller" : "requête(s)"} avec ${esc(NOM_IA[ia])} (lots de ${T}), ${duree(o.liste.length)}.</span></span></label>`).join("")}
       <div class="aide" style="margin-top:10px">Pendant le traitement, un décompte s'affiche. Ce qui est fait est enregistré au fur et à mesure : en cas d'interruption, « Compléter » reprend là où ça s'était arrêté, sans rien refaire.</div>
       <div class="encadre" id="rsResume" style="margin-top:10px;font-weight:600"></div>`,
     boutons:[{ texte:"Annuler" }, { texte:"Lancer", classe:"principal", garder:true, action:async ()=>{
@@ -6776,7 +6876,7 @@ async function executerResumes(b, o){
   Object.values(b.cases || {}).forEach(cs=>(cs.livres || []).forEach(lv=>{ if (certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")) certifLv.add(lv); }));
   const avant = new Map(o.liste.map(lv=>[lv, { resume:lv.resume, auteur:lv.auteur, annee:lv.annee }]));
   journal(`Résumés et auteurs lancés : ${o.titre}`);
-  const ok = await traiterParLots(o.liste, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", 20);
+  const ok = await traiterParLots(o.liste, cfg.qResume, ["resume","auteur","annee"], "Résumés et auteurs", tailleLot("resume"));
   let restaures = 0;
   o.liste.forEach(lv=>{
     const a = avant.get(lv); if (!a) return;
@@ -6812,11 +6912,16 @@ async function lancerPdf(b){
   if (!tous.length){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
   const sansCat = tous.filter(lv=>!lv.categorie);
   if (sansCat.length){
+    const ia = iaPourLots();
+    if (!ia){ avertirSansIaLots(); return; }
+    const t = tailleLot("categorie"), nLots = Math.ceil(sansCat.length / t);
     const ok = await confirmer(
-      `${sansCat.length} livre(s) sur ${tous.length} n'ont pas encore de catégorie thématique.<br><br>Demander leur classement à Gemini maintenant ?`,
+      `<div>${sansCat.length} livre(s) sur ${tous.length} n'ont pas encore de catégorie thématique.</div>
+       <div style="margin-top:8px">Demander leur classement à <b>${NOM_IA[ia]}</b> maintenant ?</div>
+       <div class="aide">${nLots} ${lotsManuels() ? "copier-coller" : "requête(s)"} de ${t} livres au plus, environ ${nLots * (lotsManuels() ? 60 : ia === "claude" ? 30 : 20) < 90 ? Math.max(10, nLots * (lotsManuels() ? 60 : ia === "claude" ? 30 : 20)) + " s" : Math.round(nLots * (lotsManuels() ? 60 : ia === "claude" ? 30 : 20) / 60) + " min"}. Seuls les livres sans catégorie sont traités ; ce qui est fait est conservé en cas d'interruption.</div>`,
       "Classement thématique", "Classer");
     if (ok){
-      const fini = await traiterParLots(sansCat, cfg.qCategorie, ["categorie"], "Classement thématique", 30);
+      const fini = await traiterParLots(sansCat, cfg.qCategorie, ["categorie"], "Classement thématique", t);
       if (!fini) return;
     }
   }
