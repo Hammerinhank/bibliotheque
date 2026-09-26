@@ -8493,7 +8493,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhnbgft",
@@ -8515,7 +8515,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5yytj0b5q4",
@@ -8536,7 +8536,8 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjcqetl",
@@ -8592,7 +8593,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "titre": "Rosny",
@@ -8603,7 +8604,8 @@
        "remarque": "",
        "certitude": "haute",
        "id": "muims3yn70hzh",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "muimfakh4ghn9",
@@ -8625,7 +8627,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhkfxxb",
@@ -8647,7 +8649,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhr0iro",
@@ -8669,7 +8671,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhvp76d",
@@ -8691,7 +8693,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhl2c7v",
@@ -8713,7 +8715,19 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
+      },
+      {
+       "titre": "Le bal du Comte d’orgel",
+       "auteur": "Raymond Radiguet",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "muimxul30l3gq",
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "muimfakhgi0xb",
@@ -8735,7 +8749,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhvonhd",
@@ -8757,7 +8771,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muimfakhcmjxt",
@@ -8779,7 +8793,7 @@
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjodwxj",
@@ -8800,32 +8814,32 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytj7v0qt",
-       "titre": "Les plantes et les jours",
-       "auteur": "",
+       "titre": "À l’ombre des jeunes filles en fleurs",
+       "auteur": "Marcel, Proust",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "titre partiellement visible",
        "resume": "",
        "categorie": "Essais",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "Les plaisirs et les jours",
-         "auteur": "Marcel Proust"
-        },
-        "vue": {
-         "champ": "appoint:muim27gxnhvw1",
-         "x1": 595,
-         "x2": 635
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T16:47:32.565Z"
-       }
+       "statut": "acquis"
+      },
+      {
+       "id": "muimz23ia3al4",
+       "titre": "Les plaisirs et les jours",
+       "auteur": "Marcel Proust",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "statut": "acquis",
+       "temoins": []
       },
       {
        "id": "mud5yytj7jbe7",
@@ -8846,32 +8860,20 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytj28ds9",
-       "titre": "La vie du capitaine",
-       "auteur": "Alexandre Pouchkine (écrivain russe, 1799-1837)",
+       "titre": "La fille du capitaine",
+       "auteur": "Alexandre Pouchkine",
        "annee": "1834",
        "certitude": "haute",
        "remarque": "collection Folio",
        "resume": "Biographie historique fouillée consacrée à la vie du chef cosaque rebelle Iemelyan Pougatchev par le grand maître de la littérature russe.",
        "categorie": "Littérature étrangère",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "La fille du capitaine",
-         "auteur": "Alexandre Pouchkine"
-        },
-        "vue": {
-         "champ": "appoint:muim27gxnhvw1",
-         "x1": 675,
-         "x2": 715
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T16:47:32.565Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjq78g0",
@@ -8892,7 +8894,8 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjvh0xz",
@@ -8913,7 +8916,8 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjjshi9",
@@ -8934,7 +8938,8 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjince2",
@@ -8955,28 +8960,8 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
-      },
-      {
-       "id": "mud5yytjz3wft",
-       "titre": "Mélopée",
-       "auteur": "Kopatt",
-       "annee": "",
-       "certitude": "moyenne",
-       "remarque": "titre et auteur partiellement visibles",
-       "resume": "",
-       "categorie": "Non classé",
-       "origine": "ia",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muim27gxnhvw1",
-         "x1": 860,
-         "x2": 890
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T16:47:32.565Z"
-       }
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yytjwp8gf",
@@ -9041,51 +9026,8 @@
        ],
        "temoins": [
         "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ]
-      },
-      {
-       "id": "muimfakhoa9i8",
-       "titre": "La Belle du Caire",
-       "auteur": "",
-       "annee": "",
-       "certitude": "faible",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muim27gxnhvw1",
-         "x1": 970,
-         "x2": 1000
-        }
        ],
-       "temoins": [
-        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ],
-       "statut": "probable"
-      },
-      {
-       "id": "muimfakhgkf9y",
-       "titre": "SCIENCE FICTION",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muim27gxnhvw1",
-         "x1": 235,
-         "x2": 275
-        }
-       ],
-       "temoins": [
-        "appoint:muim27gxnhvw1:2026-09-26T16:36:55.331Z"
-       ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -9144,7 +9086,10 @@
        ],
        "verif": "2026-09-26T16:47:32.566Z"
       }
-     ]
+     ],
+     "certif": {
+      "devant": "2026-09-26T17:03:31.987Z"
+     }
     },
     "6-3": {
      "livres": [
@@ -19114,7 +19059,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T16:56:38.332Z",
+ "maj": "2026-09-26T17:03:47.437Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
