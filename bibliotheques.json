@@ -6871,6 +6871,29 @@
        "origine": "ia"
       },
       {
+       "id": "mui6k3pcbmfwo",
+       "titre": "Bravo, docteur Béru",
+       "auteur": "San-Antonio",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 10,
+         "x2": 46
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "muds6xvjyzq6i",
        "titre": "ça ne s'invente pas",
        "auteur": "San-Antonio",
@@ -6880,7 +6903,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 35,
+         "x2": 70
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk0cv7l",
@@ -6892,7 +6925,109 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 56,
+         "x2": 93
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
+      },
+      {
+       "id": "mui6k3pc474jx",
+       "titre": "… de Bérurier",
+       "auteur": "San-Antonio",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 81,
+         "x2": 128
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mui6k3pcvtrff",
+       "titre": "Safari, sang et sexe",
+       "auteur": "Serge Jacquemard",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 116,
+         "x2": 150
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mui6k3pcvia01",
+       "titre": "Plus diabolique sera le piège",
+       "auteur": "Serge Jacquemard",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 138,
+         "x2": 171
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mui6k3pc2o8b7",
+       "titre": "Qui votera mort arrive",
+       "auteur": "Serge Jacquemard",
+       "annee": "",
+       "certitude": "faible",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 159,
+         "x2": 191
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muds6xvknljpu",
@@ -6904,11 +7039,21 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 181,
+         "x2": 214
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkkesay",
-       "titre": "Ne mangez pas la salade",
+       "titre": "Ne mangez pas la consigne",
        "auteur": "San-Antonio",
        "annee": "",
        "certitude": "haute",
@@ -6916,7 +7061,41 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 204,
+         "x2": 237
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
+      },
+      {
+       "id": "mui6k3pc7qkmi",
+       "titre": "La vérité en salade",
+       "auteur": "San-Antonio",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 229,
+         "x2": 255
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muds6xvkj0xg0",
@@ -6928,7 +7107,63 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 253,
+         "x2": 272
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
+      },
+      {
+       "id": "mui6k3pcjaly4",
+       "titre": "Tango chinetoque",
+       "auteur": "San-Antonio",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 271,
+         "x2": 297
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mui6k3pcxr6sb",
+       "titre": "San-Antonio renvoie la balle",
+       "auteur": "San-Antonio",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 297,
+         "x2": 326
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muds6xvkfqh5x",
@@ -6940,7 +7175,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 318,
+         "x2": 346
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkn2a48",
@@ -6952,7 +7197,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 345,
+         "x2": 367
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkqrnux",
@@ -6964,7 +7219,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 367,
+         "x2": 389
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk2fhs6",
@@ -6976,7 +7241,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 386,
+         "x2": 412
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkexer0",
@@ -6988,7 +7263,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 406,
+         "x2": 428
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk0g6m9",
@@ -7000,7 +7285,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 423,
+         "x2": 443
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk8z4gc",
@@ -7012,7 +7307,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 441,
+         "x2": 460
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk5o7a8",
@@ -7024,7 +7329,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 458,
+         "x2": 476
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkd9fem",
@@ -7036,7 +7351,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 474,
+         "x2": 493
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkx38s8",
@@ -7048,7 +7373,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 491,
+         "x2": 509
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk7tyi3",
@@ -7060,7 +7395,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 507,
+         "x2": 528
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk2ik66",
@@ -7072,7 +7417,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 526,
+         "x2": 553
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
+      },
+      {
+       "id": "mui6k3pcbqykb",
+       "titre": "Motel 007",
+       "auteur": "Ian Fleming",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 551,
+         "x2": 580
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muds6xvkk4eo1",
@@ -7084,7 +7462,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 580,
+         "x2": 606
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkkibpf",
@@ -7096,7 +7484,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 606,
+         "x2": 633
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkss4v7",
@@ -7108,7 +7506,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 633,
+         "x2": 661
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk66mam",
@@ -7120,7 +7528,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 662,
+         "x2": 691
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk3x2yb",
@@ -7132,7 +7550,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 691,
+         "x2": 720
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk057hs",
@@ -7144,7 +7572,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 720,
+         "x2": 749
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkdbk7l",
@@ -7156,7 +7594,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 749,
+         "x2": 780
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkoedmm",
@@ -7168,7 +7616,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 778,
+         "x2": 802
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkb9g2v",
@@ -7180,7 +7638,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 802,
+         "x2": 819
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvk2j1a2",
@@ -7192,7 +7660,63 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 819,
+         "x2": 835
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
+      },
+      {
+       "id": "mui6k3pcyzrx2",
+       "titre": "L'homme sans nom",
+       "auteur": "Harry Carmichael",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 835,
+         "x2": 854
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mui6k3pcehd51",
+       "titre": "Les pièces du dossier",
+       "auteur": "Dorothy Sayers",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 852,
+         "x2": 874
+        }
+       ],
+       "rang": "derriere",
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "muds6xvkvfsy3",
@@ -7204,7 +7728,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 874,
+         "x2": 891
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvku14dm",
@@ -7216,7 +7750,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 887,
+         "x2": 912
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkswc75",
@@ -7228,31 +7772,61 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 912,
+         "x2": 945
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkvingb",
        "titre": "La note noire",
-       "auteur": "",
+       "auteur": "Costantini",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "Éditions Costantini",
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 945,
+         "x2": 970
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       },
       {
        "id": "muds6xvkh3avu",
        "titre": "Un raccourci saisissant",
-       "auteur": "",
+       "auteur": "Dorothée Chifflot",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "Dorothée Chifflot",
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "derriere"
+       "rang": "derriere",
+       "vues": [
+        {
+         "champ": "appoint:mui6hxzkxlj48",
+         "x1": 970,
+         "x2": 990
+        }
+       ],
+       "temoins": [
+        "appoint:mui6hxzkxlj48:2026-09-26T09:19:57.580Z"
+       ]
       }
      ],
      "photo": {
@@ -7277,7 +7851,70 @@
       "chemin": "images/mucn2e6dat2vv/6-1-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-23T07:20:28.745Z"
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/6-1-appoint-mui6hxzkxlj48.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T09:19:57.580Z",
+       "id": "mui6hxzkxlj48",
+       "legende": "",
+       "rang": "derriere",
+       "rangInfo": {
+        "auto": true,
+        "n1": 2,
+        "n2": 31,
+        "date": "2026-09-26T09:21:26.970Z"
+       },
+       "livresVus": [
+        "mui6k3pcbmfwo",
+        "muds6xvjyzq6i",
+        "muds6xvk0cv7l",
+        "mui6k3pc474jx",
+        "mui6k3pcvtrff",
+        "mui6k3pcvia01",
+        "mui6k3pc2o8b7",
+        "muds6xvknljpu",
+        "muds6xvkkesay",
+        "mui6k3pc7qkmi",
+        "muds6xvkj0xg0",
+        "mui6k3pcjaly4",
+        "mui6k3pcxr6sb",
+        "muds6xvkfqh5x",
+        "muds6xvkn2a48",
+        "muds6xvkqrnux",
+        "muds6xvk2fhs6",
+        "muds6xvkexer0",
+        "muds6xvk0g6m9",
+        "muds6xvk8z4gc",
+        "muds6xvk5o7a8",
+        "muds6xvkd9fem",
+        "muds6xvkx38s8",
+        "muds6xvk7tyi3",
+        "muds6xvk2ik66",
+        "mui6k3pcbqykb",
+        "muds6xvkk4eo1",
+        "muds6xvkkibpf",
+        "muds6xvkss4v7",
+        "muds6xvk66mam",
+        "muds6xvk3x2yb",
+        "muds6xvk057hs",
+        "muds6xvkdbk7l",
+        "muds6xvkoedmm",
+        "muds6xvkb9g2v",
+        "muds6xvk2j1a2",
+        "mui6k3pcyzrx2",
+        "mui6k3pcehd51",
+        "muds6xvkvfsy3",
+        "muds6xvku14dm",
+        "muds6xvkswc75",
+        "muds6xvkvingb",
+        "muds6xvkh3avu"
+       ],
+       "verif": "2026-09-26T09:22:38.134Z"
+      }
+     ]
     },
     "6-2": {
      "livres": [
@@ -14943,7 +15580,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T09:12:02.971Z",
+ "maj": "2026-09-26T09:22:39.611Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
