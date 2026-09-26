@@ -6627,7 +6627,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mui9tr5m0uduh",
@@ -6650,7 +6650,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mui9tr5m73e1m",
@@ -6673,7 +6673,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mui9tr5ms5qdj",
@@ -6696,7 +6696,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkr2pk78",
@@ -6739,7 +6739,8 @@
        ],
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkr16hi8",
@@ -6760,7 +6761,8 @@
        ],
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrqi9tx",
@@ -6781,7 +6783,8 @@
        ],
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrhlyhp",
@@ -6802,7 +6805,8 @@
        ],
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mui9tr5mj1qdv",
@@ -6825,7 +6829,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mui9tr5m71bra",
@@ -6848,7 +6852,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mui9tr5m9okna",
@@ -6871,7 +6875,7 @@
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkriqr3z",
@@ -6892,7 +6896,8 @@
        ],
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrqg7yo",
@@ -6913,7 +6918,8 @@
        ],
        "temoins": [
         "appoint:mui9ksv16dhzd:2026-09-26T10:46:20.943Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mui9vbev3vo26",
@@ -6936,7 +6942,7 @@
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrd4kot",
@@ -6957,28 +6963,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
-      },
-      {
-       "id": "mud5yqkrfaevr",
-       "titre": "fais-moi confiance",
-       "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
-       "annee": "1973",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un homme naïf est manipulé par une femme fatale dans un complot machiavélique aux lourdes conséquences.",
-       "categorie": "Policier",
-       "origine": "ia",
-       "vues": [
-        {
-         "champ": "appoint:mui9oxj9waynk",
-         "x1": 105,
-         "x2": 145
-        }
        ],
-       "temoins": [
-        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       "statut": "acquis"
       },
       {
        "id": "mui9vbev2xdkx",
@@ -7001,11 +6987,33 @@
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
+      },
+      {
+       "id": "mud5yqkrfaevr",
+       "titre": "fais-moi confiance",
+       "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
+       "annee": "1973",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "Un homme naïf est manipulé par une femme fatale dans un complot machiavélique aux lourdes conséquences.",
+       "categorie": "Policier",
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 105,
+         "x2": 145
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrnumob",
-       "titre": "une bouffée d'air pur",
+       "titre": "une bouffée d'or pur",
        "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
        "annee": "1972",
        "certitude": "haute",
@@ -7022,7 +7030,9 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkr5ezww",
@@ -7043,7 +7053,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrl5gn9",
@@ -7086,7 +7097,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkruy64r",
@@ -7129,7 +7141,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrwi3fr",
@@ -7172,7 +7185,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkr9zs3l",
@@ -7193,7 +7207,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkr9nq1y",
@@ -7214,7 +7229,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mui9vbevvb20j",
@@ -7237,7 +7253,7 @@
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrnj6mb",
@@ -7258,7 +7274,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5yqkrsnk4q",
@@ -7279,7 +7296,8 @@
        ],
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mui9vbevssslw",
@@ -7302,7 +7320,7 @@
        "temoins": [
         "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mui6k3pcbmfwo",
@@ -8449,7 +8467,8 @@
       }
      ],
      "certif": {
-      "derriere": "2026-09-26T09:26:47.561Z"
+      "derriere": "2026-09-26T09:26:47.561Z",
+      "devant": "2026-09-26T11:02:55.308Z"
      }
     },
     "6-2": {
@@ -16116,7 +16135,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:00:44.249Z",
+ "maj": "2026-09-26T11:03:45.298Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
