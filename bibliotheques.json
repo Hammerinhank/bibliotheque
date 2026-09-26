@@ -13355,7 +13355,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 0,
+         "x2": 128
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
       },
       {
        "id": "mudr847ls2t13",
@@ -13367,7 +13377,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 131,
+         "x2": 262
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
+      },
+      {
+       "id": "mui4s1m23i6q7",
+       "titre": "Coule la Seine",
+       "auteur": "Fred Vargas",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 262,
+         "x2": 304
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudr847li7002",
@@ -13379,7 +13422,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 302,
+         "x2": 367
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
       },
       {
        "id": "mudr847lvrh73",
@@ -13391,7 +13444,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 369,
+         "x2": 476
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
       },
       {
        "id": "mudr847lhsnxq",
@@ -13403,7 +13466,40 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 475,
+         "x2": 572
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
+      },
+      {
+       "id": "mui4s1m2mkme0",
+       "titre": "Salut et liberté",
+       "auteur": "Fred Vargas",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 567,
+         "x2": 608
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudr847lg6ujh",
@@ -13415,7 +13511,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 597,
+         "x2": 760
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
       },
       {
        "id": "mudr847ls0a1w",
@@ -13427,7 +13533,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 742,
+         "x2": 922
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
       },
       {
        "id": "mudr847lonbwi",
@@ -13439,7 +13555,17 @@
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "rang": "devant"
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "appoint:mui4q1vhc2mut",
+         "x1": 922,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "appoint:mui4q1vhc2mut:2026-09-26T08:30:19.637Z"
+       ]
       },
       {
        "id": "mudr847l11tc4",
@@ -13736,7 +13862,37 @@
       "chemin": "images/mucn2e6dat2vv/5-1-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-23T07:00:40.731Z"
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/5-1-appoint-mui4q1vhc2mut.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T08:30:19.637Z",
+       "id": "mui4q1vhc2mut",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 8,
+        "n2": 0,
+        "date": "2026-09-26T08:31:38.276Z"
+       },
+       "livresVus": [
+        "mudr847laru8q",
+        "mudr847ls2t13",
+        "mui4s1m23i6q7",
+        "mudr847li7002",
+        "mudr847lvrh73",
+        "mudr847lhsnxq",
+        "mui4s1m2mkme0",
+        "mudr847lg6ujh",
+        "mudr847ls0a1w",
+        "mudr847lonbwi"
+       ],
+       "verif": "2026-09-26T08:31:42.624Z"
+      }
+     ]
     },
     "5-2": {
      "livres": [
@@ -14719,7 +14875,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-25T17:47:37.056Z",
+ "maj": "2026-09-26T08:31:43.657Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
