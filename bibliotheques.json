@@ -6938,6 +6938,29 @@
        "origine": "ia"
       },
       {
+       "id": "mui9vbev3vo26",
+       "titre": "Un beau matin d'été",
+       "auteur": "James Hadley Chase",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 0,
+         "x2": 60
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ],
+       "statut": "probable"
+      },
+      {
        "id": "mud5yqkrd4kot",
        "titre": "simple question de temps",
        "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
@@ -6946,7 +6969,17 @@
        "remarque": "",
        "resume": "Un homme ordinaire se retrouve impliqué malgré lui dans un engrenage criminel après avoir pris une décision fatale.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 60,
+         "x2": 105
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkripc4o",
@@ -6957,7 +6990,17 @@
        "remarque": "",
        "resume": "Un politicien corrompu et ambitieux voit son emprise sur sa ville menacée par des révélations et des oppositions farouches.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 90,
+         "x2": 120
+        },
+        "source": "l'appoint 3",
+        "date": "2026-09-26T10:55:35.822Z"
+       }
       },
       {
        "id": "mud5yqkrfaevr",
@@ -6968,7 +7011,40 @@
        "remarque": "",
        "resume": "Un homme naïf est manipulé par une femme fatale dans un complot machiavélique aux lourdes conséquences.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 105,
+         "x2": 145
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
+      },
+      {
+       "id": "mui9vbev2xdkx",
+       "titre": "On replique au jeu",
+       "auteur": "James Hadley Chase",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 145,
+         "x2": 185
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5yqkrnumob",
@@ -6979,7 +7055,17 @@
        "remarque": "",
        "resume": "Un homme tente de fuir son passé pesant pour recommencer à zéro dans un environnement apparemment paisible.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 185,
+         "x2": 225
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkr5ezww",
@@ -6990,18 +7076,39 @@
        "remarque": "",
        "resume": "Des criminels s'embarquent dans un braquage audacieux qui tourne au vinaigre à cause de trahisons inattendues.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 225,
+         "x2": 265
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkrl5gn9",
-       "titre": "ça n'arrive qu'aux morts",
-       "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
+       "titre": "Ça n'arrive qu'aux vivants",
+       "auteur": "James Hadley Chase",
        "annee": "1960",
        "certitude": "haute",
        "remarque": "",
        "resume": "Un meurtre apparemment parfait se complique lorsque des détails inattendus refont surface pour piéger le coupable.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 265,
+         "x2": 305
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkrffov9",
@@ -7012,18 +7119,39 @@
        "remarque": "",
        "resume": "Un protagoniste cupide plonge dans une spirale de violence et de séduction pour s'emparer d'une fortune convoitée.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 305,
+         "x2": 345
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkruy64r",
-       "titre": "C'est un dur métier",
-       "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
+       "titre": "C'est pas dans mes cordes",
+       "auteur": "James Hadley Chase",
        "annee": "1966",
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme ordinaire découvre que le monde du crime n'offre aucune issue facile à ceux qui y mettent un pied.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 345,
+         "x2": 385
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkrhkwss",
@@ -7034,18 +7162,39 @@
        "remarque": "",
        "resume": "Une jeune femme ambitieuse utilise tous ses charmes pour gravir les échelons sociaux, quitte à commettre des crimes.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 385,
+         "x2": 425
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkrwi3fr",
-       "titre": "on s'attaque au jeu",
-       "auteur": "James Hadley Chase (Écrivain britannique, 1906-1985)",
+       "titre": "On replique au jeu",
+       "auteur": "James Hadley Chase",
        "annee": "1974",
        "certitude": "haute",
        "remarque": "",
        "resume": "Une bande de criminels tente de monter une escroquerie d'envergure mais se heurte à des rivaux impitoyables.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 425,
+         "x2": 465
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkr8nqvy",
@@ -7056,7 +7205,17 @@
        "remarque": "",
        "resume": "Un détective privé s'acharne à résoudre une affaire complexe malgré les menaces qui pèsent sur sa vie.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 465,
+         "x2": 510
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkr9zs3l",
@@ -7067,7 +7226,17 @@
        "remarque": "",
        "resume": "Un homme riche tombe amoureux d'une femme fatale vénale et manipulatrice, ce qui le mène lentement à sa propre ruine.",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 510,
+         "x2": 550
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkr9nq1y",
@@ -7078,7 +7247,40 @@
        "remarque": "",
        "resume": "",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 550,
+         "x2": 590
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
+      },
+      {
+       "id": "mui9vbevvb20j",
+       "titre": "Tu seras tout seul dans ton cercueil",
+       "auteur": "James Hadley Chase",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 590,
+         "x2": 630
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5yqkrnj6mb",
@@ -7089,7 +7291,17 @@
        "remarque": "",
        "resume": "",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 630,
+         "x2": 670
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
       },
       {
        "id": "mud5yqkrsnk4q",
@@ -7100,7 +7312,40 @@
        "remarque": "",
        "resume": "",
        "categorie": "Policier",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 670,
+         "x2": 710
+        }
+       ],
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ]
+      },
+      {
+       "id": "mui9vbevssslw",
+       "titre": "Des demoiselles imprudentes",
+       "auteur": "Exbrayat",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mui9oxj9waynk",
+         "x1": 710,
+         "x2": 750
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mui9oxj9waynk:2026-09-26T10:49:23.192Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mui6k3pcbmfwo",
@@ -8215,7 +8460,35 @@
        "envoye": true,
        "maj": "2026-09-26T10:49:23.192Z",
        "id": "mui9oxj9waynk",
-       "legende": ""
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 11,
+        "n2": 0,
+        "date": "2026-09-26T10:54:09.027Z"
+       },
+       "livresVus": [
+        "mui9vbev3vo26",
+        "mud5yqkrd4kot",
+        "mud5yqkrfaevr",
+        "mui9vbev2xdkx",
+        "mud5yqkrnumob",
+        "mud5yqkr5ezww",
+        "mud5yqkrl5gn9",
+        "mud5yqkrffov9",
+        "mud5yqkruy64r",
+        "mud5yqkrhkwss",
+        "mud5yqkrwi3fr",
+        "mud5yqkr8nqvy",
+        "mud5yqkr9zs3l",
+        "mud5yqkr9nq1y",
+        "mui9vbevvb20j",
+        "mud5yqkrnj6mb",
+        "mud5yqkrsnk4q",
+        "mui9vbevssslw"
+       ],
+       "verif": "2026-09-26T10:55:35.824Z"
       }
      ],
      "certif": {
@@ -15886,7 +16159,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T10:53:41.256Z",
+ "maj": "2026-09-26T10:55:37.040Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
