@@ -17182,7 +17182,7 @@
        "temoins": [
         "appoint:muig7c0nomboo:2026-09-26T13:51:27.383Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muig4dptutq47",
@@ -17305,7 +17305,7 @@
       },
       {
        "id": "muig21njrpvj1",
-       "titre": "Le dernier des noirs",
+       "titre": "Le dernier des notres",
        "auteur": "Adélaïde de Clermont-Tonnerre",
        "annee": "",
        "certitude": "haute",
@@ -17329,7 +17329,7 @@
       },
       {
        "id": "muig21njrj7gv",
-       "titre": "Le dernier des noirs",
+       "titre": "Le dernier des notres",
        "auteur": "Adélaïde de Clermont-Tonnerre",
        "annee": "",
        "certitude": "haute",
@@ -17450,7 +17450,7 @@
        "temoins": [
         "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muig21njcf1fh",
@@ -17569,7 +17569,7 @@
        "temoins": [
         "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muig21nj3sa1s",
@@ -17801,21 +17801,20 @@
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z"
        ],
-       "statut": "probable",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "Madame Seyerling",
-         "auteur": "Grégoire Delacourt"
-        },
-        "vue": {
-         "champ": "appoint:muig3pqtou0x5",
-         "x1": 760,
-         "x2": 790
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-26T13:50:11.377Z"
-       }
+       "statut": "acquis"
+      },
+      {
+       "id": "muigi6e0vmlwg",
+       "titre": "Madame Seyerling",
+       "auteur": "Grégoire Delacourt",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "statut": "acquis",
+       "temoins": [],
+       "rang": "derriere"
       },
       {
        "id": "muig21njquul1",
@@ -17910,7 +17909,7 @@
        "temoins": [
         "appoint:muig3pqtou0x5:2026-09-26T13:48:54.133Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muig21nj47pcf",
@@ -17926,7 +17925,7 @@
        "temoins": [
         "photo2:2026-09-26T13:47:06.581Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -18025,14 +18024,17 @@
        ],
        "verif": "2026-09-26T13:52:00.799Z"
       }
-     ]
+     ],
+     "certif": {
+      "derriere": "2026-09-26T14:01:06.809Z"
+     }
     }
    },
    "cree": "2026-09-22T12:16:57.158Z",
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T13:52:02.335Z",
+ "maj": "2026-09-26T14:02:24.815Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
