@@ -6916,28 +6916,6 @@
        ]
       },
       {
-       "id": "mud5yqkrbfbh1",
-       "titre": "TOUCHEZ PAS AU GRISBI !",
-       "auteur": "Albert Simonin (Écrivain français, 1905-1980)",
-       "annee": "1953",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "Un vieux truand parisien tente un dernier gros coup tout en naviguant dans un milieu interlope en mutation.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
-       "id": "mud5yqkro97mz",
-       "titre": "CASINO ROYAL",
-       "auteur": "Ian Fleming (Écrivain britannique, 1908-1964)",
-       "annee": "1953",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "L'agent secret James Bond affronte le terroriste Le Chiffre lors d'une partie de baccarat à haut risque au Casino Royale.",
-       "categorie": "Policier",
-       "origine": "ia"
-      },
-      {
        "id": "mui9vbev3vo26",
        "titre": "Un beau matin d'été",
        "auteur": "James Hadley Chase",
@@ -16159,7 +16137,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T10:55:37.040Z",
+ "maj": "2026-09-26T10:58:12.605Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
