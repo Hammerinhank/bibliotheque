@@ -15165,18 +15165,39 @@
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 13,
+         "x2": 80
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8ktnyl",
-       "titre": "Bas rouge",
-       "auteur": "Michael McDowell",
+       "titre": "KATE",
+       "auteur": "MICHAEL MCDOWELL",
        "annee": "",
        "certitude": "haute",
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 85,
+         "x2": 147
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8wkg3y",
@@ -15187,7 +15208,17 @@
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 150,
+         "x2": 195
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8d9hhk",
@@ -15198,7 +15229,17 @@
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 198,
+         "x2": 240
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8fz7hq",
@@ -15209,7 +15250,17 @@
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 243,
+         "x2": 285
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari82agjw",
@@ -15220,18 +15271,38 @@
        "remarque": "Monsieur Toussaint Louverture",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 288,
+         "x2": 330
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari817j3x",
        "titre": "Noces indiennes",
-       "auteur": "",
+       "auteur": "Sharon Maas",
        "annee": "",
        "certitude": "faible",
        "remarque": "J'ai lu",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 335,
+         "x2": 375
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8953qg",
@@ -15242,7 +15313,17 @@
        "remarque": "Rivages poche",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 380,
+         "x2": 405
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8r0e0v",
@@ -15253,7 +15334,40 @@
        "remarque": "Le Livre de Poche",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 408,
+         "x2": 430
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
+      },
+      {
+       "id": "muiaql00fk6ub",
+       "titre": "Les trois dames de la Kasbah",
+       "auteur": "Pierre Loti",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 433,
+         "x2": 455
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsari8gm1mm",
@@ -15264,18 +15378,65 @@
        "remarque": "Bibliothèque étrangère",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "PÊCHEUR D'ISLANDE",
+         "auteur": "PIERRE LOTI"
+        },
+        "vue": {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 458,
+         "x2": 480
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-26T11:19:42.413Z"
+       }
+      },
+      {
+       "id": "muiaql001rzq1",
+       "titre": "Martin Eden",
+       "auteur": "Jack London",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 483,
+         "x2": 510
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsari8b0nr5",
        "titre": "Jeu de société",
-       "auteur": "",
+       "auteur": "David Lodge",
        "annee": "",
        "certitude": "faible",
        "remarque": "roman",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 513,
+         "x2": 540
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari82xiuq",
@@ -15286,7 +15447,17 @@
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 573,
+         "x2": 595
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8yvwjv",
@@ -15297,7 +15468,17 @@
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "deplace",
+        "zone": {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 582,
+         "x2": 612
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-26T11:19:42.413Z"
+       }
       },
       {
        "id": "mudsari8dz7w5",
@@ -15308,7 +15489,17 @@
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 598,
+         "x2": 620
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8xobkk",
@@ -15319,7 +15510,17 @@
        "remarque": "Libretto",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 623,
+         "x2": 645
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8hinsd",
@@ -15330,7 +15531,17 @@
        "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 648,
+         "x2": 670
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari83lww8",
@@ -15341,7 +15552,132 @@
        "remarque": "Points",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "absent",
+        "zone": {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 657,
+         "x2": 687
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-26T11:19:42.413Z"
+       }
+      },
+      {
+       "id": "muiaql00zmy4i",
+       "titre": "La bâtarde",
+       "auteur": "Violette Leduc",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 673,
+         "x2": 700
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muiaql00srk2h",
+       "titre": "LES SOURCES",
+       "auteur": "MARIE-HÉLÈNE LAFON",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 703,
+         "x2": 725
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muiaql007m4sq",
+       "titre": "Jacques de Lacretelle",
+       "auteur": "Silbermann",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 728,
+         "x2": 750
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muiaql00z0voa",
+       "titre": "La preuve",
+       "auteur": "Agota Kristof",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 753,
+         "x2": 770
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "muiaql00ka2vu",
+       "titre": "Le grand cahier",
+       "auteur": "Agota Kristof",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 773,
+         "x2": 790
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudsari8qdg9m",
@@ -15352,7 +15688,17 @@
        "remarque": "Points",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 793,
+         "x2": 815
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8i8ckv",
@@ -15363,7 +15709,17 @@
        "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 818,
+         "x2": 840
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8s5khn",
@@ -15374,18 +15730,38 @@
        "remarque": "Actes Sud",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 843,
+         "x2": 865
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8b76kk",
        "titre": "Un taureau intelligent",
-       "auteur": "",
+       "auteur": "RUDYARD KIPLING",
        "annee": "",
        "certitude": "faible",
        "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 868,
+         "x2": 890
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8hya71",
@@ -15396,7 +15772,17 @@
        "remarque": "J'ai lu",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 913,
+         "x2": 930
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari812rz6",
@@ -15407,7 +15793,17 @@
        "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "deplace",
+        "zone": {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 917,
+         "x2": 947
+        },
+        "source": "l'appoint 2",
+        "date": "2026-09-26T11:19:42.413Z"
+       }
       },
       {
        "id": "mudsari8r8hqt",
@@ -15418,7 +15814,17 @@
        "remarque": "Gallimard",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 933,
+         "x2": 950
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8ae1zl",
@@ -15429,7 +15835,17 @@
        "remarque": "Pocket",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 953,
+         "x2": 970
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8c3o4o",
@@ -15440,7 +15856,17 @@
        "remarque": "Pocket",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 973,
+         "x2": 990
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8th4bu",
@@ -15451,7 +15877,17 @@
        "remarque": "Le Livre de Poche",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:muiapudy44zcu",
+         "x1": 993,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari88vem4",
@@ -15462,7 +15898,10 @@
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari80hl1h",
@@ -15473,7 +15912,10 @@
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudsari8ldnc1",
@@ -15484,7 +15926,10 @@
        "remarque": "Folio",
        "resume": "",
        "categorie": "",
-       "origine": "ia"
+       "origine": "ia",
+       "temoins": [
+        "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
+       ]
       },
       {
        "id": "mudscom0i8com",
@@ -16453,6 +16898,57 @@
         "mudscom1fwnnn"
        ],
        "verif": "2026-09-26T11:09:17.206Z"
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/5-2-appoint-muiapudy44zcu.jpg",
+       "envoye": true,
+       "maj": "2026-09-26T11:18:10.309Z",
+       "id": "muiapudy44zcu",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 27,
+        "n2": 0,
+        "date": "2026-09-26T11:18:27.788Z"
+       },
+       "livresVus": [
+        "mudsari8raeok",
+        "mudsari8ktnyl",
+        "mudsari8wkg3y",
+        "mudsari8d9hhk",
+        "mudsari8fz7hq",
+        "mudsari82agjw",
+        "mudsari817j3x",
+        "mudsari8953qg",
+        "mudsari8r0e0v",
+        "muiaql00fk6ub",
+        "muiaql001rzq1",
+        "mudsari8b0nr5",
+        "mudsari82xiuq",
+        "mudsari8dz7w5",
+        "mudsari8xobkk",
+        "mudsari8hinsd",
+        "muiaql00zmy4i",
+        "muiaql00srk2h",
+        "muiaql007m4sq",
+        "muiaql00z0voa",
+        "muiaql00ka2vu",
+        "mudsari8qdg9m",
+        "mudsari8i8ckv",
+        "mudsari8s5khn",
+        "mudsari8b76kk",
+        "mudsari8hya71",
+        "mudsari8r8hqt",
+        "mudsari8ae1zl",
+        "mudsari8c3o4o",
+        "mudsari8th4bu",
+        "mudsari88vem4",
+        "mudsari80hl1h",
+        "mudsari8ldnc1"
+       ],
+       "verif": "2026-09-26T11:19:42.414Z"
       }
      ],
      "certif": {
@@ -16699,7 +17195,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T11:14:07.293Z",
+ "maj": "2026-09-26T11:19:43.910Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
