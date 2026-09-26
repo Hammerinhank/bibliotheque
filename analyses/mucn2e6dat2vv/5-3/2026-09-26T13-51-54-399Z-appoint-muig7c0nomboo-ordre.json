@@ -1,0 +1,95 @@
+{
+ "date": "2026-09-26T13:51:54.399Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "5-3",
+ "genre": "appoint",
+ "appoint": "muig7c0nomboo",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "L'Enquête",
+   "auteur": "Philippe Claudel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 108,
+   "x2": 224,
+   "illisible": false
+  },
+  {
+   "titre": "PIRATES DU RHONE",
+   "auteur": "BERNARD CLAVEL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 228,
+   "x2": 308,
+   "illisible": false
+  },
+  {
+   "titre": "Le seigneur du fleuve",
+   "auteur": "BERNARD CLAVEL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 312,
+   "x2": 435,
+   "illisible": false
+  },
+  {
+   "titre": "Meurtre sur le Grandvaux",
+   "auteur": "Bernard Clavel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 439,
+   "x2": 520,
+   "illisible": false
+  },
+  {
+   "titre": "Pour l'amour de l'Inde",
+   "auteur": "CATHERINE CLÉMENT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 524,
+   "x2": 699,
+   "illisible": false
+  },
+  {
+   "titre": "La Reine des cipayes",
+   "auteur": "CATHERINE CLÉMENT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 703,
+   "x2": 845,
+   "illisible": false
+  },
+  {
+   "titre": "le dernier des nôtres",
+   "auteur": "ADÉLAÏDE DE CLERMONT-TONNERRE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 849,
+   "x2": 951,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "illisible",
+   "x1": 955,
+   "x2": 999,
+   "illisible": true
+  }
+ ]
+}
