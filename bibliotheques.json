@@ -16941,11 +16941,12 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muil8twnb8kx6",
-       "titre": "Amertume",
+       "titre": "Sanctissima",
        "auteur": "Stéphane Denis",
        "annee": "",
        "certitude": "haute",
@@ -16964,7 +16965,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsofgybeuxy",
@@ -16985,7 +16986,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgylqgst",
@@ -17006,7 +17008,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgy99tgh",
@@ -17027,7 +17030,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgytre9c",
@@ -17048,7 +17052,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyz3mv2",
@@ -17069,7 +17074,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyz7q9a",
@@ -17090,7 +17096,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyuxml9",
@@ -17111,11 +17118,12 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muil8twn2inua",
-       "titre": "La chair de la lune",
+       "titre": "La clair de la lune",
        "auteur": "Christophe Donner",
        "annee": "",
        "certitude": "haute",
@@ -17134,7 +17142,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnhysb8",
@@ -17157,7 +17165,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnl6pbf",
@@ -17180,7 +17188,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyjx2sf",
@@ -17201,7 +17209,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyvy10n",
@@ -17222,28 +17231,21 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgy2bo5w",
-       "titre": "Ils sont tous ROBERT KENNEDY",
-       "auteur": "",
+       "titre": "Ils sont tuer ROBERT KENNEDY",
+       "auteur": "Marc Dugain",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "nrf Gallimard",
        "resume": "",
        "categorie": "",
        "origine": "ia",
-       "question": {
-        "type": "deplace",
-        "zone": {
-         "champ": "appoint:muil82p5jygwx",
-         "x1": 455,
-         "x2": 485
-        },
-        "source": "l'appoint 3",
-        "date": "2026-09-26T16:12:55.084Z"
-       }
+       "rang": "devant",
+       "statut": "acquis"
       },
       {
        "id": "mudsofgy38jmj",
@@ -17264,7 +17266,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgy7rjfj",
@@ -17285,7 +17288,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muil8twn5rzi8",
@@ -17308,7 +17312,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsofgy0e9s6",
@@ -17329,7 +17333,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muil8twne3g0x",
@@ -17352,7 +17357,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnowbpt",
@@ -17375,7 +17380,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsofgy5rqkn",
@@ -17396,7 +17401,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyj3kc1",
@@ -17417,7 +17423,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgybetus",
@@ -17438,7 +17445,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyc4cxc",
@@ -17459,7 +17467,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muil8twni6g1l",
@@ -17482,7 +17491,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnnvrf9",
@@ -17505,7 +17514,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsofgyf8cwm",
@@ -17526,7 +17535,8 @@
        ],
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muil8twno5cwe",
@@ -17549,7 +17559,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnato74",
@@ -17572,7 +17582,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnlgt59",
@@ -17595,7 +17605,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnimc5w",
@@ -17618,7 +17628,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnri46w",
@@ -17641,7 +17651,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muil8twnj6pua",
@@ -17664,30 +17674,7 @@
        "temoins": [
         "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
        ],
-       "statut": "probable"
-      },
-      {
-       "id": "muil8twnngsd3",
-       "titre": "illisible",
-       "auteur": "",
-       "annee": "",
-       "certitude": "faible",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muil82p5jygwx",
-         "x1": 950,
-         "x2": 970
-        }
-       ],
-       "rang": "devant",
-       "temoins": [
-        "appoint:muil82p5jygwx:2026-09-26T16:12:10.294Z"
-       ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muig21ni0x0ln",
@@ -18636,7 +18623,8 @@
       }
      ],
      "certif": {
-      "derriere": "2026-09-26T14:01:06.809Z"
+      "derriere": "2026-09-26T14:01:06.809Z",
+      "devant": "2026-09-26T16:16:46.226Z"
      }
     }
    },
@@ -18644,7 +18632,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T16:12:55.938Z",
+ "maj": "2026-09-26T16:16:50.305Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
