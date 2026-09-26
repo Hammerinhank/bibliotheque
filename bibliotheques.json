@@ -13870,6 +13870,18 @@
        "categorie": "",
        "origine": "ia",
        "rang": "derriere"
+      },
+      {
+       "titre": "La constance du jardinier",
+       "auteur": "John Le Carré",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "rang": "derriere",
+       "id": "mui65ra09si20",
+       "origine": "main"
       }
      ],
      "photo": {
@@ -14906,7 +14918,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-26T09:08:01.904Z",
+ "maj": "2026-09-26T09:10:23.549Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
