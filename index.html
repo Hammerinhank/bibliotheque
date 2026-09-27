@@ -351,6 +351,8 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .ligneCoupe::before{content:"";position:absolute;left:0;right:0;top:-2px;height:4px;background:#ff1a1a;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 8px rgba(255,26,26,.9)}
 .ligneCoupe::after{content:"⇕";position:absolute;right:8px;top:-13px;width:26px;height:26px;border-radius:50%;background:#ff1a1a;color:#fff;font-size:15px;line-height:26px;text-align:center;box-shadow:0 0 0 2px rgba(0,0,0,.5)}
 .ligneCoupe.active::before{height:6px;top:-3px}
+.ligneCoupe.h::after{top:5px}
+.ligneCoupe.b::after{top:-31px}
 .voile.g,.voile.d{right:auto;left:auto;width:0}
 .voile.g{left:0}
 .voile.d{right:0}
@@ -445,8 +447,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.81.0";
+const VERSION = "V1.82.0";
 const HISTORIQUE = [
+  { v:"V1.82.0", d:"27/09/2026", l:[
+    "Fiche « Modifier le livre » : bouton « ➕ Ajouter un livre » en bas à gauche — enregistre la fiche, puis crée juste après ce livre (même rangée) une entrée « Nouveau livre (à compléter) » prête à être remplie. Absent si la rangée est certifiée."
+  ]},
+  { v:"V1.81.1", d:"27/09/2026", l:[
+    "Lignes de coupe : la ligne du haut ne peut plus se retrouver collée au bord supérieur de la photo (position mémorisée de la coupe précédente, souvent 0 %) — elle réapparaît toujours à au moins 8 % du bord, et celle du bas à au moins 8 % du bas ; les poignées rouges sont dessinées côté intérieur de la photo pour rester visibles et attrapables ; la photo est recentrée à l'écran à l'affichage des lignes."
+  ]},
   { v:"V1.81.0", d:"27/09/2026", l:[
     "Chantier synchronisation, étape 1 (essai, à activer dans Réglages › GitHub) : chaque envoi, manuel ou automatique, ne fait plus qu'un seul commit regroupant photos en attente, résultats d'analyse et données (au lieu d'un commit par fichier). En cas d'écriture concurrente, reprise automatique sur la nouvelle version.",
     "Sécurités : sauvegarde de sûreté de toutes les bibliothèques avant activation ; bibliotheques.json toujours écrit en entier comme avant (retour arrière immédiat possible) ; décocher la case revient au fonctionnement précédent. Préparation du découpage : un fichier par bibliothèque (donnees/<bibliothèque>.json) est aussi déposé, pas encore relu."
@@ -5942,7 +5950,11 @@ function ouvrirCompartiment(b, k){
   const lireCoupe = ()=>{
     try{
       const j = JSON.parse(localStorage.getItem(CLE_COUPE) || "null");
-      if (j && isFinite(j.haut) && isFinite(j.bas) && j.haut >= 0 && j.bas <= 100 && j.bas - j.haut >= 5) return { haut:+j.haut, bas:+j.bas, gauche:0, droite:100 };
+      // position mémorisée, mais jamais collée aux bords (sinon la ligne ne peut plus être attrapée)
+      if (j && isFinite(j.haut) && isFinite(j.bas) && j.haut >= 0 && j.bas <= 100 && j.bas - j.haut >= 5){
+        const h = Math.max(8, Math.min(+j.haut, 80)), bas = Math.min(92, Math.max(+j.bas, h + 10));
+        return { haut:h, bas, gauche:0, droite:100 };
+      }
     }catch(e){}
     return { haut:25, bas:75, gauche:0, droite:100 };   // lignes vertes : toujours sur les bords au départ
   };
@@ -6271,7 +6283,11 @@ function ouvrirCompartiment(b, k){
 
     z.querySelector("#cTailleReelle").onclick = ()=>visionneuse(src, titrePhoto);
     const bLig = zOP.querySelector("#cLignes");
-    if (bLig) bLig.onclick = ()=>{ lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto(); };
+    if (bLig) bLig.onclick = ()=>{
+      lignesVisibles = !lignesVisibles; if (lignesVisibles) coupe = lireCoupe(); majPhoto();
+      // la photo entière à l'écran, pour que les quatre lignes soient attrapables
+      if (lignesVisibles){ const c = f.querySelector("#zonePhoto .cadrePhoto, #zonePhoto img"); if (c) setTimeout(()=>c.scrollIntoView({ behavior:"smooth", block:"center" }), 60); }
+    };
     const bt = zOP.querySelector("#cTronquer");      if (bt) bt.onclick = tronquer;
     const ba = zOP.querySelector("#cAnnulerCoupe");  if (ba) ba.onclick = annulerTroncature;
     const bl = zOP.querySelector("#cLegende");
@@ -6720,7 +6736,24 @@ function choisirRetraitPhoto(cs, face){
 function formLivre(cs, index, apres){
   const lv = index >= 0 ? cs.livres[index]
     : { titre:"", auteur:"", annee:"", resume:"", categorie:"", remarque:"", certitude:"haute" };
-  modale({
+  // enregistre la fiche ; renvoie false si le titre manque
+  const enregistrer = (f)=>{
+    const t = f.querySelector("#lT").value.trim();
+    if (!t){ toast("Le titre est obligatoire."); return false; }
+    lv.titre=t;
+    lv.auteur=f.querySelector("#lA").value.trim();
+    lv.annee=f.querySelector("#lY").value.trim();
+    lv.categorie=f.querySelector("#lC").value.trim();
+    lv.resume=f.querySelector("#lR").value.trim();
+    lv.remarque=f.querySelector("#lM").value.trim();
+    const g = f.querySelector("#lG"); if (g) lv.rang = g.value;
+    if (index < 0){ lv.id = uid(); lv.certitude="haute"; lv.origine="main"; cs.livres = cs.livres||[]; cs.livres.push(lv); journal(`Livre ajouté à la main : « ${lv.titre} »`); }
+    else journal(`Livre modifié : « ${lv.titre} »`);
+    return true;
+  };
+  const rangLv = ()=> lv.rang === "derriere" ? "derriere" : "devant";
+  const peutAjouterApres = index >= 0 && !certifiee(cs, rangLv());
+  const fm = modale({
     titre: index>=0 ? "Modifier le livre" : "Nouveau livre",
     html:
       `<label for="lT">Titre</label><input type="text" id="lT" value="${esc(lv.titre)}">
@@ -6735,24 +6768,27 @@ function formLivre(cs, index, apres){
          <select id="lG"><option value="devant" ${lv.rang!=="derriere"?"selected":""}>Devant</option>
          <option value="derriere" ${lv.rang==="derriere"?"selected":""}>Derrière</option></select>` : ""}`,
     boutons:[
+      ...(peutAjouterApres ? [{texte:"➕ Ajouter un livre", garder:true, action:(f)=>{
+        if (!enregistrer(f)) return false;
+        // nouvelle entrée juste après ce livre, dans la même rangée
+        const nouveau = { id:uid(), titre:"Nouveau livre (à compléter)", auteur:"", annee:"", resume:"", categorie:"", remarque:"", certitude:"haute", origine:"main" };
+        if (lv.rang === "derriere") nouveau.rang = "derriere";
+        cs.livres.splice(cs.livres.indexOf(lv) + 1, 0, nouveau);
+        journal(`Livre ajouté à la main après « ${lv.titre} »`);
+        sauver(); f.remove(); if (apres) apres(); rendreBiblio();
+        planifierEnvoi("Livres modifiés à la main");
+        toast(`Nouvelle entrée ajoutée juste après « ${lv.titre} » : touchez « Modifier » pour la compléter.`, 5000);
+      }}] : []),
       {texte:"Annuler"},
       {texte:"Enregistrer", classe:"principal", garder:true, action:(f)=>{
-        const t = f.querySelector("#lT").value.trim();
-        if (!t){ toast("Le titre est obligatoire."); return false; }
-        lv.titre=t;
-        lv.auteur=f.querySelector("#lA").value.trim();
-        lv.annee=f.querySelector("#lY").value.trim();
-        lv.categorie=f.querySelector("#lC").value.trim();
-        lv.resume=f.querySelector("#lR").value.trim();
-        lv.remarque=f.querySelector("#lM").value.trim();
-        const g = f.querySelector("#lG"); if (g) lv.rang = g.value;
-        if (index < 0){ lv.id = uid(); lv.certitude="haute"; lv.origine="main"; cs.livres = cs.livres||[]; cs.livres.push(lv); journal(`Livre ajouté à la main : « ${lv.titre} »`); }
-        else journal(`Livre modifié : « ${lv.titre} »`);
+        if (!enregistrer(f)) return false;
         sauver(); f.remove(); if (apres) apres(); rendreBiblio();
         planifierEnvoi("Livres modifiés à la main");
       }}
     ]
   });
+  // « Ajouter un livre » tout à gauche du pied de la fenêtre
+  if (peutAjouterApres){ const bA = fm.querySelector("[data-b='0']"); if (bA) bA.style.marginRight = "auto"; }
 }
 
 /* ====================================================================
