@@ -155,6 +155,11 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .filtresListe{display:flex;gap:6px;flex-wrap:nowrap}
 .filtresListe button{flex:1 1 0;min-width:0;text-align:center;padding-left:4px;padding-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nomIa{font-weight:800;white-space:nowrap}
+.recapRest{display:flex;gap:6px;align-items:stretch;margin-top:10px}
+.cadreRest{flex:1;border:2px solid var(--trait);border-radius:10px;padding:8px;font-size:13px;line-height:1.35;background:var(--encre)}
+.cadreRest.nouv{border-color:var(--vert)}
+.cadreRest .etq{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--texte2);margin-bottom:3px}
+.flecheRest{align-self:center;font-size:20px;color:var(--bronze)}
 .nomIa-claude{color:#f0a37a}
 .nomIa-gemini{color:#7fb2ff}
 .tete .horodatage{margin-left:auto;margin-right:10px;font-size:12px;color:var(--texte2);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -436,8 +441,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.79.1";
+const VERSION = "V1.80.0";
 const HISTORIQUE = [
+  { v:"V1.80.0", d:"27/09/2026", l:[
+    "Sauvegardes refaites : ① Sauvegarder une bibliothèque, ou 🗂 toutes les bibliothèques (sauvegarde globale officielle) ; ② Restaurer depuis la liste de toutes les sauvegardes, chacune clairement identifiée (📚 une bibliothèque / 🗂 toutes), avec pour une globale le choix de LA bibliothèque à restaurer (jamais toutes d'un coup).",
+    "Une restauration crée toujours une nouvelle bibliothèque « … (restaurée le jj/mm/aaaa à hh h mm) » : aucune bibliothèque existante n'est modifiée. Cadres SOURCE ➜ DESTINATION sur chaque sauvegarde et dans la confirmation.",
+    "Les sauvegardes gardent les références des photos : la bibliothèque restaurée affiche les photos d'origine sans les dupliquer ; modifier une de ces photos (tronquer, changer, permuter) lui crée sa propre photo, l'originale n'est jamais touchée."
+  ]},
   { v:"V1.79.1", d:"27/09/2026", l:[
     "Sauvegardes : sur chaque sauvegarde, le choix « Restaurer dans » est affiché directement, avec en clair ce qui va se passer (quelle bibliothèque est modifiée, combien de livres avant / après, ce qui ne bouge pas), et un bouton dont le libellé décrit l'action exacte (« Remplacer les livres de … » ou « Copier dans … »)."
   ]},
@@ -2555,17 +2565,35 @@ function panneauGrille(zone, b){
    Chaque sauvegarde est gardée sur cet appareil (IndexedDB) et sur GitHub (dossier sauvegardes/).
    ==================================================================== */
 const DOSSIER_SVG = "sauvegardes";
+/* références des photos d'un compartiment, sans les images (qui restent sur GitHub, jamais dupliquées) */
+function refsPhotos(cs){
+  const net = (ph)=>{ if (!ph || !ph.envoye || !ph.chemin) return null; const o = { ...ph }; delete o.plein; delete o.miniature; delete o.enIDB; return JSON.parse(JSON.stringify(o)); };
+  const r = {};
+  if (net(cs.photo)) r.photo = net(cs.photo);
+  if (net(cs.photo2)) r.photo2 = net(cs.photo2);
+  const ap = (cs.appoints || []).map(net).filter(Boolean);
+  if (ap.length) r.appoints = ap;
+  return r;
+}
+function instantaneBib(b){
+  return { id:b.id, nom:b.nom, lieu:b.lieu || "", rangees:b.rangees, compartiments:b.compartiments, ratio:b.ratio,
+    cases: Object.fromEntries(Object.entries(b.cases || {}).map(([k, cs])=>{
+      const ph = refsPhotos(cs);
+      if (!(cs.livres || []).length && !cs.certif && !cs.unRang && !Object.keys(ph).length) return null;
+      return [k, { livres: JSON.parse(JSON.stringify(cs.livres || [])), ...(cs.certif ? { certif:{ ...cs.certif } } : {}), ...(cs.unRang ? { unRang:true } : {}), ...ph }];
+    }).filter(Boolean)) };
+}
+/* bibId : une seule bibliothèque ; null : toutes */
 function instantaneLivres(libelle, bibId){
   const date = new Date().toISOString();
-  const bibs = (data.bibliotheques || []).filter(b=>!bibId || b.id === bibId).map(b=>({
-    id:b.id, nom:b.nom, lieu:b.lieu || "", rangees:b.rangees, compartiments:b.compartiments, ratio:b.ratio,
-    cases: Object.fromEntries(Object.entries(b.cases || {}).filter(([k, cs])=>(cs.livres || []).length || cs.certif || cs.unRang)
-      .map(([k, cs])=>[k, { livres: JSON.parse(JSON.stringify(cs.livres || [])), ...(cs.certif ? { certif: { ...cs.certif } } : {}), ...(cs.unRang ? { unRang:true } : {}) }]))
-  }));
-  const nLivres = bibs.reduce((n, b)=>n + Object.values(b.cases).reduce((m, cs)=>m + cs.livres.length, 0), 0);
-  return { type:"sauvegarde-livres", format:2, version:VERSION, date, libelle: libelle || "", appareil: navigator.platform || "",
-    bibliotheque: bibId ? { id:bibId, nom:(bibs[0] || {}).nom || "" } : null, resume:{ bibliotheques:bibs.length, livres:nLivres }, bibliotheques:bibs };
+  const bibs = (data.bibliotheques || []).filter(b=>!bibId || b.id === bibId).map(instantaneBib);
+  const nLivres = bibs.reduce((n, b)=>n + nLivresSvg(b), 0);
+  return { type:"sauvegarde-livres", format:3, version:VERSION, date, libelle: libelle || "", appareil: navigator.platform || "",
+    portee: bibId ? "une" : "toutes", bibliotheque: bibId ? { id:bibId, nom:(bibs[0] || {}).nom || "" } : null,
+    resume:{ bibliotheques:bibs.length, livres:nLivres }, bibliotheques:bibs };
 }
+const nLivresSvg = (sb)=> Object.values(sb.cases || {}).reduce((n, c)=>n + (c.livres || []).length, 0);
+const nPhotosSvg = (sb)=> Object.values(sb.cases || {}).reduce((n, c)=>n + (c.photo ? 1 : 0) + (c.photo2 ? 1 : 0) + (c.appoints || []).length, 0);
 const nomFichierSvg = (s)=> s.bibliotheque ? `${DOSSIER_SVG}/${s.bibliotheque.id}/livres-${s.date.replace(/[:.]/g, "-")}.json` : `${DOSSIER_SVG}/livres-${s.date.replace(/[:.]/g, "-")}.json`;
 
 async function creerSauvegarde(libelle, silencieux, bibId){
@@ -2577,23 +2605,26 @@ async function creerSauvegarde(libelle, silencieux, bibId){
     try{ await ghEcrire(chemin, enBase64Utf8(JSON.stringify(s)), "Sauvegarde des livres" + (libelle ? " — " + libelle : "")); surGithub = true; }
     catch(e){ journal("Sauvegarde des livres : envoi GitHub impossible (" + e.message + ")"); }
   }
-  journal(`Sauvegarde des livres créée${s.bibliotheque ? " pour « " + s.bibliotheque.nom + " »" : ""} (${s.resume.livres} livres)${libelle ? " — " + libelle : ""}${surGithub ? " — sur GitHub" : " — sur l'appareil seulement"}`);
-  if (!silencieux) toast(`Sauvegarde créée : ${s.resume.livres} livres${surGithub ? ", sur l'appareil et sur GitHub" : " (sur l'appareil ; GitHub à la prochaine connexion)"}.`, 5000);
+  const quoi = s.bibliotheque ? "« " + s.bibliotheque.nom + " »" : "toutes les bibliothèques (" + s.resume.bibliotheques + ")";
+  journal(`Sauvegarde de ${quoi} créée (${s.resume.livres} livres)${libelle ? " — " + libelle : ""}${surGithub ? " — sur GitHub" : " — sur l'appareil seulement"}`);
+  if (!silencieux) toast(`Sauvegarde de ${quoi} créée : ${s.resume.livres} livres${surGithub ? ", sur l'iPhone et sur GitHub" : " (sur l'iPhone ; GitHub dès qu'il y aura du réseau)"}.`, 5000);
   return { s, chemin, surGithub };
 }
-/* liste : sauvegardes de l'appareil et de GitHub, réunies */
-async function listerSauvegardes(bibId){
+/* toutes les sauvegardes : appareil + GitHub (dossier sauvegardes/ et ses sous-dossiers par bibliothèque) */
+async function listerSauvegardes(){
   const m = new Map();
-  const garde = (chemin)=> !bibId || chemin.startsWith(`${DOSSIER_SVG}/${bibId}/`) || /^sauvegardes\/[^/]+\.json$/.test(chemin);
-  try{ for (const c of await idbCles()) if (String(c).startsWith("svg:") && garde(c.slice(4))) m.set(c.slice(4), { chemin:c.slice(4), local:true, github:false }); }catch(e){}
+  try{ for (const c of await idbCles()) if (String(c).startsWith("svg:")) m.set(c.slice(4), { chemin:c.slice(4), local:true, github:false }); }catch(e){}
   if (ghLisible()){
-    for (const dossier of [DOSSIER_SVG].concat(bibId ? [`${DOSSIER_SVG}/${bibId}`] : [])){
-      try{
-        const r = await fetch(ghUrl(dossier) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), { headers: ghEntetes() });
-        if (r.ok) (await r.json()).filter(x=>x.type === "file" && /\.json$/.test(x.name) && garde(x.path)).forEach(x=>{
-          const e = m.get(x.path) || { chemin:x.path, local:false }; e.github = true; m.set(x.path, e); });
-      }catch(e){}
-    }
+    const lire = async (dossier)=>{
+      const r = await fetch(ghUrl(dossier) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), { headers: ghEntetes() });
+      return r.ok ? await r.json() : [];
+    };
+    try{
+      const racine = await lire(DOSSIER_SVG);
+      const fichiers = racine.filter(x=>x.type === "file");
+      for (const d of racine.filter(x=>x.type === "dir")){ try{ (await lire(d.path)).filter(x=>x.type === "file").forEach(x=>fichiers.push(x)); }catch(e){} }
+      fichiers.filter(x=>/\.json$/.test(x.name)).forEach(x=>{ const e = m.get(x.path) || { chemin:x.path, local:false }; e.github = true; m.set(x.path, e); });
+    }catch(e){}
   }
   return [...m.values()].sort((a, z)=>z.chemin.split("/").pop().localeCompare(a.chemin.split("/").pop()));
 }
@@ -2601,141 +2632,139 @@ async function lireSauvegarde(e){
   if (e.local){ const t = await idbLire("svg:" + e.chemin); if (t) return JSON.parse(t); }
   return JSON.parse(await ghLireTexte(e.chemin));
 }
-/* restauration : remet les livres (et marques) de chaque compartiment tels qu'ils étaient ; les photos ne bougent pas */
-function restaurerSauvegarde(s, destinations){
-  let nb = 0, nLivres = 0;
-  s.bibliotheques.forEach(sb=>{
-    // destination : même bibliothèque (par défaut), une autre, ou aucune
-    const dest = destinations ? destinations[sb.id] : sb.id;
-    if (!dest) return;
-    const copie = dest !== sb.id;
-    let b = (data.bibliotheques || []).find(x=>x.id === dest);
-    if (!b){ b = { id:sb.id, nom:sb.nom, lieu:sb.lieu, rangees:sb.rangees, compartiments:sb.compartiments, ratio:sb.ratio, cases:{}, cree:new Date().toISOString() }; data.bibliotheques.push(b); }
-    if (copie && sb.ratio && !Object.keys(b.cases || {}).length) b.ratio = sb.ratio;
-    b.cases = b.cases || {};
-    // grille : au moins aussi grande que celle de la sauvegarde
-    b.rangees = Math.max(b.rangees, sb.rangees || 1); b.compartiments = Math.max(b.compartiments, sb.compartiments || 1);
-    // compartiments absents de la sauvegarde : plus de livres
-    Object.keys(b.cases).forEach(k=>{ if (!sb.cases[k]){ b.cases[k].livres = []; delete b.cases[k].certif; delete b.cases[k].unRang; } });
-    Object.entries(sb.cases).forEach(([k, sc])=>{
-      const cs = b.cases[k] = b.cases[k] || { livres:[] };
-      cs.livres = JSON.parse(JSON.stringify(sc.livres || []));
-      if (copie) cs.livres.forEach(lv=>{ lv.id = uid(); });          // copie dans une autre bibliothèque : identifiants neufs
-      if (sc.certif) cs.certif = { ...sc.certif }; else delete cs.certif;
-      if (sc.unRang) cs.unRang = true; else delete cs.unRang;
-      nLivres += cs.livres.length;
-    });
-    nb++;
+const dateHeureCourte = (iso)=>{ const d = new Date(iso), z = (n)=>String(n).padStart(2, "0"); return `${z(d.getDate())}/${z(d.getMonth() + 1)}/${d.getFullYear()} à ${z(d.getHours())}h${z(d.getMinutes())}`; };
+
+/* restauration : crée TOUJOURS une nouvelle bibliothèque ; aucune bibliothèque existante n'est modifiée.
+   Les photos ne sont pas copiées : la nouvelle bibliothèque pointe sur les fichiers d'origine (emprunt) ;
+   toute modification d'une photo empruntée crée une photo propre à la nouvelle bibliothèque. */
+function restaurerEnNouvelle(s, sb){
+  const maintenant = new Date().toISOString();
+  const nb = { id:uid(), nom:`${sb.nom} (restaurée le ${dateHeureCourte(maintenant)})`, lieu:sb.lieu || "",
+    rangees:sb.rangees || 1, compartiments:sb.compartiments || 1, ratio:sb.ratio, cases:{}, cree:maintenant,
+    restauree:{ depuis:sb.id, nomOrigine:sb.nom, sauvegarde:s.date, le:maintenant } };
+  // sauvegarde sans références de photos (ancienne) : on prend celles de la bibliothèque d'origine si elle existe encore
+  const origine = biblio(sb.id);
+  const sansRefs = !Object.values(sb.cases || {}).some(c=>c.photo || c.photo2 || (c.appoints || []).length);
+  const emprunt = (ph)=> ph && ph.chemin ? Object.assign(JSON.parse(JSON.stringify(ph)), { envoye:true, emprunt:true }) : null;
+  let nLivres = 0, nPhotos = 0;
+  Object.entries(sb.cases || {}).forEach(([k, sc])=>{
+    const cs = nb.cases[k] = { livres: JSON.parse(JSON.stringify(sc.livres || [])) };
+    cs.livres.forEach(lv=>{ lv.id = uid(); });
+    if (sc.certif) cs.certif = { ...sc.certif };
+    if (sc.unRang) cs.unRang = true;
+    const src = sansRefs && origine && origine.cases && origine.cases[k] ? refsPhotos(origine.cases[k]) : sc;
+    if (emprunt(src.photo)){ cs.photo = emprunt(src.photo); nPhotos++; }
+    if (emprunt(src.photo2)){ cs.photo2 = emprunt(src.photo2); nPhotos++; }
+    const ap = (src.appoints || []).map(emprunt).filter(Boolean);
+    if (ap.length){ cs.appoints = ap; nPhotos += ap.length; }
+    nLivres += cs.livres.length;
   });
-  return { nb, nLivres };
+  data.bibliotheques.push(nb);
+  return { nb, nLivres, nPhotos, photosActuelles: sansRefs && !!origine };
 }
 
 function panneauSauvegardes(zone){
   let bibSel = biblioCourante && biblio(biblioCourante) ? biblioCourante : ((data.bibliotheques || [])[0] || {}).id;
-  const nomBib = (id)=>{ const b = biblio(id); return b ? b.nom : "(bibliothèque supprimée)"; };
   const livresDe = (b)=> Object.values(b.cases || {}).reduce((n, cs)=>n + (cs.livres || []).length, 0);
+  const choixDansGlobale = {};          // sauvegarde globale → bibliothèque choisie dedans
   const rendre = async ()=>{
     const b = biblio(bibSel);
-    if (!b){ zone.innerHTML = `<div class="aide">Aucune bibliothèque.</div>`; return; }
     zone.innerHTML = `
-      <label for="svBib" style="margin-top:0">Bibliothèque concernée</label>
-      <select id="svBib">${(data.bibliotheques || []).map(x=>`<option value="${esc(x.id)}" ${x.id === bibSel ? "selected" : ""}>${esc(x.nom)} — ${livresDe(x)} livres</option>`).join("")}</select>
-      <div class="aide">Une sauvegarde est une photographie de <b>tous les livres de cette bibliothèque</b> (titre, auteur, année, résumé, catégorie, statut, questions…) avec leur <b>compartiment, leur rangée (devant / derrière) et leur ordre</b>, ainsi que les certifications ★ et les marques « 1 rang ». Les photos ne sont pas copiées.</div>
-      <div class="groupeOutil">
-        <div class="titreGroupe">Nouvelle sauvegarde de « ${esc(b.nom)} »</div>
-        <div class="aide" style="margin-top:0">État actuel : <b>${livresDe(b)}</b> livres.</div>
-        <label for="svLib">Nom (facultatif)</label>
+      <div class="groupeOutil" style="margin-top:0">
+        <div class="titreGroupe">① Sauvegarder</div>
+        <label for="svBib" style="margin-top:0">Bibliothèque à sauvegarder</label>
+        <select id="svBib">${(data.bibliotheques || []).map(x=>`<option value="${esc(x.id)}" ${x.id === bibSel ? "selected" : ""}>${esc(x.nom)} — ${livresDe(x)} livres</option>`).join("")}</select>
+        <label for="svLib">Nom de la sauvegarde (facultatif)</label>
         <input type="text" id="svLib" placeholder="ex. avant de refaire les analyses de la rangée 8">
-        <button class="btn principal plein" id="svCreer" style="margin-top:10px">💾 Sauvegarder « ${esc(b.nom)} » maintenant</button>
-        <div class="aide">Enregistrée à deux endroits : sur cet iPhone, et sur GitHub (dès qu'il y a du réseau).</div>
+        <button class="btn principal plein" id="svCreer" style="margin-top:10px" ${b ? "" : "disabled"}>📚 Sauvegarder « ${esc(b ? b.nom : "")} »</button>
+        <button class="btn plein" id="svToutes" style="margin-top:10px">🗂 Sauvegarder toutes les bibliothèques (${(data.bibliotheques || []).length})</button>
+        <div class="aide">Une sauvegarde garde tous les livres (tous leurs attributs, compartiment, rangée, ordre), les certifications ★, les marques « 1 rang » et les <b>références</b> des photos (les photos elles-mêmes ne sont jamais dupliquées). Elle est enregistrée sur cet iPhone et sur GitHub.</div>
       </div>
-      <div class="titreSection" style="margin-top:14px">Sauvegardes de « ${esc(b.nom)} »</div>
-      <div id="svListe"><div class="aide">Chargement…</div></div>`;
+      <div class="groupeOutil">
+        <div class="titreGroupe">② Restaurer</div>
+        <div class="aide" style="margin-top:0">Une restauration <b>crée toujours une nouvelle bibliothèque</b>, nommée « … (restaurée le …) ». <b>Aucune bibliothèque existante n'est modifiée.</b> La nouvelle bibliothèque affiche les photos d'origine sans les copier ; si vous modifiez une de ces photos, elle reçoit sa propre photo et l'originale n'est jamais touchée.</div>
+        <div id="svListe"><div class="aide">Chargement des sauvegardes…</div></div>
+      </div>`;
     zone.querySelector("#svBib").onchange = (e)=>{ bibSel = e.target.value; rendre(); };
-    zone.querySelector("#svCreer").onclick = async ()=>{
-      const bt = zone.querySelector("#svCreer"); bt.disabled = true; bt.textContent = "Sauvegarde en cours…";
-      try{ await creerSauvegarde(zone.querySelector("#svLib").value.trim(), false, bibSel); }
+    const lancer = async (bt, bibId)=>{
+      bt.disabled = true; bt.textContent = "Sauvegarde en cours…";
+      try{ await creerSauvegarde(zone.querySelector("#svLib").value.trim(), false, bibId); }
       catch(e){ toast("Sauvegarde impossible : " + e.message, 6000); }
       rendre();
     };
-    const liste = await listerSauvegardes(bibSel);
+    zone.querySelector("#svCreer").onclick = (e)=>lancer(e.currentTarget, bibSel);
+    zone.querySelector("#svToutes").onclick = (e)=>lancer(e.currentTarget, null);
+
+    const liste = await listerSauvegardes();
     const zl = zone.querySelector("#svListe");
     if (!zl) return;
-    if (!liste.length){ zl.innerHTML = `<div class="aide">Aucune sauvegarde de cette bibliothèque pour l'instant.</div>`; return; }
-    zl.innerHTML = `<div class="aide">Chargement des détails (${liste.length})…</div>`;
+    if (!liste.length){ zl.innerHTML = `<div class="aide">Aucune sauvegarde pour l'instant.</div>`; return; }
     const details = [];
     for (const e of liste){ try{ details.push({ e, s: await lireSauvegarde(e) }); }catch(err){ details.push({ e, s:null }); } }
-    // les anciennes sauvegardes globales ne sont listées que si elles contiennent cette bibliothèque
-    const utiles = details.filter(d=>!d.s || d.s.bibliotheque || d.s.bibliotheques.some(x=>x.id === bibSel));
-    const livresSvg = (s)=> s.bibliotheque ? s.resume.livres : Object.values((s.bibliotheques.find(x=>x.id === bibSel) || { cases:{} }).cases).reduce((n, c)=>n + c.livres.length, 0);
-    zl.innerHTML = utiles.map((d, i)=>{
-      const s = d.s;
-      const origine = s ? (s.bibliotheque ? s.bibliotheque.nom : nomBib(bibSel) + " (dans une ancienne sauvegarde de toutes les bibliothèques)") : "?";
-      return `<div class="prop">
-          <div class="t">${s ? esc(dateFr(s.date)) : esc(d.e.chemin.split("/").pop())}${s && s.libelle ? " — « " + esc(s.libelle) + " »" : ""}</div>
-          ${s ? `<div class="infoLigne"><span class="cle">Bibliothèque sauvegardée</span><span><b>${esc(origine)}</b></span></div>
-          <div class="infoLigne"><span class="cle">Contenu</span><span>${livresSvg(s)} livres · app ${esc(s.version || "")}</span></div>` : `<div class="chg">illisible</div>`}
-          <div class="infoLigne"><span class="cle">Enregistrée</span><span>${d.e.local ? "✅ sur cet iPhone" : "— pas sur cet iPhone"}<br>${d.e.github ? "✅ sur GitHub" : "⏳ pas encore sur GitHub (partira dès qu'il y a du réseau)"}</span></div>
-          ${s ? `<div class="groupeOutil" style="margin-top:10px">
-            <label for="svDest${i}" style="margin-top:0">Restaurer dans</label>
-            <select id="svDest${i}" data-dest="${i}">${(data.bibliotheques || []).map(x=>`<option value="${esc(x.id)}" ${x.id === bibSel ? "selected" : ""}>${esc(x.nom)}${x.id === bibSel ? " (la même)" : livresDe(x) ? " (autre, " + livresDe(x) + " livres)" : " (autre, vide)"}</option>`).join("")}</select>
-            <div class="aide" id="svEffet${i}" style="margin:8px 0"></div>
-            <button class="btn rouge plein" data-rest="${i}"></button>
-          </div>
-          <button class="btn plein" data-sup="${i}" style="margin-top:10px">🗑 Supprimer cette sauvegarde</button>` : ""}
-        </div>`;
-    }).join("") || `<div class="aide">Aucune sauvegarde de cette bibliothèque pour l'instant.</div>`;
-    const sbDe = (d)=> d.s.bibliotheque ? d.s.bibliotheques[0] : d.s.bibliotheques.find(x=>x.id === bibSel);
-    const nSvg = (sb)=> Object.values(sb.cases).reduce((n, c)=>n + c.livres.length, 0);
-    const majEffet = (i)=>{
-      const d = utiles[i], sb = sbDe(d); if (!sb) return;
-      const dest = zl.querySelector("#svDest" + i).value, destB = biblio(dest);
-      const meme = dest === sb.id;
-      zl.querySelector("#svEffet" + i).innerHTML = meme
-        ? `<b>Ce qui va se passer :</b> les <b>${livresDe(destB)} livres actuels</b> de « ${esc(destB.nom)} » seront <b>remplacés</b> par les <b>${nSvg(sb)} livres</b> de cette sauvegarde, chacun dans son compartiment, sa rangée et à sa place, avec les certifications et marques « 1 rang » de ce jour-là. Les photos ne changent pas. L'état actuel est d'abord sauvegardé automatiquement.`
-        : `<b>Ce qui va se passer :</b> les <b>${nSvg(sb)} livres</b> de « ${esc(sb.nom)} » seront <b>copiés dans « ${esc(destB.nom)} »</b>${livresDe(destB) ? `, <b>à la place de ses ${livresDe(destB)} livres actuels</b>` : " (vide aujourd'hui)"}, avec la même grille, les mêmes compartiments, rangées et ordre, <b>sans les photos</b>. <b>« ${esc(sb.nom)} » n'est pas modifiée.</b> L'état actuel de « ${esc(destB.nom)} » est d'abord sauvegardé automatiquement.`;
-      zl.querySelector(`[data-rest="${i}"]`).textContent = meme
-        ? `↩ Remplacer les livres de « ${destB.nom} » par cette sauvegarde`
-        : `↩ Copier cette sauvegarde dans « ${destB.nom} »`;
+    const lisibles = details.filter(d=>d.s && Array.isArray(d.s.bibliotheques) && d.s.bibliotheques.length);
+    const sourceDe = (d, i)=>{ const s = d.s; if (s.bibliotheque) return s.bibliotheques[0]; const id = choixDansGlobale[i] || s.bibliotheques[0].id; return s.bibliotheques.find(x=>x.id === id) || s.bibliotheques[0]; };
+    zl.innerHTML = lisibles.map((d, i)=>{
+      const s = d.s, globale = !s.bibliotheque, sb = sourceDe(d, i);
+      const nomNouvelle = `${sb.nom} (restaurée le …)`;
+      return `<div class="prop" style="border-left:4px solid ${globale ? "#7fb2ff" : "var(--bronze)"};margin-top:12px">
+        <div style="font-weight:800;font-size:15px">${globale ? `🗂 Toutes les bibliothèques (${s.bibliotheques.length})` : `📚 Bibliothèque : ${esc(s.bibliotheques[0].nom)}`}</div>
+        <div class="infoLigne"><span class="cle">Faite le</span><span>${esc(dateFr(s.date))}${s.libelle ? " — « " + esc(s.libelle) + " »" : ""}</span></div>
+        <div class="infoLigne"><span class="cle">Contenu</span><span>${s.resume.livres} livres${globale ? " au total" : ""} · app ${esc(s.version || "")}</span></div>
+        <div class="infoLigne"><span class="cle">Enregistrée</span><span>${d.e.local ? "✅ sur cet iPhone" : "— pas sur cet iPhone"}<br>${d.e.github ? "✅ sur GitHub" : "⏳ pas encore sur GitHub (partira dès qu'il y a du réseau)"}</span></div>
+        ${globale ? `<label for="svIn${i}">Bibliothèque à restaurer depuis cette sauvegarde</label>
+          <select id="svIn${i}" data-in="${i}">${s.bibliotheques.map(x=>`<option value="${esc(x.id)}" ${x.id === sb.id ? "selected" : ""}>${esc(x.nom)} — ${nLivresSvg(x)} livres</option>`).join("")}</select>
+          <div class="aide">Une seule bibliothèque à la fois : restaurer tout d'un coup n'est pas possible.</div>` : ""}
+        <div class="recapRest">
+          <div class="cadreRest"><div class="etq">SOURCE</div><b>${esc(sb.nom)}</b><br>sauvegarde du ${esc(dateFr(s.date))}<br>${nLivresSvg(sb)} livres · ${nPhotosSvg(sb) ? nPhotosSvg(sb) + " photo(s) référencée(s)" : "photos : celles de la bibliothèque d'origine si elle existe encore"}</div>
+          <div class="flecheRest">➜</div>
+          <div class="cadreRest nouv"><div class="etq">DESTINATION</div><b>Nouvelle bibliothèque</b><br>« ${esc(nomNouvelle)} »<br>aucune bibliothèque existante n'est modifiée</div>
+        </div>
+        <button class="btn principal plein" data-rest="${i}" style="margin-top:8px">↩ Créer la bibliothèque restaurée</button>
+        <button class="btn plein" data-sup="${i}" style="margin-top:12px;font-size:13.5px">🗑 Supprimer cette sauvegarde${globale ? " (de toutes les bibliothèques)" : ""}</button>
+      </div>`;
+    }).join("") || `<div class="aide">Aucune sauvegarde lisible.</div>`;
+    zl.querySelectorAll("[data-in]").forEach(sel=>sel.onchange = ()=>{ choixDansGlobale[sel.dataset.in] = sel.value; rendreListe(); });
+    const rendreListe = ()=>{ // ne redessine que les cadres source (sans relire les sauvegardes)
+      lisibles.forEach((d, i)=>{
+        const sb = sourceDe(d, i), carte = zl.querySelector(`[data-rest="${i}"]`).closest(".prop");
+        carte.querySelector(".cadreRest").innerHTML = `<div class="etq">SOURCE</div><b>${esc(sb.nom)}</b><br>sauvegarde du ${esc(dateFr(d.s.date))}<br>${nLivresSvg(sb)} livres · ${nPhotosSvg(sb) ? nPhotosSvg(sb) + " photo(s) référencée(s)" : "photos : celles de la bibliothèque d'origine si elle existe encore"}`;
+        carte.querySelector(".cadreRest.nouv").innerHTML = `<div class="etq">DESTINATION</div><b>Nouvelle bibliothèque</b><br>« ${esc(sb.nom)} (restaurée le …) »<br>aucune bibliothèque existante n'est modifiée`;
+      });
     };
-    zl.querySelectorAll("[data-dest]").forEach(sel=>{ sel.onchange = ()=>majEffet(Number(sel.dataset.dest)); majEffet(Number(sel.dataset.dest)); });
     zl.querySelectorAll("[data-rest]").forEach(bt=>bt.onclick = async ()=>{
-      const i = Number(bt.dataset.rest), d = utiles[i], s = d.s;
-      const sb = sbDe(d);
-      if (!sb) return;
-      const dest = zl.querySelector("#svDest" + i).value;
-      if (!dest) return;
-      const destB = biblio(dest);
-      const ok = await confirmer(`<div class="infoLigne"><span class="cle">De</span><span><b>${esc(sb.nom)}</b> (sauvegarde du ${esc(dateFr(s.date))})</span></div>
-        <div class="infoLigne"><span class="cle">Vers</span><span><b>${esc(destB.nom)}</b>${dest === sb.id ? " (la même)" : " (autre bibliothèque)"}</span></div>
-        <div class="aide">Livres de « ${esc(destB.nom)} » : ${livresDe(destB)} aujourd'hui → ${Object.values(sb.cases).reduce((n, c)=>n + c.livres.length, 0)} après restauration. Les listes, certifications et marques « 1 rang » reprennent l'état de la sauvegarde ; les photos ne changent pas.</div>
-        <div class="aide"><b>Par sécurité, « ${esc(destB.nom)} » est d'abord sauvegardée telle quelle</b> : vous pourrez y revenir.</div>`,
-        "Confirmer la restauration", "⚠️ Restaurer", { danger:true, texteNon:"Ne rien changer", horodatage:true });
+      const i = Number(bt.dataset.rest), d = lisibles[i], s = d.s, sb = sourceDe(d, i);
+      const ok = await confirmer(`<div class="recapRest">
+          <div class="cadreRest"><div class="etq">SOURCE</div><b>${esc(sb.nom)}</b><br>sauvegarde du ${esc(dateFr(s.date))}${s.libelle ? "<br>« " + esc(s.libelle) + " »" : ""}<br>${nLivresSvg(sb)} livres</div>
+          <div class="flecheRest">➜</div>
+          <div class="cadreRest nouv"><div class="etq">DESTINATION</div><b>Nouvelle bibliothèque</b><br>« ${esc(sb.nom)} (restaurée le ${esc(dateHeureCourte(new Date().toISOString()))}) »</div>
+        </div>
+        <div class="aide">Aucune bibliothèque existante n'est modifiée. La nouvelle affichera les photos d'origine sans les copier.</div>`,
+        "Créer une bibliothèque restaurée", "↩ Créer la bibliothèque restaurée", { horodatage:true });
       if (!ok) return;
-      try{ await creerSauvegarde("avant restauration du " + dateFr(s.date), true, dest); }
-      catch(e){ toast("Sauvegarde de sécurité impossible : restauration annulée.", 6000); return; }
-      const res = restaurerSauvegarde({ ...s, bibliotheques:[sb] }, { [sb.id]: dest });
-      journal(`Sauvegarde du ${dateFr(s.date)} de « ${sb.nom} » restaurée dans « ${destB.nom} » : ${res.nLivres} livres`);
-      sauver(); rendreBiblio();
-      planifierEnvoi("Restauration d'une sauvegarde des livres");
-      toast(`« ${destB.nom} » restaurée : ${res.nLivres} livres. L'état d'avant est gardé dans une sauvegarde.`, 6000);
-      bibSel = dest; rendre();
+      const res = restaurerEnNouvelle(s, sb);
+      journal(`Restauration : « ${sb.nom} » (sauvegarde du ${dateFr(s.date)}) → nouvelle bibliothèque « ${res.nb.nom} » : ${res.nLivres} livres, ${res.nPhotos} photo(s) référencée(s)`);
+      sauver(); rendre(); if (typeof rendreBiblio === "function") rendreBiblio();
+      planifierEnvoi("Bibliothèque restaurée");
+      modale({ titre:"Bibliothèque restaurée", horodatage:true,
+        html:`<div>Nouvelle bibliothèque créée : <b>« ${esc(res.nb.nom)} »</b></div>
+          <div class="aide">${res.nLivres} livres, ${res.nPhotos} photo(s) affichée(s) depuis ${res.photosActuelles ? "les photos actuelles de la bibliothèque d'origine (sauvegarde ancienne, sans références)" : "les photos d'origine"}. « ${esc(sb.nom)} » n'a pas été modifiée.</div>`,
+        boutons:[{ texte:"Fermer" }] });
     });
     zl.querySelectorAll("[data-sup]").forEach(bt=>bt.onclick = async ()=>{
-      const d = utiles[Number(bt.dataset.sup)];
-      const ok = await confirmer(`Supprimer définitivement la sauvegarde du ${esc(dateFr(d.s.date))}${d.s.libelle ? " (« " + esc(d.s.libelle) + " »)" : ""} ?${d.s.bibliotheque ? "" : "<div class='aide'>C'est une ancienne sauvegarde de toutes les bibliothèques : elle disparaîtra pour toutes.</div>"}`, "Supprimer une sauvegarde", "Supprimer", { danger:true, texteNon:"Garder" });
+      const d = lisibles[Number(bt.dataset.sup)], s = d.s;
+      const ok = await confirmer(`<div>Supprimer définitivement la sauvegarde du ${esc(dateFr(s.date))}${s.libelle ? " (« " + esc(s.libelle) + " »)" : ""} ?</div>
+        <div class="aide">${s.bibliotheque ? "Sauvegarde de « " + esc(s.bibliotheque.nom) + " »." : "Sauvegarde de <b>toutes les bibliothèques</b> (" + s.bibliotheques.map(x=>esc(x.nom)).join(", ") + ")."} Les bibliothèques elles-mêmes ne sont pas touchées.</div>`,
+        "Supprimer une sauvegarde", "Supprimer", { danger:true, texteNon:"Garder" });
       if (!ok) return;
       try{ if (d.e.local) await idbSupprimer("svg:" + d.e.chemin); if (d.e.github) await ghSupprimer(d.e.chemin, "Suppression d'une sauvegarde des livres"); }
       catch(e){ toast("Suppression incomplète : " + e.message, 5000); }
-      journal(`Sauvegarde du ${dateFr(d.s.date)} supprimée`);
+      journal(`Sauvegarde du ${dateFr(s.date)} supprimée`);
       rendre();
     });
     // sauvegardes restées sur l'appareil : envoi sur GitHub si possible
     if (ghPret() && navigator.onLine !== false){
       let n = 0;
-      for (const d of utiles) if (d.s && d.e.local && !d.e.github){
-        try{ await ghEcrire(d.e.chemin, enBase64Utf8(JSON.stringify(d.s)), "Sauvegarde des livres"); n++; }catch(e){}
-      }
+      for (const d of lisibles) if (d.e.local && !d.e.github){ try{ await ghEcrire(d.e.chemin, enBase64Utf8(JSON.stringify(d.s)), "Sauvegarde des livres"); n++; }catch(e){} }
       if (n) rendre();
     }
   };
@@ -6837,6 +6866,7 @@ async function televerserPhoto(b, k, champ){
     cachePhotos[cleCache(b, k, champ)] = plein;
     ph.chemin = chemin;
     ph.envoye = true;
+    delete ph.emprunt;                            // photo désormais propre à cette bibliothèque
     ph.plein = null;                              // libère la mémoire de l'appareil
     sauver(); rendreBiblio();
   }
