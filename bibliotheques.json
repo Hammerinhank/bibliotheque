@@ -15826,7 +15826,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzgteoww",
@@ -15849,7 +15849,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzgdadxq",
@@ -15872,7 +15872,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzglimpv",
@@ -15895,7 +15895,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzg30axz",
@@ -15918,7 +15918,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzgpajny",
@@ -15941,7 +15941,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzg7n5gc",
@@ -15964,7 +15964,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phujh98",
@@ -15985,7 +15985,8 @@
        ],
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzgg4dmi",
@@ -16008,7 +16009,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phku5p3",
@@ -16029,7 +16030,8 @@
        ],
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phenj6e",
@@ -16050,7 +16052,8 @@
        ],
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujlfzzgduilf",
@@ -16073,18 +16076,7 @@
        "temoins": [
         "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
-      },
-      {
-       "id": "mudjl6photons",
-       "titre": "MICHEL MOUTOT",
-       "auteur": "Michel Moutot (journaliste et écrivain français, né en 1959)",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Séquoias",
-       "resume": "",
-       "categorie": "Non classé",
-       "origine": "ia"
+       "statut": "acquis"
       },
       {
        "id": "mujl2fjgtu0kg",
@@ -16841,7 +16833,8 @@
       "maj": "2026-09-27T08:52:42.790Z"
      },
      "certif": {
-      "derriere": "2026-09-27T08:57:24.275Z"
+      "derriere": "2026-09-27T08:57:24.275Z",
+      "devant": "2026-09-27T09:10:59.119Z"
      }
     },
     "8-2": {
@@ -21177,7 +21170,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-27T09:07:47.616Z",
+ "maj": "2026-09-27T09:12:51.365Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
