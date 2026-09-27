@@ -15406,11 +15406,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 27,
          "x2": 101
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 22,
+         "x2": 64
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mugq72ukqdip6",
@@ -15427,12 +15434,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 101,
          "x2": 151
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 65,
+         "x2": 95
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phszumd",
@@ -15449,15 +15462,22 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 151,
          "x2": 204
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 95,
+         "x2": 128
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phmen94",
-       "titre": "LA LUMIÈRE BLEUE",
+       "titre": "La neuvième heure",
        "auteur": "Cormac McCarthy (romancier américain, 1933-2023)",
        "annee": "",
        "certitude": "haute",
@@ -15465,20 +15485,17 @@
        "resume": "",
        "categorie": "Littérature étrangère",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "La Neuvième Heure",
-         "auteur": ""
-        },
-        "vue": {
-         "champ": "appoint:mugor73n1gwc3",
-         "x1": 204,
-         "x2": 252
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-25T08:55:41.280Z"
-       }
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 129,
+         "x2": 170
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ]
       },
       {
        "id": "mudjl6phk0uph",
@@ -15495,11 +15512,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 252,
          "x2": 330
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 170,
+         "x2": 212
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phn3878",
@@ -15516,11 +15540,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 330,
          "x2": 386
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 203,
+         "x2": 246
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6ph4sw9c",
@@ -15537,11 +15568,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 386,
          "x2": 455
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 238,
+         "x2": 287
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6php8tg6",
@@ -15558,11 +15596,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 455,
          "x2": 487
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 278,
+         "x2": 302
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mugq72ukdvth8",
@@ -15579,12 +15624,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 487,
          "x2": 512
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 295,
+         "x2": 316
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudjl6ph808nb",
@@ -15601,11 +15652,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 512,
          "x2": 590
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 311,
+         "x2": 361
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phadzyd",
@@ -15622,11 +15680,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 590,
          "x2": 657
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 359,
+         "x2": 400
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mugq72uk5z9zu",
@@ -15643,12 +15708,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 657,
          "x2": 700
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 396,
+         "x2": 425
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mugq72ukcdv7u",
@@ -15665,12 +15736,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 700,
          "x2": 762
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 423,
+         "x2": 460
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudjl6ph4x20z",
@@ -15687,11 +15764,18 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 762,
          "x2": 897
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 460,
+         "x2": 540
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudjl6phbwj0l",
@@ -15708,11 +15792,179 @@
          "champ": "appoint:mugor73n1gwc3",
          "x1": 897,
          "x2": 1000
+        },
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 542,
+         "x2": 613
         }
        ],
        "temoins": [
-        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z"
-       ]
+        "appoint:mugor73n1gwc3:2026-09-25T08:15:18.707Z",
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujlfzzgxu96g",
+       "titre": "Dimanches d'août",
+       "auteur": "Patrick Modiano",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 600,
+         "x2": 629
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mujlfzzgteoww",
+       "titre": "La grande épreuve",
+       "auteur": "Étienne de Montety",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 623,
+         "x2": 666
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mujlfzzgdadxq",
+       "titre": "De plume et d'épée",
+       "auteur": "Hubert Monteilhet",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 656,
+         "x2": 710
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mujlfzzglimpv",
+       "titre": "Sous le charme de Lillian Dawes",
+       "auteur": "Katherine Mosby",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 699,
+         "x2": 740
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mujlfzzg30axz",
+       "titre": "Pour que tu ne te perdes pas dans le quartier",
+       "auteur": "Patrick Modiano",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 724,
+         "x2": 755
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mujlfzzgpajny",
+       "titre": "Les boulevards de ceinture",
+       "auteur": "Patrick Modiano",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 741,
+         "x2": 780
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mujlfzzg7n5gc",
+       "titre": "Douze palais de mémoire",
+       "auteur": "Anna Moï",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 765,
+         "x2": 809
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudjl6phujh98",
@@ -15723,18 +15975,61 @@
        "remarque": "Grasset",
        "resume": "Un critique musical cynique devient le manager d'un sosie de Claude François dans une satire féroce du show-business.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 790,
+         "x2": 848
+        }
+       ],
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ]
       },
       {
-       "id": "mudjl6phku5p3",
-       "titre": "L'OR DU TORRENT",
+       "id": "mujlfzzgg4dmi",
+       "titre": "Sanctuaires ardents",
        "auteur": "",
        "annee": "",
        "certitude": "haute",
        "remarque": "",
        "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 827,
+         "x2": 883
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
+      },
+      {
+       "id": "mudjl6phku5p3",
+       "titre": "L'OR DU TORRENT",
+       "auteur": "Pierre Moustiers",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
        "categorie": "Non classé",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 860,
+         "x2": 908
+        }
+       ],
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ]
       },
       {
        "id": "mudjl6phenj6e",
@@ -15745,7 +16040,40 @@
        "remarque": "Gallimard",
        "resume": "Le récit des derniers jours et des ultimes réflexions d'un monarque déchu face à son destin.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 885,
+         "x2": 940
+        }
+       ],
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ]
+      },
+      {
+       "id": "mujlfzzgduilf",
+       "titre": "Séquoias",
+       "auteur": "Michel Moutot",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujldpb8d5fq0",
+         "x1": 914,
+         "x2": 988
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujldpb8d5fq0:2026-09-27T09:04:45.609Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mudjl6photons",
@@ -16459,6 +16787,51 @@
        "maj": "2026-09-25T08:15:45.974Z",
        "id": "mugors527bjs6",
        "legende": ""
+      },
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/7-3-appoint-mujldpb8d5fq0.jpg",
+       "envoye": true,
+       "maj": "2026-09-27T09:04:45.609Z",
+       "id": "mujldpb8d5fq0",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 17,
+        "n2": 0,
+        "date": "2026-09-27T09:05:55.931Z"
+       },
+       "livresVus": [
+        "mudjl6ph7vxwg",
+        "mugq72ukqdip6",
+        "mudjl6phszumd",
+        "mudjl6phmen94",
+        "mudjl6phk0uph",
+        "mudjl6phn3878",
+        "mudjl6ph4sw9c",
+        "mudjl6php8tg6",
+        "mugq72ukdvth8",
+        "mudjl6ph808nb",
+        "mudjl6phadzyd",
+        "mugq72uk5z9zu",
+        "mugq72ukcdv7u",
+        "mudjl6ph4x20z",
+        "mudjl6phbwj0l",
+        "mujlfzzgxu96g",
+        "mujlfzzgteoww",
+        "mujlfzzgdadxq",
+        "mujlfzzglimpv",
+        "mujlfzzg30axz",
+        "mujlfzzgpajny",
+        "mujlfzzg7n5gc",
+        "mudjl6phujh98",
+        "mujlfzzgg4dmi",
+        "mudjl6phku5p3",
+        "mudjl6phenj6e",
+        "mujlfzzgduilf"
+       ],
+       "verif": "2026-09-27T09:07:46.259Z"
       }
      ],
      "photo2": {
@@ -20804,7 +21177,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-27T08:57:58.411Z",
+ "maj": "2026-09-27T09:07:47.616Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
