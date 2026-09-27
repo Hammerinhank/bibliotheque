@@ -1,0 +1,285 @@
+{
+ "date": "2026-09-27T09:05:55.907Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-3",
+ "genre": "appoint",
+ "appoint": "mujldpb8d5fq0",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Le sillage de l'oubli",
+   "auteur": "Bruce Machart",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 22,
+   "x2": 64,
+   "illisible": false
+  },
+  {
+   "titre": "Des villes dans la plaine",
+   "auteur": "Cormac McCarthy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 65,
+   "x2": 95,
+   "illisible": false
+  },
+  {
+   "titre": "Le grand passage",
+   "auteur": "Cormac McCarthy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 95,
+   "x2": 128,
+   "illisible": false
+  },
+  {
+   "titre": "La neuvième heure",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "auteur non visible sur la tranche",
+   "x1": 129,
+   "x2": 170,
+   "illisible": false
+  },
+  {
+   "titre": "Chronique d'un château hanté",
+   "auteur": "Pierre Magnan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 170,
+   "x2": 212,
+   "illisible": false
+  },
+  {
+   "titre": "Laure du bout du monde",
+   "auteur": "Pierre Magnan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 203,
+   "x2": 246,
+   "illisible": false
+  },
+  {
+   "titre": "La Folie Forcalquier",
+   "auteur": "Pierre Magnan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 238,
+   "x2": 287,
+   "illisible": false
+  },
+  {
+   "titre": "Madame Perfecta",
+   "auteur": "Antonine Maillet",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 278,
+   "x2": 302,
+   "illisible": false
+  },
+  {
+   "titre": "La pie",
+   "auteur": "Pierre-Henri Malafosse",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 295,
+   "x2": 316,
+   "illisible": false
+  },
+  {
+   "titre": "L'Accordeur de piano",
+   "auteur": "Daniel Mason",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 311,
+   "x2": 361,
+   "illisible": false
+  },
+  {
+   "titre": "Les Joachim",
+   "auteur": "Brigitte Massin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 359,
+   "x2": 400,
+   "illisible": false
+  },
+  {
+   "titre": "La crique du Français",
+   "auteur": "Daphné du Maurier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 396,
+   "x2": 425,
+   "illisible": false
+  },
+  {
+   "titre": "Les souffleurs de verre",
+   "auteur": "Daphné du Maurier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 423,
+   "x2": 460,
+   "illisible": false
+  },
+  {
+   "titre": "Colorado Saga",
+   "auteur": "James A. Michener",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 460,
+   "x2": 540,
+   "illisible": false
+  },
+  {
+   "titre": "Chesapeake",
+   "auteur": "James A. Michener",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 542,
+   "x2": 613,
+   "illisible": false
+  },
+  {
+   "titre": "Dimanches d'août",
+   "auteur": "Patrick Modiano",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 600,
+   "x2": 629,
+   "illisible": false
+  },
+  {
+   "titre": "La grande épreuve",
+   "auteur": "Étienne de Montety",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 623,
+   "x2": 666,
+   "illisible": false
+  },
+  {
+   "titre": "De plume et d'épée",
+   "auteur": "Hubert Monteilhet",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 656,
+   "x2": 710,
+   "illisible": false
+  },
+  {
+   "titre": "Sous le charme de Lillian Dawes",
+   "auteur": "Katherine Mosby",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 699,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "Pour que tu ne te perdes pas dans le quartier",
+   "auteur": "Patrick Modiano",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 724,
+   "x2": 755,
+   "illisible": false
+  },
+  {
+   "titre": "Les boulevards de ceinture",
+   "auteur": "Patrick Modiano",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 741,
+   "x2": 780,
+   "illisible": false
+  },
+  {
+   "titre": "Douze palais de mémoire",
+   "auteur": "Anna Moï",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 765,
+   "x2": 809,
+   "illisible": false
+  },
+  {
+   "titre": "Podium",
+   "auteur": "Yann Moix",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 790,
+   "x2": 848,
+   "illisible": false
+  },
+  {
+   "titre": "Sanctuaires ardents",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "auteur non visible sur la tranche",
+   "x1": 827,
+   "x2": 883,
+   "illisible": false
+  },
+  {
+   "titre": "L'or du torrent",
+   "auteur": "Pierre Moustiers",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 860,
+   "x2": 908,
+   "illisible": false
+  },
+  {
+   "titre": "Le dernier mot d'un roi",
+   "auteur": "Pierre Moustiers",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 885,
+   "x2": 940,
+   "illisible": false
+  },
+  {
+   "titre": "Séquoias",
+   "auteur": "Michel Moutot",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 914,
+   "x2": 988,
+   "illisible": false
+  }
+ ]
+}
