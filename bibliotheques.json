@@ -1446,7 +1446,7 @@
        "certitude": "haute",
        "remarque": "collection Deux Coqs d'Or",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia"
       },
       {
@@ -1468,7 +1468,7 @@
        "certitude": "moyenne",
        "remarque": "titre partiellement visible",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia"
       },
       {
@@ -1479,7 +1479,7 @@
        "certitude": "moyenne",
        "remarque": "titre partiel tranche verte",
        "resume": "Shéhérazade raconte chaque nuit un conte au sultan Shahriar, en suspendant le récit pour retarder son exécution.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -1490,7 +1490,7 @@
        "certitude": "faible",
        "remarque": "tranche bleue abîmée",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia"
       },
       {
@@ -1501,7 +1501,7 @@
        "certitude": "haute",
        "remarque": "tranche rose",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia"
       },
       {
@@ -1534,7 +1534,7 @@
        "certitude": "haute",
        "remarque": "collection Mame",
        "resume": "Encyclopédie chrétienne illustrée pour les jeunes enfants, présentant la Bible, Jésus et la vie de l'Église.",
-       "categorie": "",
+       "categorie": "Religion",
        "origine": "ia"
       },
       {
@@ -1556,7 +1556,7 @@
        "certitude": "haute",
        "remarque": "tranche verte",
        "resume": "",
-       "categorie": "",
+       "categorie": "Religion",
        "origine": "ia"
       },
       {
@@ -1589,7 +1589,7 @@
        "certitude": "haute",
        "remarque": "tranche bleue",
        "resume": "",
-       "categorie": "",
+       "categorie": "Religion",
        "origine": "ia"
       },
       {
@@ -1622,7 +1622,7 @@
        "certitude": "haute",
        "remarque": "tranche blanche",
        "resume": "Dans la forêt québécoise, Maria choisit entre trois prétendants après la mort de celui qu'elle aimait, et reste fidèle à sa terre.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -1633,7 +1633,7 @@
        "certitude": "haute",
        "remarque": "tranche violette",
        "resume": "Le prince Mychkine, bon et naïf jusqu'à passer pour idiot, se heurte à la société pétersbourgeoise et à deux femmes rivales.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -1644,7 +1644,7 @@
        "certitude": "haute",
        "remarque": "tranche verte",
        "resume": "Dans le Berry, Landry, jumeau inséparable de son frère, s'éprend de la petite Fadette, jeune fille sauvage et méprisée.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -1655,7 +1655,7 @@
        "certitude": "haute",
        "remarque": "tranche jaune",
        "resume": "Enfant trouvé recueilli par la meunière Madeleine Blanchet, François grandit auprès d'elle puis, devenu homme, finit par l'épouser.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -1721,7 +1721,7 @@
        "certitude": "haute",
        "remarque": "Pierre Mardaga éditeur",
        "resume": "Monographie consacrée à Louis Süe, architecte et décorateur français majeur de l'Art déco.",
-       "categorie": "",
+       "categorie": "Art",
        "origine": "ia"
       },
       {
@@ -1754,7 +1754,7 @@
        "certitude": "moyenne",
        "remarque": "partiellement caché",
        "resume": "Recueil de photographies humoristiques en noir et blanc consacrées aux chiens et à leurs maîtres, saisis avec tendresse et ironie.",
-       "categorie": "",
+       "categorie": "Art",
        "origine": "ia"
       },
       {
@@ -1831,7 +1831,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Essai vivant sur le métier de connaisseur en art et l'« œil » qui permet d'attribuer les tableaux, à travers anecdotes et grands experts.",
-       "categorie": "",
+       "categorie": "Art",
        "origine": "ia"
       },
       {
@@ -2062,7 +2062,7 @@
        "certitude": "moyenne",
        "remarque": "Hachette, reliure claire",
        "resume": "",
-       "categorie": "",
+       "categorie": "Science-fiction",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2151,7 +2151,7 @@
        "certitude": "moyenne",
        "remarque": "Robert Laffont",
        "resume": "Abd al-Rahman, dernier prince omeyyade, échappe au massacre des Abbassides et fuit jusqu'en Espagne pour y fonder un royaume.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2196,7 +2196,7 @@
        "certitude": "moyenne",
        "remarque": "Nelson, titre peu lisible",
        "resume": "Récits consacrés aux animaux sauvages d'Afrique, observés dans leur milieu naturel et leurs rapports avec l'homme.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2285,7 +2285,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 1173",
        "resume": "Harry est inscrit malgré lui au Tournoi des Trois Sorciers, qui s'achève par le retour de Voldemort.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2308,7 +2308,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 1006",
        "resume": "Harry apprend que Sirius Black, évadé d'Azkaban, le traquerait, avant de découvrir la vérité sur la mort de ses parents.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2353,7 +2353,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche Jeunesse",
        "resume": "Zézé, petit garçon pauvre et espiègle du Brésil, confie ses peines à un oranger et se lie d'amitié avec un vieil homme.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2376,7 +2376,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 65",
        "resume": "Charlie, sa famille et Willy Wonka sont projetés en orbite dans l'ascenseur de verre et affrontent des créatures extraterrestres.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2399,7 +2399,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche Jeunesse 408",
        "resume": "Zézé, adolescent adopté par une famille aisée, surmonte sa solitude grâce à son imaginaire et à ses amis secrets.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2466,7 +2466,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 476",
        "resume": "Le jeune détective Sans Atout enquête sur un mystérieux cheval fantôme dont le galop résonne la nuit autour du château familial.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2489,7 +2489,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 491",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2512,7 +2512,7 @@
        "certitude": "moyenne",
        "remarque": "Lire en anglais",
        "resume": "Recueil de nouvelles à chute, grinçantes et ironiques, où escroqueries et manipulations se retournent souvent contre leurs auteurs.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2557,7 +2557,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 463",
        "resume": "Georges concocte une potion avec tout ce qu'il trouve pour guérir sa grand-mère acariâtre, qui se met à grandir démesurément.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2580,7 +2580,7 @@
        "certitude": "moyenne",
        "remarque": "titre partiellement lisible",
        "resume": "Un parieur invétéré perd son pari quand un étranger leste sa grenouille sauteuse de plomb de chasse.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2603,7 +2603,7 @@
        "certitude": "faible",
        "remarque": "couché derrière, peu lisible",
        "resume": "Jeu de stratégie en temps réel où l'on développe une civilisation médiévale, de l'âge sombre à l'âge impérial.",
-       "categorie": "",
+       "categorie": "Pratique",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2670,7 +2670,7 @@
        "certitude": "haute",
        "remarque": "Folio Junior 800",
        "resume": "Pour apprendre l'anglais, Kamo correspond via une mystérieuse agence avec Cathy, dont les lettres semblent venir d'une autre époque.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -2715,7 +2715,7 @@
        "certitude": "haute",
        "remarque": "Flammarion 654",
        "resume": "Nils, garçon cruel rapetissé par un lutin, parcourt la Suède sur le dos d'une oie et apprend le respect des animaux.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -3666,7 +3666,7 @@
        "auteur": "Nov’edit",
        "annee": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Histoire",
        "remarque": "",
        "certitude": "haute",
        "id": "mugl3i5e36t2y",
@@ -3681,7 +3681,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Documentaires",
        "origine": "appoint",
        "vues": [
         {
@@ -3724,7 +3724,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Documentaires",
        "origine": "appoint",
        "vues": [
         {
@@ -3830,7 +3830,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "appoint",
        "vues": [
         {
@@ -3978,7 +3978,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "XIII poursuit l'élucidation de son passé et se retrouve mêlé à des complots liés aux services secrets américains.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4168,7 +4168,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "XIII, infiltré dans les forces spéciales SPADS, poursuit sa quête d'identité en affrontant les conspirateurs.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4277,7 +4277,7 @@
        "auteur": "René Gosciny",
        "annee": "1965",
        "resume": "Astérix et Obélix parient de faire le tour de la Gaule en rapportant des spécialités culinaires de chaque région.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "remarque": "",
        "certitude": "haute",
        "id": "mugohy48fr3l0",
@@ -4289,7 +4289,7 @@
        "auteur": "René Gosciny",
        "annee": "1964",
        "resume": "Astérix et Obélix se rendent à Rome pour délivrer le barde Assurancetourix, capturé pour être livré aux lions.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "remarque": "",
        "certitude": "haute",
        "id": "mugojgtpygbm0",
@@ -4331,7 +4331,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un village gaulois coupé en deux par un fossé voit deux chefs rivaux s'affronter, sur fond d'amour entre leurs enfants.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4386,7 +4386,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un bébé mystérieux déposé au village gaulois s'avère être le fils de César, recherché par Brutus.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4441,7 +4441,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix et Obélix partent en Helvétie chercher une edelweiss pour guérir un questeur empoisonné.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4463,7 +4463,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix et Obélix voyagent en Inde sur un tapis volant pour faire tomber la pluie et sauver la princesse Rahàzade.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4533,7 +4533,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix et Obélix partent au Moyen-Orient chercher du pétrole indispensable à la potion magique, poursuivis par un espion romain.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4621,7 +4621,7 @@
        "auteur": "René Gosciny",
        "annee": "1971",
        "resume": "César fait construire une résidence romaine près du village gaulois pour assimiler ses habitants ; Astérix déjoue le projet.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "remarque": "",
        "certitude": "haute",
        "id": "mugokzis3zg7w",
@@ -4636,7 +4636,7 @@
        "certitude": "faible",
        "remarque": "",
        "resume": "César fait construire une résidence romaine près du village gaulois pour assimiler ses habitants ; Astérix déjoue le projet.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4658,7 +4658,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix et Obélix s'engagent dans la légion romaine pour retrouver le fiancé de Falbala, envoyé en Afrique.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4722,7 +4722,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix et Obélix participent aux Jeux olympiques en Grèce, où la potion magique est interdite comme dopage.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4786,7 +4786,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix, Obélix et Panoramix aident l'architecte Numérobis à bâtir en trois mois un palais pour Cléopâtre.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4835,7 +4835,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4857,7 +4857,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Astérix, accusé d'avoir laissé voler l'argent confié dans un chaudron, est banni et doit trouver de quoi le remplir pour laver son honneur.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -4918,7 +4918,7 @@
        "auteur": "René Gosciny",
        "annee": "1963",
        "resume": "Panoramix est enlevé par les Goths ; Astérix et Obélix le libèrent en semant la discorde entre chefs goths.",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "remarque": "",
        "certitude": "haute",
        "id": "mugolxwmmas06",
@@ -4933,7 +4933,7 @@
        "certitude": "faible",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Bandes dessinées",
        "origine": "appoint",
        "vues": [
         {
@@ -5137,7 +5137,7 @@
        "certitude": "haute",
        "remarque": "Babel Noir n°291",
        "resume": "Muté dans le quartier de Nihonbashi, l'inspecteur Kaga enquête sur le meurtre d'une femme en interrogeant patiemment commerçants et voisins.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -5160,7 +5160,7 @@
        "certitude": "haute",
        "remarque": "Folio Policier n°970",
        "resume": "Les inspecteurs Griessel et Cupido enquêtent sur la mort d'une Américaine, experte en art, retrouvée au bord d'une route sud-africaine.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -5183,7 +5183,7 @@
        "certitude": "haute",
        "remarque": "Points Policier P1939",
        "resume": "À Shanghai, l'inspecteur Chen traque un tueur en série qui abandonne ses victimes vêtues de robes mandarines rouges.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -5206,7 +5206,7 @@
        "certitude": "haute",
        "remarque": "Pocket n°11264",
        "resume": "Le commissaire Montalbano enquête sur la mort d'un notable politique retrouvé dans une voiture sur un terrain vague mal famé.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -5229,7 +5229,7 @@
        "certitude": "haute",
        "remarque": "Pocket n°11390",
        "resume": "Montalbano enquête sur le meurtre d'une jeune femme retrouvée nue dans une villa, affaire liée à un mystérieux violon.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -5252,7 +5252,7 @@
        "certitude": "haute",
        "remarque": "Pocket n°11391",
        "resume": "Montalbano relie la mort d'un pêcheur tunisien à celle d'un vieil homme, en protégeant un petit garçon qui vole des goûters.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -5275,7 +5275,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité",
        "resume": "Hospitalisé après une attaque, un magnat de la presse parisienne fait le bilan de sa vie depuis son lit.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5298,7 +5298,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité",
        "resume": "Un homme, amant d'une amie d'enfance, se retrouve accusé avec elle du meurtre de leurs conjoints respectifs.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5321,7 +5321,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité, tranche abîmée",
        "resume": "Recueil de nouvelles de Simenon explorant des destins ordinaires et des drames psychologiques.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5344,7 +5344,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité, ancien",
        "resume": "À New York, un acteur français déchu et une femme solitaire vivent une passion inquiète entre chambres d'hôtel et bars.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5364,7 +5364,7 @@
        "auteur": "Simenon",
        "annee": "1962",
        "resume": "Le narrateur relate les funérailles de son oncle et les querelles d'héritage d'une famille bourgeoise provinciale.",
-       "categorie": "",
+       "categorie": "Romans français",
        "remarque": "",
        "certitude": "haute",
        "rang": "derriere",
@@ -5380,7 +5380,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité",
        "resume": "En Arizona, un avocat respectable voit revenir son frère évadé de prison, ravivant une rivalité fraternelle destructrice.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5409,7 +5409,7 @@
        "certitude": "moyenne",
        "remarque": "titre partiellement effacé",
        "resume": "Souvenirs d'enfance et de famille à Liège, écrits par Simenon à l'intention de son fils.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5438,7 +5438,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Un célèbre acteur vieillissant, se sachant cardiaque, affronte ses remords et le bilan de son existence.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -5461,7 +5461,7 @@
        "certitude": "haute",
        "remarque": "n°40",
        "resume": "Après l'agression de l'inspecteur Lognon, Maigret remonte une piste menant à un trafic de faux tableaux.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5490,7 +5490,7 @@
        "certitude": "moyenne",
        "remarque": "Gallimard, tranche verte",
        "resume": "Un enfant observe depuis sa fenêtre un anarchiste caché en face, dans une petite ville de province.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5519,7 +5519,7 @@
        "certitude": "haute",
        "remarque": "n°44",
        "resume": "Le portefeuille de Maigret est volé par un jeune homme désemparé dont l'épouse vient d'être assassinée.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5548,7 +5548,7 @@
        "certitude": "haute",
        "remarque": "n°23, Presses de la Cité",
        "resume": "Maigret reconstitue la vie solitaire d'une jeune femme retrouvée morte en robe du soir dans une rue parisienne.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5577,7 +5577,7 @@
        "certitude": "haute",
        "remarque": "Librairie Arthème Fayard",
        "resume": "À Nantes, un jeune journaliste en révolte contre sa famille se perd dans la vie nocturne d'un cabaret.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5606,7 +5606,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Sur la Côte d'Azur, un hôtelier dominé par sa femme prépare minutieusement son empoisonnement pour un dimanche.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -5629,7 +5629,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Un médecin cherche à comprendre le suicide apparent de son ami Bob, homme jovial en apparence.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -5652,7 +5652,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité",
        "resume": "Maigret enquête sur un clochard, ancien médecin, jeté dans la Seine et qui refuse de parler.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5681,7 +5681,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Aux États-Unis, un homme ivre au volant voit sa femme le quitter et croise un évadé dangereux.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -5704,7 +5704,7 @@
        "certitude": "haute",
        "remarque": "n°25, Presses de la Cité",
        "resume": "Un corps démembré repêché dans le canal Saint-Martin conduit Maigret vers une énigmatique patronne de bistrot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5733,7 +5733,7 @@
        "certitude": "haute",
        "remarque": "Presses Pocket n°135",
        "resume": "Un inconnu se suicide sous les yeux de Maigret, qui découvre un sombre secret d'anciens étudiants liégeois.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5762,7 +5762,7 @@
        "certitude": "haute",
        "remarque": "n°50",
        "resume": "Le commissaire Maigret enquête sur le meurtre énigmatique d'un marchand d'art parisien sans ennemis connus.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5791,7 +5791,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Un vieil homme meurt sur les quais de Paris, et son identité se révèle multiple et mystérieuse.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5814,7 +5814,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Maigret enquête sur le meurtre d'un vieil ambassadeur retraité dans un milieu aristocratique fermé.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5837,7 +5837,7 @@
        "certitude": "haute",
        "remarque": "n°27",
        "resume": "À Cannes, une strip-teaseuse vieillissante voit sa place menacée par l'arrivée d'une jeune rivale.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5860,7 +5860,7 @@
        "certitude": "haute",
        "remarque": "n°49",
        "resume": "Maigret enquête sur l'assassinat d'un riche négociant en vins, homme brutal et détesté de son entourage.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5883,7 +5883,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Un homme traqué et désespéré s'enferme dans une chambre d'hôtel en attendant son issue tragique.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5906,7 +5906,7 @@
        "certitude": "moyenne",
        "remarque": "Le Livre de Poche",
        "resume": "Une jeune femme perdue, chassée par sa belle-famille, est recueillie par une inconnue dans un restaurant de Versailles.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5929,7 +5929,7 @@
        "certitude": "moyenne",
        "remarque": "n°2914",
        "resume": "Maigret enquête sur un représentant tué dans un hôtel de Sancerre et découvre sa double vie.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5952,7 +5952,7 @@
        "certitude": "haute",
        "remarque": "Folio policier n°769",
        "resume": "Recueil de nouvelles situées sous les tropiques et dans des contrées lointaines.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5975,7 +5975,7 @@
        "certitude": "haute",
        "remarque": "Folio n°1175",
        "resume": "Un pêcheur de Fécamp défend son frère jumeau accusé d'un meurtre lié au naufrage ancien du Télémaque.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -5998,7 +5998,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Un ministre compromis par la disparition d'un rapport sur l'effondrement d'un sanatorium sollicite l'aide de Maigret.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6021,7 +6021,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "À Concarneau, des notables sont victimes d'attentats tandis qu'un mystérieux chien jaune rôde en ville.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6044,7 +6044,7 @@
        "certitude": "haute",
        "remarque": "Folio n°665",
        "resume": "Une épouse empoisonne son mari à l'arsenic ; celui-ci, survivant, cherche à comprendre les raisons de son geste.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6067,7 +6067,7 @@
        "certitude": "moyenne",
        "remarque": "lecture de la tranche",
        "resume": "",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6090,7 +6090,7 @@
        "certitude": "moyenne",
        "remarque": "Le Livre de Poche",
        "resume": "À Batoum, un consul turc découvre la surveillance et l'oppression du régime soviétique, et une trahison intime.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6113,7 +6113,7 @@
        "certitude": "moyenne",
        "remarque": "Le Livre de Poche",
        "resume": "",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6136,7 +6136,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Place des Vosges, Maigret enquête sur un industriel tué près de son coffre-fort pillé.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6159,7 +6159,7 @@
        "certitude": "haute",
        "remarque": "Le Masque",
        "resume": "Hercule Poirot enquête sur un meurtre commis dans l'Orient-Express bloqué par la neige, parmi des passagers tous suspects.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6182,7 +6182,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche n°628",
        "resume": "Une voyageuse voit un étranglement depuis un train ; Miss Marple fait enquêter dans un manoir familial.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6205,7 +6205,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Lors d'une croisière sur le Nil, Hercule Poirot enquête sur le meurtre d'une riche héritière jeune mariée.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6228,7 +6228,7 @@
        "certitude": "haute",
        "remarque": "Rivages/Noir n°100",
        "resume": "Deux policiers de Los Angeles sont obsédés par le meurtre atroce d'une jeune actrice en 1947.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -6614,7 +6614,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Arsène Lupin enquête sur un mystère complexe impliquant une jeune femme aux yeux verts, des secrets de famille et un trésor caché.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -6637,7 +6637,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Arsène Lupin, sous l'identité de l'agence Barnett, résout des énigmes et déjoue des criminels avec son intelligence et son sens de la mise en scène.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -6660,7 +6660,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Arsène Lupin est confronté à un mystère maritime et à des intrigues complexes autour d'un château et de ses secrets.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -6683,7 +6683,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "L'histoire vraie de l'espion du KGB Oleg Gordievsky, qui a secrètement travaillé pour le MI6, et de son exfiltration audacieuse de l'URSS.",
-       "categorie": "",
+       "categorie": "Histoire",
        "origine": "appoint",
        "vues": [
         {
@@ -6816,7 +6816,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "appoint",
        "vues": [
         {
@@ -6839,7 +6839,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Des enfants, témoins d'un meurtre, sont traqués par les assassins, créant une atmosphère de suspense et de terreur.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -6862,7 +6862,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman qui explore la simplicité et la profondeur de la vie à travers les yeux d'un personnage singulier, porteur d'une sagesse inattendue.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -6929,7 +6929,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme se retrouve mêlé à une intrigue criminelle complexe, entre trahisons, meurtres et quête de justice.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -6974,7 +6974,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme est entraîné dans un jeu dangereux de chantage et de meurtre, où chaque décision peut être fatale.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7240,7 +7240,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme est entraîné dans une série de crimes et de trahisons, où sa survie dépend de sa capacité à déjouer ses ennemis.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7307,7 +7307,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman policier où l'inspecteur Bénévent enquête sur des meurtres liés à des femmes imprudentes et leurs secrets.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7330,7 +7330,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Une enquête du commissaire San-Antonio où Bérurier joue les médecins, mêlant action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7353,7 +7353,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7376,7 +7376,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7399,7 +7399,7 @@
        "certitude": "faible",
        "remarque": "",
        "resume": "Bérurier et son épouse Berthe partent en croisière en Méditerranée, prétexte à une satire burlesque des vacances et des touristes.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7422,7 +7422,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un thriller d'espionnage haletant où l'agent secret OSS 117 est plongé dans une mission dangereuse en Afrique, mêlant chasse et complots.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "appoint",
        "vues": [
         {
@@ -7445,7 +7445,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "L'agent OSS 117 est confronté à un piège diabolique et doit déjouer une conspiration internationale pour sauver sa vie et la paix.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "appoint",
        "vues": [
         {
@@ -7468,7 +7468,7 @@
        "certitude": "faible",
        "remarque": "",
        "resume": "OSS 117 est envoyé en mission pour empêcher un complot visant à déclencher une guerre mondiale, affrontant des ennemis impitoyables.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "appoint",
        "vues": [
         {
@@ -7491,7 +7491,7 @@
        "certitude": "moyenne",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7514,7 +7514,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7537,7 +7537,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7560,7 +7560,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une aventure où Bérurier se retrouve en rivalité avec le commissaire San-Antonio, sur fond d'humour et d'argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7583,7 +7583,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Une enquête du commissaire San-Antonio et de Bérurier aux accents asiatiques, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7606,7 +7606,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -7629,7 +7629,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7652,7 +7652,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7675,7 +7675,7 @@
        "certitude": "haute",
        "remarque": "Fleuve Noir Police",
        "resume": "Une enquête du commissaire San-Antonio, entre action, humour et argot.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7698,7 +7698,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret Hubert Bonisseur de La Bath, alias OSS 117.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7721,7 +7721,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret OSS 117 en Suisse, à Lausanne.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7744,7 +7744,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret OSS 117 impliquant trois Maltaises.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7767,7 +7767,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret OSS 117 à Taïwan, à Taipei.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7790,7 +7790,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret OSS 117 en Allemagne, à Francfort.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7813,7 +7813,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret OSS 117 en Tunisie.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7836,7 +7836,7 @@
        "certitude": "haute",
        "remarque": "Collection OSS 117",
        "resume": "Une mission de l'agent secret OSS 117 à Hong Kong.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7859,7 +7859,7 @@
        "certitude": "haute",
        "remarque": "Édition ancienne",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7882,7 +7882,7 @@
        "certitude": "haute",
        "remarque": "Série Noire",
        "resume": "Max le Menteur, truand vieillissant, doit protéger son butin d'or et son ami Riton face à une bande rivale.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7905,7 +7905,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Vivienne, jeune Canadienne gardant un motel isolé, est menacée par deux gangsters avant l'arrivée providentielle de James Bond.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "appoint",
        "vues": [
         {
@@ -7928,7 +7928,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "James Bond affronte au baccara Le Chiffre, trésorier d'un réseau soviétique, pour le ruiner dans un casino de la côte française.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7951,7 +7951,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "James Bond est envoyé à Paris pour enquêter sur une affaire d'espionnage impliquant une organisation criminelle et une femme fatale.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7974,7 +7974,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "Le SPECTRE vole deux bombes atomiques et fait chanter l'Occident ; James Bond affronte Emilio Largo aux Bahamas.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -7997,7 +7997,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "James Bond affronte Mr Big, gangster lié au vaudou et au SMERSH, de Harlem jusqu'en Jamaïque.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8020,7 +8020,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "James Bond traque Blofeld jusqu'à son repaire alpin suisse, puis épouse Tracy, assassinée le jour même de leurs noces.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8043,7 +8043,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "En Jamaïque, James Bond découvre l'île du Dr No, savant criminel qui sabote les lancements de fusées américaines.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8066,7 +8066,7 @@
        "certitude": "haute",
        "remarque": "Collection James Bond 007",
        "resume": "Au Japon, James Bond affronte Blofeld dans son jardin de la mort, puis perd la mémoire et vit parmi des pêcheurs.",
-       "categorie": "",
+       "categorie": "Espionnage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8089,7 +8089,7 @@
        "certitude": "haute",
        "remarque": "Série Noire",
        "resume": "Un détective privé se retrouve mêlé à une affaire complexe de meurtre et de chantage, naviguant entre trahisons et fausses pistes.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8112,7 +8112,7 @@
        "certitude": "haute",
        "remarque": "Collection noire",
        "resume": "Le détective Mike Hammer est entraîné dans une enquête brutale et violente, cherchant à venger un ami assassiné dans le milieu criminel.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8135,7 +8135,7 @@
        "certitude": "haute",
        "remarque": "Le Masque",
        "resume": "Lord Peter Wimsey enquête sur un meurtre survenu lors d'une soirée mondaine, démêlant les secrets et les motivations des invités.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8158,7 +8158,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Un détective privé est engagé pour retrouver un homme disparu, mais l'enquête le mène vers un réseau de mensonges et de dangers.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -8181,7 +8181,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Roman épistolaire où lettres et documents révèlent peu à peu l'empoisonnement d'un homme par des champignons au sein d'un ménage malheureux.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "appoint",
        "vues": [
         {
@@ -8204,7 +8204,7 @@
        "certitude": "haute",
        "remarque": "Carré Noir",
        "resume": "Un roman noir dépeignant la descente aux enfers d'un homme pris dans l'engrenage de la violence et du désespoir à Hollywood.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8227,7 +8227,7 @@
        "certitude": "haute",
        "remarque": "Collection 10/18",
        "resume": "Harry White, jeune cadre new-yorkais, est rongé par des obsessions sexuelles qui le mènent progressivement jusqu'au crime.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8250,7 +8250,7 @@
        "certitude": "haute",
        "remarque": "Rivages/Noir",
        "resume": "Dans le Paris de 1870, un tueur inspiré par les Chants de Maldoror sème la mort tandis qu'un policier le traque.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8273,7 +8273,7 @@
        "certitude": "moyenne",
        "remarque": "Éditions Costantini",
        "resume": "Le commissaire Michele Balistreri enquête sur une série de meurtres mystérieux liés à une partition musicale énigmatique et un passé trouble.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8296,7 +8296,7 @@
        "certitude": "moyenne",
        "remarque": "Dorothée Chifflot",
        "resume": "Ce roman explore le quotidien perturbé d'une femme à la suite d'un événement inattendu.",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -8481,7 +8481,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Récit autobiographique d'Anne, jeune détenue, entre prisons, projets d'évasion et amour pour Julien, lui aussi incarcéré.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -8503,7 +8503,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Récit autobiographique de la formation de l'auteur dans une école prussienne de cadets pendant la Première Guerre mondiale.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -8581,7 +8581,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Trois générations de la famille von Trotta accompagnent le déclin de l'Empire austro-hongrois jusqu'à la Première Guerre mondiale.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -8600,7 +8600,7 @@
        "auteur": "",
        "annee": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "remarque": "",
        "certitude": "haute",
        "id": "muims3yn70hzh",
@@ -8615,7 +8615,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "À Paris en 1938-1939, Ravic, chirurgien allemand réfugié clandestin, vit un amour tourmenté et cherche à se venger d'un tortionnaire nazi.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -8637,7 +8637,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Bénédicte Ombredanne, lectrice admirative d'un écrivain, lui confie sa vie conjugale étouffante sous l'emprise d'un mari pervers.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -8659,7 +8659,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Après la mort de leur mère, les frères Neshov affrontent l'héritage de la ferme familiale et les secrets du passé en Norvège.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -8681,7 +8681,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Troisième volet de la saga Neshov : Torunn hésite à reprendre la ferme familiale norvégienne et ses lourdes responsabilités.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -8703,7 +8703,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "La mort prochaine de leur mère réunit dans la ferme familiale trois frères norvégiens que tout oppose, révélant de lourds secrets.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -8722,7 +8722,7 @@
        "auteur": "Raymond Radiguet",
        "annee": "1924",
        "resume": "Dans la haute société d'après-guerre, la comtesse Mahaut d'Orgel et le jeune François de Séryeuse s'aiment en secret sans céder.",
-       "categorie": "",
+       "categorie": "Romans français",
        "remarque": "",
        "certitude": "haute",
        "id": "muimxul30l3gq",
@@ -8737,7 +8737,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le destin des auteurs d'un rapport alarmiste sur les limites de la croissance, publié dans les années 1970, et leurs choix divergents.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -8759,7 +8759,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman intime présente les confessions cyniques d'un homme aux prises avec ses faiblesses morales.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -8781,7 +8781,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce livre dépeint la vie rude et la foi des habitants d'une île bretonne battue par les tempêtes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -8837,7 +8837,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Premier livre de Proust, recueil de nouvelles, poèmes et portraits mondains évoquant l'amour, la jalousie et la vanité.",
-       "categorie": "",
+       "categorie": "Romans français",
        "statut": "acquis",
        "temoins": []
       },
@@ -9349,7 +9349,7 @@
        "certitude": "haute",
        "remarque": "J'ai Lu",
        "resume": "Trois générations d'une famille de harkis, de l'Algérie coloniale à la France contemporaine, face à l'héritage du silence.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9372,7 +9372,7 @@
        "certitude": "moyenne",
        "remarque": "titre partiellement masqué",
        "resume": "Témoignage sur la vie d'une geisha japonaise, son apprentissage et son quotidien.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9395,7 +9395,7 @@
        "certitude": "haute",
        "remarque": "Actes Sud / L'Aire",
        "resume": "Récit de voyage et reportage le long du Grand Canal chinois, à la rencontre de ses habitants.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9418,7 +9418,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche 811-812",
        "resume": "Récit autobiographique de l'enfance et de l'adolescence d'un jeune Noir confronté au racisme dans le Sud américain.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9441,7 +9441,7 @@
        "certitude": "haute",
        "remarque": "Folio classique 2643",
        "resume": "Une journée à Londres de Clarissa Dalloway préparant une réception, entremêlée aux pensées d'un vétéran traumatisé.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9464,7 +9464,7 @@
        "certitude": "haute",
        "remarque": "Folio 5198",
        "resume": "Une interne ambitieuse découvre, auprès d'un médecin atypique, une gynécologie à l'écoute des femmes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9487,7 +9487,7 @@
        "certitude": "haute",
        "remarque": "10/18 n°2507",
        "resume": "Dans une plantation du Sud, une famille se déchire autour d'un patriarche mourant et d'un fils alcoolique.",
-       "categorie": "",
+       "categorie": "Théâtre",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9510,7 +9510,7 @@
        "certitude": "haute",
        "remarque": "poche n°674",
        "resume": "Un chiromancien prédit un meurtre à Lord Arthur, qui cherche à l'accomplir avant son mariage.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9533,7 +9533,7 @@
        "certitude": "haute",
        "remarque": "Folio 2261",
        "resume": "Un psychiatre raconte comment il a guéri de sa cécité hystérique un caporal nommé A.H., futur dictateur.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9556,7 +9556,7 @@
        "certitude": "haute",
        "remarque": "Picquier poche",
        "resume": "",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9579,7 +9579,7 @@
        "certitude": "haute",
        "remarque": "poche n°1297, jauni",
        "resume": "Le médecin Sinouhé raconte sa vie mouvementée dans l'Égypte du pharaon Akhénaton (premier tome).",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9602,7 +9602,7 @@
        "certitude": "haute",
        "remarque": "poche n°1298, jauni",
        "resume": "Suite des mémoires de Sinouhé, entre chute d'Akhénaton, guerres et désillusions d'un médecin exilé.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9625,7 +9625,7 @@
        "certitude": "haute",
        "remarque": "Points P2640",
        "resume": "Dans le Kentucky des années 1930, une femme enquête sur des loups massacrés, révélant racisme et secrets.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9648,7 +9648,7 @@
        "certitude": "haute",
        "remarque": "Actes Sud",
        "resume": "Récit de la guerre d'Indochine et de ses coulisses politiques et financières jusqu'à la défaite française.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9671,7 +9671,7 @@
        "certitude": "haute",
        "remarque": "Babel 1783",
        "resume": "Les grands industriels allemands financent Hitler en 1933, prélude à l'Anschluss ; prix Goncourt 2017.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9694,7 +9694,7 @@
        "certitude": "moyenne",
        "remarque": "10/18 208-209, usé",
        "resume": "Des personnages loufoques partent en Exopotamie construire une absurde ligne de chemin de fer dans le désert.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9717,7 +9717,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche 14087",
        "resume": "Colin épouse Chloé, qui tombe malade d'un nénuphar poussant dans son poumon, tandis que leur monde se rétrécit.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9740,7 +9740,7 @@
        "certitude": "haute",
        "remarque": "10/18 n°517",
        "resume": "Recueil de poèmes ludiques et grinçants mêlant humour, jeux de langage et mélancolie.",
-       "categorie": "",
+       "categorie": "Poésie",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9763,7 +9763,7 @@
        "certitude": "haute",
        "remarque": "10/18 n°497",
        "resume": "Roman de jeunesse burlesque et parodique, enchaînant aventures absurdes et jeux de mots.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9786,7 +9786,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche",
        "resume": "Wolf construit une machine pour explorer son passé et se libérer de ses souvenirs.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9809,7 +9809,7 @@
        "certitude": "moyenne",
        "remarque": "Livre de Poche 1798",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9832,7 +9832,7 @@
        "certitude": "haute",
        "remarque": "poche n°410",
        "resume": "Chronique d'un vieux cargo et de son équipage, entre vie maritime rude et destins humains.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9855,7 +9855,7 @@
        "certitude": "haute",
        "remarque": "J'ai Lu 501",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9878,7 +9878,7 @@
        "certitude": "haute",
        "remarque": "Points P5944",
        "resume": "En Californie, en 1959, une femme au foyer disparaît ; sa femme de ménage noire mène l'enquête.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9901,7 +9901,7 @@
        "certitude": "haute",
        "remarque": "poche n°29",
        "resume": "Portrait d'Edmond Teste, esprit pur voué à l'observation de sa propre pensée.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9924,7 +9924,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche 36861",
        "resume": "Cassie Raven, technicienne de morgue à Londres qui « parle » aux morts, enquête sur une mort suspecte.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9947,7 +9947,7 @@
        "certitude": "haute",
        "remarque": "Babel 624",
        "resume": "Un soldat de 1918, privé de membres et de visage, lutte pour communiquer depuis son lit d'hôpital.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9970,7 +9970,7 @@
        "certitude": "haute",
        "remarque": "J'ai Lu 344",
        "resume": "Premier tome d'une saga : la famille bourgeoise parisienne d'un avocat réputé et ses enfants en quête d'eux-mêmes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -9993,7 +9993,7 @@
        "certitude": "haute",
        "remarque": "J'ai Lu 345",
        "resume": "Deuxième tome (La Faim des lionceaux) : les enfants Eygletière s'émancipent entre révoltes et désillusions.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -10016,7 +10016,7 @@
        "certitude": "haute",
        "remarque": "J'ai Lu 346",
        "resume": "Dernier tome (La Malandre) : la famille Eygletière se délite sous le poids des drames et rancœurs.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -10039,7 +10039,7 @@
        "certitude": "haute",
        "remarque": "poche n°180",
        "resume": "Des Russes emportés par la Révolution et la guerre civile, suite de la saga « Tant que la terre durera ».",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -10062,7 +10062,7 @@
        "certitude": "haute",
        "remarque": "poche n°181",
        "resume": "Suite : exil et épreuves des personnages russes pris dans la tourmente révolutionnaire.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -10085,7 +10085,7 @@
        "certitude": "haute",
        "remarque": "poche n°201",
        "resume": "Suite et fin de la saga : les émigrés russes à Paris vivent l'exil et la nostalgie.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -10108,7 +10108,7 @@
        "certitude": "haute",
        "remarque": "poche n°200",
        "resume": "Les émigrés russes installés en France peinent à reconstruire leur vie, dernière partie de « Tant que la terre durera ».",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -10131,7 +10131,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Un jeune bourgeois communiste est chargé d'assassiner un dirigeant du parti jugé trop conciliant.",
-       "categorie": "",
+       "categorie": "Théâtre",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10155,7 +10155,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Pendant la crise de Munich de septembre 1938, des personnages vivent l'attente angoissée de la guerre.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -10178,7 +10178,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Enquête immersive sur la Camorra napolitaine, ses trafics, sa violence et son emprise sur l'économie italienne et mondiale.",
-       "categorie": "",
+       "categorie": "Essais",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10202,7 +10202,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Un jeune avocat berlinois défend un Italien meurtrier d'un industriel et découvre un passé nazi et une faille juridique d'après-guerre.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10226,7 +10226,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Un homme d'affaires chinois raconte ses dix enfants, dont l'existence interroge la politique de l'enfant unique et la sagesse confucéenne.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10250,7 +10250,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "La vie simple et digne d'Andreas Egger, homme de peine dans les Alpes autrichiennes, traversant le XXe siècle.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10274,7 +10274,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Dans la Vienne des années 1960, Robert Simon ouvre un petit café qui devient le refuge d'habitués du quartier.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10298,7 +10298,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Une journaliste partage le quotidien d'une famille de libraire à Kaboul après la chute des talibans, révélant le sort des femmes.",
-       "categorie": "",
+       "categorie": "Essais et témoignages",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10322,7 +10322,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Iris, blessée dans un attentat à Jérusalem, retrouve par hasard son premier amour, ravivant passion, douleur et remise en question familiale.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10346,7 +10346,7 @@
        "certitude": "faible",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -10369,7 +10369,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "",
-       "categorie": "",
+       "categorie": "Science-fiction",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10399,7 +10399,7 @@
        "certitude": "haute",
        "remarque": "J'ai lu",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10435,7 +10435,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Une femme retourne en Bretagne vendre la maison familiale et revit les souvenirs douloureux de son enfance et de ses parents.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10471,7 +10471,7 @@
        "certitude": "haute",
        "remarque": "Rivages poche",
        "resume": "Chronique d'une famille de fermiers de l'Iowa, les Langdon, de 1920 aux années 1950, premier volet d'une trilogie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10507,7 +10507,7 @@
        "certitude": "haute",
        "remarque": "10/18",
        "resume": "Une journée ordinaire d'un détenu dans un camp du Goulag stalinien, entre froid, faim, travail forcé et petites victoires.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10543,7 +10543,7 @@
        "certitude": "haute",
        "remarque": "folio classique",
        "resume": "Un médecin londonien crée une potion qui libère son double maléfique, Mr Hyde, dont il perd peu à peu le contrôle.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10573,7 +10573,7 @@
        "certitude": "haute",
        "remarque": "J'ai lu",
        "resume": "Sur une île isolée, un bulldozer habité par une entité malveillante se retourne contre les ouvriers d'un chantier.",
-       "categorie": "",
+       "categorie": "Science-fiction",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10603,7 +10603,7 @@
        "certitude": "haute",
        "remarque": "J'ai lu",
        "resume": "Un enfant fugueur recueilli par un cirque découvre sa nature liée à d'étranges cristaux vivants capables de créer des êtres.",
-       "categorie": "",
+       "categorie": "Science-fiction",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10627,7 +10627,7 @@
        "certitude": "haute",
        "remarque": "10/18",
        "resume": "Un serveur de Bombay gagne un jeu télévisé ; chaque réponse s'explique par un épisode de sa vie mouvementée.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10651,7 +10651,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -10674,7 +10674,7 @@
        "certitude": "haute",
        "remarque": "Points",
        "resume": "Le prince Salina assiste au déclin de l'aristocratie sicilienne pendant l'unification italienne et l'ascension de la bourgeoisie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10698,7 +10698,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Les passagers d'un vol Paris-New York découvrent qu'ils existent en double après une mystérieuse turbulence.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10722,7 +10722,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Premier volume du théâtre de Tchekhov, réunissant ses pièces sur l'ennui, les espoirs déçus et la société russe.",
-       "categorie": "",
+       "categorie": "Théâtre",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10752,7 +10752,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Après une grave chute, l'auteur traverse la France à pied par les petits chemins, du Mercantour au Cotentin.",
-       "categorie": "",
+       "categorie": "Voyage",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10782,7 +10782,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Recueil de nouvelles cruelles et ironiques où des personnages voient leurs plans basculer par un retournement du sort.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10812,7 +10812,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche",
        "resume": "Eilis, installée à Long Island, apprend la trahison de son mari et retourne en Irlande où resurgit un ancien amour.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10842,7 +10842,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Dans un train, un homme raconte comment la jalousie l'a conduit à tuer sa femme, soupçonnée d'aimer un violoniste.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10872,7 +10872,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Un vieux cheval pie raconte sa vie et porte un regard critique sur les hommes et la notion de propriété.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10896,7 +10896,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Juré dans un procès, le prince Nekhlioudov reconnaît la prostituée accusée, qu'il a jadis séduite, et cherche à se racheter.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10920,7 +10920,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Nekhlioudov suit Katioucha jusqu'en Sibérie, découvre l'injustice du système pénal et entame sa rédemption morale.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10944,7 +10944,7 @@
        "certitude": "haute",
        "remarque": "Livre de Poche",
        "resume": "Un comédien hanté par sa lâcheté face à une agression rencontre la mère de la victime et tente de se racheter.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10968,7 +10968,7 @@
        "certitude": "haute",
        "remarque": "10/18",
        "resume": "Ignatius Reilly, érudit obèse et misanthrope de La Nouvelle-Orléans, enchaîne les petits boulots et les catastrophes burlesques.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -10992,7 +10992,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "Récits d'un chasseur parcourant la campagne russe, dépeignant avec compassion la vie des paysans serfs et des propriétaires.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -11016,7 +11016,7 @@
        "certitude": "haute",
        "remarque": "folio",
        "resume": "L'histoire de jumeaux inséparables et de leur oncle homosexuel, méditation sur la gémellité, le monde et les éléments.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -11040,7 +11040,7 @@
        "certitude": "haute",
        "remarque": "Points",
        "resume": "",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -13010,7 +13010,7 @@
        "certitude": "haute",
        "remarque": "Gallimard NRF",
        "resume": "Une ancienne candidate de téléréalité devenue influenceuse voit sa fille disparaître ; une enquêtrice explore l'exposition des enfants sur les réseaux sociaux.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13021,7 +13021,7 @@
        "certitude": "haute",
        "remarque": "JC Lattès",
        "resume": "Un adolescent sombre dans l'alcool, entre parents déchirés, un ami, sa mère et une professeure prisonniers de leurs propres loyautés secrètes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13032,7 +13032,7 @@
        "certitude": "haute",
        "remarque": "JC Lattès",
        "resume": "L'autrice reconstitue la vie de sa mère, Lucile, marquée par les drames familiaux, la bipolarité et un suicide final.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13043,7 +13043,7 @@
        "certitude": "haute",
        "remarque": "L'Âge d'Homme",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13054,7 +13054,7 @@
        "certitude": "haute",
        "remarque": "Gallimard NRF",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13065,7 +13065,7 @@
        "certitude": "haute",
        "remarque": "Édition blanche",
        "resume": "Un Romain arrive à Jérusalem après la crucifixion et enquête sur Jésus, cherchant le secret de son royaume.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -13076,7 +13076,7 @@
        "certitude": "haute",
        "remarque": "Tranche usée",
        "resume": "Le journal d'un homme mystérieux, Jean Ange, qui vit la chute de Constantinople en 1453 et un amour impossible.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -13087,7 +13087,7 @@
        "certitude": "haute",
        "remarque": "Poche pavillons",
        "resume": "Un aristocrate anglais trompé par sa femme perd tout et finit prisonnier d'un excentrique au fin fond de l'Amazonie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -13098,7 +13098,7 @@
        "certitude": "haute",
        "remarque": "Plon édition",
        "resume": "Un archevêque ukrainien, longtemps prisonnier des Soviétiques, est élu pape en pleine guerre froide et affronte une crise mondiale.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -13109,7 +13109,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "Dans le monde du marché de l'art, un marchand est entraîné dans une affaire de faux tableaux, d'argent sale et de manipulation.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -13120,7 +13120,7 @@
        "certitude": "haute",
        "remarque": "Gallimard NRF",
        "resume": "L'autrice retrace la jeunesse de sa mère, fille de François Mauriac, ambulancière dans Berlin détruit en 1945, et sa rencontre amoureuse.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13131,7 +13131,7 @@
        "certitude": "haute",
        "remarque": "Éditions P.O.L",
        "resume": "Portrait d'un médecin généraliste de campagne, Bruno Sachs, raconté à travers les voix de ses patients et proches.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13142,7 +13142,7 @@
        "certitude": "haute",
        "remarque": "Éditions P.O.L",
        "resume": "Un médecin qui aide discrètement les malades en fin de vie à mourir se confie sur son parcours et ses patients.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13153,7 +13153,7 @@
        "certitude": "haute",
        "remarque": "Édition cartonnée",
        "resume": "Un riche trader new-yorkais voit sa vie s'effondrer après un accident dans le Bronx, exploité par médias, politiciens et justice.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       },
       {
@@ -13164,7 +13164,7 @@
        "certitude": "haute",
        "remarque": "Gallimard NRF",
        "resume": "Au XVIe siècle, l'alchimiste et médecin Zénon parcourt l'Europe en quête de savoir, jusqu'à son procès pour hérésie.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13175,7 +13175,7 @@
        "certitude": "haute",
        "remarque": "Gallimard NRF",
        "resume": "Premier volet du Labyrinthe du monde : Yourcenar reconstitue sa lignée maternelle belge et la brève vie de sa mère.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -13186,7 +13186,7 @@
        "certitude": "haute",
        "remarque": "Édition noire",
        "resume": "Un rat raconte sa vie de survie, de violence et de peur parmi les hommes, métaphore saisissante de la condition humaine.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia"
       }
      ],
@@ -13223,7 +13223,7 @@
        "certitude": "haute",
        "remarque": "Éditions JC Lattès",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "vues": [
@@ -13246,7 +13246,7 @@
        "certitude": "haute",
        "remarque": "Denoël",
        "resume": "Recueil posthume de nouvelles dressant des portraits de femmes confrontées à la solitude, au désir et aux bouleversements de leur époque.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13269,7 +13269,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Une jeune Belge employée dans une grande entreprise japonaise subit humiliations et rétrogradations successives jusqu'à devenir préposée aux toilettes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13292,7 +13292,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13315,7 +13315,7 @@
        "certitude": "haute",
        "remarque": "Gallimard, nrf",
        "resume": "Ahasvérus, condamné à errer depuis la Passion du Christ, raconte à un jeune couple à Venise ses pérégrinations à travers les siècles.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13338,7 +13338,7 @@
        "certitude": "haute",
        "remarque": "Éditions du Seuil",
        "resume": "Saga familiale traversant l'histoire de l'empire colonial français et de l'aventure du caoutchouc, de la fin du XIXe siècle aux années 1930.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13361,7 +13361,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Conte poétique célébrant la naissance et la vie des mots, dans la lignée de La grammaire est une chanson douce.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13384,7 +13384,7 @@
        "certitude": "haute",
        "remarque": "Fayard",
        "resume": "Enquête menée autour du monde sur les enjeux de l'eau : pénuries, pollution, partage et géopolitique de la ressource.",
-       "categorie": "",
+       "categorie": "Essais et témoignages",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13407,7 +13407,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Suite des aventures de Joséphine Cortès et de ses filles, entre Paris, Londres et New York, mêlant amours, secrets et ambitions.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13430,7 +13430,7 @@
        "certitude": "haute",
        "remarque": "Éditions de Fallois",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13453,7 +13453,7 @@
        "certitude": "haute",
        "remarque": "Favre",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13476,7 +13476,7 @@
        "certitude": "haute",
        "remarque": "Liana Levi",
        "resume": "Dans le Berlin-Est d'après-guerre, deux amis et une femme croient bâtir un monde nouveau avant que l'idéal ne se fissure.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13499,7 +13499,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "Biographie romancée du peintre Titien, de ses débuts à Venise à sa gloire auprès des princes et des papes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13522,7 +13522,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Roman satirique brossant un portrait mordant de la société américaine, de ses mœurs et de ses élites.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13545,7 +13545,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Roman sur le rédacteur anonyme des discours d'un président de la République, plongé dans les coulisses du pouvoir.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13568,7 +13568,7 @@
        "certitude": "moyenne",
        "remarque": "Omnibus, auteur non visible",
        "resume": "",
-       "categorie": "",
+       "categorie": "Documentaires",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13591,7 +13591,7 @@
        "certitude": "haute",
        "remarque": "Actes Sud",
        "resume": "Une prise d'otages dans une clinique pratiquant l'IVG au Mississippi, racontée heure par heure à rebours.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13614,7 +13614,7 @@
        "certitude": "haute",
        "remarque": "Actes Sud",
        "resume": "Une femme revient en Argentine vingt ans après avoir fui, abandonnant son fils à la suite d'un accident tragique.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13637,7 +13637,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Deux jeunes soldats américains en Irak ; l'un meurt, l'autre rentre au pays hanté par la culpabilité et le souvenir.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13660,7 +13660,7 @@
        "certitude": "haute",
        "remarque": "Presses de la Cité",
        "resume": "",
-       "categorie": "",
+       "categorie": "Histoire",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13683,7 +13683,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le jeune pharaon Ramsès XIII tente de réformer l'Égypte et se heurte au pouvoir tout-puissant de la caste des prêtres.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13706,7 +13706,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Au chevet de sa grand-mère mourante, une jeune femme découvre dans une armoire une robe révélant un secret familial vieux de quarante ans.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13729,7 +13729,7 @@
        "certitude": "haute",
        "remarque": "Robert Laffont",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13752,7 +13752,7 @@
        "certitude": "haute",
        "remarque": "Éditions Guérin",
        "resume": "Portrait intime et affectueux de son père, l'écrivain Henri Queffélec, et de leur relation complexe.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13775,7 +13775,7 @@
        "certitude": "haute",
        "remarque": "Gallimard, nrf",
        "resume": "Ludovic, enfant né d'un viol, rejeté par sa jeune mère, grandit dans la maltraitance en quête désespérée d'amour.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -13798,7 +13798,7 @@
        "certitude": "moyenne",
        "remarque": "prénom non lisible, Presses de la Cité",
        "resume": "L'épopée de la construction du phare d'Ar-Men au large de l'île de Sein, face à une mer déchaînée.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -14180,7 +14180,7 @@
        "certitude": "moyenne",
        "remarque": "Titre partiellement lisible",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -14191,7 +14191,7 @@
        "certitude": "haute",
        "remarque": "Tranche beige, lettrage noir",
        "resume": "",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "ia"
       },
       {
@@ -14202,7 +14202,7 @@
        "certitude": "haute",
        "remarque": "Tranche beige, symbole rouge",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "ia"
       },
       {
@@ -14213,7 +14213,7 @@
        "certitude": "haute",
        "remarque": "Tranche beige, symbole rouge",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "ia"
       },
       {
@@ -14224,7 +14224,7 @@
        "certitude": "haute",
        "remarque": "Tranche bleue, les arènes",
        "resume": "Biographie d'Hélie de Saint Marc, résistant déporté, officier de Légion en Indochine et en Algérie, condamné après le putsch de 1961.",
-       "categorie": "",
+       "categorie": "Histoire",
        "origine": "ia"
       },
       {
@@ -14235,7 +14235,7 @@
        "certitude": "haute",
        "remarque": "Tranche noire, Fayard",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -14246,7 +14246,7 @@
        "certitude": "haute",
        "remarque": "Tranche crème, Grasset",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -14257,7 +14257,7 @@
        "certitude": "moyenne",
        "remarque": "Tranche noire, partiellement lisible",
        "resume": "Un médecin et un commandant mourant évoquent en mer la figure légendaire de Willsdorff, officier dit le Crabe-Tambour.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia"
       },
       {
@@ -14268,7 +14268,7 @@
        "certitude": "haute",
        "remarque": "Tranche blanche, Fayard",
        "resume": "Récit autobiographique de voyages, du Chili de la dictature à la Patagonie et à l'Équateur, jusqu'à la rencontre d'un neveu en Espagne.",
-       "categorie": "",
+       "categorie": "Voyage",
        "origine": "ia"
       },
       {
@@ -14279,7 +14279,7 @@
        "certitude": "haute",
        "remarque": "Tranche noire, Albin Michel",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "ia"
       }
      ],
@@ -14332,7 +14332,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "John Grady Cole, cow-boy au Texas des années 1950, s'éprend d'une jeune prostituée mexicaine malgré les dangers.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -14484,7 +14484,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -14548,7 +14548,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Au XVIIe siècle en Cornouailles, lady Dona St Columb vit une passion avec un pirate français caché dans une crique.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -14570,7 +14570,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Saga d'une famille de maîtres verriers français, ancêtres de l'auteure, emportée par la Révolution française.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -14745,7 +14745,7 @@
        "auteur": "Robert Merle",
        "annee": "1985",
        "resume": "Pierre de Siorac poursuit ses missions secrètes au service d'Henri IV durant la reconquête du royaume face à la Ligue.",
-       "categorie": "",
+       "categorie": "Romans français",
        "remarque": "",
        "certitude": "haute",
        "id": "muf6nf531kjyn",
@@ -15960,7 +15960,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman autobiographique explore l'enfance difficile, la quête d'identité et les amours tumultueuses d'une femme en marge de la société.",
-       "categorie": "",
+       "categorie": "Biographies & récits de vie",
        "origine": "appoint",
        "vues": [
         {
@@ -15983,7 +15983,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman retrace l'histoire d'une famille paysanne auvergnate sur plusieurs générations, explorant les liens, les secrets et la transmission.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16006,7 +16006,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman raconte l'amour passionné et interdit d'un jeune homme juif pour une camarade de classe protestante dans la France du début du XXe siècle.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16029,7 +16029,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman suit Lucas, l'un des jumeaux, après la guerre, alors qu'il tente de se reconstruire et de comprendre le monde qui l'entoure.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16052,7 +16052,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Deux jumeaux sont envoyés à la campagne chez leur grand-mère pendant la guerre, apprenant à survivre et à endurcir leur âme.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16075,7 +16075,7 @@
        "certitude": "haute",
        "remarque": "Points",
        "resume": "Deux couples se retrouvent pour un dîner tendu, où ils doivent décider comment gérer un acte violent commis par leurs enfants adolescents.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -16097,7 +16097,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman dépeint la vie quotidienne et la formation des jeunes officiers dans une académie militaire allemande pendant la Seconde Guerre mondiale.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -16119,7 +16119,7 @@
        "certitude": "haute",
        "remarque": "Actes Sud",
        "resume": "Deux aventuriers britanniques partent à la conquête d'un royaume isolé en Afghanistan, se faisant passer pour des dieux.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "vues": [
         {
@@ -16141,7 +16141,7 @@
        "certitude": "faible",
        "remarque": "",
        "resume": "Ce recueil de nouvelles explore des thèmes variés, souvent liés à l'Inde coloniale, à l'aventure et à la condition humaine.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "vues": [
         {
@@ -16163,7 +16163,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme retourne dans sa ville natale après la mort de son père, confronté aux fantômes de son passé et aux secrets familiaux.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "statut": "acquis"
       },
@@ -16175,7 +16175,7 @@
        "certitude": "haute",
        "remarque": "J'ai lu",
        "resume": "Un chirurgien palestinien découvre que sa femme est l'auteure d'un attentat-suicide à Tel-Aviv, bouleversant sa vie et ses convictions.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -16197,7 +16197,7 @@
        "certitude": "haute",
        "remarque": "Gallimard",
        "resume": "Ce roman retrace la vie d'un homme à travers ses rencontres et ses passions, explorant la fuite du temps et la quête de sens.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -16219,7 +16219,7 @@
        "certitude": "haute",
        "remarque": "Pocket",
        "resume": "Un écrivain en panne d'inspiration voit sa vie basculer après une rencontre mystérieuse et une série d'événements troublants.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -16241,7 +16241,7 @@
        "certitude": "haute",
        "remarque": "Pocket",
        "resume": "Une femme décide de tout quitter pour échapper à une vie qui ne lui convient plus, cherchant un nouveau départ loin de son passé.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -16263,7 +16263,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Dans un café japonais, les clients peuvent voyager dans le temps, mais sous des règles strictes, pour revisiter des moments clés de leur vie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -16285,7 +16285,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Un homme, Harold Fry, part marcher à travers l'Angleterre pour porter une lettre à une amie mourante, transformant son voyage en quête personnelle.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
@@ -16300,7 +16300,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Une femme japonaise vivant en Angleterre se remémore son passé à Nagasaki, explorant les souvenirs et les non-dits de sa vie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
@@ -16315,7 +16315,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Un détective privé britannique se remémore son enfance à Shanghai et sa quête obsessionnelle pour retrouver ses parents disparus.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "temoins": [
         "appoint:muiapudy44zcu:2026-09-26T11:18:10.309Z"
@@ -16330,7 +16330,7 @@
        "certitude": "haute",
        "remarque": "collection Babel",
        "resume": "Ce roman explore les liens familiaux, les secrets et les paysages de la Drôme, à travers l'histoire d'une femme qui revient sur ses terres d'origine.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16353,7 +16353,7 @@
        "certitude": "haute",
        "remarque": "collection J'ai lu",
        "resume": "Quatre personnes aux vies cabossées se rencontrent et apprennent à vivre ensemble, trouvant réconfort et amitié dans leur colocation.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16376,7 +16376,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman animalier suit la vie d'un chat, Rroû, de sa naissance à sa vie sauvage, explorant son instinct et sa relation avec les humains.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16399,7 +16399,7 @@
        "certitude": "haute",
        "remarque": "collection J'ai lu",
        "resume": "Ce roman animalier raconte l'histoire d'une harde de cerfs traquée, explorant la nature sauvage et la lutte pour la survie.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16422,7 +16422,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman explore la complexité des relations humaines, la quête d'authenticité et la fabrication de fausse monnaie, avec une mise en abyme narrative.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16445,7 +16445,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman satirique et fantaisiste suit les aventures d'un groupe de personnages excentriques, dont Lafcadio, qui commet un acte gratuit.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16468,7 +16468,7 @@
        "certitude": "haute",
        "remarque": "collection Le Livre de Poche",
        "resume": "Ce roman décrit la renaissance d'une communauté rurale provençale grâce à la persévérance de Panturle et ses amis, cultivant la terre aride.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16491,7 +16491,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce recueil de nouvelles explore la condition humaine, la solitude et la compassion à travers des récits ancrés dans la Provence rurale.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16514,7 +16514,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman raconte l'histoire d'un vieux paysan, Bobi, qui, malgré les épreuves, trouve la joie dans la nature et la simplicité de la vie.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16537,7 +16537,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman, premier de la trilogie de Pan, dépeint la vie d'un village provençal confronté à la nature sauvage et à des événements mystérieux.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16560,7 +16560,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman autobiographique évoque l'enfance de l'auteur à Manosque, sa découverte du monde, de la nature et de la littérature.",
-       "categorie": "",
+       "categorie": "Biographies & récits de vie",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16583,7 +16583,7 @@
        "certitude": "haute",
        "remarque": "couverture rose",
        "resume": "Ce recueil de textes poétiques et méditatifs célèbre la nature provençale, les saisons et la philosophie de vie de l'auteur.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16606,7 +16606,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman poétique et philosophique raconte l'histoire d'un berger qui découvre un serpent d'étoiles, symbole de la sagesse et de la nature.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16629,7 +16629,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce récit de voyage décrit les pérégrinations de l'auteur à travers les paysages de la Haute-Durance, mêlant observations et réflexions personnelles.",
-       "categorie": "",
+       "categorie": "Voyage",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16652,7 +16652,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman épistolaire raconte la passion malheureuse de Werther pour Lotte, une femme déjà fiancée, le menant à une fin tragique.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16675,7 +16675,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman retrace la vie fictive de Sayuri Nitta, une geisha célèbre de Kyoto, de son enfance pauvre à sa carrière dans le monde du plaisir.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16698,7 +16698,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce thriller médical suit le Dr. David Cole qui enquête sur des morts suspectes dans un hôpital, révélant un complot complexe.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16721,7 +16721,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Ce roman autobiographique dépeint l'enfance difficile de l'auteur en Russie, marquée par la pauvreté, la violence et la découverte de la lecture.",
-       "categorie": "",
+       "categorie": "Biographies & récits de vie",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16744,7 +16744,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Ce roman épistolaire révèle un secret de famille bouleversant à travers des lettres échangées entre une femme et un inconnu.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16767,7 +16767,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman explore les relations familiales complexes, les secrets et les non-dits à travers le regard d'une femme qui revisite son passé.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -16790,7 +16790,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Ce roman dépeint la vie d'un professeur de philosophie, Cripure, dans une petite ville de province, confronté à la médiocrité et à ses propres démons.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16813,7 +16813,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman suit la vie de Gifty, une doctorante en neurosciences, qui explore sa foi, sa famille ghanéenne et les traumatismes du passé.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16836,7 +16836,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman tragique dépeint le destin de Tess Durbeyfield, une jeune femme innocente victime des conventions sociales et de la fatalité dans l'Angleterre victorienne.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16859,7 +16859,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Addie Moore et Louis Waters, deux veufs âgés, décident de partager leurs nuits pour combattre la solitude et tisser des liens inattendus.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -16882,7 +16882,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Ce roman explore la vie d'un jeune homme confronté aux défis de l'existence et à la quête de sens dans un monde en mutation.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16905,7 +16905,7 @@
        "certitude": "moyenne",
        "remarque": "titre partiellement lisible",
        "resume": "Un colonel américain vieillissant et malade, Richard Cantwell, revit ses souvenirs de guerre et d'amour lors d'un séjour de chasse en Italie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "statut": "acquis"
@@ -16918,7 +16918,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce western raconte l'histoire d'un homme blanc élevé par les Comanches, déchiré entre deux cultures et cherchant sa place.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16941,7 +16941,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "L'histoire d'une jeune femme qui découvre le passé de sa famille lié à Spinalonga, une ancienne colonie de lépreux en Crète.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16964,7 +16964,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "Un jeune homme, Jean-Pierre, raconte son amour passionné et destructeur pour une femme mariée, dans une atmosphère de désenchantement et de liberté.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -16987,7 +16987,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Une femme se déguise en homme pour combattre dans la guerre de Sécession, laissant derrière elle son mari et sa vie d'avant.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17010,7 +17010,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Durtal, un écrivain parisien, s'intéresse à la vie de Gilles de Rais et explore l'occultisme et le satanisme, cherchant un sens à son existence.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17033,7 +17033,7 @@
        "certitude": "haute",
        "remarque": "collection Babel",
        "resume": "Ce roman retrace la vie d'un homme égyptien, Zeth, à travers les bouleversements politiques et sociaux de l'Égypte du XXe siècle.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17056,7 +17056,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Deux pièces de théâtre explorant les thèmes de l'émancipation féminine, des secrets de famille et des conséquences des choix passés sur le présent.",
-       "categorie": "",
+       "categorie": "Théâtre",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17079,7 +17079,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "L'histoire excentrique de T.S. Garp, écrivain, et de sa mère féministe, Jenny Fields, à travers leurs vies tumultueuses et leurs rencontres singulières.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17102,7 +17102,7 @@
        "certitude": "haute",
        "remarque": "Folio",
        "resume": "L'histoire de la famille Barrøy, vivant isolée sur une petite île norvégienne, confrontée aux rigueurs de la nature et aux défis de la survie.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17125,7 +17125,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Catherine Sloper, une jeune femme timide et riche, est tiraillée entre l'amour d'un homme sans fortune et l'opposition de son père autoritaire.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17148,7 +17148,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un récit autobiographique où l'auteur évoque son enfance pendant la Seconde Guerre mondiale, marquée par l'absence de son père et les souvenirs de guerre.",
-       "categorie": "",
+       "categorie": "Biographies & récits de vie",
        "origine": "appoint",
        "vues": [
         {
@@ -17171,7 +17171,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Ce roman explore les relations humaines et les secrets de famille dans un petit village, révélant les complexités des liens affectifs.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17194,7 +17194,7 @@
        "certitude": "haute",
        "remarque": "Le Livre de Poche",
        "resume": "Trois sœurs se retrouvent après la mort de leur père, confrontées à son héritage et aux non-dits qui ont marqué leur histoire familiale.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "vues": [
@@ -17357,7 +17357,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Ce roman raconte l'histoire d'une femme âgée, Madame Rose, et de ses souvenirs, offrant une réflexion sur le temps qui passe et la mémoire.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17379,7 +17379,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman qui explore les thèmes de la foi, du doute et de la quête spirituelle à travers le parcours d'un personnage confronté à ses convictions.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -17402,7 +17402,7 @@
        "certitude": "moyenne",
        "remarque": "Collection blanche",
        "resume": "Ce roman dépeint la vie d'une famille nombreuse et excentrique, avec ses joies, ses peines et ses secrets, dans un cadre pittoresque.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17424,7 +17424,7 @@
        "certitude": "haute",
        "remarque": "Tranche jaune Verdier",
        "resume": "",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17446,7 +17446,7 @@
        "certitude": "moyenne",
        "remarque": "nrf Gallimard",
        "resume": "Une servante du Val de Loire sert, dans ses dernières années, un vieux maître italien, peintre et savant venu mourir en France.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17468,7 +17468,7 @@
        "certitude": "haute",
        "remarque": "Éditions de Fallois",
        "resume": "Un écrivain enquête sur un meurtre non résolu à Orphea, où une journaliste avait prédit le crime avant de disparaître.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "vues": [
         {
@@ -17490,7 +17490,7 @@
        "certitude": "haute",
        "remarque": "Éditions de Fallois",
        "resume": "Marcus Goldman explore l'histoire tragique de sa famille, les Baltimore, révélant les secrets et drames qui ont marqué leur destin.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "vues": [
         {
@@ -17512,7 +17512,7 @@
        "certitude": "haute",
        "remarque": "Éditions de Fallois",
        "resume": "Un jeune écrivain enquête sur l'affaire du meurtre d'une adolescente, pour laquelle son mentor est le principal suspect.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "vues": [
         {
@@ -17534,7 +17534,7 @@
        "certitude": "haute",
        "remarque": "Éditions de Fallois",
        "resume": "Un écrivain se retrouve mêlé à une enquête complexe sur un meurtre survenu dans un hôtel de luxe en Suisse, révélant de sombres secrets.",
-       "categorie": "",
+       "categorie": "Policier",
        "origine": "ia",
        "vues": [
         {
@@ -17556,7 +17556,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce roman explore la vie d'un homme qui, après un drame familial, se réfugie dans la solitude et la contemplation de la nature.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -17579,7 +17579,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Une pièce de théâtre absurde où les personnages explorent les méandres de l'existence, de la communication et de la solitude humaine.",
-       "categorie": "",
+       "categorie": "Théâtre",
        "origine": "appoint",
        "vues": [
         {
@@ -17602,7 +17602,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Paul Hansen, un homme ordinaire, raconte sa vie marquée par la solitude, les drames familiaux et les rencontres inattendues au Canada.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -17625,7 +17625,7 @@
        "certitude": "haute",
        "remarque": "L'Olivier poche",
        "resume": "Un homme, récemment veuf, se retrouve confronté à la solitude et à l'absurdité de l'existence après la mort de sa femme.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17647,7 +17647,7 @@
        "certitude": "haute",
        "remarque": "Gallimard",
        "resume": "Ce récit retrace l'épopée des habitants de la vallée de Barcelonnette partis faire fortune au Mexique au XIXe siècle.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17669,7 +17669,7 @@
        "certitude": "moyenne",
        "remarque": "nrf Gallimard",
        "resume": "Le livre explore les circonstances de l'assassinat de Robert Kennedy, suggérant une conspiration et des zones d'ombre persistantes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "devant",
        "statut": "acquis"
@@ -17682,7 +17682,7 @@
        "certitude": "haute",
        "remarque": "nrf Gallimard",
        "resume": "Un homme âgé, ancien diplomate, se remémore sa vie et ses amours, confronté à la maladie et à la fin imminente.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17704,7 +17704,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Un pilote de ligne raconte sa vie, ses voyages et ses réflexions sur le monde, offrant une perspective unique depuis les cieux.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17726,7 +17726,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme se débat avec le deuil et la perte, explorant les méandres de la douleur et de la mémoire après un drame personnel.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -17749,7 +17749,7 @@
        "certitude": "haute",
        "remarque": "Julliard",
        "resume": "Le roman explore les colères intimes et sociales d'un homme face aux injustices et aux désillusions de la vie contemporaine.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17771,7 +17771,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un homme se retire dans une maison au bord de l'eau, observant le monde avec un regard désabusé et ironique sur la société.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -17794,7 +17794,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le roman suit le destin de quatre jeunes hommes français partis au front durant la Première Guerre mondiale, racontant leur quotidien.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -17817,7 +17817,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Dans une abbaye médiévale, un moine enquête sur une série de morts mystérieuses, mêlant théologie, philosophie et intrigue policière.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -17839,7 +17839,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Trois éditeurs italiens inventent un complot ésotérique, qui devient dangereusement réel, explorant l'histoire, la Kabbale et les sociétés secrètes.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -17861,7 +17861,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Naufragé au XVIIe siècle, Roberto tente d'atteindre une île voisine, explorant la science, la théologie et la quête de l'amour perdu.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "vues": [
         {
@@ -17883,7 +17883,7 @@
        "certitude": "haute",
        "remarque": "Denoël",
        "resume": "Une comédie truculente sur l'arrivée du Beaujolais nouveau, ses rituels et les personnages hauts en couleur d'un village français.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "vues": [
         {
@@ -17905,7 +17905,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman historique et d'aventure se déroulant dans l'Antiquité grecque, suivant le destin d'une jeune femme esclave et son parcours.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -17928,7 +17928,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Une jeune femme participe à un programme gouvernemental en 1875, échangeant des femmes blanches contre des chevaux avec les Cheyennes.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -17951,7 +17951,7 @@
        "certitude": "haute",
        "remarque": "cherche midi",
        "resume": "Un recueil de récits et d'essais personnels où l'auteur partage ses expériences et réflexions sur les États-Unis et ses voyages.",
-       "categorie": "",
+       "categorie": "Voyage",
        "origine": "ia",
        "vues": [
         {
@@ -17973,7 +17973,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le quatrième tome de la saga napolitaine, explorant l'amitié complexe et les destins entrelacés de Lila et Elena à travers les décennies.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "appoint",
        "vues": [
         {
@@ -17996,7 +17996,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman historique se déroulant à la Renaissance, mêlant intrigues politiques, amours interdites et destins tragiques à la cour de Mantoue.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -18019,7 +18019,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman poignant explorant la vie d'un homme confronté à la maladie de sa femme, la vieillesse et la fragilité des liens familiaux.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -18042,7 +18042,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "",
-       "categorie": "",
+       "categorie": "Non classé",
        "origine": "appoint",
        "vues": [
         {
@@ -18065,7 +18065,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un recueil de nouvelles émouvantes et réalistes, mettant en scène des chiens et leurs relations avec les hommes, souvent dans la nature.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "appoint",
        "vues": [
         {
@@ -18088,7 +18088,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Jocelyne, mercière à Arras, gagne au loto et dresse une liste de ses envies, mais hésite à changer sa vie simple et heureuse.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -18111,7 +18111,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Un homme est convoqué pour une enquête absurde et kafkaïenne, révélant les rouages d'une administration oppressante et déshumanisante.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18141,7 +18141,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Un roman d'aventure se déroulant sur le Rhône, suivant les péripéties de mariniers et de contrebandiers dans un monde fluvial rude.",
-       "categorie": "",
+       "categorie": "Jeunesse",
        "origine": "appoint",
        "vues": [
         {
@@ -18164,7 +18164,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Le premier tome de la série 'La Grande Patience', décrivant la vie difficile des mariniers du Rhône et leurs luttes quotidiennes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -18193,7 +18193,7 @@
        "certitude": "haute",
        "remarque": "Albin Michel",
        "resume": "Un roman policier se déroulant dans le Jura, où une enquête est menée suite à un crime, révélant les secrets d'une communauté rurale.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18223,7 +18223,7 @@
        "certitude": "haute",
        "remarque": "Flammarion",
        "resume": "Un récit de voyage et de découverte personnelle où l'auteure partage ses expériences et réflexions sur la culture et la spiritualité indiennes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18253,7 +18253,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un roman historique se déroulant en Inde au XIXe siècle, explorant les destins croisés de personnages durant la révolte des Cipayes.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18283,7 +18283,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Une histoire d'amour passionnelle et tragique entre une jeune femme et un homme mystérieux, sur fond de secrets de famille et de destins brisés.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18307,7 +18307,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Une histoire d'amour passionnelle et tragique entre une jeune femme et un homme mystérieux, sur fond de secrets de famille et de destins brisés.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18337,7 +18337,7 @@
        "certitude": "haute",
        "remarque": "nrf Gallimard",
        "resume": "Une jeune fille juive et un jeune Palestinien fuient la guerre et cherchent un refuge, confrontant leurs destins brisés par le conflit.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18361,7 +18361,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Ce livre explore la relation tumultueuse et passionnée entre les artistes mexicains Diego Rivera et Frida Kahlo, à travers leurs vies et œuvres.",
-       "categorie": "",
+       "categorie": "Biographies & récits de vie",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18385,7 +18385,7 @@
        "certitude": "haute",
        "remarque": "nrf Gallimard",
        "resume": "Alexis, un jeune homme mauricien, part à la recherche d'un trésor familial enfoui, explorant la nature sauvage et son propre passé.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18409,7 +18409,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Fintan, un jeune homme, retourne au Nigeria, pays de son enfance, pour y retrouver ses racines et affronter les souvenirs de sa famille.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -18432,7 +18432,7 @@
        "certitude": "haute",
        "remarque": "nrf Gallimard",
        "resume": "Un roman satirique sur la société britannique des années 1990, suivant les destins croisés de personnages liés par un héritage inattendu.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18456,7 +18456,7 @@
        "certitude": "haute",
        "remarque": "Anne Carrière",
        "resume": "Santiago, un jeune berger andalou, voyage en Égypte pour trouver un trésor, apprenant à écouter son cœur et à suivre sa Légende Personnelle.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18480,7 +18480,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Un homme retourne dans les montagnes de son enfance pour y retrouver un ami d'autrefois, explorant la nature sauvage et les liens d'amitié.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18504,7 +18504,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "L'amitié indéfectible entre Pietro et Bruno, deux garçons grandissant dans les Alpes italiennes, explorant leurs vies et leurs choix.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18528,7 +18528,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Trois femmes, en Inde, en Sicile et au Canada, voient leurs destins s'entremêler à travers leurs luttes pour la liberté et l'indépendance.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "appoint",
        "vues": [
         {
@@ -18551,7 +18551,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Une jeune femme parisienne hérite d'une maison en Provence et découvre les secrets de sa famille, bouleversant sa vie.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18575,7 +18575,7 @@
        "certitude": "haute",
        "remarque": "Autrement Littératures",
        "resume": "Un jeune homme se retrouve piégé dans un village australien isolé, confronté à l'alcoolisme et à la violence de ses habitants.",
-       "categorie": "",
+       "categorie": "Littérature étrangère",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18599,7 +18599,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Un roman qui explore les destins croisés de personnages lors du passage d'une comète, révélant leurs secrets et leurs aspirations.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18623,7 +18623,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "Une famille hongroise tente de survivre et de s'adapter aux bouleversements politiques et sociaux de l'après-guerre.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18647,7 +18647,7 @@
        "certitude": "haute",
        "remarque": "Grasset",
        "resume": "L'histoire d'une famille et de ses liens avec la nature, à travers le regard d'un enfant et la présence symbolique des oies.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18671,7 +18671,7 @@
        "certitude": "haute",
        "remarque": "Les Éditions de Minuit",
        "resume": "Une jeune femme est chargée de rédiger un rapport sur un monument national, découvrant les secrets et les mensonges qui l'entourent.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18695,7 +18695,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Une femme est contrainte de se soumettre à un homme qui la séquestre, explorant les thèmes de la domination et de la résilience.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18719,7 +18719,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Une jeune femme, surnommée la promeneuse d'oiseaux, parcourt le monde avec ses oiseaux, cherchant la liberté et l'amour.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18743,7 +18743,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Une femme anglaise voyage à bicyclette à travers la France, rencontrant des personnages hauts en couleur et découvrant l'amour.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18767,7 +18767,7 @@
        "certitude": "haute",
        "remarque": "Stock",
        "resume": "Un homme se retire dans une maison avec vue sur la mer, cherchant la solitude et la paix, mais confronté à son passé.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18783,7 +18783,7 @@
        "certitude": "moyenne",
        "remarque": "",
        "resume": "Un homme se souvient de Madame Seyerling, une femme énigmatique qui a marqué sa vie, explorant les mystères de l'amour et du temps.",
-       "categorie": "",
+       "categorie": "Romans français",
        "statut": "acquis",
        "temoins": [],
        "rang": "derriere"
@@ -18796,7 +18796,7 @@
        "certitude": "haute",
        "remarque": "JC Lattès",
        "resume": "Scarlett Johansson, sosie d'une jeune femme, bouleverse la vie d'un homme et de son entourage, explorant l'amour, l'apparence et l'identité.",
-       "categorie": "",
+       "categorie": "Romans français",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18820,7 +18820,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Ce recueil explore avec humour et tendresse les petits riens du quotidien, les manies contemporaines et la quête de sens à travers des observations fines.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18844,7 +18844,7 @@
        "certitude": "haute",
        "remarque": "Seuil",
        "resume": "Un roman qui explore les fragilités humaines et les moments de bascule, à travers des personnages confrontés à leurs doutes et leurs espoirs.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -18868,7 +18868,7 @@
        "certitude": "haute",
        "remarque": "",
        "resume": "Ce recueil de nouvelles capture les plaisirs simples et les petites angoisses de la vie moderne, avec l'humour et la poésie caractéristiques de l'auteur.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "appoint",
        "vues": [
         {
@@ -18891,7 +18891,7 @@
        "certitude": "haute",
        "remarque": "L'arpenteur",
        "resume": "Un recueil de textes courts célébrant les petits plaisirs quotidiens et les sensations fugaces qui donnent du sel à l'existence.",
-       "categorie": "",
+       "categorie": "Nouvelles & chroniques",
        "origine": "ia",
        "rang": "derriere",
        "temoins": [
@@ -19059,7 +19059,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-27T03:31:15.580Z",
+ "maj": "2026-09-27T06:56:22.844Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
