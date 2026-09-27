@@ -9094,17 +9094,6 @@
     "6-3": {
      "livres": [
       {
-       "id": "mud5z7z9ax4fd",
-       "titre": "SHISHA GUPPY",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "Non classé",
-       "origine": "ia"
-      },
-      {
        "id": "mud5z7z96h11g",
        "titre": "Le chemin des livres",
        "auteur": "",
@@ -9128,28 +9117,15 @@
       },
       {
        "id": "mud5z7z9137s3",
-       "titre": "Le jardin à l'horizon",
-       "auteur": "",
+       "titre": "Un jardin à Téhéran",
+       "auteur": "Shusha Guppy",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "",
        "resume": "",
        "categorie": "Non classé",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "Un jardin à Téhéran",
-         "auteur": "Shusha Guppy"
-        },
-        "vue": {
-         "champ": "appoint:mujk02ezapdmz",
-         "x1": 32,
-         "x2": 62
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-27T08:28:42.640Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifqs2h3j",
@@ -9172,7 +9148,7 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9qtyjm",
@@ -9193,7 +9169,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9wins9",
@@ -9214,7 +9191,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9kzqzo",
@@ -9235,7 +9213,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z94ekhx",
@@ -9256,7 +9235,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9fe0q4",
@@ -9277,7 +9257,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9jd0ip",
@@ -9298,7 +9279,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z95c6sg",
@@ -9319,7 +9301,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifqvaptg",
@@ -9342,7 +9325,7 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z98sn5n",
@@ -9363,7 +9346,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifqug1sd",
@@ -9386,7 +9370,7 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9vlbt8",
@@ -9407,7 +9391,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9jzes3",
@@ -9428,7 +9413,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z955k1m",
@@ -9449,7 +9435,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9za15l",
@@ -9470,7 +9457,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9suel0",
@@ -9491,7 +9479,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifq3ai5r",
@@ -9514,7 +9503,7 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z91v184",
@@ -9535,7 +9524,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifqjwizv",
@@ -9558,7 +9548,7 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9x7usa",
@@ -9579,32 +9569,20 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z93os7c",
-       "titre": "L'ŒUVRE D'IRVING",
-       "auteur": "John Irving (écrivain américain né en 1942)",
+       "titre": "L'Épopée du buveur d'eau",
+       "auteur": "John Irving",
        "annee": "1985",
        "certitude": "haute",
        "remarque": "",
        "resume": "Un jeune orphelin élevé par un médecin humaniste cherche sa voie dans l'Amérique du XXe siècle.",
        "categorie": "Essais",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "L'Épopée du buveur d'eau",
-         "auteur": "John Irving"
-        },
-        "vue": {
-         "champ": "appoint:mujk02ezapdmz",
-         "x1": 795,
-         "x2": 831
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-27T08:28:42.640Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z9hfhuo",
@@ -9625,7 +9603,8 @@
        ],
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifqu7k80",
@@ -9648,32 +9627,19 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mud5z7z943td2",
-       "titre": "Sous l'égide d'Osiris",
-       "auteur": "Christian Jacq (écrivain français, né en 1937)",
+       "titre": "Ramsès — Sous l'acacia d'Occident",
+       "auteur": "Christian Jacq",
        "annee": "2003",
        "certitude": "haute",
        "remarque": "",
        "resume": "En Égypte ancienne, de mystérieuses disparitions menacent les proches du pharaon alors que le pouvoir est mis à rude épreuve.",
        "categorie": "Histoire",
        "origine": "ia",
-       "question": {
-        "type": "lecture",
-        "autre": {
-         "titre": "Ramsès — Sous l'acacia d'Occident",
-         "auteur": "Christian Jacq"
-        },
-        "vue": {
-         "champ": "appoint:mujk02ezapdmz",
-         "x1": 903,
-         "x2": 949
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-27T08:28:42.640Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mujk3ifqfoolw",
@@ -9696,7 +9662,7 @@
        "temoins": [
         "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mujjj04m4k97l",
@@ -10413,7 +10379,8 @@
       "maj": "2026-09-27T08:05:59.838Z"
      },
      "certif": {
-      "derriere": "2026-09-27T08:14:38.646Z"
+      "derriere": "2026-09-27T08:14:38.646Z",
+      "devant": "2026-09-27T08:32:04.988Z"
      },
      "appoints": [
       {
@@ -20180,7 +20147,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-27T08:28:43.596Z",
+ "maj": "2026-09-27T08:32:10.276Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
