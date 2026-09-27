@@ -433,8 +433,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.76.3";
+const VERSION = "V1.77.0";
 const HISTORIQUE = [
+  { v:"V1.77.0", d:"27/09/2026", l:[
+    "Ligne Entière / Ajustée / 100 % / 200 % : bouton « 🖼 Appoint » qui fait défiler les photos d'appoint une à une (puis revient à la photo de la rangée), avec les mêmes affichages que la photo principale. Absent s'il n'y a aucun appoint ; disponible même si les rangées sont certifiées (consultation seule)."
+  ]},
+  { v:"V1.76.4", d:"27/09/2026", l:[
+    "Nettoyage : suppression complète des anciens onglets « 📚 Devant / 📚 Derrière » de la ligne photo (masqués depuis la V1.76.3) et du code qui les gérait."
+  ]},
   { v:"V1.76.3", d:"27/09/2026", l:[
     "En mode édition aussi, une seule ligne de trois boutons de même largeur : « Devant », « Derrière » (changent la photo et la liste) et « ✏️ Fin éditer » à droite, qui revient à la consultation. Les onglets Devant / Derrière en double sont retirés (la liste des appoints et « ➕ Appoint » restent)."
   ]},
@@ -5426,6 +5432,21 @@ function ouvrirCompartiment(b, k){
   });
   f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; setTimeout(rendreBiblio, 0); envoyerMaintenantSiEnAttente(); });
 
+  /* défilement des photos d'appoint : rangée → appoint 1 → appoint 2 → … → retour à la photo de la rangée */
+  const facesAppoint = ()=> (cs.appoints || []).map(a=>PRE_APPOINT + a.id);
+  const faceRangee = ()=> filtreConsult === "derriere" && cs.photo2 ? "photo2" : "photo";
+  const libelleCycleAppoint = ()=>{
+    const l = facesAppoint(), i = l.indexOf(face);
+    if (i < 0) return `🖼 Appoint 1/${l.length} ›`;
+    return i + 1 < l.length ? `🖼 Appoint ${i + 2}/${l.length} ›` : `↩ ${faceRangee() === "photo2" ? "Derrière" : "Devant"}`;
+  };
+  const cycleAppoint = ()=>{
+    const l = facesAppoint(), i = l.indexOf(face);
+    const suivante = i < 0 ? l[0] : (i + 1 < l.length ? l[i + 1] : faceRangee());
+    const zm = zoomPhoto;
+    changerFace(suivante);
+    if (zm !== "entiere"){ zoomPhoto = zm; majPhoto(); }        // garde l'affichage choisi (100 %, 200 %…)
+  };
   /* titre : rangée de la bibliothèque, compartiment, et rangée affichée dans le compartiment */
   const majTitre = ()=>{
     const h = f.querySelector(".tete h2"); if (!h) return;
@@ -5621,18 +5642,14 @@ function ouvrirCompartiment(b, k){
     // toutes les rangées qui ont des livres sont certifiées : plus rien à faire avec les appoints
     const rangsAvecLivres = ["devant","derriere"].filter(r=>(cs.livres||[]).some(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r));
     const tousCertifies = rangsAvecLivres.length > 0 && rangsAvecLivres.every(r=>certifiee(cs, r));
-    if (tousCertifies && estAppoint(face)) face = "photo";
     zf.innerHTML =
-      `<button data-face="photo" class="${face==="photo"?"actif":""}" style="display:none">${miniEtoile(cs, "devant")}📚 Devant${cs.photo?"":" (vide)"}</button>
-       <button data-face="photo2" class="${face==="photo2"?"actif":""}" style="display:none">${miniEtoile(cs, "derriere")}${cs.photo2 ? "📚 Derrière" : "➕ Derrière"}</button>
-       ${tousCertifies ? "" : `<div class="colAppoint">
+      `${tousCertifies ? "" : `<div class="colAppoint">
        ${app.length ? `<select id="cAppoints" title="Photos d'appoint">
          <option value="">🖼 Appoints (${app.length})</option>
          ${app.map((a,i)=>`<option value="${PRE_APPOINT+esc(a.id)}" ${face===PRE_APPOINT+a.id?"selected":""}>Appoint ${i+1}${a.rang ? (a.rang === "derriere" ? " · rangée 2" : " · rangée 1") : " · rangée ?"}${a.legende?" — "+esc(a.legende):""}</option>`).join("")}
        </select>` : ""}
        <button id="cAjoutAppoint" title="Ajouter une photo d'appoint (gros plan d'une partie du compartiment)"><span class="ico">➕</span><span>Appoint</span></button>
        </div>`}`;
-    zf.querySelectorAll("[data-face]").forEach(bt=>bt.onclick = ()=>changerFace(bt.dataset.face));
     // bouton direct : Safari (iPhone) n'ouvre l'appareil photo que sur un vrai toucher, pas depuis une liste déroulante
     const bAjA = zf.querySelector("#cAjoutAppoint");
     if (bAjA) bAjA.onclick = ajouterAppoint;
@@ -5712,7 +5729,10 @@ function ouvrirCompartiment(b, k){
     majReutiliser();
     // rangée certifiée : consultation seule pour cette photo
     const rangFace = appoint ? ((photoObj(cs, face) || {}).rang || null) : (face === "photo2" ? "derriere" : "devant");
-    const verrou = !!(rangFace && certifiee(cs, rangFace));
+    // rangée certifiée, ou appoint d'un compartiment dont toutes les rangées sont certifiées : consultation seule
+    const rangsLivres = ["devant","derriere"].filter(r=>(cs.livres || []).some(lv=>(lv.rang === "derriere" ? "derriere" : "devant") === r));
+    const toutCertifie = rangsLivres.length > 0 && rangsLivres.every(r=>certifiee(cs, r));
+    const verrou = !!(rangFace && certifiee(cs, rangFace)) || (appoint && toutCertifie);
     if (verrou){ lignesVisibles = false; avantTroncature = null; }
     const bV = f.querySelector("#cVerrou");
     bV.style.display = "none";                     // l'information figure dans la section « ⭐ Certification »
@@ -5791,6 +5811,7 @@ function ouvrirCompartiment(b, k){
          <button data-pz="fit" class="${zoomPhoto==="fit"?"actif":""}">Ajustée</button>
          ${lignesVisibles ? "" : `<button data-pz="1" class="${zoomPhoto==="1"?"actif":""}">100 %</button>
          <button data-pz="2" class="${zoomPhoto==="2"?"actif":""}">200 %</button>`}
+         ${(cs.appoints || []).length ? `<button id="cCycleAppoint" title="Voir la photo d'appoint suivante">${libelleCycleAppoint()}</button>` : ""}
        </div>
        ${zoomPhoto === "entiere" ? `<div class="cadreCentre">${cadreHtml}</div>` : zoomNum ? `<div class="cadreZoom" id="cZoneZoom">${cadreHtml}</div>` : cadreHtml}
        <button class="btn plein" id="cTailleReelle" style="margin:8px 0 2px">🔍 Taille réelle</button>`;
@@ -5804,6 +5825,7 @@ function ouvrirCompartiment(b, k){
     };
     if (img.complete) dims(); else img.onload = dims;
     z.querySelectorAll("[data-pz]").forEach(bt=>bt.onclick = ()=>{ zoomPhoto = bt.dataset.pz; majPhoto(); });
+    const bCy = z.querySelector("#cCycleAppoint"); if (bCy) bCy.onclick = ()=>cycleAppoint();
 
     if (lignesVisibles){ placerLignes(); brancherGlisser(cadre); }
     img.addEventListener("contextmenu", e=>{ if (lignesVisibles) e.preventDefault(); });
