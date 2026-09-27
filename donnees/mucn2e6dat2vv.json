@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-27T17:21:12.603Z",
+ "maj": "2026-09-27T17:27:35.767Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -13124,8 +13124,8 @@
      },
      {
       "id": "muk34smg21cyk",
-      "titre": "PIERRE SOGNO",
-      "auteur": "",
+      "titre": "Le serre aux truffes",
+      "auteur": "Pierre sogno",
       "annee": "",
       "certitude": "haute",
       "remarque": "",
@@ -13144,35 +13144,6 @@
        "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
       "statut": "probable"
-     },
-     {
-      "id": "muk2ubo0f9zw7",
-      "titre": "LE SERRE aux TRUFFES",
-      "auteur": "",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "Calmann-Lévy",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "rang": "derriere",
-      "vues": [
-       {
-        "champ": "photo2",
-        "x1": 100,
-        "x2": 160
-       },
-       {
-        "champ": "appoint:muk34ckghtr1v",
-        "x1": 310,
-        "x2": 360
-       }
-      ],
-      "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z",
-       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
-      ],
-      "statut": "acquis"
      },
      {
       "id": "muk34smgkq1pv",
@@ -13254,29 +13225,6 @@
        "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
       "statut": "acquis"
-     },
-     {
-      "id": "muk34smg6hnxr",
-      "titre": "Donna Tartt",
-      "auteur": "",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "",
-      "categorie": "",
-      "origine": "appoint",
-      "vues": [
-       {
-        "champ": "appoint:muk34ckghtr1v",
-        "x1": 550,
-        "x2": 660
-       }
-      ],
-      "rang": "derriere",
-      "temoins": [
-       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
-      ],
-      "statut": "probable"
      },
      {
       "id": "muk2ubo04h07n",
@@ -13534,7 +13482,7 @@
      },
      {
       "id": "muk2ubo0b5q7t",
-      "titre": "Un an des ordres",
+      "titre": "Le roi des des ordres",
       "auteur": "Vautrin",
       "annee": "",
       "certitude": "haute",
@@ -13784,6 +13732,14 @@
        "muk2ubo045xw3"
       ],
       "verif": "2026-09-27T17:21:11.455Z"
+     },
+     {
+      "chemin": "images/mucn2e6dat2vv/10-3-appoint-muk3d3tvydvgp.jpg",
+      "envoye": false,
+      "maj": "2026-09-27T17:27:34.051Z",
+      "id": "muk3d3tvydvgp",
+      "legende": "",
+      "enIDB": "images/mucn2e6dat2vv/10-3-appoint-muk3d3tvydvgp.jpg"
      }
     ],
     "certif": {
