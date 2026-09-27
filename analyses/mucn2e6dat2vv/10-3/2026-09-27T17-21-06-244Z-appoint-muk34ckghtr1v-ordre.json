@@ -1,0 +1,145 @@
+{
+ "date": "2026-09-27T17:21:06.244Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "10-3",
+ "genre": "appoint",
+ "appoint": "muk34ckghtr1v",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Ces messieurs de Saint-Malo",
+   "auteur": "BERNARD SIMIOT",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 50,
+   "x2": 180,
+   "illisible": false
+  },
+  {
+   "titre": "CHANSON DOUCE",
+   "auteur": "LEÏLA SLIMANI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 180,
+   "x2": 230,
+   "illisible": false
+  },
+  {
+   "titre": "PIERRE SOGNO",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 230,
+   "x2": 310,
+   "illisible": false
+  },
+  {
+   "titre": "LE SERRE aux TRUFFES",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 310,
+   "x2": 360,
+   "illisible": false
+  },
+  {
+   "titre": "STONER",
+   "auteur": "John Williams",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 360,
+   "x2": 410,
+   "illisible": false
+  },
+  {
+   "titre": "Les délices de Tokyo",
+   "auteur": "Durian Sukegawa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 410,
+   "x2": 460,
+   "illisible": false
+  },
+  {
+   "titre": "Le Parfum",
+   "auteur": "Patrick Süskind",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 460,
+   "x2": 550,
+   "illisible": false
+  },
+  {
+   "titre": "Donna Tartt",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 550,
+   "x2": 660,
+   "illisible": false
+  },
+  {
+   "titre": "Le chardonneret",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 590,
+   "x2": 660,
+   "illisible": false
+  },
+  {
+   "titre": "L'ANOMALIE",
+   "auteur": "HERVÉ LE TELLIER",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 660,
+   "x2": 720,
+   "illisible": false
+  },
+  {
+   "titre": "Entrez dans la danse",
+   "auteur": "Jean Teulé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 720,
+   "x2": 780,
+   "illisible": false
+  },
+  {
+   "titre": "Ma petite Française",
+   "auteur": "Bernard Thomasson",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 780,
+   "x2": 840,
+   "illisible": false
+  },
+  {
+   "titre": "Musique et silence",
+   "auteur": "Rose Tremain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 840,
+   "x2": 950,
+   "illisible": false
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-27T17:20:47.166Z",
+ "maj": "2026-09-27T17:21:12.603Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -13086,10 +13086,62 @@
         "champ": "photo2",
         "x1": 0,
         "x2": 80
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 50,
+        "x2": 180
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk34smg1jshm",
+      "titre": "CHANSON DOUCE",
+      "auteur": "LEÏLA SLIMANI",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 180,
+        "x2": 230
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk34smg21cyk",
+      "titre": "PIERRE SOGNO",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 230,
+        "x2": 310
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
       "statut": "probable"
      },
@@ -13109,10 +13161,39 @@
         "champ": "photo2",
         "x1": 100,
         "x2": 160
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 310,
+        "x2": 360
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk34smgkq1pv",
+      "titre": "STONER",
+      "auteur": "John Williams",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 360,
+        "x2": 410
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
       "statut": "probable"
      },
@@ -13132,12 +13213,18 @@
         "champ": "photo2",
         "x1": 165,
         "x2": 220
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 410,
+        "x2": 460
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0va7u0",
@@ -13155,10 +13242,39 @@
         "champ": "photo2",
         "x1": 225,
         "x2": 280
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 460,
+        "x2": 550
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk34smg6hnxr",
+      "titre": "Donna Tartt",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 550,
+        "x2": 660
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
       "statut": "probable"
      },
@@ -13178,10 +13294,39 @@
         "champ": "photo2",
         "x1": 285,
         "x2": 335
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 590,
+        "x2": 660
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk34smgfxcmb",
+      "titre": "L'ANOMALIE",
+      "auteur": "HERVÉ LE TELLIER",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 660,
+        "x2": 720
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
       "statut": "probable"
      },
@@ -13201,12 +13346,18 @@
         "champ": "photo2",
         "x1": 340,
         "x2": 375
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 720,
+        "x2": 780
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0ih90a",
@@ -13224,12 +13375,18 @@
         "champ": "photo2",
         "x1": 380,
         "x2": 410
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 780,
+        "x2": 840
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo045xw3",
@@ -13247,12 +13404,18 @@
         "champ": "photo2",
         "x1": 415,
         "x2": 455
+       },
+       {
+        "champ": "appoint:muk34ckghtr1v",
+        "x1": 840,
+        "x2": 950
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk34ckghtr1v:2026-09-27T17:20:45.473Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0yr8oj",
@@ -13592,12 +13755,35 @@
       "verif": "2026-09-27T17:03:55.760Z"
      },
      {
+      "plein": null,
       "chemin": "images/mucn2e6dat2vv/10-3-appoint-muk34ckghtr1v.jpg",
-      "envoye": false,
+      "envoye": true,
       "maj": "2026-09-27T17:20:45.473Z",
       "id": "muk34ckghtr1v",
       "legende": "",
-      "enIDB": "images/mucn2e6dat2vv/10-3-appoint-muk34ckghtr1v.jpg"
+      "rang": "derriere",
+      "rangInfo": {
+       "auto": true,
+       "n1": 0,
+       "n2": 8,
+       "date": "2026-09-27T17:21:06.267Z"
+      },
+      "livresVus": [
+       "muk2ubo0v07o2",
+       "muk34smg1jshm",
+       "muk34smg21cyk",
+       "muk2ubo0f9zw7",
+       "muk34smgkq1pv",
+       "muk2ubo0y6wr5",
+       "muk2ubo0va7u0",
+       "muk34smg6hnxr",
+       "muk2ubo04h07n",
+       "muk34smgfxcmb",
+       "muk2ubo0axiw1",
+       "muk2ubo0ih90a",
+       "muk2ubo045xw3"
+      ],
+      "verif": "2026-09-27T17:21:11.455Z"
      }
     ],
     "certif": {
