@@ -430,8 +430,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.75.0";
+const VERSION = "V1.75.2";
 const HISTORIQUE = [
+  { v:"V1.75.2", d:"25/09/2026", l:[
+    "Outils › Photo : « ✂️ Lignes de coupe » est maintenant au-dessus de « 📷 Changer la photo »."
+  ]},
+  { v:"V1.75.1", d:"25/09/2026", l:[
+    "Tout bouton qui remplace les données de cet appareil par celles de GitHub (Récupérer depuis GitHub, Remplacer, Restaurer une version) est désormais rouge, avec un libellé explicite ; dans les questions posées, le bouton mis en avant est celui qui garde les données de l'appareil."
+  ]},
   { v:"V1.75.0", d:"25/09/2026", l:[
     "PDF (par thèmes, par auteur, par titre) : case « Avec table des matières ». Cochée, une table des matières (sections, nombre de livres, numéro de page, lignes cliquables) est ajoutée après le plan de la bibliothèque."
   ]},
@@ -1099,14 +1105,16 @@ function modale(opts){
   return fond;
 }
 
-function confirmer(message, titre, texteOui){
+function confirmer(message, titre, texteOui, opts){
+  opts = opts || {};
   return new Promise(res=>{
     modale({
       titre: titre||"Confirmer",
       html: `<div style="font-size:15px">${message}</div>`,
+      // opts.danger : l'action écrase des données → bouton rouge, et c'est « garder » qui est mis en avant
       boutons:[
-        {texte:"Annuler", action:()=>res(false)},
-        {texte:texteOui||"Confirmer", classe:"principal", action:()=>res(true)}
+        {texte:opts.texteNon||"Annuler", classe: opts.danger ? "principal" : "", action:()=>res(false)},
+        {texte:texteOui||"Confirmer", classe: opts.danger ? "rouge" : "principal", action:()=>res(true)}
       ],
       surFermeture:()=>res(false)
     });
@@ -1793,7 +1801,7 @@ function ouvrirSync(){
          <div class="expl"><span class="sens">Cet appareil → GitHub.</span> Téléverse les photos en attente, puis remplace le fichier ${FICHIER_JSON} par la version de cet appareil.</div>
        </div>
        <div class="action">
-         <button class="btn" id="sRecuperer">📥 Récupérer depuis GitHub</button>
+         <button class="btn rouge" id="sRecuperer">⚠️ 📥 Récupérer depuis GitHub (remplace cet appareil)</button>
          <div class="expl"><span class="sens">GitHub → cet appareil.</span> Remplace le contenu de cet appareil par celui du dépôt. Les photos pas encore envoyées sont conservées.</div>
        </div>
        <div class="action">
@@ -2539,7 +2547,7 @@ async function ouvrirHistoriqueGitHub(){
       `<div>Remplacer le contenu de cet appareil par la version du <b>${esc(dateFr(v.date))}</b> ?</div>` +
       tableauComparaison(data, v.jeu, "Version du " + dateFr(v.date)) +
       `<div class="aide">Les photos pas encore envoyées sont conservées. Ensuite, vérifiez l'application puis envoyez sur GitHub (☁️) pour que cette version redevienne la version de référence.</div>`,
-      "Restaurer cette version", "Restaurer");
+      "Restaurer cette version", "⚠️ Remplacer cet appareil par cette version", { danger:true, texteNon:"Ne rien changer" });
     if (!ok) return;
     const attente = photosEnAttente();
     const j = JSON.parse(JSON.stringify(v.jeu));
@@ -2702,7 +2710,7 @@ async function recupererDeGitHub(silencieux){
         `<div><b>⚠️ Cet appareil contient des éléments absents de GitHub :</b></div><ul>${pertesLocales.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` +
         tableauComparaison(data, j, "GitHub") +
         `<div class="aide">Recommandé : <b>Garder cet appareil</b>, puis envoyer ses données sur GitHub ☁️.</div>`,
-        "Données de cet appareil plus complètes", "Remplacer par GitHub quand même");
+        "Données de cet appareil plus complètes", "⚠️ Remplacer par GitHub quand même", { danger:true, texteNon:"Garder cet appareil" });
       journal("À l'ouverture, appareil plus complet que GitHub : " + pertesLocales.join(" ; ") + " → " + (ok ? "remplacé par GitHub" : "appareil conservé"));
       if (!ok){ etatSync = "ok"; sale = true; sauver(false); majBandeau(); toast("Données de cet appareil conservées. Pensez à les envoyer sur GitHub ☁️.", 7000); return false; }
     }
@@ -2712,7 +2720,7 @@ async function recupererDeGitHub(silencieux){
         `<div>Le contenu de cet appareil sera remplacé par celui de GitHub.</div>` +
         tableauComparaison(data, j, "GitHub") +
         (sale ? `<div class="aide">⚠️ Cet appareil a des modifications non envoyées : elles seront perdues, sauf les photos pas encore téléversées.</div>` : ""),
-        "Récupérer depuis GitHub", "Remplacer");
+        "Récupérer depuis GitHub", "⚠️ Remplacer cet appareil par GitHub", { danger:true, texteNon:"Garder cet appareil" });
       if (!ok) return false;
     }
 
@@ -5662,6 +5670,8 @@ function ouvrirCompartiment(b, k){
     const bOrd = f.querySelector("#cAppointOrdre");
     if (bOrd) bOrd.style.display = "none";
     const zIP = f.querySelector("#cInfoPhoto"), zOP = f.querySelector("#cOutilsPhoto");
+    // le bouton « Changer la photo » ne doit pas être détruit quand les outils sont redessinés
+    { const bP0 = f.querySelector("#cPhoto"); if (bP0 && zOP.contains(bP0)) zOP.parentNode.insertBefore(bP0, zOP); }
     const nomFace = appoint ? `Appoint ${num}${(photoObj(cs, face) || {}).rang ? " · " + ((photoObj(cs, face) || {}).rang === "derriere" ? "rangée 2" : "rangée 1") : " · rangée pas encore établie"}` : face === "photo2" ? "Rangée 2 (derrière)" : (cs.photo2 ? "Rangée 1 (devant)" : "Rangée 1");
     const ligneInfo = (c, v)=>`<div class="infoLigne"><span class="cle">${c}</span><span>${v}</span></div>`;
     majInfoComp();
@@ -5682,12 +5692,13 @@ function ouvrirCompartiment(b, k){
       (verrou ? ligneInfo("État", "★ rangée certifiée — consultation seule") : "");
     const statut = "";
     const outilsPhoto = (lignesVis)=> verrou ? "" : `
-       <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px">
+       <div style="display:flex;flex-direction:column;gap:14px;margin-top:2px">
          <button class="btn plein ${lignesVis ? "coupeOn" : ""}" id="cLignes">${lignesVis ? "✂️ Masquer les lignes" : "✂️ Lignes de coupe"}</button>
          ${lignesVis ? `<button class="btn rouge plein" id="cTronquer">✂️ Tronquer</button>` : ""}
          ${avantTroncature ? `<button class="btn plein" id="cAnnulerCoupe">↶ Annuler la troncature</button>` : ""}
        </div>
        ${lignesVis ? `<div class="aide" style="margin-top:2px">Posez le doigt près d'une ligne pour la déplacer : rouges pour le haut et le bas, vertes pour la gauche et la droite. Seul le rectangle entre les quatre lignes sera conservé.</div>` : ""}
+       <div id="cPlacePhoto" style="margin-top:14px"></div>
        ${appoint ? `<label for="cLegende">Légende de cette photo d'appoint</label>
          <input type="text" id="cLegende" value="${esc(ph0.legende||"")}" placeholder="zoom sur l'étagère du bas, tranche illisible…">
          <div class="aide">Transmise à l'IA : elle l'aide à savoir ce que vous vouliez montrer.</div>` : ""}
@@ -5700,6 +5711,7 @@ function ouvrirCompartiment(b, k){
       z.innerHTML = `<div class="chargePhoto">⏳ Chargement de la photo en pleine résolution…</div>`;
       zOP.innerHTML = outilsPhoto(false);
       brancherRetirer(zOP);
+      placerBoutonPhoto();
       const photoAvant = photoObj(cs, face);
       photoPleine(b, k, face).then(d=>{
         if (!f.isConnected || photoObj(cs, face) !== photoAvant) return;
@@ -5757,6 +5769,14 @@ function ouvrirCompartiment(b, k){
       sauver(); majFaces();
     };
     brancherRetirer(zOP);
+    placerBoutonPhoto();
+  };
+  /* « Changer la photo » : sous les lignes de coupe s'il y a une photo, sinon seul en tête du groupe */
+  const placerBoutonPhoto = ()=>{
+    const bP = f.querySelector("#cPhoto"), zOP = f.querySelector("#cOutilsPhoto");
+    if (!bP || !zOP) return;
+    const place = zOP.querySelector("#cPlacePhoto");
+    if (place) place.appendChild(bP); else zOP.parentNode.insertBefore(bP, zOP);
   };
   // informations sur le compartiment (encadré « ℹ️ Informations »)
   const majInfoComp = ()=>{
