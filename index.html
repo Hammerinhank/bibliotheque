@@ -163,6 +163,8 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .infoLigne{display:flex;gap:8px;font-size:14px;margin:3px 0}
 .groupeOutil{border:1.5px solid var(--bronze);border-radius:12px;padding:10px 12px 12px;margin-top:12px;background:rgba(255,255,255,.03)}
 .groupeOutil .titreGroupe{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--bronze);margin-bottom:8px}
+details.groupeOutil > summary.titreGroupe{cursor:pointer;list-style:revert;margin-bottom:0}
+details.groupeOutil[open] > summary.titreGroupe{margin-bottom:8px}
 .groupeOutil .btn{min-height:46px}
 .caseUnRang{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--trait);border-radius:10px;background:var(--encre);cursor:pointer}
 .caseUnRang input{width:26px;height:26px;flex:0 0 26px;margin:0}
@@ -431,8 +433,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.76.0";
+const VERSION = "V1.76.1";
 const HISTORIQUE = [
+  { v:"V1.76.1", d:"27/09/2026", l:[
+    "Outils › Photo : encadré repliable, déplié par défaut ; il se replie automatiquement une fois la troncature (lignes de coupe) validée, ne laissant que son titre."
+  ]},
   { v:"V1.76.0", d:"27/09/2026", l:[
     "Correctif de fond : à l'ouverture de l'app, si GitHub n'a pas changé depuis le dernier échange, les modifications de cet appareil (plus récentes) sont gardées sans rien demander et partent ensuite sur GitHub. La question « garder / remplacer par GitHub » n'apparaît plus que si GitHub a vraiment été modifié ailleurs (autre appareil) ET que cet appareil a aussi des modifications.",
     "Date et heure (à la seconde) à droite du titre de « Sauvegarde et transferts » et des fenêtres de comparaison, de récupération et de restauration, pour dater les captures d'écran."
@@ -5377,11 +5382,11 @@ function ouvrirCompartiment(b, k){
            </details>
            <details class="secIa" id="cOutils" open>
              <summary>🛠 Outils</summary>
-             <div class="groupeOutil">
-             <div class="titreGroupe">Photo</div>
+             <details class="groupeOutil" id="grpPhoto" open>
+             <summary class="titreGroupe">Photo</summary>
              <button class="btn plein" id="cPhoto">📷 Ajouter une photo</button>
              <div id="cOutilsPhoto"></div>
-             </div>
+             </details>
              <div class="groupeOutil">
              <div class="titreGroupe">Analyse</div>
            <div class="encadre" id="cBlocAnalyse" style="margin-top:6px">
@@ -5557,6 +5562,7 @@ function ouvrirCompartiment(b, k){
       poserPhoto(cs, face, { plein: nouveau, chemin:cheminPhoto(b,k,face), envoye:false, maj:new Date().toISOString() });
       delete cachePhotos[cleCache(b,k,face)];
       lignesVisibles = false;                             // évite une seconde coupe par mégarde
+      const gP = f.querySelector("#grpPhoto"); if (gP) gP.open = false;   // coupe validée : l'encadré Photo se replie
       sauver(); majPhoto(); rendreBiblio();
       await envoyerSiPossible("Photo tronquée");
     }catch(e){
