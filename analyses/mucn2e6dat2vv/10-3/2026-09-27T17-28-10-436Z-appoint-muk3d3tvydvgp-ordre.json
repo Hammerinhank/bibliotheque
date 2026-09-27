@@ -1,0 +1,145 @@
+{
+ "date": "2026-09-27T17:28:10.436Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "10-3",
+ "genre": "appoint",
+ "appoint": "muk3d3tvydvgp",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "LE DON DU ROI",
+   "auteur": "ROSE TREMAIN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 0,
+   "x2": 80,
+   "illisible": false
+  },
+  {
+   "titre": "SUR LES CHEMINS NOIRS",
+   "auteur": "SYLVAIN TESSON",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 85,
+   "x2": 130,
+   "illisible": false
+  },
+  {
+   "titre": "La Balade du chômeur",
+   "auteur": "OLIVIER TODD",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 135,
+   "x2": 175,
+   "illisible": false
+  },
+  {
+   "titre": "La Dame couchée",
+   "auteur": "Sandra Vanbremeersch",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 180,
+   "x2": 215,
+   "illisible": false
+  },
+  {
+   "titre": "TROIS MILLE CHEVAUX-VAPEUR",
+   "auteur": "ANTONIN VARENNE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 220,
+   "x2": 280,
+   "illisible": false
+  },
+  {
+   "titre": "La toile du monde",
+   "auteur": "Antonin Varenne",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 285,
+   "x2": 330,
+   "illisible": false
+  },
+  {
+   "titre": "Le roi des ordures",
+   "auteur": "VAUTRIN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 335,
+   "x2": 490,
+   "illisible": false
+  },
+  {
+   "titre": "Romans maritimes",
+   "auteur": "ROGER VERCEL",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 495,
+   "x2": 560,
+   "illisible": false
+  },
+  {
+   "titre": "La vie en confettis",
+   "auteur": "Hélène Vergé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 565,
+   "x2": 650,
+   "illisible": false
+  },
+  {
+   "titre": "LES GENS DE MOGADOR Tome II",
+   "auteur": "Élisabeth Barbier DOMINIQUE VERNET",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 655,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "LES GENS DE MOGADOR",
+   "auteur": "Élisabeth Barbier DOMINIQUE VERNET",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 745,
+   "x2": 810,
+   "illisible": false
+  },
+  {
+   "titre": "Le sympathisant",
+   "auteur": "Viet Thanh Nguyen",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 815,
+   "x2": 920,
+   "illisible": false
+  },
+  {
+   "titre": "",
+   "auteur": "Henri V",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "",
+   "x1": 925,
+   "x2": 1000,
+   "illisible": false
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-27T17:27:35.767Z",
+ "maj": "2026-09-27T17:28:16.646Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -13381,10 +13381,39 @@
         "champ": "photo2",
         "x1": 460,
         "x2": 495
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 0,
+        "x2": 80
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk3dvxj2x1n0",
+      "titre": "SUR LES CHEMINS NOIRS",
+      "auteur": "SYLVAIN TESSON",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 85,
+        "x2": 130
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
       "statut": "probable"
      },
@@ -13404,12 +13433,18 @@
         "champ": "photo2",
         "x1": 500,
         "x2": 530
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 135,
+        "x2": 175
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo03i5rk",
@@ -13427,12 +13462,18 @@
         "champ": "photo2",
         "x1": 535,
         "x2": 560
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 180,
+        "x2": 215
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0bdptk",
@@ -13450,12 +13491,18 @@
         "champ": "photo2",
         "x1": 565,
         "x2": 600
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 220,
+        "x2": 280
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0ygtl5",
@@ -13473,12 +13520,18 @@
         "champ": "photo2",
         "x1": 605,
         "x2": 630
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 285,
+        "x2": 330
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0b5q7t",
@@ -13496,12 +13549,18 @@
         "champ": "photo2",
         "x1": 635,
         "x2": 660
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 335,
+        "x2": 490
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo0b8zex",
@@ -13519,12 +13578,18 @@
         "champ": "photo2",
         "x1": 665,
         "x2": 700
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 495,
+        "x2": 560
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo022813",
@@ -13542,12 +13607,18 @@
         "champ": "photo2",
         "x1": 705,
         "x2": 740
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 565,
+        "x2": 650
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muk2ubo01f3yv",
@@ -13565,10 +13636,39 @@
         "champ": "photo2",
         "x1": 745,
         "x2": 780
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 655,
+        "x2": 740
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk3dvxj7bqxg",
+      "titre": "LES GENS DE MOGADOR",
+      "auteur": "Élisabeth Barbier DOMINIQUE VERNET",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 745,
+        "x2": 810
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
       "statut": "probable"
      },
@@ -13588,10 +13688,39 @@
         "champ": "photo2",
         "x1": 785,
         "x2": 830
+       },
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 815,
+        "x2": 920
        }
       ],
       "temoins": [
-       "photo2:2026-09-27T17:11:13.549Z"
+       "photo2:2026-09-27T17:11:13.549Z",
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muk3dvxjl6tz7",
+      "titre": "(titre non lu)",
+      "auteur": "Henri V",
+      "annee": "",
+      "certitude": "faible",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk3d3tvydvgp",
+        "x1": 925,
+        "x2": 1000
+       }
+      ],
+      "rang": "derriere",
+      "temoins": [
+       "appoint:muk3d3tvydvgp:2026-09-27T17:27:34.051Z"
       ],
       "statut": "probable"
      },
@@ -13734,12 +13863,35 @@
       "verif": "2026-09-27T17:21:11.455Z"
      },
      {
+      "plein": null,
       "chemin": "images/mucn2e6dat2vv/10-3-appoint-muk3d3tvydvgp.jpg",
-      "envoye": false,
+      "envoye": true,
       "maj": "2026-09-27T17:27:34.051Z",
       "id": "muk3d3tvydvgp",
       "legende": "",
-      "enIDB": "images/mucn2e6dat2vv/10-3-appoint-muk3d3tvydvgp.jpg"
+      "rang": "derriere",
+      "rangInfo": {
+       "auto": true,
+       "n1": 0,
+       "n2": 10,
+       "date": "2026-09-27T17:28:10.460Z"
+      },
+      "livresVus": [
+       "muk2ubo0yr8oj",
+       "muk3dvxj2x1n0",
+       "muk2ubo0az1us",
+       "muk2ubo03i5rk",
+       "muk2ubo0bdptk",
+       "muk2ubo0ygtl5",
+       "muk2ubo0b5q7t",
+       "muk2ubo0b8zex",
+       "muk2ubo022813",
+       "muk2ubo01f3yv",
+       "muk3dvxj7bqxg",
+       "muk2ubo050hqp",
+       "muk3dvxjl6tz7"
+      ],
+      "verif": "2026-09-27T17:28:15.282Z"
      }
     ],
     "certif": {
