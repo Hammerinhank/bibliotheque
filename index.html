@@ -430,8 +430,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.74.2";
+const VERSION = "V1.75.0";
 const HISTORIQUE = [
+  { v:"V1.75.0", d:"25/09/2026", l:[
+    "PDF (par thèmes, par auteur, par titre) : case « Avec table des matières ». Cochée, une table des matières (sections, nombre de livres, numéro de page, lignes cliquables) est ajoutée après le plan de la bibliothèque."
+  ]},
   { v:"V1.74.2", d:"25/09/2026", l:[
     "Lots par copier-coller : la demande est maintenant écrite directement dans Claude à l'ouverture (comme pour les photos), il suffit d'envoyer. La taille de chaque lot est ajustée pour que la demande tienne dans le lien (jusqu'à 80 livres)."
   ]},
@@ -5081,6 +5084,8 @@ function rendreBiblio(){
      </div>
      <div class="coche" style="margin-top:8px"><input type="checkbox" id="bPdfEmpl" ${cfg.pdfEmplacement ? "checked" : ""}>
        <label for="bPdfEmpl" style="margin:0">Emplacement dans le PDF : ajouter « (rg: X, cl: Y, 1 ou 2) » après chaque livre (rangée, colonne, rang de devant ou de derrière), avec un schéma numéroté de la bibliothèque en tête</label></div>
+     <div class="coche" style="margin-top:10px"><input type="checkbox" id="bPdfTdm" ${cfg.pdfTdm ? "checked" : ""}>
+       <label for="bPdfTdm" style="margin:0">Avec table des matières : après le plan de la bibliothèque, la liste des sections (thèmes, auteurs ou lettres) avec leur numéro de page, cliquable</label></div>
      <div id="bPdfSens" style="margin:6px 0 0 26px;${cfg.pdfEmplacement ? "" : "opacity:.45;pointer-events:none"}">
        <div class="aide" style="margin:0 0 4px">Numérotation des rangées dans le PDF (les colonnes vont toujours de gauche à droite) :</div>
        <div class="coche"><input type="radio" name="bSensRg" id="bSensHB" value="hb" ${cfg.pdfRangsBasHaut ? "" : "checked"}><label for="bSensHB" style="margin:0">de haut en bas (1 = rangée du haut, comme à l'écran)</label></div>
@@ -5112,6 +5117,7 @@ function rendreBiblio(){
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
   $("#bPdfTri").onclick = ()=>fenetrePdfTri(b);
+  $("#bPdfTdm").onchange = (e)=>{ cfg.pdfTdm = e.target.checked; sauverCfg(); };
   $("#bPdfEmpl").onchange = (e)=>{
     cfg.pdfEmplacement = e.target.checked; sauverCfg();
     const z = $("#bPdfSens"); z.style.opacity = e.target.checked ? "" : ".45"; z.style.pointerEvents = e.target.checked ? "" : "none";
@@ -7246,6 +7252,11 @@ function construirePdf(jsPDF, b, livres, mode){
     doc.setDrawColor(190); doc.line(MG, y, MG+LARG, y); y += 8;
   }
 
+  // table des matières : le contenu commence sur une nouvelle page ; la table sera insérée juste avant
+  const avecTdm = !!cfg.pdfTdm && cats.length > 1;
+  const pageAvantTdm = doc.getNumberOfPages();
+  if (avecTdm){ doc.addPage(); y = MG; }
+  const pageDe = {};
   cats.forEach(cat=>{
     const l = groupes[cat].slice().sort((x,z)=>{
       if (mode && mode.tri === "titre"){
@@ -7258,6 +7269,7 @@ function construirePdf(jsPDF, b, livres, mode){
       return d !== 0 ? d : (x.titre||"").localeCompare(z.titre||"","fr",{sensitivity:"base"});
     });
     saut(16);
+    pageDe[cat] = doc.getNumberOfPages();
     doc.setFont("helvetica","bold"); doc.setFontSize(13);
     doc.text(cat + "  (" + l.length + ")", MG, y); y += 2;
     doc.setDrawColor(150); doc.line(MG, y, MG+LARG, y); y += 6;
@@ -7284,6 +7296,36 @@ function construirePdf(jsPDF, b, livres, mode){
     y += 4;
   });
   if (avecEmpl){ y += 2; encadre("Rappel — " + RAPPEL); }
+
+  if (avecTdm){
+    // nombre de pages de la table, insertion après le plan, puis dessin (les sections sont décalées d'autant)
+    const PAS = 6.2, HAUT = 297 - MG * 2 - 16;
+    const parPage = Math.floor(HAUT / PAS);
+    const nPagesTdm = Math.ceil(cats.length / parPage);
+    for (let i = 0; i < nPagesTdm; i++) doc.insertPage(pageAvantTdm + 1 + i);
+    cats.forEach((cat, i)=>{
+      const pg = pageAvantTdm + 1 + Math.floor(i / parPage);
+      doc.setPage(pg);
+      let yy = MG + (i % parPage) * PAS;
+      if (i % parPage === 0){
+        doc.setFont("helvetica","bold"); doc.setFontSize(15); doc.setTextColor(0);
+        doc.text(nPagesTdm > 1 ? `Table des matières (${Math.floor(i / parPage) + 1}/${nPagesTdm})` : "Table des matières", MG, MG);
+        doc.setDrawColor(150); doc.line(MG, MG + 3, MG + LARG, MG + 3);
+      }
+      yy += 12;
+      const pageCible = pageDe[cat] + nPagesTdm;
+      doc.setFont("helvetica","normal"); doc.setFontSize(11); doc.setTextColor(0);
+      const libelle = doc.splitTextToSize(cat + "  (" + groupes[cat].length + ")", LARG - 22)[0];
+      doc.text(libelle, MG, yy);
+      doc.text(String(pageCible), MG + LARG, yy, { align:"right" });
+      // pointillés entre le libellé et le numéro
+      const xDeb = MG + doc.getTextWidth(libelle) + 2, xFin = MG + LARG - doc.getTextWidth(String(pageCible)) - 2;
+      doc.setTextColor(160);
+      for (let x = xDeb; x < xFin; x += 1.6) doc.text(".", x, yy);
+      doc.setTextColor(0);
+      try{ doc.link(MG, yy - 4.5, LARG, 6, { pageNumber: pageCible }); }catch(e){}
+    });
+  }
 
   const n = doc.getNumberOfPages();
   for (let p=1; p<=n; p++){
