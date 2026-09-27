@@ -445,8 +445,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.80.1";
+const VERSION = "V1.80.2";
 const HISTORIQUE = [
+  { v:"V1.80.2", d:"27/09/2026", l:[
+    "Correctif restauration : les sauvegardes anciennes (avant V1.80) ne contenaient que les compartiments ayant des livres ; restaurées, elles perdaient les photos des compartiments sans livres. Désormais les photos de tous les compartiments de la bibliothèque d'origine sont reprises.",
+    "Les sauvegardes gardent désormais tout le compartiment (état d'analyse, permutations, liste mise de côté…), pas seulement les livres ; la bibliothèque restaurée retrouve aussi les analyses sauvegardées (♻️) de la bibliothèque d'origine."
+  ]},
   { v:"V1.80.1", d:"27/09/2026", l:[
     "Tableau appareil / GitHub : la ligne « Livres » se déplie (▸ / ▾) pour montrer le nombre de livres de chaque bibliothèque, noms en petit et abrégés au minimum nécessaire pour les distinguer."
   ]},
@@ -2141,6 +2145,16 @@ async function envoyerDonneesAuto(quoi, opts){
 let reconstructionEnCours = false;
 
 async function listerResultatsSauves(b, k){
+  // bibliothèque restaurée : elle retrouve aussi les analyses sauvegardées de sa bibliothèque d'origine
+  if (b.restauree && b.restauree.depuis && !listerResultatsSauves.origine){
+    listerResultatsSauves.origine = true;
+    try{
+      const propres = await listerResultatsSauves(b, k);
+      const orig = await listerResultatsSauves(Object.assign({}, b, { id:b.restauree.depuis, restauree:null }), k).catch(()=>[]);
+      const vus = new Set(propres.map(x=>x.nom));
+      return propres.concat(orig.filter(x=>!vus.has(x.nom))).sort((a, z)=>(a.t || "").localeCompare(z.t || ""));
+    } finally { listerResultatsSauves.origine = false; }
+  }
   // un compartiment renuméroté garde ses analyses : on lit aussi ses anciens emplacements
   const csK = (b.cases || {})[k] || {};
   if ((csK.cleDepuis || (csK.historiqueCles || []).length) && !listerResultatsSauves.enCours){
@@ -2615,9 +2629,12 @@ function refsPhotos(cs){
 function instantaneBib(b){
   return { id:b.id, nom:b.nom, lieu:b.lieu || "", rangees:b.rangees, compartiments:b.compartiments, ratio:b.ratio,
     cases: Object.fromEntries(Object.entries(b.cases || {}).map(([k, cs])=>{
+      // tout le compartiment, sauf les images elles-mêmes (seules leurs références sont gardées)
+      const copie = JSON.parse(JSON.stringify(cs, (cle, v)=> (cle === "plein" || cle === "miniature" || cle === "enIDB") ? undefined : v));
+      delete copie.photo; delete copie.photo2; delete copie.appoints;
       const ph = refsPhotos(cs);
-      if (!(cs.livres || []).length && !cs.certif && !cs.unRang && !Object.keys(ph).length) return null;
-      return [k, { livres: JSON.parse(JSON.stringify(cs.livres || [])), ...(cs.certif ? { certif:{ ...cs.certif } } : {}), ...(cs.unRang ? { unRang:true } : {}), ...ph }];
+      if (!(cs.livres || []).length && !cs.certif && !cs.unRang && !Object.keys(ph).length && !cs.avantReconstruction) return null;
+      return [k, Object.assign(copie, { livres: copie.livres || [] }, ph)];
     }).filter(Boolean)) };
 }
 /* bibId : une seule bibliothèque ; null : toutes */
@@ -2684,11 +2701,15 @@ function restaurerEnNouvelle(s, sb){
   const sansRefs = !Object.values(sb.cases || {}).some(c=>c.photo || c.photo2 || (c.appoints || []).length);
   const emprunt = (ph)=> ph && ph.chemin ? Object.assign(JSON.parse(JSON.stringify(ph)), { envoye:true, emprunt:true }) : null;
   let nLivres = 0, nPhotos = 0;
-  Object.entries(sb.cases || {}).forEach(([k, sc])=>{
-    const cs = nb.cases[k] = { livres: JSON.parse(JSON.stringify(sc.livres || [])) };
+  // compartiments à créer : ceux de la sauvegarde, plus (ancienne sauvegarde sans photos) ceux de l'origine qui ont des photos
+  const cles = new Set(Object.keys(sb.cases || {}));
+  if (sansRefs && origine) Object.keys(origine.cases || {}).forEach(k=>{ if (Object.keys(refsPhotos(origine.cases[k])).length) cles.add(k); });
+  [...cles].forEach(k=>{
+    const sc = (sb.cases || {})[k] || { livres:[] };
+    const cs = nb.cases[k] = JSON.parse(JSON.stringify(sc));
+    delete cs.photo; delete cs.photo2; delete cs.appoints;
+    cs.livres = cs.livres || [];
     cs.livres.forEach(lv=>{ lv.id = uid(); });
-    if (sc.certif) cs.certif = { ...sc.certif };
-    if (sc.unRang) cs.unRang = true;
     const src = sansRefs && origine && origine.cases && origine.cases[k] ? refsPhotos(origine.cases[k]) : sc;
     if (emprunt(src.photo)){ cs.photo = emprunt(src.photo); nPhotos++; }
     if (emprunt(src.photo2)){ cs.photo2 = emprunt(src.photo2); nPhotos++; }
