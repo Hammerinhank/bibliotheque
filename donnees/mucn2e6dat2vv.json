@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-27T17:11:14.883Z",
+ "maj": "2026-09-27T17:12:58.624Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -13069,6 +13069,466 @@
        "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
       ],
       "statut": "acquis"
+     },
+     {
+      "id": "muk2ubo0v07o2",
+      "titre": "Ces messieurs de Saint-Malo",
+      "auteur": "Bernard Simiot",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Albin Michel",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 0,
+        "x2": 80
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0f9zw7",
+      "titre": "LE SERRE aux TRUFFES",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Calmann-Lévy",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 100,
+        "x2": 160
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0y6wr5",
+      "titre": "Les délices de Tokyo",
+      "auteur": "Durian Sukegawa",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Albin Michel",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 165,
+        "x2": 220
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0va7u0",
+      "titre": "Le Parfum",
+      "auteur": "Patrick Süskind",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Fayard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 225,
+        "x2": 280
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo04h07n",
+      "titre": "Le chardonneret",
+      "auteur": "Donna Tartt",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 285,
+        "x2": 335
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0axiw1",
+      "titre": "Entrez dans la danse",
+      "auteur": "Jean Teulé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Julliard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 340,
+        "x2": 375
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0ih90a",
+      "titre": "Ma petite Française",
+      "auteur": "Bernard Thomasson",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Seuil",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 380,
+        "x2": 410
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo045xw3",
+      "titre": "Musique et silence",
+      "auteur": "Rose Tremain",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Plon",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 415,
+        "x2": 455
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0yr8oj",
+      "titre": "Le don du roi",
+      "auteur": "Rose Tremain",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Editions de Fallois",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 460,
+        "x2": 495
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0az1us",
+      "titre": "La balade du chômeur",
+      "auteur": "Olivier Todd",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Grasset",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 500,
+        "x2": 530
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo03i5rk",
+      "titre": "La Dame couchée",
+      "auteur": "Sandra Vanbremeersch",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Seuil",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 535,
+        "x2": 560
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0bdptk",
+      "titre": "TROIS MILLE CHEVAUX-VAPEUR",
+      "auteur": "Antonin Varenne",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Albin Michel",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 565,
+        "x2": 600
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0ygtl5",
+      "titre": "La toile du monde",
+      "auteur": "Antonin Varenne",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Albin Michel",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 605,
+        "x2": 630
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0b5q7t",
+      "titre": "Un an des ordres",
+      "auteur": "Vautrin",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Fayard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 635,
+        "x2": 660
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0b8zex",
+      "titre": "Romains maritimes",
+      "auteur": "Roger Vercel",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Omnibus",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 665,
+        "x2": 700
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo022813",
+      "titre": "La vie en confettis",
+      "auteur": "Hélène Vergé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Robert Laffont",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 705,
+        "x2": 740
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo01f3yv",
+      "titre": "Les gens de Mogador Tome II",
+      "auteur": "Elisabeth Barbier",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Julliard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 745,
+        "x2": 780
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo050hqp",
+      "titre": "Le sympathisant",
+      "auteur": "Viet Thanh Nguyen",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "B3",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 785,
+        "x2": 830
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0ydks3",
+      "titre": "Mémoires d'un enfant du rail",
+      "auteur": "Henri Vincenot",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Hachette Littérature",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 835,
+        "x2": 880
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muk2ubo0d8mi2",
+      "titre": "DEUX FEMMES",
+      "auteur": "Frédéric Vitoux",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Seuil",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "derriere",
+      "vues": [
+       {
+        "champ": "photo2",
+        "x1": 885,
+        "x2": 920
+       }
+      ],
+      "temoins": [
+       "photo2:2026-09-27T17:11:13.549Z"
+      ],
+      "statut": "probable"
      }
     ],
     "photo": {
@@ -13078,21 +13538,21 @@
      "maj": "2026-09-23T07:50:01.042Z"
     },
     "analyse": {
-     "maj": "2026-09-23T07:50:13.125Z",
+     "maj": "2026-09-27T17:12:57.748Z",
      "rangs": {
       "devant": "2026-09-23T07:50:13.125Z",
-      "derriere": "2026-09-23T06:56:01.765Z"
+      "derriere": "2026-09-27T17:12:57.748Z"
      },
      "ia": "gemini",
-     "modele": "gemini-flash-lite-latest",
-     "photos": 1,
+     "modele": "gemini-2.5-flash",
+     "photos": 2,
      "manuel": false
     },
     "photo2": {
+     "plein": null,
      "chemin": "images/mucn2e6dat2vv/10-3-derriere.jpg",
-     "envoye": false,
-     "maj": "2026-09-27T17:11:13.549Z",
-     "enIDB": "images/mucn2e6dat2vv/10-3-derriere.jpg"
+     "envoye": true,
+     "maj": "2026-09-27T17:11:13.549Z"
     },
     "appoints": [
      {
