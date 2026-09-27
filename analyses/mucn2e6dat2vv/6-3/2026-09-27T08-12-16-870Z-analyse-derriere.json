@@ -1,0 +1,584 @@
+{
+ "date": "2026-09-27T08:12:16.870Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "6-3",
+ "genre": "analyse",
+ "portee": "derriere",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "livres": [
+  {
+   "id": "mujjj04m4k97l",
+   "titre": "Caprices de Chine",
+   "auteur": "Stéphane Fière",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions de l'Aube",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 20,
+     "x2": 43
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mw3kzz",
+   "titre": "Double bonheur",
+   "auteur": "Stéphane Fière",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions de l'Aube",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 43,
+     "x2": 74
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m9hsmd",
+   "titre": "Les souvenirs",
+   "auteur": "David Foenkinos",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard, collection blanche nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 74,
+     "x2": 94
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m96u3x",
+   "titre": "Jeune-Vieille",
+   "auteur": "Paul Fournel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "P.O.L",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 94,
+     "x2": 114
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mlwh18",
+   "titre": "Où on va, papa ?",
+   "auteur": "Jean-Louis Fournier",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Stock, tranche étroite sombre",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 114,
+     "x2": 128
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m6643s",
+   "titre": "Les Naufragés de l'île Tromelin",
+   "auteur": "Irène Frain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Michel Lafon",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 128,
+     "x2": 166
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m3170f",
+   "titre": "Modern Style",
+   "auteur": "Irène Frain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "JC Lattès",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 166,
+     "x2": 208
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mm5uqm",
+   "titre": "L'homme fatal",
+   "auteur": "Irène Frain",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Fayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 208,
+     "x2": 250
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mo1gjg",
+   "titre": "Ce qu'a vu le vent d'ouest",
+   "auteur": "Fruttero & Lucentini",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Seuil",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 250,
+     "x2": 288
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mvlz2c",
+   "titre": "Les jardins de Torcello",
+   "auteur": "Claudie Gallay",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Actes Sud",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 288,
+     "x2": 324
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m2s33d",
+   "titre": "La beauté des jours",
+   "auteur": "Claudie Gallay",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Actes Sud",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 324,
+     "x2": 360
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mz4hbw",
+   "titre": "Roi par effraction",
+   "auteur": "François Garde",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 360,
+     "x2": 386
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mgd1of",
+   "titre": "Pour trois couronnes",
+   "auteur": "François Garde",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 386,
+     "x2": 411
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mf78vv",
+   "titre": "Dar Baroud",
+   "auteur": "Louis Gardel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Seuil",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 411,
+     "x2": 443
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m5j8ai",
+   "titre": "Fendre l'armure",
+   "auteur": "Anna Gavalda",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Le Dilettante, texte pâle",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 443,
+     "x2": 475
+    }
+   ]
+  },
+  {
+   "id": "mujjj04myz6je",
+   "titre": "Le nouvel Ingénu",
+   "auteur": "Pierre Gaxotte",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Fayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 475,
+     "x2": 494
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mbinre",
+   "titre": "Lorelei",
+   "auteur": "Maurice Genevoix",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Seuil",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 494,
+     "x2": 514
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mi177m",
+   "titre": "Un océan de pavots",
+   "auteur": "Amitav Ghosh",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Robert Laffont",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 514,
+     "x2": 564
+    }
+   ]
+  },
+  {
+   "id": "mujjj04msm10p",
+   "titre": "Les Services compétents",
+   "auteur": "Iegor Gran",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "P.O.L",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 564,
+     "x2": 591
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mgnzuf",
+   "titre": "L'Affreux",
+   "auteur": "Franz-Olivier Giesbert",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 591,
+     "x2": 618
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mjuv00",
+   "titre": "La Souille",
+   "auteur": "Franz-Olivier Giesbert",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 618,
+     "x2": 641
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m3o0t5",
+   "titre": "Fontranges au Niagara",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "auteur illisible, tranche étroite",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 641,
+     "x2": 655
+    }
+   ]
+  },
+  {
+   "id": "mujjj04my4lp9",
+   "titre": "Ana non",
+   "auteur": "Agustín Gómez-Arcos",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Stock",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 655,
+     "x2": 680
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mywnyx",
+   "titre": "Le Rivage des Syrtes",
+   "auteur": "Julien Gracq",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "José Corti",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 680,
+     "x2": 713
+    }
+   ]
+  },
+  {
+   "id": "mujjj04my8u1h",
+   "titre": "Colère",
+   "auteur": "Patrick Grainville",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditions du Seuil",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 713,
+     "x2": 755
+    }
+   ]
+  },
+  {
+   "id": "mujjj04muxpfv",
+   "titre": "La fin d'une liaison",
+   "auteur": "Graham Greene",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Robert Laffont, Pavillons poche",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 755,
+     "x2": 778
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mu4t0f",
+   "titre": "La valse des arbres et du ciel",
+   "auteur": "Jean-Michel Guenassia",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 778,
+     "x2": 811
+    }
+   ]
+  },
+  {
+   "id": "mujjj04m1lla1",
+   "titre": "A Dieu vat",
+   "auteur": "Jean-Michel Guenassia",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 811,
+     "x2": 859
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mw9tsu",
+   "titre": "La vie rêvée d'Ernesto G.",
+   "auteur": "Jean-Michel Guenassia",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 859,
+     "x2": 900
+    }
+   ]
+  },
+  {
+   "id": "mujjj04mkfe5r",
+   "titre": "Les terres promises",
+   "auteur": "Jean-Michel Guenassia",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 900,
+     "x2": 956
+    }
+   ]
+  }
+ ]
+}
