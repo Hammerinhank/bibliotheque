@@ -436,8 +436,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.79.0";
+const VERSION = "V1.79.1";
 const HISTORIQUE = [
+  { v:"V1.79.1", d:"27/09/2026", l:[
+    "Sauvegardes : sur chaque sauvegarde, le choix « Restaurer dans » est affiché directement, avec en clair ce qui va se passer (quelle bibliothèque est modifiée, combien de livres avant / après, ce qui ne bouge pas), et un bouton dont le libellé décrit l'action exacte (« Remplacer les livres de … » ou « Copier dans … »)."
+  ]},
   { v:"V1.79.0", d:"27/09/2026", l:[
     "Sauvegardes propres à chaque bibliothèque : on choisit en tête de page la bibliothèque concernée ; chaque sauvegarde ne contient qu'elle (dossier sauvegardes/<bibliothèque>/) et la liste n'affiche que les siennes (plus les anciennes sauvegardes globales).",
     "Chaque sauvegarde indique clairement « Bibliothèque sauvegardée : … » et où elle est enregistrée (« ✅ sur cet iPhone », « ✅ sur GitHub » ou « ⏳ pas encore sur GitHub ») ; la restauration affiche sans ambiguïté la bibliothèque d'origine et la bibliothèque de destination."
@@ -2673,25 +2676,34 @@ function panneauSauvegardes(zone){
           ${s ? `<div class="infoLigne"><span class="cle">Bibliothèque sauvegardée</span><span><b>${esc(origine)}</b></span></div>
           <div class="infoLigne"><span class="cle">Contenu</span><span>${livresSvg(s)} livres · app ${esc(s.version || "")}</span></div>` : `<div class="chg">illisible</div>`}
           <div class="infoLigne"><span class="cle">Enregistrée</span><span>${d.e.local ? "✅ sur cet iPhone" : "— pas sur cet iPhone"}<br>${d.e.github ? "✅ sur GitHub" : "⏳ pas encore sur GitHub (partira dès qu'il y a du réseau)"}</span></div>
-          ${s ? `<div class="barre" style="margin-top:8px"><button class="btn rouge" data-rest="${i}" style="flex:2">↩ Restaurer…</button><button class="btn" data-sup="${i}" style="flex:1">🗑 Supprimer</button></div>` : ""}
+          ${s ? `<div class="groupeOutil" style="margin-top:10px">
+            <label for="svDest${i}" style="margin-top:0">Restaurer dans</label>
+            <select id="svDest${i}" data-dest="${i}">${(data.bibliotheques || []).map(x=>`<option value="${esc(x.id)}" ${x.id === bibSel ? "selected" : ""}>${esc(x.nom)}${x.id === bibSel ? " (la même)" : livresDe(x) ? " (autre, " + livresDe(x) + " livres)" : " (autre, vide)"}</option>`).join("")}</select>
+            <div class="aide" id="svEffet${i}" style="margin:8px 0"></div>
+            <button class="btn rouge plein" data-rest="${i}"></button>
+          </div>
+          <button class="btn plein" data-sup="${i}" style="margin-top:10px">🗑 Supprimer cette sauvegarde</button>` : ""}
         </div>`;
     }).join("") || `<div class="aide">Aucune sauvegarde de cette bibliothèque pour l'instant.</div>`;
+    const sbDe = (d)=> d.s.bibliotheque ? d.s.bibliotheques[0] : d.s.bibliotheques.find(x=>x.id === bibSel);
+    const nSvg = (sb)=> Object.values(sb.cases).reduce((n, c)=>n + c.livres.length, 0);
+    const majEffet = (i)=>{
+      const d = utiles[i], sb = sbDe(d); if (!sb) return;
+      const dest = zl.querySelector("#svDest" + i).value, destB = biblio(dest);
+      const meme = dest === sb.id;
+      zl.querySelector("#svEffet" + i).innerHTML = meme
+        ? `<b>Ce qui va se passer :</b> les <b>${livresDe(destB)} livres actuels</b> de « ${esc(destB.nom)} » seront <b>remplacés</b> par les <b>${nSvg(sb)} livres</b> de cette sauvegarde, chacun dans son compartiment, sa rangée et à sa place, avec les certifications et marques « 1 rang » de ce jour-là. Les photos ne changent pas. L'état actuel est d'abord sauvegardé automatiquement.`
+        : `<b>Ce qui va se passer :</b> les <b>${nSvg(sb)} livres</b> de « ${esc(sb.nom)} » seront <b>copiés dans « ${esc(destB.nom)} »</b>${livresDe(destB) ? `, <b>à la place de ses ${livresDe(destB)} livres actuels</b>` : " (vide aujourd'hui)"}, avec la même grille, les mêmes compartiments, rangées et ordre, <b>sans les photos</b>. <b>« ${esc(sb.nom)} » n'est pas modifiée.</b> L'état actuel de « ${esc(destB.nom)} » est d'abord sauvegardé automatiquement.`;
+      zl.querySelector(`[data-rest="${i}"]`).textContent = meme
+        ? `↩ Remplacer les livres de « ${destB.nom} » par cette sauvegarde`
+        : `↩ Copier cette sauvegarde dans « ${destB.nom} »`;
+    };
+    zl.querySelectorAll("[data-dest]").forEach(sel=>{ sel.onchange = ()=>majEffet(Number(sel.dataset.dest)); majEffet(Number(sel.dataset.dest)); });
     zl.querySelectorAll("[data-rest]").forEach(bt=>bt.onclick = async ()=>{
-      const d = utiles[Number(bt.dataset.rest)], s = d.s;
-      const sb = s.bibliotheque ? s.bibliotheques[0] : s.bibliotheques.find(x=>x.id === bibSel);
+      const i = Number(bt.dataset.rest), d = utiles[i], s = d.s;
+      const sb = sbDe(d);
       if (!sb) return;
-      // destination : la même par défaut, ou une autre
-      const dest = await new Promise(res=>{
-        let fait = false;
-        modale({ titre:"Restaurer une sauvegarde", horodatage:true,
-          html:`<div class="infoLigne"><span class="cle">Sauvegarde</span><span><b>${esc(dateFr(s.date))}</b>${s.libelle ? " — « " + esc(s.libelle) + " »" : ""}</span></div>
-            <div class="infoLigne"><span class="cle">Bibliothèque d'origine</span><span><b>${esc(sb.nom)}</b> — ${Object.values(sb.cases).reduce((n, c)=>n + c.livres.length, 0)} livres</span></div>
-            <label for="svDest">Restaurer dans la bibliothèque</label>
-            <select id="svDest">${(data.bibliotheques || []).map(x=>`<option value="${esc(x.id)}" ${x.id === sb.id ? "selected" : ""}>${esc(x.nom)}${x.id === sb.id ? " (la même, d'origine)" : livresDe(x) ? " (autre — a déjà " + livresDe(x) + " livres)" : " (autre — vide)"}</option>`).join("")}</select>
-            <div class="aide">Dans une autre bibliothèque, la sauvegarde y copie grille, compartiments, rangées et ordre des livres, <b>sans les photos</b>.</div>`,
-          boutons:[{ texte:"Annuler", action:()=>{ fait = true; res(null); } }, { texte:"Continuer", classe:"principal", action:(f2)=>{ fait = true; res(f2.querySelector("#svDest").value); } }],
-          surFermeture:()=>{ if (!fait) res(null); } });
-      });
+      const dest = zl.querySelector("#svDest" + i).value;
       if (!dest) return;
       const destB = biblio(dest);
       const ok = await confirmer(`<div class="infoLigne"><span class="cle">De</span><span><b>${esc(sb.nom)}</b> (sauvegarde du ${esc(dateFr(s.date))})</span></div>
