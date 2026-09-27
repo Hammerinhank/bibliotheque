@@ -14099,7 +14099,8 @@
        "remarque": "Gallimard NRF",
        "resume": "Une ancienne candidate de téléréalité devenue influenceuse voit sa fille disparaître ; une enquêtrice explore l'exposition des enfants sur les réseaux sociaux.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "statut": "acquis"
       },
       {
        "id": "muk2iktn5ykza",
@@ -14122,7 +14123,7 @@
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vopvkdb",
@@ -14143,7 +14144,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vo0l10c",
@@ -14164,7 +14166,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2voyowua",
@@ -14185,7 +14188,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2voumj08",
@@ -14197,16 +14201,7 @@
        "resume": "",
        "categorie": "Romans français",
        "origine": "ia",
-       "question": {
-        "type": "absent",
-        "zone": {
-         "champ": "appoint:muk2hewccfjzt",
-         "x1": 230,
-         "x2": 260
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-27T17:03:55.759Z"
-       }
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vok32iu",
@@ -14227,7 +14222,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vodiz7z",
@@ -14248,7 +14244,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2voaoa9p",
@@ -14269,7 +14266,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vo7wg9q",
@@ -14290,7 +14288,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vownz1u",
@@ -14311,7 +14310,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vodiwrk",
@@ -14332,7 +14332,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vo0tidx",
@@ -14353,7 +14354,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vofj3yz",
@@ -14374,7 +14376,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vod7wmv",
@@ -14395,7 +14398,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vo2omel",
@@ -14416,7 +14420,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "mudsz2vot39kp",
@@ -14437,7 +14442,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
+       ],
+       "statut": "acquis"
       },
       {
        "id": "muk2iktn50p3a",
@@ -14460,7 +14466,7 @@
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mudsz2voj77ud",
@@ -14481,30 +14487,8 @@
        ],
        "temoins": [
         "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ]
-      },
-      {
-       "id": "muk2iktn5vyuq",
-       "titre": "Myrina",
-       "auteur": "",
-       "annee": "",
-       "certitude": "faible",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:muk2hewccfjzt",
-         "x1": 220,
-         "x2": 260
-        }
        ],
-       "rang": "devant",
-       "temoins": [
-        "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
-       ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -14566,7 +14550,10 @@
        ],
        "verif": "2026-09-27T17:03:55.760Z"
       }
-     ]
+     ],
+     "certif": {
+      "devant": "2026-09-27T17:06:11.990Z"
+     }
     },
     "8-3": {
      "livres": [
@@ -42540,7 +42527,7 @@
    }
   }
  ],
- "maj": "2026-09-27T17:03:57.269Z",
+ "maj": "2026-09-27T17:07:11.180Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
