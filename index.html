@@ -154,6 +154,9 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case.pgNouvelle{border:2px dashed var(--bronze);background:transparent}
 .filtresListe{display:flex;gap:6px;flex-wrap:nowrap}
 .filtresListe button{flex:1 1 0;min-width:0;text-align:center;padding-left:4px;padding-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nomIa{font-weight:800;white-space:nowrap}
+.nomIa-claude{color:#f0a37a}
+.nomIa-gemini{color:#7fb2ff}
 .tete .horodatage{margin-left:auto;margin-right:10px;font-size:12px;color:var(--texte2);white-space:nowrap;font-variant-numeric:tabular-nums}
 .secIa{margin-top:12px;border:1px solid var(--trait);border-radius:10px;padding:8px 12px}
 .secIa > summary{cursor:pointer;font-weight:700;color:var(--bronze);font-size:15px;padding:4px 0}
@@ -433,8 +436,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.77.0";
+const VERSION = "V1.77.1";
 const HISTORIQUE = [
+  { v:"V1.77.1", d:"27/09/2026", l:[
+    "Dans les textes qui citent l'IA utilisée (Claude ou Gemini), son nom est en gras et en couleur (Claude en orangé, Gemini en bleu) pour bien le repérer."
+  ]},
   { v:"V1.77.0", d:"27/09/2026", l:[
     "Ligne Entière / Ajustée / 100 % / 200 % : bouton « 🖼 Appoint » qui fait défiler les photos d'appoint une à une (puis revient à la photo de la rangée), avec les mêmes affichages que la photo principale. Absent s'il n'y a aucun appoint ; disponible même si les rangées sont certifiées (consultation seule)."
   ]},
@@ -2904,6 +2910,8 @@ const iaEnPanne = {};                     // pour la session : une IA en panne n
 const NOM_IA = { gemini:"Gemini", claude:"Claude" };
 
 /* Vrai si l'IA est réglée « sans clé » (copier-coller dans son site). */
+/* nom de l'IA mis en valeur dans un texte (gras et couleur) */
+function iaHtml(ia){ return NOM_IA[ia] ? `<b class="nomIa nomIa-${ia}">${NOM_IA[ia]}</b>` : "l'IA"; }
 function modeManuel(nom){ return (nom === "claude" ? cfg.claudeMode : cfg.geminiMode) === "manuel"; }
 
 async function interrogerIA(parties, lire, opts){
@@ -3013,6 +3021,7 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
   ia = ia || "claude";
   genre = genre || "analyse";
   const NOM = NOM_IA[ia], autre = ia === "claude" ? "gemini" : "claude";
+  const NOMH = iaHtml(ia);
   const images = parties.filter(p=>p.inline_data).map(p=>"data:" + p.inline_data.mime_type + ";base64," + p.inline_data.data);
   const deux = images.length > 1;
   const cs = b.cases[k];
@@ -3032,8 +3041,8 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
   const f = modale({
     titre: (genre === "controle" ? "Lire l'appoint avec " : "Demander à ") + NOM + " (sans clé)",
     html:
-      (tombees.length ? `<div class="encadre" style="margin-top:0">${NOM_IA[autre]} a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
-      (genre === "controle" ? `<div class="encadre" style="margin-top:0">Lecture d'une photo d'appoint : ${NOM} lit la photo sans voir la liste ; l'application fera ensuite le rapprochement.</div>` : "") +
+      (tombees.length ? `<div class="encadre" style="margin-top:0">${iaHtml(autre)} a échoué : ${esc(String(tombees[0].e.message).split("\n")[0])}</div>` : "") +
+      (genre === "controle" ? `<div class="encadre" style="margin-top:0">Lecture d'une photo d'appoint : ${NOMH} lit la photo sans voir la liste ; l'application fera ensuite le rapprochement.</div>` : "") +
       `<div id="mcEtapes"></div>`,
     boutons:[{texte:"Fermer"}]
   });
@@ -3043,24 +3052,24 @@ function lancerClaudeManuel(b, k, parties, echecs, ia, genre, portee){
          ${deux ? `<div class="aide">Pour une lecture plus fine, vous pouvez aussi les envoyer une par une :</div>
            <div class="barre"><button class="btn" id="mcP1" style="flex:1">Photo 1</button><button class="btn" id="mcP2" style="flex:1">Photo 2</button></div>` : ""}
          <div class="aide" id="mcEtatCopie"></div>`;
-  const etape3 = `<div class="etape"><div class="n">3</div><div class="c">Dans ${NOM}, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
+  const etape3 = `<div class="etape"><div class="n">3</div><div class="c">Dans ${NOMH}, copiez sa réponse (le bloc JSON), revenez ici et touchez le bouton vert.
          <button class="btn plein" id="mcReponse">📥 Copier la réponse de ${NOM}</button>
-         <div class="aide">Dès que vous avez ouvert ${NOM}, le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir ${NOM} n'enregistre aucune attente.</div></div></div>`;
+         <div class="aide">Dès que vous avez ouvert ${NOMH}, le bouton vert reste aussi en bas de l'écran tant que la réponse est attendue, même si vous fermez cette fenêtre. Fermer cette fenêtre sans ouvrir ${NOMH} n'enregistre aucune attente.</div></div></div>`;
   const rendreEtapes = ()=>{
     const z = f.querySelector("#mcEtapes");
     z.innerHTML = !questionManuelle
       ? `<div class="etape"><div class="n">1</div><div class="c">
            <button class="btn plein" id="mcQuestion" style="margin-top:0">✍️ Copier la question à la main</button>
-           <div class="aide" style="margin:2px 0 10px">Seulement si, d'habitude, la question n'apparaît pas déjà écrite dans ${NOM} (étape 2). Les étapes s'adaptent alors.</div>
+           <div class="aide" style="margin:2px 0 10px">Seulement si, d'habitude, la question n'apparaît pas déjà écrite dans ${NOMH} (étape 2). Les étapes s'adaptent alors.</div>
            Copier ${deux ? "les deux photos (réunies côte à côte)" : "la photo"} dans le presse-papier.
            ${btnsPhotos()}</div></div>
-         <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOM} : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
+         <div class="etape"><div class="n">2</div><div class="c">Ouvrir ${NOMH} : la question est déjà écrite. <b>Collez la photo en pièce jointe</b>, puis envoyez.
            <button class="btn plein" id="mcOuvrir">↗️ Ouvrir ${NOM} avec la question</button></div></div>` + etape3
-      : `<div class="etape"><div class="n">1</div><div class="c"><b>✓ La question est dans le presse-papier.</b> Ouvrez ${NOM} (page vide) et <b>collez-la</b> dans la zone de saisie, sans envoyer.
+      : `<div class="etape"><div class="n">1</div><div class="c"><b>✓ La question est dans le presse-papier.</b> Ouvrez ${NOMH} (page vide) et <b>collez-la</b> dans la zone de saisie, sans envoyer.
            <button class="btn plein" id="mcOuvrirVide">↗️ Ouvrir ${NOM}</button>
            <button class="btn plein" id="mcQuestion">Recopier la question</button>
            <button class="btn plein" id="mcRetour">↩ Revenir au déroulé normal</button></div></div>
-         <div class="etape"><div class="n">2</div><div class="c">Revenez ici, copiez ${deux ? "les photos" : "la photo"}, puis retournez dans ${NOM} : <b>collez-la en pièce jointe</b> sous la question et envoyez.
+         <div class="etape"><div class="n">2</div><div class="c">Revenez ici, copiez ${deux ? "les photos" : "la photo"}, puis retournez dans ${NOMH} : <b>collez-la en pièce jointe</b> sous la question et envoyez.
            ${btnsPhotos()}</div></div>` + etape3;
     brancher();
     majVifs();
@@ -4818,6 +4827,7 @@ function avertirSansIaLots(){
    Pour chaque lot : copier la demande → ouvrir l'IA et coller → copier la réponse → la coller ici ; puis lot suivant. */
 function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia){
   const NOM = NOM_IA[ia] || "l'IA";
+  const NOMH = iaHtml(ia);
   const LIMITE_LIEN = 12000;             // longueur maximale du lien qui pré-remplit la question dans l'IA
   const construire = (tranche)=> question + "\n\nListe :\n" + tranche.map((lv, i)=>`${i}. ${lv.titre}${lv.auteur ? " — " + lv.auteur : ""}${lv.annee ? " (" + lv.annee + ")" : ""}`).join("\n") +
     "\n\nRéponds uniquement avec le bloc JSON demandé, sans texte autour.";
@@ -4843,11 +4853,11 @@ function traiterParLotsManuel(livres, question, champs, titreFenetre, taille, ia
       const z = f.querySelector("#lmZone");
       z.innerHTML = `
         <div class="encadre" style="margin-top:0"><b>Lot ${n + 1} sur ${nLots}</b> — ${tranche.length} livre(s). Déjà traités : ${fait} / ${livres.length}, reste ${livres.length - fait}.</div>
-        <div class="etape"><div class="n">1</div><div class="c">Ouvrir ${NOM} : la demande (question + liste des livres de ce lot) est <b>déjà écrite</b>, il suffit de l'<b>envoyer</b>.
+        <div class="etape"><div class="n">1</div><div class="c">Ouvrir ${NOMH} : la demande (question + liste des livres de ce lot) est <b>déjà écrite</b>, il suffit de l'<b>envoyer</b>.
           <button class="btn principal plein" id="lmOuvrir">↗️ Ouvrir ${NOM} avec la demande</button>
           <div class="aide" id="lmEtat"></div>
           <button class="btn plein" id="lmCopier" style="margin-top:6px;font-size:13.5px">Recopier la demande (si le collage ne marche pas)</button></div></div>
-        <div class="etape"><div class="n">2</div><div class="c">Dans ${NOM}, copiez toute sa réponse (le bloc JSON), revenez ici et :
+        <div class="etape"><div class="n">2</div><div class="c">Dans ${NOMH}, copiez toute sa réponse (le bloc JSON), revenez ici et :
           <button class="btn plein" id="lmReponse">📥 Coller la réponse de ${NOM}</button>
           <div id="lmMain" hidden><textarea id="lmTexte" placeholder="Collez ici la réponse de ${NOM}" style="min-height:120px"></textarea>
             <button class="btn principal plein" id="lmValider">Valider la réponse collée</button></div></div></div>
@@ -5126,7 +5136,7 @@ function rendreBiblio(){
      </div>
      <div class="action">
        <button class="btn" id="bResumes">📝 Résumés et auteurs</button>
-       <div class="expl">Demande à l'IA (${esc(NOM_IA[iaPourLots()] || "réglée dans ⚙️")}) un résumé d'une ligne, l'auteur détaillé et l'année de parution pour chaque livre.</div>
+       <div class="expl">Demande à ${iaHtml(iaPourLots())} un résumé d'une ligne, l'auteur détaillé et l'année de parution pour chaque livre.</div>
      </div>
      <div class="action">
        <button class="btn" id="bPdf">📄 PDF classé par thèmes</button>
@@ -5869,7 +5879,7 @@ function ouvrirCompartiment(b, k){
         ? `${e.total} livre(s) — ${e.acquis} 🔒 · ${e.probables} probable(s) · <b style="color:${e.questions ? "var(--orange)" : "inherit"}">${e.questions} ❓</b>${certifiee(cs, r) ? ` · <b style="color:#ffd23f">★ certifiée</b>` : ""}`
         : "aucun livre");
     });
-    if (cs.analyse && cs.analyse.maj) h += ligne("Dernière analyse", `${esc(dateFr(cs.analyse.maj))}${cs.analyse.ia ? " — " + esc(NOM_IA[cs.analyse.ia] || cs.analyse.ia) : ""}`);
+    if (cs.analyse && cs.analyse.maj) h += ligne("Dernière analyse", `${esc(dateFr(cs.analyse.maj))}${cs.analyse.ia ? " — " + (NOM_IA[cs.analyse.ia] ? iaHtml(cs.analyse.ia) : esc(cs.analyse.ia)) : ""}`);
     const nA = (cs.appoints || []).length;
     if (nA) h += ligne("Appoints", `${nA} photo(s) d'appoint`);
     zc.innerHTML = h;
@@ -6971,7 +6981,7 @@ async function lancerResumes(b){
   ].filter(Boolean);
   let choix = options[0].id;
   const f = modale({ titre:"Résumés et auteurs",
-    html:`<div class="aide" style="margin-top:0"><b>À quoi ça sert ?</b> Pour chaque livre, <b>${esc(NOM_IA[ia])}</b>${lotsManuels() ? " (sans clé : par copier-coller, lot par lot)" : ""} donne un <b>résumé d'une ligne</b>, l'<b>auteur complet</b> et l'<b>année de première parution</b>. Ils apparaissent dans les compartiments, dans la liste et dans les PDF. Les titres et l'ordre des livres ne sont jamais touchés.</div>
+    html:`<div class="aide" style="margin-top:0"><b>À quoi ça sert ?</b> Pour chaque livre, ${iaHtml(ia)}${lotsManuels() ? " (sans clé : par copier-coller, lot par lot)" : ""} donne un <b>résumé d'une ligne</b>, l'<b>auteur complet</b> et l'<b>année de première parution</b>. Ils apparaissent dans les compartiments, dans la liste et dans les PDF. Les titres et l'ordre des livres ne sont jamais touchés.</div>
       <div class="encadre" style="margin:10px 0">
         <div class="infoLigne"><span class="cle">Livres</span><span><b>${tous.length}</b></span></div>
         <div class="infoLigne"><span class="cle">Complets</span><span>✅ ${complets.length} (résumé et auteur)</span></div>
@@ -6984,7 +6994,7 @@ async function lancerResumes(b){
         <input type="radio" name="rsChoix" value="${o.id}" ${o.id === choix ? "checked" : ""} style="margin-top:2px">
         <span><b>${o.titre}</b>${o.recommande ? ` <span style="color:var(--vert);font-weight:700">— recommandé</span>` : ""}
           <br><span class="aide" style="margin:0">${o.detail}</span>
-          <br><span class="aide" style="margin:0">⏱ ${lots(o.liste.length)} ${lotsManuels() ? "copier-coller" : "requête(s)"} avec ${esc(NOM_IA[ia])} (lots de ${T}), ${duree(o.liste.length)}.</span></span></label>`).join("")}
+          <br><span class="aide" style="margin:0">⏱ ${lots(o.liste.length)} ${lotsManuels() ? "copier-coller" : "requête(s)"} avec ${iaHtml(ia)} (lots de ${T}), ${duree(o.liste.length)}.</span></span></label>`).join("")}
       <div class="aide" style="margin-top:10px">Pendant le traitement, un décompte s'affiche. Ce qui est fait est enregistré au fur et à mesure : en cas d'interruption, « Compléter » reprend là où ça s'était arrêté, sans rien refaire.</div>
       <div class="encadre" id="rsResume" style="margin-top:10px;font-weight:600"></div>`,
     boutons:[{ texte:"Annuler" }, { texte:"Lancer", classe:"principal", garder:true, action:async ()=>{
@@ -7052,7 +7062,7 @@ async function lancerPdf(b){
     const t = tailleLot("categorie"), nLots = Math.ceil(sansCat.length / t);
     const ok = await confirmer(
       `<div>${sansCat.length} livre(s) sur ${tous.length} n'ont pas encore de catégorie thématique.</div>
-       <div style="margin-top:8px">Demander leur classement à <b>${NOM_IA[ia]}</b> maintenant ?</div>
+       <div style="margin-top:8px">Demander leur classement à ${iaHtml(ia)} maintenant ?</div>
        <div class="aide">${nLots} ${lotsManuels() ? "copier-coller" : "requête(s)"} de ${t} livres au plus, environ ${nLots * (lotsManuels() ? 60 : ia === "claude" ? 30 : 20) < 90 ? Math.max(10, nLots * (lotsManuels() ? 60 : ia === "claude" ? 30 : 20)) + " s" : Math.round(nLots * (lotsManuels() ? 60 : ia === "claude" ? 30 : 20) / 60) + " min"}. Seuls les livres sans catégorie sont traités ; ce qui est fait est conservé en cas d'interruption.</div>`,
       "Classement thématique", "Classer");
     if (ok){
