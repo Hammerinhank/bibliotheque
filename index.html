@@ -433,8 +433,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.76.1";
+const VERSION = "V1.76.2";
 const HISTORIQUE = [
+  { v:"V1.76.2", d:"27/09/2026", l:[
+    "Titre de la fenêtre d'un compartiment (toujours visible en haut) : ajoute la rangée affichée — « · devant », « · derrière », ou « · appoint n (devant / derrière) » ; il suit la rangée choisie, en consultation comme en édition."
+  ]},
   { v:"V1.76.1", d:"27/09/2026", l:[
     "Outils › Photo : encadré repliable, déplié par défaut ; il se replie automatiquement une fois la troncature (lignes de coupe) validée, ne laissant que son titre."
   ]},
@@ -5420,6 +5423,15 @@ function ouvrirCompartiment(b, k){
   });
   f.querySelector("[data-b='0']").addEventListener("click", ()=>{ rafraichirCompartimentOuvert = null; setTimeout(rendreBiblio, 0); envoyerMaintenantSiEnAttente(); });
 
+  /* titre : rangée de la bibliothèque, compartiment, et rangée affichée dans le compartiment */
+  const majTitre = ()=>{
+    const h = f.querySelector(".tete h2"); if (!h) return;
+    let quoi;
+    if (!modeEdition) quoi = filtreConsult === "derriere" ? "derrière" : "devant";
+    else if (estAppoint(face)){ const ap = photoObj(cs, face) || {}; quoi = `appoint ${numeroAppoint(cs, face)}${ap.rang ? " (" + (ap.rang === "derriere" ? "derrière" : "devant") + ")" : ""}`; }
+    else quoi = face === "photo2" ? "derrière" : "devant";
+    h.textContent = `Rangée ${r} · compartiment ${c} · ${quoi}`;
+  };
   /* ---------- deux modes : consultation (par défaut) / édition ---------- */
   let modeEdition = false;
   let filtreConsult = vueRangee === "derriere" ? "derriere" : "devant";
@@ -5432,6 +5444,7 @@ function ouvrirCompartiment(b, k){
     const l = cs.livres || [];
     const n1 = l.filter(lv=>lv.rang !== "derriere").length, n2 = l.length - n1;
     const bt = (v, lib, actif)=>`<button data-mode="${v}" class="${actif ? "actif" : ""}" style="flex:1 1 0;min-width:0;text-align:center">${lib}</button>`;
+    majTitre();
     zm.innerHTML = modeEdition
       ? bt("consulter", "✏️ Éditer (touchez pour revenir à la liste)", true)
       : bt("devant", `${miniEtoile(cs, "devant")}Devant (${n1})`, filtreConsult === "devant") + bt("derriere", `${miniEtoile(cs, "derriere")}Derrière (${n2})`, filtreConsult === "derriere") + bt("editer", "✏️ Éditer", false);
@@ -5673,6 +5686,7 @@ function ouvrirCompartiment(b, k){
     info.textContent = `La plus récente date du ${der.quand}. Vous choisirez laquelle réutiliser — sans redemander à l'IA — ou aucune ; vous pourrez aussi supprimer celles devenues inutiles.`;
   };
   const majPhoto = ()=>{
+    if (typeof majTitre === "function") majTitre();
     majUnRang();
     majFaces();
     const z = f.querySelector("#zonePhoto");
