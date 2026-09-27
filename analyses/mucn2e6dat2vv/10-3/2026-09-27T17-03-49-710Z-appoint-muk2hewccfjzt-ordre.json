@@ -1,0 +1,195 @@
+{
+ "date": "2026-09-27T17:03:49.710Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "10-3",
+ "genre": "appoint",
+ "appoint": "muk2hewccfjzt",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "DELPHINE DE VIGAN",
+   "auteur": "LES ENFANTS SONT ROIS",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 0,
+   "x2": 80,
+   "illisible": false
+  },
+  {
+   "titre": "Les loyautés",
+   "auteur": "DELPHINE DE VIGAN",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 80,
+   "x2": 135,
+   "illisible": false
+  },
+  {
+   "titre": "Rien ne s'oppose à la nuit",
+   "auteur": "Delphine de Vigan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 135,
+   "x2": 190,
+   "illisible": false
+  },
+  {
+   "titre": "Il y a longtemps mon amour",
+   "auteur": "VLADIMIR VOLKOFF",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 190,
+   "x2": 245,
+   "illisible": false
+  },
+  {
+   "titre": "Le secret du royaume",
+   "auteur": "Mika Waltari",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 245,
+   "x2": 300,
+   "illisible": false
+  },
+  {
+   "titre": "MIKA WALTARI / LES AMANTS DE BYZANCE",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 300,
+   "x2": 350,
+   "illisible": false
+  },
+  {
+   "titre": "une poignée de cendres",
+   "auteur": "evelyn waugh",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 350,
+   "x2": 400,
+   "illisible": false
+  },
+  {
+   "titre": "Les Souliers de saint Pierre",
+   "auteur": "MORRIS L. WEST",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 400,
+   "x2": 470,
+   "illisible": false
+  },
+  {
+   "titre": "LE MAÎTRE",
+   "auteur": "MORRIS WEST",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 470,
+   "x2": 530,
+   "illisible": false
+  },
+  {
+   "titre": "MON ENFANT DE BERLIN",
+   "auteur": "ANNE WIAZEMSKY",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 530,
+   "x2": 570,
+   "illisible": false
+  },
+  {
+   "titre": "La Maladie de Sachs",
+   "auteur": "Martin Winckler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 570,
+   "x2": 620,
+   "illisible": false
+  },
+  {
+   "titre": "En souvenir d'André",
+   "auteur": "Martin Winckler",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 620,
+   "x2": 660,
+   "illisible": false
+  },
+  {
+   "titre": "Le bûcher des vanités",
+   "auteur": "TOM WOLFE",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 660,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "L'ŒUVRE AU NOIR",
+   "auteur": "MARGUERITE YOURCENAR",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 740,
+   "x2": 790,
+   "illisible": false
+  },
+  {
+   "titre": "Souvenirs pieux",
+   "auteur": "Marguerite Yourcenar",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 790,
+   "x2": 850,
+   "illisible": false
+  },
+  {
+   "titre": "DENIER DU RÊVE",
+   "auteur": "M. Yourcenar",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 850,
+   "x2": 890,
+   "illisible": false
+  },
+  {
+   "titre": "MÉMOIRES D'UN RAT",
+   "auteur": "ANDRZEJ ZANIEWSKI",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 890,
+   "x2": 960,
+   "illisible": false
+  },
+  {
+   "titre": "Myrina",
+   "auteur": "",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "couché",
+   "x1": 220,
+   "x2": 260,
+   "illisible": false
+  }
+ ]
+}

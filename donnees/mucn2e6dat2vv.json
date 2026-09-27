@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-27T17:03:12.017Z",
+ "maj": "2026-09-27T17:03:57.269Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -12682,6 +12682,29 @@
       "origine": "ia"
      },
      {
+      "id": "muk2iktn5ykza",
+      "titre": "DELPHINE DE VIGAN",
+      "auteur": "LES ENFANTS SONT ROIS",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 0,
+        "x2": 80
+       }
+      ],
+      "rang": "devant",
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ],
+      "statut": "probable"
+     },
+     {
       "id": "mudsz2vopvkdb",
       "titre": "Les loyautés",
       "auteur": "Delphine de Vigan",
@@ -12690,7 +12713,17 @@
       "remarque": "JC Lattès",
       "resume": "Un adolescent sombre dans l'alcool, entre parents déchirés, un ami, sa mère et une professeure prisonniers de leurs propres loyautés secrètes.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 80,
+        "x2": 135
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vo0l10c",
@@ -12701,7 +12734,17 @@
       "remarque": "JC Lattès",
       "resume": "L'autrice reconstitue la vie de sa mère, Lucile, marquée par les drames familiaux, la bipolarité et un suicide final.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 135,
+        "x2": 190
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2voyowua",
@@ -12712,7 +12755,17 @@
       "remarque": "L'Âge d'Homme",
       "resume": "",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 190,
+        "x2": 245
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2voumj08",
@@ -12723,7 +12776,17 @@
       "remarque": "Gallimard NRF",
       "resume": "",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "question": {
+       "type": "absent",
+       "zone": {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 230,
+        "x2": 260
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-27T17:03:55.759Z"
+      }
      },
      {
       "id": "mudsz2vok32iu",
@@ -12734,7 +12797,17 @@
       "remarque": "Édition blanche",
       "resume": "Un Romain arrive à Jérusalem après la crucifixion et enquête sur Jésus, cherchant le secret de son royaume.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 245,
+        "x2": 300
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vodiz7z",
@@ -12745,7 +12818,17 @@
       "remarque": "Tranche usée",
       "resume": "Le journal d'un homme mystérieux, Jean Ange, qui vit la chute de Constantinople en 1453 et un amour impossible.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 300,
+        "x2": 350
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2voaoa9p",
@@ -12756,7 +12839,17 @@
       "remarque": "Poche pavillons",
       "resume": "Un aristocrate anglais trompé par sa femme perd tout et finit prisonnier d'un excentrique au fin fond de l'Amazonie.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 350,
+        "x2": 400
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vo7wg9q",
@@ -12767,7 +12860,17 @@
       "remarque": "Plon édition",
       "resume": "Un archevêque ukrainien, longtemps prisonnier des Soviétiques, est élu pape en pleine guerre froide et affronte une crise mondiale.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 400,
+        "x2": 470
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vownz1u",
@@ -12778,7 +12881,17 @@
       "remarque": "Robert Laffont",
       "resume": "Dans le monde du marché de l'art, un marchand est entraîné dans une affaire de faux tableaux, d'argent sale et de manipulation.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 470,
+        "x2": 530
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vodiwrk",
@@ -12789,7 +12902,17 @@
       "remarque": "Gallimard NRF",
       "resume": "L'autrice retrace la jeunesse de sa mère, fille de François Mauriac, ambulancière dans Berlin détruit en 1945, et sa rencontre amoureuse.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 530,
+        "x2": 570
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vo0tidx",
@@ -12800,7 +12923,17 @@
       "remarque": "Éditions P.O.L",
       "resume": "Portrait d'un médecin généraliste de campagne, Bruno Sachs, raconté à travers les voix de ses patients et proches.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 570,
+        "x2": 620
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vofj3yz",
@@ -12811,7 +12944,17 @@
       "remarque": "Éditions P.O.L",
       "resume": "Un médecin qui aide discrètement les malades en fin de vie à mourir se confie sur son parcours et ses patients.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 620,
+        "x2": 660
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vod7wmv",
@@ -12822,7 +12965,17 @@
       "remarque": "Édition cartonnée",
       "resume": "Un riche trader new-yorkais voit sa vie s'effondrer après un accident dans le Bronx, exploité par médias, politiciens et justice.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 660,
+        "x2": 740
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vo2omel",
@@ -12833,7 +12986,17 @@
       "remarque": "Gallimard NRF",
       "resume": "Au XVIe siècle, l'alchimiste et médecin Zénon parcourt l'Europe en quête de savoir, jusqu'à son procès pour hérésie.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 740,
+        "x2": 790
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
      },
      {
       "id": "mudsz2vot39kp",
@@ -12844,7 +13007,40 @@
       "remarque": "Gallimard NRF",
       "resume": "Premier volet du Labyrinthe du monde : Yourcenar reconstitue sa lignée maternelle belge et la brève vie de sa mère.",
       "categorie": "Romans français",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 790,
+        "x2": 850
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
+     },
+     {
+      "id": "muk2iktn50p3a",
+      "titre": "DENIER DU RÊVE",
+      "auteur": "M. Yourcenar",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 850,
+        "x2": 890
+       }
+      ],
+      "rang": "devant",
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ],
+      "statut": "probable"
      },
      {
       "id": "mudsz2voj77ud",
@@ -12855,7 +13051,40 @@
       "remarque": "Édition noire",
       "resume": "Un rat raconte sa vie de survie, de violence et de peur parmi les hommes, métaphore saisissante de la condition humaine.",
       "categorie": "Littérature étrangère",
-      "origine": "ia"
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 890,
+        "x2": 960
+       }
+      ],
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ]
+     },
+     {
+      "id": "muk2iktn5vyuq",
+      "titre": "Myrina",
+      "auteur": "",
+      "annee": "",
+      "certitude": "faible",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:muk2hewccfjzt",
+        "x1": 220,
+        "x2": 260
+       }
+      ],
+      "rang": "devant",
+      "temoins": [
+       "appoint:muk2hewccfjzt:2026-09-27T17:03:09.955Z"
+      ],
+      "statut": "probable"
      }
     ],
     "photo": {
@@ -12882,12 +13111,40 @@
     },
     "appoints": [
      {
+      "plein": null,
       "chemin": "images/mucn2e6dat2vv/10-3-appoint-muk2hewccfjzt.jpg",
-      "envoye": false,
+      "envoye": true,
       "maj": "2026-09-27T17:03:09.955Z",
       "id": "muk2hewccfjzt",
       "legende": "",
-      "enIDB": "images/mucn2e6dat2vv/10-3-appoint-muk2hewccfjzt.jpg"
+      "rang": "devant",
+      "rangInfo": {
+       "auto": true,
+       "n1": 15,
+       "n2": 0,
+       "date": "2026-09-27T17:03:49.728Z"
+      },
+      "livresVus": [
+       "muk2iktn5ykza",
+       "mudsz2vopvkdb",
+       "mudsz2vo0l10c",
+       "mudsz2voyowua",
+       "mudsz2vok32iu",
+       "mudsz2vodiz7z",
+       "mudsz2voaoa9p",
+       "mudsz2vo7wg9q",
+       "mudsz2vownz1u",
+       "mudsz2vodiwrk",
+       "mudsz2vo0tidx",
+       "mudsz2vofj3yz",
+       "mudsz2vod7wmv",
+       "mudsz2vo2omel",
+       "mudsz2vot39kp",
+       "muk2iktn50p3a",
+       "mudsz2voj77ud",
+       "muk2iktn5vyuq"
+      ],
+      "verif": "2026-09-27T17:03:55.760Z"
      }
     ]
    },
