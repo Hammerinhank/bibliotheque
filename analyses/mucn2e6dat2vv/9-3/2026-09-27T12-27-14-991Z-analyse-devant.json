@@ -1,0 +1,546 @@
+{
+ "date": "2026-09-27T12:27:14.991Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "9-3",
+ "genre": "analyse",
+ "portee": "devant",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-3-flash-preview"
+ },
+ "livres": [
+  {
+   "id": "mujsmw8cb1y6k",
+   "titre": "Katiba",
+   "auteur": "Jean-Christophe Rufin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Flammarion",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 25,
+     "x2": 90
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cashzw",
+   "titre": "Les causes perdues",
+   "auteur": "Jean-Christophe Rufin",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Édition Gallimard NRF",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 65,
+     "x2": 118
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c6aw0p",
+   "titre": "L'été à Martha's Vineyard",
+   "auteur": "Richard Russo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Collection 10/18",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 91,
+     "x2": 149
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cyqv9r",
+   "titre": "Sortilèges du Cap Cod",
+   "auteur": "Richard Russo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Collection 10/18",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 126,
+     "x2": 174
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cgp1d9",
+   "titre": "Le déclin de l'empire Whiting",
+   "auteur": "Richard Russo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Collection 10/18",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 151,
+     "x2": 215
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8ct9cdo",
+   "titre": "Quatre saisons à Mohawk",
+   "auteur": "Richard Russo",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Collection 10/18",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 195,
+     "x2": 253
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c4pnkw",
+   "titre": "Les trompettes guerrières",
+   "auteur": "Robert Sabatier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 233,
+     "x2": 288
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c6tmj6",
+   "titre": "La souris verte",
+   "auteur": "Robert Sabatier",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 273,
+     "x2": 320
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8co3qst",
+   "titre": "Les volontaires",
+   "auteur": "Saint-Loup",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur PHC",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 303,
+     "x2": 369
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c7zsb4",
+   "titre": "Les hérétiques",
+   "auteur": "Saint-Loup",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur PHC",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 357,
+     "x2": 416
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cnq3ec",
+   "titre": "Hélie de Saint Marc",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Les Arènes",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 408,
+     "x2": 439
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8ctzg7x",
+   "titre": "L'Accusée",
+   "auteur": "Michel de Saint Pierre",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 433,
+     "x2": 472
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cr64l2",
+   "titre": "Vingt-Quatre Heures d'une femme sensible",
+   "auteur": "Constance de Salm",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Phébus",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 466,
+     "x2": 486
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c5345z",
+   "titre": "Histoire du véritable Gribouille",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Tranche rouge et blanche",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 480,
+     "x2": 504
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cvxnqa",
+   "titre": "Les Princes du sang",
+   "auteur": "Gilbert Schlogel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Fayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 500,
+     "x2": 551
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cfikag",
+   "titre": "Odette Toulemonde et autres histoires",
+   "auteur": "Eric-Emmanuel Schmitt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 550,
+     "x2": 581
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cjjkwy",
+   "titre": "Le sumo qui ne pouvait pas grossir",
+   "auteur": "Eric-Emmanuel Schmitt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 581,
+     "x2": 598
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c9qj4t",
+   "titre": "Là-haut",
+   "auteur": "Pierre Schoendoerffer",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 597,
+     "x2": 632
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cmjoe4",
+   "titre": "L'aile du papillon",
+   "auteur": "Pierre Schoendoerffer",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 631,
+     "x2": 658
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cy4l92",
+   "titre": "Le Crabe-Tambour",
+   "auteur": "Pierre Schoendoerffer",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 657,
+     "x2": 688
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c0mepq",
+   "titre": "L'Exercice de la médecine",
+   "auteur": "Laurent Seksik",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Flammarion",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 687,
+     "x2": 721
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c2tvg0",
+   "titre": "Le Neveu d'Amérique",
+   "auteur": "Luis Sepúlveda",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Tranche blanche étroite",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 720,
+     "x2": 741
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cvg7g2",
+   "titre": "Adieu Volodia",
+   "auteur": "Simone Signoret",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Fayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 740,
+     "x2": 803
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c3iei5",
+   "titre": "Alexandre et Alestria",
+   "auteur": "Shan Sa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 798,
+     "x2": 839
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cov6bv",
+   "titre": "Les Conspirateurs",
+   "auteur": "Shan Sa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 837,
+     "x2": 878
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c8pa42",
+   "titre": "Shan Sa Impératrice",
+   "auteur": "Shan Sa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 876,
+     "x2": 928
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8c6ykyq",
+   "titre": "La Joueuse de Go",
+   "auteur": "Shan Sa",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Tranche bleue",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 917,
+     "x2": 954
+    }
+   ]
+  },
+  {
+   "id": "mujsmw8cma15i",
+   "titre": "L'Innocence perdue",
+   "auteur": "Neil Sheehan",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Éditeur Seuil",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "devant",
+   "vues": [
+    {
+     "champ": "photo",
+     "x1": 948,
+     "x2": 1000
+    }
+   ]
+  }
+ ]
+}
