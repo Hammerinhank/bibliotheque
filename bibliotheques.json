@@ -9106,14 +9106,25 @@
       },
       {
        "id": "mud5z7z96h11g",
-       "titre": "Le chemin des larmes",
+       "titre": "Le chemin des livres",
        "auteur": "",
        "annee": "",
        "certitude": "moyenne",
        "remarque": "",
        "resume": "",
        "categorie": "Non classé",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 16,
+         "x2": 35
+        }
+       ],
+       "statut": "acquis",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9137s3",
@@ -9124,7 +9135,44 @@
        "remarque": "",
        "resume": "",
        "categorie": "Non classé",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "Un jardin à Téhéran",
+         "auteur": "Shusha Guppy"
+        },
+        "vue": {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 32,
+         "x2": 62
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-27T08:28:42.640Z"
+       }
+      },
+      {
+       "id": "mujk3ifqs2h3j",
+       "titre": "L'Âge de Pierre",
+       "auteur": "Paul Guimard",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 59,
+         "x2": 83
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5z7z9qtyjm",
@@ -9135,7 +9183,17 @@
        "remarque": "",
        "resume": "Ce roman évoque l'exil et les souvenirs à travers le voyage nostalgique d'un vieil homme dans un tramway d'Istanbul.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 82,
+         "x2": 108
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9wins9",
@@ -9146,7 +9204,17 @@
        "remarque": "",
        "resume": "À travers les souvenirs liés au vieux pommier familial, une femme replonge dans l'histoire secrète et tragique de ses aïeules.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 107,
+         "x2": 140
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9kzqzo",
@@ -9157,7 +9225,17 @@
        "remarque": "",
        "resume": "Une quête mémorielle et identitaire sur les traces des Juifs en URSS et dans la région autonome de Birobidjan.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 140,
+         "x2": 188
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z94ekhx",
@@ -9168,7 +9246,17 @@
        "remarque": "",
        "resume": "Récit d'un voyage maritime ou enquête sur l'univers des paquebots transatlantiques et leur mythe légendaire.",
        "categorie": "Voyage",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 189,
+         "x2": 247
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9fe0q4",
@@ -9179,7 +9267,17 @@
        "remarque": "",
        "resume": "Henry Skrimshander, prodige du baseball universitaire, voit sa vie et celle de ses proches bouleversées après un lancer raté.",
        "categorie": "Essais",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 250,
+         "x2": 301
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9jd0ip",
@@ -9190,7 +9288,17 @@
        "remarque": "",
        "resume": "Un drame intime explore les tensions, les secrets et les non-dits au sein d'une famille bourgeoise.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 302,
+         "x2": 334
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z95c6sg",
@@ -9201,7 +9309,40 @@
        "remarque": "",
        "resume": "Une exploration des failles psychologiques et des drames enfouis qui traversent la vie quotidienne de personnages ordinaires.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 336,
+         "x2": 372
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
+      },
+      {
+       "id": "mujk3ifqvaptg",
+       "titre": "La Chambre sourde",
+       "auteur": "Isabelle Hausser",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 373,
+         "x2": 406
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5z7z98sn5n",
@@ -9212,7 +9353,40 @@
        "remarque": "",
        "resume": "Une plongée romanesque dans l'univers clos et sulfureux des harems ottomans à travers le destin de femmes soumises.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 406,
+         "x2": 441
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
+      },
+      {
+       "id": "mujk3ifqug1sd",
+       "titre": "Les Collégiens",
+       "auteur": "Stephen Hecquet",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 442,
+         "x2": 463
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5z7z9vlbt8",
@@ -9223,7 +9397,17 @@
        "remarque": "",
        "resume": "La biographie romancée de Lola Montez, danseuse célèbre et aventurière au destin hors du commun.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 464,
+         "x2": 514
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9jzes3",
@@ -9234,7 +9418,17 @@
        "remarque": "",
        "resume": "En 2022, la France élit un président musulman modéré qui instaure la charia, transformant radicalement la société et la vie d'un universitaire.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 515,
+         "x2": 544
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z955k1m",
@@ -9245,7 +9439,17 @@
        "remarque": "",
        "resume": "Un instituteur tombe amoureux d'une musicienne venue donner des leçons de violon à l'école, bouleversant sa vie de famille.",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 545,
+         "x2": 564
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9za15l",
@@ -9256,7 +9460,17 @@
        "remarque": "",
        "resume": "L'histoire bouleversante d'une famille afghane brisée par les séparations, les guerres et les choix déchirants à travers plusieurs générations.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 561,
+         "x2": 613
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z9suel0",
@@ -9267,7 +9481,40 @@
        "remarque": "",
        "resume": "Une chronique subtille et pénétrante de la vie quotidienne et des passions secrètes d'une famille anglaise au milieu du vingtième siècle.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 613,
+         "x2": 641
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
+      },
+      {
+       "id": "mujk3ifq3ai5r",
+       "titre": "À rude épreuve",
+       "auteur": "",
+       "annee": "",
+       "certitude": "moyenne",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 643,
+         "x2": 682
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5z7z91v184",
@@ -9278,7 +9525,40 @@
        "remarque": "",
        "resume": "",
        "categorie": "Romans français",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 682,
+         "x2": 721
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
+      },
+      {
+       "id": "mujk3ifqjwizv",
+       "titre": "Le Meilleur des mondes",
+       "auteur": "Aldous Huxley",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 722,
+         "x2": 764
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5z7z9x7usa",
@@ -9289,7 +9569,17 @@
        "remarque": "",
        "resume": "Recueil de récits romantiques et de légendes inspirés du séjour de l'auteur dans le célèbre palais mauresque de l'Alhambra.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 766,
+         "x2": 797
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
       },
       {
        "id": "mud5z7z93os7c",
@@ -9300,7 +9590,21 @@
        "remarque": "",
        "resume": "Un jeune orphelin élevé par un médecin humaniste cherche sa voie dans l'Amérique du XXe siècle.",
        "categorie": "Essais",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "L'Épopée du buveur d'eau",
+         "auteur": "John Irving"
+        },
+        "vue": {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 795,
+         "x2": 831
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-27T08:28:42.640Z"
+       }
       },
       {
        "id": "mud5z7z9hfhuo",
@@ -9311,7 +9615,40 @@
        "remarque": "",
        "resume": "Un homme âgé, célèbre chirurgien, tombe amoureux d'une jeune femme et subit une greffe de main expérimentale pour la séduire.",
        "categorie": "Littérature étrangère",
-       "origine": "ia"
+       "origine": "ia",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 832,
+         "x2": 880
+        }
+       ],
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ]
+      },
+      {
+       "id": "mujk3ifqu7k80",
+       "titre": "Mer blanche",
+       "auteur": "Roy Jacobsen",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 874,
+         "x2": 909
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mud5z7z943td2",
@@ -9322,7 +9659,44 @@
        "remarque": "",
        "resume": "En Égypte ancienne, de mystérieuses disparitions menacent les proches du pharaon alors que le pouvoir est mis à rude épreuve.",
        "categorie": "Histoire",
-       "origine": "ia"
+       "origine": "ia",
+       "question": {
+        "type": "lecture",
+        "autre": {
+         "titre": "Ramsès — Sous l'acacia d'Occident",
+         "auteur": "Christian Jacq"
+        },
+        "vue": {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 903,
+         "x2": 949
+        },
+        "source": "l'appoint 1",
+        "date": "2026-09-27T08:28:42.640Z"
+       }
+      },
+      {
+       "id": "mujk3ifqfoolw",
+       "titre": "Le Destin de Iouri Voronine",
+       "auteur": "Henriette Jelinek",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "",
+       "resume": "",
+       "categorie": "",
+       "origine": "appoint",
+       "vues": [
+        {
+         "champ": "appoint:mujk02ezapdmz",
+         "x1": 949,
+         "x2": 988
+        }
+       ],
+       "rang": "devant",
+       "temoins": [
+        "appoint:mujk02ezapdmz:2026-09-27T08:25:53.994Z"
+       ],
+       "statut": "probable"
       },
       {
        "id": "mujjj04m4k97l",
@@ -10040,7 +10414,51 @@
      },
      "certif": {
       "derriere": "2026-09-27T08:14:38.646Z"
-     }
+     },
+     "appoints": [
+      {
+       "plein": null,
+       "chemin": "images/mucn2e6dat2vv/6-3-appoint-mujk02ezapdmz.jpg",
+       "envoye": true,
+       "maj": "2026-09-27T08:25:53.994Z",
+       "id": "mujk02ezapdmz",
+       "legende": "",
+       "rang": "devant",
+       "rangInfo": {
+        "auto": true,
+        "n1": 16,
+        "n2": 0,
+        "date": "2026-09-27T08:28:13.712Z"
+       },
+       "livresVus": [
+        "mud5z7z96h11g",
+        "mujk3ifqs2h3j",
+        "mud5z7z9qtyjm",
+        "mud5z7z9wins9",
+        "mud5z7z9kzqzo",
+        "mud5z7z94ekhx",
+        "mud5z7z9fe0q4",
+        "mud5z7z9jd0ip",
+        "mud5z7z95c6sg",
+        "mujk3ifqvaptg",
+        "mud5z7z98sn5n",
+        "mujk3ifqug1sd",
+        "mud5z7z9vlbt8",
+        "mud5z7z9jzes3",
+        "mud5z7z955k1m",
+        "mud5z7z9za15l",
+        "mud5z7z9suel0",
+        "mujk3ifq3ai5r",
+        "mud5z7z91v184",
+        "mujk3ifqjwizv",
+        "mud5z7z9x7usa",
+        "mud5z7z9hfhuo",
+        "mujk3ifqu7k80",
+        "mujk3ifqfoolw"
+       ],
+       "verif": "2026-09-27T08:28:42.641Z"
+      }
+     ]
     },
     "7-2": {
      "livres": [
@@ -19762,7 +20180,7 @@
    "ratio": 0.514
   }
  ],
- "maj": "2026-09-27T08:14:49.396Z",
+ "maj": "2026-09-27T08:28:43.596Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
