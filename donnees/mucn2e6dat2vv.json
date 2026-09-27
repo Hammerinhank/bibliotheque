@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-27T17:12:58.624Z",
+ "maj": "2026-09-27T17:20:47.166Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -13590,6 +13590,14 @@
        "muk2iktn5vyuq"
       ],
       "verif": "2026-09-27T17:03:55.760Z"
+     },
+     {
+      "chemin": "images/mucn2e6dat2vv/10-3-appoint-muk34ckghtr1v.jpg",
+      "envoye": false,
+      "maj": "2026-09-27T17:20:45.473Z",
+      "id": "muk34ckghtr1v",
+      "legende": "",
+      "enIDB": "images/mucn2e6dat2vv/10-3-appoint-muk34ckghtr1v.jpg"
      }
     ],
     "certif": {
