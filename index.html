@@ -154,6 +154,7 @@ details.pliable > .contenuPli{padding:4px 12px 12px}
 .case.pgNouvelle{border:2px dashed var(--bronze);background:transparent}
 .filtresListe{display:flex;gap:6px;flex-wrap:nowrap}
 .filtresListe button{flex:1 1 0;min-width:0;text-align:center;padding-left:4px;padding-right:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tete .horodatage{margin-left:auto;margin-right:10px;font-size:12px;color:var(--texte2);white-space:nowrap;font-variant-numeric:tabular-nums}
 .secIa{margin-top:12px;border:1px solid var(--trait);border-radius:10px;padding:8px 12px}
 .secIa > summary{cursor:pointer;font-weight:700;color:var(--bronze);font-size:15px;padding:4px 0}
 .secIa[open] > summary{margin-bottom:6px}
@@ -430,8 +431,15 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.75.2";
+const VERSION = "V1.76.0";
 const HISTORIQUE = [
+  { v:"V1.76.0", d:"27/09/2026", l:[
+    "Correctif de fond : à l'ouverture de l'app, si GitHub n'a pas changé depuis le dernier échange, les modifications de cet appareil (plus récentes) sont gardées sans rien demander et partent ensuite sur GitHub. La question « garder / remplacer par GitHub » n'apparaît plus que si GitHub a vraiment été modifié ailleurs (autre appareil) ET que cet appareil a aussi des modifications.",
+    "Date et heure (à la seconde) à droite du titre de « Sauvegarde et transferts » et des fenêtres de comparaison, de récupération et de restauration, pour dater les captures d'écran."
+  ]},
+  { v:"V1.75.3", d:"25/09/2026", l:[
+    "Boutons « Devant » et « Derrière » (consultation et édition) : petite étoile dorée ★ en tête du libellé quand la rangée est certifiée."
+  ]},
   { v:"V1.75.2", d:"25/09/2026", l:[
     "Outils › Photo : « ✂️ Lignes de coupe » est maintenant au-dessus de « 📷 Changer la photo »."
   ]},
@@ -1081,6 +1089,10 @@ async function copierTexte(txt){
   }catch(e){ return false; }
 }
 
+function horodatageCourt(){
+  const d = new Date(), z = (n)=>String(n).padStart(2, "0");
+  return `${z(d.getDate())}/${z(d.getMonth() + 1)} ${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
+}
 function modale(opts){
   const fond = document.createElement("div");
   fond.className = "fond";
@@ -1088,7 +1100,7 @@ function modale(opts){
     `<button class="btn ${b.classe||""}" data-b="${i}">${esc(b.texte)}</button>`).join("");
   fond.innerHTML =
     `<div class="modale">
-       <div class="tete"><h2 class="serif">${esc(opts.titre||"")}</h2>
+       <div class="tete"><h2 class="serif">${esc(opts.titre||"")}</h2>${opts.horodatage ? `<span class="horodatage">${horodatageCourt()}</span>` : ""}
          <button class="icone" data-fermer="1">✕</button></div>
        <div class="corps">${opts.html||""}</div>
        ${boutons ? `<div class="pied">${boutons}</div>` : ""}
@@ -1109,7 +1121,7 @@ function confirmer(message, titre, texteOui, opts){
   opts = opts || {};
   return new Promise(res=>{
     modale({
-      titre: titre||"Confirmer",
+      titre: titre||"Confirmer", horodatage: !!opts.horodatage,
       html: `<div style="font-size:15px">${message}</div>`,
       // opts.danger : l'action écrase des données → bouton rouge, et c'est « garder » qui est mis en avant
       boutons:[
@@ -1785,7 +1797,7 @@ function tableauComparaison(jeuLoc, jeuDist, titreDist){
    ==================================================================== */
 function ouvrirSync(){
   const f = modale({
-    titre:"Sauvegarde et transferts",
+    titre:"Sauvegarde et transferts", horodatage:true,
     html:
       `<div class="aide" style="font-size:13px;margin-bottom:10px">
          Cet appareil garde les données et les photos pas encore envoyées. Le dépôt GitHub
@@ -2547,7 +2559,7 @@ async function ouvrirHistoriqueGitHub(){
       `<div>Remplacer le contenu de cet appareil par la version du <b>${esc(dateFr(v.date))}</b> ?</div>` +
       tableauComparaison(data, v.jeu, "Version du " + dateFr(v.date)) +
       `<div class="aide">Les photos pas encore envoyées sont conservées. Ensuite, vérifiez l'application puis envoyez sur GitHub (☁️) pour que cette version redevienne la version de référence.</div>`,
-      "Restaurer cette version", "⚠️ Remplacer cet appareil par cette version", { danger:true, texteNon:"Ne rien changer" });
+      "Restaurer cette version", "⚠️ Remplacer cet appareil par cette version", { danger:true, texteNon:"Ne rien changer", horodatage:true });
     if (!ok) return;
     const attente = photosEnAttente();
     const j = JSON.parse(JSON.stringify(v.jeu));
@@ -2626,7 +2638,7 @@ async function envoyerVersGitHub(){
           `<div><b>⚠️ Cet envoi ferait disparaître des éléments de GitHub :</b></div><ul>${pertes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` +
           tableauComparaison(data, j, "GitHub") +
           `<div class="aide">Si ce n'est pas voulu, annulez : cet appareil a sans doute des données anciennes. Faites plutôt « 📥 Récupérer depuis GitHub », ou « 🕘 Restaurer une version précédente ».</div>`,
-          "Envoi avec pertes", "Envoyer malgré tout");
+          "Envoi avec pertes", "Envoyer malgré tout", { horodatage:true });
         journal("Alerte « envoi avec pertes » : " + pertes.join(" ; ") + " → " + (ok ? "envoyé malgré tout" : "annulé"));
         if (!ok) return;
       }
@@ -2703,24 +2715,39 @@ async function recupererDeGitHub(silencieux){
     const j = JSON.parse(txt);
     if (!j || !Array.isArray(j.bibliotheques)) throw new Error("Fichier distant inattendu.");
 
-    // à l'ouverture : ne jamais écraser en silence des données locales plus riches que GitHub
+    // ---- à l'ouverture de l'app ----
     const pertesLocales = pertesEnvoi(j, data, "sur cet appareil", "si on reprend GitHub");
-    if (silencieux && pertesLocales.length){
-      const ok = await confirmer(
-        `<div><b>⚠️ Cet appareil contient des éléments absents de GitHub :</b></div><ul>${pertesLocales.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` +
-        tableauComparaison(data, j, "GitHub") +
-        `<div class="aide">Recommandé : <b>Garder cet appareil</b>, puis envoyer ses données sur GitHub ☁️.</div>`,
-        "Données de cet appareil plus complètes", "⚠️ Remplacer par GitHub quand même", { danger:true, texteNon:"Garder cet appareil" });
-      journal("À l'ouverture, appareil plus complet que GitHub : " + pertesLocales.join(" ; ") + " → " + (ok ? "remplacé par GitHub" : "appareil conservé"));
-      if (!ok){ etatSync = "ok"; sale = true; sauver(false); majBandeau(); toast("Données de cet appareil conservées. Pensez à les envoyer sur GitHub ☁️.", 7000); return false; }
+    if (silencieux){
+      const connue = localStorage.getItem(CLE_SYNC);
+      const githubChangeAilleurs = !!(j.maj && j.maj !== connue && j.maj !== data.maj);
+      // 1. rien de neuf
+      if (j.maj === data.maj){ etatSync = "ok"; majBandeau(); return false; }
+      // 2. GitHub inchangé depuis notre dernier échange : cet appareil est simplement plus récent → on le garde, il partira sur GitHub
+      if (!githubChangeAilleurs){
+        journal("À l'ouverture : GitHub inchangé depuis le dernier échange, cet appareil a des modifications plus récentes → conservées (envoi à suivre)");
+        etatSync = "ok"; if (sale || pertesLocales.length) sale = true; majBandeau();
+        return false;
+      }
+      // 3. GitHub modifié ailleurs, et cet appareil n'a rien de propre : on prend GitHub sans rien demander
+      if (!sale && !pertesLocales.length){ /* remplacement silencieux ci-dessous */ }
+      // 4. les deux ont changé : vraie question
+      else {
+        const ok = await confirmer(
+          `<div><b>GitHub a été modifié depuis un autre appareil</b> (le ${esc(dateFr(j.maj))}), <b>et cet appareil a aussi des modifications</b> (le ${esc(dateFr(data.maj))}) qui n'y sont pas.</div>` +
+          (pertesLocales.length ? `<ul>${pertesLocales.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` : "") +
+          tableauComparaison(data, j, "GitHub") +
+          `<div class="aide"><b>Garder cet appareil</b> conserve votre travail ici ; il remplacera ensuite la version de GitHub. <b>Remplacer par GitHub</b> perd les modifications de cet appareil.</div>`,
+          "Deux versions différentes", "⚠️ Remplacer par GitHub (perd les modifications d'ici)", { danger:true, texteNon:"Garder cet appareil", horodatage:true });
+        journal("À l'ouverture, conflit (GitHub modifié ailleurs + modifications locales) → " + (ok ? "remplacé par GitHub" : "appareil conservé"));
+        if (!ok){ etatSync = "ok"; sale = true; localStorage.setItem(CLE_SYNC, j.maj || ""); sauver(false); majBandeau(); toast("Données de cet appareil conservées ; elles partiront sur GitHub.", 6000); return false; }
+      }
     }
-    else if (!silencieux || sale){
-      if (silencieux && !sale && j.maj === data.maj){ etatSync="ok"; majBandeau(); return false; }
+    else {
       const ok = await confirmer(
         `<div>Le contenu de cet appareil sera remplacé par celui de GitHub.</div>` +
         tableauComparaison(data, j, "GitHub") +
         (sale ? `<div class="aide">⚠️ Cet appareil a des modifications non envoyées : elles seront perdues, sauf les photos pas encore téléversées.</div>` : ""),
-        "Récupérer depuis GitHub", "⚠️ Remplacer cet appareil par GitHub", { danger:true, texteNon:"Garder cet appareil" });
+        "Récupérer depuis GitHub", "⚠️ Remplacer cet appareil par GitHub", { danger:true, texteNon:"Garder cet appareil", horodatage:true });
       if (!ok) return false;
     }
 
@@ -3329,6 +3356,8 @@ function rendreAcquis(lv){ lv.statut = "acquis"; delete lv.question; }
 const estAcquis = (lv)=> lv.statut === "acquis";
 
 const certifiee = (cs, r)=> !!(cs && cs.certif && cs.certif[r]);
+/* petite étoile dorée en tête d'un libellé de rangée certifiée */
+const miniEtoile = (cs, r)=> certifiee(cs, r) ? `<span style="color:#ffd23f;font-size:.8em;margin-right:3px" title="Rangée certifiée">★</span>` : "";
 /* étoile d'état d'une rangée : ⭐ pleine si certifiée ; sinon contour jaune vif (des livres) ou gris (aucun livre) */
 function etoileRangee(cs, r){
   if (certifiee(cs, r)) return `<span title="${r === "derriere" ? "Rangée 2" : "Rangée 1"} certifiée" style="display:inline-block;width:22px;text-align:center">⭐</span>`;
@@ -5400,7 +5429,7 @@ function ouvrirCompartiment(b, k){
     const bt = (v, lib, actif)=>`<button data-mode="${v}" class="${actif ? "actif" : ""}" style="flex:1 1 0;min-width:0;text-align:center">${lib}</button>`;
     zm.innerHTML = modeEdition
       ? bt("consulter", "✏️ Éditer (touchez pour revenir à la liste)", true)
-      : bt("devant", `Devant (${n1})`, filtreConsult === "devant") + bt("derriere", `Derrière (${n2})`, filtreConsult === "derriere") + bt("editer", "✏️ Éditer", false);
+      : bt("devant", `${miniEtoile(cs, "devant")}Devant (${n1})`, filtreConsult === "devant") + bt("derriere", `${miniEtoile(cs, "derriere")}Derrière (${n2})`, filtreConsult === "derriere") + bt("editer", "✏️ Éditer", false);
     ze.hidden = !modeEdition;
     zc.hidden = modeEdition;
     if (!modeEdition){
@@ -5570,8 +5599,8 @@ function ouvrirCompartiment(b, k){
     const tousCertifies = rangsAvecLivres.length > 0 && rangsAvecLivres.every(r=>certifiee(cs, r));
     if (tousCertifies && estAppoint(face)) face = "photo";
     zf.innerHTML =
-      `<button data-face="photo" class="${face==="photo"?"actif":""}">📚 Devant${cs.photo?"":" (vide)"}</button>
-       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${cs.photo2 ? "📚 Derrière" : "➕ Derrière"}</button>
+      `<button data-face="photo" class="${face==="photo"?"actif":""}">${miniEtoile(cs, "devant")}📚 Devant${cs.photo?"":" (vide)"}</button>
+       <button data-face="photo2" class="${face==="photo2"?"actif":""}">${miniEtoile(cs, "derriere")}${cs.photo2 ? "📚 Derrière" : "➕ Derrière"}</button>
        ${tousCertifies ? "" : `<div class="colAppoint">
        ${app.length ? `<select id="cAppoints" title="Photos d'appoint">
          <option value="">🖼 Appoints (${app.length})</option>
