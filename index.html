@@ -445,8 +445,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.80.2";
+const VERSION = "V1.81.0";
 const HISTORIQUE = [
+  { v:"V1.81.0", d:"27/09/2026", l:[
+    "Chantier synchronisation, étape 1 (essai, à activer dans Réglages › GitHub) : chaque envoi, manuel ou automatique, ne fait plus qu'un seul commit regroupant photos en attente, résultats d'analyse et données (au lieu d'un commit par fichier). En cas d'écriture concurrente, reprise automatique sur la nouvelle version.",
+    "Sécurités : sauvegarde de sûreté de toutes les bibliothèques avant activation ; bibliotheques.json toujours écrit en entier comme avant (retour arrière immédiat possible) ; décocher la case revient au fonctionnement précédent. Préparation du découpage : un fichier par bibliothèque (donnees/<bibliothèque>.json) est aussi déposé, pas encore relu."
+  ]},
   { v:"V1.80.2", d:"27/09/2026", l:[
     "Correctif restauration : les sauvegardes anciennes (avant V1.80) ne contenaient que les compartiments ayant des livres ; restaurées, elles perdaient les photos des compartiments sans livres. Désormais les photos de tous les compartiments de la bibliothèque d'origine sont reprises.",
     "Les sauvegardes gardent désormais tout le compartiment (état d'analyse, permutations, liste mise de côté…), pas seulement les livres ; la bibliothèque restaurée retrouve aussi les analyses sauvegardées (♻️) de la bibliothèque d'origine."
@@ -2031,6 +2035,21 @@ function raisonEchec(e){
 /* Envoie tout de suite une photo qui vient d'être prise ou modifiée. */
 async function envoyerPhotoAuto(b, k, champ, quoi){
   if (!ghPret() || navigator.onLine === false){ avertirNonSauve(quoi, raisonEchec()); return false; }
+  if (cfg.syncGroupee && !reconstructionEnCours){
+    // la photo part tout de suite, avec les données et les résultats en attente, en un seul commit —
+    // seulement si les données peuvent partir sans risque (GitHub pas modifié ailleurs, rien ne disparaîtrait)
+    try{
+      const txt = await ghLireTexte(FICHIER_JSON);
+      if (txt){
+        const j = JSON.parse(txt), connue = localStorage.getItem(CLE_SYNC);
+        const pertes = pertesEnvoi(data, j).filter(x=>!(/^(livres|résumés|dont) :/.test(x) || /^\d+ livre\(s\) .* absent/.test(x)));
+        if ((j.maj && connue && j.maj !== connue) || pertes.length) throw new Error("données non envoyables sans vérification");
+      }
+      await envoyerGroupe(quoi, null);
+      toast(quoi + " : sauvegardée sur GitHub ✓", 3000);
+      return true;
+    }catch(e){ journal("Envoi groupé de la photo impossible (" + e.message + ") : envoi de la photo seule"); }
+  }
   try{
     await televerserPhoto(b, k, champ);
     toast(quoi + " : sauvegardée sur GitHub ✓", 3000);
@@ -2052,6 +2071,11 @@ async function journaliserResultat(b, k, genre, contenu){
   resultatsSession.push({ chemin, doc });
   versionJournal++;
   const quoi = (genre === "appoint" ? "Résultat de la lecture de l'appoint" : "Résultat de l'analyse") + " de " + lib(k);
+  if (cfg.syncGroupee){
+    // synchronisation groupée : le résultat partira avec le prochain envoi (même commit que les données)
+    ecrireJournalEnAttente(journalEnAttente().concat([{ chemin, doc }]));
+    return true;
+  }
   if (!ghPret() || navigator.onLine === false){
     ecrireJournalEnAttente(journalEnAttente().concat([{ chemin, doc }]));
     avertirNonSauve(quoi, raisonEchec() + " Il est gardé de côté et partira au prochain envoi ☁️.");
@@ -2079,6 +2103,93 @@ async function viderJournalEnAttente(pg){
   }
   ecrireJournalEnAttente(l.filter(x=>!x.fait));
   return n;
+}
+
+/* ====================================================================
+   SYNCHRONISATION GROUPÉE (étape 1) : un seul commit par envoi
+   Photos en attente + résultats d'analyse + bibliotheques.json (toujours complet, comme avant)
+   + donnees/<bibliothèque>.json (préparation du découpage par bibliothèque, pas encore relu).
+   Interrupteur : cfg.syncGroupee (Réglages › GitHub). Décoché → fonctionnement précédent.
+   ==================================================================== */
+const ghRepoUrl = (p)=> `https://api.github.com/repos/${cfg.ghUser}/${cfg.ghRepo}/${p}`;
+async function ghApi(p, method, corps){
+  const r = await fetch(ghRepoUrl(p) + (method ? "" : (p.includes("?") ? "&" : "?") + "t=" + Date.now()), {
+    method: method || "GET",
+    headers: { Authorization:"token " + ghToken(), Accept:"application/vnd.github+json", "Content-Type":"application/json" },
+    body: corps ? JSON.stringify(corps) : undefined
+  });
+  if (!r.ok){ const e = new Error("GitHub " + r.status + " : " + (await r.text()).slice(0, 200)); e.status = r.status; throw e; }
+  return await r.json();
+}
+/* un seul commit contenant tous les fichiers ; en cas de commit concurrent, on recommence sur la nouvelle base (3 essais) */
+async function commitGroupe(fichiers, message, pg){
+  // 1. les contenus (blobs) : un appel par fichier, mais aucun commit
+  const blobs = [];
+  for (let i = 0; i < fichiers.length; i++){
+    const f = fichiers[i];
+    if (pg) pg.maj(i, fichiers.length + 1, `Préparation ${i + 1} / ${fichiers.length} — ${f.chemin.split("/").pop()} (reste ${fichiers.length - i})`);
+    const b = await ghApi("git/blobs", "POST", { content: f.base64, encoding:"base64" });
+    blobs.push({ path: f.chemin, mode:"100644", type:"blob", sha: b.sha });
+  }
+  // 2. arbre + commit + déplacement de la branche
+  for (let essai = 1; essai <= 3; essai++){
+    if (pg) pg.maj(fichiers.length, fichiers.length + 1, `Commit unique (${fichiers.length} fichier(s))${essai > 1 ? " — nouvel essai " + essai : ""}`);
+    const ref = await ghApi(`git/ref/heads/${encodeURIComponent(cfg.ghBranche)}`);
+    const base = await ghApi(`git/commits/${ref.object.sha}`);
+    const arbre = await ghApi("git/trees", "POST", { base_tree: base.tree.sha, tree: blobs });
+    const commit = await ghApi("git/commits", "POST", { message, tree: arbre.sha, parents:[ref.object.sha] });
+    try{
+      await ghApi(`git/refs/heads/${encodeURIComponent(cfg.ghBranche)}`, "PATCH", { sha: commit.sha, force:false });
+      return commit.sha;
+    }catch(e){
+      if (e.status !== 422 || essai === 3) throw e;       // 422 : quelqu'un a écrit entre-temps → on recommence sur la nouvelle base
+    }
+  }
+}
+/* prépare et envoie tout ce qui attend, en un seul commit ; met à jour les états locaux seulement si le commit a réussi */
+async function envoyerGroupe(quoi, pg){
+  const fichiers = [], apres = [];
+  // photos en attente
+  for (const p of photosEnAttente()){
+    const ph = photoObj(p.cs, p.champ);
+    if (!ph.plein && ph.enIDB){ try{ ph.plein = await idbLire(ph.enIDB); }catch(e){} }
+    if (!ph.plein){ journal("Photo en attente introuvable : " + p.cle + " " + p.champ); continue; }
+    const chemin = cheminPhoto(p.bib, p.cle, p.champ), plein = ph.plein;
+    fichiers.push({ chemin, base64: base64Seul(plein) });
+    apres.push(()=>{ if (photoObj(p.cs, p.champ) === ph && ph.plein === plein){ cachePhotos[cleCache(p.bib, p.cle, p.champ)] = plein; ph.chemin = chemin; ph.envoye = true; ph.plein = null; delete ph.emprunt; } });
+  }
+  // résultats d'analyse en attente
+  const jr = journalEnAttente();
+  jr.forEach(x=>fichiers.push({ chemin:x.chemin, base64: enBase64Utf8(JSON.stringify(x.doc, null, 1)) }));
+  if (jr.length) apres.push(()=>{ const noms = new Set(jr.map(x=>x.chemin)); ecrireJournalEnAttente(journalEnAttente().filter(x=>!noms.has(x.chemin))); });
+  // données : le fichier complet (inchangé, pour pouvoir revenir en arrière) + un fichier par bibliothèque
+  const maj = new Date().toISOString();
+  const jeu = JSON.parse(JSON.stringify(data, (cle, v)=> cle === "plein" && typeof v === "string" && v.length > 2000 ? undefined : v));
+  jeu.maj = maj;
+  fichiers.push({ chemin: FICHIER_JSON, base64: enBase64Utf8(JSON.stringify(jeu, null, 1)) });
+  (jeu.bibliotheques || []).forEach(b=>fichiers.push({ chemin:`donnees/${b.id}.json`, base64: enBase64Utf8(JSON.stringify({ format:1, maj, bibliotheque:b }, null, 1)) }));
+  const nPhotos = apres.length - (jr.length ? 1 : 0);
+  await commitGroupe(fichiers, `Bibliothèques — ${quoi}${nPhotos ? " — " + nPhotos + " photo(s)" : ""}${jr.length ? " — " + jr.length + " analyse(s)" : ""} — ${dateFr()}`, pg);
+  apres.forEach(f=>f());
+  data.maj = maj;
+  localStorage.setItem(CLE_SYNC, maj);
+  sale = false; etatSync = "ok";
+  sauver(false); majBandeau();
+  journal(`Envoi groupé réussi (1 commit) : ${nPhotos} photo(s), ${jr.length} résultat(s) d'analyse, données de ${(jeu.bibliotheques || []).length} bibliothèque(s) — ${quoi}`);
+  return { nPhotos, nAnalyses: jr.length };
+}
+/* activation de l'interrupteur : sauvegarde de sûreté d'abord */
+async function activerSyncGroupee(){
+  const ok = await confirmer(`<div><b>Activer la synchronisation groupée (essai) ?</b></div>
+    <div class="aide">Chaque envoi (manuel ou automatique) ne fera plus qu'<b>un seul commit</b> regroupant les photos en attente, les résultats d'analyse et les données. Le fichier complet ${FICHIER_JSON} reste écrit à chaque fois, exactement comme avant : les versions précédentes de l'app le relisent sans conversion. En plus, un fichier par bibliothèque est déposé dans donnees/ (préparation de l'étape suivante).</div>
+    <div class="aide"><b>Avant d'activer, une sauvegarde de sûreté de toutes les bibliothèques est créée</b> (Réglages › Sauvegardes). Vous pouvez décocher à tout moment pour revenir au fonctionnement actuel.</div>`,
+    "Synchronisation groupée", "Sauvegarder puis activer", { horodatage:true });
+  if (!ok) return false;
+  try{ await creerSauvegarde("avant synchronisation groupée", false, null); }
+  catch(e){ toast("Sauvegarde de sûreté impossible : activation annulée.", 6000); return false; }
+  cfg.syncGroupee = true; sauverCfg();
+  journal("Synchronisation groupée ACTIVÉE (sauvegarde de sûreté créée)");
+  return true;
 }
 
 /* Envoi automatique des DONNÉES (listes de livres de chaque rangée) juste après une analyse appliquée.
@@ -2115,6 +2226,9 @@ async function envoyerDonneesAuto(quoi, opts){
           return false;
         }
       }
+      if (cfg.syncGroupee){
+        await envoyerGroupe(quoi, null);            // un seul commit : photos, résultats et données
+      } else {
       // photos et résultats restés de côté, puis les données
       for (const p of photosEnAttente()){ try{ await televerserPhoto(p.bib, p.cle, p.champ); }catch(e){} }
       if (journalEnAttente().length) await viderJournalEnAttente();
@@ -2123,6 +2237,7 @@ async function envoyerDonneesAuto(quoi, opts){
       localStorage.setItem(CLE_SYNC, data.maj);
       sale = photosEnAttente().length > 0; etatSync = "ok";
       sauver(false);
+      }
       if (!opts.discret) toast(quoi + " : sauvegardé sur GitHub ✓", 3000);
       journal("Sauvegarde auto réussie : " + quoi + " (" + etatCourt() + ")");
       return true;
@@ -2981,6 +3096,22 @@ async function envoyerVersGitHub(){
   const total = attente.length + 1;
   const pg = fenetreProgres("Envoi vers GitHub");
   let fait = 0;
+  if (cfg.syncGroupee){
+    try{
+      const r = await envoyerGroupe("envoi manuel", pg);
+      pg.fermer();
+      toast(`Envoyé en un seul commit : ${r.nPhotos} photo(s)${r.nAnalyses ? ", " + r.nAnalyses + " résultat(s) d'analyse" : ""} et les données.`, 5000);
+    }catch(e){
+      pg.fermer();
+      etatSync = "echec"; majBandeau();
+      journal("ÉCHEC de l'envoi groupé : " + e.message);
+      modale({ titre:"Envoi interrompu", horodatage:true,
+        html:`<div>L'envoi groupé n'a pas abouti : <b>rien n'a été modifié sur GitHub</b> (tout ou rien).</div><div class="aide">${esc(e.message)}</div><div class="aide">Tout reste sur cet appareil : relancez l'envoi.</div>`,
+        boutons:[{texte:"Fermer"}] });
+    }
+    rendre();
+    return;
+  }
   try{
     if (journalEnAttente().length) await viderJournalEnAttente(pg);
     for (const p of attente){
@@ -7831,6 +7962,11 @@ function ouvrirReglages(ongletInitial){
          <div class="aide">Le jeton reste sur l'appareil. Les données iront dans ${FICHIER_JSON} et les photos dans images/&lt;bibliothèque&gt;/&lt;rangée-compartiment&gt;.jpg.</div>
          <button class="btn" id="rTest" style="margin-top:10px">Tester l'accès au dépôt</button>
          <div id="rStatut" class="aide"></div>
+         <div class="groupeOutil">
+           <div class="titreGroupe">Synchronisation (essai)</div>
+           <label class="caseUnRang" for="rSyncG"><input type="checkbox" id="rSyncG" ${cfg.syncGroupee ? "checked" : ""}>
+             <span>Un seul commit par envoi<br><span class="aide" style="margin:0">photos, résultats d'analyse et données regroupés ; le fichier complet reste écrit comme avant. Décocher revient au fonctionnement précédent.</span></span></label>
+         </div>
        </div>
 
        <div id="pQuestions" hidden>
@@ -7931,6 +8067,10 @@ function ouvrirReglages(ongletInitial){
   };
   f.querySelector("#rLogMaj").onclick = afficherLog;
   f.querySelector("#rStockage").onclick = ()=>diagnosticStockage();
+  f.querySelector("#rSyncG").onchange = async (e)=>{
+    if (e.target.checked){ const ok = await activerSyncGroupee(); if (!ok) e.target.checked = false; }
+    else { cfg.syncGroupee = false; sauverCfg(); journal("Synchronisation groupée désactivée (retour au fonctionnement précédent)"); toast("Synchronisation groupée désactivée."); }
+  };
   const bSB = f.querySelector("#rSupprBiblio");
   if (bSB) bSB.onclick = ()=>{
     const bb = biblio(biblioCourante); if (!bb) return;
