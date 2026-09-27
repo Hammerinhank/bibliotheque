@@ -15134,6 +15134,28 @@
     "9-2": {
      "livres": [
       {
+       "titre": "Test",
+       "auteur": "Rest",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mujz3kucyqpac",
+       "origine": "main"
+      },
+      {
+       "titre": "Test",
+       "auteur": "Test",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "id": "mujz38cmqlidk",
+       "origine": "main"
+      },
+      {
        "id": "mudjmrq8vuqo4",
        "titre": "Sincères Amitiés",
        "auteur": "",
@@ -23351,13 +23373,16 @@
     },
     "5-1": {
      "livres": []
+    },
+    "4-3": {
+     "livres": []
     }
    },
    "cree": "2026-09-27T11:52:27.888Z",
    "ratio": 0.703
   }
  ],
- "maj": "2026-09-27T14:41:36.256Z",
+ "maj": "2026-09-27T15:28:19.718Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
