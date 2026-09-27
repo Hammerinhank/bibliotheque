@@ -15261,132 +15261,674 @@
     "9-3": {
      "livres": [
       {
-       "id": "mudr1r3uqdcts",
-       "titre": "Robert Sabatier Les trompettes de la renommée",
+       "id": "mujsmw8cb1y6k",
+       "titre": "Katiba",
+       "auteur": "Jean-Christophe Rufin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Flammarion",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 25,
+         "x2": 90
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cashzw",
+       "titre": "Les causes perdues",
+       "auteur": "Jean-Christophe Rufin",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Édition Gallimard NRF",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 65,
+         "x2": 118
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c6aw0p",
+       "titre": "L'été à Martha's Vineyard",
+       "auteur": "Richard Russo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Collection 10/18",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 91,
+         "x2": 149
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cyqv9r",
+       "titre": "Sortilèges du Cap Cod",
+       "auteur": "Richard Russo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Collection 10/18",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 126,
+         "x2": 174
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cgp1d9",
+       "titre": "Le déclin de l'empire Whiting",
+       "auteur": "Richard Russo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Collection 10/18",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 151,
+         "x2": 215
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8ct9cdo",
+       "titre": "Quatre saisons à Mohawk",
+       "auteur": "Richard Russo",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Collection 10/18",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 195,
+         "x2": 253
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c4pnkw",
+       "titre": "Les trompettes guerrières",
        "auteur": "Robert Sabatier",
        "annee": "",
-       "certitude": "moyenne",
-       "remarque": "Titre partiellement lisible",
+       "certitude": "haute",
+       "remarque": "Éditeur Albin Michel",
        "resume": "",
-       "categorie": "Romans français",
-       "origine": "ia"
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 233,
+         "x2": 288
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3urvu46",
+       "id": "mujsmw8c6tmj6",
        "titre": "La souris verte",
-       "auteur": "",
+       "auteur": "Robert Sabatier",
        "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche beige, lettrage noir",
+       "remarque": "Éditeur Albin Michel",
        "resume": "",
-       "categorie": "Jeunesse",
-       "origine": "ia"
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 273,
+         "x2": 320
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3ugl0xz",
+       "id": "mujsmw8co3qst",
        "titre": "Les volontaires",
-       "auteur": "",
+       "auteur": "Saint-Loup",
        "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche beige, symbole rouge",
+       "remarque": "Éditeur PHC",
        "resume": "",
-       "categorie": "Non classé",
-       "origine": "ia"
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 303,
+         "x2": 369
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3uefihp",
+       "id": "mujsmw8c7zsb4",
        "titre": "Les hérétiques",
+       "auteur": "Saint-Loup",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur PHC",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 357,
+         "x2": 416
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cnq3ec",
+       "titre": "Hélie de Saint Marc",
        "auteur": "",
        "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche beige, symbole rouge",
+       "remarque": "Éditeur Les Arènes",
        "resume": "",
-       "categorie": "Non classé",
-       "origine": "ia"
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 408,
+         "x2": 439
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3uferia",
-       "titre": "Hélie de Saint Marc",
-       "auteur": "Laurent Beccaria (journaliste et éditeur français)",
-       "annee": "1988",
+       "id": "mujsmw8ctzg7x",
+       "titre": "L'Accusée",
+       "auteur": "Michel de Saint Pierre",
+       "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche bleue, les arènes",
-       "resume": "Biographie d'Hélie de Saint Marc, résistant déporté, officier de Légion en Indochine et en Algérie, condamné après le putsch de 1961.",
-       "categorie": "Histoire",
-       "origine": "ia"
+       "remarque": "Éditeur Grasset",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 433,
+         "x2": 472
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3ucdh69",
-       "titre": "Gilbert Schlogel Les Princes du sang",
+       "id": "mujsmw8cr64l2",
+       "titre": "Vingt-Quatre Heures d'une femme sensible",
+       "auteur": "Constance de Salm",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Phébus",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 466,
+         "x2": 486
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c5345z",
+       "titre": "Histoire du véritable Gribouille",
+       "auteur": "",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tranche rouge et blanche",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 480,
+         "x2": 504
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cvxnqa",
+       "titre": "Les Princes du sang",
        "auteur": "Gilbert Schlogel",
        "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche noire, Fayard",
+       "remarque": "Éditeur Fayard",
        "resume": "",
-       "categorie": "Romans français",
-       "origine": "ia"
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 500,
+         "x2": 551
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3utwiho",
-       "titre": "Pierre Schoendoerffer Là-haut",
+       "id": "mujsmw8cfikag",
+       "titre": "Odette Toulemonde et autres histoires",
+       "auteur": "Eric-Emmanuel Schmitt",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Albin Michel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 550,
+         "x2": 581
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cjjkwy",
+       "titre": "Le sumo qui ne pouvait pas grossir",
+       "auteur": "Eric-Emmanuel Schmitt",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Albin Michel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 581,
+         "x2": 598
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c9qj4t",
+       "titre": "Là-haut",
        "auteur": "Pierre Schoendoerffer",
-       "annee": "1981",
+       "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche crème, Grasset",
-       "resume": "Un homme part sur les traces d'un ancien compagnon d'Indochine devenu une figure légendaire, presque un roi, dans les montagnes d'Asie du Sud-Est.",
-       "categorie": "Romans français",
-       "origine": "ia"
+       "remarque": "Éditeur Grasset",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 597,
+         "x2": 632
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3u03s97",
-       "titre": "Le crabe tambour",
-       "auteur": "Pierre Schoendoerffer (cinéaste et écrivain français, 1928-2012)",
-       "annee": "1976",
-       "certitude": "moyenne",
-       "remarque": "Tranche noire, partiellement lisible",
-       "resume": "Un médecin et un commandant mourant évoquent en mer la figure légendaire de Willsdorff, officier dit le Crabe-Tambour.",
-       "categorie": "Romans français",
-       "origine": "ia"
+       "id": "mujsmw8cmjoe4",
+       "titre": "L'aile du papillon",
+       "auteur": "Pierre Schoendoerffer",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Grasset",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 631,
+         "x2": 658
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3uo66u9",
-       "titre": "Luis Sepulveda Le Neveu d'Amérique",
-       "auteur": "Luis Sepulveda",
-       "annee": "1996",
+       "id": "mujsmw8cy4l92",
+       "titre": "Le Crabe-Tambour",
+       "auteur": "Pierre Schoendoerffer",
+       "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche blanche, Fayard",
-       "resume": "Récit autobiographique de voyages, du Chili de la dictature à la Patagonie et à l'Équateur, jusqu'à la rencontre d'un neveu en Espagne.",
-       "categorie": "Voyage",
-       "origine": "ia"
+       "remarque": "Éditeur Grasset",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 657,
+         "x2": 688
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       },
       {
-       "id": "mudr1r3u3rz93",
-       "titre": "Impératrice",
-       "auteur": "Shan Sa (romancière franco-chinoise née en 1972)",
-       "annee": "2003",
+       "id": "mujsmw8c0mepq",
+       "titre": "L'Exercice de la médecine",
+       "auteur": "Laurent Seksik",
+       "annee": "",
        "certitude": "haute",
-       "remarque": "Tranche noire, Albin Michel",
-       "resume": "Récit à la première personne de la vie de Wu Zetian, seule femme devenue impératrice de Chine sous les Tang.",
-       "categorie": "Non classé",
-       "origine": "ia"
+       "remarque": "Éditeur Flammarion",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 687,
+         "x2": 721
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c2tvg0",
+       "titre": "Le Neveu d'Amérique",
+       "auteur": "Luis Sepúlveda",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tranche blanche étroite",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 720,
+         "x2": 741
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cvg7g2",
+       "titre": "Adieu Volodia",
+       "auteur": "Simone Signoret",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Fayard",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 740,
+         "x2": 803
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c3iei5",
+       "titre": "Alexandre et Alestria",
+       "auteur": "Shan Sa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Albin Michel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 798,
+         "x2": 839
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cov6bv",
+       "titre": "Les Conspirateurs",
+       "auteur": "Shan Sa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Albin Michel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 837,
+         "x2": 878
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c8pa42",
+       "titre": "Shan Sa Impératrice",
+       "auteur": "Shan Sa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Albin Michel",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 876,
+         "x2": 928
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8c6ykyq",
+       "titre": "La Joueuse de Go",
+       "auteur": "Shan Sa",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Tranche bleue",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 917,
+         "x2": 954
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
+      },
+      {
+       "id": "mujsmw8cma15i",
+       "titre": "L'Innocence perdue",
+       "auteur": "Neil Sheehan",
+       "annee": "",
+       "certitude": "haute",
+       "remarque": "Éditeur Seuil",
+       "resume": "",
+       "categorie": "",
+       "origine": "ia",
+       "rang": "devant",
+       "vues": [
+        {
+         "champ": "photo",
+         "x1": 948,
+         "x2": 1000
+        }
+       ],
+       "temoins": [
+        "photo:2026-09-27T12:24:41.983Z"
+       ],
+       "statut": "acquis"
       }
      ],
      "photo": {
+      "plein": null,
       "chemin": "images/mucn2e6dat2vv/9-3.jpg",
       "envoye": true,
-      "maj": "2026-09-23T03:26:17.697Z"
+      "maj": "2026-09-27T12:24:41.983Z"
      },
      "analyse": {
-      "maj": "2026-09-23T06:56:11.899Z",
+      "maj": "2026-09-27T12:27:14.995Z",
+      "rangs": {
+       "devant": "2026-09-27T12:27:14.995Z",
+       "derriere": "2026-09-23T06:56:11.899Z"
+      },
       "ia": "gemini",
-      "modele": "gemini-flash-lite-latest",
-      "photos": 1,
+      "modele": "gemini-3-flash-preview",
+      "photos": 2,
       "manuel": false
      },
      "photo2": {
       "chemin": "images/mucn2e6dat2vv/9-3-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-23T16:27:01.190Z"
+     },
+     "certif": {
+      "devant": "2026-09-27T12:29:02.774Z"
      }
     },
     "7-3": {
@@ -21179,7 +21721,7 @@
    "cree": "2026-09-27T11:52:27.888Z"
   }
  ],
- "maj": "2026-09-27T11:53:28.676Z",
+ "maj": "2026-09-27T12:30:31.755Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
