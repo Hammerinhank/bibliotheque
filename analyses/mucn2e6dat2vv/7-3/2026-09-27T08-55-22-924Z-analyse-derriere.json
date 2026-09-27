@@ -1,0 +1,546 @@
+{
+ "date": "2026-09-27T08:55:22.924Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "7-3",
+ "genre": "analyse",
+ "portee": "derriere",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "livres": [
+  {
+   "id": "mujl2fjgtu0kg",
+   "titre": "Le grand hiver",
+   "auteur": "Ismaïl Kadaré",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Fayard",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 14,
+     "x2": 69
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgpqg10",
+   "titre": "Impossibles adieux",
+   "auteur": "Han Kang",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 68,
+     "x2": 97
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjglpbtz",
+   "titre": "La chambre noire de Longwood",
+   "auteur": "Jean-Paul Kauffmann",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "La Table Ronde",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 95,
+     "x2": 125
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgw81ws",
+   "titre": "Au-delà des pyramides",
+   "auteur": "Douglas Kennedy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Belfond",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 125,
+     "x2": 158
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgnjas5",
+   "titre": "Un monde à portée de main",
+   "auteur": "Maylis de Kerangal",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Verticales",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 158,
+     "x2": 186
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg95qi7",
+   "titre": "Eagle",
+   "auteur": "Tracy Kidder",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Flammarion",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 184,
+     "x2": 218
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjggvmlm",
+   "titre": "Les patriotes",
+   "auteur": "Sana Krasikov",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 218,
+     "x2": 261
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg3lgvb",
+   "titre": "Hier",
+   "auteur": "Agota Kristof",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Éditions du Seuil, texte pâle",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 261,
+     "x2": 278
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgt3h3z",
+   "titre": "L'immortalité",
+   "auteur": "Milan Kundera",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard, Du monde entier",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 278,
+     "x2": 313
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg136bz",
+   "titre": "La lenteur",
+   "auteur": "Milan Kundera",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 313,
+     "x2": 334
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjggxwpk",
+   "titre": "Les gens",
+   "auteur": "Philippe Labro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 334,
+     "x2": 375
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgu35uc",
+   "titre": "Un début à Paris",
+   "auteur": "Philippe Labro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 375,
+     "x2": 402
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgiyvle",
+   "titre": "L'étudiant étranger",
+   "auteur": "Philippe Labro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 402,
+     "x2": 431
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgfzykd",
+   "titre": "Franz & Clara",
+   "auteur": "Philippe Labro",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 431,
+     "x2": 456
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgqbwkl",
+   "titre": "En douceur",
+   "auteur": "Jean-Marie Laclavetine",
+   "annee": "",
+   "certitude": "faible",
+   "remarque": "Gallimard nrf, titre peu lisible",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 455,
+     "x2": 478
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgq19co",
+   "titre": "Histoire du fils",
+   "auteur": "Marie-Hélène Lafon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Buchet-Chastel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 477,
+     "x2": 497
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgtuv1c",
+   "titre": "Les Guérillans",
+   "auteur": "Jacques Lanzmann",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "JC Lattès",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 496,
+     "x2": 525
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgxk96m",
+   "titre": "L'extravagant voyage du jeune et prodigieux T. S. Spivet",
+   "auteur": "Reif Larsen",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "NiL éditions",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 525,
+     "x2": 567
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg2601z",
+   "titre": "Les Centurions",
+   "auteur": "Jean Lartéguy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Presses de la Cité",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 567,
+     "x2": 611
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjglqk9u",
+   "titre": "Le miroir aux tiroirs",
+   "auteur": "Jacques Laurent",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "Grasset, petits caractères",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 611,
+     "x2": 643
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjggqah3",
+   "titre": "Les derniers jours de Charles Baudelaire",
+   "auteur": "Bernard-Henri Lévy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Grasset",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 643,
+     "x2": 675
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg4ysu3",
+   "titre": "Les Bienveillantes",
+   "auteur": "Jonathan Littell",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Gallimard nrf",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 675,
+     "x2": 733
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg4rpso",
+   "titre": "La vie en sourdine",
+   "auteur": "David Lodge",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Rivages",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 733,
+     "x2": 772
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgroi6y",
+   "titre": "Thérapie",
+   "auteur": "David Lodge",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Rivages",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 772,
+     "x2": 806
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg7w5l2",
+   "titre": "Hors de l'abri",
+   "auteur": "David Lodge",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Rivages",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 806,
+     "x2": 839
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgpiqp4",
+   "titre": "L'ombre venue de l'espace",
+   "auteur": "H.P. Lovecraft, August Derleth",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "petits caractères, tranche noire",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 839,
+     "x2": 866
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjg30ks4",
+   "titre": "Grace",
+   "auteur": "Paul Lynch",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Albin Michel",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 866,
+     "x2": 914
+    }
+   ]
+  },
+  {
+   "id": "mujl2fjgpa59w",
+   "titre": "C'est comment l'Amérique ?",
+   "auteur": "Frank McCourt",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "Belfond",
+   "resume": "",
+   "categorie": "",
+   "origine": "ia",
+   "rang": "derriere",
+   "vues": [
+    {
+     "champ": "photo2",
+     "x1": 914,
+     "x2": 953
+    }
+   ]
+  }
+ ]
+}
