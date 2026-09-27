@@ -14299,7 +14299,17 @@
       "chemin": "images/mucn2e6dat2vv/10-3-derriere.jpg",
       "envoye": true,
       "maj": "2026-09-23T16:27:04.236Z"
-     }
+     },
+     "appoints": [
+      {
+       "chemin": "images/mucn2e6dat2vv/10-3-appoint-muk2hewccfjzt.jpg",
+       "envoye": false,
+       "maj": "2026-09-27T17:02:55.404Z",
+       "id": "muk2hewccfjzt",
+       "legende": "",
+       "enIDB": "images/mucn2e6dat2vv/10-3-appoint-muk2hewccfjzt.jpg"
+      }
+     ]
     },
     "8-3": {
      "livres": [
@@ -42273,7 +42283,7 @@
    }
   }
  ],
- "maj": "2026-09-27T16:59:45.143Z",
+ "maj": "2026-09-27T17:02:57.235Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
