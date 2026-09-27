@@ -1,0 +1,285 @@
+{
+ "date": "2026-09-27T08:28:13.687Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "6-3",
+ "genre": "appoint",
+ "appoint": "mujk02ezapdmz",
+ "mode": "ordre",
+ "source": {
+  "ia": "claude",
+  "modele": "claude.ai (copier-coller)"
+ },
+ "lus": [
+  {
+   "titre": "Le chemin des livres",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "auteur illisible",
+   "x1": 16,
+   "x2": 35,
+   "illisible": false
+  },
+  {
+   "titre": "Un jardin à Téhéran",
+   "auteur": "Shusha Guppy",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 32,
+   "x2": 62,
+   "illisible": false
+  },
+  {
+   "titre": "L'Âge de Pierre",
+   "auteur": "Paul Guimard",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 59,
+   "x2": 83,
+   "illisible": false
+  },
+  {
+   "titre": "Le Dernier Tramway",
+   "auteur": "Nedim Gürsel",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 82,
+   "x2": 108,
+   "illisible": false
+  },
+  {
+   "titre": "Le goût des pépins de pomme",
+   "auteur": "Katharina Hagena",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 107,
+   "x2": 140,
+   "illisible": false
+  },
+  {
+   "titre": "L'inconnue de Birobidjan",
+   "auteur": "Marek Halter",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 140,
+   "x2": 188,
+   "illisible": false
+  },
+  {
+   "titre": "Paquebot",
+   "auteur": "Hervé Hamon",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 189,
+   "x2": 247,
+   "illisible": false
+  },
+  {
+   "titre": "L'Art du jeu",
+   "auteur": "Chad Harbach",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 250,
+   "x2": 301,
+   "illisible": false
+  },
+  {
+   "titre": "Une comédie familiale",
+   "auteur": "Isabelle Hausser",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 302,
+   "x2": 334,
+   "illisible": false
+  },
+  {
+   "titre": "Nitchevo",
+   "auteur": "Isabelle Hausser",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 336,
+   "x2": 372,
+   "illisible": false
+  },
+  {
+   "titre": "La Chambre sourde",
+   "auteur": "Isabelle Hausser",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 373,
+   "x2": 406,
+   "illisible": false
+  },
+  {
+   "titre": "Le Harem",
+   "auteur": "Frédérique Hébrard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 406,
+   "x2": 441,
+   "illisible": false
+  },
+  {
+   "titre": "Les Collégiens",
+   "auteur": "Stephen Hecquet",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "",
+   "x1": 442,
+   "x2": 463,
+   "illisible": false
+  },
+  {
+   "titre": "Lola",
+   "auteur": "Catherine Hermary-Vieille",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 464,
+   "x2": 514,
+   "illisible": false
+  },
+  {
+   "titre": "Soumission",
+   "auteur": "Michel Houellebecq",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 515,
+   "x2": 544,
+   "illisible": false
+  },
+  {
+   "titre": "Mademoiselle Chambon",
+   "auteur": "Éric Holder",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 545,
+   "x2": 564,
+   "illisible": false
+  },
+  {
+   "titre": "Ainsi résonne l'écho infini des montagnes",
+   "auteur": "Khaled Hosseini",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 561,
+   "x2": 613,
+   "illisible": false
+  },
+  {
+   "titre": "La Longue-vue",
+   "auteur": "Elizabeth Jane Howard",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 613,
+   "x2": 641,
+   "illisible": false
+  },
+  {
+   "titre": "À rude épreuve",
+   "auteur": "",
+   "annee": "",
+   "certitude": "moyenne",
+   "remarque": "auteur partiellement lisible (…OWARD)",
+   "x1": 643,
+   "x2": 682,
+   "illisible": false
+  },
+  {
+   "titre": "Les Pagès",
+   "auteur": "Frédéric Hulot",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 682,
+   "x2": 721,
+   "illisible": false
+  },
+  {
+   "titre": "Le Meilleur des mondes",
+   "auteur": "Aldous Huxley",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 722,
+   "x2": 764,
+   "illisible": false
+  },
+  {
+   "titre": "Contes de l'Alhambra",
+   "auteur": "Washington Irving",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 766,
+   "x2": 797,
+   "illisible": false
+  },
+  {
+   "titre": "L'Épopée du buveur d'eau",
+   "auteur": "John Irving",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 795,
+   "x2": 831,
+   "illisible": false
+  },
+  {
+   "titre": "La Quatrième Main",
+   "auteur": "John Irving",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 832,
+   "x2": 880,
+   "illisible": false
+  },
+  {
+   "titre": "Mer blanche",
+   "auteur": "Roy Jacobsen",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 874,
+   "x2": 909,
+   "illisible": false
+  },
+  {
+   "titre": "Ramsès — Sous l'acacia d'Occident",
+   "auteur": "Christian Jacq",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 903,
+   "x2": 949,
+   "illisible": false
+  },
+  {
+   "titre": "Le Destin de Iouri Voronine",
+   "auteur": "Henriette Jelinek",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 949,
+   "x2": 988,
+   "illisible": false
+  }
+ ]
+}
