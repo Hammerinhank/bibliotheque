@@ -436,8 +436,15 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.77.1";
+const VERSION = "V1.78.1";
 const HISTORIQUE = [
+  { v:"V1.78.1", d:"27/09/2026", l:[
+    "Sauvegardes : à la restauration, choix de la bibliothèque de destination pour chaque bibliothèque sauvegardée — la même, une autre (par ex. une bibliothèque vide créée pour tester), ou aucune. Injectée dans une autre, la copie reprend grille, compartiments, rangées et ordre des livres, sans les photos."
+  ]},
+  { v:"V1.78.0", d:"27/09/2026", l:[
+    "Réglages ⚙️ › Sauvegardes : « 💾 Sauvegarder maintenant » enregistre tous les livres (tous leurs attributs) avec leur compartiment, leur rangée et leur ordre, plus les certifications et marques « 1 rang » — sur l'appareil et sur GitHub (dossier sauvegardes/).",
+    "Liste des sauvegardes (date, nom, nombre de livres, emplacement) ; « ↩ Restaurer » remet les livres exactement dans cet état, après avoir sauvegardé l'état actuel par sécurité ; suppression possible. Les photos ne sont jamais touchées."
+  ]},
   { v:"V1.77.1", d:"27/09/2026", l:[
     "Dans les textes qui citent l'IA utilisée (Claude ou Gemini), son nom est en gras et en couleur (Claude en orangé, Gemini en bleu) pour bien le repérer."
   ]},
@@ -2529,6 +2536,183 @@ function panneauGrille(zone, b){
     planifierEnvoi("Grille modifiée");
     toast("Changements appliqués.", 4000);
     p = initiale(); rendre();
+  };
+  rendre();
+}
+
+/* ====================================================================
+   SAUVEGARDES DES LIVRES (Réglages ⚙️ › Sauvegardes)
+   Instantané de tous les livres (tous leurs attributs), avec leur compartiment, leur rangée et leur ordre,
+   ainsi que les marques des compartiments (certification, « 1 rang »). Les photos ne sont pas copiées
+   (elles restent sur GitHub) : seules les listes de livres sont sauvegardées et restaurées.
+   Chaque sauvegarde est gardée sur cet appareil (IndexedDB) et sur GitHub (dossier sauvegardes/).
+   ==================================================================== */
+const DOSSIER_SVG = "sauvegardes";
+function instantaneLivres(libelle){
+  const date = new Date().toISOString();
+  const bibs = (data.bibliotheques || []).map(b=>({
+    id:b.id, nom:b.nom, lieu:b.lieu || "", rangees:b.rangees, compartiments:b.compartiments, ratio:b.ratio,
+    cases: Object.fromEntries(Object.entries(b.cases || {}).filter(([k, cs])=>(cs.livres || []).length || cs.certif || cs.unRang)
+      .map(([k, cs])=>[k, { livres: JSON.parse(JSON.stringify(cs.livres || [])), ...(cs.certif ? { certif: { ...cs.certif } } : {}), ...(cs.unRang ? { unRang:true } : {}) }]))
+  }));
+  const nLivres = bibs.reduce((n, b)=>n + Object.values(b.cases).reduce((m, cs)=>m + cs.livres.length, 0), 0);
+  return { type:"sauvegarde-livres", format:1, version:VERSION, date, libelle: libelle || "", appareil: navigator.platform || "", resume:{ bibliotheques:bibs.length, livres:nLivres }, bibliotheques:bibs };
+}
+const nomFichierSvg = (s)=> `${DOSSIER_SVG}/livres-${s.date.replace(/[:.]/g, "-")}.json`;
+
+async function creerSauvegarde(libelle, silencieux){
+  const s = instantaneLivres(libelle);
+  const chemin = nomFichierSvg(s);
+  await idbEcrire("svg:" + chemin, JSON.stringify(s));                 // copie sur l'appareil, toujours
+  let surGithub = false;
+  if (ghPret() && navigator.onLine !== false){
+    try{ await ghEcrire(chemin, enBase64Utf8(JSON.stringify(s)), "Sauvegarde des livres" + (libelle ? " — " + libelle : "")); surGithub = true; }
+    catch(e){ journal("Sauvegarde des livres : envoi GitHub impossible (" + e.message + ")"); }
+  }
+  journal(`Sauvegarde des livres créée (${s.resume.livres} livres)${libelle ? " — " + libelle : ""}${surGithub ? " — sur GitHub" : " — sur l'appareil seulement"}`);
+  if (!silencieux) toast(`Sauvegarde créée : ${s.resume.livres} livres${surGithub ? ", sur l'appareil et sur GitHub" : " (sur l'appareil ; GitHub à la prochaine connexion)"}.`, 5000);
+  return { s, chemin, surGithub };
+}
+/* liste : sauvegardes de l'appareil et de GitHub, réunies */
+async function listerSauvegardes(){
+  const m = new Map();
+  try{ for (const c of await idbCles()) if (String(c).startsWith("svg:")) m.set(c.slice(4), { chemin:c.slice(4), local:true, github:false }); }catch(e){}
+  if (ghLisible()){
+    try{
+      const r = await fetch(ghUrl(DOSSIER_SVG) + "?ref=" + encodeURIComponent(cfg.ghBranche) + "&t=" + Date.now(), { headers: ghEntetes() });
+      if (r.ok) (await r.json()).filter(x=>x.type === "file" && /\.json$/.test(x.name)).forEach(x=>{
+        const e = m.get(x.path) || { chemin:x.path, local:false }; e.github = true; m.set(x.path, e); });
+    }catch(e){}
+  }
+  return [...m.values()].sort((a, z)=>z.chemin.localeCompare(a.chemin));
+}
+async function lireSauvegarde(e){
+  if (e.local){ const t = await idbLire("svg:" + e.chemin); if (t) return JSON.parse(t); }
+  return JSON.parse(await ghLireTexte(e.chemin));
+}
+/* restauration : remet les livres (et marques) de chaque compartiment tels qu'ils étaient ; les photos ne bougent pas */
+function restaurerSauvegarde(s, destinations){
+  let nb = 0, nLivres = 0;
+  s.bibliotheques.forEach(sb=>{
+    // destination : même bibliothèque (par défaut), une autre, ou aucune
+    const dest = destinations ? destinations[sb.id] : sb.id;
+    if (!dest) return;
+    const copie = dest !== sb.id;
+    let b = (data.bibliotheques || []).find(x=>x.id === dest);
+    if (!b){ b = { id:sb.id, nom:sb.nom, lieu:sb.lieu, rangees:sb.rangees, compartiments:sb.compartiments, ratio:sb.ratio, cases:{}, cree:new Date().toISOString() }; data.bibliotheques.push(b); }
+    if (copie && sb.ratio && !Object.keys(b.cases || {}).length) b.ratio = sb.ratio;
+    b.cases = b.cases || {};
+    // grille : au moins aussi grande que celle de la sauvegarde
+    b.rangees = Math.max(b.rangees, sb.rangees || 1); b.compartiments = Math.max(b.compartiments, sb.compartiments || 1);
+    // compartiments absents de la sauvegarde : plus de livres
+    Object.keys(b.cases).forEach(k=>{ if (!sb.cases[k]){ b.cases[k].livres = []; delete b.cases[k].certif; delete b.cases[k].unRang; } });
+    Object.entries(sb.cases).forEach(([k, sc])=>{
+      const cs = b.cases[k] = b.cases[k] || { livres:[] };
+      cs.livres = JSON.parse(JSON.stringify(sc.livres || []));
+      if (copie) cs.livres.forEach(lv=>{ lv.id = uid(); });          // copie dans une autre bibliothèque : identifiants neufs
+      if (sc.certif) cs.certif = { ...sc.certif }; else delete cs.certif;
+      if (sc.unRang) cs.unRang = true; else delete cs.unRang;
+      nLivres += cs.livres.length;
+    });
+    nb++;
+  });
+  return { nb, nLivres };
+}
+
+function panneauSauvegardes(zone){
+  const rendre = async ()=>{
+    const r = resume(data) || { livres:0 };
+    zone.innerHTML = `
+      <div class="aide" style="margin-top:0">Une sauvegarde est une photographie de <b>tous les livres</b> (titre, auteur, année, résumé, catégorie, statut, questions…) avec leur <b>compartiment, leur rangée (devant / derrière) et leur ordre</b>, ainsi que les certifications ★ et les marques « 1 rang ». Les photos ne sont pas copiées : elles restent sur GitHub.</div>
+      <div class="groupeOutil">
+        <div class="titreGroupe">Nouvelle sauvegarde</div>
+        <div class="aide" style="margin-top:0">État actuel : <b>${r.livres}</b> livres dans ${(data.bibliotheques || []).length} bibliothèque(s).</div>
+        <label for="svLib">Nom (facultatif)</label>
+        <input type="text" id="svLib" placeholder="ex. avant de refaire les analyses de la rangée 8">
+        <button class="btn principal plein" id="svCreer" style="margin-top:10px">💾 Sauvegarder maintenant</button>
+      </div>
+      <div class="titreSection" style="margin-top:14px">Sauvegardes existantes</div>
+      <div id="svListe"><div class="aide">Chargement…</div></div>`;
+    zone.querySelector("#svCreer").onclick = async ()=>{
+      const bt = zone.querySelector("#svCreer"); bt.disabled = true; bt.textContent = "Sauvegarde en cours…";
+      try{ await creerSauvegarde(zone.querySelector("#svLib").value.trim()); }
+      catch(e){ toast("Sauvegarde impossible : " + e.message, 6000); }
+      rendre();
+    };
+    const liste = await listerSauvegardes();
+    const zl = zone.querySelector("#svListe");
+    if (!liste.length){ zl.innerHTML = `<div class="aide">Aucune sauvegarde pour l'instant.</div>`; return; }
+    zl.innerHTML = `<div class="aide">Chargement des détails (${liste.length})…</div>`;
+    const details = [];
+    for (let i = 0; i < liste.length; i++){
+      try{ details.push({ e:liste[i], s: await lireSauvegarde(liste[i]) }); }catch(err){ details.push({ e:liste[i], s:null }); }
+    }
+    zl.innerHTML = details.map((d, i)=>{
+      const s = d.s;
+      return `<div class="prop" style="display:flex;gap:8px;align-items:center">
+        <div style="flex:1">
+          <div class="t">${s ? esc(dateFr(s.date)) : esc(d.e.chemin.split("/").pop())}${s && s.libelle ? " — " + esc(s.libelle) : ""}</div>
+          <div class="chg">${s ? `${s.resume.livres} livres, ${s.resume.bibliotheques} bibliothèque(s) · app ${esc(s.version || "")}` : "illisible"}</div>
+          <div class="aide" style="margin:2px 0 0">${d.e.local ? "📱 sur cet appareil" : ""}${d.e.local && d.e.github ? " · " : ""}${d.e.github ? "☁️ sur GitHub" : " · pas encore sur GitHub"}</div>
+        </div>
+        ${s ? `<div style="display:flex;flex-direction:column;gap:6px">
+          <button class="btn rouge" data-rest="${i}">↩ Restaurer</button>
+          <button class="btn" data-sup="${i}">🗑</button></div>` : ""}
+      </div>`;
+    }).join("");
+    zl.querySelectorAll("[data-rest]").forEach(bt=>bt.onclick = async ()=>{
+      const d = details[Number(bt.dataset.rest)], s = d.s;
+      const actuel = resume(data) || { livres:0 };
+      // destination de chaque bibliothèque sauvegardée
+      const destinations = {};
+      const choixDest = await new Promise(res=>{
+        let fait = false;
+        const opts = (sb)=>`<option value="${esc(sb.id)}">${esc(sb.nom)} (la même)</option>` +
+          (data.bibliotheques || []).filter(b=>b.id !== sb.id).map(b=>`<option value="${esc(b.id)}">→ ${esc(b.nom)}${Object.values(b.cases || {}).some(cs=>(cs.livres || []).length) ? " (a déjà des livres)" : " (vide)"}</option>`).join("") +
+          `<option value="">Ne pas restaurer</option>`;
+        const fd = modale({ titre:"Restaurer — où ?", horodatage:true,
+          html:`<div>Sauvegarde du <b>${esc(dateFr(s.date))}</b>${s.libelle ? " (« " + esc(s.libelle) + " »)" : ""}. Pour chaque bibliothèque sauvegardée, choisissez où remettre ses livres :</div>
+            ${s.bibliotheques.map((sb, i)=>`<label for="svD${i}">${esc(sb.nom)} — ${Object.values(sb.cases).reduce((n, c)=>n + c.livres.length, 0)} livres</label><select id="svD${i}">${opts(sb)}</select>`).join("")}
+            <div class="aide">« La même » remet les livres dans leur bibliothèque d'origine. Choisir une autre bibliothèque (par exemple une bibliothèque vide créée pour tester) y copie grille, compartiments, rangées et ordre des livres, <b>sans les photos</b> ; les compartiments de la destination absents de la sauvegarde sont vidés de leurs livres.</div>`,
+          boutons:[{ texte:"Annuler", action:()=>{ fait = true; res(false); } }, { texte:"Continuer", classe:"principal", action:(f2)=>{
+            s.bibliotheques.forEach((sb, i)=>{ destinations[sb.id] = f2.querySelector("#svD" + i).value; }); fait = true; res(true); } }],
+          surFermeture:()=>{ if (!fait) res(false); } });
+      });
+      if (!choixDest) return;
+      const cibles = s.bibliotheques.filter(sb=>destinations[sb.id]).map(sb=>{
+        const dest = (data.bibliotheques || []).find(b=>b.id === destinations[sb.id]);
+        return `« ${esc(sb.nom)} » → « ${esc(dest ? dest.nom : sb.nom)} »`;
+      });
+      if (!cibles.length){ toast("Rien à restaurer."); return; }
+      const ok = await confirmer(`<div><b>Remettre les livres tels qu'ils étaient le ${esc(dateFr(s.date))}</b> :</div><ul>${cibles.map(c=>"<li>" + c + "</li>").join("")}</ul>
+        <div class="aide">Les listes de chaque compartiment, les certifications et les marques « 1 rang » reprennent leur état de ce jour-là dans la bibliothèque de destination. Les photos ne changent pas.</div>
+        <div class="aide"><b>Par sécurité, l'état actuel est d'abord sauvegardé</b> (« avant restauration ») : vous pourrez y revenir.</div>`,
+        "Restaurer une sauvegarde", "⚠️ Restaurer", { danger:true, texteNon:"Ne rien changer", horodatage:true });
+      if (!ok) return;
+      try{ await creerSauvegarde("avant restauration du " + dateFr(s.date), true); }
+      catch(e){ toast("Sauvegarde de sécurité impossible : restauration annulée.", 6000); return; }
+      const res = restaurerSauvegarde(s, destinations);
+      journal(`Sauvegarde du ${dateFr(s.date)} restaurée : ${res.nLivres} livres`);
+      sauver(); rendreBiblio();
+      planifierEnvoi("Restauration d'une sauvegarde des livres");
+      toast(`Restauré : ${res.nLivres} livres. L'état d'avant est gardé dans une sauvegarde.`, 6000);
+      rendre();
+    });
+    zl.querySelectorAll("[data-sup]").forEach(bt=>bt.onclick = async ()=>{
+      const d = details[Number(bt.dataset.sup)];
+      const ok = await confirmer(`Supprimer définitivement la sauvegarde du ${esc(dateFr(d.s.date))}${d.s.libelle ? " (« " + esc(d.s.libelle) + " »)" : ""} ?`, "Supprimer une sauvegarde", "Supprimer", { danger:true, texteNon:"Garder" });
+      if (!ok) return;
+      try{ if (d.e.local) await idbSupprimer("svg:" + d.e.chemin); if (d.e.github) await ghSupprimer(d.e.chemin, "Suppression d'une sauvegarde des livres"); }
+      catch(e){ toast("Suppression incomplète : " + e.message, 5000); }
+      journal(`Sauvegarde du ${dateFr(d.s.date)} supprimée`);
+      rendre();
+    });
+    // sauvegardes restées sur l'appareil : envoi sur GitHub si possible
+    if (ghPret() && navigator.onLine !== false){
+      for (const d of details) if (d.s && d.e.local && !d.e.github){
+        try{ await ghEcrire(d.e.chemin, enBase64Utf8(JSON.stringify(d.s)), "Sauvegarde des livres"); d.e.github = true; }catch(e){}
+      }
+    }
   };
   rendre();
 }
@@ -7455,6 +7639,7 @@ function ouvrirReglages(ongletInitial){
          <button data-o="questions">Questions</button>
          <button data-o="entretien">Entretien</button>
          <button data-o="grille">Grille</button>
+         <button data-o="sauvegardes">Sauvegardes</button>
          <button data-o="analyse">Analyse</button>
          <button data-o="log">Log</button>
        </div>
@@ -7553,6 +7738,7 @@ function ouvrirReglages(ongletInitial){
          <button class="btn" id="qCr" style="margin-top:6px">Texte par défaut</button>
        </div>
 
+       <div id="pSauvegardes" hidden><div id="pSauvegardesZone"></div></div>
        <div id="pGrille" hidden>
          ${biblioCourante && biblio(biblioCourante) ? `<div id="pGrilleZone"></div>` : `<div class="aide">Ouvrez d'abord une bibliothèque pour paramétrer sa grille.</div>`}
        </div>
@@ -7616,13 +7802,14 @@ function ouvrirReglages(ongletInitial){
 
   const activer = (nom)=>{
     f.querySelectorAll("[data-o]").forEach(x=>x.classList.toggle("actif", x.dataset.o===nom));
-    ["gemini","github","questions","entretien","grille","analyse","log"].forEach(o=>{
+    ["gemini","github","questions","entretien","grille","sauvegardes","analyse","log"].forEach(o=>{
       f.querySelector("#p"+o[0].toUpperCase()+o.slice(1)).hidden = (o !== nom);
     });
     // « Enregistrer » ne concerne que les onglets Gemini, GitHub et Questions
     const bEnr = f.querySelector(".pied [data-b='1']");
     if (bEnr) bEnr.style.display = ["gemini","github","questions"].includes(nom) ? "" : "none";
     if (nom === "log") afficherLog();
+    if (nom === "sauvegardes") panneauSauvegardes(f.querySelector("#pSauvegardesZone"));
     if (nom === "grille"){ const zg = f.querySelector("#pGrilleZone"); if (zg && !zg.dataset.fait){ zg.dataset.fait = "1"; panneauGrille(zg, biblio(biblioCourante)); } }
   };
   const afficherLog = ()=>{
