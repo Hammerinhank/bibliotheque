@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T10:48:54.882Z",
+ "maj": "2026-09-28T10:50:06.023Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -105,6 +105,17 @@
        "photo:2026-09-28T10:43:25.055Z"
       ],
       "statut": "probable"
+     },
+     {
+      "id": "mul4kxjl0aoz9",
+      "titre": "L’alphabet de becassine",
+      "auteur": "",
+      "annee": "",
+      "resume": "",
+      "categorie": "",
+      "remarque": "",
+      "certitude": "haute",
+      "origine": "main"
      },
      {
       "id": "mul4k63lkfiah",
