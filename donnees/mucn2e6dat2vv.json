@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T14:54:04.691Z",
+ "maj": "2026-09-28T14:54:24.651Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15592,14 +15592,883 @@
     }
    },
    "9-2": {
-    "livres": [],
+    "livres": [
+     {
+      "id": "muldbzbrh8jay",
+      "titre": "Sentiments distingués",
+      "auteur": "Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 27,
+        "x2": 60
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbrho488",
+      "titre": "Sempé",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 60,
+        "x2": 85
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbrjyzob",
+      "titre": "Sempé",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 85,
+        "x2": 110
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbr1jmg3",
+      "titre": "DES HAUTS ET DES BAS",
+      "auteur": "Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 110,
+        "x2": 145
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbspqeji",
+      "titre": "SINCÈRES AMITIÉS",
+      "auteur": "Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 145,
+        "x2": 180
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsn8v62",
+      "titre": "SINCÈRES AMITIÉS",
+      "auteur": "Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 180,
+        "x2": 225
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsoud1v",
+      "titre": "Histoires inédites du Petit Nicolas",
+      "auteur": "Goscinny Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "IMAV éditions",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 225,
+        "x2": 260
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsydc9j",
+      "titre": "Histoires inédites du Petit Nicolas",
+      "auteur": "Goscinny Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "IMAV éditions",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 260,
+        "x2": 295
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbs40bfc",
+      "titre": "ANNE BALTUS DOLORES",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 300,
+        "x2": 320
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsovaha",
+      "titre": "FLUIDE GLACIAL",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 320,
+        "x2": 340
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbslnle5",
+      "titre": "HAUT DE GAMME (VOLUME 1)",
+      "auteur": "Binet",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Bas de gamme",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 340,
+        "x2": 360
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsk5ejt",
+      "titre": "LES BIDOCHON Tome 20",
+      "auteur": "Binet",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "casterman",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 360,
+        "x2": 380
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsz83yi",
+      "titre": "LES DINGODOSSIERS",
+      "auteur": "Goscinny Gotlib",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Dargaud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 380,
+        "x2": 400
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbs1nlhd",
+      "titre": "RUBRIQUE-A-BRAC (Tome 1)",
+      "auteur": "Gotlib",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 400,
+        "x2": 420
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsnrrhi",
+      "titre": "L'ÉNIGMATIQUE MONSIEUR SCHMUTZ",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Dargaud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 420,
+        "x2": 440
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbszcf63",
+      "titre": "LE PERROQUET DES BATIGNOLLES",
+      "auteur": "Boujut Tardi Stanislas",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Dargaud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 440,
+        "x2": 460
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbs5sldb",
+      "titre": "Bonjour Bonsoir",
+      "auteur": "Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "éditions Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 460,
+        "x2": 490
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbszjotj",
+      "titre": "Toutes complices",
+      "auteur": "",
+      "annee": "",
+      "certitude": "faible",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 490,
+        "x2": 520
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbstcx0z",
+      "titre": "Les Récits du petit Nicolas",
+      "auteur": "Sempé / Goscinny",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 520,
+        "x2": 540
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsv3e1t",
+      "titre": "Histoires inédites du Petit Nicolas",
+      "auteur": "Goscinny & Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "IMAV éditions",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 540,
+        "x2": 570
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsh8t4n",
+      "titre": "LES MISCELLANÉES DE Mr. SCHOTT",
+      "auteur": "Ben Schott",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 570,
+        "x2": 600
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbspm7jk",
+      "titre": "LES SOLDES DE L'AN DEUX",
+      "auteur": "Jacques Faizant",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 600,
+        "x2": 620
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbs70khl",
+      "titre": "RAOUL TABURIN",
+      "auteur": "Sempé",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 620,
+        "x2": 640
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsatvzk",
+      "titre": "OHÉ! DU BATEAU",
+      "auteur": "Jacques Faizant",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 640,
+        "x2": 670
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsf7wgb",
+      "titre": "FAIRE DE LA BANDE DESSINÉE",
+      "auteur": "Scott McCloud",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 670,
+        "x2": 700
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsj9afh",
+      "titre": "L'ART INVISIBLE",
+      "auteur": "Scott McCloud",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 700,
+        "x2": 730
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsxiyq2",
+      "titre": "LE BRICOLAGE",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Serre",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 730,
+        "x2": 750
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsx0nbx",
+      "titre": "Contes à Ninon",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 750,
+        "x2": 770
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbs02f69",
+      "titre": "Le docteur Pascal",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 770,
+        "x2": 790
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbssyrff",
+      "titre": "LA DÉBÂCLE",
+      "auteur": "Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 790,
+        "x2": 820
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbseti76",
+      "titre": "La bête humaine",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 820,
+        "x2": 840
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsjjvq8",
+      "titre": "La terre",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 840,
+        "x2": 860
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbstpqlh",
+      "titre": "L'Œuvre",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 860,
+        "x2": 880
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbs44bxs",
+      "titre": "GERMINAL",
+      "auteur": "Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 880,
+        "x2": 900
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsfo5or",
+      "titre": "Pot-Bouille",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 900,
+        "x2": 920
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsata5a",
+      "titre": "Une page d'amour",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 920,
+        "x2": 940
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsj75zo",
+      "titre": "Son Excellence Eugène Rougon",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 940,
+        "x2": 960
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbswo83q",
+      "titre": "Le ventre de Paris",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 960,
+        "x2": 980
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbsowf7o",
+      "titre": "L'attaque du moulin",
+      "auteur": "Émile Zola",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Livre de Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 980,
+        "x2": 1000
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     }
+    ],
     "photo": {
+     "plein": null,
      "chemin": "images/mucn2e6dat2vv/9-2.jpg",
-     "envoye": false,
-     "maj": "2026-09-28T14:54:03.740Z",
-     "enIDB": "images/mucn2e6dat2vv/9-2.jpg"
+     "envoye": true,
+     "maj": "2026-09-28T14:54:03.740Z"
     },
-    "unRang": true
+    "unRang": true,
+    "analyse": {
+     "maj": "2026-09-28T14:54:23.901Z",
+     "rangs": {
+      "devant": "2026-09-28T14:54:23.901Z"
+     },
+     "ia": "gemini",
+     "modele": "gemini-2.5-flash",
+     "photos": 1,
+     "manuel": false
+    }
    },
    "9-3": {
     "livres": [
