@@ -17176,28 +17176,6 @@
        "statut": "acquis"
       },
       {
-       "id": "muldbzbs40bfc",
-       "titre": "ANNE BALTUS DOLORES",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "",
-       "resume": "",
-       "categorie": "",
-       "origine": "ia",
-       "vues": [
-        {
-         "champ": "photo",
-         "x1": 300,
-         "x2": 320
-        }
-       ],
-       "temoins": [
-        "photo:2026-09-28T14:54:03.740Z"
-       ],
-       "statut": "acquis"
-      },
-      {
        "id": "muldbzbsovaha",
        "titre": "FLUIDE GLACIAL",
        "auteur": "",
@@ -17217,65 +17195,27 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable",
-       "question": {
-        "type": "deplace",
-        "zone": {
-         "champ": "appoint:mulde9hkkbjk9",
-         "x1": 400,
-         "x2": 660
-        },
-        "source": "l'appoint 1",
-        "date": "2026-09-28T14:56:50.138Z"
-       }
+       "statut": "acquis"
       },
       {
-       "id": "muldem7ttm9i1",
-       "titre": "Dessins de GOTLIB",
+       "id": "muldbzbs40bfc",
+       "titre": "ANNE BALTUS DOLORES",
        "auteur": "",
        "annee": "",
        "certitude": "haute",
        "remarque": "",
        "resume": "",
        "categorie": "",
-       "origine": "appoint",
-       "vues": [
-        {
-         "champ": "appoint:mulde9hkkbjk9",
-         "x1": 770,
-         "x2": 810
-        }
-       ],
-       "temoins": [
-        "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
-       ],
-       "statut": "probable"
-      },
-      {
-       "id": "muldbzbsnrrhi",
-       "titre": "L'ÉNIGMATIQUE MONSIEUR SCHMUTZ",
-       "auteur": "",
-       "annee": "",
-       "certitude": "haute",
-       "remarque": "Dargaud",
-       "resume": "",
-       "categorie": "",
        "origine": "ia",
        "vues": [
         {
          "champ": "photo",
-         "x1": 420,
-         "x2": 440
-        },
-        {
-         "champ": "appoint:mulde9hkkbjk9",
-         "x1": 890,
-         "x2": 930
+         "x1": 300,
+         "x2": 320
         }
        ],
        "temoins": [
-        "photo:2026-09-28T14:54:03.740Z",
-        "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+        "photo:2026-09-28T14:54:03.740Z"
        ],
        "statut": "acquis"
       },
@@ -17371,7 +17311,7 @@
        "temoins": [
         "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbs1nlhd",
@@ -17421,7 +17361,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbs5sldb",
@@ -17443,7 +17383,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbszjotj",
@@ -17465,7 +17405,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbstcx0z",
@@ -17487,7 +17427,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsv3e1t",
@@ -17509,7 +17449,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsh8t4n",
@@ -17531,7 +17471,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbs70khl",
@@ -17553,7 +17493,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbspm7jk",
@@ -17575,7 +17515,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsatvzk",
@@ -17597,7 +17537,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsf7wgb",
@@ -17619,7 +17559,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsj9afh",
@@ -17641,7 +17581,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsxiyq2",
@@ -17663,7 +17603,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsx0nbx",
@@ -17685,7 +17625,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbs02f69",
@@ -17707,7 +17647,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbssyrff",
@@ -17729,7 +17669,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbseti76",
@@ -17751,7 +17691,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsjjvq8",
@@ -17773,7 +17713,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbstpqlh",
@@ -17795,7 +17735,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbs44bxs",
@@ -17817,7 +17757,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsfo5or",
@@ -17839,7 +17779,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsata5a",
@@ -17861,7 +17801,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsj75zo",
@@ -17883,7 +17823,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbswo83q",
@@ -17905,7 +17845,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "muldbzbsowf7o",
@@ -17927,7 +17867,7 @@
        "temoins": [
         "photo:2026-09-28T14:54:03.740Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -17977,7 +17917,10 @@
        ],
        "verif": "2026-09-28T14:56:50.139Z"
       }
-     ]
+     ],
+     "certif": {
+      "devant": "2026-09-28T16:37:55.683Z"
+     }
     },
     "9-3": {
      "livres": [
@@ -44972,7 +44915,7 @@
    }
   }
  ],
- "maj": "2026-09-28T16:35:59.140Z",
+ "maj": "2026-09-28T16:37:58.767Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
