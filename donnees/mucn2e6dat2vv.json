@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T14:56:11.471Z",
+ "maj": "2026-09-28T14:56:51.050Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15594,7 +15594,7 @@
    "9-2": {
     "livres": [
      {
-      "titre": "Âme sœur",
+      "titre": "Âmes sœurs",
       "auteur": "Sempé",
       "annee": "",
       "resume": "",
@@ -15602,7 +15602,18 @@
       "remarque": "",
       "certitude": "haute",
       "id": "muldd1ncb96i6",
-      "origine": "main"
+      "origine": "main",
+      "vues": [
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 50,
+        "x2": 100
+       }
+      ],
+      "statut": "acquis",
+      "temoins": [
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+      ]
      },
      {
       "id": "muldbzbrh8jay",
@@ -15619,12 +15630,18 @@
         "champ": "photo",
         "x1": 27,
         "x2": 60
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 100,
+        "x2": 150
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbrho488",
@@ -15646,7 +15663,17 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable"
+      "statut": "probable",
+      "question": {
+       "type": "absent",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 135,
+        "x2": 165
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
      },
      {
       "id": "muldbzbrjyzob",
@@ -15668,7 +15695,17 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable"
+      "statut": "probable",
+      "question": {
+       "type": "absent",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 135,
+        "x2": 165
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
      },
      {
       "id": "muldbzbr1jmg3",
@@ -15685,12 +15722,18 @@
         "champ": "photo",
         "x1": 110,
         "x2": 145
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 150,
+        "x2": 200
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbspqeji",
@@ -15712,7 +15755,17 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable"
+      "statut": "probable",
+      "question": {
+       "type": "absent",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 185,
+        "x2": 215
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
      },
      {
       "id": "muldbzbsn8v62",
@@ -15729,12 +15782,18 @@
         "champ": "photo",
         "x1": 180,
         "x2": 225
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 200,
+        "x2": 250
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbsoud1v",
@@ -15751,12 +15810,18 @@
         "champ": "photo",
         "x1": 225,
         "x2": 260
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 300,
+        "x2": 350
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbsydc9j",
@@ -15773,12 +15838,18 @@
         "champ": "photo",
         "x1": 260,
         "x2": 295
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 350,
+        "x2": 400
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbs40bfc",
@@ -15800,7 +15871,17 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable"
+      "statut": "probable",
+      "question": {
+       "type": "absent",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 400,
+        "x2": 660
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
      },
      {
       "id": "muldbzbsovaha",
@@ -15822,7 +15903,17 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable"
+      "statut": "probable",
+      "question": {
+       "type": "deplace",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 400,
+        "x2": 660
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
      },
      {
       "id": "muldbzbslnle5",
@@ -15844,7 +15935,17 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable"
+      "statut": "probable",
+      "question": {
+       "type": "deplace",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 400,
+        "x2": 660
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
      },
      {
       "id": "muldbzbsk5ejt",
@@ -15861,12 +15962,18 @@
         "champ": "photo",
         "x1": 360,
         "x2": 380
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 660,
+        "x2": 700
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbsz83yi",
@@ -15888,6 +15995,60 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
+      "statut": "probable",
+      "question": {
+       "type": "absent",
+       "zone": {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 685,
+        "x2": 715
+       },
+       "source": "l'appoint 1",
+       "date": "2026-09-28T14:56:50.138Z"
+      }
+     },
+     {
+      "id": "muldem7ttm9i1",
+      "titre": "Dessins de GOTLIB",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 770,
+        "x2": 810
+       }
+      ],
+      "temoins": [
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldem7t2c3y8",
+      "titre": "RUBRIQUE-A-BRAC",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "appoint",
+      "vues": [
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 810,
+        "x2": 850
+       }
+      ],
+      "temoins": [
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+      ],
       "statut": "probable"
      },
      {
@@ -15905,12 +16066,18 @@
         "champ": "photo",
         "x1": 400,
         "x2": 420
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 850,
+        "x2": 890
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbsnrrhi",
@@ -15927,12 +16094,18 @@
         "champ": "photo",
         "x1": 420,
         "x2": 440
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 890,
+        "x2": 930
        }
       ],
       "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "muldbzbszcf63",
@@ -16482,12 +16655,33 @@
     },
     "appoints": [
      {
+      "plein": null,
       "chemin": "images/mucn2e6dat2vv/9-2-appoint-mulde9hkkbjk9.jpg",
-      "envoye": false,
+      "envoye": true,
       "maj": "2026-09-28T14:56:10.377Z",
       "id": "mulde9hkkbjk9",
       "legende": "",
-      "enIDB": "images/mucn2e6dat2vv/9-2-appoint-mulde9hkkbjk9.jpg"
+      "rang": "devant",
+      "rangInfo": {
+       "auto": true,
+       "n1": 11,
+       "n2": 0,
+       "date": "2026-09-28T14:56:26.860Z"
+      },
+      "livresVus": [
+       "muldd1ncb96i6",
+       "muldbzbrh8jay",
+       "muldbzbr1jmg3",
+       "muldbzbsn8v62",
+       "muldbzbsoud1v",
+       "muldbzbsydc9j",
+       "muldbzbsk5ejt",
+       "muldem7ttm9i1",
+       "muldem7t2c3y8",
+       "muldbzbs1nlhd",
+       "muldbzbsnrrhi"
+      ],
+      "verif": "2026-09-28T14:56:50.139Z"
      }
     ]
    },

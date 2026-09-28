@@ -1,0 +1,145 @@
+{
+ "date": "2026-09-28T14:56:26.841Z",
+ "bibliotheque": "mucn2e6dat2vv",
+ "nomBibliotheque": "Grande bibliothèque de Gaudissart",
+ "compartiment": "9-2",
+ "genre": "appoint",
+ "appoint": "mulde9hkkbjk9",
+ "mode": "ordre",
+ "source": {
+  "ia": "gemini",
+  "modele": "gemini-2.5-flash"
+ },
+ "lus": [
+  {
+   "titre": "Âmes sœurs",
+   "auteur": "Sempé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 50,
+   "x2": 100,
+   "illisible": false
+  },
+  {
+   "titre": "Sentiments distingués",
+   "auteur": "Sempé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 100,
+   "x2": 150,
+   "illisible": false
+  },
+  {
+   "titre": "DES HAUTS ET DES BAS",
+   "auteur": "SEMPÉ",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 150,
+   "x2": 200,
+   "illisible": false
+  },
+  {
+   "titre": "SINCÈRES AMITIÉS",
+   "auteur": "Sempé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 200,
+   "x2": 250,
+   "illisible": false
+  },
+  {
+   "titre": "Histoires inédites du Petit Nicolas",
+   "auteur": "Goscinny & Sempé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 300,
+   "x2": 350,
+   "illisible": false
+  },
+  {
+   "titre": "Histoires inédites du Petit Nicolas",
+   "auteur": "Goscinny & Sempé",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 350,
+   "x2": 400,
+   "illisible": false
+  },
+  {
+   "titre": "LES BIDOCHON Tome 20",
+   "auteur": "BINET",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 660,
+   "x2": 700,
+   "illisible": false
+  },
+  {
+   "titre": "HAUT DE GAMME (VOLUME 1)",
+   "auteur": "ANNE BALTUS",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 700,
+   "x2": 740,
+   "illisible": false
+  },
+  {
+   "titre": "FLUIDE GLACIAL",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 740,
+   "x2": 770,
+   "illisible": false
+  },
+  {
+   "titre": "Dessins de GOTLIB",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 770,
+   "x2": 810,
+   "illisible": false
+  },
+  {
+   "titre": "RUBRIQUE-A-BRAC",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 810,
+   "x2": 850,
+   "illisible": false
+  },
+  {
+   "titre": "RUBRIQUE-A-BRAC (Tome 2)",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 850,
+   "x2": 890,
+   "illisible": false
+  },
+  {
+   "titre": "L'ÉNIGMATIQUE MONSIEUR SCHMUTZ",
+   "auteur": "",
+   "annee": "",
+   "certitude": "haute",
+   "remarque": "",
+   "x1": 890,
+   "x2": 930,
+   "illisible": false
+  }
+ ]
+}
