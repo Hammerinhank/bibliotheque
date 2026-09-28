@@ -468,8 +468,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.83.0";
+const VERSION = "V1.84.0";
 const HISTORIQUE = [
+  { v:"V1.84.0", d:"28/09/2026", l:[
+    "Localiser un livre (ou « Localiser tous ») : le message indiquant l'emplacement reste affiché en bas de l'écran jusqu'au prochain appui n'importe où, au lieu de disparaître au bout de quelques secondes."
+  ]},
   { v:"V1.83.0", d:"28/09/2026", l:[
     "Recherche d'un livre : quand le champ est vide, bouton ☰ à droite qui ouvre un menu arborescent de recherches prédéfinies (jamais plus de 12 lignes par niveau ; au-delà, passage par la première lettre puis les deux premières).",
     "En tête : livres sans auteur, sans résumé, titre partiellement illisible. Puis : remarques (familles collection, éditeur, état, position, lecture gênée, non classées, toutes de A à Z), auteur (lettre du nom → auteur), année (siècle → décennie → année), catégorie, certitude, emplacement (rang, rangée → compartiment), divers (sans titre, ajoutés à la main, appoint, statut, doublons).",
@@ -1145,12 +1148,21 @@ function dateFr(d){
   return x.toLocaleDateString("fr-FR") + " à " + x.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
 }
 
-let minuteurToast=null;
+let minuteurToast=null, fermetureToast=null;
+/* ms = "clic" : le message reste affiché jusqu'au prochain appui n'importe où sur l'écran */
 function toast(msg, ms){
   const t = $("#toast");
   t.textContent = msg;
   t.classList.remove("masque");
   clearTimeout(minuteurToast);
+  if (fermetureToast){ document.removeEventListener("pointerdown", fermetureToast, true); fermetureToast = null; }
+  if (ms === "clic"){
+    setTimeout(()=>{            // après le geste qui a affiché le message
+      fermetureToast = ()=>{ t.classList.add("masque"); document.removeEventListener("pointerdown", fermetureToast, true); fermetureToast = null; };
+      document.addEventListener("pointerdown", fermetureToast, true);
+    }, 0);
+    return;
+  }
   minuteurToast = setTimeout(()=>t.classList.add("masque"), ms||3200);
 }
 
@@ -5739,7 +5751,7 @@ function afficherRechercheBiblio(b){
     rendreBiblio();
     const el = document.querySelector("#vueBiblio .case .cadreCible");
     if (el) el.closest(".case").scrollIntoView({ behavior:"smooth", block:"center" });
-    toast(`${groupe.length} livre(s) : ${devant} en rangée de devant, ${derriere} en rangée de derrière.` + (devant && derriere ? " Basculez Rangées 1 / Rangées 2 pour voir les autres." : ""), 7000);
+    toast(`${groupe.length} livre(s) : ${devant} en rangée de devant, ${derriere} en rangée de derrière.` + (devant && derriere ? " Basculez Rangées 1 / Rangées 2 pour voir les autres." : ""), "clic");
   };
   z.querySelectorAll("[data-loc]").forEach(bt=>bt.onclick = ()=>{
     const o = liste[Number(bt.dataset.loc)];
@@ -5748,7 +5760,7 @@ function afficherRechercheBiblio(b){
     rendreBiblio();
     const el = document.querySelector(`#vueBiblio [data-case="${o.k}"]`);
     if (el) el.scrollIntoView({ behavior:"smooth", block:"center" });
-    toast(`« ${o.lv.titre || "titre non lu"} » : ${ou(o)}.`, 6000);
+    toast(`« ${o.lv.titre || "titre non lu"} » : ${ou(o)}.`, "clic");
     journal(`Livre localisé : « ${o.lv.titre || "titre non lu"} » (${o.k}${vueRangee === "derriere" ? ", derrière" : ""})`);
   });
 }
