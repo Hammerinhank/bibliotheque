@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T10:27:16.179Z",
+ "maj": "2026-09-28T10:27:34.131Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -480,6 +480,374 @@
    },
    "9-1": {
     "livres": [
+     {
+      "id": "mul3st5blgqke",
+      "titre": "La petite maison dans la prairie tome 1",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 50,
+        "x2": 95
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5bg0b3l",
+      "titre": "La petite maison dans la prairie tome 3",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 95,
+        "x2": 135
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5b8e3w8",
+      "titre": "La petite maison dans la prairie tome 4",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 135,
+        "x2": 175
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5bpds8e",
+      "titre": "La petite maison dans la prairie tome 5",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 175,
+        "x2": 215
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5bp2l2x",
+      "titre": "La petite maison dans la prairie tome 6",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 215,
+        "x2": 255
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5bj614v",
+      "titre": "La petite maison dans la prairie tome 7",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 255,
+        "x2": 295
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5brrxxa",
+      "titre": "La petite maison dans la prairie tome 8",
+      "auteur": "Laura Ingalls Wilder",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Castor Poche",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 295,
+        "x2": 330
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5bigels",
+      "titre": "Une Place à prendre",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Grasset",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 330,
+        "x2": 450
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5chev7x",
+      "titre": "Harry Potter et le Prisonnier d'Azkaban",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard, tome 3",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 450,
+        "x2": 510
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5c0oxpu",
+      "titre": "Harry Potter et la Coupe de Feu",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard, tome 4",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 510,
+        "x2": 570
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5cd5y4r",
+      "titre": "Harry Potter et l'Ordre du Phénix",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard, tome 5",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 570,
+        "x2": 630
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5ce6bjr",
+      "titre": "Harry Potter à l'École des Sorciers",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard, tome 1",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 630,
+        "x2": 690
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5c3tk98",
+      "titre": "Harry Potter et la Coupe de Feu",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard, tome 4",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 690,
+        "x2": 750
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5cpowt2",
+      "titre": "Harry Potter et les Reliques de la Mort",
+      "auteur": "J.K. Rowling",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard, tome 7",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 750,
+        "x2": 810
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5chy82g",
+      "titre": "Contes pour enfants pas sages",
+      "auteur": "J. Prévert - E. Henriquez",
+      "annee": "",
+      "certitude": "moyenne",
+      "remarque": "tranche fine",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 880,
+        "x2": 895
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul3st5cbdaoz",
+      "titre": "Apprenti mercenaire",
+      "auteur": "",
+      "annee": "",
+      "certitude": "faible",
+      "remarque": "Star Wars, Boba Fett",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "rang": "devant",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 895,
+        "x2": 910
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:27:14.906Z"
+      ],
+      "statut": "probable"
+     },
      {
       "id": "mucvphyw0q1ak",
       "titre": "L'or sous la neige",
@@ -1312,10 +1680,10 @@
      }
     ],
     "photo": {
+     "plein": null,
      "chemin": "images/mucn2e6dat2vv/9-1.jpg",
-     "envoye": false,
-     "maj": "2026-09-28T10:27:14.906Z",
-     "enIDB": "images/mucn2e6dat2vv/9-1.jpg"
+     "envoye": true,
+     "maj": "2026-09-28T10:27:14.906Z"
     },
     "photo2": {
      "plein": null,
@@ -2237,6 +2605,16 @@
        "statut": "acquis"
       }
      ]
+    },
+    "analyse": {
+     "maj": "2026-09-28T10:27:32.882Z",
+     "rangs": {
+      "devant": "2026-09-28T10:27:32.882Z"
+     },
+     "ia": "gemini",
+     "modele": "gemini-2.5-flash",
+     "photos": 2,
+     "manuel": false
     }
    },
    "8-1": {
