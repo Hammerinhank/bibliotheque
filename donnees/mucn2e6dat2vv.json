@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T14:52:44.299Z",
+ "maj": "2026-09-28T14:53:43.533Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15595,8 +15595,9 @@
     "livres": [],
     "photo": {
      "chemin": "images/mucn2e6dat2vv/9-2.jpg",
-     "envoye": true,
-     "maj": "2026-09-23T03:26:02.114Z"
+     "envoye": false,
+     "maj": "2026-09-28T14:53:42.589Z",
+     "enIDB": "images/mucn2e6dat2vv/9-2.jpg"
     },
     "unRang": true
    },
