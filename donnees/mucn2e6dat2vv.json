@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T11:14:46.150Z",
+ "maj": "2026-09-28T14:52:44.299Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15592,151 +15592,11 @@
     }
    },
    "9-2": {
-    "livres": [
-     {
-      "titre": "Test",
-      "auteur": "Rest",
-      "annee": "",
-      "resume": "",
-      "categorie": "",
-      "remarque": "",
-      "certitude": "haute",
-      "id": "mujz3kucyqpac",
-      "origine": "main"
-     },
-     {
-      "titre": "Test",
-      "auteur": "Test",
-      "annee": "",
-      "resume": "",
-      "categorie": "",
-      "remarque": "",
-      "certitude": "haute",
-      "id": "mujz38cmqlidk",
-      "origine": "main"
-     },
-     {
-      "id": "mudjmrq8vuqo4",
-      "titre": "Sincères Amitiés",
-      "auteur": "",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "",
-      "categorie": "Non classé",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8oo0dj",
-      "titre": "Des Hauts et des Bas",
-      "auteur": "Sempé (dessinateur humoristique français 1932-2022)",
-      "annee": "1995",
-      "certitude": "haute",
-      "remarque": "Éditions Denoël",
-      "resume": "Recueil de dessins humoristiques croquant avec tendresse et ironie les petits travers de la société.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8a8eeh",
-      "titre": "Penser Bouger",
-      "auteur": "Sempé (dessinateur humoristique français 1932-2022)",
-      "annee": "2009",
-      "certitude": "haute",
-      "remarque": "Éditions Denoël",
-      "resume": "Album de dessins illustrant avec poésie et humour les mouvements et les contradictions de l'existence.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq87xwvc",
-      "titre": "Les Bidonchon Tome 20",
-      "auteur": "Christian Binet (auteur de bande dessinée français né en 1947)",
-      "annee": "1996",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "Aventures humoristiques du quotidien d'un couple de Français moyens, Raymonde et Robert Bidonchon.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8i95pb",
-      "titre": "Ohé du Bateau",
-      "auteur": "Jacques Faizant (dessinateur de presse français 1918-2006)",
-      "annee": "1982",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "Recueil de dessins satiriques et humoristiques sur l'actualité politique et sociale française.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq83klyh",
-      "titre": "Les Soldes de l'An Deux",
-      "auteur": "Jacques Faizant (dessinateur de presse français 1918-2006)",
-      "annee": "1984",
-      "certitude": "haute",
-      "remarque": "Éditions Denoël",
-      "resume": "Sélection de dessins d'humour et d'actualité commentant la vie politique et la société française.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8dapn6",
-      "titre": "Figure de la Bande Dessinée",
-      "auteur": "Scott McCloud (auteur de bande dessinée américain né en 1960)",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "Essai en bande dessinée consacré au langage, aux codes et aux techniques narratives du neuvième art.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8su4sj",
-      "titre": "L'Art Invisible",
-      "auteur": "Scott McCloud (auteur de bande dessinée américain né en 1960)",
-      "annee": "1993",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "Essai théorique révolutionnaire analysant les codes, le langage et les mécanismes de la bande dessinée.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8a03uq",
-      "titre": "Le Bricolage",
-      "auteur": "Serre (dessinateur humoristique français 1928-2000)",
-      "annee": "1981",
-      "certitude": "haute",
-      "remarque": "Éditions Glénat",
-      "resume": "Recueil de dessins satiriques mettant en scène les catastrophes comiques liées au bricolage amateur.",
-      "categorie": "Bandes dessinées",
-      "origine": "ia"
-     },
-     {
-      "id": "mudjmrq8mqe6r",
-      "titre": "La Débâcle",
-      "auteur": "Émile Zola (écrivain français 1840-1902)",
-      "annee": "1892",
-      "certitude": "moyenne",
-      "remarque": "",
-      "resume": "Roman historique décrivant la chute du Second Empire et la terrible défaite de l'armée française à Sedan.",
-      "categorie": "Romans français",
-      "origine": "ia"
-     }
-    ],
+    "livres": [],
     "photo": {
      "chemin": "images/mucn2e6dat2vv/9-2.jpg",
      "envoye": true,
      "maj": "2026-09-23T03:26:02.114Z"
-    },
-    "analyse": {
-     "maj": "2026-09-23T03:28:35.552Z",
-     "ia": "gemini",
-     "modele": "gemini-2.5-flash",
-     "photos": 1,
-     "manuel": false
     },
     "unRang": true
    },
