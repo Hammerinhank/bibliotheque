@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T10:48:27.733Z",
+ "maj": "2026-09-28T10:48:54.882Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -17,14 +17,627 @@
     "photo": null
    },
    "10-1": {
-    "livres": [],
+    "livres": [
+     {
+      "id": "mul4k63lrpzc5",
+      "titre": "L'homme au camion",
+      "auteur": "Bruno Munari",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 25,
+        "x2": 60
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lbr4jy",
+      "titre": "WOODY LE PIC et le mystère de Komoko",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Deux Coqs d'Or",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 65,
+        "x2": 100
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lr1cad",
+      "titre": "conte des 1001 nuits - à la recherche des îles wak-wak",
+      "auteur": "",
+      "annee": "",
+      "certitude": "moyenne",
+      "remarque": "Editions Nord-Sud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 105,
+        "x2": 135
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63loix0t",
+      "titre": "L'ARCHE DE NOÉ",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Caran d'Ache",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 140,
+        "x2": 170
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lkfiah",
+      "titre": "ARC-EN-CIEL",
+      "auteur": "Marcus Pfister",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Editions Nord-Sud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 175,
+        "x2": 205
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63llqhva",
+      "titre": "Conte de mes bêtes sous la lune",
+      "auteur": "Russell Hoban & David Gentleman",
+      "annee": "",
+      "certitude": "moyenne",
+      "remarque": "Flammarion",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 290,
+        "x2": 320
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lz55sb",
+      "titre": "LA DANSE DES TIGRES",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Flammarion",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 325,
+        "x2": 355
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63ltl595",
+      "titre": "LES SUPER GRANDS CAMIONS",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Flammarion",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 360,
+        "x2": 390
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lrz6kp",
+      "titre": "L'histoire et la vie d'une CHARTREUSE",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Berger-Levrault",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 395,
+        "x2": 425
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lzgg68",
+      "titre": "le théo",
+      "auteur": "Droguet & Ardant",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "collection Les tout-petits en images",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 430,
+        "x2": 460
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63lqvks6",
+      "titre": "Ma première Bible",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Bayard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 465,
+        "x2": 495
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63l5kdsj",
+      "titre": "Tu sais, Dieu...",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Bayard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 500,
+        "x2": 530
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63l7x9no",
+      "titre": "Mon premier Théo",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Mame",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 535,
+        "x2": 565
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63ms7cn5",
+      "titre": "L'Histoire de Jésus",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Témoins",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 570,
+        "x2": 600
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63m4q0bg",
+      "titre": "DIEU PARMI NOUS",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "2 volumes",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 605,
+        "x2": 635
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63m71uw3",
+      "titre": "3 nouveaux contes du Père Castor",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "à écouter dès 2 ans",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 640,
+        "x2": 670
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63muehva",
+      "titre": "Le vieil homme et la mer",
+      "auteur": "Hemingway",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Gallimard",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 675,
+        "x2": 705
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mqfuea",
+      "titre": "mille ans de contes",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Milan",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 710,
+        "x2": 740
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63m9bbf5",
+      "titre": "Œuvres illustrées pour les jeunes",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Editions du Voyage",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 745,
+        "x2": 775
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mqb4wl",
+      "titre": "LE PAYS OU L'ON N'ARRIVE JAMAIS",
+      "auteur": "ANDRÉ DHÔTEL",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 780,
+        "x2": 810
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63m1h0a8",
+      "titre": "MARIA CHAPDELAINE",
+      "auteur": "LOUIS HÉMON",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 815,
+        "x2": 845
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mk1e7x",
+      "titre": "L'IDIOT",
+      "auteur": "FÉDOR DOSTOIEVSKY",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 850,
+        "x2": 880
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mc71u9",
+      "titre": "FRANÇOIS LE CHAMPI",
+      "auteur": "GEORGE SAND",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 885,
+        "x2": 915
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mcrtsg",
+      "titre": "LE NAUFRAGÉ DU KÉROSE",
+      "auteur": "JOSEPH PERRIN",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 920,
+        "x2": 950
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mbkdqe",
+      "titre": "Saint-François d'Assise",
+      "auteur": "THOMAS DE CELANO",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 955,
+        "x2": 985
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mhnet5",
+      "titre": "LE LIVRE DE LA JUNGLE",
+      "auteur": "R. KIPLING",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Delagrave",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 990,
+        "x2": 1000
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mbxtkt",
+      "titre": "LE SECOND LIVRE DE LA JUNGLE",
+      "auteur": "R. KIPLING",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Delagrave",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "mul4k63mlu18f",
+      "titre": "ALICE au pays des merveilles",
+      "auteur": "LEWIS CARROLL",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Flammarion",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "temoins": [
+       "photo:2026-09-28T10:43:25.055Z"
+      ],
+      "statut": "probable"
+     }
+    ],
     "photo": {
      "chemin": "images/mucn2e6dat2vv/10-1.jpg",
      "envoye": true,
      "maj": "2026-09-28T10:43:25.055Z",
      "plein": null
     },
-    "unRang": true
+    "unRang": true,
+    "analyse": {
+     "maj": "2026-09-28T10:48:49.380Z",
+     "rangs": {
+      "devant": "2026-09-28T10:48:49.380Z"
+     },
+     "ia": "gemini",
+     "modele": "gemini-2.5-flash",
+     "photos": 1,
+     "manuel": false
+    }
    },
    "10-2": {
     "livres": [
