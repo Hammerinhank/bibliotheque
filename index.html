@@ -468,8 +468,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.86.0";
+const VERSION = "V1.87.0";
 const HISTORIQUE = [
+  { v:"V1.87.0", d:"28/09/2026", l:[
+    "« Ce que l'on peut en tirer » : bouton « 🎯 PDF de la sélection (N livres) » qui produit un PDF des livres retenus par le champ de recherche (texte tapé ou recherche prédéfinie ☰), trié par auteur ou par titre ; le critère est rappelé en tête du PDF. Bouton grisé, avec explication, tant qu'il n'y a pas de sélection.",
+    "La fenêtre « PDF trié » propose aussi ce choix « La sélection du champ de recherche » quand une sélection existe."
+  ]},
   { v:"V1.86.0", d:"28/09/2026", l:[
     "Mode « ✏️ Éditer » d'un compartiment : sur une rangée certifiée, chaque livre a désormais son bouton « Modifier » (fiche avec rang verrouillé). Toujours ni suppression, ni déplacement, ni ajout, ni confirmation : le compte et l'ordre certifiés restent intacts."
   ]},
@@ -5632,6 +5636,10 @@ function rendreBiblio(){
        <button class="btn" id="bPdfTri">🔤 PDF trié par auteur ou par titre</button>
        <div class="expl">Tri alphabétique par auteur ou par titre, avec au besoin un filtre sur tout ou partie du titre (ou de l'auteur) pour ne garder que certains livres.</div>
      </div>
+     <div class="action">
+       <button class="btn" id="bPdfSel">🎯 PDF de la sélection</button>
+       <div class="expl" id="bPdfSelExpl"></div>
+     </div>
      <div class="coche" style="margin-top:8px"><input type="checkbox" id="bPdfEmpl" ${cfg.pdfEmplacement ? "checked" : ""}>
        <label for="bPdfEmpl" style="margin:0">Emplacement dans le PDF : ajouter « (rg: X, cl: Y, 1 ou 2) » après chaque livre (rangée, colonne, rang de devant ou de derrière), avec un schéma numéroté de la bibliothèque en tête</label></div>
      <div class="coche" style="margin-top:10px"><input type="checkbox" id="bPdfTdm" ${cfg.pdfTdm ? "checked" : ""}>
@@ -5691,6 +5699,7 @@ function rendreBiblio(){
   $("#bResumes").onclick = ()=>lancerResumes(b);
   $("#bPdf").onclick = ()=>lancerPdf(b);
   $("#bPdfTri").onclick = ()=>fenetrePdfTri(b);
+  $("#bPdfSel").onclick = ()=>fenetrePdfTri(b, "selection");
   $("#bPdfTdm").onchange = (e)=>{ cfg.pdfTdm = e.target.checked; sauverCfg(); };
   $("#bPdfEmpl").onchange = (e)=>{
     cfg.pdfEmplacement = e.target.checked; sauverCfg();
@@ -5712,25 +5721,47 @@ function rendreBiblio(){
 let vueRangee = "devant";          // rangée affichée dans la grille : "devant" | "derriere"
 let rechercheBiblio = "", caseCible = null;   // recherche d'un livre dans la bibliothèque, et compartiment mis en évidence
 
+/* livres retenus par le champ de recherche : critère prédéfini ☰ ou texte tapé
+   → { tri, groupe (objets {k, cs, lv}), desc } ; groupe vide s'il n'y a pas de sélection */
+function selectionRecherche(b){
+  const crit = critereActif(b);
+  const q = rechercheBiblio.trim();
+  if (!crit && !q) return { tri:[], groupe:[], desc:"" };
+  const tous = livresAvecPlace(b);
+  if (crit){
+    const groupe = tous.filter(o=>{ try{ return !!crit.test(o); }catch(e){ return false; } });
+    return { tri:groupe, groupe, desc:crit.affiche.replace(/^🎯\s*/, "") };
+  }
+  const tri = tous.map(o=>Object.assign(o, { s: scoreRecherche(q, o.lv) })).filter(o=>o.s > 0.45).sort((a, z2)=>z2.s - a.s);
+  // tous ceux qui correspondent presque aussi bien que le meilleur (ex. tous les livres d'un auteur)
+  const groupe = tri.length ? tri.filter(o=>o.s >= tri[0].s - 0.12) : [];
+  return { tri, groupe, desc:`recherche « ${q} »` };
+}
+/* bouton « PDF de la sélection » de la section « Ce que l'on peut en tirer » */
+function majBoutonPdfSel(b){
+  const bt = $("#bPdfSel"), ex = $("#bPdfSelExpl");
+  if (!bt) return;
+  const sel = selectionRecherche(b), n = sel.groupe.length;
+  bt.disabled = !n;
+  bt.textContent = n ? `🎯 PDF de la sélection (${n} livre${n > 1 ? "s" : ""})` : "🎯 PDF de la sélection";
+  if (ex) ex.innerHTML = n
+    ? `Livres retenus par le champ de recherche : <b>${esc(sel.desc)}</b>. Tri par auteur ou par titre au choix.`
+    : `Choisissez d'abord des livres avec le champ de recherche en haut de page : quelques lettres tapées, ou une recherche prédéfinie (bouton ☰).`;
+}
+
 /* résultats de la recherche au-dessus de la grille */
 function afficherRechercheBiblio(b){
   const z = $("#bRechRes");
   if (!z) return;
+  majBoutonPdfSel(b);
   const crit = critereActif(b);
   const q = rechercheBiblio.trim();
   if (!crit && !q){ z.innerHTML = ""; return; }
-  const tous = livresAvecPlace(b);
-  let tri, groupe;
-  if (crit){
-    groupe = tous.filter(o=>{ try{ return !!crit.test(o); }catch(e){ return false; } });
-    tri = groupe;
-    if (!groupe.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond à ce critère dans cette bibliothèque.</div>`; return; }
-  } else {
-    tri = tous.map(o=>Object.assign(o, { s: scoreRecherche(q, o.lv) })).filter(o=>o.s > 0.45).sort((a, z2)=>z2.s - a.s);
-    if (!tri.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; return; }
-    // tous ceux qui correspondent presque aussi bien que le meilleur (ex. tous les livres d'un auteur)
-    groupe = tri.filter(o=>o.s >= tri[0].s - 0.12);
-  }
+  const sel = selectionRecherche(b);
+  const tri = sel.tri, groupe = sel.groupe;
+  if (!groupe.length){ z.innerHTML = crit
+      ? `<div class="aide">Aucun livre ne correspond à ce critère dans cette bibliothèque.</div>`
+      : `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; return; }
   const net = groupe.length === 1;
   const ou = (o)=>{
     const [r, c] = o.k.split("-");
@@ -8008,6 +8039,7 @@ function livresFiltres(b, o){
     if (!o.auteurChoisi) return [];
     return tous.filter(lv=>lv.auteur && cleAuteur(lv.auteur, true) === o.auteurChoisi);
   }
+  if (o.choix === "selection") return selectionRecherche(b).groupe.map(x=>x.lv);
   if (o.choix === "titre" || o.choix === "auteur"){
     const f = simplifier(o.choix === "titre" ? o.texteTitre : o.texteAuteur);
     if (!f) return tous;
@@ -8021,14 +8053,18 @@ function descFiltre(b, o){
     const a = listeAuteurs(b).find(x=>x.cle === o.auteurChoisi);
     return a ? `livres de ${a.nom}` : "";
   }
+  if (o.choix === "selection"){ const s = selectionRecherche(b); return s.groupe.length ? s.desc : ""; }
   if (o.choix === "titre" && o.texteTitre) return `titre contenant « ${o.texteTitre} »`;
   if (o.choix === "auteur" && o.texteAuteur) return `auteur contenant « ${o.texteAuteur} »`;
   return "";
 }
 
-function fenetrePdfTri(b){
+function fenetrePdfTri(b, choixImpose){
   if (!compteLivres(b)){ toast("Aucun livre relevé : analysez d'abord des photos."); return; }
   const o = optionsTri();
+  const sel = selectionRecherche(b);
+  if (choixImpose) o.choix = choixImpose;
+  if (o.choix === "selection" && !sel.groupe.length) o.choix = "tous";
   const auteurs = listeAuteurs(b);
   if (!auteurs.some(a=>a.cle === o.auteurChoisi)) o.auteurChoisi = auteurs.length ? auteurs[0].cle : "";
   const radio = (v, lib)=>`<div class="coche"><input type="radio" name="tChoix" id="tC_${v}" value="${v}" ${o.choix===v?"checked":""}><label for="tC_${v}" style="margin:0">${lib}</label></div>`;
@@ -8036,6 +8072,7 @@ function fenetrePdfTri(b){
     titre:"PDF trié — " + b.nom,
     html:
       `<label style="margin-top:0">Quels livres ?</label>
+       ${sel.groupe.length ? radio("selection", `La sélection du champ de recherche : ${esc(sel.desc)} (${sel.groupe.length} livre${sel.groupe.length > 1 ? "s" : ""})`) : ""}
        ${radio("tous", "Tous les livres")}
        ${radio("unAuteur", "Un seul auteur, choisi dans la liste")}
        <div id="tZ_unAuteur" style="margin:4px 0 8px 26px">
@@ -8100,7 +8137,7 @@ async function pdfTrie(b, o){
     const jsPDF = await chargerJsPDF();
     const blob = construirePdf(jsPDF, b, livres, o);
     const d = descFiltre(b, o);
-    const suffixe = o.choix === "unAuteur" && d ? "-" + d.replace(/^livres de /,"").replace(/[^\w\-]+/g,"_") : (d ? "-filtre" : "");
+    const suffixe = o.choix === "unAuteur" && d ? "-" + d.replace(/^livres de /,"").replace(/[^\w\-]+/g,"_") : (o.choix === "selection" && d ? "-selection" : (d ? "-filtre" : ""));
     const nom = "tri-" + (o.tri === "titre" ? "titre" : "auteur") + suffixe + "-" + b.nom.replace(/[^\w\-]+/g,"_") + "-" + new Date().toISOString().slice(0,10) + ".pdf";
     proposerPdf(blob, nom, "PDF trié par " + (o.tri === "titre" ? "titre" : "auteur"),
       `PDF prêt : ${livres.length} livre(s)${d ? " — " + esc(d) : ""}.`);
