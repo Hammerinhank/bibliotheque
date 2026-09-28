@@ -468,8 +468,11 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.84.0";
+const VERSION = "V1.85.0";
 const HISTORIQUE = [
+  { v:"V1.85.0", d:"28/09/2026", l:[
+    "Livre localisé (encadré de rouge dans la liste du compartiment) : bouton « ✏️ Modifier la fiche de ce livre » qui ouvre directement la fiche en édition (titre, auteur, année, catégorie, résumé, remarque, rang). Enregistrement et envoi comme depuis le mode Éditer. Pas de bouton si la rangée est certifiée (un message l'indique)."
+  ]},
   { v:"V1.84.0", d:"28/09/2026", l:[
     "Localiser un livre (ou « Localiser tous ») : le message indiquant l'emplacement reste affiché en bas de l'écran jusqu'au prochain appui n'importe où, au lieu de disparaître au bout de quelques secondes."
   ]},
@@ -6304,8 +6307,19 @@ function ouvrirCompartiment(b, k){
       // livre(s) recherché(s) et localisé(s) depuis la grille : encadrés de rouge
       const cibles = caseCible && caseCible.bib === b.id && caseCible.livres ? caseCible.livres : null;
       zc.innerHTML = vis.length
-        ? vis.map(lv=>`<div class="livre${cibles && cibles.has(lv) ? " livreCible" : ""}"><div class="t">${esc(lv.titre)}</div>${lv.auteur ? `<div class="a">${esc(lv.auteur)}</div>` : ""}</div>`).join("")
+        ? vis.map(lv=>{
+            const cible = cibles && cibles.has(lv);
+            const bloque = certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant");
+            return `<div class="livre${cible ? " livreCible" : ""}"><div class="t">${esc(lv.titre)}</div>${lv.auteur ? `<div class="a">${esc(lv.auteur)}</div>` : ""}${cible
+              ? (bloque ? `<div class="aide" style="margin:6px 0 0;color:#ffd23f">★ Rangée certifiée : fiche non modifiable (retirez la certification pour corriger).</div>`
+                        : `<button class="btn principal" data-ficheCible="${(cs.livres || []).indexOf(lv)}" style="margin-top:8px;width:100%">✏️ Modifier la fiche de ce livre</button>`)
+              : ""}</div>`;
+          }).join("")
         : `<div class="vide">Aucun livre ${filtreConsult === "derriere" ? "sur la rangée de derrière" : "sur la rangée de devant"}.</div>`;
+      zc.querySelectorAll("[data-fichecible]").forEach(bt=>bt.onclick = ()=>{
+        const i = Number(bt.dataset.fichecible);
+        if (i >= 0 && (cs.livres || [])[i]) formLivre(cs, i, ()=>majConsult());
+      });
       const premier = zc.querySelector(".livreCible");
       if (premier && !majConsult.dejaDefile){ majConsult.dejaDefile = true; setTimeout(()=>premier.scrollIntoView({ behavior:"smooth", block:"center" }), 150); }
     }
