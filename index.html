@@ -319,6 +319,27 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .scanLigne.vert .pt{background:var(--vert)} .scanLigne.orange .pt{background:var(--orange)} .scanLigne.rouge .pt{background:var(--rouge)}
 .scanLigne .ch{font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all;color:var(--texte2)}
 .scanLigne .qui{font-weight:600}
+/* ---------- recherches prédéfinies (menu ☰ du champ de recherche) ---------- */
+#bRechMenu{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:35;background:var(--encre2);border:1px solid var(--bronze);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.6);max-height:62vh;overflow:auto;-webkit-overflow-scrolling:touch}
+.predTete{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--encre3);border-bottom:1px solid var(--trait)}
+.predTete .chemin{flex:1;min-width:0;font-size:13px;color:var(--texte2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.predTete button{background:var(--encre);border:1px solid var(--trait);color:var(--texte);border-radius:9px;padding:6px 10px;font-size:14px;cursor:pointer;flex:0 0 auto}
+.predLigne{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--trait);color:var(--texte);padding:12px;font-size:15px;cursor:pointer;font-family:inherit}
+.predLigne:active{background:var(--encre3)}
+.predLigne:disabled{opacity:.38;cursor:default}
+.predLigne .lib{flex:1;min-width:0}
+.predLigne .aideP{display:block;font-size:12px;color:var(--texte2);margin-top:2px;line-height:1.3}
+.predLigne .nb{flex:0 0 auto;font-size:12.5px;color:var(--texte2);background:var(--encre);border:1px solid var(--trait);border-radius:999px;padding:1px 8px}
+.predLigne .fl{flex:0 0 auto;color:var(--bronze);font-size:20px;line-height:1;width:12px;text-align:center}
+.predLigne.tous .lib{color:var(--bronze);font-style:italic}
+.predSep{height:7px;background:var(--encre);border-bottom:1px solid var(--trait)}
+.predTitreGrille{font-size:12.5px;color:var(--texte2);padding:10px 12px 0}
+.predGrille{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:6px;padding:8px 10px 12px}
+.predGrille button{background:var(--encre3);border:1px solid var(--trait);border-radius:10px;color:var(--texte);padding:8px 2px 6px;font-size:17px;font-weight:600;cursor:pointer;line-height:1.15;font-family:inherit}
+.predGrille button:active{background:var(--trait)}
+.predGrille button small{display:block;font-size:11px;font-weight:400;color:var(--texte2)}
+#bRech.critere{color:var(--bronze);font-weight:600}
+
 /* ---------- recherche de modèle Gemini ---------- */
 .modeles{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:46vh;overflow-y:auto}
 .mod{display:flex;align-items:center;gap:8px;background:var(--encre);border:1px solid var(--trait);border-radius:10px;padding:8px 10px;font-size:13.5px}
@@ -447,8 +468,13 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.82.0";
+const VERSION = "V1.83.0";
 const HISTORIQUE = [
+  { v:"V1.83.0", d:"28/09/2026", l:[
+    "Recherche d'un livre : quand le champ est vide, bouton ☰ à droite qui ouvre un menu arborescent de recherches prédéfinies (jamais plus de 12 lignes par niveau ; au-delà, passage par la première lettre puis les deux premières).",
+    "En tête : livres sans auteur, sans résumé, titre partiellement illisible. Puis : remarques (familles collection, éditeur, état, position, lecture gênée, non classées, toutes de A à Z), auteur (lettre du nom → auteur), année (siècle → décennie → année), catégorie, certitude, emplacement (rang, rangée → compartiment), divers (sans titre, ajoutés à la main, appoint, statut, doublons).",
+    "Le critère choisi s'affiche dans le champ (en bronze) ; la croix l'efface. Résultats listés par emplacement, avec « Localiser tous »."
+  ]},
   { v:"V1.82.0", d:"27/09/2026", l:[
     "Fiche « Modifier le livre » : bouton « ➕ Ajouter un livre » en bas à gauche — enregistre la fiche, puis crée juste après ce livre (même rangée) une entrée « Nouveau livre (à compléter) » prête à être remplie. Absent si la rangée est certifiée."
   ]},
@@ -5532,11 +5558,15 @@ function rendreBiblio(){
   const hors = Object.keys(b.cases||{}).filter(k=>{
     const [r,c]=k.split("-").map(Number); return r>b.rangees||c>b.compartiments; });
 
+  const critB = critereActif(b);
+  const valRech = critB ? critB.affiche : rechercheBiblio;
   $("#vueBiblio").innerHTML =
     `<div style="margin-bottom:10px">
        <div style="position:relative">
-         <input type="search" id="bRech" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Chercher un livre : quelques lettres du titre ou de l'auteur" value="${esc(rechercheBiblio)}" style="padding-right:46px">
-         <button id="bRechEffacer" aria-label="Effacer" title="Effacer" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);margin-top:2px;width:34px;height:34px;border-radius:50%;border:0;background:var(--trait);color:var(--texte);font-size:18px;line-height:34px;padding:0;${rechercheBiblio ? "" : "display:none"}">×</button>
+         <input type="search" id="bRech" class="${critB ? "critere" : ""}" ${critB ? "readonly" : ""} autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Chercher un livre : quelques lettres du titre ou de l'auteur" value="${esc(valRech)}" style="padding-right:46px">
+         <button id="bRechEffacer" aria-label="Effacer" title="Effacer" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);margin-top:2px;width:34px;height:34px;border-radius:50%;border:0;background:var(--trait);color:var(--texte);font-size:18px;line-height:34px;padding:0;${valRech ? "" : "display:none"}">×</button>
+         <button id="bRechPred" aria-label="Recherches prédéfinies" title="Recherches prédéfinies" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);margin-top:2px;width:36px;height:36px;border-radius:9px;border:1px solid var(--bronze);background:var(--bronze-sombre);color:#fff8e1;font-size:18px;line-height:34px;padding:0;cursor:pointer;${valRech ? "display:none" : ""}">☰</button>
+         <div id="bRechMenu" hidden></div>
        </div>
        <div id="bRechRes"></div>
      </div>
@@ -5597,13 +5627,37 @@ function rendreBiblio(){
 
   const inpR = $("#bRech");
   const bEff = $("#bRechEffacer");
+  const bPred = $("#bRechPred");
+  const effacerCibles = ()=>{ caseCible = null; document.querySelectorAll("#vueBiblio .case .cadreCible").forEach(x=>x.remove()); document.querySelectorAll("#vueBiblio .case.cible").forEach(x=>x.classList.remove("cible")); };
+  const majBoutonsRech = ()=>{ const v = !!inpR.value; bEff.style.display = v ? "" : "none"; bPred.style.display = v ? "none" : ""; };
   inpR.oninput = ()=>{
+    if (critereActif(b)) return;              // un critère prédéfini est affiché : seule la croix l'efface
     rechercheBiblio = inpR.value;
-    bEff.style.display = rechercheBiblio ? "" : "none";
-    if (!rechercheBiblio.trim()){ caseCible = null; document.querySelectorAll("#vueBiblio .case .cadreCible").forEach(x=>x.remove()); document.querySelectorAll("#vueBiblio .case.cible").forEach(x=>x.classList.remove("cible")); }
+    majBoutonsRech();
+    if (rechercheBiblio) fermerMenuPred();
+    if (!rechercheBiblio.trim()) effacerCibles();
     afficherRechercheBiblio(b);
   };
-  bEff.onclick = (e)=>{ e.preventDefault(); inpR.value = ""; inpR.oninput(); inpR.focus(); };
+  bEff.onclick = (e)=>{
+    e.preventDefault();
+    const avaitCritere = !!critereActif(b);
+    critereBiblio = null;
+    inpR.readOnly = false; inpR.classList.remove("critere");
+    inpR.value = ""; rechercheBiblio = "";
+    majBoutonsRech(); effacerCibles(); afficherRechercheBiblio(b);
+    if (avaitCritere) journal("Recherche prédéfinie effacée");
+    inpR.focus();
+  };
+  bPred.onclick = (e)=>{
+    e.preventDefault(); e.stopPropagation();
+    if (!$("#bRechMenu").hidden){ fermerMenuPred(); return; }
+    ouvrirMenuPred(b, (crit)=>{
+      critereBiblio = crit; rechercheBiblio = "";
+      inpR.value = crit.affiche; inpR.readOnly = true; inpR.classList.add("critere"); inpR.blur();
+      majBoutonsRech(); effacerCibles(); afficherRechercheBiblio(b);
+      journal(`Recherche prédéfinie : ${crit.affiche}`);
+    });
+  };
   afficherRechercheBiblio(b);
   document.querySelectorAll("#bVueRangee [data-vr]").forEach(bt=>bt.onclick = ()=>{
     if (vueRangee === bt.dataset.vr) return;
@@ -5641,14 +5695,21 @@ let rechercheBiblio = "", caseCible = null;   // recherche d'un livre dans la bi
 function afficherRechercheBiblio(b){
   const z = $("#bRechRes");
   if (!z) return;
+  const crit = critereActif(b);
   const q = rechercheBiblio.trim();
-  if (!q){ z.innerHTML = ""; return; }
-  const tous = [];
-  Object.entries(b.cases || {}).forEach(([k, cs])=>(cs.livres || []).forEach(lv=>tous.push({ k, cs, lv })));
-  const tri = tous.map(o=>Object.assign(o, { s: scoreRecherche(q, o.lv) })).filter(o=>o.s > 0.45).sort((a, z2)=>z2.s - a.s);
-  if (!tri.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; return; }
-  // tous ceux qui correspondent presque aussi bien que le meilleur (ex. tous les livres d'un auteur)
-  const groupe = tri.filter(o=>o.s >= tri[0].s - 0.12);
+  if (!crit && !q){ z.innerHTML = ""; return; }
+  const tous = livresAvecPlace(b);
+  let tri, groupe;
+  if (crit){
+    groupe = tous.filter(o=>{ try{ return !!crit.test(o); }catch(e){ return false; } });
+    tri = groupe;
+    if (!groupe.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond à ce critère dans cette bibliothèque.</div>`; return; }
+  } else {
+    tri = tous.map(o=>Object.assign(o, { s: scoreRecherche(q, o.lv) })).filter(o=>o.s > 0.45).sort((a, z2)=>z2.s - a.s);
+    if (!tri.length){ z.innerHTML = `<div class="aide">Aucun livre ne correspond encore : continuez à taper.</div>`; return; }
+    // tous ceux qui correspondent presque aussi bien que le meilleur (ex. tous les livres d'un auteur)
+    groupe = tri.filter(o=>o.s >= tri[0].s - 0.12);
+  }
   const net = groupe.length === 1;
   const ou = (o)=>{
     const [r, c] = o.k.split("-");
@@ -5658,13 +5719,15 @@ function afficherRechercheBiblio(b){
     return `rangée ${r}, compartiment ${c}${deux ? (rg === "derriere" ? ", rang de derrière" : ", rang de devant") : ""} — ${memeRang.indexOf(o.lv) + 1}${memeRang.indexOf(o.lv) ? "e" : "er"} livre en partant de la gauche`;
   };
   const carte = (o, i, principal)=>`<div class="prop" style="display:flex;gap:10px;align-items:center;${principal ? "border-left:3px solid var(--vert)" : ""}">
-      <div style="flex:1"><div class="t">${esc(o.lv.titre)}</div><div class="chg">${esc(o.lv.auteur || "auteur inconnu")}</div><div class="aide" style="margin:2px 0 0">${esc(ou(o))}</div></div>
+      <div style="flex:1"><div class="t">${esc(o.lv.titre || "(titre non lu)")}</div><div class="chg">${esc(o.lv.auteur || "auteur inconnu")}${crit && o.lv.annee ? " · " + esc(o.lv.annee) : ""}</div>${crit && o.lv.remarque ? `<div class="mot">${esc(o.lv.remarque)}</div>` : ""}<div class="aide" style="margin:2px 0 0">${esc(ou(o))}</div></div>
       <button class="btn ${principal ? "principal" : ""}" data-loc="${i}">📍 Localiser</button></div>`;
   const pos = (o)=>{ const [r, c] = o.k.split("-").map(Number); return r * 1000 + c * 10 + (o.lv.rang === "derriere" ? 1 : 0); };
-  const MAX = 80;
+  const MAX = crit ? 500 : 80;
   const liste = net ? [tri[0]] : groupe.slice().sort((a, z2)=>pos(a) - pos(z2) || a.cs.livres.indexOf(a.lv) - z2.cs.livres.indexOf(z2.lv)).slice(0, MAX);
   const nbCases = new Set(groupe.map(o=>o.k + (o.lv.rang === "derriere" ? "|d" : ""))).size;
-  z.innerHTML = `<div class="aide" style="margin:6px 0 4px">${net ? "Livre trouvé :" : `<b>${groupe.length}</b> livres correspondent${groupe.length > MAX ? ` (${MAX} premiers affichés)` : ""} — continuez à taper pour préciser :`}</div>` +
+  z.innerHTML = `<div class="aide" style="margin:6px 0 4px">${crit
+      ? (net ? "1 livre correspond à ce critère :" : `<b>${groupe.length}</b> livres correspondent à ce critère${groupe.length > MAX ? ` (${MAX} premiers affichés)` : ""}, classés par emplacement :`)
+      : (net ? "Livre trouvé :" : `<b>${groupe.length}</b> livres correspondent${groupe.length > MAX ? ` (${MAX} premiers affichés)` : ""} — continuez à taper pour préciser :`)}</div>` +
     (!net ? `<button class="btn principal plein" id="bLocTous" style="margin-bottom:6px">📍 Localiser tous (${nbCases} emplacement${nbCases > 1 ? "s" : ""})</button>` : "") +
     `<div style="${!net && liste.length > 6 ? "max-height:50vh;overflow:auto;border:1px solid var(--trait);border-radius:10px;padding:4px" : ""}">` +
     liste.map((o, i)=>carte(o, i, net)).join("") + `</div>`;
@@ -5685,10 +5748,315 @@ function afficherRechercheBiblio(b){
     rendreBiblio();
     const el = document.querySelector(`#vueBiblio [data-case="${o.k}"]`);
     if (el) el.scrollIntoView({ behavior:"smooth", block:"center" });
-    toast(`« ${o.lv.titre} » : ${ou(o)}.`, 6000);
-    journal(`Livre localisé : « ${o.lv.titre} » (${o.k}${vueRangee === "derriere" ? ", derrière" : ""})`);
+    toast(`« ${o.lv.titre || "titre non lu"} » : ${ou(o)}.`, 6000);
+    journal(`Livre localisé : « ${o.lv.titre || "titre non lu"} » (${o.k}${vueRangee === "derriere" ? ", derrière" : ""})`);
   });
 }
+/* ====================================================================
+   RECHERCHES PRÉDÉFINIES — menu arborescent ouvert par ☰ à droite du champ de recherche
+   Chaque nœud : { lib, aide?, test?(o), kids?() , tousLib?, lettre? }  — o = { k, cs, lv }
+   Jamais plus de PRED_MAX lignes à un niveau : au-delà, regroupement par lettre(s) ou par tranche de numéros.
+   ==================================================================== */
+const PRED_MAX = 12;
+let critereBiblio = null;          // { bib, affiche, test } : critère prédéfini actif
+function critereActif(b){ return critereBiblio && b && critereBiblio.bib === b.id ? critereBiblio : null; }
+
+function livresAvecPlace(b){
+  const tous = [];
+  Object.entries(b.cases || {}).forEach(([k, cs])=>(cs.livres || []).forEach(lv=>tous.push({ k, cs, lv })));
+  return tous;
+}
+
+/* --- auteurs --- */
+function estSansAuteur(a){
+  const s = simplifier(String(a || "").replace(/\([^)]*\)/g, " ")).replace(/[^a-z0-9?]+/g, " ").trim();
+  return !s || /^(auteur )?(inconnu|inconnue|non lu|non lisible|illisible|non identifie|indetermine|non precise|n a|na|\?+)$/.test(s);
+}
+function nomDeFamille(nom){
+  const mots = nom.split(" ").filter(Boolean);
+  while (mots.length > 1 && /^(jr\.?|sr\.?|fils|pere|ii|iii|iv)$/i.test(simplifier(mots[mots.length - 1]))) mots.pop();
+  return mots[mots.length - 1] || nom;
+}
+const cacheAuteurs = new WeakMap();
+function auteursDe(lv){
+  const src = String(lv.auteur || "");
+  const c = cacheAuteurs.get(lv);
+  if (c && c.src === src) return c.l;
+  let l = [];
+  const t = src.replace(/\([^)]*\)/g, " ").replace(/\[[^\]]*\]/g, " ").replace(/\s+/g, " ").trim();
+  if (t && !estSansAuteur(t)){
+    const v = t.split(/\s*,\s*/);
+    let parts;
+    if (v.length === 2 && v[0] && !/\s/.test(v[0]) && !/\s(et|and|&)\s/i.test(t)) parts = [v[1] + " " + v[0]];   // « Hugo, Victor »
+    else parts = t.split(/\s*(?:,|;|\/|&|\s+et\s+|\s+and\s+)\s*/i);
+    l = parts.map(x=>x.trim().replace(/^[-–—]+|[-–—.]+$/g, "").trim())
+      .filter(x=>x && !/^(al|et al|dir|coll|ill|trad)\.?$/i.test(x))
+      .map(nom=>({ nom, cle: simplifier(nom), famille: nomDeFamille(nom) }));
+  }
+  cacheAuteurs.set(lv, { src, l });
+  return l;
+}
+
+/* --- années --- */
+function anneeDe(lv){
+  const m = String(lv.annee || "").match(/\b(1[0-9]{3}|20[0-9]{2})\b/);
+  return m ? Number(m[1]) : null;
+}
+
+/* --- remarques --- */
+const remDe = (lv)=> String(lv.remarque || "").trim();
+const RX_GENE = /illisib|peu lisib|mal lisib|difficile|partiel|coupe|tronque|masque|cache|efface|flou|reflet|sombre|occult|incomplet|devin|incertain|abime.*(tranche|titre)|\?/;
+const FAMILLES_REMARQUES = [
+  { lib:"📖 Collections et poches", rx:/collection|coll\.|folio|poche|pocket|j'?ai lu|\bpoints\b|10\/18|pleiade|bouquins|garnier|\bgf\b|que sais-je|babel|\bserie\b|quarto|l'imaginaire|\bidees\b|\bblanche\b|omnibus|rivages noir|serie noire|harlequin/ },
+  { lib:"🏢 Éditeurs", rx:/edition|\bed\.|editeur|gallimard|seuil|flammarion|albin|grasset|fayard|laffont|julliard|actes sud|\bstock\b|\bplon\b|hachette|larousse|minuit|\bp\.?o\.?l\.?\b|denoel|calmann|lattes|belin|\bpuf\b|armand colin|dunod|mercure|bourgois|rivages|payot|le robert|nathan|bordas|casterman|dargaud|glenat|magnard|hatier|autrement|arlea|zulma|phebus|verdier|l'olivier|sabine wespieser|liana levi|presses de la cite|belfond|robert laffont|j'ai lu|pocket/ },
+  { lib:"🩹 État du livre", rx:/abime|\busee?s?\b|dechir|tache|jauni|decolor|fendu|casse|reliure|relie|broche|cuir|toile|bon etat|mauvais etat|\bneuf\b|\betat\b|scotch|humid|moisi|corne|jaquette|sous blister|coffret/ },
+  { lib:"↔️ Position sur l'étagère", rx:/couche|a plat|penche|empile|horizontal|incline|a l'envers|renverse|retourne|de face|en travers/ },
+  { lib:"🔍 Lecture gênée", rx:RX_GENE }
+];
+const familleDe = (lv)=>{ const s = simplifier(remDe(lv)); return s ? FAMILLES_REMARQUES.filter(f=>f.rx.test(s)) : []; };
+
+/* titre partiellement illisible : remarque de gêne, titre tronqué (… ? [ ]), ou lecture peu sûre */
+function titrePartiellementIllisible(lv){
+  const t = String(lv.titre || "");
+  if (!t.trim()) return false;                          // titre absent : critère « Sans titre » (Divers)
+  if (RX_GENE.test(simplifier(remDe(lv)))) return true;
+  if (/…|\.\.\.|\?|\[|\]|_{2,}|\*{2,}/.test(t)) return true;
+  return lv.certitude === "faible";
+}
+
+/* --- regroupements pour ne jamais dépasser PRED_MAX lignes --- */
+function testUnion(items){ return o=>items.some(it=>it.test && it.test(o)); }
+/* dernier recours (valeurs qui commencent toutes pareil) : tranches alphabétiques consécutives « premier → dernier » */
+function regrouperTranches(items){
+  if (items.length <= PRED_MAX) return items;
+  const taille = Math.ceil(items.length / Math.ceil(items.length / PRED_MAX));
+  const out = [];
+  for (let i = 0; i < items.length; i += taille){
+    const m = items.slice(i, i + taille);
+    out.push({ lib:`${m[0].lib} → ${m[m.length - 1].lib}`, test:testUnion(m), kids:()=>regrouperTranches(m) });
+  }
+  return out.length > PRED_MAX ? regrouperTranches(out) : out;
+}
+function regrouperLettres(items, prof){
+  prof = prof || 1;
+  if (items.length <= PRED_MAX) return items;
+  if (prof > 3) return regrouperTranches(items);
+  const groupes = new Map();
+  items.forEach(it=>{
+    const t = simplifier(it.tri || it.lib).replace(/[^a-z0-9]/g, "");
+    let g = t.slice(0, prof);
+    if (!g) g = "#";
+    else if (/^[0-9]/.test(g)) g = "0–9";
+    else g = g.charAt(0).toUpperCase() + g.slice(1);
+    if (!groupes.has(g)) groupes.set(g, []);
+    groupes.get(g).push(it);
+  });
+  if (groupes.size === 1) return regrouperLettres(items, prof + 1);
+  const cles = [...groupes.keys()].sort((a, z)=>a === "#" ? 1 : z === "#" ? -1 : a.localeCompare(z, "fr"));
+  return cles.map(g=>{
+    const membres = groupes.get(g);
+    return { lib:g, lettre:true, test:testUnion(membres), kids:()=>regrouperLettres(membres, prof + 1) };
+  });
+}
+function regrouperNumeros(items){          // items portant .num (rangées, compartiments)
+  if (items.length <= PRED_MAX) return items;
+  const groupes = new Map();
+  items.forEach(it=>{ const g = Math.floor((it.num - 1) / 10); if (!groupes.has(g)) groupes.set(g, []); groupes.get(g).push(it); });
+  return [...groupes.keys()].sort((a, z)=>a - z).map(g=>{
+    const m = groupes.get(g);
+    return { lib:`${m[0].num}–${m[m.length - 1].num}`, lettre:true, test:testUnion(m), kids:()=>m };
+  });
+}
+/* valeurs distinctes d'un champ texte → nœuds (orthographe la plus fréquente affichée) */
+function noeudsValeurs(tous, valeur, filtre){
+  const m = new Map();
+  tous.forEach(o=>{
+    if (filtre && !filtre(o)) return;
+    const v = String(valeur(o) || "").trim(); if (!v) return;
+    const c = simplifier(v);
+    if (!m.has(c)) m.set(c, new Map());
+    const f = m.get(c); f.set(v, (f.get(v) || 0) + 1);
+  });
+  return [...m.entries()].map(([c, f])=>{
+    const lib = [...f.entries()].sort((a, z)=>z[1] - a[1])[0][0];
+    return { lib, tri:lib, test:o=>simplifier(String(valeur(o) || "").trim()) === c };
+  }).sort((a, z)=>simplifier(a.lib).localeCompare(simplifier(z.lib), "fr", { numeric:true }));
+}
+
+/* --- l'arbre complet, recalculé à chaque ouverture --- */
+function arbrePredefini(b){
+  const tous = livresAvecPlace(b);
+
+  const branchesRemarques = ()=>{
+    const fam = FAMILLES_REMARQUES.map(f=>({
+      lib:f.lib, tousLib:"Toutes les remarques de cette famille",
+      test:o=>f.rx.test(simplifier(remDe(o.lv))),
+      kids:()=>regrouperLettres(noeudsValeurs(tous, o=>remDe(o.lv), o=>f.rx.test(simplifier(remDe(o.lv)))))
+    }));
+    const nonClassee = o=>!!remDe(o.lv) && !familleDe(o.lv).length;
+    return fam.concat([
+      { lib:"🗃️ Autres remarques (non classées)", tousLib:"Toutes les remarques non classées", test:nonClassee,
+        kids:()=>regrouperLettres(noeudsValeurs(tous, o=>remDe(o.lv), nonClassee)) },
+      { lib:"🔤 Toutes les remarques, de A à Z", test:o=>!!remDe(o.lv),
+        kids:()=>regrouperLettres(noeudsValeurs(tous, o=>remDe(o.lv))) },
+      { lib:"∅ Livres sans remarque", test:o=>!remDe(o.lv) }
+    ]);
+  };
+
+  const branchesAuteurs = ()=>{
+    const m = new Map();
+    tous.forEach(o=>auteursDe(o.lv).forEach(a=>{
+      if (!m.has(a.cle)) m.set(a.cle, { f:new Map(), famille:a.famille });
+      const e = m.get(a.cle); e.f.set(a.nom, (e.f.get(a.nom) || 0) + 1);
+    }));
+    const items = [...m.entries()].map(([cle, e])=>{
+      const lib = [...e.f.entries()].sort((a, z)=>z[1] - a[1])[0][0];
+      return { lib, tri:e.famille + " " + lib, test:o=>auteursDe(o.lv).some(a=>a.cle === cle) };
+    }).sort((a, z)=>simplifier(a.tri).localeCompare(simplifier(z.tri), "fr", { numeric:true }));
+    return regrouperLettres(items);
+  };
+
+  const branchesAnnees = ()=>{
+    const ans = [...new Set(tous.map(o=>anneeDe(o.lv)).filter(Boolean))].sort((a, z)=>a - z);
+    const siecles = [...new Set(ans.map(a=>Math.floor(a / 100)))];
+    return [{ lib:"∅ Sans année", test:o=>!anneeDe(o.lv) }].concat(siecles.map(s=>({
+      lib:`${s}00 – ${s}99`, tousLib:`Tous les livres de ${s}00 à ${s}99`,
+      test:o=>{ const a = anneeDe(o.lv); return !!a && Math.floor(a / 100) === s; },
+      kids:()=>[...new Set(ans.filter(a=>Math.floor(a / 100) === s).map(a=>Math.floor(a / 10)))].map(d=>({
+        lib:`${d}0 – ${d}9`, tousLib:`Tous les livres de ${d}0 à ${d}9`,
+        test:o=>{ const a = anneeDe(o.lv); return !!a && Math.floor(a / 10) === d; },
+        kids:()=>ans.filter(a=>Math.floor(a / 10) === d).map(a=>({ lib:String(a), test:o=>anneeDe(o.lv) === a }))
+      }))
+    })));
+  };
+
+  const branchesCategories = ()=>{
+    const v = noeudsValeurs(tous, o=>o.lv.categorie);
+    return [{ lib:"∅ Sans catégorie", test:o=>!String(o.lv.categorie || "").trim() }]
+      .concat(v.length < PRED_MAX ? v : regrouperLettres(v));
+  };
+
+  const branchesEmplacement = ()=>{
+    const rangees = [...new Set(tous.map(o=>Number(o.k.split("-")[0])))].filter(n=>n > 0).sort((a, z)=>a - z);
+    return [
+      { lib:"Rang de devant", test:o=>o.lv.rang !== "derriere" },
+      { lib:"Rang de derrière", test:o=>o.lv.rang === "derriere" },
+      { lib:"Par rangée", kids:()=>regrouperNumeros(rangees.map(r=>({
+          num:r, lib:`Rangée ${r}`, tousLib:`Toute la rangée ${r}`,
+          test:o=>Number(o.k.split("-")[0]) === r,
+          kids:()=>regrouperNumeros([...new Set(tous.filter(o=>Number(o.k.split("-")[0]) === r).map(o=>Number(o.k.split("-")[1])))]
+            .sort((a, z)=>a - z).map(c=>({ num:c, lib:`Compartiment ${c}`, test:o=>o.k === `${r}-${c}` })))
+        }))) }
+    ];
+  };
+
+  const branchesDivers = ()=>{
+    const cleDoublon = lv=>simplifier(lv.titre).replace(/[^a-z0-9]/g, "") + "|" + simplifier(lv.auteur).replace(/[^a-z0-9]/g, "");
+    const nb = new Map();
+    tous.forEach(o=>{ if (String(o.lv.titre || "").trim()){ const c = cleDoublon(o.lv); nb.set(c, (nb.get(c) || 0) + 1); } });
+    return [
+      { lib:"Sans titre (tranche illisible)", test:o=>!String(o.lv.titre || "").trim() },
+      { lib:"Doublons possibles (même titre et même auteur)", test:o=>!!String(o.lv.titre || "").trim() && (nb.get(cleDoublon(o.lv)) || 0) > 1 },
+      { lib:"Ajoutés à la main", test:o=>o.lv.origine === "main" },
+      { lib:"Issus d'une photo d'appoint", test:o=>o.lv.origine === "appoint" },
+      { lib:"Statut de lecture", kids:()=>[
+          { lib:"🔒 Acquis", test:o=>o.lv.statut === "acquis" },
+          { lib:"Probables", test:o=>o.lv.statut === "probable" },
+          { lib:"❓ Questions en suspens", test:o=>!!o.lv.question || o.lv.statut === "question" },
+          { lib:"Sans statut", test:o=>!o.lv.statut && !o.lv.question }
+        ] }
+    ];
+  };
+
+  return [
+    { lib:"👤 Livres sans auteur", test:o=>estSansAuteur(o.lv.auteur) },
+    { lib:"📝 Livres sans résumé", test:o=>!String(o.lv.resume || "").trim() },
+    { lib:"🔍 Titre partiellement illisible", aide:"remarque signalant une gêne, titre contenant « … », « ? » ou des crochets, ou lecture peu sûre",
+      test:o=>titrePartiellementIllisible(o.lv) },
+    { sep:true },
+    { lib:"💬 D'après les remarques", kids:branchesRemarques },
+    { lib:"✍️ Par auteur", aide:"première lettre du nom, puis l'auteur", kids:branchesAuteurs },
+    { lib:"📅 Par année de parution", kids:branchesAnnees },
+    { lib:"🗂️ Par catégorie", kids:branchesCategories },
+    { lib:"🎯 Par certitude de lecture", kids:()=>[
+        { lib:"Haute", test:o=>o.lv.certitude === "haute" },
+        { lib:"Moyenne", test:o=>o.lv.certitude === "moyenne" },
+        { lib:"Faible", test:o=>o.lv.certitude === "faible" },
+        { lib:"Non précisée", test:o=>!["haute", "moyenne", "faible"].includes(o.lv.certitude) }
+      ] },
+    { lib:"📍 Par emplacement", kids:branchesEmplacement },
+    { lib:"🧩 Divers", kids:branchesDivers }
+  ];
+}
+
+/* --- affichage du menu --- */
+let fermetureMenuPred = null;
+function fermerMenuPred(){
+  const m = $("#bRechMenu");
+  if (m){ m.hidden = true; m.innerHTML = ""; }
+  if (fermetureMenuPred){ document.removeEventListener("pointerdown", fermetureMenuPred, true); document.removeEventListener("keydown", fermetureMenuPred, true); fermetureMenuPred = null; }
+}
+function ouvrirMenuPred(b, surChoix){
+  const menu = $("#bRechMenu");
+  if (!menu) return;
+  const tous = livresAvecPlace(b);
+  const pile = [{ lib:"Recherches prédéfinies", kids:()=>arbrePredefini(b) }];
+  const compte = n=>n.test ? tous.filter(o=>{ try{ return !!n.test(o); }catch(e){ return false; } }).length : null;
+  let items = [];
+
+  const dessiner = ()=>{
+    const cur = pile[pile.length - 1];
+    if (!cur._kids) cur._kids = cur.kids();
+    items = (cur.tousLib && cur.test ? [{ lib:cur.tousLib, test:cur.test, _tous:true }] : []).concat(cur._kids);
+    const chemin = pile.length > 1 ? pile.slice(1).map(p=>p.lib).join(" › ") : `${tous.length} livre(s) dans « ${b.nom} »`;
+    const lignes = [], tuiles = [];
+    items.forEach((it, i)=>{
+      if (it.sep){ lignes.push(`<div class="predSep"></div>`); return; }
+      const n = compte(it);
+      if (it.lettre){ tuiles.push(`<button data-pi="${i}">${esc(it.lib)}<small>${n}</small></button>`); return; }
+      lignes.push(`<button class="predLigne${it._tous ? " tous" : ""}" data-pi="${i}" ${n === 0 ? "disabled" : ""}>
+          <span class="lib">${esc(it.lib)}${it.aide ? `<span class="aideP">${esc(it.aide)}</span>` : ""}</span>
+          ${n !== null ? `<span class="nb">${n}</span>` : ""}
+          <span class="fl">${it.kids ? "›" : ""}</span></button>`);
+    });
+    menu.innerHTML = `<div class="predTete">
+        ${pile.length > 1 ? `<button data-pr="1">‹ Retour</button>` : ""}
+        <span class="chemin">${esc(chemin)}</span>
+        <button data-pf="1" aria-label="Fermer">✕</button></div>` +
+      lignes.join("") +
+      (tuiles.length ? `${lignes.length ? `<div class="predTitreGrille">Par initiale :</div>` : ""}<div class="predGrille">${tuiles.join("")}</div>` : "") +
+      (!lignes.length && !tuiles.length ? `<div class="aide" style="padding:12px">Rien à proposer ici pour cette bibliothèque.</div>` : "");
+    menu.scrollTop = 0;
+  };
+
+  menu.onclick = (e)=>{
+    e.stopPropagation();
+    const bt = e.target.closest("button");
+    if (!bt || bt.disabled) return;
+    if (bt.dataset.pf){ fermerMenuPred(); return; }
+    if (bt.dataset.pr){ pile.pop(); dessiner(); return; }
+    const it = items[Number(bt.dataset.pi)];
+    if (!it) return;
+    if (it.kids){ pile.push(it); dessiner(); return; }
+    const noms = pile.slice(1).filter(p=>!p.lettre).map(p=>p.lib);
+    if (!it._tous) noms.push(it.lib);
+    fermerMenuPred();
+    surChoix({ bib:b.id, affiche:"🎯 " + noms.map(n=>n.replace(/^[^\p{L}\p{N}]+/u, "")).join(" › "), test:it.test });
+  };
+  fermerMenuPred();
+  menu.hidden = false;
+  dessiner();
+  fermetureMenuPred = (e)=>{
+    if (e.type === "keydown"){ if (e.key === "Escape") fermerMenuPred(); return; }
+    const m = $("#bRechMenu");
+    if (!m || m.hidden){ fermerMenuPred(); return; }
+    if (m.contains(e.target) || e.target.id === "bRechPred") return;
+    fermerMenuPred();
+  };
+  document.addEventListener("pointerdown", fermetureMenuPred, true);
+  document.addEventListener("keydown", fermetureMenuPred, true);
+}
+
 function chargerPhotosGrille(b){
   const champVue = vueRangee === "derriere" ? "photo2" : "photo", vue = vueRangee;
   document.querySelectorAll("#vueBiblio [data-case] .sansphoto.charge").forEach(sp=>{
