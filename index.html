@@ -468,8 +468,14 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.85.0";
+const VERSION = "V1.86.0";
 const HISTORIQUE = [
+  { v:"V1.86.0", d:"28/09/2026", l:[
+    "Mode « ✏️ Éditer » d'un compartiment : sur une rangée certifiée, chaque livre a désormais son bouton « Modifier » (fiche avec rang verrouillé). Toujours ni suppression, ni déplacement, ni ajout, ni confirmation : le compte et l'ordre certifiés restent intacts."
+  ]},
+  { v:"V1.85.1", d:"28/09/2026", l:[
+    "Livre localisé sur une rangée certifiée : le bouton « ✏️ Modifier la fiche de ce livre » est aussi proposé (petites corrections, compléments), avec un message rappelant que la certification n'est pas remise en cause. Dans la fiche, seul le rang (devant/derrière) est alors verrouillé, pour ne pas changer le compte ni l'ordre certifiés."
+  ]},
   { v:"V1.85.0", d:"28/09/2026", l:[
     "Livre localisé (encadré de rouge dans la liste du compartiment) : bouton « ✏️ Modifier la fiche de ce livre » qui ouvre directement la fiche en édition (titre, auteur, année, catégorie, résumé, remarque, rang). Enregistrement et envoi comme depuis le mode Éditer. Pas de bouton si la rangée est certifiée (un message l'indique)."
   ]},
@@ -6311,8 +6317,8 @@ function ouvrirCompartiment(b, k){
             const cible = cibles && cibles.has(lv);
             const bloque = certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant");
             return `<div class="livre${cible ? " livreCible" : ""}"><div class="t">${esc(lv.titre)}</div>${lv.auteur ? `<div class="a">${esc(lv.auteur)}</div>` : ""}${cible
-              ? (bloque ? `<div class="aide" style="margin:6px 0 0;color:#ffd23f">★ Rangée certifiée : fiche non modifiable (retirez la certification pour corriger).</div>`
-                        : `<button class="btn principal" data-ficheCible="${(cs.livres || []).indexOf(lv)}" style="margin-top:8px;width:100%">✏️ Modifier la fiche de ce livre</button>`)
+              ? (bloque ? `<div class="aide" style="margin:6px 0 0;color:#ffd23f">★ Rangée certifiée : la fiche reste modifiable (corrections, compléments) sans remettre en cause la certification.</div>` : "") +
+                `<button class="btn principal" data-ficheCible="${(cs.livres || []).indexOf(lv)}" style="margin-top:8px;width:100%">✏️ Modifier la fiche de ce livre</button>`
               : ""}</div>`;
           }).join("")
         : `<div class="vide">Aucun livre ${filtreConsult === "derriere" ? "sur la rangée de derrière" : "sur la rangée de devant"}.</div>`;
@@ -6913,7 +6919,8 @@ function ouvrirCompartiment(b, k){
              ${htmlExtraitsQuestion(cs, lv)}
              <div class="barre" style="margin-top:8px;flex-direction:column;align-items:stretch">${boutonsQuestion(lv, i, cs)}</div>`; })() : ""}${lv.question ? `
              <button class="btn" data-photoq="${i}" style="margin-top:6px;width:100%">📷 Photographier cet endroit (photo d'appoint lue aussitôt)</button></div>` : ""}
-         ${bloque(lv) ? `<div class="aide" style="margin:4px 0 0;color:#ffd23f">★ rangée certifiée</div>` : `<div class="actions">
+         ${bloque(lv) ? `<div class="aide" style="margin:4px 0 0;color:#ffd23f">★ Rangée certifiée : fiche modifiable (corrections, compléments) ; ni suppression, ni déplacement, ni changement de rang.</div>
+           <div class="actions"><button class="btn" data-modif="${i}">Modifier</button></div>` : `<div class="actions">
            ${!estAcquis(lv) && !lv.question ? `<button class="btn" data-conf="${i}" title="Je l'ai vérifié : il est bien à cette place">✓ Confirmer</button>` : ""}
            <button class="btn" data-modif="${i}">Modifier</button>
            <button class="btn rouge" data-suppr="${i}">Supprimer</button>
@@ -7147,6 +7154,7 @@ function formLivre(cs, index, apres){
   };
   const rangLv = ()=> lv.rang === "derriere" ? "derriere" : "devant";
   const peutAjouterApres = index >= 0 && !certifiee(cs, rangLv());
+  const rangVerrouille = index >= 0 && certifiee(cs, rangLv());   // rangée certifiée : le livre reste à sa place
   const fm = modale({
     titre: index>=0 ? "Modifier le livre" : "Nouveau livre",
     html:
@@ -7159,8 +7167,9 @@ function formLivre(cs, index, apres){
        <label for="lR">Résumé en une ligne</label><textarea id="lR">${esc(lv.resume)}</textarea>
        <label for="lM">Remarque</label><input type="text" id="lM" value="${esc(lv.remarque)}">
        ${(cs.photo2 || lv.rang) ? `<label for="lG">Rang dans le compartiment</label>
-         <select id="lG"><option value="devant" ${lv.rang!=="derriere"?"selected":""}>Devant</option>
-         <option value="derriere" ${lv.rang==="derriere"?"selected":""}>Derrière</option></select>` : ""}`,
+         <select id="lG" ${rangVerrouille ? "disabled" : ""}><option value="devant" ${lv.rang!=="derriere"?"selected":""}>Devant</option>
+         <option value="derriere" ${lv.rang==="derriere"?"selected":""}>Derrière</option></select>
+         ${rangVerrouille ? `<div class="aide" style="margin:4px 0 0">★ Rangée certifiée : le rang ne peut pas être changé ici (cela modifierait le compte et l'ordre certifiés).</div>` : ""}` : ""}`,
     boutons:[
       ...(peutAjouterApres ? [{texte:"➕ Ajouter un livre", garder:true, action:(f)=>{
         if (!enregistrer(f)) return false;
