@@ -1458,7 +1458,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lbr4jy",
@@ -1480,7 +1480,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lr1cad",
@@ -1502,7 +1502,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63loix0t",
@@ -1524,7 +1524,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4kxjl0aoz9",
@@ -1535,7 +1535,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4mrij9y2at",
@@ -1546,7 +1547,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lkfiah",
@@ -1568,7 +1570,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4obr4jqlby",
@@ -1579,7 +1581,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4pehrz8rgj",
@@ -1590,7 +1593,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4q2umpxqu8",
@@ -1601,7 +1605,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63llqhva",
@@ -1623,7 +1628,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lz55sb",
@@ -1645,7 +1650,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63ltl595",
@@ -1667,7 +1672,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lrz6kp",
@@ -1689,7 +1694,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lzgg68",
@@ -1711,7 +1716,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63lqvks6",
@@ -1733,7 +1738,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4r9u1mutsz",
@@ -1744,7 +1749,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4rhfudsbei",
@@ -1755,7 +1761,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4rcyl4i1kd",
@@ -1766,7 +1773,8 @@
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63l5kdsj",
@@ -1788,7 +1796,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63l7x9no",
@@ -1810,7 +1818,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63ms7cn5",
@@ -1832,18 +1840,19 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4u61l09kpg",
-       "titre": "Nouveau livre (à compléter)",
+       "titre": "Deux histoires pour mes deux ans",
        "auteur": "",
        "annee": "",
        "resume": "",
        "categorie": "",
        "remarque": "",
        "certitude": "haute",
-       "origine": "main"
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63m4q0bg",
@@ -1865,7 +1874,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63m71uw3",
@@ -1887,7 +1896,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63muehva",
@@ -1909,7 +1918,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mqfuea",
@@ -1931,7 +1940,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63m9bbf5",
@@ -1953,7 +1962,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mqb4wl",
@@ -1975,7 +1984,19 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
+      },
+      {
+       "id": "mul5cfz2c1vn2",
+       "titre": "Perdu au large des grands bancs",
+       "auteur": "Dan Corby",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63m1h0a8",
@@ -1997,7 +2018,19 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
+      },
+      {
+       "id": "mul5dgmllc051",
+       "titre": "La cicatrice",
+       "auteur": "Bruce Lowery",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mk1e7x",
@@ -2019,7 +2052,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mc71u9",
@@ -2041,7 +2074,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mcrtsg",
@@ -2063,7 +2096,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mbkdqe",
@@ -2085,7 +2118,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mhnet5",
@@ -2107,7 +2140,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mbxtkt",
@@ -2122,7 +2155,19 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
+      },
+      {
+       "id": "mul5g867gz5o8",
+       "titre": "Gédéon",
+       "auteur": "Benjamin, Rabier",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main",
+       "statut": "acquis"
       },
       {
        "id": "mul4k63mlu18f",
@@ -2137,7 +2182,7 @@
        "temoins": [
         "photo:2026-09-28T10:43:25.055Z"
        ],
-       "statut": "probable"
+       "statut": "acquis"
       }
      ],
      "photo": {
@@ -2156,6 +2201,9 @@
       "modele": "gemini-2.5-flash",
       "photos": 1,
       "manuel": false
+     },
+     "certif": {
+      "devant": "2026-09-28T11:14:19.488Z"
      }
     },
     "10-2": {
@@ -44105,7 +44153,7 @@
    }
   }
  ],
- "maj": "2026-09-28T11:08:55.769Z",
+ "maj": "2026-09-28T11:14:36.870Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
