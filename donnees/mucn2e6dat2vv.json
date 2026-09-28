@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T14:57:14.492Z",
+ "maj": "2026-09-28T15:04:45.390Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15916,38 +15916,6 @@
       }
      },
      {
-      "id": "muldbzbslnle5",
-      "titre": "HAUT DE GAMME (VOLUME 1)",
-      "auteur": "Binet",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "Bas de gamme",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 340,
-        "x2": 360
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
-      ],
-      "statut": "probable",
-      "question": {
-       "type": "deplace",
-       "zone": {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 400,
-        "x2": 660
-       },
-       "source": "l'appoint 1",
-       "date": "2026-09-28T14:56:50.138Z"
-      }
-     },
-     {
       "id": "muldbzbsk5ejt",
       "titre": "LES BIDOCHON Tome 20",
       "auteur": "Binet",
@@ -15976,36 +15944,26 @@
       "statut": "acquis"
      },
      {
-      "id": "muldbzbsz83yi",
-      "titre": "LES DINGODOSSIERS",
-      "auteur": "Goscinny Gotlib",
+      "id": "muldbzbslnle5",
+      "titre": "HAUT DE GAMME (VOLUME 1)",
+      "auteur": "Binet",
       "annee": "",
       "certitude": "haute",
-      "remarque": "Dargaud",
+      "remarque": "Bas de gamme",
       "resume": "",
       "categorie": "",
       "origine": "ia",
       "vues": [
        {
         "champ": "photo",
-        "x1": 380,
-        "x2": 400
+        "x1": 340,
+        "x2": 360
        }
       ],
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable",
-      "question": {
-       "type": "absent",
-       "zone": {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 685,
-        "x2": 715
-       },
-       "source": "l'appoint 1",
-       "date": "2026-09-28T14:56:50.138Z"
-      }
+      "statut": "acquis"
      },
      {
       "id": "muldem7ttm9i1",
@@ -16028,6 +15986,56 @@
        "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
       ],
       "statut": "probable"
+     },
+     {
+      "id": "muldbzbsnrrhi",
+      "titre": "L'ÉNIGMATIQUE MONSIEUR SCHMUTZ",
+      "auteur": "",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Dargaud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 420,
+        "x2": 440
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 890,
+        "x2": 930
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muldbzbsz83yi",
+      "titre": "LES DINGODOSSIERS",
+      "auteur": "Goscinny Gotlib",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Dargaud",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 380,
+        "x2": 400
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "acquis"
      },
      {
       "id": "muldem7t2c3y8",
@@ -16071,34 +16079,6 @@
         "champ": "appoint:mulde9hkkbjk9",
         "x1": 850,
         "x2": 890
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z",
-       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
-      ],
-      "statut": "acquis"
-     },
-     {
-      "id": "muldbzbsnrrhi",
-      "titre": "L'ÉNIGMATIQUE MONSIEUR SCHMUTZ",
-      "auteur": "",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "Dargaud",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 420,
-        "x2": 440
-       },
-       {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 890,
-        "x2": 930
        }
       ],
       "temoins": [
@@ -16153,7 +16133,7 @@
      },
      {
       "id": "muldbzbszjotj",
-      "titre": "Toutes complices",
+      "titre": "Tout se complique",
       "auteur": "",
       "annee": "",
       "certitude": "faible",
@@ -16240,28 +16220,6 @@
       "statut": "probable"
      },
      {
-      "id": "muldbzbspm7jk",
-      "titre": "LES SOLDES DE L'AN DEUX",
-      "auteur": "Jacques Faizant",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "Denoël",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 600,
-        "x2": 620
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
-      ],
-      "statut": "probable"
-     },
-     {
       "id": "muldbzbs70khl",
       "titre": "RAOUL TABURIN",
       "auteur": "Sempé",
@@ -16276,6 +16234,28 @@
         "champ": "photo",
         "x1": 620,
         "x2": 640
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
+      ],
+      "statut": "probable"
+     },
+     {
+      "id": "muldbzbspm7jk",
+      "titre": "LES SOLDES DE L'AN DEUX",
+      "auteur": "Jacques Faizant",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Denoël",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 600,
+        "x2": 620
        }
       ],
       "temoins": [
@@ -16527,7 +16507,7 @@
      },
      {
       "id": "muldbzbsfo5or",
-      "titre": "Pot-Bouille",
+      "titre": "Nana",
       "auteur": "Émile Zola",
       "annee": "",
       "certitude": "haute",
