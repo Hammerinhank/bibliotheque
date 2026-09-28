@@ -1538,6 +1538,17 @@
        "origine": "main"
       },
       {
+       "id": "mul4mrij9y2at",
+       "titre": "Martin et Jocko",
+       "auteur": "Benjamen Ranier",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
+      },
+      {
        "id": "mul4k63lkfiah",
        "titre": "ARC-EN-CIEL",
        "auteur": "Marcus Pfister",
@@ -1558,6 +1569,39 @@
         "photo:2026-09-28T10:43:25.055Z"
        ],
        "statut": "probable"
+      },
+      {
+       "id": "mul4obr4jqlby",
+       "titre": "Apprendre à lire",
+       "auteur": "",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
+      },
+      {
+       "id": "mul4pehrz8rgj",
+       "titre": "Chanter comme une casserole",
+       "auteur": "Marc Levy",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
+      },
+      {
+       "id": "mul4q2umpxqu8",
+       "titre": "L’album de mon chien",
+       "auteur": "Erlanuba",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
       },
       {
        "id": "mul4k63llqhva",
@@ -1692,6 +1736,39 @@
        "statut": "probable"
       },
       {
+       "id": "mul4r9u1mutsz",
+       "titre": "Père Castor, raconte-nous ton histoire",
+       "auteur": "",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
+      },
+      {
+       "id": "mul4rhfudsbei",
+       "titre": "Pomme, d’api mon petit jeu de printemps",
+       "auteur": "",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
+      },
+      {
+       "id": "mul4rcyl4i1kd",
+       "titre": "Astrapi Archéologie.",
+       "auteur": "",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
+      },
+      {
        "id": "mul4k63l5kdsj",
        "titre": "Tu sais, Dieu...",
        "auteur": "",
@@ -1756,6 +1833,17 @@
         "photo:2026-09-28T10:43:25.055Z"
        ],
        "statut": "probable"
+      },
+      {
+       "id": "mul4u61l09kpg",
+       "titre": "Nouveau livre (à compléter)",
+       "auteur": "",
+       "annee": "",
+       "resume": "",
+       "categorie": "",
+       "remarque": "",
+       "certitude": "haute",
+       "origine": "main"
       },
       {
        "id": "mul4k63m4q0bg",
@@ -44017,7 +44105,7 @@
    }
   }
  ],
- "maj": "2026-09-28T10:50:06.023Z",
+ "maj": "2026-09-28T11:08:38.749Z",
  "photosNonAssociees": [
   "images/mucn2e6dat2vv/1-1.jpg",
   "images/mucn2e6dat2vv/1-2.jpg"
