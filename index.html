@@ -230,6 +230,14 @@ input[type=text],input[type=search],input[type=number],input[type=password],sele
   border-radius:9px;padding:9px 10px;font-size:16px;font-family:inherit;
 }
 textarea{min-height:90px;resize:vertical;line-height:1.4}
+/* croix ✕ pour vider un champ d'un seul appui (fiche d'un livre) */
+.champEff{position:relative}
+.champEff > input{padding-right:40px}
+.champEff > textarea{padding-right:40px}
+.btnEff{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;border-radius:50%;
+  background:var(--trait);color:var(--texte);font-size:15px;line-height:32px;padding:0;cursor:pointer;opacity:.85}
+.champEff > textarea + .btnEff{top:6px;transform:none}
+.btnEff:active{opacity:1;background:var(--rouge-sombre)}
 input, select, textarea{font-size:max(16px, 1em)}
 .ligne2{display:flex;gap:10px}
 .ligne2 > *{flex:1}
@@ -468,8 +476,20 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.88.0";
+const VERSION = "V1.91.0";
 const HISTORIQUE = [
+  { v:"V1.91.0", d:"28/09/2026", l:[
+    "Log : chaque ligne porte l'identifiant de la fenêtre qui l'a écrite (ex. [F7K]), pour voir quand deux fenêtres de l'app travaillent en même temps.",
+    "À chaque ouverture : navigateur et système, mode (onglet du navigateur ou app de l'écran d'accueil), type de chargement (nouvelle ouverture, rechargement, retour arrière), page d'où l'on vient, et les autres fenêtres de l'app encore ouvertes.",
+    "Alerte dans le Log si le navigateur diffère de l'ouverture précédente, et si une page est restaurée depuis le cache du navigateur."
+  ]},
+  { v:"V1.90.0", d:"28/09/2026", l:[
+    "Fenêtre périmée (une autre fenêtre de l'app a enregistré depuis) : détectée dès le retour au premier plan et au premier appui, avant toute saisie — le message « Page périmée » s'affiche aussitôt.",
+    "Ce message ne peut plus être fermé par ✕ : seul « Recharger » est proposé, pour ne plus pouvoir saisir des données qui ne seraient pas enregistrées."
+  ]},
+  { v:"V1.89.0", d:"28/09/2026", l:[
+    "Fiche d'un livre (Modifier / Nouveau livre) : petite croix ✕ à droite de chaque champ (titre, auteur, année, catégorie, résumé, remarque) pour le vider d'un seul appui. La croix n'apparaît que si le champ contient quelque chose ; rien n'est enregistré avant « Enregistrer »."
+  ]},
   { v:"V1.88.0", d:"28/09/2026", l:[
     "Mode « ✏️ Éditer » › section « ⭐ Certification » : sous chaque rangée non certifiée, bouton rouge « 🗑 Supprimer les N livres de la rangée » — retire tous ses livres, y compris ceux ajoutés à la main (photos et autre rangée intactes).",
     "Confirmation obligatoire qui détaille l'impact et rappelle que c'est irréversible (pas de « Rétablir »). Jamais proposé sur une rangée certifiée ★."
@@ -1331,15 +1351,80 @@ function lireLog(){
   try{ const l = JSON.parse(localStorage.getItem(CLE_LOG) || "null"); if (l && l.jour === aujourdhui()) return l; }catch(e){}
   return { jour: aujourdhui(), lignes: [] };
 }
+/* Identifiant court de CETTE fenêtre (onglet) de l'app : il préfixe chaque ligne du Log. */
+function idFenetre(){
+  if (!window.__idFenetre){
+    const c = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    window.__idFenetre = "F" + [0,1].map(()=>c[Math.floor(Math.random() * c.length)]).join("");
+    window.__heureFenetre = new Date().toTimeString().slice(0, 8);
+  }
+  return window.__idFenetre;
+}
 function journal(texte){
   try{
     const l = lireLog();
     const d = new Date();
-    l.lignes.push(String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0") + ":" + String(d.getSeconds()).padStart(2,"0") + "  " + texte);
+    l.lignes.push(String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0") + ":" + String(d.getSeconds()).padStart(2,"0") + "  [" + idFenetre() + "] " + texte);
     if (l.lignes.length > 800) l.lignes = l.lignes.slice(-800);
     localStorage.setItem(CLE_LOG, JSON.stringify(l));
   }catch(e){}
 }
+/* ---------- contexte de la fenêtre : navigateur, mode, chargement, autres fenêtres ---------- */
+function decrireNavigateur(){
+  const ua = navigator.userAgent || "";
+  let sys = "système inconnu";
+  const ios = ua.match(/(?:iPhone|iPad|iPod).*? OS (\d+)[_.](\d+)/);
+  if (ios) sys = (/iPad/.test(ua) ? "iPadOS " : "iOS ") + ios[1] + "." + ios[2];
+  else if (/Macintosh/.test(ua)) sys = navigator.maxTouchPoints > 1 ? "iPadOS (mode ordinateur)" : "macOS";
+  else if (/Android/.test(ua)) sys = "Android";
+  else if (/Windows/.test(ua)) sys = "Windows";
+  let nav = "navigateur inconnu";
+  if (/CriOS|Chrome\//.test(ua) && !/Edg/.test(ua)) nav = "Chrome";
+  else if (/FxiOS|Firefox\//.test(ua)) nav = "Firefox";
+  else if (/EdgiOS|Edg\//.test(ua)) nav = "Edge";
+  else if (/Safari\//.test(ua)) nav = "Safari";
+  else if (/AppleWebKit/.test(ua)) nav = "navigateur intégré à une autre app";
+  return nav + " — " + sys;
+}
+function modeFenetre(){
+  const autonome = navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
+  return autonome ? "app de l'écran d'accueil" : "onglet du navigateur";
+}
+function typeChargement(){
+  try{
+    const n = performance.getEntriesByType("navigation")[0];
+    return ({ navigate:"nouvelle ouverture", reload:"rechargement", back_forward:"retour arrière / réouverture d'onglet", prerender:"préchargement" })[n && n.type] || "inconnu";
+  }catch(e){ return "inconnu"; }
+}
+const CLE_DERNIER_NAV = "biblio_dernier_navigateur";
+let canalFenetres = null;
+function journalContexteOuverture(){
+  const navig = decrireNavigateur(), mode = modeFenetre();
+  let ref = "";
+  try{ if (document.referrer){ const u = new URL(document.referrer); ref = u.host + u.pathname; } }catch(e){}
+  journal(`Fenêtre ${idFenetre()} : ${navig} — ${mode} — ${typeChargement()}${ref ? " — venue de " + ref : ""}`);
+  try{
+    const avant = localStorage.getItem(CLE_DERNIER_NAV), maintenant = navig + " — " + mode;
+    if (avant && avant !== maintenant) journal(`⚠️ Changement de navigateur ou de mode depuis la dernière ouverture : avant « ${avant} », maintenant « ${maintenant} »`);
+    localStorage.setItem(CLE_DERNIER_NAV, maintenant);
+  }catch(e){}
+  // les autres fenêtres de l'app encore vivantes se signalent (une fenêtre suspendue par l'iPhone ne répond pas)
+  try{
+    canalFenetres = new BroadcastChannel("biblio_fenetres");
+    canalFenetres.onmessage = (e)=>{
+      const m = e.data || {};
+      if (m.type === "ouverture"){
+        // (c'est la nouvelle fenêtre qui l'inscrit au Log, pour éviter deux écritures simultanées)
+        canalFenetres.postMessage({ type:"presente", id:idFenetre(), heure:window.__heureFenetre, mode:modeFenetre() });
+      } else if (m.type === "presente"){
+        journal(`Autre fenêtre de l'app encore ouverte : ${m.id} (ouverte à ${m.heure}, ${m.mode})`);
+      }
+    };
+    canalFenetres.postMessage({ type:"ouverture", id:idFenetre() });
+  }catch(e){}
+}
+window.addEventListener("pageshow", (e)=>{ if (e.persisted) journal(`Page restaurée depuis le cache du navigateur (fenêtre ouverte à ${window.__heureFenetre}) — données éventuellement anciennes`); });
+
 /* résumé compact des données, pour situer chaque événement */
 function etatCourt(jeu){
   const r = resume(jeu || data);
@@ -3151,12 +3236,25 @@ let revConnue = null;
 function fenetrePerimee(){
   if (document.getElementById("avertPerime")) return;
   const f = modale({ titre:"Page périmée",
-    html:`<div id="avertPerime">Les données ont été modifiées dans <b>une autre fenêtre</b> de l'application (autre onglet, ou application ouverte depuis l'écran d'accueil).</div>
-          <div class="aide">Pour ne pas écraser ces modifications avec les données plus anciennes de cette page, rien n'est plus enregistré ici. Rechargez la page.</div>`,
+    html:`<div id="avertPerime">Les données ont été modifiées dans <b>une autre fenêtre</b> de l'application (autre onglet Safari, ou application ouverte depuis l'écran d'accueil).</div>
+          <div class="aide">Cette fenêtre-ci a des données plus anciennes : pour ne pas écraser le travail enregistré par l'autre, <b>plus rien ne peut être enregistré ici</b>. Rechargez : vous retrouverez tout ce qui a été enregistré, dans l'une ou l'autre fenêtre. Pensez ensuite à fermer les autres onglets de l'app.</div>`,
     boutons:[{texte:"🔄 Recharger", classe:"principal", action:()=>{ location.reload(); }}] });
+  // pas de ✕ : continuer à saisir ici serait du travail perdu
+  const x = f.querySelector("[data-fermer]"); if (x) x.remove();
   return f;
 }
 window.addEventListener("storage", (e)=>{ if (e.key === CLE_REV) fenetrePerimee(); });
+/* Sur iPhone, une fenêtre suspendue ne reçoit pas l'événement « storage » :
+   on vérifie donc au retour au premier plan et au premier appui, avant toute saisie. */
+function verifierPerimee(origine){
+  if (!pagePerimee() || document.getElementById("avertPerime")) return;
+  journal("Fenêtre périmée détectée (" + origine + ") : rechargement demandé avant toute saisie");
+  fenetrePerimee();
+}
+document.addEventListener("visibilitychange", ()=>{ if (!document.hidden) verifierPerimee("retour au premier plan"); });
+window.addEventListener("pageshow", ()=>verifierPerimee("réaffichage de la page"));
+window.addEventListener("focus", ()=>verifierPerimee("retour sur la fenêtre"));
+document.addEventListener("pointerdown", ()=>verifierPerimee("appui"), true);
 
 async function envoyerVersGitHub(){
   journal("Envoi vers GitHub demandé — " + etatCourt());
@@ -7212,6 +7310,30 @@ function choisirRetraitPhoto(cs, face){
   });
 }
 
+/* Ajoute une croix ✕ à droite de chaque champ texte d'un conteneur :
+   un appui vide le champ (visible seulement s'il contient quelque chose). */
+function ajouterCroixEffacer(conteneur){
+  conteneur.querySelectorAll('input[type=text], textarea').forEach(ch=>{
+    if (ch.parentElement.classList.contains("champEff")) return;
+    const enveloppe = document.createElement("div");
+    enveloppe.className = "champEff";
+    ch.parentNode.insertBefore(enveloppe, ch);
+    enveloppe.appendChild(ch);
+    const x = document.createElement("button");
+    x.type = "button"; x.className = "btnEff"; x.tabIndex = -1;
+    x.textContent = "✕"; x.title = "Vider ce champ"; x.setAttribute("aria-label", "Vider ce champ");
+    enveloppe.appendChild(x);
+    const maj = ()=>{ x.style.display = ch.value ? "" : "none"; };
+    x.addEventListener("click", (e)=>{
+      e.preventDefault(); e.stopPropagation();
+      ch.value = ""; maj(); ch.focus();
+      ch.dispatchEvent(new Event("input", { bubbles:true }));
+    });
+    ch.addEventListener("input", maj);
+    maj();
+  });
+}
+
 function formLivre(cs, index, apres){
   const lv = index >= 0 ? cs.livres[index]
     : { titre:"", auteur:"", annee:"", resume:"", categorie:"", remarque:"", certitude:"haute" };
@@ -7268,6 +7390,7 @@ function formLivre(cs, index, apres){
       }}
     ]
   });
+  ajouterCroixEffacer(fm);
   // « Ajouter un livre » tout à gauche du pied de la fenêtre
   if (peutAjouterApres){ const bA = fm.querySelector("[data-b='0']"); if (bA) bA.style.marginRight = "auto"; }
 }
@@ -9058,6 +9181,7 @@ document.addEventListener("keydown", e=>{
 
 charger();
 journal(`Ouverture de l'app ${VERSION} — ${etatCourt()}${sale ? " — modifications non envoyées" : ""}`);
+journalContexteOuverture();
 rechargerPhotosIdb().then(()=>sauver(false));      // remet les photos en attente en mémoire, et migre les anciennes hors du localStorage
 // après la vérification de GitHub au démarrage ; si une fenêtre (question de synchronisation…) est ouverte, on attend qu'elle soit réglée
 (function envoiOuverture(essai){
