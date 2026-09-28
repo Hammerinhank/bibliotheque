@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T15:04:45.390Z",
+ "maj": "2026-09-28T16:35:59.140Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15644,70 +15644,6 @@
       "statut": "acquis"
      },
      {
-      "id": "muldbzbrho488",
-      "titre": "Sempé",
-      "auteur": "",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 60,
-        "x2": 85
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
-      ],
-      "statut": "probable",
-      "question": {
-       "type": "absent",
-       "zone": {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 135,
-        "x2": 165
-       },
-       "source": "l'appoint 1",
-       "date": "2026-09-28T14:56:50.138Z"
-      }
-     },
-     {
-      "id": "muldbzbrjyzob",
-      "titre": "Sempé",
-      "auteur": "",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 85,
-        "x2": 110
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
-      ],
-      "statut": "probable",
-      "question": {
-       "type": "absent",
-       "zone": {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 135,
-        "x2": 165
-       },
-       "source": "l'appoint 1",
-       "date": "2026-09-28T14:56:50.138Z"
-      }
-     },
-     {
       "id": "muldbzbr1jmg3",
       "titre": "DES HAUTS ET DES BAS",
       "auteur": "Sempé",
@@ -15736,44 +15672,12 @@
       "statut": "acquis"
      },
      {
-      "id": "muldbzbspqeji",
-      "titre": "SINCÈRES AMITIÉS",
-      "auteur": "Sempé",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "Denoël",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 145,
-        "x2": 180
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
-      ],
-      "statut": "probable",
-      "question": {
-       "type": "absent",
-       "zone": {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 185,
-        "x2": 215
-       },
-       "source": "l'appoint 1",
-       "date": "2026-09-28T14:56:50.138Z"
-      }
-     },
-     {
       "id": "muldbzbsn8v62",
       "titre": "SINCÈRES AMITIÉS",
       "auteur": "Sempé",
       "annee": "",
       "certitude": "haute",
-      "remarque": "",
+      "remarque": "Denoël",
       "resume": "",
       "categorie": "",
       "origine": "ia",
@@ -15871,17 +15775,7 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z"
       ],
-      "statut": "probable",
-      "question": {
-       "type": "absent",
-       "zone": {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 400,
-        "x2": 660
-       },
-       "source": "l'appoint 1",
-       "date": "2026-09-28T14:56:50.138Z"
-      }
+      "statut": "acquis"
      },
      {
       "id": "muldbzbsovaha",
@@ -15914,56 +15808,6 @@
        "source": "l'appoint 1",
        "date": "2026-09-28T14:56:50.138Z"
       }
-     },
-     {
-      "id": "muldbzbsk5ejt",
-      "titre": "LES BIDOCHON Tome 20",
-      "auteur": "Binet",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "casterman",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 360,
-        "x2": 380
-       },
-       {
-        "champ": "appoint:mulde9hkkbjk9",
-        "x1": 660,
-        "x2": 700
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z",
-       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
-      ],
-      "statut": "acquis"
-     },
-     {
-      "id": "muldbzbslnle5",
-      "titre": "HAUT DE GAMME (VOLUME 1)",
-      "auteur": "Binet",
-      "annee": "",
-      "certitude": "haute",
-      "remarque": "Bas de gamme",
-      "resume": "",
-      "categorie": "",
-      "origine": "ia",
-      "vues": [
-       {
-        "champ": "photo",
-        "x1": 340,
-        "x2": 360
-       }
-      ],
-      "temoins": [
-       "photo:2026-09-28T14:54:03.740Z"
-      ],
-      "statut": "acquis"
      },
      {
       "id": "muldem7ttm9i1",
@@ -16012,6 +15856,56 @@
       "temoins": [
        "photo:2026-09-28T14:54:03.740Z",
        "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muldbzbsk5ejt",
+      "titre": "LES BIDOCHON Tome 20",
+      "auteur": "Binet",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "casterman",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 360,
+        "x2": 380
+       },
+       {
+        "champ": "appoint:mulde9hkkbjk9",
+        "x1": 660,
+        "x2": 700
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z",
+       "appoint:mulde9hkkbjk9:2026-09-28T14:56:10.377Z"
+      ],
+      "statut": "acquis"
+     },
+     {
+      "id": "muldbzbslnle5",
+      "titre": "HAUT DE GAMME (VOLUME 1)",
+      "auteur": "Binet",
+      "annee": "",
+      "certitude": "haute",
+      "remarque": "Bas de gamme",
+      "resume": "",
+      "categorie": "",
+      "origine": "ia",
+      "vues": [
+       {
+        "champ": "photo",
+        "x1": 340,
+        "x2": 360
+       }
+      ],
+      "temoins": [
+       "photo:2026-09-28T14:54:03.740Z"
       ],
       "statut": "acquis"
      },
