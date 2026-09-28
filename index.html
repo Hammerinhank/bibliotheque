@@ -468,8 +468,12 @@ body.attenteClaude #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 /* ====================================================================
    VERSION ET HISTORIQUE
    ==================================================================== */
-const VERSION = "V1.87.0";
+const VERSION = "V1.88.0";
 const HISTORIQUE = [
+  { v:"V1.88.0", d:"28/09/2026", l:[
+    "Mode « ✏️ Éditer » › section « ⭐ Certification » : sous chaque rangée non certifiée, bouton rouge « 🗑 Supprimer les N livres de la rangée » — retire tous ses livres, y compris ceux ajoutés à la main (photos et autre rangée intactes).",
+    "Confirmation obligatoire qui détaille l'impact et rappelle que c'est irréversible (pas de « Rétablir »). Jamais proposé sur une rangée certifiée ★."
+  ]},
   { v:"V1.87.0", d:"28/09/2026", l:[
     "« Ce que l'on peut en tirer » : bouton « 🎯 PDF de la sélection (N livres) » qui produit un PDF des livres retenus par le champ de recherche (texte tapé ou recherche prédéfinie ☰), trié par auteur ou par titre ; le critère est rappelé en tête du PDF. Bouton grisé, avec explication, tant qu'il n'y a pas de sélection.",
     "La fenêtre « PDF trié » propose aussi ce choix « La sélection du champ de recherche » quand une sélection existe."
@@ -2387,6 +2391,46 @@ async function viderListesCompartiment(b, k){
   sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
   toast("Listes vidées. Choisissez une photo, puis 🔍 nouvelle analyse ou ♻️ analyse sauvegardée.", 6000);
   envoyerDonneesAuto("Listes de livres de " + lib(k), { livresEnMoinsVoulus:true });
+}
+/* Supprimer définitivement tous les livres d'UNE rangée d'un compartiment
+   (analysés ou ajoutés à la main). Jamais sur une rangée certifiée ★.
+   Photos et autre rangée intactes ; aucune liste n'est mise de côté. */
+async function supprimerLivresRangee(b, k, r){
+  const cs = b.cases[k];
+  if (!cs) return;
+  const nomR = r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
+  if (certifiee(cs, r)){ toast(`La ${nomR} est certifiée ★ : suppression impossible.`, 6000); return; }
+  const rangDe = (lv)=> lv.rang === "derriere" ? "derriere" : "devant";
+  const cibles = (cs.livres||[]).filter(lv=>rangDe(lv) === r);
+  if (!cibles.length){ toast(`Aucun livre dans la ${nomR}.`, 4000); return; }
+  const autre = r === "derriere" ? "devant" : "derriere";
+  const nAutre = (cs.livres||[]).length - cibles.length;
+  const ok = await confirmer(`<div><b>Supprimer définitivement les ${cibles.length} livre(s) de la ${nomR} de ${esc(lib(k))} ?</b></div>
+    <div class="encadre" style="margin:10px 0;border-color:var(--rouge)">
+      <b>Ce qui sera supprimé :</b> tous les livres de cette rangée, <b>y compris ceux ajoutés à la main</b>, avec tout ce que contiennent leurs fiches (titre, auteur, année, catégorie, résumé, remarque, état acquis / probable, questions en suspens).<br><br>
+      <b>Ce qui ne change pas :</b> les photos du compartiment${nAutre ? ` et les ${nAutre} livre(s) de la ${autre === "derriere" ? "rangée 2" : "rangée 1"}` : ""}.
+    </div>
+    <div style="color:var(--rouge);font-weight:700">⚠️ Action irréversible : il n'y a pas de « Rétablir ». La suppression est aussitôt enregistrée et envoyée sur GitHub.</div>
+    <div class="aide">Seule une sauvegarde faite auparavant (Réglages ⚙️ › Sauvegardes) permettrait de retrouver ces livres, dans une nouvelle bibliothèque restaurée.</div>`,
+    "Supprimer les livres de la rangée", `🗑 Supprimer ${cibles.length} livre(s)`, { danger:true, texteNon:"Annuler — garder les livres" });
+  if (!ok) return;
+  // re-vérification : la rangée a pu être certifiée entre-temps
+  if (certifiee(cs, r)){ toast(`La ${nomR} est certifiée ★ : suppression impossible.`, 6000); return; }
+  cs.livres = (cs.livres||[]).filter(lv=>rangDe(lv) !== r);
+  // la photo de cette rangée redevient « à analyser »
+  if (cs.analyse){
+    if (!cs.livres.length) delete cs.analyse;
+    else {
+      if (!cs.analyse.rangs) cs.analyse.rangs = { devant:cs.analyse.maj, derriere:cs.analyse.maj };
+      delete cs.analyse.rangs[r];
+    }
+  }
+  // les photos d'appoint rattachées à cette rangée ne le sont plus
+  (cs.appoints||[]).forEach(a=>{ if (a.rang === r){ delete a.rang; delete a.rangInfo; } });
+  journal(`Suppression définitive des ${cibles.length} livre(s) de la ${nomR} de ${lib(k)}`);
+  sauver(); if (rafraichirCompartimentOuvert) rafraichirCompartimentOuvert(b.id, k); rendreBiblio();
+  toast(`${cibles.length} livre(s) supprimé(s) de la ${nomR}.`, 5000);
+  envoyerDonneesAuto("Livres de la " + nomR + " de " + lib(k), { livresEnMoinsVoulus:true });
 }
 function retablirListesCompartiment(b, k){
   const cs = b.cases[k], sv = cs && cs.avantReconstruction;
@@ -6883,7 +6927,9 @@ function ouvrirCompartiment(b, k){
             <div style="margin-bottom:8px"><b>${nomR(r)}</b> : ${certifiee(cs, r) ? `<span style="color:#ffd23f;font-weight:700">★ certifiée le ${esc(dateFr(cs.certif[r]))}</span>` : "non certifiée"}</div>
             ${certifiee(cs, r)
               ? `<button class="btn plein" data-decertif="${r}" style="min-height:48px;font-size:15.5px">Retirer la certification de la ${nomR(r).toLowerCase()}</button>`
-              : `<button class="btn plein" data-certif="${r}" style="min-height:48px;font-size:15.5px;border:2px solid #ffd23f">⭐ Certifier la ${nomR(r).toLowerCase()}</button>`}
+              : `<button class="btn plein" data-certif="${r}" style="min-height:48px;font-size:15.5px;border:2px solid #ffd23f">⭐ Certifier la ${nomR(r).toLowerCase()}</button>
+                 <button class="btn rouge plein" data-suppr-rangee="${r}" style="margin-top:22px;min-height:44px">🗑 Supprimer les ${etatRangee(cs, r).total} livre(s) de la ${nomR(r).toLowerCase()}</button>
+                 <div class="aide" style="margin:4px 0 0">Suppression définitive, y compris des livres ajoutés à la main ; confirmation demandée.</div>`}
           </div>`).join("")}
           ${l.some(lv=>!certifiee(cs, lv.rang === "derriere" ? "derriere" : "devant")) ? `<div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--trait)">
             <button class="btn plein" data-vider="1" style="min-height:44px">🗑 Vider ${cs.certif ? "les rangées non certifiées" : "les listes"}</button>
@@ -6912,6 +6958,7 @@ function ouvrirCompartiment(b, k){
     const zCert = f.querySelector("#zoneCertif");
     zCert.innerHTML = htmlCertif;
     const vC = zCert.querySelector("[data-vider]"); if (vC) vC.onclick = ()=>viderListesCompartiment(b, k);
+    zCert.querySelectorAll("[data-suppr-rangee]").forEach(el=>el.onclick=()=>supprimerLivresRangee(b, k, el.dataset.supprRangee));
     zCert.querySelectorAll("[data-certif]").forEach(el=>el.onclick=async()=>{
       const r = el.dataset.certif, e = etatRangee(cs, r), nomR = r === "derriere" ? "rangée 2 (derrière)" : "rangée 1 (devant)";
       const ok = await confirmer(`<div><b>Certifier la ${nomR}</b> : vous l'avez vérifiée livre par livre contre l'étagère, et elle est 100 % conforme ?</div>
