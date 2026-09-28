@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T14:54:24.651Z",
+ "maj": "2026-09-28T14:56:11.471Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -15594,6 +15594,17 @@
    "9-2": {
     "livres": [
      {
+      "titre": "Âme sœur",
+      "auteur": "Sempé",
+      "annee": "",
+      "resume": "",
+      "categorie": "",
+      "remarque": "",
+      "certitude": "haute",
+      "id": "muldd1ncb96i6",
+      "origine": "main"
+     },
+     {
       "id": "muldbzbrh8jay",
       "titre": "Sentiments distingués",
       "auteur": "Sempé",
@@ -16468,7 +16479,17 @@
      "modele": "gemini-2.5-flash",
      "photos": 1,
      "manuel": false
-    }
+    },
+    "appoints": [
+     {
+      "chemin": "images/mucn2e6dat2vv/9-2-appoint-mulde9hkkbjk9.jpg",
+      "envoye": false,
+      "maj": "2026-09-28T14:56:10.377Z",
+      "id": "mulde9hkkbjk9",
+      "legende": "",
+      "enIDB": "images/mucn2e6dat2vv/9-2-appoint-mulde9hkkbjk9.jpg"
+     }
+    ]
    },
    "9-3": {
     "livres": [
