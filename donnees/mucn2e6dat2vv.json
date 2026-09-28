@@ -1,6 +1,6 @@
 {
  "format": 1,
- "maj": "2026-09-28T10:27:34.131Z",
+ "maj": "2026-09-28T10:28:54.791Z",
  "bibliotheque": {
   "id": "mucn2e6dat2vv",
   "nom": "Grande bibliothèque de Gaudissart",
@@ -501,7 +501,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5bg0b3l",
@@ -524,7 +524,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5b8e3w8",
@@ -547,7 +547,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5bpds8e",
@@ -570,7 +570,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5bp2l2x",
@@ -593,7 +593,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5bj614v",
@@ -616,7 +616,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5brrxxa",
@@ -639,7 +639,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5bigels",
@@ -662,7 +662,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5chev7x",
@@ -685,7 +685,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5c0oxpu",
@@ -708,7 +708,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5cd5y4r",
@@ -731,7 +731,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5ce6bjr",
@@ -754,7 +754,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5c3tk98",
@@ -777,7 +777,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5cpowt2",
@@ -800,7 +800,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5chy82g",
@@ -823,7 +823,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mul3st5cbdaoz",
@@ -846,7 +846,7 @@
       "temoins": [
        "photo:2026-09-28T10:27:14.906Z"
       ],
-      "statut": "probable"
+      "statut": "acquis"
      },
      {
       "id": "mucvphyw0q1ak",
@@ -1692,7 +1692,8 @@
      "maj": "2026-09-25T17:30:26.855Z"
     },
     "certif": {
-     "derriere": "2026-09-25T17:40:46.266Z"
+     "derriere": "2026-09-25T17:40:46.266Z",
+     "devant": "2026-09-28T10:28:51.586Z"
     },
     "avantReconstruction": {
      "date": "2026-09-25T17:47:36.031Z",
